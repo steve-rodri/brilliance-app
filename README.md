@@ -8,7 +8,13 @@
 * Manage Events:  Schedule Employees, Map Out Logistics, Visualize Cash Flow
 * Inventory: Keep track of Inventory Items (Stock, Maintenance, Cash Flow)
 * Staff: Payroll, Time-Tracking, Reimbursements
-* Dashboard Analytics 
+* Dashboard Analytics
+
+## Technologies Used
+* Ruby on Rails
+* React
+* Google Calendar API
+* MapBox
 
 ## ERD
 ![ERD](/deliverables/ERD.png)
