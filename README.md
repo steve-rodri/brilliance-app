@@ -2,6 +2,13 @@
 ## A Custom CRM/Events/Inventory/Staff Management and Analytics App
 
 ## Features
+* Admin and Employee Login
+* Admin has full CRUD on all Tables / Employee has limited CRUD
+* CRM: Generate Invoices to Print or Email, Keep track of Client Balances
+* Manage Events:  Schedule Employees, Map Out Logistics, Visualize Cash Flow
+* Inventory: Keep track of Inventory Items (Stock, Maintenance, Cash Flow)
+* Staff: Payroll, Time-Tracking, Reimbursements
+* Dashboard Analytics 
 
 ## ERD
 ![ERD](/deliverables/ERD.png)
