@@ -1,15 +1,7 @@
 # The Brilliance Event Productions App
 ## A Custom CRM/Events/Inventory/Staff Management and Analytics App
----
-*
 
 ## Features
-* Admin and Employee roles for Users
-*
-
-
-When an Admin logs in and
-
 
 ## ERD
 ![ERD](/deliverables/ERD.png)
