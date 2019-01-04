@@ -30,9 +30,7 @@ gem 'rack-cors'
 
 gem 'knock'
 gem 'jwt'
-
 gem 'faker'
-
 gem 'foreman'
 
 group :development, :test do
