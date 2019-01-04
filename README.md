@@ -21,7 +21,7 @@ When an Admin logs in and
 ### Dashboard - Admin
 ![Admin](/deliverables/Wireframes/Admin-Dashboard-Overview.png)
 ### Dashboard - Employee
-![Employee](/deliverables/Wireframes/Admin-Employee-Dashboard-Overview.png)
+![Employee](/deliverables/Wireframes/Employee-Dashboard-Overview.png)
 ### Events List
 ![Admin](/deliverables/Wireframes/Admin-Events-List.png)
 ### Event Detail - Basic Information
