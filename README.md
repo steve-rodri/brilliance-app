@@ -20,7 +20,6 @@
 ![ERD](/deliverables/ERD.png)
 
 ## Wireframes
-
 ### Login
 ![Login](/deliverables/Wireframes/Login.png)
 ### Dashboard - Admin
