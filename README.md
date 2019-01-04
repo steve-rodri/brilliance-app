@@ -15,15 +15,13 @@ When an Admin logs in and
 ![ERD](/deliverables/ERD.png)
 
 ## Wireframes
-![Admin](/deliverables/Wireframes/Admin-Clients-Detail-Modal-Edit.png)
-
-![Admin](/deliverables/Wireframes/Admin-Clients-Detail-Modal.png)
-
-![Admin](/deliverables/Wireframes/Admin-Clients-List.png)
-
-![Admin](/deliverables/Wireframes/Admin-Dashboard-Financials.png)
+![Login](/deliverables/Wireframes/Login.png)
 
 ![Admin](/deliverables/Wireframes/Admin-Dashboard-Overview.png)
+
+![Employee](/deliverables/Wireframes/Admin-Employee-Dashboard-Overview.png)
+
+![Admin](/deliverables/Wireframes/Admin-Events-List.png)
 
 ![Admin](/deliverables/Wireframes/Admin-Event-Detail-Basic-Information.png)
 
@@ -33,12 +31,14 @@ When an Admin logs in and
 
 ![Admin](/deliverables/Wireframes/Admin-Event-Detail-Logistics.png)
 
-![Admin](/deliverables/Wireframes/Admin-Events-List.png)
+![Admin](/deliverables/Wireframes/Admin-Clients-List.png)
+
+![Admin](/deliverables/Wireframes/Admin-Clients-Detail-Modal-Edit.png)
+
+![Admin](/deliverables/Wireframes/Admin-Clients-Detail-Modal.png)
 
 ![Admin](/deliverables/Wireframes/Admin-Invoices-List.png)
 
-![Employee](/deliverables/Wireframes/Admin-Employee-Dashboard-Overview.png)
-
-![Login](/deliverables/Wireframes/Login.png)
+![Admin](/deliverables/Wireframes/Admin-Dashboard-Financials.png)
 
 ![Print](/deliverables/Wireframes/Print-Views.png)
