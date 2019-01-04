@@ -1,24 +1,44 @@
-# README
+# The Brilliance Event Productions App
+## A Custom CRM/Events/Inventory/Staff Management and Analytics App
+---
+*
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Features
+* Admin and Employee roles for Users
+*
 
-Things you may want to cover:
 
-* Ruby version
+When an Admin logs in and
 
-* System dependencies
 
-* Configuration
+## ERD
+![ERD](/deliverables/ERD.png)
 
-* Database creation
+## Wireframes
+![Admin](/deliverables/Admin - Clients Detail - Modal - Edit.png)
 
-* Database initialization
+![Admin](/deliverables/Admin - Clients Detail - Modal.png)
 
-* How to run the test suite
+![Admin](/deliverables/Admin - Clients List.png)
 
-* Services (job queues, cache servers, search engines, etc.)
+![Admin](/deliverables/Admin - Dashboard - Financials.png)
 
-* Deployment instructions
+![Admin](/deliverables/Admin - Dashboard - Overview.png)
 
-* ...
+![Admin](/deliverables/Admin - Event Detail - Basic Information.png)
+
+![Admin](/deliverables/Admin - Event Detail - Cash Flow.png)
+
+![Admin](/deliverables/Admin - Event Detail - Invoice.png)
+
+![Admin](/deliverables/Admin - Event Detail - Logistics.png)
+
+![Admin](/deliverables/Admin - Events List.png)
+
+![Admin](/deliverables/Admin - Invoices List.png)
+
+![Employee](/deliverables/Admin - Employee - Dashboard - Overview.png)
+
+![Login](/deliverables/Login.png)
+
+![Print](/deliverables/Print Views.png)
