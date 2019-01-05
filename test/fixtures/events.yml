@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Confirmation: MyString
+  Action: MyString
+  Kind: MyString
+  Staff_Status: MyString
+  Event_Start: 2019-01-05 15:28:41
+  Event_End: 2019-01-05 15:28:41
+  Call_Time: 2019-01-05 15:28:41
+  Clock_Out: 2019-01-05 15:28:41
+  Break_Start: 2019-01-05 15:28:41
+  Driving_Time: MyString
+  Break: MyString
+  Description: MyString
+  Summary: MyString
+  Notes: MyText
+  Tags: MyString
+  client: one
+
+two:
+  Confirmation: MyString
+  Action: MyString
+  Kind: MyString
+  Staff_Status: MyString
+  Event_Start: 2019-01-05 15:28:41
+  Event_End: 2019-01-05 15:28:41
+  Call_Time: 2019-01-05 15:28:41
+  Clock_Out: 2019-01-05 15:28:41
+  Break_Start: 2019-01-05 15:28:41
+  Driving_Time: MyString
+  Break: MyString
+  Description: MyString
+  Summary: MyString
+  Notes: MyText
+  Tags: MyString
+  client: two
