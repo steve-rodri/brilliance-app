@@ -17,7 +17,7 @@
 * MapBox
 
 ## ERD
-![ERD](/deliverables/ERD.png)
+![ERD](/deliverables/ERD.jpeg)
 
 ## Wireframes
 ### Login
