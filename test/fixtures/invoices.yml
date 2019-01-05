@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Type: MyString
+  Status: MyString
+  Payment_Status: MyString
+  Payment_Type: MyString
+  Commission_Paid: MyString
+  Check_Info: MyString
+  Discount: 1.5
+  Tip: 1.5
+  Refund: 1.5
+  event: one
+
+two:
+  Type: MyString
+  Status: MyString
+  Payment_Status: MyString
+  Payment_Type: MyString
+  Commission_Paid: MyString
+  Check_Info: MyString
+  Discount: 1.5
+  Tip: 1.5
+  Refund: 1.5
+  event: two
