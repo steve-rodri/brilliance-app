@@ -1,15 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  Photo: MyString
+  Prefix: MyString
   First_Name: MyString
   Last_Name: MyString
   Phone_Number: MyString
   Work_Email: MyString
-  SS_Number: MyString
+  SS: MyString
 
 two:
+  Photo: MyString
+  Prefix: MyString
   First_Name: MyString
   Last_Name: MyString
   Phone_Number: MyString
   Work_Email: MyString
-  SS_Number: MyString
+  SS: MyString
