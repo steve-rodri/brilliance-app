@@ -1,0 +1,112 @@
+﻿Id,Address,place_id(s),contact_id,created_at
+1,"1600 Round Swamp Rd 
+Plainview, NY 11803",1,,2/19/2018 4:16pm
+2,"154 Westchester Ave
+White Plains, NY, United States",36,,2/19/2018 4:16pm
+3,"Gaylord National Resort & Convention Center
+201 Waterfront St, Oxon Hill, MD  20745, United States",33,,2/19/2018 4:16pm
+4,"Long Island Marriott Hotel
+101 James Doolittle Blvd, Uniondale, NY  11553, United States",6,,2/19/2018 4:16pm
+5,"83 Muttontown Eastwoods Rd
+Syosset, NY, United States",25,,2/19/2018 4:16pm
+6,"Crest Hollow Country Club 8325 Jericho Tpke, Woodbury, NY 11797",15,,2/19/2018 4:16pm
+7,"Hofstra University 100 Hempstead Tpke, Hempstead, NY 11549",7,,2/19/2018 4:16pm
+8,"Teaneck Marriott at Glenpointe
+100 Frank W Burr Blvd, Teaneck, NJ  07666, United States",8,,2/19/2018 4:16pm
+9,"Miller's Ale House
+3046 Hempstead Tpke, Levittown, NY  11756, United States",22,,2/19/2018 4:16pm
+10,Pier 60 Chelsea Piers,31,,2/19/2018 4:16pm
+11,"Tobay Beach
+Ocean Pkwy, Babylon, NY  11702, United States",10,,2/19/2018 4:16pm
+12,"Knights of Columbus
+2985 Kenneth Pl, Oceanside, NY  11572, United States",27,,2/19/2018 4:16pm
+13,"66 Gibbs Pond Rd
+Nesconset, NY  11767
+United States",4,,2/19/2018 4:16pm
+14,"Stonybrook University
+Suny at Stoney Brook, South Dr, Stony Brook, NY 11794, United States",24,,2/19/2018 4:16pm
+15,"Museum of American Armor
+1303 Round Swamp Rd, Old Bethpage, NY  11804, United States",5,,2/19/2018 4:16pm
+16,"877 Main St, Holbrook, NY 11741",42,,2/19/2018 4:16pm
+17,"Oheka Castle Hotel & Estate
+135 W Gate Dr, Huntington, NY  11743, United States",11,,2/19/2018 4:16pm
+18,"99 Quaker Meeting House Rd
+Farmingdale, NY  11735
+United States","2,51,57",,2/19/2018 4:16pm
+19,"North Ritz Club
+274 Jericho Tpke, Syosset, NY  11791, United States",14,,2/19/2018 4:16pm
+20,"Fox Hollow Rest & Caterers
+7755 Jericho Tpke, Woodbury, NY 11797, United States",29,,2/19/2018 4:16pm
+21,"John J. Burns Park
+4990 Merrick Rd, Massapequa, NY  11762, United States",32,,2/19/2018 4:16pm
+22,"Hyatt Regency New Brunswick
+2 Albany St, New Brunswick, NJ  08901, United States",21,,2/19/2018 4:16pm
+23,"Temple Avodah
+3050 Oceanside Rd, Oceanside, NY  11572, United States",26,,2/19/2018 4:16pm
+24,"1400 Old Country Rd
+Westbury, NY  11590
+United States",47,,2/19/2018 4:16pm
+25,"Grumman Studios
+500 Grumman Rd W, Bethpage, NY  11714, United States",23,,2/19/2018 4:16pm
+26,"117 Newtown Road
+Plainview, NY 11803",3,,2/19/2018 4:16pm
+27,"Carlyle of Lawrence
+140 Central Ave, Lawrence, NY  11559, United States",20,,2/19/2018 4:16pm
+28,"2 N 6th St
+Brooklyn, NY, United States",28,,2/19/2018 4:16pm
+29,"Theodore Roosevelt Mem Park
+Oyster Bay, NY  11771, United States",13,,2/19/2018 4:16pm
+30,"Westbury Manor
+1100 Jericho Tpke, Westbury, NY  11590, United States",30,,2/19/2018 4:16pm
+31,"Hilton Long Island/Huntington
+598 Broadhollow Rd, Melville, NY  11747, United States",34,,2/19/2018 4:16pm
+32,"The Carltun
+672 Eisenhower Pl, East Meadow, NY  11554, United States",9,,2/19/2018 4:16pm
+33,"Ascent Lounge
+10 Columbus Cir, FL 4, New York, NY  10019, United States",38,,2/19/2018 4:16pm
+34,"Syosset-Woodbury Community Park
+7800 Jericho Tpke, Woodbury, NY  11797, United States",37,,2/19/2018 4:16pm
+35,"20 Westbourne Ln
+Melville, NY, United States",17,,2/19/2018 4:16pm
+36,"Pace University - New York City Campus
+1 Pace Plaza, New York, NY  10038, United States",19,,2/19/2018 4:16pm
+37,"E W Allen Town Park
+Farmingdale, NY  11735, United States",35,,2/19/2018 4:16pm
+38,"1717 Motor Pkwy
+Hauppauge, NY, United States",12,,2/19/2018 4:16pm
+39,"2000 Raynors Way, Smithtown, NY 11787, United States",16,,2/19/2018 4:16pm
+40,"523 Church Ave, Woodmere, NY 11598",52,,2/19/2018 7:42pm
+46,"59 Straight Ln, Levittown, NY 11756",53,,2/20/2018 3:39pm
+47,"3000 Bellmore Ave, Bellmore, NY 11710",54,,2/20/2018 4:07pm
+77," 198 Central Ave, White Plains, NY 10606",55,,3/5/2018 2:28pm
+78,"575 Underhill Blvd, # 225 
+Syosset, New York 11791",56,,4/23/2018 2:17pm
+79,"50 Vanderbilt Pkwy, Dix Hills, NY 11746",58,,5/7/2018 5:06pm
+80,"1300 Lido Blvd, Lido Beach, NY 11561",63,,5/8/2018 4:03pm
+81,"494 Prospect Ave, Sea Cliff, New York 11579",64,,5/8/2018 4:36pm
+82,"500 Tulip Ave, Floral Park, NY 11001",67,,5/14/2018 3:09pm
+83,"26 Quealy Pl, Rockville Centre, NY 11570",68,,5/14/2018 5:21pm
+84,"856 River Ave, Bronx, NY 10451",69,,5/14/2018 9:14pm
+85,"Cradle of Aviation Museum, Charles Lindbergh Blvd, Garden City, NY 11530",70,,5/15/2018 5:06pm
+86,"555 Northern Blvd, Great Neck, NY 11021",71,,5/15/2018 6:11pm
+87,"1 Hancock Commons Yaphank, NY 11980",,183,5/25/2018 7:46pm
+88,"49 Palm Lane Westbury, NY 11590",,182,5/25/2018 7:51pm
+89,"948 Mirabelle Ave Westbury, NY 11590",,"180,185",5/25/2018 7:55pm
+90,"270 Old East Neck Rd Melville, NY 11747",,2469,5/25/2018 7:57pm
+91,"580 Willis Avenue Williston Park, NY 11596 Apt. LJ",,184,5/25/2018 7:58pm
+92,"1041 Pugsley Avenue Bronx, NY 10472 Apt. 11a",,2487,5/25/2018 8:00pm
+93,"23 Denis Lane Middle Island, NY 11953",,1297,5/25/2018 8:04pm
+94,"1300 Pleasant Road Wantagh, NY 11793",,2535,5/25/2018 8:05pm
+95,"4272 Clarissa Road Bethpage, NY 11756",,2538,5/25/2018 8:10pm
+96,"1458 Rhode Avenue North Merrick, NY 11566",,2537,5/25/2018 8:10pm
+97,"55 Glenwood Rd, Roslyn, NY 11576",76,,5/31/2018 9:20pm
+98,"10805pp, 280 Davenport Ave, New Rochelle, NY 10805",77,,6/4/2018 3:50pm
+99,"140 Central Ave, Lawrence, NY 11559",80,,6/4/2018 6:23pm
+100,"54 Audrey Ave, Oyster Bay, NY 11771",74,,6/7/2018 7:40pm
+101,"310 West 75th Street New York, NY 10023",81,,6/18/2018 3:29pm
+102,"500 Broadway Bethpage NY, 11714",82,,7/2/2018 6:33pm
+103,"5933 Northern Blvd, East Norwich, NY 11732",84,,7/23/2018 7:42pm
+104,"24 Jackwill Road E.Patchogue, NY 11772",85,,7/23/2018 8:12pm
+105,"180 W Neck Rd
+Huntington, NY  11743
+United States",86,,8/21/2018 3:17pm
