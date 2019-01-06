@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  resources :contacts
   scope '/api' do
     resources :companies
-    resources :contacts
-    resources :invoices
+      resources :invoices
     resources :clients
     resources :events
   end
