@@ -11,7 +11,16 @@ class App extends Component {
     }
   }
 
-  loggedIn = () =>{
+  async componentDidMount(){
+    if (this.loggedIn()) {
+      const calendars = await getGoogleCalendars();
+      const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
+      const events = await getGoogleEvents(jobsCalendar.id)
+
+    }
+  }
+
+  loggedIn = () => {
     const token = localStorage.getItem('google_access_token')
     if (token) {
       return true
@@ -20,18 +29,23 @@ class App extends Component {
     }
   }
 
+  logOut = () => {
+    localStorage.removeItem('google_access_token')
+  }
+
   responseGoogle = (resp) => {
     if (resp.accessToken) {
       localStorage.setItem('google_access_token',resp.accessToken)
     }
   }
-  
+
   render() {
     return (
       <div className="App">
       {!this.loggedIn() && <Login
         responseGoogle={this.responseGoogle}
       />}
+      {this.loggedIn() && <button onClick={this.logOut}>Log Out</button>}
       </div>
     );
   }
