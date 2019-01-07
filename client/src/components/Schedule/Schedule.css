@@ -1,0 +1,10 @@
+.schedule--container {
+  margin: 20px auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 80vw;
+}
+
+.schedule--title {
+  font-size: 32px;
+}

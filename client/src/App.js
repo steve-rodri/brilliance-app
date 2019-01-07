@@ -1,53 +1,64 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Login from './components/Login/index.js'
-import { getGoogleCalendars, getGoogleEvents, createGoogleEvent } from './services/calendar_service'
+import Dashboard from './components/Dashboard/index.js'
 import './App.css';
 
 class App extends Component {
   constructor(props){
     super(props)
-    this.state = {
+    this.state = {}
+  }
 
+  componentDidMount(){
+    const user = JSON.parse(localStorage.getItem('profileObj'));
+    if (user) {
+      this.setState({
+        user: user
+      })
     }
   }
 
-  async componentDidMount(){
-    if (this.loggedIn()) {
-      const calendars = await getGoogleCalendars();
-      const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
-      const events = await getGoogleEvents(jobsCalendar.id)
-
-    }
+  setUser = (user) => {
+    this.setState({
+      user
+    })
   }
 
-  loggedIn = () => {
-    const token = localStorage.getItem('google_access_token')
-    if (token) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  logOut = () => {
-    localStorage.removeItem('google_access_token')
-  }
-
-  responseGoogle = (resp) => {
-    if (resp.accessToken) {
-      localStorage.setItem('google_access_token',resp.accessToken)
-    }
+  removeUser = () => {
+    this.setState({
+      user: null
+    })
+    localStorage.clear();
   }
 
   render() {
     return (
-      <div className="App">
-      {!this.loggedIn() && <Login
-        responseGoogle={this.responseGoogle}
-      />}
-      {this.loggedIn() && <button onClick={this.logOut}>Log Out</button>}
-      </div>
+      <Router>
+        <div className="App">
+          <Route exact path="/" render={() => this.Login()}/>
+          <Route exact path="/login" render={() => this.Login()}/>
+          <Route exact path="/admin" render={() => this.Dashboard()}/>
+        </div>
+      </Router>
     );
+  }
+
+  Login(){
+    return (
+      <Login
+        setUser={this.setUser}
+      />
+    )
+  }
+
+  Dashboard(){
+    return (
+      <Dashboard
+        removeUser={this.removeUser}
+        user={this.state.user}
+      />
+    )
   }
 }
 
