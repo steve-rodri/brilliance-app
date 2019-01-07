@@ -1,0 +1,29 @@
+header {
+  height: 75px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 10% 80% 10%;
+  border-bottom: 2px solid black;
+}
+
+nav {
+  justify-self: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+nav > * {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 5px;
+}
+
+nav > * :hover {
+  border: 2px solid black;
+}
+
+.user-circle:hover {
+  cursor: pointer
+}
