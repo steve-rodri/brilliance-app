@@ -1,3 +1,17 @@
+* {
+  margin: 0;
+}
+
 .App {
   text-align: center;
+}
+
+.logo {
+  width: 125px;
+  height: 29px;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 60px;
 }
