@@ -22,12 +22,12 @@ async function getGoogleEvents(calendar_id){
   if(!accessToken) throw new Error('Must authorize with Google');
   const resp = await axios({
     method: 'get',
-    url:`https://www.googleapis.com/calendar/v3/calendars/${calendar_id}/events?alwaysIncludeEmail=true&orderby=starttime`,
+    url:`https://www.googleapis.com/calendar/v3/calendars/${calendar_id}/events?alwaysIncludeEmail=true&orderby=starttime&maxResults=2500`,
     headers:{
       Authorization: `Bearer ${accessToken}`
     },
   })
-  console.log(resp.data.items)
+  return resp.data.items
 }
 
 async function createGoogleEvent(calendar_id, start, end, summary){
