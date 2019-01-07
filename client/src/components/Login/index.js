@@ -8,7 +8,7 @@ export default function Login(props) {
     <div className="login-page">
       <div className="login-form">
         <div className="logo-container">
-          <img id="logo" src={logo_t} alt='logo'/>
+          <img className="logo" src={logo_t} alt='logo'/>
         </div>
         <div className='google-login-container'>
           <GoogleLogin
