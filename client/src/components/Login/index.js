@@ -1,6 +1,6 @@
 import React from 'react'
 import GoogleLogin from 'react-google-login'
-import logo_t from './images/logo_t.GIF'
+import logo_t from '../../images/logo_t.GIF'
 import './Login.css'
 
 export default function Login(props) {

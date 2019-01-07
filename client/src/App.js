@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Login from './components/Login'
+import Login from './components/Login/index.js'
 import { getGoogleCalendars, getGoogleEvents, createGoogleEvent } from './services/calendar_service'
 import './App.css';
 
