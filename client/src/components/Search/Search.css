@@ -1,0 +1,21 @@
+.search {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search > * {
+  padding: 0 15px;
+  font-size: 24px;
+  height: 100%;
+  width: 75%;
+  border-radius: 25px;
+  border: 2px solid gray;
+}
+
+.search > *:focus{
+  outline: none;
+  border: none;
+  box-shadow: 0 0 2px 3pt rgba(0, 127, 255, .7);
+}
