@@ -7,10 +7,7 @@ import Events from './components/Events/index.js'
 import Invoices from './components/Invoices/index.js'
 import './App.css';
 import { event } from './services/event'
-import {
-  getGoogleCalendars,
-  getGoogleEvents,
-} from './services/calendar_service'
+import { getGoogleCalendars, getGoogleEvents } from './services/calendar_service'
 
 class App extends Component {
   constructor(props){
@@ -22,8 +19,7 @@ class App extends Component {
 
     const user = JSON.parse(localStorage.getItem('profileObj'));
     if (user) {
-      const g_events = await this.fetchAllGoogleEvents()
-      console.log(g_events)
+      await this.fetchAllGoogleEvents()
       const events = await event.getAll()
       console.log(events)
       this.setState({
@@ -54,7 +50,6 @@ class App extends Component {
   async mergeGoogleCalendar(){
     const events = await this.fetchAllGoogleEvents()
   }
-
 
   render() {
     return (

@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import List from '../List/index.js'
 import { Redirect } from 'react-router-dom'
+import List from '../List/index.js'
 import moment from 'moment'
 import './Schedule.css'
 
-import {
-  getGoogleCalendars,
-  getGoogleEvents,
-  createGoogleEvent
-} from '../../services/calendar_service'
+import { getGoogleCalendars, getGoogleEvents } from '../../services/calendar_service'
 
 export default class Schedule extends Component {
   constructor(props){
@@ -56,7 +52,7 @@ export default class Schedule extends Component {
 
     })
 
-    
+
   }
 
   render(){
