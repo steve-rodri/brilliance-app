@@ -25,42 +25,44 @@ ActiveRecord::Schema.define(version: 2019_01_06_015049) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string "Name"
-    t.string "Logo"
-    t.string "Website"
-    t.string "Phone_Number"
+    t.string "name"
+    t.string "logo"
+    t.string "website"
+    t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string "Photo"
-    t.string "Prefix"
-    t.string "First_Name"
-    t.string "Last_Name"
-    t.string "Phone_Number"
-    t.string "Work_Email"
-    t.string "SS"
+    t.string "photo"
+    t.string "prefix"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "work_email"
+    t.string "ss"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "Confirmation"
-    t.string "Action"
-    t.string "Kind"
-    t.string "Staff_Status"
-    t.datetime "Event_Start"
-    t.datetime "Event_End"
-    t.datetime "Call_Time"
-    t.datetime "Clock_Out"
-    t.datetime "Break_Start"
-    t.string "Driving_Time"
-    t.string "Break"
-    t.string "Description"
-    t.string "Summary"
-    t.text "Notes"
-    t.string "Tags"
+    t.string "action"
+    t.string "break"
+    t.datetime "break_start"
+    t.datetime "call_time"
+    t.datetime "clock_out"
+    t.string "confirmation"
+    t.string "creator"
+    t.string "description"
+    t.string "driving_time"
+    t.datetime "end"
+    t.string "gc_id"
+    t.string "html_link"
+    t.string "kind"
+    t.text "notes"
+    t.datetime "start"
+    t.string "summary"
+    t.string "tags"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "client_id"
@@ -68,15 +70,15 @@ ActiveRecord::Schema.define(version: 2019_01_06_015049) do
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.string "Type"
-    t.string "Status"
-    t.string "Payment_Status"
-    t.string "Payment_Type"
-    t.string "Commission_Paid"
-    t.string "Check_Info"
-    t.float "Discount"
-    t.float "Tip"
-    t.float "Refund"
+    t.string "kind"
+    t.string "status"
+    t.string "payment_status"
+    t.string "payment_type"
+    t.string "commission_paid"
+    t.string "check_info"
+    t.float "discount"
+    t.float "tip"
+    t.float "refund"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "event_id"

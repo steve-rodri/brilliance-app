@@ -9,13 +9,13 @@ csv_text = File.read(Rails.root.join('lib','seeds', 'Contacts.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
   Contact.create! ({
-    Photo: row['Photo'],
-    Prefix: row['Prefix'],
-    First_Name: row['First_Name'],
-    Last_Name: row['Last_Name'],
-    Phone_Number: row['Phone_Number'],
-    Work_Email: row['Work_Email'],
-    SS: row['SS'],
+    photo: row['Photo'],
+    prefix: row['Prefix'],
+    first_name: row['First_Name'],
+    last_name: row['Last_Name'],
+    phone_number: row['Phone_Number'],
+    work_email: row['Work_Email'],
+    ss: row['SS'],
 
     created_at: row['created_at']
   })
@@ -38,21 +38,20 @@ csv_text = File.read(Rails.root.join('lib','seeds', 'Events.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
   Event.create! ({
-    Confirmation: row['Confirmation'],
-    Action: row['Action'],
-    Kind: row['Kind'],
-    Staff_Status: row['Staff_Status'],
-    Event_Start: row['Event_Start'],
-    Event_End: row['Event_End'],
-    Call_Time: row['Call_Time'],
-    Clock_Out: row['Clock_Out'],
-    Break_Start: row['Break_Start'],
-    Driving_Time: row['Driving_Time'],
-    Break: row['Break'],
-    Description: row['Description'],
-    Summary: row['Summary'],
-    Notes: row['Notes'],
-    Tags: row['Tags'],
+    action: row['Action'],
+    break: row['Break'],
+    break_start: row['Break_Start'],
+    call_time: row['Call_Time'],
+    clock_out: row['Clock_Out'],
+    confirmation: row['Confirmation'],
+    description: row['Description'],
+    driving_time: row['Driving_Time'],
+    end: row['Event_End'],
+    kind: row['Kind'],
+    notes: row['Notes'],
+    start: row['Event_Start'],
+    summary: row['Summary'],
+    tags: row['Tags'],
 
     client_id: row['client_id'],
     created_at: row['created_at']
@@ -65,14 +64,14 @@ csv_text = File.read(Rails.root.join('lib','seeds', 'Invoices.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
   Invoice.create! ({
-    Type: row['Type'],
-    Status: row['Status'],
-    Payment_Status: row['Payment_Status'],
-    Payment_Type: row['Payment_Type'],
-    Commission_Paid: row['Commission_Paid'],
-    Check_Info: row['Check_Info'],
-    Discount: row['Discount'],
-    Tip: row['Tip'],
+    kind: row['Type'],
+    status: row['Status'],
+    payment_status: row['Payment_Status'],
+    payment_type: row['Payment_Type'],
+    commission_paid: row['Commission_Paid'],
+    check_info: row['Check_Info'],
+    discount: row['Discount'],
+    tip: row['Tip'],
 
     event_id: row['event_id'],
     created_at: row['created_at']

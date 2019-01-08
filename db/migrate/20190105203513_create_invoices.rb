@@ -1,15 +1,15 @@
 class CreateInvoices < ActiveRecord::Migration[5.2]
   def change
     create_table :invoices do |t|
-      t.string :Type
-      t.string :Status
-      t.string :Payment_Status
-      t.string :Payment_Type
-      t.string :Commission_Paid
-      t.string :Check_Info
-      t.float :Discount
-      t.float :Tip
-      t.float :Refund
+      t.string :kind
+      t.string :status
+      t.string :payment_status
+      t.string :payment_type
+      t.string :commission_paid
+      t.string :check_info
+      t.float :discount
+      t.float :tip
+      t.float :refund
 
       t.timestamps
     end
