@@ -6,6 +6,12 @@
   text-align: center;
 }
 
+.ListPage {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 75px auto
+}
+
 .logo {
   width: 125px;
   height: 29px;
@@ -14,4 +20,5 @@
 
 h1 {
   font-size: 60px;
+  margin-top: 20px;
 }

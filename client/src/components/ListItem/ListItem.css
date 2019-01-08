@@ -1,0 +1,14 @@
+.List-Item {
+  width: 97%;
+  height: 85px;
+  margin: 5px auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(5, 1fr)
+}
+
+.List-Item--description{
+  grid-column-start: 4;
+}
