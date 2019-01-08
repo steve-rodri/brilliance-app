@@ -1,6 +1,23 @@
 import axios from 'axios';
 const accessToken = localStorage.getItem('google_access_token');
 
+async function getUser(){
+  if (!accessToken) throw new Error('Must authorize with Google');
+  try {
+    const resp = await axios({
+      method: 'get',
+      url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    return resp.data
+  } catch (e) {
+    localStorage.clear()
+    return null
+  }
+}
+
 async function getGoogleCalendars(){
   if (!accessToken) throw new Error('Must authorize with Google');
   try {
@@ -62,6 +79,7 @@ async function createGoogleEvent(calendar_id, start, end, summary){
 }
 
 export {
+  getUser
   getGoogleCalendars,
   getGoogleEvents,
   createGoogleEvent
