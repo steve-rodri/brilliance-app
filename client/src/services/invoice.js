@@ -4,7 +4,7 @@ const invoice = {
   getAll: async function (){
     try {
       const resp = await axios.get('/api/invoices')
-      console.log(resp.data)
+      return resp.data
     } catch (e) {
       console.log(e)
     }
