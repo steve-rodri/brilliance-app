@@ -12,7 +12,7 @@ export default class Clients extends Component {
   }
 
   async componentDidMount(){
-    await this.fetchaAllClients()
+    await this.fetchAllClients()
   }
 
   fetchAllClients = async() => {
@@ -30,7 +30,7 @@ export default class Clients extends Component {
           title="Clients"
           categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
           subtitles={['name / company', 'contact info', 'next event', 'balance']}
-          invoices={this.state.clients}
+          clients={this.state.clients}
         />
       </div>
     )
