@@ -14,45 +14,36 @@ export default class Schedule extends Component {
     }
   }
 
-  async componentDidMount(){
+  async componentWillMount(){
     await this.findUpcomingUserEvents()
   }
 
   findAllUserEvents = async() => {
     const user = this.props.user
-    const calendars = await getGoogleCalendars();
-    if (!calendars) return (<Redirect to="/login"/>)
-    const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
-    const events = await getGoogleEvents(jobsCalendar.id)
-    const userEvents = events.filter(function(event) {
-        if (event.attendees) {
-          return event.attendees.find(attendee => (attendee.email = user.email))
+    if (user) {
+      const calendars = await getGoogleCalendars();
+      if (!calendars) return (<Redirect to="/login"/>)
+      const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
+      const events = await getGoogleEvents(jobsCalendar.id)
+      const userEvents = events.filter(function(event) {
+          if (event.attendees) {
+            return event.attendees.find(attendee => (attendee.email = user.email))
+          }
         }
-      }
-    )
-    return userEvents
+      )
+      return userEvents
+    }
   }
 
   findUpcomingUserEvents = async() => {
     const userEvents = await this.findAllUserEvents();
-    const upcomingEvents = userEvents.filter(function(event){
-
-      if (event.start.dateTime) {
-
-        const eventStart = event.start.dateTime
+    if (userEvents) {
+      const upcomingEvents = userEvents.filter(function(event){
         const now = moment().format()
-        return moment(eventStart).isAfter(now)
-
-      } else if (event.start.date) {
-
-        const eventStart = event.start.date
-        const now = moment().format()
-        return moment(eventStart).isAfter(now)
-      }
-
-    })
-
-
+        return moment(start(event)).isAfter(now)
+      })
+      this.setState({userEvents:upcomingEvents})
+    }
   }
 
   render(){
@@ -62,5 +53,17 @@ export default class Schedule extends Component {
         <List items={this.state.userEvents}/>
       </div>
     )
+  }
+}
+
+function start(event) {
+  if (event) {
+    if (event.start) {
+      if (event.start.date) {
+        return event.start.date
+      } else if (event.start.dateTime) {
+        return event.start.dateTime
+      }
+    }
   }
 }

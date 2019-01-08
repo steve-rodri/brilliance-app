@@ -15,13 +15,13 @@ class App extends Component {
     this.state = {}
   }
 
-  async componentDidMount(){
+  async componentWillMount(){
 
     const user = JSON.parse(localStorage.getItem('profileObj'));
     if (user) {
-      await this.fetchAllGoogleEvents()
-      const events = await event.getAll()
-      console.log(events)
+      // await this.fetchAllGoogleEvents()
+      // const events = await event.getAll()
+      // console.log(events)
       this.setState({
         user: user,
       })
