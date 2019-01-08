@@ -22,24 +22,6 @@ export default class Dashboard extends Component {
         <Header removeUser={this.props.removeUser}/>
         <h1>Welcome {user.givenName}!</h1>
         <Schedule user={user}/>
-        <ReactModal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.handleAfterOpenFunc}
-          onRequestClose={this.handleRequestCloseFunc}
-          style={{ overlay: {}, content: {} }}
-          contentLabel="Example Modal"
-          portalClassName="User-Portal-Modal"
-          overlayClassName="ReactModal__Overlay"
-          className="User-Portal-Modal__Content"
-          shouldFocusAfterRender={true}
-          shouldCloseOnOverlayClick={true}
-          shouldCloseOnEsc={true}
-          shouldReturnFocusAfterClose={false}
-          role="dialog"
-          parentSelector={() => document.body}
-        />
-
-
       </div>
     )
   }
@@ -56,3 +38,20 @@ export default class Dashboard extends Component {
     })
   }
 }
+
+// <ReactModal
+//   isOpen={this.state.modalIsOpen}
+//   onAfterOpen={this.handleAfterOpenFunc}
+//   onRequestClose={this.handleRequestCloseFunc}
+//   style={{ overlay: {}, content: {} }}
+//   contentLabel="Example Modal"
+//   portalClassName="User-Portal-Modal"
+//   overlayClassName="ReactModal__Overlay"
+//   className="User-Portal-Modal__Content"
+//   shouldFocusAfterRender={true}
+//   shouldCloseOnOverlayClick={true}
+//   shouldCloseOnEsc={true}
+//   shouldReturnFocusAfterClose={false}
+//   role="dialog"
+//   parentSelector={() => document.body}
+// />
