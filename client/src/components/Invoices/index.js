@@ -11,11 +11,11 @@ export default class Invoices extends Component {
     }
   }
 
-  componentDidMount(){
+  async componentDidMount(){
     await this.fetchAllInvoices()
   }
 
-  fetchAllInvoices(){
+  fetchAllInvoices = async() => {
     const invoices = await invoice.getAll();
     this.setState({
       invoices
