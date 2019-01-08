@@ -11,12 +11,12 @@ export default class Clients extends Component {
     }
   }
 
-  componentDidMount(){
+  async componentDidMount(){
     await this.fetchaAllClients()
   }
 
   fetchAllClients = async() => {
-    const cliets = await client.getAll();
+    const clients = await client.getAll();
     this.setState({
       clients
     })
