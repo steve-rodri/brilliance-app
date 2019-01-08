@@ -50,7 +50,10 @@ export default class Schedule extends Component {
     return (
       <div className="schedule--container">
         <h2 className='schedule--title'>Schedule</h2>
-        <List items={this.state.userEvents}/>
+        <List
+          type="Schedule"
+          items={this.state.userEvents}
+        />
       </div>
     )
   }
