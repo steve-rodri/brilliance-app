@@ -12,7 +12,8 @@ export default class Header extends Component {
   constructor(props){
     super(props)
     this.state = {
-      redirectToLogin: false
+      redirectToLogin: false,
+      redirectToDashboard: false
     }
   }
 
@@ -24,11 +25,18 @@ export default class Header extends Component {
     this.props.removeUser()
   }
 
+  toDashboard = () => {
+    this.setState({
+      redirectToDashboard: true
+    })
+  }
+
   render(){
     if (this.state.redirectToLogin) return (<Redirect to="/login"/>)
+    if (this.state.redirectToDashboard) return (<Redirect to="/admin"/>)
     return(
       <header>
-        <img className="logo" src={logo_t} alt='logo'/>
+        <img onClick={this.toDashboard} className="logo" src={logo_t} alt='logo'/>
         <nav>
           <Link to='/admin/events'>Events</Link>
           <Link to='/admin/clients'>Clients</Link>

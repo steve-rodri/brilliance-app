@@ -24,6 +24,6 @@ nav > * :hover {
   border: 2px solid black;
 }
 
-.user-circle:hover {
+.user-circle:hover, .logo:hover {
   cursor: pointer
 }
