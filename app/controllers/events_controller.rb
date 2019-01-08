@@ -33,6 +33,42 @@ class EventsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /events/
+  def bulk_update
+    render json: {msg: "batch update"}
+    # updateEvents = @event.import[event_params], on_duplicate_key_update: {
+    #   conflict_target: [:gc_id],
+    #   columns: [
+    #     :action,
+    #     :break,
+    #     :break_start,
+    #     :call_time,
+    #     :clock_out,
+    #     :confirmation,
+    #     :creator,
+    #     :description,
+    #     :driving_time,
+    #     :end,
+    #     :gc_id,
+    #     :html_link,
+    #     :id,
+    #     :kind,
+    #     :notes,
+    #     :start,
+    #     :summary,
+    #     :tags
+    #   ]
+    # }
+    # if updateEvents.results
+    #   render json: {@event.failed_instances}
+    # end
+    # else
+    #   render json: @event.errors, status: :unprocessable_entity
+    end
+
+
+  end
+
   # DELETE /events/1
   def destroy
     @event.destroy
@@ -46,6 +82,36 @@ class EventsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_params
-      params.require(:event).permit(:Confirmation, :Action, :Kind, :Staff_Status, :Event_Start, :Event_End, :Call_Time, :Clock_Out, :Break_Start, :Driving_Time, :Break, :Description, :Summary, :Notes, :Tags, :client_id)
+      params.require(:event).permit(
+        :action,
+        :attendees,
+        :break,
+        :break_start,
+        :call_time,
+        :client_id,
+        :clock_out,
+        :confirmation,
+        :created,
+        :creator,
+        :description,
+        :driving_time,
+        :end,
+        :etag,
+        :extendedProperties,
+        :gc_id,
+        :html_link,
+        :id,
+        :kind,
+        :location,
+        :notes,
+        :organizer,
+        :reminders,
+        :sequence,
+        :start,
+        :status,
+        :summary,
+        :tags,
+        :updated
+      )
     end
 end
