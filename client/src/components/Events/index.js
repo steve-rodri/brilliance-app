@@ -30,7 +30,7 @@ export default class Events extends Component {
           title="Events"
           categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
           subtitles={['title', 'client', 'location', 'confirmation', 'scheduled']}
-          events={this.state.events}
+          data={this.state.events}
         />
       </div>
     )

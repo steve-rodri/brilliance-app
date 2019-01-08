@@ -22,12 +22,20 @@ export default class Dashboard extends Component {
         redirectToLogin: true
       })
     }
+
   }
 
   render(){
-
     if (this.state.redirectToLogin) return (<Redirect to='/login' />)
-    const user = this.props.user
+    let user;
+    if (!this.props.user) {
+      const profileObj = JSON.parse(localStorage.getItem('profileObj'));
+      if (profileObj) {
+        user = profileObj
+      }
+    } else {
+      user = this.props.user
+    }
     return (
       <div>
         <Header removeUser={this.props.removeUser}/>

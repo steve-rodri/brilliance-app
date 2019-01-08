@@ -18,6 +18,7 @@ export default class List extends Component {
           <ListItem
             key={item.id}
             item={item}
+            type={this.props.type}
           />
         ))}
         </div>

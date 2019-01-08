@@ -30,7 +30,7 @@ export default class Invoices extends Component {
           title="Invoices"
           categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
           subtitles={['client & date', 'type', 'status', 'balance']}
-          invoices={this.state.invoices}
+          data={this.state.invoices}
         />
       </div>
     )

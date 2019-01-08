@@ -30,7 +30,7 @@ export default class Clients extends Component {
           title="Clients"
           categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
           subtitles={['name / company', 'contact info', 'next event', 'balance']}
-          clients={this.state.clients}
+          data={this.state.clients}
         />
       </div>
     )
