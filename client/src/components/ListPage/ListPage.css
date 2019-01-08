@@ -1,0 +1,26 @@
+.ListPage--container {
+  display: grid;
+  grid-template-columns:  250px auto
+}
+
+.ListPage--categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid black;
+}
+
+.ListPage--categories > a {
+  text-align: left;
+  width: 125px;
+}
+
+aside > div {
+  margin: 0 15px;
+}
+
+aside > h2 {
+  margin: 10px 0;
+}

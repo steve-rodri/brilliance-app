@@ -17,7 +17,7 @@ export default class Header extends Component {
   }
 
   logOut = () => {
-    localStorage.removeItem('google_access_token')
+    localStorage.clear()
     this.setState({
       redirectToLogin: true
     })
