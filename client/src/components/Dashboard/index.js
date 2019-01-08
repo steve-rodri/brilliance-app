@@ -10,17 +10,28 @@ export default class Dashboard extends Component {
   constructor (props){
     super(props)
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      redirectToLogin: false
+    }
+  }
+
+  componentWillMount(){
+    const token = localStorage.getItem('google_access_token')
+    if (!token) {
+      this.setState({
+        redirectToLogin: true
+      })
     }
   }
 
   render(){
-    if (!this.props.user) return (<Redirect to='/login' />)
+
+    if (this.state.redirectToLogin) return (<Redirect to='/login' />)
     const user = this.props.user
     return (
       <div>
         <Header removeUser={this.props.removeUser}/>
-        <h1>Welcome {user.givenName}!</h1>
+        <h1>Welcome {user && user.givenName}!</h1>
         <Schedule user={user}/>
       </div>
     )

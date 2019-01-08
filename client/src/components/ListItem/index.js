@@ -40,7 +40,7 @@ export default function ListItem(props){
       <div>
         <h6>{item && item.summary}</h6>
         <p>{item && moment(start()).format('dddd, MMMM Do')}</p>
-        <p>{item && moment(start()).format('LT')-moment(end()).format('LT')}</p>
+        <p>{item && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
       </div>
       <p className="List-Item--description">{item && item.description}</p>
     </div>

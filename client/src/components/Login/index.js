@@ -11,7 +11,8 @@ export default class Login extends Component {
       redirectToDashboard: false
     }
   }
-  componentDidMount(){
+
+  componentWillMount(){
     const token = localStorage.getItem('google_access_token');
     if (token) {
       this.setState({
@@ -24,9 +25,6 @@ export default class Login extends Component {
     if (resp.accessToken) {
       localStorage.setItem('google_access_token',resp.accessToken)
       localStorage.setItem('profileObj', JSON.stringify(resp.profileObj))
-    }
-    const token = localStorage.getItem('google_access_token');
-    if (token) {
       this.setState({
         redirectToDashboard: true
       })
