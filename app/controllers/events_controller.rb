@@ -64,7 +64,7 @@ class EventsController < ApplicationController
     # end
     # else
     #   render json: @event.errors, status: :unprocessable_entity
-    end
+    #end
 
 
   end
