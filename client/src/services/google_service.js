@@ -2,7 +2,7 @@ import axios from 'axios';
 const accessToken = localStorage.getItem('google_access_token');
 
 async function getUser(){
-  if (!accessToken) throw new Error('Must authorize with Google');
+  // if (!accessToken) throw new Error('Must authorize with Google');
   try {
     const resp = await axios({
       method: 'get',
@@ -19,7 +19,7 @@ async function getUser(){
 }
 
 async function getGoogleCalendars(){
-  if (!accessToken) throw new Error('Must authorize with Google');
+  // if (!accessToken) throw new Error('Must authorize with Google');
   try {
     const resp = await axios({
       method: 'get',
@@ -36,7 +36,7 @@ async function getGoogleCalendars(){
 }
 
 async function getGoogleEvents(calendar_id){
-  if(!accessToken) throw new Error('Must authorize with Google');
+  // if(!accessToken) throw new Error('Must authorize with Google');
   try {
     const resp = await axios({
       method: 'get',
@@ -53,7 +53,7 @@ async function getGoogleEvents(calendar_id){
 }
 
 async function createGoogleEvent(calendar_id, start, end, summary){
-  if(!accessToken) throw new Error('Must authorize with Google');
+  // if(!accessToken) throw new Error('Must authorize with Google');
   try {
     const resp = await axios({
       method: 'post',

@@ -30,7 +30,7 @@ export default class Dashboard extends Component {
     return (
       <div>
       <Header />
-      <h1>Welcome {user.given_name}!</h1>
+      <h1>Welcome {user.givenName}!</h1>
       <Schedule user={user}/>
       </div>
     )
