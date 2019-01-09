@@ -19,7 +19,6 @@ export default class Schedule extends Component {
 
   findAllUserEvents = async() => {
     const user = this.props.user
-    console.log(user, "4")
     if (user) {
       const calendars = await getGoogleCalendars();
       const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))

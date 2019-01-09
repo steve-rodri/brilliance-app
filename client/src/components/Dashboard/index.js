@@ -27,11 +27,10 @@ export default class Dashboard extends Component {
 
   render(){
     const user = this.props.user
-    console.log(user, "2")
     return (
       <div>
       <Header />
-      <h1>Welcome {user && user.given_name}!</h1>
+      <h1>Welcome {user.given_name}!</h1>
       <Schedule user={user}/>
       </div>
     )

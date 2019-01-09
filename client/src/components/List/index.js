@@ -14,9 +14,9 @@ export default class List extends Component {
           ))}
         </div>
         <div className="List">
-        { items && items.map(item => (
+        { items && items.map((item, id) => (
           <ListItem
-            key={item.id}
+            key={id}
             item={item}
             type={this.props.type}
           />
