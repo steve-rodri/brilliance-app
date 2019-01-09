@@ -79,7 +79,7 @@ async function createGoogleEvent(calendar_id, start, end, summary){
 }
 
 export {
-  getUser
+  getUser,
   getGoogleCalendars,
   getGoogleEvents,
   createGoogleEvent
