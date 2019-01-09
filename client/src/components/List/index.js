@@ -9,8 +9,8 @@ export default class List extends Component {
     return (
       <div>
         <div className="Titles">
-          {subtitles && subtitles.map(subtitle => (
-            <h5>{subtitle}</h5>
+          {subtitles && subtitles.map((subtitle, id) => (
+            <h5 key={id}>{subtitle}</h5>
           ))}
         </div>
         <div className="List">

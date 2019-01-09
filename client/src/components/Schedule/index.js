@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import List from '../List/index.js'
 import moment from 'moment'
 import './Schedule.css'
 
-import { getGoogleCalendars, getGoogleEvents } from '../../services/calendar_service'
+import { getGoogleCalendars, getGoogleEvents } from '../../services/google_service'
 
 export default class Schedule extends Component {
   constructor(props){
@@ -14,15 +13,15 @@ export default class Schedule extends Component {
     }
   }
 
-  async componentWillMount(){
+  async componentDidMount(){
     await this.findUpcomingUserEvents()
   }
 
   findAllUserEvents = async() => {
     const user = this.props.user
+    console.log(user, "4")
     if (user) {
       const calendars = await getGoogleCalendars();
-      if (!calendars) return (<Redirect to="/login"/>)
       const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
       const events = await getGoogleEvents(jobsCalendar.id)
       const userEvents = events.filter(function(event) {

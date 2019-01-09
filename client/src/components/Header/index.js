@@ -22,7 +22,6 @@ export default class Header extends Component {
     this.setState({
       redirectToLogin: true
     })
-    this.props.removeUser()
   }
 
   toDashboard = () => {
