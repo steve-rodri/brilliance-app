@@ -6,9 +6,17 @@ export default class List extends Component {
   render(){
     const items = this.props.items
     const subtitles = this.props.subtitles
+    const style = () => {
+      if (subtitles) {
+        return this.styleColumns(subtitles.length)
+      } else {
+        return {}
+      }
+    }
+
     return (
       <div>
-        <div className="Titles" style={this.styleColumns(subtitles.length)}>
+        <div className="Titles" style={style()}>
           {subtitles && subtitles.map((subtitle, id) => (
             <h5 key={id}>{subtitle}</h5>
           ))}
@@ -19,7 +27,7 @@ export default class List extends Component {
             key={id}
             item={item}
             type={this.props.type}
-            numColumns={subtitles.length}
+            numColumns={subtitles && subtitles.length}
             styleColumns={this.styleColumns}
           />
         ))}
