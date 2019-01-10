@@ -5,11 +5,10 @@ import './ListItem.css'
 
 export default function ListItem(props){
   const { item, type, numColumns } = props
-
   switch (type) {
     case 'Schedule':
       return (
-        <Link to={`/admin/${type.toLowerCase()}/${item.id}`}>
+        <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <p>{item && timeUntil()}</p>
             <div>
@@ -22,17 +21,18 @@ export default function ListItem(props){
         </Link>
       )
     case 'Events':
+    const event = item
       return (
-        <Link to={`/admin/${type.toLowerCase()}/${item.id}`}>
+        <Link to={`/admin/${type.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <div>
-              <h6>{item && item.summary}</h6>
-              <p>{item && moment(start()).format('dddd, MMMM Do')}</p>
-              <p>{item && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
+              <h6>{event && event.summary}</h6>
+              <p>{event && moment(start()).format('dddd, MMMM Do')}</p>
+              <p>{event && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
-            <p>{item && item.client_id}</p>
-            <p>{item && item.location}</p>
-            <p>{item && item.confirmation}</p>
+            <p>{event && clientName(event)}</p>
+            <p>{event && event.location}</p>
+            <p>{event && event.confirmation}</p>
             <p>Scheduled?</p>
           </div>
         </Link>
@@ -40,7 +40,7 @@ export default function ListItem(props){
     case 'Invoices':
     const invoice = item
       return (
-        <Link to={`/admin/${type.toLowerCase()}/${item.id}`}>
+        <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <div></div>
             <h4>{invoice.kind}</h4>
@@ -54,7 +54,7 @@ export default function ListItem(props){
     case 'Clients':
       const client = item.contactInfo
       return (
-        <Link to={`/admin/${type.toLowerCase()}/${item.id}`}>
+        <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <h3>{client && client.fullName}</h3>
           </div>
@@ -103,5 +103,14 @@ export default function ListItem(props){
 
   function timeUntil(){
     return moment(start()).fromNow()
+  }
+
+  function clientName(event) {
+
+    if (event.client) {
+      if (event.client.contactInfo) {
+        return event.client.contactInfo.fullName
+      }
+    }
   }
 }
