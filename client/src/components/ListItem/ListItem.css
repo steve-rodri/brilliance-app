@@ -6,7 +6,6 @@
   border-radius: 5px;
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(5, 1fr)
 }
 
 .List-Item--description{

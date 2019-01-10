@@ -1,49 +1,64 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 import './ListItem.css'
 
 export default function ListItem(props){
-  const item = props.item
-  const type = props.type
+  const { item, type, numColumns } = props
 
   switch (type) {
     case 'Schedule':
       return (
-        <div className="List-Item">
-          <p>{item && timeUntil()}</p>
-          <div>
-            <h6>{item && item.summary}</h6>
-            <p>{item && moment(start()).format('dddd, MMMM Do')}</p>
-            <p>{item && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
+        <Link to={`/admin/${type.toLowerCase()}/${item.id}`}>
+          <div className="List-Item" style={styleColumns(numColumns)}>
+            <p>{item && timeUntil()}</p>
+            <div>
+              <h6>{item && item.summary}</h6>
+              <p>{item && moment(start()).format('dddd, MMMM Do')}</p>
+              <p>{item && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
+            </div>
+            <p className="List-Item--description">{item && item.description}</p>
           </div>
-          <p className="List-Item--description">{item && item.description}</p>
-        </div>
+        </Link>
       )
     case 'Events':
       return (
-        <div className="List-Item">
-          <div>
-            <h6>{item && item.summary}</h6>
-            <p>{item && moment(start()).format('dddd, MMMM Do')}</p>
-            <p>{item && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
+        <Link to={`/admin/${type.toLowerCase()}/${item.id}`}>
+          <div className="List-Item" style={styleColumns(numColumns)}>
+            <div>
+              <h6>{item && item.summary}</h6>
+              <p>{item && moment(start()).format('dddd, MMMM Do')}</p>
+              <p>{item && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
+            </div>
+            <p>{item && item.client_id}</p>
+            <p>{item && item.location}</p>
+            <p>{item && item.confirmation}</p>
+            <p>Scheduled?</p>
           </div>
-          <p>{item && item.client_id}</p>
-          <p>{item && item.location}</p>
-          <p>{item && item.confirmation}</p>
-          <p>Scheduled?</p>
-        </div>
+        </Link>
       )
     case 'Invoices':
+    const invoice = item
       return (
-        <div className="List-Item">
-
-        </div>
+        <Link to={`/admin/${type.toLowerCase()}/${item.id}`}>
+          <div className="List-Item" style={styleColumns(numColumns)}>
+            <div></div>
+            <h4>{invoice.kind}</h4>
+            <div className="List-Item--status">
+              <h3>{invoice.payment_status}</h3>
+              <h4>{invoice.payment_type}</h4>
+            </div>
+          </div>
+        </Link>
       )
     case 'Clients':
+      const client = item.contactInfo
       return (
-        <div className="List-Item">
-
-        </div>
+        <Link to={`/admin/${type.toLowerCase()}/${item.id}`}>
+          <div className="List-Item" style={styleColumns(numColumns)}>
+            <h3>{client && client.fullName}</h3>
+          </div>
+        </Link>
       )
     default:
   }
@@ -57,6 +72,12 @@ export default function ListItem(props){
           return item.start.dateTime
         }
       }
+    }
+  }
+
+  function styleColumns(numColumns){
+    return {
+      gridTemplateColumns: `repeat(${numColumns}, 1fr)`
     }
   }
 

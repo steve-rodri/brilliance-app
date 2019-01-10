@@ -2,7 +2,6 @@
   margin: 5px auto;
   width: 97%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr)
 }
 
 .List {
