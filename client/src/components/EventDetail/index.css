@@ -1,0 +1,18 @@
+.EventDetail--tab-control {
+  display: flex;
+  height: 60px;
+  background-color: rgba(0,0,0,.88);
+  color: white;
+  align-items: center;
+}
+
+.EventDetail--tab-control > div {
+  height: 98%;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.EventDetail--tab-control > div:hover {
+  cursor: pointer
+}

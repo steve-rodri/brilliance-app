@@ -3,7 +3,7 @@ header {
   display: grid;
   align-items: center;
   grid-template-columns: 10% 80% 10%;
-  border-bottom: 2px solid black;
+  border-bottom: 3px solid black;
 }
 
 nav {
