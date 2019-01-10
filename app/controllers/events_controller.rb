@@ -3,9 +3,9 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    @events = Event.all
+    @events = Event.all.limit(50)
 
-    render json: @events
+    render json: @events, include: '**'
   end
 
   # GET /events/1
