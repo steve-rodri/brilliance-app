@@ -8,7 +8,7 @@ export default class List extends Component {
     const subtitles = this.props.subtitles
     return (
       <div>
-        <div className="Titles">
+        <div className="Titles" style={this.styleColumns(subtitles.length)}>
           {subtitles && subtitles.map((subtitle, id) => (
             <h5 key={id}>{subtitle}</h5>
           ))}
@@ -19,10 +19,18 @@ export default class List extends Component {
             key={id}
             item={item}
             type={this.props.type}
+            numColumns={subtitles.length}
+            styleColumns={this.styleColumns}
           />
         ))}
         </div>
       </div>
     )
+  }
+
+  styleColumns(numColumns){
+    return {
+      gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+    }
   }
 }

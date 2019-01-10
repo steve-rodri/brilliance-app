@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
 import List from '../List/index.js'
 import './ListPage.css'
 
@@ -7,6 +8,8 @@ export default class ListPage extends Component {
   sort(e){
     console.log(e.target.innerHTML)
   }
+
+
 
   render(){
     return (
@@ -25,6 +28,7 @@ export default class ListPage extends Component {
             subtitles={this.props.subtitles}
             items={this.props.data}
             type={this.props.title}
+            handleSelect={this.handleSelect}
           />
         </main>
       </div>

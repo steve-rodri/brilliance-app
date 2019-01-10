@@ -26,7 +26,7 @@ export default class Main extends Component {
     return(
       <div className="App">
         <Route exact path="/admin" render={() => <Dashboard user={this.user()} /> } />
-        <Route  path="/admin/events" render={() => <Events user={this.user()} /> } />
+        <Route  path="/admin/events" render={(props) => <Events {...props} user={this.user()} /> } />
         <Route  path="/admin/clients" render={() => <Clients user={this.user()} /> } />
         <Route  path="/admin/invoices" render={() => <Invoices user={this.user()} /> } />
       </div>
