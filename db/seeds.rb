@@ -1,80 +1,196 @@
-require 'csv'
-
 Contact.destroy_all
 Client.destroy_all
 Event.destroy_all
+Invoice.destroy_all
 
 #seed Contacts
-csv_text = File.read(Rails.root.join('lib','seeds', 'Contacts.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
-  Contact.create! ({
-    photo: row['Photo'],
-    prefix: row['Prefix'],
-    first_name: row['First_Name'],
-    last_name: row['Last_Name'],
-    phone_number: row['Phone_Number'],
-    work_email: row['Work_Email'],
-    ss: row['SS'],
-
-    created_at: row['created_at']
-  })
-end
+Contact.bulk_create! ([
+  {
+    first_name: 'Pam',
+    last_name: 'Beasely',
+    phone_number: '555-123-4567',
+    work_email: 'Pam_Beasely@gmail.com',
+  },
+  {
+    first_name: 'Jim',
+    last_name: 'Halpert',
+    phone_number: '555-123-4567',
+    work_email: 'Jim_Halpert@gmail.com',
+  },
+  {
+    first_name: 'Michael',
+    last_name: 'Scott',
+    phone_number: '555-123-4567',
+    work_email: 'Michael_Scott@gmail.com',
+  },
+  {
+    first_name: 'Dwight',
+    last_name: 'Schrute',
+    phone_number: '666-666-6666',
+    work_email: 'Dwight.Schrute@schrutefarms.com',
+  }
+])
 puts "There are now #{Contact.count} rows in the Contact table"
 
 #seed Clients
-csv_text = File.read(Rails.root.join('lib','seeds', 'Clients.csv'))
-csv = CSV.parse(csv_text, :headers => true, :skip_blanks => false, :encoding => 'ISO-8859-1')
-csv.each do |row|
-  Client.create! ({
-    contact_id: row['contact_id'],
-    created_at: row['created_at']
-  })
-end
+Client.bulk_create! (
+  {
+    contact_id: 1
+  },
+  {
+    contact_id: 2
+  },
+  {
+    contact_id: 3
+  },
+  {
+    contact_id: 4
+  }
+])
 puts "There are now #{Client.count} rows in the Clients table"
 
-#seed Events
-csv_text = File.read(Rails.root.join('lib','seeds', 'Events.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
-  Event.create! ({
-    action: row['Action'],
-    break: row['Break'],
-    break_start: row['Break_Start'],
-    call_time: row['Call_Time'],
-    clock_out: row['Clock_Out'],
-    confirmation: row['Confirmation'],
-    description: row['Description'],
-    driving_time: row['Driving_Time'],
-    end: row['Event_End'],
-    kind: row['Kind'],
-    notes: row['Notes'],
-    start: row['Event_Start'],
-    summary: row['Summary'],
-    tags: row['Tags'],
+Event.bulk_create! ([
+  {
+    action: 'Set up',
+    call_time: Time.now(),
+    clock_out: Time.now(),
+    confirmation: true,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    driving_time: Time.now(),
+    end: Time.now(),
+    kind: 'Test',
+    notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    start: Time.now(),
+    summary: 'Test Event',
 
-    client_id: row['client_id'],
-    created_at: row['created_at']
-  })
-end
+    client_id: 2
+  },
+  {
+    action: 'Set up',
+    call_time: Time.now(),
+    clock_out: Time.now(),
+    confirmation: true,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    driving_time: Time.now(),
+    end: Time.now(),
+    kind: 'Test',
+    notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    start: Time.now(),
+    summary: 'Test Event',
+
+    client_id: 1
+  },
+  {
+    action: 'Set up',
+    call_time: Time.now(),
+    clock_out: Time.now(),
+    confirmation: true,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    driving_time: Time.now(),
+    end: Time.now(),
+    kind: 'Test',
+    notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    start: Time.now(),
+    summary: 'Test Event',
+
+    client_id: 3
+  },
+  {
+    action: 'Set up',
+    call_time: Time.now(),
+    clock_out: Time.now(),
+    confirmation: true,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    driving_time: Time.now(),
+    end: Time.now(),
+    kind: 'Test',
+    notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    start: Time.now(),
+    summary: 'Test Event',
+
+    client_id: 4
+  },
+  {
+    action: 'Set up',
+    call_time: Time.now(),
+    clock_out: Time.now(),
+    confirmation: true,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    driving_time: Time.now(),
+    end: Time.now(),
+    kind: 'Test',
+    notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    start: Time.now(),
+    summary: 'Test Event',
+
+    client_id: 1
+  }
+])
+
 puts "There are now #{Event.count} rows in the Events table"
 
 #seed Invoices
-csv_text = File.read(Rails.root.join('lib','seeds', 'Invoices.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
-  Invoice.create! ({
-    kind: row['Type'],
-    status: row['Status'],
-    payment_status: row['Payment_Status'],
-    payment_type: row['Payment_Type'],
-    commission_paid: row['Commission_Paid'],
-    check_info: row['Check_Info'],
-    discount: row['Discount'],
-    tip: row['Tip'],
+Invoice.bulk_create! ([
+  {
+    kind: 'On Premise Contract',
+    status: 'Email Sent',
+    payment_status: 'Paid In Full',
+    payment_type: 'Check',
+    commission_paid: '1',
+    check_info: 'Chase Bank Check#1234',
+    discount: 250,
+    tip: 0,
 
-    event_id: row['event_id'],
-    created_at: row['created_at']
-  })
+    event_id: 1
+  },
+  {
+    kind: 'On Premise Contract',
+    status: 'Email Sent',
+    payment_status: 'Paid In Full',
+    payment_type: 'Check',
+    commission_paid: '1',
+    check_info: 'Chase Bank Check#1234',
+    discount: 250,
+    tip: 0,
+
+    event_id: 2
+  },
+  {
+    kind: 'On Premise Contract',
+    status: 'Email Sent',
+    payment_status: 'Paid In Full',
+    payment_type: 'Check',
+    commission_paid: '1',
+    check_info: 'Chase Bank Check#1234',
+    discount: 250,
+    tip: 0,
+
+    event_id: 3
+  },
+  {
+    kind: 'On Premise Contract',
+    status: 'Email Sent',
+    payment_status: 'Paid In Full',
+    payment_type: 'Check',
+    commission_paid: '1',
+    check_info: 'Chase Bank Check#1234',
+    discount: 250,
+    tip: 0,
+
+    event_id: 4
+  },
+  {
+    kind: 'Production',
+    status: 'Email Sent',
+    payment_status: 'Paid In Full',
+    payment_type: 'Check',
+    commission_paid: '1',
+    check_info: 'Chase Bank Check#1234',
+    discount: 250,
+    tip: 0,
+
+    event_id: 5
+  }
+])
 end
 puts "There are now #{Invoice.count} rows in the Invoices table"
