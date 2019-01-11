@@ -37,11 +37,11 @@ export default class Events extends Component {
   }
 
   Show = ({ match }) => {
-    const req_id = match.params.id
+    const req_id = parseInt(match.params.id)
     const events = this.state.events
-    const event = events.find(event => event.id = req_id)
+    const e = events.find(event => event.id === req_id)
     return (
-      <EventDetail event={event}/>
+      <EventDetail event={e}/>
     )
   }
 
