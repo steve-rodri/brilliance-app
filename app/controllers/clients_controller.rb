@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
-    @clients = Client.all.limit(50)
+    @clients = Client.all
 
     render json: @clients
   end
@@ -38,6 +38,27 @@ class ClientsController < ApplicationController
     @client.destroy
   end
 
+  # GET /clients/find
+  def find
+    term = params[:q]
+    term = term.capitalize
+    query = "SELECT * FROM contacts WHERE first_name LIKE '%#{term}%'"
+    contacts = execute_sql(query)
+
+    clients = []
+    if contacts
+      contacts.each do |contact|
+        id =  contact.as_json["id"]
+
+        client = Client.find_by contact_id: "#{id}"
+        if client
+          clients.push(client)
+        end
+      end
+    end
+    render json: clients
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
@@ -46,6 +67,6 @@ class ClientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def client_params
-      params.require(:client).permit(:contact_id)
+      params.require(:client).permit(:contact_id, :q)
     end
 end
