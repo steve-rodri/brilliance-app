@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BasicInfo from './BasicInfo';
+import BasicInfo from './BasicInfo/index.js';
 import Logistics from './Logistics';
 import Invoice from './Invoice';
 import CashFlow from './CashFlow';
@@ -18,22 +18,31 @@ export default class EventDetail extends Component {
   }
 
   view = () => {
+    const { event } = this.props
     switch (this.state.view) {
       case 'Basic Info':
         return (
-          <BasicInfo />
+          <BasicInfo
+            event={event}
+          />
         )
       case 'Logistics':
         return (
-          <Logistics />
+          <Logistics
+            event={event}
+          />
         )
       case 'Invoice':
         return (
-          <Invoice />
+          <Invoice
+            event={event}
+          />
         )
       case 'Cash Flow':
         return (
-          <CashFlow />
+          <CashFlow
+            event={event}
+          />
         )
 
       default:
@@ -55,8 +64,6 @@ export default class EventDetail extends Component {
       borderTop:'1px solid rgba(0,0,0,.88) '
     }
   }
-
-
 
   render(){
     return (
