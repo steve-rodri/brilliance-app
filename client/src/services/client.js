@@ -8,6 +8,14 @@ const client = {
     } catch (e) {
       console.log(e)
     }
+  },
+  find: async function (query){
+    try {
+      const resp = await axios.get(`/api/clients/find?q=${query}`)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
