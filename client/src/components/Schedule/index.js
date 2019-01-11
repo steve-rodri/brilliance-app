@@ -21,15 +21,17 @@ export default class Schedule extends Component {
     const user = this.props.user
     if (user) {
       const calendars = await getGoogleCalendars();
-      const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
-      const events = await getGoogleEvents(jobsCalendar.id)
-      const userEvents = events.filter(function(event) {
-          if (event.attendees) {
-            return event.attendees.find(attendee => (attendee.email = user.email))
+      if (calendars) {
+        const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
+        const events = await getGoogleEvents(jobsCalendar.id)
+        const userEvents = events.filter(function(event) {
+            if (event.attendees) {
+              return event.attendees.find(attendee => (attendee.email = user.email))
+            }
           }
-        }
-      )
-      return userEvents
+        )
+        return userEvents
+      }
     }
   }
 

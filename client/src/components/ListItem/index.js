@@ -106,7 +106,6 @@ export default function ListItem(props){
   }
 
   function clientName(event) {
-
     if (event.client) {
       if (event.client.contactInfo) {
         return event.client.contactInfo.fullName
