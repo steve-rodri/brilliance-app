@@ -40,11 +40,15 @@ class ClientsController < ApplicationController
 
   # GET /clients/find
   def find
-    term = params[:q]
-    term = term.capitalize
-    query = "SELECT * FROM contacts WHERE first_name LIKE '%#{term}%'"
-    contacts = execute_sql(query)
+    terms = params[:q].split
 
+    if terms.length > 1
+      query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0]}%' AND last_name LIKE '%#{terms[1]}%' LIMIT 10"
+    else
+      query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0]}%' LIMIT 10"
+    end
+
+    contacts = execute_sql(query)
     clients = []
     if contacts
       contacts.each do |contact|
