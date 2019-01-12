@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import Header from '../Header/index.js'
 import ListPage from '../ListPage/index.js'
-import EventDetail from '../EventDetail/index.js'
+import EventDetail from './EventDetail/index.js'
 import { event } from '../../services/event'
+import './index.css'
 
 export default class Events extends Component {
   constructor(props){
@@ -41,7 +42,7 @@ export default class Events extends Component {
     const events = this.state.events
     const e = events.find(event => event.id === req_id)
     return (
-      <EventDetail event={e}/>
+      <EventDetail e={e} eventId={req_id}/>
     )
   }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import List from '../List/index.js'
 import moment from 'moment'
 import './Schedule.css'
@@ -9,7 +10,8 @@ export default class Schedule extends Component {
   constructor(props){
     super(props)
     this.state = {
-      userEvents: []
+      userEvents: [],
+      redirectToLogin: false
     }
   }
 
@@ -31,6 +33,8 @@ export default class Schedule extends Component {
           }
         )
         return userEvents
+      } else {
+        this.setState({ redirectToLogin:true })
       }
     }
   }
@@ -47,6 +51,7 @@ export default class Schedule extends Component {
   }
 
   render(){
+    if (this.state.redirectToLogin) return (<Redirect to="/login"/>)
     return (
       <div className="schedule--container">
         <h2 className='schedule--title'>Schedule</h2>

@@ -2,18 +2,18 @@ import React from 'react'
 import moment from 'moment'
 
 export default function Standard (props){
-  const { event, clientName } = props
+  const { event, fields } = props
   return (
     <div className="MainInfo">
 
       <label>Client</label>
-        <p className="BasicInfo--field">{event && clientName}</p>
+        <p className="BasicInfo--field">{fields && fields.client}</p>
 
       <label>Type/Action</label>
         <p className="BasicInfo--field">{event && event.action? event.action : ''}</p>
 
       <label>Location</label>
-        <p className="BasicInfo--field">{event && event.location? event.location : ''}</p>
+        <p className="BasicInfo--field">{fields && fields.location}</p>
 
       <label>Kind</label>
         <p className="BasicInfo--field">{event && event.kind? event.kind : ''}</p>

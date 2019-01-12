@@ -12,6 +12,7 @@ const event = {
   getOne: async function(id){
     try {
       const resp = await axios.get(`/api/events/${id}`)
+      return resp.data
     } catch (e) {
       console.log(e)
     }
@@ -19,7 +20,7 @@ const event = {
   update: async function(id, data){
     try {
       const resp = await axios.put(`/api/events/${id}`, data)
-      return resp
+      return resp.data
     } catch (e) {
       console.log(e)
     }
