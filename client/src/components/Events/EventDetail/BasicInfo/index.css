@@ -22,8 +22,12 @@ label {
   font-weight: bold;
 }
 
-.BasicInfo--field{
+.BasicInfo--field {
   font-size: 24px;
+}
+
+.BasicInfo--field > * {
+  width: 99%;
 }
 
 .BasicInfo--staff-and-notes {

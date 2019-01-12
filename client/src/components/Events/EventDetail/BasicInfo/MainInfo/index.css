@@ -7,3 +7,13 @@
 
   padding: 30px;
 }
+
+.MainInfo--client-search .results {
+  display: none;
+  width: 200px;
+  height: 200px;
+}
+
+.search-result:hover {
+  cursor:pointer
+}
