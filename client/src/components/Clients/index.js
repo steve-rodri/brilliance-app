@@ -7,7 +7,7 @@ export default class Clients extends Component {
   constructor(props){
     super(props)
     this.state = {
-
+      clients: null
     }
   }
 
@@ -23,14 +23,16 @@ export default class Clients extends Component {
   }
 
   render(){
+    const { location } = this.props
+    const { clients } = this.state
     return (
       <div className="ListPage">
-        <Header removeUser={this.props.removeUser}/>
+        <Header location={location} />
         <ListPage
           title="Clients"
           categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
           subtitles={['name / company', 'contact info', 'next event', 'balance']}
-          data={this.state.clients}
+          data={clients}
         />
       </div>
     )

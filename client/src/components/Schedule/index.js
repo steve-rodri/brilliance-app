@@ -51,13 +51,14 @@ export default class Schedule extends Component {
   }
 
   render(){
-    if (this.state.redirectToLogin) return (<Redirect to="/login"/>)
+    const { redirectToLogin, userEvents} = this.state
+    if (redirectToLogin) return (<Redirect to="/login"/>)
     return (
       <div className="schedule--container">
         <h2 className='schedule--title'>Schedule</h2>
         <List
           type="Schedule"
-          items={this.state.userEvents}
+          items={userEvents}
         />
       </div>
     )

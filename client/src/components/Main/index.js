@@ -25,10 +25,10 @@ export default class Main extends Component {
     if (!token ) return (<Redirect to="/login"/>)
     return(
       <div className="App">
-        <Route exact path="/admin" render={() => <Dashboard user={this.user()} /> } />
+        <Route exact path="/admin" render={(props) => <Dashboard {...props} user={this.user()} /> } />
         <Route  path="/admin/events" render={(props) => <Events {...props} user={this.user()} /> } />
-        <Route  path="/admin/clients" render={() => <Clients user={this.user()} /> } />
-        <Route  path="/admin/invoices" render={() => <Invoices user={this.user()} /> } />
+        <Route  path="/admin/clients" render={(props) => <Clients {...props} user={this.user()} /> } />
+        <Route  path="/admin/invoices" render={(props) => <Invoices {...props} user={this.user()} /> } />
       </div>
     )
   }
