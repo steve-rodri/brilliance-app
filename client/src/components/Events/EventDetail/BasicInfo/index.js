@@ -12,15 +12,17 @@ library.add(faTimes)
 export default class BasicInfo extends Component {
   render(){
     const { event, fields, searchFieldData, editMode } = this.props
+    if (fields) {
+    }
     return (
       <div className="BasicInfo--container">
         <div className="BasicInfo--header">
           <h1 className="BasicInfo--event-title">Event Title</h1>
           {editMode?
-            <React.Fragment>
+            <div className="BasicInfo--buttons">
               <div className="BasicInfo--button close" onClick={this.props.close}><FontAwesomeIcon icon="times" size="2x"/></div>
               <div className="BasicInfo--button edit" onClick={this.props.handleSubmit}><FontAwesomeIcon icon="check" size="2x"/></div>
-            </React.Fragment>
+            </div>
             :
             <div className="BasicInfo--button edit" onClick={this.props.edit}><FontAwesomeIcon icon="pencil-alt" size="2x"/></div>}
         </div>
@@ -29,7 +31,7 @@ export default class BasicInfo extends Component {
           event={event}
           searchFieldData={searchFieldData}
           fields={fields}
-          editMode={this.props.editMode}
+          editMode={editMode}
           handleSelect={this.props.handleSelect}
           handleChange={this.props.handleChange}
           handleSearchChange={this.props.handleSearchChange}
@@ -40,7 +42,11 @@ export default class BasicInfo extends Component {
           </div>
           <div className="BasicInfo--notes-container">
             <label>Notes</label>
-            <p className="BasicInfo--notes">{event && event.notes? event.notes : ''}</p>
+            {editMode?
+              <textarea className="BasicInfo--notes" type="text" name='notes' value={fields.notes? fields.notes : ''} onChange={this.props.handleChange}/>
+              :
+              <textarea readOnly="readonly" value={event && event.notes? event.notes : ''} className="BasicInfo--notes-readonly"/>
+            }
           </div>
         </div>
       </div>

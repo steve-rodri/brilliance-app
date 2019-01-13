@@ -1,38 +1,77 @@
 .BasicInfo--container {
   height: 100vh;
-  width: 95vw;
+  width: 95%;
   padding: 0 20px 20px 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .BasicInfo--header {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 10% 80% 10%;
   border-bottom: 1px solid black;
+  padding: 10px 0;
+  height:100px;
 }
 
 .BasicInfo--event-title {
-  font-size: 5vw;
-  margin: 20px;
+  grid-column: 2 / span 1
 }
 
 label {
   text-align: left;
   font-weight: bold;
+  padding: 10px 0;
 }
 
 .BasicInfo--staff-and-notes {
   display: flex;
+  height: 100%;
 }
 
 .BasicInfo--staff-and-notes > * {
-  width: 50%
+  height: 40%;
+  width: 50%;
+}
+
+.BasicInfo--notes-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+}
+
+.BasicInfo--notes, .BasicInfo--notes-readonly {
+  border-radius: 5px;
+  font-size: 1em;
+  height: 100%;
+  width: 100%;
+  resize: none;
+  overflow: scroll;
+}
+
+.BasicInfo--notes {
+  border: 1px solid lightgray;
+}
+
+.BasicInfo--notes-readonly {
+  border: none
+}
+
+.BasicInfo--notes-readonly:focus {
+  outline: none
+}
+
+.BasicInfo--buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .BasicInfo--button {
   padding: 10px;
-  position: absolute;
 }
 
 .close {

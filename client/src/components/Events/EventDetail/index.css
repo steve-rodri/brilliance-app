@@ -1,13 +1,12 @@
 .EventDetail--container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
 }
 
 .EventDetail--tab-control {
   display: flex;
-  height: 4.75vw;
+  height: 3em;
   width: 100%;
   background-color: rgba(0,0,0,.88);
   color: white;
@@ -22,7 +21,7 @@
 }
 
 .EventDetail--tab-control > div > h3 {
-  font-size: 1.75vw;
+  font-size: 1.2em;
 }
 
 .EventDetail--tab-control > div:hover {
