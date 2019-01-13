@@ -10,9 +10,15 @@
 .Edit--input {
   position: absolute;
   text-align: center;
+  border-radius: 5px;
+  border: 1px solid lightgray;
   height: 100%;
   width: 100%;
-  font-size: 2.1vw;
+  font-size: 1em;
+}
+
+.Edit--input, .datetime {
+  font-family: "Helvetica neue"
 }
 
 .Edit--results {
@@ -23,9 +29,7 @@
   width: 100%;
   height: 600%;
   overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-radius: 5px;
 }
 
 .Edit--search-result {
@@ -33,7 +37,8 @@
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(0,0,0,.5);
-  width: 95%;
+  margin: 0 auto;
+  width: 93%;
   height: 33%;
   z-index: 2;
 }

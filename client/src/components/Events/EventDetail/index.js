@@ -59,7 +59,7 @@ export default class EventDetail extends Component {
 
   setFields = () => {
     const { evt } = this.state
-    const fieldNames = ['location', 'start', 'end', 'action', 'kind', 'description', 'package']
+    const fieldNames = ['location', 'start', 'end', 'action', 'kind', 'description', 'notes', 'package']
     fieldNames.forEach( field => this.setField( field, evt[field] ))
   }
 
@@ -163,7 +163,7 @@ export default class EventDetail extends Component {
 
   resetSearchFieldData = async() => {
     this.setState({
-      searchFieldData: []
+      searchFieldData: null
     })
   }
 
@@ -240,7 +240,7 @@ export default class EventDetail extends Component {
 
   render(){
     return (
-      <div className="EventDetail--container">
+      <div className="EventDetail--container" onClick={this.resetSearchFieldData}>
         <div className="EventDetail--tab-control">
           <div className="Tab" style={this.styleTab("Basic Info")}  onClick={() => this.setView("Basic Info")}><h3>Basic Info</h3></div>
           <div className="Tab" style={this.styleTab("Logistics")}   onClick={() => this.setView("Logistics")}><h3>Logistics</h3></div>

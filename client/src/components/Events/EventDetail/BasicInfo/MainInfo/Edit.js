@@ -4,7 +4,6 @@ import './Edit.css'
 
 export default function Edit(props) {
   const { fields, searchFieldData } = props
-
   function displayResults(){
     if (searchFieldData) {
       return {
@@ -16,7 +15,9 @@ export default function Edit(props) {
         borderBottom: '1px solid rgba(0,0,0,.55)'
       }
     } else {
-      return {}
+      return {
+        display: 'none'
+      }
     }
   }
 
@@ -57,7 +58,7 @@ export default function Edit(props) {
         </div>
 
       <label>Start</label>
-        <div className="Edit--field">
+        <div className="Edit--field datetime">
           <input className="Edit--input" type="datetime-local" name='start' value={fields.start? moment(fields.start).format('YYYY-MM-DDTHH:mm') : ''} onChange={props.handleChange}/>
         </div>
       <label>Description</label>
@@ -66,7 +67,7 @@ export default function Edit(props) {
         </div>
 
       <label>End</label>
-        <div className="Edit--field">
+        <div className="Edit--field datetime">
           <input className="Edit--input" type="datetime-local" name='end'  value={fields.end? moment(fields.end).format('YYYY-MM-DDTHH:mm') : ''} onChange={props.handleChange}/>
         </div>
 
