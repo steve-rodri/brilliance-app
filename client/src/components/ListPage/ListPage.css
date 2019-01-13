@@ -17,10 +17,21 @@
   width: 125px;
 }
 
+
 aside > div {
   margin: 15px 15px 0 15px;
 }
 
 aside > h2 {
   margin: 10px 0;
+}
+
+@media (max-width: 1000px) {
+  aside {
+    display:none
+  }
+
+  main {
+    width: 100vw;
+  }
 }
