@@ -17,6 +17,11 @@ export default class Header extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    const { location } = nextProps
+    this.setState({ location })
+  }
+
   logOut = () => {
     localStorage.clear()
     this.setState({
@@ -25,14 +30,20 @@ export default class Header extends Component {
   }
 
   toDashboard = () => {
-    this.setState({
-      redirectToDashboard: true
-    })
+    const { location } = this.state
+    if (location) {
+      if (location.pathname !== '/admin') {
+        this.setState({
+          redirectToDashboard: true
+        })
+      }
+    }
   }
 
   render(){
-    if (this.state.redirectToLogin) return (<Redirect to="/login"/>)
-    if (this.state.redirectToDashboard) return (<Redirect to="/admin"/>)
+    const { redirectToLogin, redirectToDashboard } = this.state
+    if (redirectToLogin) return (<Redirect to="/login"/>)
+    if (redirectToDashboard) return (<Redirect to="/admin"/>)
     return(
       <header>
         <img onClick={this.toDashboard} className="logo" src={logo_t} alt='logo'/>
