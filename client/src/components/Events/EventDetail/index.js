@@ -12,10 +12,11 @@ export default class EventDetail extends Component {
     super(props)
     this.state = {
       view: 'Basic Info',
-      evt: {},
-      fields: {},
+      evt: null,
+      fields: null,
       searchFieldData: [],
-      formData: {}
+      formData: null,
+      editMode: false
     }
   }
 
@@ -24,10 +25,6 @@ export default class EventDetail extends Component {
     await this.getEvent();
     await this.setClientName();
     await this.setFields();
-  }
-
-  componentWillUpdate(){
-    console.log('updating')
   }
 
   getEvent = async() => {
@@ -45,14 +42,6 @@ export default class EventDetail extends Component {
     if (q.length > 2) {
       const clients = await client.find(query)
       return clients
-    }
-  }
-
-  getClientId(clientName){
-    const { fields, searchFieldData:{ clients } } = this.state
-    if (clients) {
-      const c = clients.find(client => client.contactInfo.fullName === fields.client)
-      return c.id
     }
   }
 
@@ -143,16 +132,18 @@ export default class EventDetail extends Component {
   }
 
   handleEditSubmit = async() => {
-    const { evt, formData } = this.state
-    console.log(formData)
-    await event.update(evt.id, formData)
-    this.resetForm();
-    const updatedEvent = await event.getOne(evt.id)
-    this.setState({
-      evt: updatedEvent
-    })
-    await this.setClientName();
-    await this.setFields();
+    const { evt, formData, editMode } = this.state
+    if (formData) {
+      await event.update(evt.id, formData)
+      this.resetForm();
+      const updatedEvent = await event.getOne(evt.id)
+      this.setState({
+        evt: updatedEvent
+      })
+      await this.setClientName();
+      await this.setFields();
+    }
+    this.setState({editMode: !editMode})
   }
 
   edit = () => {
@@ -177,7 +168,7 @@ export default class EventDetail extends Component {
   }
 
   view = () => {
-    const { view, evt, fields, searchFieldData } = this.state
+    const { view, evt, fields, searchFieldData, editMode } = this.state
     switch (view) {
       case 'Basic Info':
         return (
@@ -185,6 +176,8 @@ export default class EventDetail extends Component {
             event={evt}
             fields={fields}
             searchFieldData={searchFieldData}
+            editMode={editMode}
+            edit={this.edit}
             setField={this.setField}
             resetForm={this.resetForm}
             handleChange={this.handleChange}

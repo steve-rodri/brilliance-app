@@ -27,7 +27,7 @@ const event = {
   },
   bulkUpdate: async function(data){
     try {
-      const resp = await axios.put('/api/events/', data)
+      // const resp = await axios.put('/api/events/', data)
     } catch (e) {
       console.log(e)
     }
