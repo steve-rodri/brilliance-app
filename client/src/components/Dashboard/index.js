@@ -6,30 +6,11 @@ import Schedule from '../Schedule/index.js'
 import './Dashboard.css'
 
 export default class Dashboard extends Component {
-  constructor (props){
-    super(props)
-    this.state = {
-      modalIsOpen: false,
-    }
-  }
-
-  openUserModal(){
-    this.setState({
-      modalIsOpen: true
-    })
-  }
-
-  handleRequestCloseFunc(){
-    this.setState({
-      modalIsOpen: false
-    })
-  }
-
   render(){
-    const user = this.props.user
+    const { user, location } = this.props
     return (
       <div>
-      <Header />
+      <Header location={location}/>
       <h1>Welcome {user.givenName}!</h1>
       <Schedule user={user}/>
       </div>
@@ -37,6 +18,26 @@ export default class Dashboard extends Component {
   }
 }
 
+
+// constructor (props){
+//   super(props)
+//   this.state = {
+//     modalIsOpen: false,
+//   }
+// }
+//
+// openUserModal(){
+//   this.setState({
+//     modalIsOpen: true
+//   })
+// }
+//
+// handleRequestCloseFunc(){
+//   this.setState({
+//     modalIsOpen: false
+//   })
+// }
+//
 // <ReactModal
 //   isOpen={this.state.modalIsOpen}
 //   onAfterOpen={this.handleAfterOpenFunc}

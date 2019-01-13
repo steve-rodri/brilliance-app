@@ -20,13 +20,11 @@ export default class Events extends Component {
 
   fetchAllEvents = async() => {
     const events = await event.getAll();
-    this.setState({
-      events
-    })
+    this.setState({ events })
   }
 
   List = () => {
-    const events = this.state.events
+    const { events } = this.state
     return (
       <ListPage
         title="Events"
@@ -47,10 +45,10 @@ export default class Events extends Component {
   }
 
   render(){
-    const match = this.props.match
+    const { location, match } = this.props
     return (
       <div className="ListPage">
-        <Header />
+        <Header location={location}/>
 
         <Route exact path={match.path} render={this.List}/>
         <Route exact path={`${match.path}/:id`} render={this.Show}/>
