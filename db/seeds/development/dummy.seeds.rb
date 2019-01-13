@@ -1,4 +1,5 @@
 Contact.destroy_all
+Company.destroy_all
 Client.destroy_all
 Event.destroy_all
 Invoice.destroy_all
@@ -32,19 +33,33 @@ Contact.bulk_create! ([
 ])
 puts "There are now #{Contact.count} rows in the Contact table"
 
+#seed Companies
+Company.create! ([
+  {
+    name: 'Dunder Mifflin',
+    website: 'http://www.dundermifflin.com',
+    phone_number: '555-123-4567',
+  }
+])
+puts "There are now #{Contact.count} rows in the Contact table"
+
 #seed Clients
 Client.bulk_create! (
   {
-    contact_id: 1
+    contact_id: 1,
+    company_id: 1
   },
   {
-    contact_id: 2
+    contact_id: 2,
+    company_id: 1
   },
   {
-    contact_id: 3
+    contact_id: 3,
+    company_id: 1
   },
   {
-    contact_id: 4
+    contact_id: 4,
+    company_id: 1
   }
 ])
 puts "There are now #{Client.count} rows in the Clients table"

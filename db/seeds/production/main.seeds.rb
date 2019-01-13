@@ -1,10 +1,10 @@
 require 'csv'
 
-Contact.destroy_all
-Company.destroy_all
 Client.destroy_all
 Event.destroy_all
 Invoice.destroy_all
+Contact.destroy_all
+Company.destroy_all
 
 #seed Contacts
 csv_text = File.read(Rails.root.join('lib','seeds', 'Contacts.csv'))
@@ -46,6 +46,7 @@ csv = CSV.parse(csv_text, :headers => true, :skip_blanks => false, :encoding => 
 csv.each do |row|
   Client.create! ({
     contact_id: row['contact_id'],
+    company_id: row['company_id'],
     created_at: row['created_at']
   })
 end
