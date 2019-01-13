@@ -13,8 +13,8 @@ export default function ListItem(props){
             <p>{item && timeUntil()}</p>
             <div>
               <h6>{item && item.summary}</h6>
-              <p>{item && moment(start()).format('dddd, MMMM Do')}</p>
-              <p>{item && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
+              <p>{item && item.start && moment(start()).format('dddd, MMMM Do')}</p>
+              <p>{item && item.start && item.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
             <p className="List-Item--description">{item && item.description}</p>
           </div>
@@ -27,8 +27,8 @@ export default function ListItem(props){
           <div className="List-Item" style={styleColumns(numColumns)}>
             <div>
               <h6>{event && event.summary}</h6>
-              <p>{event && moment(start()).format('dddd, MMMM Do')}</p>
-              <p>{event && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
+              <p>{event && event.start && moment(start()).format('dddd, MMMM Do')}</p>
+              <p>{event && event.start && event.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
             <p>{event && clientName(event)}</p>
             <p>{event && event.location}</p>

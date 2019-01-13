@@ -19,6 +19,12 @@ export default class Schedule extends Component {
     await this.findUpcomingUserEvents()
   }
 
+  async componentWillUnmount(){
+    this.setState({
+      userEvents: []
+    })
+  }
+
   findAllUserEvents = async() => {
     const user = this.props.user
     if (user) {
