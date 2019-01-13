@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import './Standard.css'
 
 export default function Standard (props){
   const { event, fields } = props
@@ -7,28 +8,44 @@ export default function Standard (props){
     <div className="MainInfo">
 
       <label>Client</label>
-        <p className="BasicInfo--field">{fields && fields.client}</p>
+        <div className="Standard--field">
+          <p>{fields && fields.client}</p>
+        </div>
 
       <label>Type/Action</label>
-        <p className="BasicInfo--field">{event && event.action? event.action : ''}</p>
+        <div className="Standard--field">
+          <p>{fields && fields.action? fields.action : ''}</p>
+        </div>
 
       <label>Location</label>
-        <p className="BasicInfo--field">{fields && fields.location}</p>
+        <div className="Standard--field">
+          <p>{fields && fields.location}</p>
+        </div>
 
       <label>Kind</label>
-        <p className="BasicInfo--field">{event && event.kind? event.kind : ''}</p>
+        <div className="Standard--field">
+          <p>{fields && fields.kind? fields.kind : ''}</p>
+        </div>
 
       <label>Start</label>
-        <p className="BasicInfo--field">{event && event.start? moment(event.start).format('LLLL'): ''}</p>
+        <div className="Standard--field">
+          <p>{fields && fields.start? moment(fields.start).format('LLLL'): ''}</p>
+        </div>
 
       <label>Description</label>
-        <p className="BasicInfo--field">{event && event.description? event.description : ''}</p>
+        <div className="Standard--field">
+          <p>{fields && fields.description? fields.description : ''}</p>
+        </div>
 
       <label>End</label>
-        <p className="BasicInfo--field">{event && event.end? moment(event.end).format('LLLL') : ''}</p>
+        <div className="Standard--field">
+          <p>{fields && fields.end? moment(fields.end).format('LLLL') : ''}</p>
+        </div>
 
       <label>Package</label>
-        <p className="BasicInfo--field">{event && event.package? event.package : ''}</p>
+        <div className="Standard--field">
+          <p>{fields && fields.package? fields.package : ''}</p>
+        </div>
 
     </div>
   )

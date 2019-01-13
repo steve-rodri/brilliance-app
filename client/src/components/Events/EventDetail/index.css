@@ -1,6 +1,14 @@
+.EventDetail--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .EventDetail--tab-control {
   display: flex;
-  height: 60px;
+  height: 4.75vw;
+  width: 100%;
   background-color: rgba(0,0,0,.88);
   color: white;
   align-items: center;
@@ -11,6 +19,10 @@
   display: flex;
   align-items: center;
   padding: 0 10px;
+}
+
+.EventDetail--tab-control > div > h3 {
+  font-size: 1.75vw;
 }
 
 .EventDetail--tab-control > div:hover {

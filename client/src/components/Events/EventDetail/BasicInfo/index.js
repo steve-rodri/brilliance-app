@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import MainInfo from './MainInfo/index.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPencilAlt, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import './index.css'
 
 library.add(faPencilAlt)
 library.add(faCheck)
+library.add(faTimes)
 
 export default class BasicInfo extends Component {
   render(){
@@ -16,9 +17,12 @@ export default class BasicInfo extends Component {
         <div className="BasicInfo--header">
           <h1 className="BasicInfo--event-title">Event Title</h1>
           {editMode?
-            <div className="BasicInfo--editButton" onClick={this.props.handleSubmit}><FontAwesomeIcon icon="check" size="2x"/></div>
+            <React.Fragment>
+              <div className="BasicInfo--button close" onClick={this.props.close}><FontAwesomeIcon icon="times" size="2x"/></div>
+              <div className="BasicInfo--button edit" onClick={this.props.handleSubmit}><FontAwesomeIcon icon="check" size="2x"/></div>
+            </React.Fragment>
             :
-            <div className="BasicInfo--editButton" onClick={this.props.edit}><FontAwesomeIcon icon="pencil-alt" size="2x"/></div>}
+            <div className="BasicInfo--button edit" onClick={this.props.edit}><FontAwesomeIcon icon="pencil-alt" size="2x"/></div>}
         </div>
 
         <MainInfo
