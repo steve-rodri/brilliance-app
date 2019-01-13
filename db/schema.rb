@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_06_015049) do
+ActiveRecord::Schema.define(version: 2019_01_13_202849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 2019_01_06_015049) do
     t.string "ss"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "email_addresses", force: :cascade do |t|
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "contact_id"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_email_addresses_on_company_id"
+    t.index ["contact_id"], name: "index_email_addresses_on_contact_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -87,6 +97,8 @@ ActiveRecord::Schema.define(version: 2019_01_06_015049) do
 
   add_foreign_key "clients", "companies"
   add_foreign_key "clients", "contacts"
+  add_foreign_key "email_addresses", "companies"
+  add_foreign_key "email_addresses", "contacts"
   add_foreign_key "events", "clients"
   add_foreign_key "invoices", "events"
 end

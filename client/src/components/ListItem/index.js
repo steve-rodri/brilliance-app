@@ -27,12 +27,15 @@ export default function ListItem(props){
           <div className="List-Item" style={styleColumns(numColumns)}>
             <div>
               <h6>{event && event.summary}</h6>
-              <p>{event && event.start && moment(start()).format('dddd, MMMM Do')}</p>
+              <p>{event && event.start && moment(start()).format('ddd, MMM Do')}</p>
               <p>{event && event.start && event.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
-            <p>{event && clientName(event)}</p>
+            <div>
+              <p>{event && clientName(event)}</p>
+              <h5>{event && companyName(event)}</h5>
+            </div>
             <p>{event && event.location}</p>
-            <p>{event && event.confirmation}</p>
+            <p style={styleConfirmation(event && event.confirmation)}>{event && event.confirmation}</p>
             <p>Scheduled?</p>
           </div>
         </Link>
@@ -62,10 +65,10 @@ export default function ListItem(props){
               <h4>{company && company.name}</h4>
             </div>
             <div>
-              {client && <p>{client.phoneNumber && `p#: ${client.phoneNumber}`}</p>}
-              {client && <p>{client.email && `e: ${client.email}`}</p>}
-              {company && <p>{company.phoneNumber && `p#: ${company.phoneNumber}`}</p>}
-              {company && <p>{company.website && `w: ${<a>company.website</a>}`}</p>}
+              {client && <p>{client.phoneNumber && `${client.phoneNumber}`}</p>}
+              {client && client.emailAddresses.length > 0 && <a href={`mailto:${client.emailAddresses[0].address}`}>{client.emailAddresses[0].address}</a>}
+              {company && <p>{company.phoneNumber && `${company.phoneNumber}`}</p>}
+              {company && <p>{company.website && `${<a href={company.website}>company.website</a>}`}</p>}
             </div>
           </div>
         </Link>
@@ -120,6 +123,34 @@ export default function ListItem(props){
       if (event.client.contactInfo) {
         return event.client.contactInfo.fullName
       }
+    }
+  }
+
+  function companyName(event) {
+    if (event.client) {
+      if (event.client.company) {
+        return event.client.company.name
+      }
+    }
+  }
+
+  function styleConfirmation(msg){
+    switch (msg) {
+      case "Unconfirmed":
+        return {
+          backgroundColor: 'yellow',
+          borderRadius: '5px',
+          width: '90%'
+        }
+      case "Confirmed":
+        return {
+          backgroundColor: 'green',
+          color: 'white',
+          borderRadius: '5px',
+          width: '90%'
+        }
+      default:
+        return {}
     }
   }
 }
