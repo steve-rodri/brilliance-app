@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    @events = Event.all.limit(50)
+    @events = Event.last(50)
 
     render json: @events, include: '**'
   end
