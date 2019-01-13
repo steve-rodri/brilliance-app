@@ -1,8 +1,9 @@
 header {
   height: 75px;
+  min-width: 705px;
   display: grid;
   align-items: center;
-  grid-template-columns: 20% 60% 20%;
+  grid-template-columns: 20% 70% 10%;
   border-bottom: 3px solid black;
 }
 
