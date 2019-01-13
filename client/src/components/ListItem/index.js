@@ -53,10 +53,20 @@ export default function ListItem(props){
       )
     case 'Clients':
       const client = item.contactInfo
+      const company = item.company
       return (
         <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
-            <h3>{client && client.fullName}</h3>
+            <div>
+              <h3>{client && client.fullName}</h3>
+              <h4>{company && company.name}</h4>
+            </div>
+            <div>
+              {client && <p>{client.phoneNumber && `p#: ${client.phoneNumber}`}</p>}
+              {client && <p>{client.email && `e: ${client.email}`}</p>}
+              {company && <p>{company.phoneNumber && `p#: ${company.phoneNumber}`}</p>}
+              {company && <p>{company.website && `w: ${<a>company.website</a>}`}</p>}
+            </div>
           </div>
         </Link>
       )
