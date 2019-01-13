@@ -5,6 +5,7 @@ Event.destroy_all
 Invoice.destroy_all
 Contact.destroy_all
 Company.destroy_all
+EmailAddress.destroy_all
 
 #seed Contacts
 csv_text = File.read(Rails.root.join('lib','seeds', 'Contacts.csv'))
@@ -39,6 +40,19 @@ csv.each do |row|
 end
 puts "There are now #{Company.count} rows in the Company table"
 
+#seed Email Addresses
+csv_text = File.read(Rails.root.join('lib','seeds', 'Email_Addresses.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  EmailAddress.create! ({
+    address: row['Email_Address'],
+
+    contact_id: row['contact_id'],
+    company_id: row['company_id'],
+    created_at: row['created_at']
+  })
+end
+puts "There are now #{EmailAddress.count} rows in the Email Addresses table"
 
 #seed Clients
 csv_text = File.read(Rails.root.join('lib','seeds', 'Clients.csv'))

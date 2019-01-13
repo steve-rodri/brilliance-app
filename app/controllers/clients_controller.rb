@@ -3,14 +3,14 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
-    @clients = Client.all
+    @clients = Client.all.limit(50)
 
-    render json: @clients
+    render json: @clients, include: '**'
   end
 
   # GET /clients/1
   def show
-    render json: @client
+    render json: @client, include: '**'
   end
 
   # POST /clients
