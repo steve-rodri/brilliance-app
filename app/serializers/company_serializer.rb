@@ -1,4 +1,4 @@
-class ContactSerializer < ActiveModel::Serializer
+class CompanySerializer < ActiveModel::Serializer
   attributes :id,
   :name,
   :logo,

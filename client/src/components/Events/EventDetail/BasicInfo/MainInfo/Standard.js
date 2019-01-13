@@ -3,7 +3,7 @@ import moment from 'moment'
 import './Standard.css'
 
 export default function Standard (props){
-  const { event, fields } = props
+  const { fields } = props
   return (
     <div className="MainInfo">
 
