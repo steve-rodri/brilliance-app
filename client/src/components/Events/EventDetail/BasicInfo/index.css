@@ -1,6 +1,6 @@
 .BasicInfo--container {
   height: 100vh;
-  width: 100vw;
+  width: 95vw;
   padding: 0 20px 20px 20px;
   display: flex;
   flex-direction: column;
@@ -13,21 +13,13 @@
 }
 
 .BasicInfo--event-title {
+  font-size: 5vw;
   margin: 20px;
 }
 
 label {
   text-align: left;
-  font-size: 20px;
   font-weight: bold;
-}
-
-.BasicInfo--field {
-  font-size: 24px;
-}
-
-.BasicInfo--field > * {
-  width: 99%;
 }
 
 .BasicInfo--staff-and-notes {
@@ -38,12 +30,19 @@ label {
   width: 50%
 }
 
-.BasicInfo--editButton {
-  position: absolute;
-  right: 1.5%;
+.BasicInfo--button {
   padding: 10px;
+  position: absolute;
 }
 
-.BasicInfo--editButton:hover {
+.close {
+  right: 8%;
+}
+
+.edit {
+  right: 1.5%;
+}
+
+.BasicInfo--button:hover {
   cursor: pointer;
 }

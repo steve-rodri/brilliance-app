@@ -1,0 +1,44 @@
+.Edit--field {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Edit--input {
+  position: absolute;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  font-size: 2.1vw;
+}
+
+.Edit--results {
+  padding: 1.55px;
+  z-index: 1;
+  position: absolute;
+  top: 125%;
+  width: 100%;
+  height: 600%;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Edit--search-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,.5);
+  width: 95%;
+  height: 33%;
+  z-index: 2;
+}
+
+.Edit--search-result:hover {
+  cursor:pointer;
+  background-color: rgba(127, 127, 127, 0.2);
+}

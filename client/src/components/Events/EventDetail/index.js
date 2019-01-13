@@ -14,7 +14,7 @@ export default class EventDetail extends Component {
       view: 'Basic Info',
       evt: null,
       fields: null,
-      searchFieldData: [],
+      searchFieldData: null,
       formData: null,
       editMode: false
     }
@@ -93,7 +93,8 @@ export default class EventDetail extends Component {
             formData: {
               ...prevState.formData,
               client_id: item.id
-            }
+            },
+            searchFieldData: null
           }))
         break;
         case 'location':
@@ -101,7 +102,8 @@ export default class EventDetail extends Component {
             formData: {
               ...prevState.formData,
               place_id: item.id
-            }
+            },
+            searchFieldData: null
           }))
         break;
         default:
@@ -109,7 +111,8 @@ export default class EventDetail extends Component {
             formData: {
               ...prevState.formData,
               [name]: item.id
-            }
+            },
+            searchFieldData: null
           }))
         break;
       }
@@ -150,6 +153,14 @@ export default class EventDetail extends Component {
     this.setState({editMode: !this.state.editMode})
   }
 
+  close = () => {
+    this.setState({
+      editMode: !this.state.editMode,
+      formData: null,
+      searchFieldData: null
+    })
+  }
+
   resetSearchFieldData = async() => {
     this.setState({
       searchFieldData: []
@@ -178,6 +189,7 @@ export default class EventDetail extends Component {
             searchFieldData={searchFieldData}
             editMode={editMode}
             edit={this.edit}
+            close={this.close}
             setField={this.setField}
             resetForm={this.resetForm}
             handleChange={this.handleChange}
@@ -228,7 +240,7 @@ export default class EventDetail extends Component {
 
   render(){
     return (
-      <div>
+      <div className="EventDetail--container">
         <div className="EventDetail--tab-control">
           <div className="Tab" style={this.styleTab("Basic Info")}  onClick={() => this.setView("Basic Info")}><h3>Basic Info</h3></div>
           <div className="Tab" style={this.styleTab("Logistics")}   onClick={() => this.setView("Logistics")}><h3>Logistics</h3></div>
