@@ -34,7 +34,7 @@ gem 'faker'
 gem 'foreman'
 gem 'activerecord-import'
 gem 'active_model_serializers', '~> 0.10.0'
-gem 'pager_api'
+gem 'seedbank'
 
 
 group :development, :test do
