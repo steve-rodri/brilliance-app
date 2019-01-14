@@ -64,6 +64,7 @@ export default class Schedule extends Component {
       <div className="schedule--container">
         <h2 className='schedule--title'>Schedule</h2>
         <List
+          user={this.props.user}
           type="Schedule"
           items={userEvents}
           subtitles={subtitles}
