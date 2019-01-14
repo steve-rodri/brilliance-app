@@ -1,0 +1,13 @@
+.Dashboard--main {
+  display: grid;
+  grid-template-rows: .1fr auto;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-color: rgba(0, 0, 0, 0.88);
+}
+
+.Dashboard--intro {
+  color: white;
+  margin: 10px 0 0 0 ;
+}
