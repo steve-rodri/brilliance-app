@@ -48,11 +48,11 @@ export default class Header extends Component {
       <header>
         <img onClick={this.toDashboard} className="logo" src={logo_t} alt='logo'/>
         <nav>
-          <div><Link to='/admin/events'>Events</Link></div>
-          <div><Link to='/admin/clients'>Clients</Link></div>
-          <div><Link to='/admin/invoices'>Invoices</Link></div>
-          <div><Link to='/admin/staff'>Staff</Link></div>
-          <div><Link to='/admin/inventory'>Inventory</Link></div>
+          <Link to='/admin/events'><div>Events</div></Link>
+          <Link to='/admin/clients'><div>Clients</div></Link>
+          <Link to='/admin/invoices'><div>Invoices</div></Link>
+          <Link to='/admin/staff'><div>Staff</div></Link>
+          <Link to='/admin/inventory'><div>Inventory</div></Link>
         </nav>
         <div className="user-circle" onClick={this.logOut}><FontAwesomeIcon icon="user-circle" size="3x"/></div>
       </header>
