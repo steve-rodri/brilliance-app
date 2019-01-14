@@ -9,14 +9,13 @@
 }
 
 .login-form {
- border: 2px solid white;
  background-color: rgba(0,0,0,.7);
  border-radius: 10px;
  height: 250px;
  width: 350px;
  display: grid;
  grid-template-columns: auto;
- grid-template-rows: .25fr auto;
+ grid-template-rows: .35fr auto;
 }
 
 .logo-container {
@@ -25,7 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid rgba(255,255,255,.2);
 }
 
 .google-login-container {

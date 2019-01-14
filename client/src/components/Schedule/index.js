@@ -58,6 +58,7 @@ export default class Schedule extends Component {
 
   render(){
     const { redirectToLogin, userEvents} = this.state
+    const subtitles = ['','title', 'call', 'notes', 'confirmation']
     if (redirectToLogin) return (<Redirect to="/login"/>)
     return (
       <div className="schedule--container">
@@ -65,6 +66,7 @@ export default class Schedule extends Component {
         <List
           type="Schedule"
           items={userEvents}
+          subtitles={subtitles}
         />
       </div>
     )
