@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :addresses
+  resources :places
   scope '/api' do
     resources :clients do
       get 'find', on: :collection, to: 'clients#find'
