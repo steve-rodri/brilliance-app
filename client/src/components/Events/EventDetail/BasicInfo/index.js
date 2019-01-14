@@ -19,8 +19,6 @@ export default class BasicInfo extends Component {
     }
   }
 
-  //asdf
-
   delete = () => {
     const { event } = this.props
     this.props.delete(event.id)
