@@ -5,7 +5,7 @@ Event.destroy_all
 Invoice.destroy_all
 
 #seed Contacts
-Contact.bulk_create! ([
+Contact.create! ([
   {
     first_name: 'Pam',
     last_name: 'Beasely',
@@ -44,7 +44,7 @@ Company.create! ([
 puts "There are now #{Contact.count} rows in the Contact table"
 
 #seed Clients
-Client.bulk_create! (
+Client.create! ([
   {
     contact_id: 1,
     company_id: 1
@@ -64,13 +64,13 @@ Client.bulk_create! (
 ])
 puts "There are now #{Client.count} rows in the Clients table"
 
-Event.bulk_create! ([
+Event.create! ([
   {
     action: 'Set up',
     call_time: Time.now(),
     clock_out: Time.now(),
-    confirmation: true,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    confirmation: "Unconfirmed",
+    description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
     end: Time.now(),
     kind: 'Test',
@@ -84,8 +84,8 @@ Event.bulk_create! ([
     action: 'Set up',
     call_time: Time.now(),
     clock_out: Time.now(),
-    confirmation: true,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    confirmation: "Confirmed",
+    description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
     end: Time.now(),
     kind: 'Test',
@@ -99,8 +99,8 @@ Event.bulk_create! ([
     action: 'Set up',
     call_time: Time.now(),
     clock_out: Time.now(),
-    confirmation: true,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    confirmation: "Confirmed",
+    description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
     end: Time.now(),
     kind: 'Test',
@@ -114,8 +114,8 @@ Event.bulk_create! ([
     action: 'Set up',
     call_time: Time.now(),
     clock_out: Time.now(),
-    confirmation: true,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    confirmation: "Confirmed",
+    description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
     end: Time.now(),
     kind: 'Test',
@@ -129,8 +129,8 @@ Event.bulk_create! ([
     action: 'Set up',
     call_time: Time.now(),
     clock_out: Time.now(),
-    confirmation: true,
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    confirmation: "Unconfirmed",
+    description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
     end: Time.now(),
     kind: 'Test',
@@ -145,7 +145,7 @@ Event.bulk_create! ([
 puts "There are now #{Event.count} rows in the Events table"
 
 #seed Invoices
-Invoice.bulk_create! ([
+Invoice.create! ([
   {
     kind: 'On Premise Contract',
     status: 'Email Sent',
@@ -207,5 +207,4 @@ Invoice.bulk_create! ([
     event_id: 5
   }
 ])
-end
 puts "There are now #{Invoice.count} rows in the Invoices table"
