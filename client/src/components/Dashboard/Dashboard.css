@@ -1,14 +1,18 @@
 .Dashboard--main {
   display: grid;
-  grid-template-rows: .1fr auto;
+  grid-template-rows: .4fr auto;
   justify-content: center;
-  align-items: center;
-  height: 90vh;
+  align-items: start;
+  height: 100vh;
   min-width: 725px;
   background-color: rgba(0, 0, 0, 0.88);
 }
 
 .Dashboard--intro {
+  width: 50%;
+  justify-self: center;
+  align-self: center;
   color: white;
-  margin: 10px 0 0 0 ;
+  font-family: 'Rokkitt', serif;
+  border-bottom: 1px solid white;
 }
