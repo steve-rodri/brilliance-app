@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_202849) do
+ActiveRecord::Schema.define(version: 2019_01_13_230930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "clients", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -76,6 +82,8 @@ ActiveRecord::Schema.define(version: 2019_01_13_202849) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "client_id"
+    t.integer "location_id"
+    t.integer "call_location_id"
     t.index ["client_id"], name: "index_events_on_client_id"
   end
 
@@ -95,10 +103,28 @@ ActiveRecord::Schema.define(version: 2019_01_13_202849) do
     t.index ["event_id"], name: "index_invoices_on_event_id"
   end
 
+  create_table "places", force: :cascade do |t|
+    t.boolean "installation"
+    t.string "photo"
+    t.string "name"
+    t.string "short_name"
+    t.string "commission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "address_id"
+    t.bigint "company_id"
+    t.index ["address_id"], name: "index_places_on_address_id"
+    t.index ["company_id"], name: "index_places_on_company_id"
+  end
+
   add_foreign_key "clients", "companies"
   add_foreign_key "clients", "contacts"
   add_foreign_key "email_addresses", "companies"
   add_foreign_key "email_addresses", "contacts"
   add_foreign_key "events", "clients"
+  add_foreign_key "events", "places", column: "call_location_id"
+  add_foreign_key "events", "places", column: "location_id"
   add_foreign_key "invoices", "events"
+  add_foreign_key "places", "addresses"
+  add_foreign_key "places", "companies"
 end

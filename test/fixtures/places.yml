@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  installation: false
+  photo: MyString
+  name: MyString
+  short_name: MyString
+  commission: MyString
+
+two:
+  installation: false
+  photo: MyString
+  name: MyString
+  short_name: MyString
+  commission: MyString
