@@ -20,14 +20,18 @@ export default class ListPage extends Component {
           </div>
         </aside>
         <main>
-          <h3 className="ListPage--category-title">Category</h3>
+          <h3 className="ListPage--category-title">All</h3>
           <List
             subtitles={this.props.subtitles}
             items={this.props.data}
             type={this.props.title}
             handleSelect={this.handleSelect}
           />
-          <button className="ListPage--button create" onClick={this.props.create}>Create New {<FontAwesomeIcon icon="plus" size="2x"/>}</button>
+          {this.props.title === "Events"?
+            <div className="ListPage--button create" onClick={this.props.create}><span>Create New</span>{<FontAwesomeIcon icon="plus" size="2x"/>}</div>
+            :
+            ''
+          }
         </main>
       </div>
     )

@@ -62,6 +62,7 @@ export default class Events extends Component {
         eventId={req_id}
         handleDelete={this.handleDelete}
         match={this.props.match}
+        fetchAllEvents={this.fetchAllEvents}
       />
     )
   }

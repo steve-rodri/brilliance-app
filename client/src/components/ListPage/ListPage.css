@@ -22,6 +22,25 @@
 }
 
 
+.ListPage--button, .create {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  margin: 0 auto;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.ListPage--button > * {
+  padding: 0 5px;
+}
+
+.ListPage--button:hover {
+  cursor:pointer
+}
+
 aside > div {
   margin: 15px 15px 0 15px;
 }
