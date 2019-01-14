@@ -3,8 +3,9 @@ header {
   min-width: 705px;
   display: grid;
   align-items: center;
-  grid-template-columns: 20% 70% 10%;
+  grid-template-columns: 20% 60% 20%;
   border-bottom: 3px solid black;
+  background: black;
 }
 
 nav {
@@ -19,6 +20,9 @@ nav > * {
   align-items: center;
   height: 100%;
   padding: 0 5px;
+  color: white;
+  font-size: 20px;
+  font-family: sans-serif;
 }
 
 nav > * :hover {
@@ -31,5 +35,9 @@ nav > * :hover {
 
 .user-circle {
   justify-self: right;
-  padding: 10px;
+  padding: 5px;
+  background: white;
+  border-radius: 100%;
+  margin: 10px;
+
 }
