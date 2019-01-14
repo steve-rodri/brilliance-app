@@ -1,34 +1,43 @@
 .ListPage--container {
   display: grid;
-  grid-template-columns:  250px auto
+  grid-template-columns:  250px auto;
+  align-items: center;
 }
 
 .ListPage--name {
-  color: white;
-  font-size: 50px;
+  color: rgba(0, 175, 215, 1);
+  font-size: 60px;
+  font-family: 'Rokkitt', serif;
 }
 
 .ListPage--category-title {
-  margin: 10px 0;
-  font-size: 24px;
+  font-size: 28px;
+  font-family: 'Josefin Slab', serif;
+  background-color: rgba(0, 125, 180, .6);
+  padding: 5px 0;
 }
 
 .ListPage--categories {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  padding: 15px;
-  border: 1px solid white;
-  width: 50%;
+  width: 100%;
 }
 
 .ListPage--categories > a {
+  border-bottom: 1px solid white;
+  text-decoration: none;
   font-size: 18px;
   color: white;
-  text-align: left;
-  width: 60%;
-  padding: 3px 0;
+  text-align: center;
+  width: 88%;
+  padding: 5px;
+  margin: 3px 0;
+}
+
+.ListPage--categories > a:hover {
+  color: rgba(0, 175, 215, 1);
 }
 
 .ListPage--button, .create {
@@ -50,15 +59,16 @@
   cursor:pointer
 }
 
+main {
+  height: 99%;
+}
+
 aside {
+  height: 100%;
   background-color: rgba(0,0,0,.88);
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-aside > div {
-  margin: 15px 15px 0 15px;
 }
 
 aside > h2 {

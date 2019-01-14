@@ -1,5 +1,6 @@
 .Titles {
   margin: 0 auto;
+  padding: 5px 0;
   width: 97%;
   display: grid;
   justify-items: center;

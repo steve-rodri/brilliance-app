@@ -20,7 +20,7 @@ export default function ListItem(props){
           <div className="List-Item" style={styleColumns(numColumns)}>
             <p>{item && timeUntil()}</p>
             <div>
-              <h6>{item && item.summary}</h6>
+              <h4>{item && item.summary}</h4>
               <p>{item && item.start && moment(start()).format('dddd, MMMM Do')}</p>
               <p>{item && item.start && item.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
@@ -35,7 +35,7 @@ export default function ListItem(props){
         <Link to={`/admin/${type.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <div>
-              <h6>{event && event.summary}</h6>
+              <h3>{event && event.summary}</h3>
               <p>{event && event.start && moment(start()).format('ddd, MMM Do')}</p>
               <p>{event && event.start && event.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
@@ -162,16 +162,19 @@ export default function ListItem(props){
     switch (msg) {
       case "Unconfirmed":
         return {
-          backgroundColor: 'yellow',
-          borderRadius: '5px',
-          width: '90%'
+          backgroundColor: 'gold',
+          borderRadius: '10px',
+          padding: '5px',
+          width: '70%'
         }
       case "Confirmed":
         return {
-          backgroundColor: 'green',
+          backgroundColor: 'limegreen',
+          fontWeight: 'bold',
+          padding: '5px',
           color: 'white',
-          borderRadius: '5px',
-          width: '90%'
+          borderRadius: '10px',
+          width: '70%'
         }
       default:
         return {}
