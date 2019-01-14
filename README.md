@@ -46,5 +46,3 @@
 ![Admin](/deliverables/Wireframes/Admin-Invoices-List.png)
 ### Dashboard - Financials
 ![Admin](/deliverables/Wireframes/Admin-Dashboard-Financials.png)
-### Print Views
-![Print](/deliverables/Wireframes/Print-Views.png)
