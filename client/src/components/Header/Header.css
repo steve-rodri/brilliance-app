@@ -18,7 +18,7 @@ nav {
   border-right: 1px solid white;
 }
 
-nav > div {
+nav > * {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,26 +28,26 @@ nav > div {
   height: 100%;
   align-items: center;
   padding: 0 5px;
+  text-decoration: none;
 }
 
-nav > div > a {
+nav > * > div {
   color: white;
-  text-decoration: none;
   font-size: 24px;
   font-family: 'Gruppo';
   font-weight: bold;
 }
 
-nav > div:hover, nav > div > a:hover{
+nav > *:hover, nav > * > div:hover{
   cursor: pointer;
 }
 
-nav > div:hover {
+nav > *:hover {
   border-bottom: 1px solid white;
   border-top: 1px solid white;
 }
 
-nav > div:active {
+nav > *:active {
   background-color: lightgray;
 }
 
@@ -70,13 +70,13 @@ nav > div:active {
 }
 
 @media (max-width: 1200px) {
-  nav > div > a {
+  nav > * > div {
     font-size: 20px;
   }
 }
 
 @media (max-width: 1000px) {
-  nav > div > a {
+  nav > * > div {
     font-size: 16px;
   }
 }
