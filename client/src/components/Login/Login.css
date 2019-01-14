@@ -4,10 +4,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('../../images/COTG.jpg');
+  background-size: cover;
 }
 
 .login-form {
- border: 2px solid black;
+ border: 2px solid white;
+ background-color: rgba(0,0,0,.7);
  border-radius: 10px;
  height: 250px;
  width: 350px;
@@ -22,7 +25,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid white;
 }
 
 .google-login-container {
