@@ -33,7 +33,11 @@ export default class BasicInfo extends Component {
     return (
       <div className="BasicInfo--container">
         <div className="BasicInfo--header">
-          <h1 className="BasicInfo--event-title">Event Title</h1>
+          {editMode?
+          <input className="BasicInfo--event-summary" name="summary" value={fields.summary? fields.summary : ''} onChange={this.props.handleChange} />
+          :
+          <h1 className="BasicInfo--event-title">{fields && fields.summary}</h1>
+          }
           {editMode?
             <div className="BasicInfo--buttons">
               <div className="BasicInfo--button close" onClick={this.props.close}><FontAwesomeIcon icon="times" size="2x"/></div>

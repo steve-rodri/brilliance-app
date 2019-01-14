@@ -70,7 +70,7 @@ export default class EventDetail extends Component {
 
   setFields = () => {
     const { evt } = this.state
-    const fieldNames = ['start', 'end', 'action', 'kind', 'description', 'notes', 'package']
+    const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
     fieldNames.forEach( field => this.setField( field, evt[field] ))
   }
 
@@ -156,6 +156,7 @@ export default class EventDetail extends Component {
       })
       await this.setClientName();
       await this.setFields();
+      this.props.fetchAllEvents();
     }
     this.setState({editMode: !editMode})
   }

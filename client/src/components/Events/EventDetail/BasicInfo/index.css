@@ -17,9 +17,19 @@
   height:100px;
 }
 
-.BasicInfo--event-title {
+.BasicInfo--event-title, .BasicInfo--event-summary {
   grid-column: 2 / span 1
 }
+
+.BasicInfo--event-summary{
+  font-size: 60px;
+  text-align: center;
+  width: 100%;
+  border: none;
+  padding: 0;
+}
+
+
 
 label {
   text-align: left;
