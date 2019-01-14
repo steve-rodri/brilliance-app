@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import Header from '../Header/index.js'
 import ListPage from '../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
@@ -10,7 +10,8 @@ export default class Events extends Component {
   constructor(props){
     super(props)
     this.state = {
-      events: []
+      events: [],
+      newEvent: false
     }
   }
 
@@ -23,6 +24,21 @@ export default class Events extends Component {
     this.setState({ events })
   }
 
+  handleDelete = async(id) => {
+    await event.delete(id);
+    await this.fetchAllEvents();
+  }
+
+  handleCreate = async() => {
+    const resp = await event.createNew();
+    const evts = [...this.state.events]
+    evts.push(resp.data)
+    this.setState({ events: evts }, () =>
+      this.setState({ newEvent: resp.data })
+    )
+    window.location.reload();
+  }
+
   List = () => {
     const { events } = this.state
     return (
@@ -31,6 +47,7 @@ export default class Events extends Component {
         categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
         subtitles={['title', 'client', 'location', 'confirmation', 'scheduled']}
         data={events}
+        create={this.handleCreate}
       />
     )
   }
@@ -40,12 +57,19 @@ export default class Events extends Component {
     const events = this.state.events
     const e = events.find(event => event.id === req_id)
     return (
-      <EventDetail e={e} eventId={req_id}/>
+      <EventDetail
+        e={e}
+        eventId={req_id}
+        handleDelete={this.handleDelete}
+        match={this.props.match}
+      />
     )
   }
 
   render(){
     const { location, match } = this.props
+    const { newEvent } = this.state
+    if (newEvent) return (<Redirect to={`/admin/events/${newEvent.id}`}/>)
     return (
       <div className="ListPage">
         <Header location={location}/>
