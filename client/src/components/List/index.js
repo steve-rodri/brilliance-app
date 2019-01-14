@@ -15,7 +15,7 @@ export default class List extends Component {
     }
 
     return (
-      <div>
+      <div className="List--container">
         <div className="Titles" style={style()}>
           {subtitles && subtitles.map((subtitle, id) => (
             <h5 key={id}>{subtitle}</h5>
