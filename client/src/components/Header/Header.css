@@ -1,5 +1,5 @@
 header {
-  height: 75px;
+  min-height: 75px;
   min-width: 705px;
   display: grid;
   align-items: center;
@@ -40,7 +40,11 @@ nav > div > a {
 
 nav > div:hover, nav > div > a:hover{
   cursor: pointer;
-  color: darkgray;
+}
+
+nav > div:hover {
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
 }
 
 nav > div:active {

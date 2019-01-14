@@ -258,10 +258,10 @@ export default class EventDetail extends Component {
     return (
       <div className="EventDetail--container" onClick={this.resetSearchFieldData}>
         <div className="EventDetail--tab-control">
-          <div className="Tab" style={this.styleTab("Basic Info")}  onClick={() => this.setView("Basic Info")}><h3>Basic Info</h3></div>
-          <div className="Tab" style={this.styleTab("Logistics")}   onClick={() => this.setView("Logistics")}><h3>Logistics</h3></div>
-          <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>Invoice</h3></div>
-          <div className="Tab" style={this.styleTab("Cash Flow")}   onClick={() => this.setView("Cash Flow")}><h3>Cash Flow</h3></div>
+          <div className="Tab" style={this.styleTab("Basic Info")}  onClick={() => this.setView("Basic Info")}><h3>BASIC INFO</h3></div>
+          <div className="Tab" style={this.styleTab("Logistics")}   onClick={() => this.setView("Logistics")}><h3>LOGISTICS</h3></div>
+          <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>INVOICE</h3></div>
+          <div className="Tab" style={this.styleTab("Cash Flow")}   onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
         </div>
         {this.view()}
       </div>

@@ -1,7 +1,7 @@
 .List-Item {
-  width: 97%;
+  width: 99%;
   height: 85px;
-  margin: 5px auto;
+  margin: 4px auto;
   border: 1px solid black;
   border-radius: 5px;
   display: grid;
