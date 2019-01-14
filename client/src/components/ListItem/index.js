@@ -8,7 +8,7 @@ export default function ListItem(props){
   switch (type) {
     case 'Schedule':
       return (
-        <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
+        <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black', backgroundColor: 'white'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <p>{item && timeUntil()}</p>
             <div>
@@ -68,7 +68,7 @@ export default function ListItem(props){
               {client && <p>{client.phoneNumber && `${client.phoneNumber}`}</p>}
               {client && client.emailAddresses.length > 0 && <a href={`mailto:${client.emailAddresses[0].address}`}>{client.emailAddresses[0].address}</a>}
               {company && <p>{company.phoneNumber && `${company.phoneNumber}`}</p>}
-              {company && <p>{company.website && `${<a href={company.website}>company.website</a>}`}</p>}
+              {company && company.website && <a href={`${company.website}`} onClick={(e) => e.stopPropagation()}>{company.website}</a>}
             </div>
           </div>
         </Link>

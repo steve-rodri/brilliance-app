@@ -37,8 +37,15 @@ export default class List extends Component {
   }
 
   styleColumns(numColumns){
-    return {
+    if (this.props.type === 'Schedule') {
+      return {
+        color: 'white',
+        gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+      }
+    } else {
+      return {
       gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+      }
     }
   }
 }

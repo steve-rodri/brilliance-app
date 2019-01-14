@@ -12,10 +12,10 @@ export default class ListPage extends Component {
     return (
       <div className='ListPage--container'>
         <aside>
-          <h2>{this.props.title}</h2>
+          <h2 className="ListPage--name">{this.props.title}</h2>
           <div className="ListPage--categories">
             {this.props.categories.map((category, id) => (
-              <p onClick={this.sort} key={id}>{category}</p>
+              <a href='#'key={id}>{category}</a>
             ))}
           </div>
         </aside>

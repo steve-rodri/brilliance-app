@@ -3,8 +3,13 @@
   grid-template-columns:  250px auto
 }
 
+.ListPage--name {
+  color: white;
+}
+
 .ListPage--category-title {
-  margin: 5px 0;
+  margin: 10px 0;
+  font-size: 24px;
 }
 
 .ListPage--categories {
@@ -13,14 +18,17 @@
   justify-content: center;
   align-items: center;
   padding: 15px;
-  border: 1px solid black;
+  border: 1px solid white;
+  width: 50%;
 }
 
 .ListPage--categories > a {
+  font-size: 18px;
+  color: white;
   text-align: left;
-  width: 125px;
+  width: 60%;
+  padding: 3px 0;
 }
-
 
 .ListPage--button, .create {
   display: flex;
@@ -39,6 +47,13 @@
 
 .ListPage--button:hover {
   cursor:pointer
+}
+
+aside {
+  background-color: rgba(0,0,0,.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 aside > div {
