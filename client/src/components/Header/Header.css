@@ -38,8 +38,13 @@ nav > div > a {
   font-weight: bold;
 }
 
-nav > * :hover {
+nav > div:hover, nav > div > a:hover{
   cursor: pointer;
+  color: darkgray;
+}
+
+nav > div:active {
+  background-color: lightgray;
 }
 
 .logo {
