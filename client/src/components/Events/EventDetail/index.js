@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import BasicInfo from './BasicInfo/index.js';
 import Logistics from './Logistics/index.js';
 import Invoice from './Invoice/index.js';
 import CashFlow from './CashFlow/index.js';
-import { event } from '../../../services/event'
+import { event } from '../../../services/event';
 import { client } from '../../../services/client'
 import './index.css'
 
@@ -16,24 +17,34 @@ export default class EventDetail extends Component {
       fields: null,
       searchFieldData: null,
       formData: null,
-      editMode: false
+      editMode: false,
+      redirectToEvents: false
     }
   }
 
   async componentDidMount(){
     window.scrollTo(0,0);
     await this.getEvent();
-    await this.setClientName();
-    await this.setFields();
   }
 
   getEvent = async() => {
     const { e, eventId } = this.props
     if (!e) {
       const evt = await event.getOne(eventId)
-      this.setState({ evt })
+      if (evt) {
+        this.setState({ evt })
+        await this.setClientName();
+        await this.setFields();
+        if (this.state.fields) {
+          this.setState({editMode: true})
+        }
+      } else {
+        this.setState({redirectToEvents: true})
+      }
     } else {
       this.setState({ evt: e })
+      await this.setClientName();
+      await this.setFields();
     }
   }
 
@@ -59,7 +70,7 @@ export default class EventDetail extends Component {
 
   setFields = () => {
     const { evt } = this.state
-    const fieldNames = ['location', 'start', 'end', 'action', 'kind', 'description', 'notes', 'package']
+    const fieldNames = ['start', 'end', 'action', 'kind', 'description', 'notes', 'package']
     fieldNames.forEach( field => this.setField( field, evt[field] ))
   }
 
@@ -184,11 +195,13 @@ export default class EventDetail extends Component {
       case 'Basic Info':
         return (
           <BasicInfo
+            match={this.props.match}
             event={evt}
             fields={fields}
             searchFieldData={searchFieldData}
             editMode={editMode}
             edit={this.edit}
+            delete={this.props.handleDelete}
             close={this.close}
             setField={this.setField}
             resetForm={this.resetForm}
@@ -239,6 +252,8 @@ export default class EventDetail extends Component {
   }
 
   render(){
+    const { match } = this.props
+    if (this.state.redirectToEvents) return (<Redirect to={match.path}/>)
     return (
       <div className="EventDetail--container" onClick={this.resetSearchFieldData}>
         <div className="EventDetail--tab-control">
