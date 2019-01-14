@@ -64,7 +64,7 @@ export default function ListItem(props){
               <h3>{client && client.fullName}</h3>
               <h4>{company && company.name}</h4>
             </div>
-            <div>
+            <div className="List-Item--contact-info">
               {client && <p>{client.phoneNumber && `${client.phoneNumber}`}</p>}
               {client && client.emailAddresses.length > 0 && <a href={`mailto:${client.emailAddresses[0].address}`}>{client.emailAddresses[0].address}</a>}
               {company && <p>{company.phoneNumber && `${company.phoneNumber}`}</p>}

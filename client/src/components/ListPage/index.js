@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import List from '../List/index.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './ListPage.css'
 
+library.add(faPlus)
+
 export default class ListPage extends Component {
-
-  sort(e){
-    console.log(e.target.innerHTML)
-  }
-
-
-
   render(){
     return (
       <div className='ListPage--container'>
@@ -22,13 +20,14 @@ export default class ListPage extends Component {
           </div>
         </aside>
         <main>
-          <h3>Category</h3>
+          <h3 className="ListPage--category-title">Category</h3>
           <List
             subtitles={this.props.subtitles}
             items={this.props.data}
             type={this.props.title}
             handleSelect={this.handleSelect}
           />
+          <button className="ListPage--button create" onClick={this.props.create}>Create New {<FontAwesomeIcon icon="plus" size="2x"/>}</button>
         </main>
       </div>
     )
