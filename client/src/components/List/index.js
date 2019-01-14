@@ -24,6 +24,7 @@ export default class List extends Component {
         <div className="List">
         { items && items.map((item, id) => (
           <ListItem
+            user={this.props.user}
             key={id}
             item={item}
             type={this.props.type}

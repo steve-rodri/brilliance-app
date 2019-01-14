@@ -1,14 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCircle, faCheckCircle, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 import './ListItem.css'
+
+library.add(faCircle)
+library.add(faCheckCircle)
+library.add(faTimesCircle)
+library.add(faQuestionCircle)
 
 export default function ListItem(props){
   const { item, type, numColumns } = props
   switch (type) {
     case 'Schedule':
       return (
-        <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black', backgroundColor: 'white'}}>
+        <a href={item.htmlLink} target="_blank" style={{textDecoration: 'none', color: 'black', backgroundColor: 'white'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <p>{item && timeUntil()}</p>
             <div>
@@ -17,8 +25,9 @@ export default function ListItem(props){
               <p>{item && item.start && item.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
             <p className="List-Item--description">{item && item.description}</p>
+            <p>{status(props)}</p>
           </div>
-        </Link>
+        </a>
       )
     case 'Events':
     const event = item
@@ -36,7 +45,6 @@ export default function ListItem(props){
             </div>
             <p>{event && event.location}</p>
             <p style={styleConfirmation(event && event.confirmation)}>{event && event.confirmation}</p>
-            <p>Scheduled?</p>
           </div>
         </Link>
       )
@@ -74,6 +82,22 @@ export default function ListItem(props){
         </Link>
       )
     default:
+  }
+
+  function status(props){
+    const { user, item } = props
+    const currentUser = item.attendees.find( attendee => attendee.email === user.email)
+    switch (currentUser.responseStatus) {
+      case 'needsAction':
+        return <FontAwesomeIcon icon="circle" size="3x"/>
+      case 'accepted':
+        return <FontAwesomeIcon color="green" icon="check-circle" size="3x"/>
+      case 'tentative':
+        return <FontAwesomeIcon color="gold" icon="question-circle" size="3x"/>
+      case 'declined':
+        return <FontAwesomeIcon color="red" icon="times-circle" size="3x"/>
+      default:
+    }
   }
 
   function checkStartType() {

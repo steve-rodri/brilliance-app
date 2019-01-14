@@ -10,23 +10,42 @@ header {
 
 nav {
   justify-self: center;
-  height: 100%;
+  height: 33%;
+  width: 100%;
   display: flex;
   align-items: center;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
 }
 
-nav > * {
+nav > div {
   display: flex;
+  justify-content: center;
   align-items: center;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+  width: 100%;
   height: 100%;
+  align-items: center;
   padding: 0 5px;
+}
+
+nav > div > a {
   color: white;
-  font-size: 20px;
-  font-family: sans-serif;
+  text-decoration: none;
+  font-size: 24px;
+  font-family: 'Gruppo';
+  font-weight: bold;
 }
 
 nav > * :hover {
-  border: 2px solid black;
+  cursor: pointer;
+}
+
+.logo {
+  width: 100px;
+  height: 25px;
+  padding: 10px;
 }
 
 .user-circle:hover, .logo:hover {
@@ -39,5 +58,23 @@ nav > * :hover {
   background: white;
   border-radius: 100%;
   margin: 10px;
+}
 
+@media (max-width: 1200px) {
+  nav > div > a {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1000px) {
+  nav > div > a {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 750px) {
+  .logo {
+    width: 140px;
+    height: 33px;
+  }
 }
