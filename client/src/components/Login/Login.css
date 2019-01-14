@@ -9,8 +9,8 @@
 .login-form {
  border: 2px solid black;
  border-radius: 10px;
- height: 50vh;
- width: 70vw;
+ height: 250px;
+ width: 350px;
  display: grid;
  grid-template-columns: auto;
  grid-template-rows: .25fr auto;
