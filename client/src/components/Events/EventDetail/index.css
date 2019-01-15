@@ -10,8 +10,8 @@
   min-height: 50px;
   max-height: 60px;
   width: 100%;
-  background-color: rgba(0,0,0,.88);
-  color: white;
+  background-color: rgba(0, 125, 180, .6);
+  color: lightgray;
   align-items: center;
 }
 
