@@ -17,6 +17,19 @@ export default class BasicInfo extends Component {
     this.state = {
       redirectToEvents: false
     }
+    this.summary = React.createRef()
+  }
+
+//selects summary field if it is empty or untitled
+  componentDidUpdate(){
+    const { fields } = this.props
+    if (fields) {
+      if (!fields.summary || fields.summary === "Untitled") {
+        if (this.summary.current) {
+          this.summary.current.select()
+        }
+      }
+    }
   }
 
   delete = () => {
@@ -34,7 +47,7 @@ export default class BasicInfo extends Component {
       <div className="BasicInfo--container">
         <div className="BasicInfo--header">
           {editMode?
-          <input className="BasicInfo--event-summary" name="summary" value={fields.summary? fields.summary : ''} onChange={this.props.handleChange} />
+          <input className="BasicInfo--event-summary" name="summary" value={fields.summary? fields.summary : ''} onChange={this.props.handleChange} ref={this.summary}/>
           :
           <h1 className="BasicInfo--event-title">{fields && fields.summary}</h1>
           }
