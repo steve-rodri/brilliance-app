@@ -1,6 +1,11 @@
 # The Brilliance Event Productions App
 ## A Custom CRM/Events/Inventory/Staff Management and Analytics App
 
+![Login](/deliverables/Deployed/Login.png)
+![Dashboard](/deliverables/Deployed/Dashboard.png)
+![List](/deliverables/Deployed/List.png)
+![Detail](/deliverables/Deployed/Detail.png)
+
 ## Features
 * Admin and Employee Login
 * Admin has full CRUD on all Tables / Employee has limited CRUD
@@ -24,8 +29,6 @@
 ![Login](/deliverables/Wireframes/Login.png)
 ### Dashboard - Admin
 ![Admin](/deliverables/Wireframes/Admin-Dashboard-Overview.png)
-### Dashboard - Employee
-![Employee](/deliverables/Wireframes/Employee-Dashboard-Overview.png)
 ### Events List
 ![Admin](/deliverables/Wireframes/Admin-Events-List.png)
 ### Event Detail - Basic Information
@@ -38,11 +41,24 @@
 ![Admin](/deliverables/Wireframes/Admin-Event-Detail-Cash-Flow.png)
 ### Clients List
 ![Admin](/deliverables/Wireframes/Admin-Clients-List.png)
-### Client Detail - Modal
-![Admin](/deliverables/Wireframes/Admin-Clients-Detail-Modal.png)
-### Client Detail - Modal - Edit
-![Admin](/deliverables/Wireframes/Admin-Clients-Detail-Modal-Edit.png)
 ### Invoices List
 ![Admin](/deliverables/Wireframes/Admin-Invoices-List.png)
-### Dashboard - Financials
-![Admin](/deliverables/Wireframes/Admin-Dashboard-Financials.png)
+
+## MVP
+* Create, Read, Update, and Delete Events
+* Read Events from Google Calendar
+
+## Post MVP Features
+* CRUD Invoices, Clients, and Inventory
+* Fully sync Google Calendar
+* Admin and Employee Login
+* Dashboard Analytics
+
+## Code Example
+This is something I found while researching how Active Model Serializer works. Very helpful on the Front-End.
+
+```Ruby
+ActiveModelSerializers.config.key_transform = :camel_lower
+```
+
+It converts all your json response data from snake_case to camelCase
