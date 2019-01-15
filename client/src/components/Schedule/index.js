@@ -10,7 +10,7 @@ export default class Schedule extends Component {
   constructor(props){
     super(props)
     this.state = {
-      userEvents: [],
+      userEvents: null,
       redirectToLogin: false
     }
   }
@@ -21,7 +21,7 @@ export default class Schedule extends Component {
 
   async componentWillUnmount(){
     this.setState({
-      userEvents: []
+      userEvents: null
     })
   }
 
@@ -52,27 +52,47 @@ export default class Schedule extends Component {
         const now = moment().format()
         return moment(start(event)).isAfter(now)
       })
-      this.setState({userEvents:upcomingEvents})
+      if (upcomingEvents.length > 0) {
+        this.setState({ userEvents: upcomingEvents })
+      }
+    }
+  }
+
+  styleContainer(){
+    if (this.state.userEvents) {
+      return {
+        display: 'block'
+      }
+    } else {
+      return {
+        display: 'none'
+      }
     }
   }
 
   render(){
     const { redirectToLogin, userEvents} = this.state
+    console.log(userEvents)
     const subtitles = ['','title', 'call', 'notes', 'confirmation']
     if (redirectToLogin) return (<Redirect to="/login"/>)
     return (
-      <div className="schedule--container">
-        <h2 className='schedule--title'>Schedule</h2>
-        <List
-          user={this.props.user}
-          type="Schedule"
-          items={userEvents}
-          subtitles={subtitles}
-        />
-      </div>
+      <React.Fragment>
+        <div className="schedule--container" style={this.styleContainer()}>
+          <h2 className='schedule--title'>Schedule</h2>
+          <List
+            user={this.props.user}
+            type="Schedule"
+            items={userEvents}
+            subtitles={subtitles}
+          />
+        </div>
+        {!userEvents && <p className="schedule--not-currently" >Not currently scheduled...</p>}
+      </React.Fragment>
+
     )
   }
 }
+
 
 function start(event) {
   if (event) {

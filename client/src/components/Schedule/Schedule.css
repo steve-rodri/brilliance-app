@@ -1,8 +1,9 @@
 .schedule--container {
+  display: none;
   background-color: rgba(0,0,0,.88);
   margin: 20px auto;
   border-radius: 10px;
-  width: 90%;
+  width: 95%;
 }
 
 .schedule--title {
@@ -21,5 +22,9 @@
 }
 
 .schedule--subtitles > p {
+  color: white;
+}
+
+.schedule--not-currently {
   color: white;
 }
