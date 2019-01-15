@@ -4,7 +4,6 @@ header {
   display: grid;
   align-items: center;
   grid-template-columns: 20% 60% 20%;
-  border-bottom: 3px solid black;
   background: black;
 }
 
