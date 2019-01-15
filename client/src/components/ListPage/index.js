@@ -18,6 +18,11 @@ export default class ListPage extends Component {
               <a href='#'key={id}>{category}</a>
             ))}
           </div>
+          {this.props.title === "Events"?
+            <div className="ListPage--button create" onClick={this.props.create}><span>Create New</span>{<FontAwesomeIcon icon="plus" size="2x"/>}</div>
+            :
+            ''
+          }
         </aside>
         <main>
           <h3 className="ListPage--category-title">All</h3>
