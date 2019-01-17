@@ -26,7 +26,7 @@ export default class Clients extends Component {
     const { location } = this.props
     const { clients } = this.state
     return (
-      <div className="ListPage">
+      <div className="Section">
         <Header location={location} />
         <ListPage
           title="Clients"

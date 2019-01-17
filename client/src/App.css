@@ -1,17 +1,13 @@
 * {
   margin: 0;
+  box-sizing: border-box;
 }
 
 .App {
   text-align: center;
   height: 100vh;
   width: 100vw;
-}
-
-.ListPage {
-  height: 100vh;
-  display: grid;
-  grid-template-rows: 75px auto
+  overflow: hidden;
 }
 
 h1 {

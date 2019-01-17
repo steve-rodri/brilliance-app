@@ -72,7 +72,7 @@ export default class Events extends Component {
     const { newEvent } = this.state
     if (newEvent) return (<Redirect to={`/admin/events/${newEvent.id}`}/>)
     return (
-      <div className="ListPage">
+      <div className='Section'>
         <Header location={location}/>
 
         <Route exact path={match.path} render={this.List}/>
