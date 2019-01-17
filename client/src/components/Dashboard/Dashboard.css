@@ -8,7 +8,7 @@
   grid-template-rows: .4fr auto;
   justify-content: center;
   align-items: start;
-  height: 100%;
+  height: calc(100vh - 75px);
   max-width: 100%;
   min-width: 725px;
   background-color: rgba(0, 0, 0, 0.88);

@@ -1,13 +1,16 @@
+
 .Titles {
-  margin: 0 auto;
-  padding: 5px 0;
-  width: 97%;
+  align-self: flex-start;
+  padding: 5px 0 5px 0;
+  width: 100%;
   display: grid;
   justify-items: center;
+  border-bottom: 1px solid black;
+  font-size: 20px;
 }
 
 .List {
-  height: 100%;
-  overflow: scroll;
-  padding-bottom: 20px;
+  width: 100%;
+  max-height: calc(100vh - 147px);
+  overflow: auto;
 }
