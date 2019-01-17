@@ -3,14 +3,15 @@ header {
   min-width: 705px;
   display: grid;
   align-items: center;
-  grid-template-columns: 20% 60% 20%;
+  justify-items: center;
+  grid-template-columns: 15% 70% 15%;
   background: black;
 }
 
 nav {
   justify-self: center;
   height: 33%;
-  width: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
   border-left: 1px solid white;
@@ -53,7 +54,7 @@ nav > *:active {
 .logo {
   width: 100px;
   height: 25px;
-  padding: 10px;
+  margin: 10px;
 }
 
 .user-circle:hover, .logo:hover {
@@ -62,7 +63,7 @@ nav > *:active {
 
 .user-circle {
   justify-self: right;
-  padding: 5px;
+  padding: 1px;
   background: white;
   border-radius: 100%;
   margin: 10px;
