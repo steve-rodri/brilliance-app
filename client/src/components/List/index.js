@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import ListItem from '../ListItem/index.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './List.css'
+
+library.add(faPlus)
 
 export default class List extends Component {
   render(){
@@ -32,6 +37,11 @@ export default class List extends Component {
             styleColumns={this.styleColumns}
           />
         ))}
+        {this.props.type === "Events"?
+          <div className="ListPage--button create" onClick={this.props.create}><span>Create New</span>{<FontAwesomeIcon icon="plus" size="2x"/>}</div>
+          :
+          ''
+        }
         </div>
       </div>
     )

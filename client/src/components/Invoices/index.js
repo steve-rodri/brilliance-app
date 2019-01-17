@@ -48,7 +48,7 @@ export default class Invoices extends Component {
   render(){
     const { location, match } = this.props
     return (
-      <div className="ListPage">
+      <div className="Section">
         <Header location={location}/>
 
         <Route exact path={match.path} render={this.List}/>

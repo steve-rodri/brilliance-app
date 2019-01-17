@@ -30,13 +30,9 @@ export default class ListPage extends Component {
             subtitles={this.props.subtitles}
             items={this.props.data}
             type={this.props.title}
+            create={this.props.create}
             handleSelect={this.handleSelect}
           />
-          {this.props.title === "Events"?
-            <div className="ListPage--button create" onClick={this.props.create}><span>Create New</span>{<FontAwesomeIcon icon="plus" size="2x"/>}</div>
-            :
-            ''
-          }
         </main>
       </div>
     )
