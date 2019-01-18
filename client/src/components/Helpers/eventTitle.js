@@ -1,4 +1,12 @@
-function title (evt) {
+function eventTitle (evt){
+  if (!evt.action) {
+    return title(evt)
+  } else {
+    return `${evt.action} - ${title(evt)}`
+  }
+}
+
+function title(evt) {
 
   function placeName(){
     if (evt.placeLocation) {
@@ -113,5 +121,5 @@ function title (evt) {
 }
 
 export {
-  title
+  eventTitle
 }
