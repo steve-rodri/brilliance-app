@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { title } from './helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircle, faCheckCircle, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
@@ -16,7 +17,7 @@ export default function ListItem(props){
   switch (type) {
     case 'Schedule':
       return (
-        <a href={item.htmlLink} target="_blank" style={{textDecoration: 'none', color: 'black', backgroundColor: 'white'}}>
+        <a href={item.htmlLink} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black', backgroundColor: 'white'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <p>{item && timeUntil()}</p>
             <div>
@@ -35,7 +36,7 @@ export default function ListItem(props){
         <Link to={`/admin/${type.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <div>
-              <h3>{event && event.summary}</h3>
+              <h3>{event && title(event)}</h3>
               <p>{event && event.start && moment(start()).format('ddd, MMM Do')}</p>
               <p>{event && event.start && event.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
@@ -43,7 +44,7 @@ export default function ListItem(props){
               <p>{event && clientName(event)}</p>
               <h5>{event && companyName(event)}</h5>
             </div>
-            <p>{event && event.location}</p>
+            <p>{event && event.placeLocation && event.placeLocation.name}</p>
             <p style={styleConfirmation(event && event.confirmation)}>{event && event.confirmation}</p>
           </div>
         </Link>
