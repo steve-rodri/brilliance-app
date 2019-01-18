@@ -1,6 +1,6 @@
-﻿Id,Type,Amount,Reimbursement Type,Receipt,Paid?,Notes,staff_id,event_id,created_at
-1,Reimbursement,$51.80,Fuel,IMG_4117.JPG (https://dl.airtable.com/ellbeKNuR9K3xia1PUTP_IMG_4117.JPG),Paid,,2,1193,7/5/2018 4:26pm
-2,Reimbursement,$65.10,Fuel,IMG_4117.JPG (https://dl.airtable.com/EdQ2M33NSyOdRC1bvbao_IMG_4117.JPG),Paid,,2,1518,7/5/2018 4:27pm
-3,Reimbursement,$48.05,Fuel,IMG_4117.JPG (https://dl.airtable.com/ZnEeqNRG2rwU0F1Sr3jA_IMG_4117.JPG),Paid,,2,1519,7/5/2018 4:28pm
-4,Reimbursement,$74.10,Fuel,IMG_4117.JPG (https://dl.airtable.com/ISKqWcHVSAKayFZgFYFW_IMG_4117.JPG),Paid,,2,1521,7/5/2018 4:30pm
-5,Reimbursement,$10.00,Fuel,,Paid,,9,1203,7/9/2018 8:02pm
+﻿id,type,amount,reimbursement_type,receipt,paid,notes,staff_id,event_id,created_at
+1,Reimbursement,$51.80,Fuel,IMG_4117.JPG (https://dl.airtable.com/ellbeKNuR9K3xia1PUTP_IMG_4117.JPG),Paid,,2,1193,2018-07-05 4:26pm
+2,Reimbursement,$65.10,Fuel,IMG_4117.JPG (https://dl.airtable.com/EdQ2M33NSyOdRC1bvbao_IMG_4117.JPG),Paid,,2,1518,2018-07-05 4:27pm
+3,Reimbursement,$48.05,Fuel,IMG_4117.JPG (https://dl.airtable.com/ZnEeqNRG2rwU0F1Sr3jA_IMG_4117.JPG),Paid,,2,1519,2018-07-05 4:28pm
+4,Reimbursement,$74.10,Fuel,IMG_4117.JPG (https://dl.airtable.com/ISKqWcHVSAKayFZgFYFW_IMG_4117.JPG),Paid,,2,1521,2018-07-05 4:30pm
+5,Reimbursement,$10.00,Fuel,,Paid,,9,1203,2018-07-09 8:02pm

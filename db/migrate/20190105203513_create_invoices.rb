@@ -5,8 +5,10 @@ class CreateInvoices < ActiveRecord::Migration[5.2]
       t.string :status
       t.string :payment_status
       t.string :payment_type
+      t.string :commission_actual
       t.string :commission_paid
       t.string :check_info
+      t.float :deposit
       t.float :discount
       t.float :tip
       t.float :refund

@@ -1,1078 +1,1078 @@
-﻿Id,Type,Status,Payment_Status,Payment_Type,Commission_Paid,Check_Info,Discount,Deposit,Tip,Refund,Commission(Actual),event_id,created_at
-1,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,134,1/28/2018 9:29pm
-2,On Premise Contract,,Paid In Full,Unknown,,,500.00,,,,,177,1/28/2018 9:30pm
-3,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,178,1/28/2018 9:30pm
-4,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,47,1/28/2018 9:30pm
-5,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,111,1/28/2018 9:30pm
-6,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,52,1/28/2018 9:30pm
-7,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,113,1/28/2018 9:30pm
-8,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,23,1/28/2018 9:30pm
-9,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,49,1/28/2018 9:30pm
-10,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,61,1/28/2018 9:30pm
-11,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,57,1/28/2018 9:30pm
-12,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,136,1/28/2018 9:30pm
-13,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,97,1/28/2018 9:30pm
-14,On Premise Contract,,Paid In Full,Unknown,,,450.00,,,,,143,1/28/2018 9:30pm
-15,On Premise Contract,,Paid In Full,Unknown,,,150.00,,,,,81,1/28/2018 9:30pm
-16,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,109,1/28/2018 9:30pm
-17,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,40,1/28/2018 9:30pm
-18,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,244,1/28/2018 9:30pm
-19,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,100,1/28/2018 9:30pm
-20,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,231,1/28/2018 9:30pm
-21,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,157,1/28/2018 9:30pm
-22,On Premise Contract,,Paid In Full,Unknown,,,250.00,,,,,127,1/28/2018 9:30pm
-23,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,214,1/28/2018 9:30pm
-24,On Premise Contract,,Paid In Full,Cash,,,500.00,,,,,15,1/28/2018 9:30pm
-25,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,7,1/28/2018 9:30pm
-26,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,133,1/28/2018 9:30pm
-27,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,105,1/28/2018 9:30pm
-28,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,146,1/28/2018 9:30pm
-29,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,70,1/28/2018 9:30pm
-30,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,14,1/28/2018 9:30pm
-31,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,126,1/28/2018 9:30pm
-32,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,152,1/28/2018 9:30pm
-33,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,89,1/28/2018 9:30pm
-34,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,36,1/28/2018 9:30pm
-35,On Premise Contract,,Paid In Full,Unknown,,,900.00,,,,,199,1/28/2018 9:30pm
-36,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,42,1/28/2018 9:30pm
-37,On Premise Contract,,Paid In Full,Check,,,900.00,,,,,108,1/28/2018 9:30pm
-38,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,208,1/28/2018 9:30pm
-39,On Premise Contract,,Paid In Full,Unknown,,,2000.00,,,,,9,1/28/2018 9:30pm
-40,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,59,1/28/2018 9:30pm
-41,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,95,1/28/2018 9:30pm
-42,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,161,1/28/2018 9:30pm
-43,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,192,1/28/2018 9:30pm
-44,On Premise Contract,,Paid In Full,Unknown,,,600.00,,,,,155,1/28/2018 9:30pm
-45,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,194,1/28/2018 9:30pm
-46,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,20,1/28/2018 9:30pm
-47,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,123,1/28/2018 9:30pm
-48,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,213,1/28/2018 9:30pm
-49,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,125,1/28/2018 9:30pm
-50,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,148,1/28/2018 9:30pm
-51,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,86,1/28/2018 9:30pm
-52,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,172,1/28/2018 9:30pm
-53,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,103,1/28/2018 9:30pm
-54,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,92,1/28/2018 9:30pm
-55,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,160,1/28/2018 9:30pm
-56,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,180,1/28/2018 9:30pm
-57,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,240,1/28/2018 9:30pm
-58,On Premise Contract,,Paid In Full,Unknown,,,900.00,,,,,243,1/28/2018 9:30pm
-59,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,24,1/28/2018 9:30pm
-60,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,110,1/28/2018 9:30pm
-61,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,196,1/28/2018 9:30pm
-62,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,64,1/28/2018 9:30pm
-63,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,76,1/28/2018 9:30pm
-64,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,38,1/28/2018 9:30pm
-65,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,218,1/28/2018 9:30pm
-66,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,124,1/28/2018 9:30pm
-67,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,245,1/28/2018 9:30pm
-68,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,78,1/28/2018 9:30pm
-69,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,220,1/28/2018 9:30pm
-70,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,33,1/28/2018 9:30pm
-71,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,187,1/28/2018 9:30pm
-72,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,13,1/28/2018 9:30pm
-73,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,73,1/28/2018 9:30pm
-74,On Premise Contract,,Paid In Full,Unknown,,,700.00,,,,,19,1/28/2018 9:30pm
-75,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,188,1/28/2018 9:30pm
-76,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,21,1/28/2018 9:30pm
-77,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,11,1/28/2018 9:30pm
-78,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,63,1/28/2018 9:30pm
-79,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,216,1/28/2018 9:30pm
-80,On Premise Contract,,Paid In Full,Unknown,,,400.00,,,,,217,1/28/2018 9:30pm
-81,On Premise Contract,,Paid In Full,Unknown,,,,,,,,173,1/28/2018 9:30pm
-82,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,170,1/28/2018 9:30pm
-83,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,204,1/28/2018 9:30pm
-84,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,225,1/28/2018 9:30pm
-85,On Premise Contract,,Paid In Full,Check,,,0.00,,,,$900.00,120,1/28/2018 9:30pm
-86,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,195,1/28/2018 9:30pm
-87,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,94,1/28/2018 9:30pm
-88,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,185,1/28/2018 9:30pm
-89,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,191,1/28/2018 9:30pm
-90,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,55,1/28/2018 9:30pm
-91,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,56,1/28/2018 9:30pm
-92,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,248,1/28/2018 9:30pm
-93,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,74,1/28/2018 9:30pm
-94,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,186,1/28/2018 9:30pm
-95,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,30,1/28/2018 9:30pm
-96,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,132,1/28/2018 9:30pm
-97,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,141,1/28/2018 9:30pm
-98,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,158,1/28/2018 9:30pm
-99,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,190,1/28/2018 9:30pm
-100,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,206,1/28/2018 9:30pm
-101,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,162,1/28/2018 9:30pm
-102,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,69,1/28/2018 9:30pm
-103,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,44,1/28/2018 9:30pm
-104,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,53,1/28/2018 9:30pm
-105,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,128,1/28/2018 9:30pm
-106,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,228,1/28/2018 9:30pm
-107,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,101,1/28/2018 9:30pm
-108,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,17,1/28/2018 9:30pm
-109,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,169,1/28/2018 9:30pm
-110,On Premise Contract,,Paid In Full,Unknown,,,500.00,,,,,164,1/28/2018 9:30pm
-111,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,6,1/28/2018 9:30pm
-112,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,66,1/28/2018 9:30pm
-113,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,167,1/28/2018 9:30pm
-114,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,215,1/28/2018 9:30pm
-115,On Premise Contract,,Paid In Full,Unknown,,,900.00,,,,,98,1/28/2018 9:30pm
-116,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,135,1/28/2018 9:30pm
-117,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,131,1/28/2018 9:30pm
-118,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,87,1/28/2018 9:30pm
-119,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,165,1/28/2018 9:30pm
-120,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,201,1/28/2018 9:30pm
-121,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,116,1/28/2018 9:30pm
-122,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,25,1/28/2018 9:30pm
-123,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,118,1/28/2018 9:30pm
-124,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,232,1/28/2018 9:30pm
-125,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,223,1/28/2018 9:30pm
-126,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,153,1/28/2018 9:30pm
-127,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,16,1/28/2018 9:30pm
-128,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,122,1/28/2018 9:30pm
-129,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,147,1/28/2018 9:30pm
-130,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,237,1/28/2018 9:30pm
-131,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,197,1/28/2018 9:30pm
-132,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,230,1/28/2018 9:30pm
-133,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,5,1/28/2018 9:30pm
-134,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,154,1/28/2018 9:30pm
-135,On Premise Contract,,Paid In Full,Cash,,,0.00,,,,,106,1/28/2018 9:30pm
-136,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,156,1/28/2018 9:30pm
-137,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,227,1/28/2018 9:30pm
-138,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,189,1/28/2018 9:30pm
-139,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,130,1/28/2018 9:30pm
-140,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,88,1/28/2018 9:30pm
-141,On Premise Contract,,Paid In Full,Unknown,,,150.00,,,,,219,1/28/2018 9:30pm
-142,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,58,1/28/2018 9:30pm
-143,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,210,1/28/2018 9:30pm
-144,On Premise Contract,,Paid In Full,Unknown,,,250.00,,,,,75,1/28/2018 9:30pm
-145,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,140,1/28/2018 9:30pm
-146,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,226,1/28/2018 9:30pm
-147,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,193,1/28/2018 9:30pm
-148,On Premise Contract,,Paid In Full,Unknown,,,700.00,,,,,150,1/28/2018 9:30pm
-149,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,91,1/28/2018 9:30pm
-150,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,4,1/28/2018 9:30pm
-151,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,10,1/28/2018 9:30pm
-152,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,139,1/28/2018 9:30pm
-153,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,32,1/28/2018 9:30pm
-154,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,142,1/28/2018 9:30pm
-155,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,82,1/28/2018 9:30pm
-156,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,43,1/28/2018 9:30pm
-157,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,212,1/28/2018 9:30pm
-158,On Premise Contract,,Paid In Full,Check,,,,,,,,205,1/28/2018 9:30pm
-159,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,79,1/28/2018 9:30pm
-160,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,41,1/28/2018 9:30pm
-161,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,65,1/28/2018 9:30pm
-162,On Premise Contract,,Paid In Full,Unknown,,,1800.00,,,,,72,1/28/2018 9:30pm
-163,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,138,1/28/2018 9:30pm
-164,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,117,1/28/2018 9:30pm
-165,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,235,1/28/2018 9:30pm
-166,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,144,1/28/2018 9:30pm
-167,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,174,1/28/2018 9:30pm
-168,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,27,1/28/2018 9:30pm
-169,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,$450.00,198,1/28/2018 9:30pm
-170,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,182,1/28/2018 9:30pm
-171,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,3,1/28/2018 9:30pm
-172,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,224,1/28/2018 9:30pm
-173,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,26,1/28/2018 9:30pm
-174,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,163,1/28/2018 9:30pm
-175,On Premise Contract,,Paid In Full,Check,,,0.00,,,,,181,1/28/2018 9:30pm
-176,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,129,1/28/2018 9:30pm
-177,On Premise Contract,,Paid In Full,Unknown,,,400.00,,,,,45,1/28/2018 9:30pm
-178,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,67,1/28/2018 9:30pm
-179,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,184,1/28/2018 9:30pm
-180,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,221,1/28/2018 9:30pm
-181,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,229,1/28/2018 9:30pm
-182,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,2,1/28/2018 9:30pm
-183,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,209,1/28/2018 9:30pm
-184,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,99,1/28/2018 9:30pm
-185,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,62,1/28/2018 9:30pm
-186,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,236,1/28/2018 9:30pm
-187,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,112,1/28/2018 9:30pm
-188,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,80,1/28/2018 9:30pm
-189,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,35,1/28/2018 9:30pm
-190,On Premise Contract,,Paid In Full,Unknown,,,1400.00,,,,,247,1/28/2018 9:30pm
-191,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,104,1/28/2018 9:30pm
-192,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,176,1/28/2018 9:30pm
-193,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,234,1/28/2018 9:30pm
-194,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,12,1/28/2018 9:30pm
-195,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,175,1/28/2018 9:30pm
-196,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,159,1/28/2018 9:30pm
-197,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,246,1/28/2018 9:30pm
-198,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,114,1/28/2018 9:30pm
-199,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,50,1/28/2018 9:30pm
-200,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,31,1/28/2018 9:30pm
-201,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,207,1/28/2018 9:30pm
-202,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,18,1/28/2018 9:30pm
-203,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,90,1/28/2018 9:30pm
-204,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,85,1/28/2018 9:30pm
-205,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,48,1/28/2018 9:30pm
-206,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,233,1/28/2018 9:30pm
-207,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,149,1/28/2018 9:30pm
-208,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,239,1/28/2018 9:30pm
-209,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,68,1/28/2018 9:30pm
-210,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,39,1/28/2018 9:30pm
-211,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,60,1/28/2018 9:30pm
-212,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,179,1/28/2018 9:30pm
-213,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,71,1/28/2018 9:30pm
-214,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,46,1/28/2018 9:30pm
-215,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,222,1/28/2018 9:30pm
-216,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,93,1/28/2018 9:30pm
-217,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,29,1/28/2018 9:30pm
-218,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,171,1/28/2018 9:30pm
-219,On Premise Contract,,Paid In Full,Unknown,,,2200.00,,,,,77,1/28/2018 9:30pm
-220,On Premise Contract,,Paid In Full,Unknown,,,1500.00,,,,,202,1/28/2018 9:30pm
-221,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,119,1/28/2018 9:30pm
-222,On Premise Contract,,Paid In Full,Unknown,,,700.00,,,,,121,1/28/2018 9:30pm
-223,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,37,1/28/2018 9:30pm
-224,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,96,1/28/2018 9:30pm
-225,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,102,1/28/2018 9:30pm
-226,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,211,1/28/2018 9:30pm
-227,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,166,1/28/2018 9:30pm
-228,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,145,1/28/2018 9:30pm
-229,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,115,1/28/2018 9:30pm
-230,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,22,1/28/2018 9:30pm
-231,On Premise Contract,,Paid In Full,Unknown,,,1200.00,,,,,151,1/28/2018 9:30pm
-232,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,34,1/28/2018 9:30pm
-233,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,54,1/28/2018 9:30pm
-234,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,168,1/28/2018 9:30pm
-235,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,137,1/28/2018 9:30pm
-236,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,183,1/28/2018 9:30pm
-237,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,238,1/28/2018 9:30pm
-238,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,83,1/28/2018 9:30pm
-239,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,84,1/28/2018 9:30pm
-240,On Premise Contract,,Paid In Full,Unknown,,,1500.00,,,,,203,1/28/2018 9:30pm
-241,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,200,1/28/2018 9:30pm
-242,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,242,1/28/2018 9:30pm
-243,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,28,1/28/2018 9:30pm
-244,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,51,1/28/2018 9:30pm
-245,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,241,1/28/2018 9:30pm
-246,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,107,1/28/2018 9:30pm
-247,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,8,1/28/2018 9:30pm
-248,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,1,1/28/2018 9:30pm
-249,On Premise Contract,,Paid In Full,Check,,,,,,,,355,2/13/2018 4:23pm
-250,On Premise Contract,,Paid In Full,Check,,,,,,,,356,2/13/2018 4:44pm
-251,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,357,2/19/2018 6:01pm
-252,On Premise Contract,,Paid In Full,Check,,,250.00,,,,,358,2/19/2018 6:04pm
-253,On Premise Contract,,Paid In Full,Cash,,,,,,,,359,2/19/2018 6:07pm
-254,On Premise Contract,,Paid In Full,Check,,,,,,,,360,2/19/2018 6:19pm
-255,On Premise Contract,,Paid In Full,Check,,,,,,,,361,2/19/2018 8:26pm
-256,On Premise Contract,,Paid In Full,Check,,,,,,,,362,2/19/2018 8:55pm
-257,On Premise Contract,,Paid In Full,Check,,,,,,,,363,2/19/2018 8:58pm
-258,On Premise Contract,,Paid In Full,Check,,,,,,,,364,2/19/2018 9:02pm
-259,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,365,2/19/2018 9:05pm
-260,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,366,2/19/2018 9:11pm
-261,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,367,2/19/2018 9:14pm
-262,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,369,2/19/2018 9:17pm
-263,On Premise Contract,,Paid In Full,Check,,,,,,,,370,2/19/2018 9:20pm
-264,On Premise Contract,,Paid In Full,Cash,,,,,,,,371,2/19/2018 9:23pm
-265,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,372,2/19/2018 9:28pm
-266,On Premise Contract,,Paid In Full,Check,,,,,,,,373,2/19/2018 9:39pm
-267,On Premise Contract,,Paid In Full,Cash,,,,,,,,374,2/19/2018 9:42pm
-268,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,375,2/19/2018 9:45pm
-269,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,"-$1,000.00",376,2/19/2018 9:50pm
-270,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,-$900.00,377,2/20/2018 2:31pm
-271,On Premise Contract,,Paid In Full,Cash,,,,,,,,378,2/20/2018 2:38pm
-272,On Premise Contract,,Paid In Full,Check,,,,,,,,379,2/20/2018 2:45pm
-273,On Premise Contract,,Paid In Full,Cash,,,50.00,,,,,380,2/20/2018 2:49pm
-274,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,381,2/20/2018 2:53pm
-275,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,382,2/20/2018 2:56pm
-276,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,383,2/20/2018 3:02pm
-277,On Premise Contract,,Paid In Full,Check,,,,,,,,384,2/20/2018 3:05pm
-278,On Premise Contract,,Paid In Full,Check,,,200.00,,,,$600.00,385,2/20/2018 3:08pm
-279,On Premise Contract,,Paid In Full,Check,,,200.00,,,,,386,2/20/2018 3:12pm
-280,On Premise Contract,,Paid In Full,Check,,,,,,,,387,2/20/2018 3:17pm
-281,On Premise Contract,,Paid In Full,Check,,,,,,,,388,2/20/2018 3:22pm
-282,On Premise Contract,,Paid In Full,Cash,,,,,,,,389,2/20/2018 3:26pm
-283,On Premise Contract,,Paid In Full,Check,,,,,,,,390,2/20/2018 3:30pm
-284,On Premise Contract,,Paid In Full,Check,,,,,,,,391,2/20/2018 3:42pm
-285,On Premise Contract,,Paid In Full,Cash,,,,,,,,392,2/20/2018 3:45pm
-286,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$700.00,393,2/20/2018 3:52pm
-287,On Premise Contract,,Paid In Full,Cash,,,,,,,,394,2/20/2018 3:57pm
-288,On Premise Contract,,Paid In Full,Cash,,,,,,,,395,2/20/2018 4:02pm
-289,On Premise Contract,,Paid In Full,Check,,,,,,,,396,2/20/2018 4:12pm
-290,On Premise Contract,,Paid In Full,Cash,,,,,,,,397,2/20/2018 4:15pm
-291,On Premise Contract,,Paid In Full,Cash,,,,,,,,398,2/20/2018 4:18pm
-292,On Premise Contract,,Paid In Full,Cash,,,,,,,,399,2/20/2018 4:46pm
-293,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,400,2/20/2018 4:48pm
-294,On Premise Contract,,Paid In Full,Check,,,,,,,,401,2/20/2018 4:54pm
-295,On Premise Contract,,Paid In Full,Check,,,,,,,,402,2/20/2018 5:00pm
-296,On Premise Contract,,Paid In Full,Check,,,,,,,,403,2/20/2018 5:13pm
-297,On Premise Contract,,Paid In Full,Check,,,,,,,,404,2/20/2018 5:15pm
-298,On Premise Contract,,Paid In Full,Check,,,,,,,,405,2/20/2018 5:18pm
-299,On Premise Contract,,Paid In Full,Check,,,,,,,,406,2/20/2018 5:21pm
-300,On Premise Contract,,Paid In Full,Check,,,,,,,,407,2/20/2018 5:30pm
-301,On Premise Contract,,Paid In Full,Cash,,,,,,,,408,2/20/2018 5:36pm
-302,On Premise Contract,,Paid In Full,Check,,,,,,,,409,2/20/2018 5:42pm
-303,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,410,2/20/2018 5:46pm
-304,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,411,2/20/2018 5:49pm
-305,On Premise Contract,,Paid In Full,Check,,,,,,,,412,2/20/2018 5:52pm
-306,On Premise Contract,,Paid In Full,Check,,,,,,,,413,2/20/2018 5:56pm
-307,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,414,2/20/2018 6:03pm
-308,On Premise Contract,,Paid In Full,Check,,,,,,,,415,2/20/2018 6:06pm
-309,On Premise Contract,,Paid In Full,Cash,,,,,,,,416,2/20/2018 6:10pm
-310,On Premise Contract,,Paid In Full,Check,,,,,,,,417,2/20/2018 8:40pm
-311,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,418,2/20/2018 8:45pm
-312,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,,419,2/20/2018 8:50pm
-313,On Premise Contract,,Paid In Full,Check,,,,,,,,420,2/20/2018 8:55pm
-314,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,421,2/20/2018 8:58pm
-315,On Premise Contract,,Paid In Full,Check,,,,,,,,422,2/20/2018 9:05pm
-316,On Premise Contract,,Paid In Full,Check,,,,,,,,423,2/20/2018 9:09pm
-317,On Premise Contract,,Paid In Full,Check,,,,,,,,424,2/20/2018 9:17pm
-318,On Premise Contract,,Paid In Full,Check,,,,,,,,425,2/20/2018 9:22pm
-319,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,426,2/20/2018 9:24pm
-320,On Premise Contract,,Paid In Full,Check,,,,$750.00,,,,427,2/20/2018 9:29pm
-321,On Premise Contract,,Paid In Full,Cash,,,,,,,,428,2/20/2018 9:34pm
-322,On Premise Contract,,Paid In Full,Check,,,,,,,$950.00,429,2/20/2018 9:39pm
-323,On Premise Contract,,Paid In Full,Check,,,,,,,,430,2/20/2018 9:43pm
-324,On Premise Contract,,Paid In Full,Check,,,,,,,,431,2/20/2018 9:49pm
-325,On Premise Contract,,Paid In Full,Check,,,,,,,,432,2/20/2018 9:52pm
-326,On Premise Contract,,Paid In Full,Check,,,,,,,,433,2/20/2018 9:55pm
-327,On Premise Contract,,Paid In Full,Check,,,,,,,,443,2/26/2018 2:39pm
-328,On Premise Contract,,Paid In Full,Check,,,375.00,,,,$0.00,444,2/26/2018 3:00pm
-329,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,445,2/26/2018 3:10pm
-330,On Premise Contract,,Paid In Full,Cash,,,,,,,,446,2/26/2018 3:18pm
-331,On Premise Contract,,Paid In Full,Check,,,,,,,$800.00,447,2/26/2018 3:23pm
-332,On Premise Contract,,Paid In Full,Cash,,,,,,,$450.00,448,2/26/2018 3:51pm
-333,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$700.00,449,2/26/2018 6:24pm
-334,On Premise Contract,,Paid In Full,Check,,,,,,,$850.00,450,2/26/2018 6:30pm
-335,On Premise Contract,,Paid In Full,Check,,,,,,,,451,2/26/2018 6:39pm
-336,On Premise Contract,,Paid In Full,Check,,,,,,,$600.00,452,2/26/2018 6:47pm
-337,On Premise Contract,,Paid In Full,Check,,,,,,,,453,2/26/2018 7:30pm
-338,On Premise Contract,,Paid In Full,Check,,,,,,,,454,2/26/2018 7:34pm
-339,On Premise Contract,,Outstanding Balance,Cash,,,,"$1,200.00",,,$350.00,455,2/26/2018 7:40pm
-340,On Premise Contract,,Paid In Full,Cash,,,,,,,,456,2/26/2018 7:52pm
-341,On Premise Contract,,Paid In Full,Check,,,,,,,,457,2/26/2018 7:55pm
-342,On Premise Contract,,Paid In Full,Check,,,,,,,,458,2/26/2018 7:59pm
-343,On Premise Contract,,Paid In Full,Check,,,90.00,,,,$800.00,459,2/26/2018 8:02pm
-344,On Premise Contract,,Paid In Full,Cash,,,,,,,$650.00,461,2/26/2018 8:11pm
-345,On Premise Contract,,Paid In Full,Check,,,,,,,,463,2/26/2018 8:15pm
-346,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$750.00,464,2/26/2018 8:23pm
-347,On Premise Contract,,Paid In Full,Cash,,,500.00,,,,,465,2/26/2018 8:26pm
-348,On Premise Contract,,Paid In Full,Check,,,,,,,,466,2/26/2018 8:29pm
-349,On Premise Contract,,Paid In Full,Cash,,,,,,,,467,2/26/2018 8:32pm
-350,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,468,2/26/2018 8:34pm
-351,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$450.00,469,2/26/2018 8:38pm
-352,On Premise Contract,,Paid In Full,Cash,,,,,,,,470,2/26/2018 8:42pm
-353,On Premise Contract,,Paid In Full,Check,,,200.00,,,,$400.00,471,2/26/2018 8:46pm
-354,On Premise Contract,,Paid In Full,Cash,,,,,,,$550.00,472,2/26/2018 9:09pm
-355,On Premise Contract,,Paid In Full,Check,,,100.00,,,,$700.00,473,2/26/2018 9:13pm
-356,On Premise Contract,,Paid In Full,Check,,,,,,,$375.00,474,2/26/2018 9:16pm
-357,On Premise Contract,,Paid In Full,Cash,,,,,,,,475,2/26/2018 9:21pm
-358,On Premise Contract,,Paid In Full,Check,,,,,,,,476,2/27/2018 2:54pm
-359,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,477,2/27/2018 2:56pm
-360,On Premise Contract,,Paid In Full,Check,,,,,,,,478,2/27/2018 3:00pm
-361,On Premise Contract,,Paid In Full,Check,,,,,,,,479,2/27/2018 3:12pm
-362,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,480,2/27/2018 3:19pm
-363,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,481,2/27/2018 3:27pm
-364,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,482,2/27/2018 3:30pm
-365,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$750.00,483,2/27/2018 3:34pm
-366,On Premise Contract,,Paid In Full,Check,,,,,,,$700.00,484,2/27/2018 3:38pm
-367,On Premise Contract,,Paid In Full,Check,,,,,,,$800.00,485,2/27/2018 3:41pm
-368,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,486,2/27/2018 3:45pm
-369,On Premise Contract,,Paid In Full,Check,,,,,,,,487,2/27/2018 3:50pm
-370,On Premise Contract,,Paid In Full,Cash,,,,,,,,488,2/27/2018 3:54pm
-371,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$475.00,489,2/27/2018 4:03pm
-372,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$500.00,490,2/27/2018 4:14pm
-373,On Premise Contract,,Paid In Full,Check,,,,,,,,491,2/27/2018 4:17pm
-374,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,492,2/27/2018 4:19pm
-375,On Premise Contract,,Paid In Full,Check,,,,,,,$800.00,493,2/27/2018 4:29pm
-376,On Premise Contract,,Paid In Full,Check,,,,,,,,494,2/27/2018 4:33pm
-377,On Premise Contract,,Paid In Full,Check,,,,,,,,495,2/27/2018 4:37pm
-378,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,496,2/27/2018 4:40pm
-379,On Premise Contract,,Paid In Full,Cash,,,,,,,,497,2/27/2018 5:02pm
-380,On Premise Contract,,Paid In Full,Check,,,,,,,,498,2/27/2018 6:23pm
-381,On Premise Contract,,Paid In Full,Check,,,,,,,$850.00,500,2/27/2018 6:30pm
-382,On Premise Contract,,Paid In Full,Cash,,,,,,,$700.00,501,2/27/2018 6:46pm
-383,On Premise Contract,,Paid In Full,Cash,,,,,,,,502,2/27/2018 6:50pm
-384,On Premise Contract,,Paid In Full,Check,,,,,,,,503,2/27/2018 6:53pm
-385,On Premise Contract,,Paid In Full,Cash,,,,,,,,504,2/27/2018 6:56pm
-386,On Premise Contract,,Paid In Full,Cash,,,,,,,,505,2/27/2018 7:00pm
-387,On Premise Contract,,Paid In Full,Check,,,,,,,,506,2/27/2018 7:06pm
-388,On Premise Contract,,Paid In Full,Check,,,,,,,,507,2/27/2018 7:14pm
-389,On Premise Contract,,Paid In Full,Check,,,,,,,,508,2/27/2018 7:21pm
-390,On Premise Contract,,Paid In Full,Cash,,,,,,,,509,2/27/2018 7:24pm
-391,On Premise Contract,,Paid In Full,Cash,,,,$200.00,,,,510,2/27/2018 7:26pm
-392,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$850.00,511,2/27/2018 8:20pm
-393,On Premise Contract,,Paid In Full,Cash,,,,,,,,512,2/27/2018 8:25pm
-394,On Premise Contract,,Paid In Full,Cash,,,,,,,$450.00,513,2/27/2018 8:28pm
-395,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,514,2/27/2018 8:32pm
-396,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,515,2/27/2018 8:52pm
-397,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,516,2/27/2018 9:01pm
-398,On Premise Contract,,Paid In Full,Cash,,,,,,,,517,2/27/2018 9:07pm
-399,On Premise Contract,,Paid In Full,Check,,,,,,,,518,2/27/2018 9:10pm
-400,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,519,2/27/2018 9:12pm
-401,On Premise Contract,,Paid In Full,Check,,,,,,,,520,2/27/2018 9:14pm
-402,On Premise Contract,,Paid In Full,Unknown,,,,,,,$250.00,521,2/27/2018 9:18pm
-403,On Premise Contract,,Paid In Full,Check,,,,,,,,522,2/28/2018 2:26pm
-404,On Premise Contract,,Paid In Full,Cash,,,,,,,,523,2/28/2018 2:34pm
-405,On Premise Contract,,Paid In Full,Check,,,,,,,,524,2/28/2018 2:40pm
-406,On Premise Contract,,Paid In Full,Cash,,,,,,,,525,2/28/2018 2:42pm
-407,On Premise Contract,,Paid In Full,Cash,,,,,,,,526,2/28/2018 2:44pm
-408,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,527,2/28/2018 2:47pm
-409,On Premise Contract,,Paid In Full,Check,,,,,,,$550.00,528,2/28/2018 2:53pm
-410,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$750.00,529,2/28/2018 3:21pm
-411,On Premise Contract,,Paid In Full,Check,,,,,,,,530,2/28/2018 3:24pm
-412,On Premise Contract,,Paid In Full,Cash,,,,,,,$800.00,531,2/28/2018 3:26pm
-413,On Premise Contract,,Paid In Full,Check,,,,,,,,532,2/28/2018 3:30pm
-414,On Premise Contract,,Paid In Full,Check,,,,,,,,533,2/28/2018 3:33pm
-415,On Premise Contract,,Paid In Full,Check,,,,,,,,534,2/28/2018 3:39pm
-416,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,535,2/28/2018 3:45pm
-417,On Premise Contract,,Paid In Full,Cash,,,,,,,,536,2/28/2018 3:50pm
-418,On Premise Contract,,Paid In Full,Cash,,,,,,,$0.00,537,2/28/2018 4:06pm
-419,On Premise Contract,,Paid In Full,Cash,,,,,,,,538,2/28/2018 4:09pm
-420,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,539,2/28/2018 4:27pm
-421,On Premise Contract,,Paid In Full,Check,,,,,,,,540,2/28/2018 6:08pm
-422,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,541,2/28/2018 6:11pm
-423,On Premise Contract,,Paid In Full,Check,,,,,,,,542,2/28/2018 6:14pm
-424,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,543,2/28/2018 6:17pm
-425,On Premise Contract,,Paid In Full,Check,,,,,,,,544,2/28/2018 6:27pm
-426,On Premise Contract,,Paid In Full,Check,,,,,,,,545,2/28/2018 6:30pm
-427,On Premise Contract,,Paid In Full,Check,,,,,,,,546,2/28/2018 6:32pm
-428,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,547,2/28/2018 6:36pm
-429,On Premise Contract,,Paid In Full,Cash,,,,,,,,548,2/28/2018 6:39pm
-430,On Premise Contract,,Paid In Full,Check,,,,,,,,549,2/28/2018 6:43pm
-431,On Premise Contract,,Paid In Full,Unknown,,,,,,,,550,2/28/2018 7:09pm
-432,On Premise Contract,,Paid In Full,Unknown,,,,,,,,551,2/28/2018 7:14pm
-433,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,553,2/28/2018 8:09pm
-434,On Premise Contract,,Paid In Full,Check,,,,,,,,554,2/28/2018 8:13pm
-435,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,555,2/28/2018 8:22pm
-436,On Premise Contract,,Paid In Full,Check,,,,,,,,556,2/28/2018 8:25pm
-437,On Premise Contract,,Paid In Full,Unknown,,,,,,,,557,2/28/2018 8:31pm
-438,On Premise Contract,,Paid In Full,Unknown,,,,,,,,558,2/28/2018 8:35pm
-439,On Premise Contract,,Paid In Full,Unknown,,,,,,,,559,2/28/2018 8:39pm
-440,On Premise Contract,,Paid In Full,Check,,,,,,,,560,2/28/2018 8:42pm
-441,On Premise Contract,,Paid In Full,Check,,,,,,,,561,2/28/2018 8:46pm
-442,On Premise Contract,,Paid In Full,Unknown,,,,,,,,562,2/28/2018 8:59pm
-443,On Premise Contract,,Paid In Full,Cash,,,,,,,$700.00,563,2/28/2018 9:06pm
-444,On Premise Contract,,Paid In Full,Unknown,,,,,,,,564,2/28/2018 9:10pm
-445,On Premise Contract,,Paid In Full,Check,,,,,,,$700.00,570,3/5/2018 2:42pm
-446,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,571,3/5/2018 2:49pm
-447,On Premise Contract,,Paid In Full,Cash,,,,,,,,572,3/5/2018 2:51pm
-448,On Premise Contract,,Paid In Full,Cash,,,,,,,$0.00,573,3/5/2018 2:54pm
-449,On Premise Contract,,Paid In Full,Cash,,,,,,,,574,3/5/2018 2:57pm
-450,On Premise Contract,,Paid In Full,Check,,,,,,,$900.00,575,3/5/2018 3:00pm
-451,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,$700.00,576,3/5/2018 3:03pm
-452,On Premise Contract,,Paid In Full,Unknown,,,,,,,$0.00,577,3/5/2018 3:05pm
-453,On Premise Contract,,Paid In Full,Check,,,,,,,,578,3/5/2018 3:11pm
-454,On Premise Contract,,Paid In Full,Check,,,,,,,,579,3/5/2018 3:20pm
-455,On Premise Contract,,Paid In Full,Check,,,,,,,,580,3/5/2018 3:24pm
-456,On Premise Contract,,Paid In Full,Unknown,,,,,,,,581,3/5/2018 3:39pm
-457,On Premise Contract,,Paid In Full,Unknown,,,,,,,,582,3/5/2018 3:46pm
-458,On Premise Contract,,Paid In Full,Check,,,,,,,,583,3/5/2018 3:57pm
-459,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,584,3/5/2018 5:16pm
-460,On Premise Contract,,Paid In Full,Check,,,,,,,,585,3/5/2018 5:18pm
-461,On Premise Contract,,Paid In Full,Check,,,,,,,,586,3/5/2018 5:47pm
-462,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,587,3/5/2018 6:36pm
-463,On Premise Contract,,Paid In Full,Check,,,,,,,,588,3/5/2018 6:39pm
-464,On Premise Contract,,Paid In Full,Unknown,,,,,,,,589,3/5/2018 6:43pm
-465,On Premise Contract,,Paid In Full,Check,,,,,,,,590,3/5/2018 6:55pm
-466,On Premise Contract,,Paid In Full,Unknown,,,,,,,,591,3/5/2018 6:56pm
-467,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,592,3/5/2018 6:59pm
-468,On Premise Contract,,Paid In Full,Unknown,,,,,,,,593,3/5/2018 7:08pm
-469,On Premise Contract,,Paid In Full,Check,,,,,,,,594,3/5/2018 7:11pm
-470,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,595,3/5/2018 7:14pm
-471,On Premise Contract,,Paid In Full,Unknown,,,,,,,,596,3/5/2018 7:16pm
-472,On Premise Contract,,Paid In Full,Check,,,,,,,,597,3/5/2018 7:50pm
-473,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,598,3/5/2018 7:54pm
-474,On Premise Contract,,Paid In Full,Unknown,,,,,,,,599,3/5/2018 7:56pm
-475,On Premise Contract,,Paid In Full,Unknown,,,,,,,,600,3/5/2018 7:59pm
-476,On Premise Contract,,Paid In Full,Check,,,,,,,,601,3/5/2018 8:02pm
-477,On Premise Contract,,Paid In Full,Cash,,,,,,,,602,3/5/2018 8:48pm
-478,On Premise Contract,,Paid In Full,Unknown,,,,,,,,603,3/5/2018 9:08pm
-479,On Premise Contract,,Paid In Full,Check,,,,,,,,604,3/5/2018 10:16pm
-480,On Premise Contract,,Paid In Full,Check,,,,,,,,605,3/6/2018 2:39pm
-481,On Premise Contract,,Paid In Full,Check,,,,,,,,606,3/6/2018 2:44pm
-482,On Premise Contract,,Paid In Full,Check,,,,,,,,607,3/6/2018 2:55pm
-483,On Premise Contract,,Paid In Full,Cash,,,,,,,,608,3/6/2018 2:57pm
-484,On Premise Contract,,Paid In Full,Check,,,,,,,,609,3/6/2018 2:59pm
-485,On Premise Contract,,Paid In Full,Check,,,,,,,,610,3/6/2018 3:01pm
-486,On Premise Contract,,Paid In Full,Unknown,,,,,,,,611,3/6/2018 3:03pm
-487,On Premise Contract,,Paid In Full,Check,,,,,,,,612,3/6/2018 3:05pm
-488,On Premise Contract,,Paid In Full,Unknown,,,,,,,,613,3/6/2018 3:08pm
-489,On Premise Contract,,Paid In Full,Check,,,,,,,,614,3/6/2018 5:07pm
-490,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,615,3/6/2018 5:53pm
-491,On Premise Contract,,Paid In Full,Cash,,,,,,,,616,3/6/2018 5:55pm
-492,On Premise Contract,,Paid In Full,Check | Commission Deduction,,,800.00,,,,-$800.00,617,3/6/2018 5:59pm
-493,On Premise Contract,,Paid In Full,Cash,,,,,,,,618,3/6/2018 8:17pm
-494,On Premise Contract,,Paid In Full,Check,,,,,,,$450.00,619,3/6/2018 8:21pm
-495,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,620,3/6/2018 8:24pm
-496,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,621,3/6/2018 8:27pm
-497,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,622,3/6/2018 8:29pm
-498,On Premise Contract,,Paid In Full,Check,,,,,,,,623,3/6/2018 8:30pm
-499,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,624,3/6/2018 8:32pm
-500,On Premise Contract,,Paid In Full,Check,,,,,,,,625,3/6/2018 8:34pm
-501,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,626,3/6/2018 8:36pm
-502,On Premise Contract,,Paid In Full,Check,,,,,,,,627,3/6/2018 8:37pm
-503,On Premise Contract,,Paid In Full,Check,,,,,,,$900.00,628,3/6/2018 8:39pm
-504,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,629,3/6/2018 8:42pm
-505,On Premise Contract,,Paid In Full,Check,,,,,,,,630,3/6/2018 8:45pm
-506,On Premise Contract,,Paid In Full,Check,,,,,,,$550.00,631,3/6/2018 8:51pm
-507,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,632,3/6/2018 9:02pm
-508,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$800.00,633,3/6/2018 9:04pm
-509,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,634,3/6/2018 9:09pm
-510,On Premise Contract,,Paid In Full,Check,,,,,,,,635,3/6/2018 9:11pm
-511,On Premise Contract,,Paid In Full,Check,,,,,,,,636,3/6/2018 9:14pm
-512,On Premise Contract,,Paid In Full,Check,,,,,,,,637,3/6/2018 9:16pm
-513,On Premise Contract,,Paid In Full,Check,,,,,,,$450.00,638,3/6/2018 9:18pm
-514,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,639,3/6/2018 9:41pm
-515,On Premise Contract,,Paid In Full,Check,,,,,,,$950.00,640,3/6/2018 9:43pm
-516,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,641,3/6/2018 9:46pm
-517,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,642,3/6/2018 9:48pm
-518,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,643,3/6/2018 9:50pm
-519,On Premise Contract,,Paid In Full,Check,,,,,,,$100.00,644,3/6/2018 9:51pm
-520,On Premise Contract,,Paid In Full,Check,,,,,,,,645,3/8/2018 2:43pm
-521,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,646,3/8/2018 2:46pm
-522,On Premise Contract,,Paid In Full,Check,,,,,,,,647,3/8/2018 2:49pm
-523,On Premise Contract,,Paid In Full,Unknown,,,,,,,,648,3/8/2018 2:57pm
-524,On Premise Contract,,Paid In Full,Check,,,,,,,,649,3/8/2018 3:42pm
-525,On Premise Contract,,Paid In Full,Check,,,,,,,,650,3/8/2018 3:44pm
-526,On Premise Contract,,Paid In Full,Check,,,,,,,,651,3/8/2018 3:46pm
-527,On Premise Contract,,Paid In Full,Unknown,,,,,,,,652,3/8/2018 3:48pm
-528,On Premise Contract,,Paid In Full,Check,,,,,,,,653,3/8/2018 3:51pm
-529,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,654,3/8/2018 3:56pm
-530,On Premise Contract,,Paid In Full,Check,,,,,,,,655,3/8/2018 4:02pm
-531,On Premise Contract,,Paid In Full,Unknown,,,,,,,,656,3/8/2018 4:10pm
-532,On Premise Contract,,Paid In Full,Unknown,,,,,,,,657,3/8/2018 4:15pm
-533,On Premise Contract,,Paid In Full,Check,,,,,,,,658,3/8/2018 4:27pm
-534,On Premise Contract,,Paid In Full,Check,,,,,,,,659,3/8/2018 4:30pm
-535,On Premise Contract,,Paid In Full,Unknown,,,,,,,,660,3/8/2018 4:31pm
-536,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,661,3/8/2018 4:33pm
-537,On Premise Contract,,Paid In Full,Unknown,,,,,,,,662,3/8/2018 4:34pm
-538,On Premise Contract,,Paid In Full,Check,,,,,,,,663,3/8/2018 4:36pm
-539,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,664,3/8/2018 4:39pm
-540,On Premise Contract,,Paid In Full,Check,,,,,,,,665,3/8/2018 4:42pm
-541,On Premise Contract,,Paid In Full,Check,,,,,,,,666,3/8/2018 4:48pm
-542,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,667,3/8/2018 4:50pm
-543,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,668,3/8/2018 4:53pm
-544,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,669,3/8/2018 4:55pm
-545,On Premise Contract,,Paid In Full,Check,,,,,,,,670,3/8/2018 4:56pm
-546,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,671,3/8/2018 4:58pm
-547,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,672,3/8/2018 5:00pm
-548,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,$300.00,,,"-$2,200.00",673,3/8/2018 5:02pm
-549,On Premise Contract,,Paid In Full,Check,,,,,,,,674,3/8/2018 5:07pm
-550,On Premise Contract,,Paid In Full,Check,,,,,,,,675,3/8/2018 5:11pm
-551,On Premise Contract,,Paid In Full,Check,,,,,,,,676,3/8/2018 5:12pm
-552,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,677,3/8/2018 5:14pm
-553,On Premise Contract,,Paid In Full,Check,,,,,,,,678,3/8/2018 5:15pm
-554,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,679,3/8/2018 5:19pm
-555,On Premise Contract,,Paid In Full,Check,,,,,,,,680,3/8/2018 5:21pm
-556,On Premise Contract,,Paid In Full,Check,,,,,,,,681,3/8/2018 5:23pm
-557,On Premise Contract,,Paid In Full,Check,,,,,,,,682,3/8/2018 5:26pm
-558,On Premise Contract,,Paid In Full,Check,,,,,,,,683,3/8/2018 5:30pm
-559,On Premise Contract,,Paid In Full,Check,,,,,,,,684,3/8/2018 5:31pm
-560,On Premise Contract,,Paid In Full,Check,,,,,,,,685,3/8/2018 5:33pm
-561,On Premise Contract,,Paid In Full,Check,,,,,,,,686,3/8/2018 5:38pm
-562,On Premise Contract,,Paid In Full,Check,,,,,,,,687,3/8/2018 5:44pm
-563,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,688,3/8/2018 5:50pm
-564,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,689,3/8/2018 5:53pm
-565,On Premise Contract,,Paid In Full,Check,,,,,,,,690,3/8/2018 5:56pm
-566,On Premise Contract,,Paid In Full,Unknown,,,,,,,,691,3/8/2018 5:59pm
-567,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,692,3/8/2018 6:02pm
-568,On Premise Contract,,Paid In Full,Check,,,,,,,,693,3/8/2018 6:04pm
-569,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,694,3/8/2018 6:07pm
-570,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,695,3/8/2018 6:09pm
-571,On Premise Contract,,Paid In Full,Check,,,,,,,,696,3/8/2018 6:11pm
-572,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,,697,3/8/2018 6:13pm
-573,On Premise Contract,,Paid In Full,Cash,,,,,,,$850.00,698,3/13/2018 3:08pm
-574,On Premise Contract,,Paid In Full,Cash,,,,,,,$600.00,699,3/13/2018 3:12pm
-575,On Premise Contract,,Paid In Full,Check,,,,,,,$675.00,700,3/13/2018 3:15pm
-576,On Premise Contract,,Paid In Full,Cash,,,,,,,$775.00,701,3/13/2018 3:19pm
-577,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,702,3/13/2018 3:23pm
-578,On Premise Contract,,Paid In Full,Cash,,,,,,,,703,3/13/2018 3:33pm
-579,On Premise Contract,,Paid In Full,Check,,,,,,,,704,3/13/2018 3:39pm
-580,On Premise Contract,,Paid In Full,Check,,,,,,,,705,3/13/2018 3:42pm
-581,On Premise Contract,,Paid In Full,Cash,,,,,,,$750.00,706,3/13/2018 3:46pm
-582,On Premise Contract,,Paid In Full,Cash,,,,,,,,707,3/13/2018 3:50pm
-583,On Premise Contract,,Paid In Full,Check,,,,,,,,708,4/2/2018 2:01pm
-584,On Premise Contract,,Paid In Full,Check,,,,,,,,709,4/2/2018 2:05pm
-585,On Premise Contract,,Paid In Full,Check,,,,,,,,710,4/2/2018 2:37pm
-586,On Premise Contract,,Paid In Full,Check,,,100.00,,,,$550.00,711,4/2/2018 2:40pm
-587,On Premise Contract,,Paid In Full,Check,,,,,,,,712,4/2/2018 2:54pm
-588,On Premise Contract,,Paid In Full,Check,,,,,,,,713,4/2/2018 3:00pm
-589,On Premise Contract,,Paid In Full,Check,,,,,,,,714,4/2/2018 3:15pm
-590,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$850.00,715,4/9/2018 2:12pm
-591,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,716,4/9/2018 2:32pm
-592,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,717,4/9/2018 2:37pm
-593,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$600.00,718,4/9/2018 2:43pm
-594,On Premise Contract,,Paid In Full,Cash,,,,,,,,719,4/9/2018 2:48pm
-595,On Premise Contract,,Paid In Full,Check,,,,,,,,720,4/9/2018 2:51pm
-596,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,721,4/9/2018 3:01pm
-597,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$600.00,722,4/9/2018 3:06pm
-598,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$600.00,723,4/9/2018 3:10pm
-599,On Premise Contract,,Paid In Full,Check,,,,,,,$700.00,724,4/9/2018 3:37pm
-600,On Premise Contract,,Paid In Full,Check,,,,,,,,725,4/9/2018 3:40pm
-601,On Premise Contract,,Paid In Full,Check,,,,,,,,726,4/9/2018 4:28pm
-602,On Premise Contract,,Paid In Full,Check,,,,,,,"$2,400.00",727,4/9/2018 4:39pm
-603,On Premise Contract,,Paid In Full,Check,,,,,,,,728,4/10/2018 5:18pm
-604,On Premise Contract,,Paid In Full,Check,,,250.00,,,,,729,4/10/2018 5:29pm
-605,On Premise Contract,,Paid In Full,Check,,,,,,,,730,4/10/2018 5:42pm
-606,On Premise Contract,,Paid In Full,Check,,,,,,,,731,4/10/2018 5:51pm
-607,On Premise Contract,,Paid In Full,Check,,,,,,,,732,4/10/2018 6:09pm
-608,On Premise Contract,,Paid In Full,Check,,,,,,,,733,4/10/2018 6:14pm
-609,On Premise Contract,,Paid In Full,Unknown,,,,,,,$0.00,734,4/10/2018 6:36pm
-610,On Premise Contract,,Paid In Full,Cash,,,,,,,$700.00,735,4/10/2018 7:08pm
-611,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,736,4/10/2018 7:18pm
-612,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,737,4/10/2018 7:50pm
-613,On Premise Contract,,Paid In Full,Check,,,,,,,,738,4/10/2018 7:54pm
-614,On Premise Contract,,Paid In Full,Cash,,,600.00,,,,$0.00,739,4/10/2018 7:59pm
-615,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$725.00,740,4/10/2018 8:04pm
-616,On Premise Contract,,Paid In Full,Check,,,,,,,,741,4/10/2018 8:09pm
-617,On Premise Contract,,Paid In Full,Check,,,,,,,,742,4/10/2018 8:13pm
-618,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,743,4/10/2018 8:15pm
-619,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,744,4/10/2018 8:20pm
-620,On Premise Contract,,Paid In Full,Check,,,,,,,,746,4/10/2018 8:43pm
-621,On Premise Contract,,Paid In Full,Cash,,,,$400.00,,,$0.00,747,4/10/2018 8:45pm
-622,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$650.00,748,4/10/2018 8:49pm
-623,On Premise Contract,,Paid In Full,Check,,,,,,,,749,4/10/2018 8:52pm
-624,On Premise Contract,,Paid In Full,Check,,,400.00,,,,$0.00,750,4/10/2018 8:54pm
-625,On Premise Contract,,Paid In Full,Cash,,,600.00,,,,,751,4/12/2018 3:35pm
-626,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,752,4/12/2018 3:37pm
-627,On Premise Contract,,Paid In Full,Check,,,,,,,,753,4/12/2018 3:41pm
-628,On Premise Contract,,Paid In Full,Check,,,,,,,,754,4/12/2018 4:13pm
-629,On Premise Contract,,Outstanding Balance,Check,,,,"$1,650.00",,,$0.00,755,4/12/2018 4:27pm
-630,On Premise Contract,,Paid In Full,Check,,,200.00,,,,,756,4/12/2018 4:49pm
-631,On Premise Contract,,Paid In Full,Cash,,,,,,,,757,4/12/2018 4:51pm
-632,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,758,4/12/2018 4:54pm
-633,On Premise Contract,,Paid In Full,Check,,,,,,,,759,4/12/2018 4:57pm
-634,On Premise Contract,,Paid In Full,Cash,,,,,,,$525.00,760,4/12/2018 4:59pm
-635,On Premise Contract,,Paid In Full,Cash,,,,,,,,761,4/12/2018 5:01pm
-636,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,762,4/12/2018 5:03pm
-637,On Premise Contract,,Paid In Full,Check,,,,,,,,763,4/12/2018 5:06pm
-638,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,764,4/12/2018 5:09pm
-639,On Premise Contract,,Paid In Full,Check,,,400.00,,,,,765,4/12/2018 5:11pm
-640,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,766,4/12/2018 5:13pm
-641,On Premise Contract,,Paid In Full,Check,,,,,,,,767,4/12/2018 5:15pm
-642,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,768,4/12/2018 5:19pm
-643,On Premise Contract,,Paid In Full,Cash,,,,,,,$450.00,769,4/12/2018 5:21pm
-644,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,770,4/12/2018 5:22pm
-645,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,771,4/12/2018 5:24pm
-646,On Premise Contract,,Paid In Full,Check,,,,,,,$775.00,772,4/12/2018 5:27pm
-647,On Premise Contract,,Paid In Full,Check,,,,,,,$650.00,773,4/12/2018 5:34pm
-648,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,$500.00,774,4/12/2018 5:40pm
-649,On Premise Contract,,Paid In Full,Check,,,,,,,,775,4/12/2018 5:44pm
-650,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,776,4/12/2018 5:48pm
-651,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,777,4/12/2018 7:38pm
-652,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,778,4/12/2018 7:46pm
-653,On Premise Contract,,Paid In Full,Cash,,,350.00,,,,,779,4/12/2018 7:47pm
-654,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,780,4/12/2018 7:49pm
-655,On Premise Contract,,Paid In Full,Deduction from Commissions,,,700.00,,,,,781,4/12/2018 7:51pm
-656,On Premise Contract,,Paid In Full,Check,,,,,,,$600.00,782,4/12/2018 7:53pm
-657,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,783,4/12/2018 8:01pm
-658,On Premise Contract,,Paid In Full,Check,,,,,,,,784,4/12/2018 8:03pm
-659,On Premise Contract,,Paid In Full,Cash,,,,,,,,785,4/12/2018 8:05pm
-660,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,786,4/12/2018 8:07pm
-661,On Premise Contract,,Paid In Full,Check,,,200.00,,,,,787,4/12/2018 8:09pm
-662,On Premise Contract,,Paid In Full,Cash,,,,,,,$525.00,788,4/12/2018 8:11pm
-663,On Premise Contract,,Paid In Full,Check,,,,,,,,789,4/12/2018 8:19pm
-664,On Premise Contract,,Paid In Full,Cash,,,,,,,,790,4/12/2018 8:24pm
-665,On Premise Contract,,Paid In Full,Cash,,,,,,,$550.00,791,4/12/2018 8:26pm
-666,On Premise Contract,,Paid In Full,Check,,,,,,,,792,4/12/2018 8:31pm
-667,On Premise Contract,,Paid In Full,Check,,,,,,,,793,4/12/2018 8:40pm
-668,On Premise Contract,,Paid In Full,Check,,,,,,,$525.00,794,4/12/2018 8:43pm
-669,On Premise Contract,,Paid In Full,Cash,,,150.00,,,,,795,4/17/2018 2:29pm
-670,On Premise Contract,,Paid In Full,Check,,,,,,,,796,4/17/2018 2:45pm
-671,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,797,4/17/2018 2:50pm
-672,On Premise Contract,,Paid In Full,Check,,,,,,,,798,4/17/2018 2:52pm
-673,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,799,4/17/2018 3:04pm
-674,On Premise Contract,,Paid In Full,Check,,,200.00,,,,$600.00,800,4/17/2018 3:15pm
-675,On Premise Contract,,Paid In Full,Check,,,,,,,,801,4/17/2018 8:19pm
-676,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$400.00,802,4/17/2018 8:22pm
-677,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,803,4/17/2018 8:27pm
-678,On Premise Contract,,Paid In Full,Check,,,,,,,,804,4/17/2018 8:30pm
-679,On Premise Contract,,Paid In Full,Cash | Check,,,500.00,,,,,805,4/17/2018 8:34pm
-680,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$775.00,806,4/17/2018 8:39pm
-681,On Premise Contract,,Paid In Full,Check,,,,,,,$500.00,807,4/17/2018 8:41pm
-682,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,808,4/17/2018 8:43pm
-683,On Premise Contract,,Paid In Full,Check,,,,,,,,809,4/17/2018 8:53pm
-684,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,810,4/17/2018 8:56pm
-685,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,811,4/17/2018 9:03pm
-686,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,812,4/17/2018 9:06pm
-687,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,813,4/17/2018 9:09pm
-688,On Premise Contract,,Paid In Full,Cash,,,250.00,,,,$650.00,814,4/17/2018 9:12pm
-689,On Premise Contract,,Paid In Full,Check,,,,,,,,815,4/17/2018 9:18pm
-690,On Premise Contract,,Paid In Full,Cash,,,,,,,,816,4/17/2018 9:20pm
-691,On Premise Contract,,Paid In Full,Check,,,,,,,$525.00,817,4/17/2018 9:22pm
-692,On Premise Contract,,Paid In Full,Check,,,800.00,,,,,818,4/17/2018 9:26pm
-693,On Premise Contract,,Paid In Full,Check,,,,,,,,819,4/17/2018 9:28pm
-694,On Premise Contract,,Paid In Full,Cash,,,,,,,,820,4/17/2018 9:31pm
-695,On Premise Contract,,Paid In Full,Cash,,,,,,,,821,4/17/2018 9:34pm
-696,On Premise Contract,,Paid In Full,Cash,,,,,,,,822,4/17/2018 9:36pm
-697,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,823,4/17/2018 9:38pm
-698,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$475.00,824,4/17/2018 9:50pm
-699,On Premise Contract,,Paid In Full,Check,,,,,,,,825,4/17/2018 9:55pm
-700,On Premise Contract,,Paid In Full,Cash,,,,,,,,826,4/18/2018 2:13pm
-701,On Premise Contract,,Paid In Full,Check,,,,,,,,827,4/18/2018 2:15pm
-702,On Premise Contract,,Paid In Full,Check,,,,,,,,828,4/18/2018 2:18pm
-703,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,829,4/18/2018 2:20pm
-704,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,830,4/18/2018 2:22pm
-705,On Premise Contract,,Paid In Full,Cash,,,,,,,,831,4/18/2018 2:23pm
-706,On Premise Contract,,Paid In Full,Cash,,,,,,,,832,4/18/2018 2:25pm
-707,On Premise Contract,,Paid In Full,Check,,,,,,,,833,4/18/2018 2:27pm
-708,On Premise Contract,,Paid In Full,Cash,,,,,,,,834,4/18/2018 2:37pm
-709,On Premise Contract,,Paid In Full,Unknown,,,,,,,,835,4/18/2018 2:38pm
-710,On Premise Contract,,Paid In Full,Check,,,,,,,,836,4/18/2018 2:41pm
-711,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,837,4/18/2018 2:43pm
-712,On Premise Contract,,Paid In Full,Cash,,,,,,,,838,4/18/2018 2:44pm
-713,On Premise Contract,,Paid In Full,Cash,,,,,,,$475.00,839,4/18/2018 2:49pm
-714,On Premise Contract,,Paid In Full,Check,,,,,,,,840,4/18/2018 3:05pm
-715,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,841,4/18/2018 3:07pm
-716,On Premise Contract,,Paid In Full,Cash,,,,,,,,842,4/18/2018 3:15pm
-717,On Premise Contract,,Paid In Full,Check,,,,,,,$750.00,843,4/18/2018 3:17pm
-718,On Premise Contract,,Paid In Full,Cash,,,,,,,,844,4/18/2018 3:19pm
-719,On Premise Contract,,Paid In Full,Cash,,,,,,,$650.00,845,4/18/2018 3:22pm
-720,On Premise Contract,,Paid In Full,Cash,,,,,,,,846,4/18/2018 3:25pm
-721,On Premise Contract,,Paid In Full,Check,,,,,,,,847,4/18/2018 3:27pm
-722,On Premise Contract,,Paid In Full,Check,,,,,,,,848,4/18/2018 3:29pm
-723,On Premise Contract,,Paid In Full,Cash,,,,,,,,849,4/18/2018 3:31pm
-724,On Premise Contract,,Paid In Full,Cash,,,,,,,$475.00,850,4/18/2018 3:33pm
-725,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$575.00,851,4/18/2018 3:36pm
-726,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,852,4/18/2018 3:38pm
-727,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,$575.00,853,4/18/2018 3:39pm
-728,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,$275.00,854,4/18/2018 3:42pm
-729,On Premise Contract,,Paid In Full,Unknown,,,,,,,,855,4/18/2018 3:49pm
-730,On Premise Contract,,Paid In Full,Cash,,,,,,,,856,4/18/2018 3:50pm
-731,On Premise Contract,,Paid In Full,Check,,,,,,,,857,4/18/2018 3:52pm
-732,On Premise Contract,,Paid In Full,Check,,,,,,,,858,4/18/2018 3:53pm
-733,On Premise Contract,,Paid In Full,Check,,,,,,,,859,4/18/2018 6:23pm
-734,On Premise Contract,,Paid In Full,Check,,,,,,,,860,4/18/2018 6:25pm
-735,On Premise Contract,,Paid In Full,Check,,,,,,,$775.00,861,4/18/2018 6:28pm
-736,On Premise Contract,,Paid In Full,Check,,,,,,,$700.00,862,4/18/2018 6:30pm
-737,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,863,4/18/2018 6:32pm
-738,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,864,4/18/2018 6:36pm
-739,On Premise Contract,,Paid In Full,Check,,,,,,,,865,4/18/2018 6:40pm
-740,On Premise Contract,,Paid In Full,Check,,,,,,,,866,4/18/2018 6:43pm
-741,On Premise Contract,,Paid In Full,Check,,,,,,,$525.00,867,4/18/2018 6:45pm
-742,On Premise Contract,,Paid In Full,Check,,,,,,,$525.00,868,4/18/2018 6:51pm
-743,On Premise Contract,,Paid In Full,Check,,,,,,,$750.00,869,4/18/2018 6:56pm
-744,On Premise Contract,,Paid In Full,Check,,,,,,,$650.00,870,4/18/2018 7:00pm
-745,On Premise Contract,,Paid In Full,Check,,,,,,,$375.00,871,4/18/2018 7:04pm
-746,On Premise Contract,,Paid In Full,Check,,,,,,,,872,4/18/2018 7:44pm
-747,On Premise Contract,,Paid In Full,Check,,,,,,,,873,4/18/2018 7:47pm
-748,On Premise Contract,,Paid In Full,Check,,,,,,,,874,4/18/2018 7:59pm
-749,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,875,4/18/2018 8:01pm
-750,On Premise Contract,,Paid In Full,Unknown,,,,,,,,876,4/18/2018 8:04pm
-751,On Premise Contract,,Paid In Full,Check,,,,,,,,877,4/18/2018 8:07pm
-752,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,878,4/18/2018 8:09pm
-753,On Premise Contract,,Paid In Full,Cash,,,,,,,,879,4/18/2018 8:12pm
-754,On Premise Contract,,Paid In Full,Check,,,,,,,,880,4/18/2018 8:13pm
-755,On Premise Contract,,Paid In Full,Check,,,,,,,,881,4/18/2018 8:16pm
-756,On Premise Contract,,Paid In Full,Cash,,,,,,,,882,4/18/2018 8:19pm
-757,On Premise Contract,,Paid In Full,Check,,,,,,,,883,4/18/2018 8:21pm
-758,On Premise Contract,,Paid In Full,Unknown,,,,,,,,884,4/18/2018 8:25pm
-759,On Premise Contract,,Paid In Full,Check,,,,,,,,885,4/18/2018 8:28pm
-760,On Premise Contract,,Paid In Full,Check,,,,,,,,886,4/18/2018 8:30pm
-761,On Premise Contract,,Paid In Full,Check,,,,,,,,887,4/18/2018 8:33pm
-762,On Premise Contract,,Paid In Full,Check,,,,,,,,888,4/18/2018 8:38pm
-763,On Premise Contract,,Paid In Full,Cash,,,,,,,$660.00,889,4/23/2018 2:16pm
-764,On Premise Contract,,Paid In Full,Check,,,,,,,"$1,190.00",890,4/23/2018 3:03pm
-765,On Premise Contract,,Paid In Full,Check,,,,,,,,891,4/23/2018 4:08pm
-766,On Premise Contract,,Paid In Full,Check,,,,,,,,892,4/23/2018 4:14pm
-767,On Premise Contract,,Paid In Full,Check,,,,,,,$600.00,893,4/23/2018 4:16pm
-768,On Premise Contract,,Paid In Full,Check,,,,,,,,894,4/23/2018 4:21pm
-769,On Premise Contract,,Paid In Full,Check,,,,,,,"$1,430.00",895,4/23/2018 4:28pm
-770,On Premise Contract,,Paid In Full,Cash,,,,,,,"$1,260.00",896,4/23/2018 4:36pm
-771,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,"$1,350.00",897,4/23/2018 5:25pm
-772,On Premise Contract,,Paid In Full,Unknown,,,700.00,,,,$720.00,898,4/23/2018 6:24pm
-773,On Premise Contract,,Paid In Full,Check,,,,,,,"$1,620.00",899,4/23/2018 7:14pm
-774,On Premise Contract,,Paid In Full,Check,,,,,,,$280.00,900,4/23/2018 8:42pm
-775,On Premise Contract,,Paid In Full,Check,,,,,,,,901,4/24/2018 1:25pm
-776,On Premise Contract,,Paid In Full,Check,,,,,,,$500.00,902,4/24/2018 1:42pm
-777,On Premise Contract,,Paid In Full,Check,,,,,,,$600.00,903,4/24/2018 1:45pm
-778,On Premise Contract,,Paid In Full,Check,,,,,,,$600.00,904,4/24/2018 1:51pm
-779,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,905,4/24/2018 2:09pm
-780,On Premise Contract,,Paid In Full,Unknown,,,,,,,,906,4/24/2018 2:13pm
-781,On Premise Contract,,Paid In Full,Cash,,,,,,,,907,4/24/2018 2:17pm
-782,On Premise Contract,,Paid In Full,Unknown,,,,,,,,908,4/24/2018 2:20pm
-783,On Premise Contract,,Paid In Full,Unknown,,,,,,,,909,4/24/2018 2:22pm
-784,On Premise Contract,,Paid In Full,Unknown,,,,,,,,910,4/24/2018 2:27pm
-785,On Premise Contract,,Paid In Full,Unknown,,,,,,,,911,4/24/2018 3:19pm
-786,On Premise Contract,,Paid In Full,Unknown,,,,,,,,912,4/24/2018 3:25pm
-787,On Premise Contract,,Paid In Full,Unknown,,,,,,,,913,4/24/2018 3:48pm
-788,On Premise Contract,,Paid In Full,Unknown,,,,,,,,914,4/24/2018 6:29pm
-789,On Premise Contract,,Paid In Full,Unknown,,,,,,,,915,4/24/2018 6:33pm
-790,On Premise Contract,,Paid In Full,Unknown,,,,,,,,916,4/24/2018 7:21pm
-791,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,917,4/24/2018 7:48pm
-792,On Premise Contract,,Paid In Full,Unknown,,,,,,,,918,4/24/2018 7:52pm
-793,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,919,4/24/2018 7:58pm
-794,On Premise Contract,,Paid In Full,Unknown,,,,,,,,920,4/24/2018 8:05pm
-795,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,921,4/24/2018 8:09pm
-796,On Premise Contract,,Paid In Full,Unknown,,,,,,,,922,4/24/2018 8:13pm
-797,On Premise Contract,,Paid In Full,Unknown,,,,,,,,923,4/24/2018 8:15pm
-798,On Premise Contract,,Paid In Full,Unknown,,,,,,,,924,4/24/2018 8:21pm
-799,On Premise Contract,,Paid In Full,Unknown,,,,,,,,925,4/24/2018 8:34pm
-800,On Premise Contract,,Paid In Full,Unknown,,,,,,,,926,4/24/2018 8:35pm
-801,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,927,4/24/2018 8:37pm
-802,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,928,4/24/2018 8:40pm
-803,On Premise Contract,,Paid In Full,Unknown,,,,,,,,929,4/24/2018 8:48pm
-804,On Premise Contract,,Paid In Full,Unknown,,,,,,,,930,4/24/2018 8:51pm
-805,On Premise Contract,,Paid In Full,Unknown,,,,,,,,931,4/24/2018 8:53pm
-806,On Premise Contract,,Paid In Full,Unknown,,,,,,,,932,4/24/2018 9:01pm
-807,On Premise Contract,,Paid In Full,Unknown,,,,,,,,933,4/24/2018 9:06pm
-808,On Premise Contract,,Paid In Full,Unknown,,,,,,,,934,4/24/2018 9:08pm
-809,On Premise Contract,,Paid In Full,Unknown,,,,,,,,935,4/25/2018 2:08pm
-810,On Premise Contract,,Paid In Full,Unknown,,,,,,,,936,4/25/2018 2:16pm
-811,On Premise Contract,,Paid In Full,Unknown,,,,,,,,937,4/25/2018 2:21pm
-812,On Premise Contract,,Paid In Full,Cash,,,,,,,,938,4/25/2018 2:23pm
-813,On Premise Contract,,Paid In Full,Unknown,,,,,,,,939,4/25/2018 2:35pm
-814,On Premise Contract,,Paid In Full,Unknown,,,,,,,,940,4/25/2018 2:48pm
-815,On Premise Contract,,Paid In Full,Unknown,,,,,,,,941,4/25/2018 3:07pm
-816,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,942,4/25/2018 3:11pm
-817,On Premise Contract,,Paid In Full,Unknown,,,,,,,,943,4/25/2018 3:13pm
-818,On Premise Contract,,Paid In Full,Unknown,,,,,,,,944,4/25/2018 3:14pm
-819,On Premise Contract,,Paid In Full,Check,,,,,,,,945,4/25/2018 3:17pm
-820,On Premise Contract,,Paid In Full,Unknown,,,,,,,,946,4/25/2018 3:25pm
-821,On Premise Contract,,Paid In Full,Unknown,,,,,,,,947,4/25/2018 3:27pm
-822,On Premise Contract,,Paid In Full,Unknown,,,,,,,,948,4/25/2018 3:30pm
-823,On Premise Contract,,Paid In Full,Unknown,,,,,,,,949,4/25/2018 3:32pm
-824,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,950,4/25/2018 3:36pm
-825,On Premise Contract,,Paid In Full,Unknown,,,,,,,,951,4/25/2018 3:38pm
-826,On Premise Contract,,Paid In Full,Unknown,,,,,,,,952,4/25/2018 3:40pm
-827,On Premise Contract,,Paid In Full,Unknown,,,,,,,,953,4/25/2018 3:42pm
-828,On Premise Contract,,Paid In Full,Unknown,,,,,,,,954,4/25/2018 3:44pm
-829,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,955,4/25/2018 3:46pm
-830,On Premise Contract,,Paid In Full,Unknown,,,,,,,,956,4/25/2018 3:47pm
-831,On Premise Contract,,Paid In Full,Unknown,,,,,,,,957,4/25/2018 3:49pm
-832,On Premise Contract,,Outstanding Balance,Unknown,,,,"$1,300.00",,,,958,4/25/2018 3:51pm
-833,On Premise Contract,,Paid In Full,Cash,,,,,,,,959,4/25/2018 3:54pm
-834,On Premise Contract,,Paid In Full,Unknown,,,,,,,,960,4/25/2018 3:56pm
-835,On Premise Contract,,Paid In Full,Unknown,,,,,,,,961,4/25/2018 3:58pm
-836,On Premise Contract,,Paid In Full,Unknown,,,350.00,,,,,962,4/25/2018 4:00pm
-837,On Premise Contract,,Outstanding Balance,Unknown,,,,$200.00,,,,963,4/25/2018 4:02pm
-838,On Premise Contract,,Paid In Full,Unknown,,,,,,,,964,4/25/2018 4:04pm
-839,On Premise Contract,,Paid In Full,Cash,,,250.00,,,,,965,4/25/2018 4:06pm
-840,On Premise Contract,,Paid In Full,Unknown,,,,,,,,966,4/25/2018 4:11pm
-841,On Premise Contract,,Paid In Full,Unknown,,,,,,,,967,4/25/2018 4:25pm
-842,On Premise Contract,,Paid In Full,Unknown,,,,,,,,968,4/25/2018 4:29pm
-843,On Premise Contract,,Outstanding Balance,Unknown,,,,$200.00,,,,969,4/25/2018 4:31pm
-844,On Premise Contract,,Paid In Full,Unknown,,,,,,,,970,4/25/2018 4:33pm
-845,On Premise Contract,,Paid In Full,Unknown,,,,,,,,971,4/25/2018 4:35pm
-846,On Premise Contract,,Paid In Full,Unknown,,,,,,,,972,4/25/2018 4:36pm
-847,Production Invoice,,Paid In Full,Unknown,,,800.00,,,,,973,4/25/2018 4:39pm
-848,On Premise Contract,,Paid In Full,Unknown,,,,,,,,974,4/25/2018 6:34pm
-849,On Premise Contract,,Paid In Full,Unknown,,,,,,,,975,4/25/2018 6:53pm
-850,On Premise Contract,,Paid In Full,Unknown,,,,,,,,976,4/25/2018 6:55pm
-851,On Premise Contract,,Paid In Full,Unknown,,,,,,,,977,4/25/2018 7:05pm
-852,On Premise Contract,,Paid In Full,Unknown,,,,,,,,978,4/25/2018 7:15pm
-853,On Premise Contract,,Paid In Full,Unknown,,,,,,,,979,4/25/2018 7:17pm
-854,On Premise Contract,,Paid In Full,Unknown,,,,,,,,980,4/25/2018 7:19pm
-855,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,981,4/25/2018 7:22pm
-856,On Premise Contract,,Paid In Full,Unknown,,,,,,,,982,4/25/2018 7:25pm
-857,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,983,4/25/2018 7:28pm
-858,On Premise Contract,,Paid In Full,Unknown,,,,,,,,984,4/25/2018 7:29pm
-859,On Premise Contract,,Paid In Full,Unknown,,,,,,,,985,4/25/2018 7:32pm
-860,On Premise Contract,,Paid In Full,Unknown,,,,,,,,986,4/25/2018 7:34pm
-861,On Premise Contract,,Paid In Full,Check,,,,,,,,987,4/25/2018 8:27pm
-862,On Premise Contract,,Paid In Full,Unknown,,,,,,,,988,4/25/2018 8:33pm
-863,On Premise Contract,,Paid In Full,Unknown,,,,,,,,989,4/25/2018 8:36pm
-864,On Premise Contract,,Paid In Full,Unknown,,,,,,,,990,4/25/2018 8:48pm
-865,Production Invoice,,Paid In Full,Unknown,,,,,,,,991,4/30/2018 1:56pm
-866,On Premise Contract,,Paid In Full,Check,,,,,,,,992,4/30/2018 2:25pm
-867,On Premise Contract,,Paid In Full,Unknown,,,,,,,,993,4/30/2018 2:34pm
-868,On Premise Contract,,Paid In Full,Check,,,,,,,,994,4/30/2018 2:41pm
-869,On Premise Contract,,Paid In Full,Unknown,,,,,,,,995,4/30/2018 3:05pm
-870,On Premise Contract,,Paid In Full,Unknown,,,,,,,,996,4/30/2018 3:16pm
-871,Proposal,,Incomplete / Not finished,,,,100.00,,,,,997,4/30/2018 3:21pm
-872,On Premise Contract,,Paid In Full,Check,,,,,,,,998,5/1/2018 4:03pm
-873,Production Invoice,,Paid In Full,Unknown,,,,,,,,999,5/1/2018 4:25pm
-874,On Premise Contract,,Paid In Full,Check,,,,,,,,1000,5/1/2018 4:30pm
-875,Production Invoice,,Paid In Full,Deduction from Commissions,,,,,,,,1001,5/1/2018 4:54pm
-876,On Premise Contract,,Outstanding Balance,Unknown,,,100.00,"$1,060.00",,,,1002,5/1/2018 6:06pm
-877,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1003,5/1/2018 6:58pm
-878,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1004,5/1/2018 7:01pm
-879,On Premise Contract,,Paid In Full,Check,,,,,,,,1005,5/1/2018 7:04pm
-880,Production Invoice,,Paid In Full,Check,,,,,,,,1006,5/1/2018 7:06pm
-881,On Premise Contract,,Paid In Full,Check,,,,"$1,700.00",,,,1007,5/1/2018 7:13pm
-882,On Premise Contract,,Paid In Full,Check,,,,,,,,1008,5/1/2018 7:16pm
-883,Production Invoice,,Paid In Full,Unknown,,,400.00,,,,,1009,5/1/2018 7:33pm
-884,On Premise Contract,,Full Refund,Unknown,,,,,,,,1010,5/1/2018 7:41pm
-885,On Premise Contract,,Paid In Full,Check,,,,,,,,1011,5/1/2018 7:57pm
-886,Production Invoice,,Paid In Full,Check,,,,,,,,1012,5/1/2018 8:00pm
-887,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,1013,5/1/2018 8:05pm
-888,On Premise Contract,,Paid In Full,Check,,,,,,,,1014,5/2/2018 3:32pm
-889,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,1015,5/2/2018 3:50pm
-890,Production Invoice,,Paid In Full,Check,,,,,,,,1016,5/2/2018 3:52pm
-891,Production Invoice,,Paid In Full,Check,,,,,,,,1017,5/2/2018 3:55pm
-892,Production Invoice,,Paid In Full,Check,,,,,,,,1018,5/2/2018 3:58pm
-893,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1019,5/2/2018 4:01pm
-894,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1020,5/2/2018 4:04pm
-895,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1021,5/2/2018 4:07pm
-896,Production Invoice,,Paid In Full,Cash,,,100.00,,,,,1022,5/2/2018 4:09pm
-897,Production Invoice,,Paid In Full,Deduction from Commissions,,,,,,,,1023,5/2/2018 4:16pm
-898,On Premise Contract,,Paid In Full,Check,,,,,,,,1024,5/2/2018 4:20pm
-899,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1025,5/2/2018 4:22pm
-900,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,1026,5/2/2018 4:24pm
-901,On Premise Contract,,Paid In Full,Check,,,,,,,,1027,5/2/2018 4:27pm
-902,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1028,5/2/2018 4:29pm
-903,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1029,5/2/2018 5:26pm
-904,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1030,5/2/2018 5:29pm
-905,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,1031,5/2/2018 5:30pm
-906,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,1032,5/2/2018 5:55pm
-907,On Premise Contract,,Paid In Full,Check,,,,,,,,1033,5/2/2018 5:57pm
-908,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,1034,5/2/2018 5:59pm
-909,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1035,5/2/2018 6:01pm
-910,On Premise Contract,,Paid In Full,Check,,,,,,,,1036,5/2/2018 6:03pm
-911,On Premise Contract,,Paid In Full,Check,,,,,,,,1037,5/2/2018 6:05pm
-912,On Premise Contract,,Paid In Full,Check,,,,,,,,1038,5/2/2018 6:06pm
-913,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1039,5/2/2018 6:08pm
-914,On Premise Contract,,Paid In Full,Check,,,,,,,,1040,5/2/2018 6:10pm
-915,On Premise Contract,,Paid In Full,Check,,,,,,,,1041,5/2/2018 6:12pm
-916,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1042,5/2/2018 6:14pm
-917,On Premise Contract,,Paid In Full,Check,,,,,,,,1043,5/2/2018 6:18pm
-918,On Premise Contract,,Paid In Full,Cash,,,,,,,,1044,5/2/2018 6:21pm
-919,On Premise Contract,,Paid In Full,Check,,,,,,,,1045,5/2/2018 6:23pm
-920,On Premise Contract,,Paid In Full,Check,,,,,,,,1046,5/2/2018 6:30pm
-921,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,1047,5/2/2018 6:35pm
-922,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1048,5/2/2018 6:38pm
-923,Production Invoice,,Paid In Full,Check,,,,,,,,1049,5/2/2018 6:41pm
-924,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1050,5/2/2018 8:10pm
-925,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1051,5/2/2018 8:12pm
-926,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1052,5/2/2018 8:13pm
-927,On Premise Contract,,Partially Refunded,Check,,,,,,$600.00,,1053,5/2/2018 8:16pm
-928,Production Invoice,,Paid In Full,Check,,,,,,,,1054,5/2/2018 9:25pm
-929,Production Invoice,,Paid In Full,Unknown,,,,,,,,1055,5/2/2018 9:42pm
-930,On Premise Contract,,Paid In Full,,,,,,,,,1056,5/2/2018 10:03pm
-931,On Premise Contract,,Paid In Full,Check,,,,,,,,1057,5/2/2018 10:05pm
-932,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1058,5/2/2018 10:06pm
-933,On Premise Contract,,Paid In Full,Cash,,,,,,,,1059,5/2/2018 10:08pm
-934,On Premise Contract,,Paid In Full,Check,,,,,,,,1060,5/2/2018 10:10pm
-935,On Premise Contract,,Paid In Full,Check,,,,,,,,1061,5/3/2018 1:41pm
-936,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1062,5/3/2018 1:43pm
-937,On Premise Contract,,Paid In Full,Check,,,,,,,,1063,5/3/2018 1:45pm
-938,On Premise Contract,,Paid In Full,Cash,,,100.00,"$2,050.00",,,,1064,5/3/2018 1:47pm
-939,On Premise Contract,,Paid In Full,Check,,,,,,,,1065,5/3/2018 1:51pm
-940,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1066,5/3/2018 1:54pm
-941,On Premise Contract,,Paid In Full,Check,,,,,,,,1067,5/3/2018 1:56pm
-942,On Premise Contract,,Paid In Full,Check,,,,,,,,1068,5/3/2018 2:00pm
-943,On Premise Contract,,Paid In Full,Check,,,,,,,,1069,5/3/2018 2:02pm
-944,On Premise Contract,,Paid In Full,Cash | Check,,,,$275.00,,,,1071,5/3/2018 2:06pm
-945,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1072,5/3/2018 2:09pm
-946,On Premise Contract,,Paid In Full,Check,,,,,,,,1073,5/3/2018 2:11pm
-947,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1074,5/3/2018 2:14pm
-948,On Premise Contract,,Paid In Full,,,,,,,,,1075,5/3/2018 2:15pm
-949,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1076,5/3/2018 2:17pm
-950,On Premise Contract,,Paid In Full,Cash,,,100.00,"$1,900.00",,,,1077,5/3/2018 2:19pm
-951,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1078,5/3/2018 2:21pm
-952,On Premise Contract,,Paid In Full,Check,,,,,,,,1079,5/3/2018 2:26pm
-953,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1080,5/3/2018 2:28pm
-954,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1081,5/3/2018 2:35pm
-955,On Premise Contract,,Paid In Full,Check,,,,,,,,1082,5/3/2018 2:37pm
-956,On Premise Contract,,Paid In Full,Cash,,,,,,,,1083,5/3/2018 2:38pm
-957,On Premise Contract,,Paid In Full,Check,,,,,,,,1084,5/3/2018 2:41pm
-958,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1085,5/3/2018 2:43pm
-959,On Premise Contract,,Paid In Full,Check,,,,,,,,1086,5/3/2018 2:46pm
-960,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1087,5/3/2018 2:53pm
-961,On Premise Contract,,Paid In Full,Check,,,,,,,,1088,5/3/2018 2:58pm
-962,On Premise Contract,,Paid In Full,Check,,,,,,,,1089,5/3/2018 3:01pm
-963,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,1090,5/3/2018 3:05pm
-964,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1091,5/3/2018 3:09pm
-965,On Premise Contract,,Paid In Full,Check,,,,,,,,1092,5/3/2018 3:12pm
-966,On Premise Contract,,Paid In Full,Check,,,400.00,,,,$0.00,1093,5/3/2018 3:15pm
-967,On Premise Contract,,Paid In Full,Check,,,,,,,,1094,5/3/2018 3:21pm
-968,Production Invoice,,Paid In Full,Check,,,,,$150.00,,,1095,5/3/2018 3:29pm
-969,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1096,5/3/2018 4:06pm
-970,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1097,5/3/2018 4:14pm
-971,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1098,5/3/2018 4:15pm
-972,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1099,5/3/2018 4:17pm
-973,On Premise Contract,,Paid In Full,Check,,,,,,,,1100,5/3/2018 4:19pm
-974,On Premise Contract,,Paid In Full,Check,,,,,,,,1101,5/3/2018 4:21pm
-975,On Premise Contract,,Paid In Full,Check,,,,,,,,1102,5/3/2018 4:23pm
-976,On Premise Contract,,Paid In Full,Check,,,,,,,,1103,5/3/2018 4:24pm
-977,On Premise Contract,,Paid In Full,Check,,,,,,,,1104,5/3/2018 4:26pm
-978,On Premise Contract,,Paid In Full,Check,,,,,,,,1105,5/3/2018 4:28pm
-979,On Premise Contract,,Paid In Full,Check,,,,,,,,1106,5/3/2018 4:30pm
-980,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1107,5/3/2018 4:32pm
-981,On Premise Contract,,Paid In Full,Check,,,,,,,,1108,5/3/2018 4:33pm
-982,On Premise Contract,,Paid In Full,Check,,,,,,,,1109,5/3/2018 4:36pm
-983,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1110,5/3/2018 4:41pm
-984,On Premise Contract,,Paid In Full,Check,,,,,,,,1111,5/3/2018 4:43pm
-985,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1112,5/3/2018 4:45pm
-986,On Premise Contract,,Paid In Full,Cash,,,,,,,,1113,5/3/2018 5:08pm
-987,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1114,5/3/2018 7:20pm
-988,On Premise Contract,,Paid In Full,Cash,,,,,,,,1115,5/3/2018 7:22pm
-989,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1116,5/3/2018 7:23pm
-990,On Premise Contract,,Paid In Full,Cash,,,,,,,$0.00,1117,5/3/2018 7:26pm
-991,On Premise Contract,,Paid In Full,Cash,,,,,,,,1118,5/3/2018 7:30pm
-992,On Premise Contract,,Paid In Full,Check,,,,,,,,1119,5/3/2018 7:33pm
-993,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1120,5/3/2018 7:36pm
-994,On Premise Contract,,Paid In Full,Check,,,,,,,,1121,5/3/2018 7:42pm
-995,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1122,5/3/2018 7:47pm
-996,On Premise Contract,,Paid In Full,Cash,,,,,,,,1123,5/3/2018 7:51pm
-997,On Premise Contract,,Paid In Full,Check,,,,,,,,1124,5/3/2018 7:53pm
-998,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1125,5/3/2018 7:55pm
-999,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1126,5/3/2018 7:56pm
-1000,On Premise Contract,,Paid In Full,Check,,,,,,,,1127,5/3/2018 7:59pm
-1001,On Premise Contract,,Paid In Full,Check,,,,,,,,1128,5/3/2018 8:01pm
-1002,On Premise Contract,,Paid In Full,Cash | Check,,,,"$1,200.00",,,,1129,5/3/2018 8:03pm
-1003,On Premise Contract,,Paid In Full,Cash,,,,,,,,1130,5/3/2018 8:05pm
-1004,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1131,5/3/2018 8:08pm
-1005,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,1132,5/7/2018 3:40pm
-1006,On Premise Contract,,Paid In Full,Cash,,,,,,,,1254,5/22/2018 6:13pm
-1007,On Premise Contract,,Paid In Full,Cash,,,,,,,,1271,5/22/2018 10:36pm
-1008,On Premise Contract,,Paid In Full,Check,,,,,,,$0.00,1264,5/22/2018 11:19pm
-1009,Production Invoice,,Paid In Full,Check,,,,,,,,1276,5/24/2018 5:48pm
-1010,Production Invoice,,Paid In Full,Check,,,,,,,,1184,5/25/2018 4:21pm
-1011,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,368,5/25/2018 4:29pm
-1012,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1231,5/25/2018 4:31pm
-1013,On Premise Contract,,Paid In Full,Check,,,,,,,,1243,5/25/2018 4:37pm
-1014,On Premise Contract,,Paid In Full,Cash,,,,,,,,1270,5/25/2018 4:39pm
-1015,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1236,5/25/2018 4:42pm
-1016,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1280,5/29/2018 5:41pm
-1017,On Premise Contract,,Paid In Full,,,,,$0.00,,,,1206,5/31/2018 7:47pm
-1018,On Premise Contract,,Paid In Full,Cash,,,100.00,"$1,900.00",,,,1205,5/31/2018 8:44pm
-1019,Production Invoice,,Paid In Full,Check,,,,,,,,1281,5/31/2018 9:14pm
-1020,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1279,6/4/2018 5:52pm
-1021,Production Invoice,,Paid In Full,,,,1600.00,,,,,1258,6/4/2018 8:46pm
-1022,Production Invoice,,Paid In Full,Check,,,550.00,,,,,1284,6/4/2018 9:03pm
-1023,Rental Contract,Emailed to Client,Paid In Full,Check,,7/13/2018 BOA #16368,,,,,,1289,6/5/2018 8:22pm
-1024,Production Invoice,,Paid In Full,Check,,6/21,,,,,,552,6/7/2018 3:34pm
-1025,On Premise Contract,,Paid In Full,Check,,Surdyk 5857,,"$2,300.00",,,,1508,6/7/2018 4:03pm
-1026,Production Invoice,,Paid In Full,Deduction from Commissions,,,,,,,,1506,6/8/2018 12:34am
-1027,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1218,6/11/2018 3:42pm
-1028,Production Invoice,,Paid In Full,Check,,,,"$5,000.00",,,,1503,6/12/2018 5:27pm
-1029,Production Invoice,Emailed to Client,Paid In Full,Check,,DMD Flushing Bank #17721,,,,,,1502,6/18/2018 2:44pm
-1030,Rental Contract,Emailed to Client,Not Paid,,,,,,,,,1513,6/18/2018 3:21pm
-1031,Production Invoice,Emailed to Client,Not Paid,,,,,,,,,1514,6/18/2018 3:33pm
-1032,Production Invoice,,Paid In Full,,,,,,,,,1512,6/20/2018 5:15pm
-1033,Production Invoice,,Paid In Full,Check,,,,,,,,1158,6/20/2018 5:26pm
-1034,On Premise Contract,,Paid In Full,Cash,,,,,,,,1273,6/26/2018 7:57pm
-1035,On Premise Contract,,Paid In Full,Cash,,,,,,,,1520,6/26/2018 8:31pm
-1036,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1522,6/26/2018 8:41pm
-1037,Production Invoice,,Paid In Full,Cash,,,,,,,,1212,6/27/2018 2:57pm
-1038,Rental Contract,,Paid In Full,Check,,1244 Capital 6/20/18,,,,,,1529,6/27/2018 4:51pm
-1039,Production Invoice,Emailed to Client,Paid In Full,Check,,7/26/18 #5924,,,,,,1235,6/27/2018 5:08pm
-1040,Production Invoice,,Paid In Full,Check,,6/21 Capital #1077,,,,,,1178,6/27/2018 5:25pm
-1041,Rental Contract,,Paid In Full,Check,,,,,,,,1533,7/6/2018 2:18pm
-1042,Production Invoice,,Paid In Full,Check,,|  EKO's Budget was $2800,1340.00,,,,,1241,7/6/2018 2:28pm
-1043,Production Invoice,Emailed to Client,Not Paid,,,,1250.00,,,,$95.00,1534,7/6/2018 3:47pm
-1044,Production Invoice,,Paid In Full,Check,,,,,,,,1535,7/9/2018 6:36pm
-1045,Production Invoice,Emailed to Client,Not Paid,,,,,,,,,1538,7/9/2018 7:29pm
-1046,On Premise Contract,,Paid In Full,Check,,,,,,,,1523,7/23/2018 6:38pm
-1047,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1160,7/23/2018 6:40pm
-1048,Production Invoice,,Paid In Full,Check,,Bethpage Federal Credit Union #7435 7/19/18,,,,,,1539,7/23/2018 7:44pm
-1049,Production Invoice,Emailed to Client,Not Paid,,,,,,,,,1552,7/23/2018 8:14pm
-1050,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1180,7/23/2018 8:40pm
-1051,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1229,7/23/2018 11:09pm
-1052,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1183,7/23/2018 11:09pm
-1053,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1240,7/23/2018 11:09pm
-1054,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1197,7/23/2018 11:09pm
-1055,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1219,7/23/2018 11:09pm
-1056,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1186,7/23/2018 11:09pm
-1057,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1201,7/23/2018 11:09pm
-1058,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1228,7/23/2018 11:10pm
-1059,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1511,7/23/2018 11:10pm
-1060,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1179,7/23/2018 11:10pm
-1061,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1227,7/24/2018 1:00am
-1062,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1195,7/24/2018 1:00am
-1063,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1230,7/24/2018 1:01am
-1064,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1238,7/24/2018 1:01am
-1065,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1221,7/24/2018 1:01am
-1066,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1208,7/24/2018 1:01am
-1067,Rental Contract,Emailed to Client,Paid In Full,Check,,TD Bank #1291,,,,,,1555,8/7/2018 4:40pm
-1068,Rental Contract,Emailed to Client,Paid In Full,,,,,,,,,1556,8/7/2018 5:02pm
-1069,On Premise Contract,Emailed to Client,Not Paid,Cash,,,1150.00,,,,,1557,8/7/2018 5:18pm
-1070,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1141,8/7/2018 5:20pm
-1071,Rental Contract,Emailed to Client,Paid In Full,Check,,Chase #0231,,,,,,1558,8/7/2018 5:46pm
-1072,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1559,8/7/2018 5:51pm
-1073,Production Invoice,Not Sent,Not Paid,,,,725.00,,,,,1561,8/7/2018 6:07pm
-1074,On Premise Contract,Emailed to Client,Paid In Full,Cash,,,100.00,,,,,1526,8/7/2018 7:07pm
-1075,Rental Contract,Emailed to Client,Paid In Full,,,,,,,,,1562,8/7/2018 7:11pm
-1076,Production Invoice,Emailed to Client,Paid In Full,Check,,8/13/2018,,,,,,1554,8/14/2018 4:59pm
-1077,Production Invoice,Emailed to Client,Not Paid,,,,,,,,,1532,8/14/2018 5:05pm
+﻿id,type,status,payment_status,payment_type,commission_paid,check_info,discount,deposit,tip,refund,commission_actual,event_id,created_at
+1,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,134,2018-01-28 9:29pm
+2,On Premise Contract,,Paid In Full,Unknown,,,500.00,,,,,177,2018-01-28 9:30pm
+3,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,178,2018-01-28 9:30pm
+4,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,47,2018-01-28 9:30pm
+5,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,111,2018-01-28 9:30pm
+6,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,52,2018-01-28 9:30pm
+7,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,113,2018-01-28 9:30pm
+8,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,23,2018-01-28 9:30pm
+9,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,49,2018-01-28 9:30pm
+10,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,61,2018-01-28 9:30pm
+11,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,57,2018-01-28 9:30pm
+12,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,136,2018-01-28 9:30pm
+13,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,97,2018-01-28 9:30pm
+14,On Premise Contract,,Paid In Full,Unknown,,,450.00,,,,,143,2018-01-28 9:30pm
+15,On Premise Contract,,Paid In Full,Unknown,,,150.00,,,,,81,2018-01-28 9:30pm
+16,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,109,2018-01-28 9:30pm
+17,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,40,2018-01-28 9:30pm
+18,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,244,2018-01-28 9:30pm
+19,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,100,2018-01-28 9:30pm
+20,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,231,2018-01-28 9:30pm
+21,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,157,2018-01-28 9:30pm
+22,On Premise Contract,,Paid In Full,Unknown,,,250.00,,,,,127,2018-01-28 9:30pm
+23,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,214,2018-01-28 9:30pm
+24,On Premise Contract,,Paid In Full,Cash,,,500.00,,,,,15,2018-01-28 9:30pm
+25,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,7,2018-01-28 9:30pm
+26,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,133,2018-01-28 9:30pm
+27,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,105,2018-01-28 9:30pm
+28,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,146,2018-01-28 9:30pm
+29,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,70,2018-01-28 9:30pm
+30,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,14,2018-01-28 9:30pm
+31,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,126,2018-01-28 9:30pm
+32,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,152,2018-01-28 9:30pm
+33,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,89,2018-01-28 9:30pm
+34,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,36,2018-01-28 9:30pm
+35,On Premise Contract,,Paid In Full,Unknown,,,900.00,,,,,199,2018-01-28 9:30pm
+36,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,42,2018-01-28 9:30pm
+37,On Premise Contract,,Paid In Full,Check,,,900.00,,,,,108,2018-01-28 9:30pm
+38,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,208,2018-01-28 9:30pm
+39,On Premise Contract,,Paid In Full,Unknown,,,2000.00,,,,,9,2018-01-28 9:30pm
+40,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,59,2018-01-28 9:30pm
+41,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,95,2018-01-28 9:30pm
+42,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,161,2018-01-28 9:30pm
+43,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,192,2018-01-28 9:30pm
+44,On Premise Contract,,Paid In Full,Unknown,,,600.00,,,,,155,2018-01-28 9:30pm
+45,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,194,2018-01-28 9:30pm
+46,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,20,2018-01-28 9:30pm
+47,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,123,2018-01-28 9:30pm
+48,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,213,2018-01-28 9:30pm
+49,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,125,2018-01-28 9:30pm
+50,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,148,2018-01-28 9:30pm
+51,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,86,2018-01-28 9:30pm
+52,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,172,2018-01-28 9:30pm
+53,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,103,2018-01-28 9:30pm
+54,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,92,2018-01-28 9:30pm
+55,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,160,2018-01-28 9:30pm
+56,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,180,2018-01-28 9:30pm
+57,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,240,2018-01-28 9:30pm
+58,On Premise Contract,,Paid In Full,Unknown,,,900.00,,,,,243,2018-01-28 9:30pm
+59,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,24,2018-01-28 9:30pm
+60,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,110,2018-01-28 9:30pm
+61,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,196,2018-01-28 9:30pm
+62,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,64,2018-01-28 9:30pm
+63,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,76,2018-01-28 9:30pm
+64,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,38,2018-01-28 9:30pm
+65,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,218,2018-01-28 9:30pm
+66,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,124,2018-01-28 9:30pm
+67,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,245,2018-01-28 9:30pm
+68,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,78,2018-01-28 9:30pm
+69,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,220,2018-01-28 9:30pm
+70,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,33,2018-01-28 9:30pm
+71,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,187,2018-01-28 9:30pm
+72,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,13,2018-01-28 9:30pm
+73,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,73,2018-01-28 9:30pm
+74,On Premise Contract,,Paid In Full,Unknown,,,700.00,,,,,19,2018-01-28 9:30pm
+75,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,188,2018-01-28 9:30pm
+76,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,21,2018-01-28 9:30pm
+77,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,11,2018-01-28 9:30pm
+78,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,63,2018-01-28 9:30pm
+79,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,216,2018-01-28 9:30pm
+80,On Premise Contract,,Paid In Full,Unknown,,,400.00,,,,,217,2018-01-28 9:30pm
+81,On Premise Contract,,Paid In Full,Unknown,,,,,,,,173,2018-01-28 9:30pm
+82,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,170,2018-01-28 9:30pm
+83,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,204,2018-01-28 9:30pm
+84,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,225,2018-01-28 9:30pm
+85,On Premise Contract,,Paid In Full,Check,,,0.00,,,,900.00,120,2018-01-28 9:30pm
+86,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,195,2018-01-28 9:30pm
+87,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,94,2018-01-28 9:30pm
+88,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,185,2018-01-28 9:30pm
+89,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,191,2018-01-28 9:30pm
+90,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,55,2018-01-28 9:30pm
+91,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,56,2018-01-28 9:30pm
+92,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,248,2018-01-28 9:30pm
+93,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,74,2018-01-28 9:30pm
+94,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,186,2018-01-28 9:30pm
+95,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,30,2018-01-28 9:30pm
+96,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,132,2018-01-28 9:30pm
+97,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,141,2018-01-28 9:30pm
+98,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,158,2018-01-28 9:30pm
+99,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,190,2018-01-28 9:30pm
+100,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,206,2018-01-28 9:30pm
+101,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,162,2018-01-28 9:30pm
+102,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,69,2018-01-28 9:30pm
+103,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,44,2018-01-28 9:30pm
+104,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,53,2018-01-28 9:30pm
+105,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,128,2018-01-28 9:30pm
+106,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,228,2018-01-28 9:30pm
+107,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,101,2018-01-28 9:30pm
+108,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,17,2018-01-28 9:30pm
+109,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,169,2018-01-28 9:30pm
+110,On Premise Contract,,Paid In Full,Unknown,,,500.00,,,,,164,2018-01-28 9:30pm
+111,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,6,2018-01-28 9:30pm
+112,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,66,2018-01-28 9:30pm
+113,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,167,2018-01-28 9:30pm
+114,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,215,2018-01-28 9:30pm
+115,On Premise Contract,,Paid In Full,Unknown,,,900.00,,,,,98,2018-01-28 9:30pm
+116,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,135,2018-01-28 9:30pm
+117,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,131,2018-01-28 9:30pm
+118,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,87,2018-01-28 9:30pm
+119,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,165,2018-01-28 9:30pm
+120,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,201,2018-01-28 9:30pm
+121,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,116,2018-01-28 9:30pm
+122,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,25,2018-01-28 9:30pm
+123,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,118,2018-01-28 9:30pm
+124,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,232,2018-01-28 9:30pm
+125,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,223,2018-01-28 9:30pm
+126,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,153,2018-01-28 9:30pm
+127,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,16,2018-01-28 9:30pm
+128,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,122,2018-01-28 9:30pm
+129,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,147,2018-01-28 9:30pm
+130,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,237,2018-01-28 9:30pm
+131,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,197,2018-01-28 9:30pm
+132,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,230,2018-01-28 9:30pm
+133,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,5,2018-01-28 9:30pm
+134,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,154,2018-01-28 9:30pm
+135,On Premise Contract,,Paid In Full,Cash,,,0.00,,,,,106,2018-01-28 9:30pm
+136,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,156,2018-01-28 9:30pm
+137,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,227,2018-01-28 9:30pm
+138,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,189,2018-01-28 9:30pm
+139,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,130,2018-01-28 9:30pm
+140,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,88,2018-01-28 9:30pm
+141,On Premise Contract,,Paid In Full,Unknown,,,150.00,,,,,219,2018-01-28 9:30pm
+142,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,58,2018-01-28 9:30pm
+143,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,210,2018-01-28 9:30pm
+144,On Premise Contract,,Paid In Full,Unknown,,,250.00,,,,,75,2018-01-28 9:30pm
+145,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,140,2018-01-28 9:30pm
+146,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,226,2018-01-28 9:30pm
+147,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,193,2018-01-28 9:30pm
+148,On Premise Contract,,Paid In Full,Unknown,,,700.00,,,,,150,2018-01-28 9:30pm
+149,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,91,2018-01-28 9:30pm
+150,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,4,2018-01-28 9:30pm
+151,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,10,2018-01-28 9:30pm
+152,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,139,2018-01-28 9:30pm
+153,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,32,2018-01-28 9:30pm
+154,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,142,2018-01-28 9:30pm
+155,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,82,2018-01-28 9:30pm
+156,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,43,2018-01-28 9:30pm
+157,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,212,2018-01-28 9:30pm
+158,On Premise Contract,,Paid In Full,Check,,,,,,,,205,2018-01-28 9:30pm
+159,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,79,2018-01-28 9:30pm
+160,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,41,2018-01-28 9:30pm
+161,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,65,2018-01-28 9:30pm
+162,On Premise Contract,,Paid In Full,Unknown,,,1800.00,,,,,72,2018-01-28 9:30pm
+163,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,138,2018-01-28 9:30pm
+164,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,117,2018-01-28 9:30pm
+165,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,235,2018-01-28 9:30pm
+166,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,144,2018-01-28 9:30pm
+167,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,174,2018-01-28 9:30pm
+168,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,27,2018-01-28 9:30pm
+169,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,450.00,198,2018-01-28 9:30pm
+170,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,182,2018-01-28 9:30pm
+171,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,3,2018-01-28 9:30pm
+172,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,224,2018-01-28 9:30pm
+173,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,26,2018-01-28 9:30pm
+174,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,163,2018-01-28 9:30pm
+175,On Premise Contract,,Paid In Full,Check,,,0.00,,,,,181,2018-01-28 9:30pm
+176,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,129,2018-01-28 9:30pm
+177,On Premise Contract,,Paid In Full,Unknown,,,400.00,,,,,45,2018-01-28 9:30pm
+178,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,67,2018-01-28 9:30pm
+179,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,184,2018-01-28 9:30pm
+180,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,221,2018-01-28 9:30pm
+181,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,229,2018-01-28 9:30pm
+182,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,2,2018-01-28 9:30pm
+183,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,209,2018-01-28 9:30pm
+184,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,99,2018-01-28 9:30pm
+185,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,62,2018-01-28 9:30pm
+186,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,236,2018-01-28 9:30pm
+187,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,112,2018-01-28 9:30pm
+188,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,80,2018-01-28 9:30pm
+189,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,35,2018-01-28 9:30pm
+190,On Premise Contract,,Paid In Full,Unknown,,,1400.00,,,,,247,2018-01-28 9:30pm
+191,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,104,2018-01-28 9:30pm
+192,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,176,2018-01-28 9:30pm
+193,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,234,2018-01-28 9:30pm
+194,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,12,2018-01-28 9:30pm
+195,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,175,2018-01-28 9:30pm
+196,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,159,2018-01-28 9:30pm
+197,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,246,2018-01-28 9:30pm
+198,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,114,2018-01-28 9:30pm
+199,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,50,2018-01-28 9:30pm
+200,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,31,2018-01-28 9:30pm
+201,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,207,2018-01-28 9:30pm
+202,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,18,2018-01-28 9:30pm
+203,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,90,2018-01-28 9:30pm
+204,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,85,2018-01-28 9:30pm
+205,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,48,2018-01-28 9:30pm
+206,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,233,2018-01-28 9:30pm
+207,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,149,2018-01-28 9:30pm
+208,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,239,2018-01-28 9:30pm
+209,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,68,2018-01-28 9:30pm
+210,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,39,2018-01-28 9:30pm
+211,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,60,2018-01-28 9:30pm
+212,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,179,2018-01-28 9:30pm
+213,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,71,2018-01-28 9:30pm
+214,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,46,2018-01-28 9:30pm
+215,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,222,2018-01-28 9:30pm
+216,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,93,2018-01-28 9:30pm
+217,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,29,2018-01-28 9:30pm
+218,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,171,2018-01-28 9:30pm
+219,On Premise Contract,,Paid In Full,Unknown,,,2200.00,,,,,77,2018-01-28 9:30pm
+220,On Premise Contract,,Paid In Full,Unknown,,,1500.00,,,,,202,2018-01-28 9:30pm
+221,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,119,2018-01-28 9:30pm
+222,On Premise Contract,,Paid In Full,Unknown,,,700.00,,,,,121,2018-01-28 9:30pm
+223,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,37,2018-01-28 9:30pm
+224,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,96,2018-01-28 9:30pm
+225,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,102,2018-01-28 9:30pm
+226,On Premise Contract,,Paid In Full,Unknown,,,300.00,,,,,211,2018-01-28 9:30pm
+227,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,166,2018-01-28 9:30pm
+228,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,145,2018-01-28 9:30pm
+229,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,115,2018-01-28 9:30pm
+230,On Premise Contract,,Paid In Full,Unknown,,,1300.00,,,,,22,2018-01-28 9:30pm
+231,On Premise Contract,,Paid In Full,Unknown,,,1200.00,,,,,151,2018-01-28 9:30pm
+232,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,34,2018-01-28 9:30pm
+233,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,54,2018-01-28 9:30pm
+234,On Premise Contract,,Paid In Full,Unknown,,,800.00,,,,,168,2018-01-28 9:30pm
+235,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,137,2018-01-28 9:30pm
+236,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,183,2018-01-28 9:30pm
+237,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,238,2018-01-28 9:30pm
+238,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,83,2018-01-28 9:30pm
+239,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,84,2018-01-28 9:30pm
+240,On Premise Contract,,Paid In Full,Unknown,,,1500.00,,,,,203,2018-01-28 9:30pm
+241,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,200,2018-01-28 9:30pm
+242,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,242,2018-01-28 9:30pm
+243,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,28,2018-01-28 9:30pm
+244,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,51,2018-01-28 9:30pm
+245,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,,241,2018-01-28 9:30pm
+246,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,107,2018-01-28 9:30pm
+247,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,8,2018-01-28 9:30pm
+248,On Premise Contract,,Paid In Full,Unknown,,,0.00,,,,,1,2018-01-28 9:30pm
+249,On Premise Contract,,Paid In Full,Check,,,,,,,,355,2018-02-13 4:23pm
+250,On Premise Contract,,Paid In Full,Check,,,,,,,,356,2018-02-13 4:44pm
+251,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,357,2018-02-19 6:01pm
+252,On Premise Contract,,Paid In Full,Check,,,250.00,,,,,358,2018-02-19 6:04pm
+253,On Premise Contract,,Paid In Full,Cash,,,,,,,,359,2018-02-19 6:07pm
+254,On Premise Contract,,Paid In Full,Check,,,,,,,,360,2018-02-19 6:19pm
+255,On Premise Contract,,Paid In Full,Check,,,,,,,,361,2018-02-19 8:26pm
+256,On Premise Contract,,Paid In Full,Check,,,,,,,,362,2018-02-19 8:55pm
+257,On Premise Contract,,Paid In Full,Check,,,,,,,,363,2018-02-19 8:58pm
+258,On Premise Contract,,Paid In Full,Check,,,,,,,,364,2018-02-19 9:02pm
+259,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,365,2018-02-19 9:05pm
+260,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,366,2018-02-19 9:11pm
+261,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,367,2018-02-19 9:14pm
+262,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,369,2018-02-19 9:17pm
+263,On Premise Contract,,Paid In Full,Check,,,,,,,,370,2018-02-19 9:20pm
+264,On Premise Contract,,Paid In Full,Cash,,,,,,,,371,2018-02-19 9:23pm
+265,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,372,2018-02-19 9:28pm
+266,On Premise Contract,,Paid In Full,Check,,,,,,,,373,2018-02-19 9:39pm
+267,On Premise Contract,,Paid In Full,Cash,,,,,,,,374,2018-02-19 9:42pm
+268,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,375,2018-02-19 9:45pm
+269,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,-1000.00,376,2018-02-19 9:50pm
+270,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,-900.00,377,2018-02-20 2:31pm
+271,On Premise Contract,,Paid In Full,Cash,,,,,,,,378,2018-02-20 2:38pm
+272,On Premise Contract,,Paid In Full,Check,,,,,,,,379,2018-02-20 2:45pm
+273,On Premise Contract,,Paid In Full,Cash,,,50.00,,,,,380,2018-02-20 2:49pm
+274,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,381,2018-02-20 2:53pm
+275,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,382,2018-02-20 2:56pm
+276,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,383,2018-02-20 3:02pm
+277,On Premise Contract,,Paid In Full,Check,,,,,,,,384,2018-02-20 3:05pm
+278,On Premise Contract,,Paid In Full,Check,,,200.00,,,,600.00,385,2018-02-20 3:08pm
+279,On Premise Contract,,Paid In Full,Check,,,200.00,,,,,386,2018-02-20 3:12pm
+280,On Premise Contract,,Paid In Full,Check,,,,,,,,387,2018-02-20 3:17pm
+281,On Premise Contract,,Paid In Full,Check,,,,,,,,388,2018-02-20 3:22pm
+282,On Premise Contract,,Paid In Full,Cash,,,,,,,,389,2018-02-20 3:26pm
+283,On Premise Contract,,Paid In Full,Check,,,,,,,,390,2018-02-20 3:30pm
+284,On Premise Contract,,Paid In Full,Check,,,,,,,,391,2018-02-20 3:42pm
+285,On Premise Contract,,Paid In Full,Cash,,,,,,,,392,2018-02-20 3:45pm
+286,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,700.00,393,2018-02-20 3:52pm
+287,On Premise Contract,,Paid In Full,Cash,,,,,,,,394,2018-02-20 3:57pm
+288,On Premise Contract,,Paid In Full,Cash,,,,,,,,395,2018-02-20 4:02pm
+289,On Premise Contract,,Paid In Full,Check,,,,,,,,396,2018-02-20 4:12pm
+290,On Premise Contract,,Paid In Full,Cash,,,,,,,,397,2018-02-20 4:15pm
+291,On Premise Contract,,Paid In Full,Cash,,,,,,,,398,2018-02-20 4:18pm
+292,On Premise Contract,,Paid In Full,Cash,,,,,,,,399,2018-02-20 4:46pm
+293,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,400,2018-02-20 4:48pm
+294,On Premise Contract,,Paid In Full,Check,,,,,,,,401,2018-02-20 4:54pm
+295,On Premise Contract,,Paid In Full,Check,,,,,,,,402,2018-02-20 5:00pm
+296,On Premise Contract,,Paid In Full,Check,,,,,,,,403,2018-02-20 5:13pm
+297,On Premise Contract,,Paid In Full,Check,,,,,,,,404,2018-02-20 5:15pm
+298,On Premise Contract,,Paid In Full,Check,,,,,,,,405,2018-02-20 5:18pm
+299,On Premise Contract,,Paid In Full,Check,,,,,,,,406,2018-02-20 5:21pm
+300,On Premise Contract,,Paid In Full,Check,,,,,,,,407,2018-02-20 5:30pm
+301,On Premise Contract,,Paid In Full,Cash,,,,,,,,408,2018-02-20 5:36pm
+302,On Premise Contract,,Paid In Full,Check,,,,,,,,409,2018-02-20 5:42pm
+303,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,410,2018-02-20 5:46pm
+304,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,411,2018-02-20 5:49pm
+305,On Premise Contract,,Paid In Full,Check,,,,,,,,412,2018-02-20 5:52pm
+306,On Premise Contract,,Paid In Full,Check,,,,,,,,413,2018-02-20 5:56pm
+307,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,414,2018-02-20 6:03pm
+308,On Premise Contract,,Paid In Full,Check,,,,,,,,415,2018-02-20 6:06pm
+309,On Premise Contract,,Paid In Full,Cash,,,,,,,,416,2018-02-20 6:10pm
+310,On Premise Contract,,Paid In Full,Check,,,,,,,,417,2018-02-20 8:40pm
+311,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,418,2018-02-20 8:45pm
+312,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,,419,2018-02-20 8:50pm
+313,On Premise Contract,,Paid In Full,Check,,,,,,,,420,2018-02-20 8:55pm
+314,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,421,2018-02-20 8:58pm
+315,On Premise Contract,,Paid In Full,Check,,,,,,,,422,2018-02-20 9:05pm
+316,On Premise Contract,,Paid In Full,Check,,,,,,,,423,2018-02-20 9:09pm
+317,On Premise Contract,,Paid In Full,Check,,,,,,,,424,2018-02-20 9:17pm
+318,On Premise Contract,,Paid In Full,Check,,,,,,,,425,2018-02-20 9:22pm
+319,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,426,2018-02-20 9:24pm
+320,On Premise Contract,,Paid In Full,Check,,,,750.00,,,,427,2018-02-20 9:29pm
+321,On Premise Contract,,Paid In Full,Cash,,,,,,,,428,2018-02-20 9:34pm
+322,On Premise Contract,,Paid In Full,Check,,,,,,,950.00,429,2018-02-20 9:39pm
+323,On Premise Contract,,Paid In Full,Check,,,,,,,,430,2018-02-20 9:43pm
+324,On Premise Contract,,Paid In Full,Check,,,,,,,,431,2018-02-20 9:49pm
+325,On Premise Contract,,Paid In Full,Check,,,,,,,,432,2018-02-20 9:52pm
+326,On Premise Contract,,Paid In Full,Check,,,,,,,,433,2018-02-20 9:55pm
+327,On Premise Contract,,Paid In Full,Check,,,,,,,,443,2018-02-26 2:39pm
+328,On Premise Contract,,Paid In Full,Check,,,375.00,,,,0.00,444,2018-02-26 3:00pm
+329,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,445,2018-02-26 3:10pm
+330,On Premise Contract,,Paid In Full,Cash,,,,,,,,446,2018-02-26 3:18pm
+331,On Premise Contract,,Paid In Full,Check,,,,,,,800.00,447,2018-02-26 3:23pm
+332,On Premise Contract,,Paid In Full,Cash,,,,,,,450.00,448,2018-02-26 3:51pm
+333,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,700.00,449,2018-02-26 6:24pm
+334,On Premise Contract,,Paid In Full,Check,,,,,,,850.00,450,2018-02-26 6:30pm
+335,On Premise Contract,,Paid In Full,Check,,,,,,,,451,2018-02-26 6:39pm
+336,On Premise Contract,,Paid In Full,Check,,,,,,,600.00,452,2018-02-26 6:47pm
+337,On Premise Contract,,Paid In Full,Check,,,,,,,,453,2018-02-26 7:30pm
+338,On Premise Contract,,Paid In Full,Check,,,,,,,,454,2018-02-26 7:34pm
+339,On Premise Contract,,Outstanding Balance,Cash,,,,1200.00,,,350.00,455,2018-02-26 7:40pm
+340,On Premise Contract,,Paid In Full,Cash,,,,,,,,456,2018-02-26 7:52pm
+341,On Premise Contract,,Paid In Full,Check,,,,,,,,457,2018-02-26 7:55pm
+342,On Premise Contract,,Paid In Full,Check,,,,,,,,458,2018-02-26 7:59pm
+343,On Premise Contract,,Paid In Full,Check,,,90.00,,,,800.00,459,2018-02-26 8:02pm
+344,On Premise Contract,,Paid In Full,Cash,,,,,,,650.00,461,2018-02-26 8:11pm
+345,On Premise Contract,,Paid In Full,Check,,,,,,,,463,2018-02-26 8:15pm
+346,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,750.00,464,2018-02-26 8:23pm
+347,On Premise Contract,,Paid In Full,Cash,,,500.00,,,,,465,2018-02-26 8:26pm
+348,On Premise Contract,,Paid In Full,Check,,,,,,,,466,2018-02-26 8:29pm
+349,On Premise Contract,,Paid In Full,Cash,,,,,,,,467,2018-02-26 8:32pm
+350,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,468,2018-02-26 8:34pm
+351,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,450.00,469,2018-02-26 8:38pm
+352,On Premise Contract,,Paid In Full,Cash,,,,,,,,470,2018-02-26 8:42pm
+353,On Premise Contract,,Paid In Full,Check,,,200.00,,,,400.00,471,2018-02-26 8:46pm
+354,On Premise Contract,,Paid In Full,Cash,,,,,,,550.00,472,2018-02-26 9:09pm
+355,On Premise Contract,,Paid In Full,Check,,,100.00,,,,700.00,473,2018-02-26 9:13pm
+356,On Premise Contract,,Paid In Full,Check,,,,,,,375.00,474,2018-02-26 9:16pm
+357,On Premise Contract,,Paid In Full,Cash,,,,,,,,475,2018-02-26 9:21pm
+358,On Premise Contract,,Paid In Full,Check,,,,,,,,476,2018-02-27 2:54pm
+359,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,477,2018-02-27 2:56pm
+360,On Premise Contract,,Paid In Full,Check,,,,,,,,478,2018-02-27 3:00pm
+361,On Premise Contract,,Paid In Full,Check,,,,,,,,479,2018-02-27 3:12pm
+362,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,480,2018-02-27 3:19pm
+363,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,481,2018-02-27 3:27pm
+364,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,482,2018-02-27 3:30pm
+365,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,750.00,483,2018-02-27 3:34pm
+366,On Premise Contract,,Paid In Full,Check,,,,,,,700.00,484,2018-02-27 3:38pm
+367,On Premise Contract,,Paid In Full,Check,,,,,,,800.00,485,2018-02-27 3:41pm
+368,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,486,2018-02-27 3:45pm
+369,On Premise Contract,,Paid In Full,Check,,,,,,,,487,2018-02-27 3:50pm
+370,On Premise Contract,,Paid In Full,Cash,,,,,,,,488,2018-02-27 3:54pm
+371,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,475.00,489,2018-02-27 4:03pm
+372,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,500.00,490,2018-02-27 4:14pm
+373,On Premise Contract,,Paid In Full,Check,,,,,,,,491,2018-02-27 4:17pm
+374,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,492,2018-02-27 4:19pm
+375,On Premise Contract,,Paid In Full,Check,,,,,,,800.00,493,2018-02-27 4:29pm
+376,On Premise Contract,,Paid In Full,Check,,,,,,,,494,2018-02-27 4:33pm
+377,On Premise Contract,,Paid In Full,Check,,,,,,,,495,2018-02-27 4:37pm
+378,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,496,2018-02-27 4:40pm
+379,On Premise Contract,,Paid In Full,Cash,,,,,,,,497,2018-02-27 5:02pm
+380,On Premise Contract,,Paid In Full,Check,,,,,,,,498,2018-02-27 6:23pm
+381,On Premise Contract,,Paid In Full,Check,,,,,,,850.00,500,2018-02-27 6:30pm
+382,On Premise Contract,,Paid In Full,Cash,,,,,,,700.00,501,2018-02-27 6:46pm
+383,On Premise Contract,,Paid In Full,Cash,,,,,,,,502,2018-02-27 6:50pm
+384,On Premise Contract,,Paid In Full,Check,,,,,,,,503,2018-02-27 6:53pm
+385,On Premise Contract,,Paid In Full,Cash,,,,,,,,504,2018-02-27 6:56pm
+386,On Premise Contract,,Paid In Full,Cash,,,,,,,,505,2018-02-27 7:00pm
+387,On Premise Contract,,Paid In Full,Check,,,,,,,,506,2018-02-27 7:06pm
+388,On Premise Contract,,Paid In Full,Check,,,,,,,,507,2018-02-27 7:14pm
+389,On Premise Contract,,Paid In Full,Check,,,,,,,,508,2018-02-27 7:21pm
+390,On Premise Contract,,Paid In Full,Cash,,,,,,,,509,2018-02-27 7:24pm
+391,On Premise Contract,,Paid In Full,Cash,,,,200.00,,,,510,2018-02-27 7:26pm
+392,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,850.00,511,2018-02-27 8:20pm
+393,On Premise Contract,,Paid In Full,Cash,,,,,,,,512,2018-02-27 8:25pm
+394,On Premise Contract,,Paid In Full,Cash,,,,,,,450.00,513,2018-02-27 8:28pm
+395,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,514,2018-02-27 8:32pm
+396,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,515,2018-02-27 8:52pm
+397,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,516,2018-02-27 9:01pm
+398,On Premise Contract,,Paid In Full,Cash,,,,,,,,517,2018-02-27 9:07pm
+399,On Premise Contract,,Paid In Full,Check,,,,,,,,518,2018-02-27 9:10pm
+400,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,519,2018-02-27 9:12pm
+401,On Premise Contract,,Paid In Full,Check,,,,,,,,520,2018-02-27 9:14pm
+402,On Premise Contract,,Paid In Full,Unknown,,,,,,,250.00,521,2018-02-27 9:18pm
+403,On Premise Contract,,Paid In Full,Check,,,,,,,,522,2018-02-28 2:26pm
+404,On Premise Contract,,Paid In Full,Cash,,,,,,,,523,2018-02-28 2:34pm
+405,On Premise Contract,,Paid In Full,Check,,,,,,,,524,2018-02-28 2:40pm
+406,On Premise Contract,,Paid In Full,Cash,,,,,,,,525,2018-02-28 2:42pm
+407,On Premise Contract,,Paid In Full,Cash,,,,,,,,526,2018-02-28 2:44pm
+408,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,527,2018-02-28 2:47pm
+409,On Premise Contract,,Paid In Full,Check,,,,,,,550.00,528,2018-02-28 2:53pm
+410,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,750.00,529,2018-02-28 3:21pm
+411,On Premise Contract,,Paid In Full,Check,,,,,,,,530,2018-02-28 3:24pm
+412,On Premise Contract,,Paid In Full,Cash,,,,,,,800.00,531,2018-02-28 3:26pm
+413,On Premise Contract,,Paid In Full,Check,,,,,,,,532,2018-02-28 3:30pm
+414,On Premise Contract,,Paid In Full,Check,,,,,,,,533,2018-02-28 3:33pm
+415,On Premise Contract,,Paid In Full,Check,,,,,,,,534,2018-02-28 3:39pm
+416,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,535,2018-02-28 3:45pm
+417,On Premise Contract,,Paid In Full,Cash,,,,,,,,536,2018-02-28 3:50pm
+418,On Premise Contract,,Paid In Full,Cash,,,,,,,0.00,537,2018-02-28 4:06pm
+419,On Premise Contract,,Paid In Full,Cash,,,,,,,,538,2018-02-28 4:09pm
+420,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,539,2018-02-28 4:27pm
+421,On Premise Contract,,Paid In Full,Check,,,,,,,,540,2018-02-28 6:08pm
+422,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,541,2018-02-28 6:11pm
+423,On Premise Contract,,Paid In Full,Check,,,,,,,,542,2018-02-28 6:14pm
+424,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,543,2018-02-28 6:17pm
+425,On Premise Contract,,Paid In Full,Check,,,,,,,,544,2018-02-28 6:27pm
+426,On Premise Contract,,Paid In Full,Check,,,,,,,,545,2018-02-28 6:30pm
+427,On Premise Contract,,Paid In Full,Check,,,,,,,,546,2018-02-28 6:32pm
+428,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,547,2018-02-28 6:36pm
+429,On Premise Contract,,Paid In Full,Cash,,,,,,,,548,2018-02-28 6:39pm
+430,On Premise Contract,,Paid In Full,Check,,,,,,,,549,2018-02-28 6:43pm
+431,On Premise Contract,,Paid In Full,Unknown,,,,,,,,550,2018-02-28 7:09pm
+432,On Premise Contract,,Paid In Full,Unknown,,,,,,,,551,2018-02-28 7:14pm
+433,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,553,2018-02-28 8:09pm
+434,On Premise Contract,,Paid In Full,Check,,,,,,,,554,2018-02-28 8:13pm
+435,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,555,2018-02-28 8:22pm
+436,On Premise Contract,,Paid In Full,Check,,,,,,,,556,2018-02-28 8:25pm
+437,On Premise Contract,,Paid In Full,Unknown,,,,,,,,557,2018-02-28 8:31pm
+438,On Premise Contract,,Paid In Full,Unknown,,,,,,,,558,2018-02-28 8:35pm
+439,On Premise Contract,,Paid In Full,Unknown,,,,,,,,559,2018-02-28 8:39pm
+440,On Premise Contract,,Paid In Full,Check,,,,,,,,560,2018-02-28 8:42pm
+441,On Premise Contract,,Paid In Full,Check,,,,,,,,561,2018-02-28 8:46pm
+442,On Premise Contract,,Paid In Full,Unknown,,,,,,,,562,2018-02-28 8:59pm
+443,On Premise Contract,,Paid In Full,Cash,,,,,,,700.00,563,2018-02-28 9:06pm
+444,On Premise Contract,,Paid In Full,Unknown,,,,,,,,564,2018-02-28 9:10pm
+445,On Premise Contract,,Paid In Full,Check,,,,,,,700.00,570,2018-03-05 2:42pm
+446,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,571,2018-03-05 2:49pm
+447,On Premise Contract,,Paid In Full,Cash,,,,,,,,572,2018-03-05 2:51pm
+448,On Premise Contract,,Paid In Full,Cash,,,,,,,0.00,573,2018-03-05 2:54pm
+449,On Premise Contract,,Paid In Full,Cash,,,,,,,,574,2018-03-05 2:57pm
+450,On Premise Contract,,Paid In Full,Check,,,,,,,900.00,575,2018-03-05 3:00pm
+451,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,700.00,576,2018-03-05 3:03pm
+452,On Premise Contract,,Paid In Full,Unknown,,,,,,,0.00,577,2018-03-05 3:05pm
+453,On Premise Contract,,Paid In Full,Check,,,,,,,,578,2018-03-05 3:11pm
+454,On Premise Contract,,Paid In Full,Check,,,,,,,,579,2018-03-05 3:20pm
+455,On Premise Contract,,Paid In Full,Check,,,,,,,,580,2018-03-05 3:24pm
+456,On Premise Contract,,Paid In Full,Unknown,,,,,,,,581,2018-03-05 3:39pm
+457,On Premise Contract,,Paid In Full,Unknown,,,,,,,,582,2018-03-05 3:46pm
+458,On Premise Contract,,Paid In Full,Check,,,,,,,,583,2018-03-05 3:57pm
+459,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,584,2018-03-05 5:16pm
+460,On Premise Contract,,Paid In Full,Check,,,,,,,,585,2018-03-05 5:18pm
+461,On Premise Contract,,Paid In Full,Check,,,,,,,,586,2018-03-05 5:47pm
+462,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,587,2018-03-05 6:36pm
+463,On Premise Contract,,Paid In Full,Check,,,,,,,,588,2018-03-05 6:39pm
+464,On Premise Contract,,Paid In Full,Unknown,,,,,,,,589,2018-03-05 6:43pm
+465,On Premise Contract,,Paid In Full,Check,,,,,,,,590,2018-03-05 6:55pm
+466,On Premise Contract,,Paid In Full,Unknown,,,,,,,,591,2018-03-05 6:56pm
+467,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,592,2018-03-05 6:59pm
+468,On Premise Contract,,Paid In Full,Unknown,,,,,,,,593,2018-03-05 7:08pm
+469,On Premise Contract,,Paid In Full,Check,,,,,,,,594,2018-03-05 7:11pm
+470,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,595,2018-03-05 7:14pm
+471,On Premise Contract,,Paid In Full,Unknown,,,,,,,,596,2018-03-05 7:16pm
+472,On Premise Contract,,Paid In Full,Check,,,,,,,,597,2018-03-05 7:50pm
+473,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,598,2018-03-05 7:54pm
+474,On Premise Contract,,Paid In Full,Unknown,,,,,,,,599,2018-03-05 7:56pm
+475,On Premise Contract,,Paid In Full,Unknown,,,,,,,,600,2018-03-05 7:59pm
+476,On Premise Contract,,Paid In Full,Check,,,,,,,,601,2018-03-05 8:02pm
+477,On Premise Contract,,Paid In Full,Cash,,,,,,,,602,2018-03-05 8:48pm
+478,On Premise Contract,,Paid In Full,Unknown,,,,,,,,603,2018-03-05 9:08pm
+479,On Premise Contract,,Paid In Full,Check,,,,,,,,604,2018-03-05 10:16pm
+480,On Premise Contract,,Paid In Full,Check,,,,,,,,605,2018-03-06 2:39pm
+481,On Premise Contract,,Paid In Full,Check,,,,,,,,606,2018-03-06 2:44pm
+482,On Premise Contract,,Paid In Full,Check,,,,,,,,607,2018-03-06 2:55pm
+483,On Premise Contract,,Paid In Full,Cash,,,,,,,,608,2018-03-06 2:57pm
+484,On Premise Contract,,Paid In Full,Check,,,,,,,,609,2018-03-06 2:59pm
+485,On Premise Contract,,Paid In Full,Check,,,,,,,,610,2018-03-06 3:01pm
+486,On Premise Contract,,Paid In Full,Unknown,,,,,,,,611,2018-03-06 3:03pm
+487,On Premise Contract,,Paid In Full,Check,,,,,,,,612,2018-03-06 3:05pm
+488,On Premise Contract,,Paid In Full,Unknown,,,,,,,,613,2018-03-06 3:08pm
+489,On Premise Contract,,Paid In Full,Check,,,,,,,,614,2018-03-06 5:07pm
+490,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,615,2018-03-06 5:53pm
+491,On Premise Contract,,Paid In Full,Cash,,,,,,,,616,2018-03-06 5:55pm
+492,On Premise Contract,,Paid In Full,Check | Commission Deduction,,,800.00,,,,-800.00,617,2018-03-06 5:59pm
+493,On Premise Contract,,Paid In Full,Cash,,,,,,,,618,2018-03-06 8:17pm
+494,On Premise Contract,,Paid In Full,Check,,,,,,,450.00,619,2018-03-06 8:21pm
+495,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,620,2018-03-06 8:24pm
+496,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,621,2018-03-06 8:27pm
+497,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,622,2018-03-06 8:29pm
+498,On Premise Contract,,Paid In Full,Check,,,,,,,,623,2018-03-06 8:30pm
+499,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,624,2018-03-06 8:32pm
+500,On Premise Contract,,Paid In Full,Check,,,,,,,,625,2018-03-06 8:34pm
+501,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,626,2018-03-06 8:36pm
+502,On Premise Contract,,Paid In Full,Check,,,,,,,,627,2018-03-06 8:37pm
+503,On Premise Contract,,Paid In Full,Check,,,,,,,900.00,628,2018-03-06 8:39pm
+504,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,629,2018-03-06 8:42pm
+505,On Premise Contract,,Paid In Full,Check,,,,,,,,630,2018-03-06 8:45pm
+506,On Premise Contract,,Paid In Full,Check,,,,,,,550.00,631,2018-03-06 8:51pm
+507,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,632,2018-03-06 9:02pm
+508,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,800.00,633,2018-03-06 9:04pm
+509,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,634,2018-03-06 9:09pm
+510,On Premise Contract,,Paid In Full,Check,,,,,,,,635,2018-03-06 9:11pm
+511,On Premise Contract,,Paid In Full,Check,,,,,,,,636,2018-03-06 9:14pm
+512,On Premise Contract,,Paid In Full,Check,,,,,,,,637,2018-03-06 9:16pm
+513,On Premise Contract,,Paid In Full,Check,,,,,,,450.00,638,2018-03-06 9:18pm
+514,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,639,2018-03-06 9:41pm
+515,On Premise Contract,,Paid In Full,Check,,,,,,,950.00,640,2018-03-06 9:43pm
+516,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,641,2018-03-06 9:46pm
+517,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,642,2018-03-06 9:48pm
+518,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,643,2018-03-06 9:50pm
+519,On Premise Contract,,Paid In Full,Check,,,,,,,100.00,644,2018-03-06 9:51pm
+520,On Premise Contract,,Paid In Full,Check,,,,,,,,645,2018-03-08 2:43pm
+521,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,646,2018-03-08 2:46pm
+522,On Premise Contract,,Paid In Full,Check,,,,,,,,647,2018-03-08 2:49pm
+523,On Premise Contract,,Paid In Full,Unknown,,,,,,,,648,2018-03-08 2:57pm
+524,On Premise Contract,,Paid In Full,Check,,,,,,,,649,2018-03-08 3:42pm
+525,On Premise Contract,,Paid In Full,Check,,,,,,,,650,2018-03-08 3:44pm
+526,On Premise Contract,,Paid In Full,Check,,,,,,,,651,2018-03-08 3:46pm
+527,On Premise Contract,,Paid In Full,Unknown,,,,,,,,652,2018-03-08 3:48pm
+528,On Premise Contract,,Paid In Full,Check,,,,,,,,653,2018-03-08 3:51pm
+529,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,654,2018-03-08 3:56pm
+530,On Premise Contract,,Paid In Full,Check,,,,,,,,655,2018-03-08 4:02pm
+531,On Premise Contract,,Paid In Full,Unknown,,,,,,,,656,2018-03-08 4:10pm
+532,On Premise Contract,,Paid In Full,Unknown,,,,,,,,657,2018-03-08 4:15pm
+533,On Premise Contract,,Paid In Full,Check,,,,,,,,658,2018-03-08 4:27pm
+534,On Premise Contract,,Paid In Full,Check,,,,,,,,659,2018-03-08 4:30pm
+535,On Premise Contract,,Paid In Full,Unknown,,,,,,,,660,2018-03-08 4:31pm
+536,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,661,2018-03-08 4:33pm
+537,On Premise Contract,,Paid In Full,Unknown,,,,,,,,662,2018-03-08 4:34pm
+538,On Premise Contract,,Paid In Full,Check,,,,,,,,663,2018-03-08 4:36pm
+539,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,664,2018-03-08 4:39pm
+540,On Premise Contract,,Paid In Full,Check,,,,,,,,665,2018-03-08 4:42pm
+541,On Premise Contract,,Paid In Full,Check,,,,,,,,666,2018-03-08 4:48pm
+542,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,667,2018-03-08 4:50pm
+543,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,668,2018-03-08 4:53pm
+544,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,669,2018-03-08 4:55pm
+545,On Premise Contract,,Paid In Full,Check,,,,,,,,670,2018-03-08 4:56pm
+546,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,671,2018-03-08 4:58pm
+547,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,672,2018-03-08 5:00pm
+548,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,300.00,,,-2200.00,673,2018-03-08 5:02pm
+549,On Premise Contract,,Paid In Full,Check,,,,,,,,674,2018-03-08 5:07pm
+550,On Premise Contract,,Paid In Full,Check,,,,,,,,675,2018-03-08 5:11pm
+551,On Premise Contract,,Paid In Full,Check,,,,,,,,676,2018-03-08 5:12pm
+552,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,677,2018-03-08 5:14pm
+553,On Premise Contract,,Paid In Full,Check,,,,,,,,678,2018-03-08 5:15pm
+554,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,679,2018-03-08 5:19pm
+555,On Premise Contract,,Paid In Full,Check,,,,,,,,680,2018-03-08 5:21pm
+556,On Premise Contract,,Paid In Full,Check,,,,,,,,681,2018-03-08 5:23pm
+557,On Premise Contract,,Paid In Full,Check,,,,,,,,682,2018-03-08 5:26pm
+558,On Premise Contract,,Paid In Full,Check,,,,,,,,683,2018-03-08 5:30pm
+559,On Premise Contract,,Paid In Full,Check,,,,,,,,684,2018-03-08 5:31pm
+560,On Premise Contract,,Paid In Full,Check,,,,,,,,685,2018-03-08 5:33pm
+561,On Premise Contract,,Paid In Full,Check,,,,,,,,686,2018-03-08 5:38pm
+562,On Premise Contract,,Paid In Full,Check,,,,,,,,687,2018-03-08 5:44pm
+563,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,688,2018-03-08 5:50pm
+564,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,689,2018-03-08 5:53pm
+565,On Premise Contract,,Paid In Full,Check,,,,,,,,690,2018-03-08 5:56pm
+566,On Premise Contract,,Paid In Full,Unknown,,,,,,,,691,2018-03-08 5:59pm
+567,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,692,2018-03-08 6:02pm
+568,On Premise Contract,,Paid In Full,Check,,,,,,,,693,2018-03-08 6:04pm
+569,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,694,2018-03-08 6:07pm
+570,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,695,2018-03-08 6:09pm
+571,On Premise Contract,,Paid In Full,Check,,,,,,,,696,2018-03-08 6:11pm
+572,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,,697,2018-03-08 6:13pm
+573,On Premise Contract,,Paid In Full,Cash,,,,,,,850.00,698,2018-03-13 3:08pm
+574,On Premise Contract,,Paid In Full,Cash,,,,,,,600.00,699,2018-03-13 3:12pm
+575,On Premise Contract,,Paid In Full,Check,,,,,,,675.00,700,2018-03-13 3:15pm
+576,On Premise Contract,,Paid In Full,Cash,,,,,,,775.00,701,2018-03-13 3:19pm
+577,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,702,2018-03-13 3:23pm
+578,On Premise Contract,,Paid In Full,Cash,,,,,,,,703,2018-03-13 3:33pm
+579,On Premise Contract,,Paid In Full,Check,,,,,,,,704,2018-03-13 3:39pm
+580,On Premise Contract,,Paid In Full,Check,,,,,,,,705,2018-03-13 3:42pm
+581,On Premise Contract,,Paid In Full,Cash,,,,,,,750.00,706,2018-03-13 3:46pm
+582,On Premise Contract,,Paid In Full,Cash,,,,,,,,707,2018-03-13 3:50pm
+583,On Premise Contract,,Paid In Full,Check,,,,,,,,708,2018-04-02 2:01pm
+584,On Premise Contract,,Paid In Full,Check,,,,,,,,709,2018-04-02 2:05pm
+585,On Premise Contract,,Paid In Full,Check,,,,,,,,710,2018-04-02 2:37pm
+586,On Premise Contract,,Paid In Full,Check,,,100.00,,,,550.00,711,2018-04-02 2:40pm
+587,On Premise Contract,,Paid In Full,Check,,,,,,,,712,2018-04-02 2:54pm
+588,On Premise Contract,,Paid In Full,Check,,,,,,,,713,2018-04-02 3:00pm
+589,On Premise Contract,,Paid In Full,Check,,,,,,,,714,2018-04-02 3:15pm
+590,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,850.00,715,2018-04-09 2:12pm
+591,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,716,2018-04-09 2:32pm
+592,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,717,2018-04-09 2:37pm
+593,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,600.00,718,2018-04-09 2:43pm
+594,On Premise Contract,,Paid In Full,Cash,,,,,,,,719,2018-04-09 2:48pm
+595,On Premise Contract,,Paid In Full,Check,,,,,,,,720,2018-04-09 2:51pm
+596,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,721,2018-04-09 3:01pm
+597,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,600.00,722,2018-04-09 3:06pm
+598,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,600.00,723,2018-04-09 3:10pm
+599,On Premise Contract,,Paid In Full,Check,,,,,,,700.00,724,2018-04-09 3:37pm
+600,On Premise Contract,,Paid In Full,Check,,,,,,,,725,2018-04-09 3:40pm
+601,On Premise Contract,,Paid In Full,Check,,,,,,,,726,2018-04-09 4:28pm
+602,On Premise Contract,,Paid In Full,Check,,,,,,,2400.00,727,2018-04-09 4:39pm
+603,On Premise Contract,,Paid In Full,Check,,,,,,,,728,2018-04-10 5:18pm
+604,On Premise Contract,,Paid In Full,Check,,,250.00,,,,,729,2018-04-10 5:29pm
+605,On Premise Contract,,Paid In Full,Check,,,,,,,,730,2018-04-10 5:42pm
+606,On Premise Contract,,Paid In Full,Check,,,,,,,,731,2018-04-10 5:51pm
+607,On Premise Contract,,Paid In Full,Check,,,,,,,,732,2018-04-10 6:09pm
+608,On Premise Contract,,Paid In Full,Check,,,,,,,,733,2018-04-10 6:14pm
+609,On Premise Contract,,Paid In Full,Unknown,,,,,,,0.00,734,2018-04-10 6:36pm
+610,On Premise Contract,,Paid In Full,Cash,,,,,,,700.00,735,2018-04-10 7:08pm
+611,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,736,2018-04-10 7:18pm
+612,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,737,2018-04-10 7:50pm
+613,On Premise Contract,,Paid In Full,Check,,,,,,,,738,2018-04-10 7:54pm
+614,On Premise Contract,,Paid In Full,Cash,,,600.00,,,,0.00,739,2018-04-10 7:59pm
+615,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,725.00,740,2018-04-10 8:04pm
+616,On Premise Contract,,Paid In Full,Check,,,,,,,,741,2018-04-10 8:09pm
+617,On Premise Contract,,Paid In Full,Check,,,,,,,,742,2018-04-10 8:13pm
+618,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,743,2018-04-10 8:15pm
+619,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,744,2018-04-10 8:20pm
+620,On Premise Contract,,Paid In Full,Check,,,,,,,,746,2018-04-10 8:43pm
+621,On Premise Contract,,Paid In Full,Cash,,,,400.00,,,0.00,747,2018-04-10 8:45pm
+622,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,650.00,748,2018-04-10 8:49pm
+623,On Premise Contract,,Paid In Full,Check,,,,,,,,749,2018-04-10 8:52pm
+624,On Premise Contract,,Paid In Full,Check,,,400.00,,,,0.00,750,2018-04-10 8:54pm
+625,On Premise Contract,,Paid In Full,Cash,,,600.00,,,,,751,2018-04-12 3:35pm
+626,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,752,2018-04-12 3:37pm
+627,On Premise Contract,,Paid In Full,Check,,,,,,,,753,2018-04-12 3:41pm
+628,On Premise Contract,,Paid In Full,Check,,,,,,,,754,2018-04-12 4:13pm
+629,On Premise Contract,,Outstanding Balance,Check,,,,1650.00,,,0.00,755,2018-04-12 4:27pm
+630,On Premise Contract,,Paid In Full,Check,,,200.00,,,,,756,2018-04-12 4:49pm
+631,On Premise Contract,,Paid In Full,Cash,,,,,,,,757,2018-04-12 4:51pm
+632,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,758,2018-04-12 4:54pm
+633,On Premise Contract,,Paid In Full,Check,,,,,,,,759,2018-04-12 4:57pm
+634,On Premise Contract,,Paid In Full,Cash,,,,,,,525.00,760,2018-04-12 4:59pm
+635,On Premise Contract,,Paid In Full,Cash,,,,,,,,761,2018-04-12 5:01pm
+636,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,762,2018-04-12 5:03pm
+637,On Premise Contract,,Paid In Full,Check,,,,,,,,763,2018-04-12 5:06pm
+638,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,764,2018-04-12 5:09pm
+639,On Premise Contract,,Paid In Full,Check,,,400.00,,,,,765,2018-04-12 5:11pm
+640,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,766,2018-04-12 5:13pm
+641,On Premise Contract,,Paid In Full,Check,,,,,,,,767,2018-04-12 5:15pm
+642,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,768,2018-04-12 5:19pm
+643,On Premise Contract,,Paid In Full,Cash,,,,,,,450.00,769,2018-04-12 5:21pm
+644,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,770,2018-04-12 5:22pm
+645,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,771,2018-04-12 5:24pm
+646,On Premise Contract,,Paid In Full,Check,,,,,,,775.00,772,2018-04-12 5:27pm
+647,On Premise Contract,,Paid In Full,Check,,,,,,,650.00,773,2018-04-12 5:34pm
+648,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,500.00,774,2018-04-12 5:40pm
+649,On Premise Contract,,Paid In Full,Check,,,,,,,,775,2018-04-12 5:44pm
+650,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,776,2018-04-12 5:48pm
+651,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,777,2018-04-12 7:38pm
+652,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,778,2018-04-12 7:46pm
+653,On Premise Contract,,Paid In Full,Cash,,,350.00,,,,,779,2018-04-12 7:47pm
+654,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,780,2018-04-12 7:49pm
+655,On Premise Contract,,Paid In Full,Deduction from Commissions,,,700.00,,,,,781,2018-04-12 7:51pm
+656,On Premise Contract,,Paid In Full,Check,,,,,,,600.00,782,2018-04-12 7:53pm
+657,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,783,2018-04-12 8:01pm
+658,On Premise Contract,,Paid In Full,Check,,,,,,,,784,2018-04-12 8:03pm
+659,On Premise Contract,,Paid In Full,Cash,,,,,,,,785,2018-04-12 8:05pm
+660,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,786,2018-04-12 8:07pm
+661,On Premise Contract,,Paid In Full,Check,,,200.00,,,,,787,2018-04-12 8:09pm
+662,On Premise Contract,,Paid In Full,Cash,,,,,,,525.00,788,2018-04-12 8:11pm
+663,On Premise Contract,,Paid In Full,Check,,,,,,,,789,2018-04-12 8:19pm
+664,On Premise Contract,,Paid In Full,Cash,,,,,,,,790,2018-04-12 8:24pm
+665,On Premise Contract,,Paid In Full,Cash,,,,,,,550.00,791,2018-04-12 8:26pm
+666,On Premise Contract,,Paid In Full,Check,,,,,,,,792,2018-04-12 8:31pm
+667,On Premise Contract,,Paid In Full,Check,,,,,,,,793,2018-04-12 8:40pm
+668,On Premise Contract,,Paid In Full,Check,,,,,,,525.00,794,2018-04-12 8:43pm
+669,On Premise Contract,,Paid In Full,Cash,,,150.00,,,,,795,2018-04-17 2:29pm
+670,On Premise Contract,,Paid In Full,Check,,,,,,,,796,2018-04-17 2:45pm
+671,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,797,2018-04-17 2:50pm
+672,On Premise Contract,,Paid In Full,Check,,,,,,,,798,2018-04-17 2:52pm
+673,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,799,2018-04-17 3:04pm
+674,On Premise Contract,,Paid In Full,Check,,,200.00,,,,600.00,800,2018-04-17 3:15pm
+675,On Premise Contract,,Paid In Full,Check,,,,,,,,801,2018-04-17 8:19pm
+676,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,400.00,802,2018-04-17 8:22pm
+677,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,803,2018-04-17 8:27pm
+678,On Premise Contract,,Paid In Full,Check,,,,,,,,804,2018-04-17 8:30pm
+679,On Premise Contract,,Paid In Full,Cash | Check,,,500.00,,,,,805,2018-04-17 8:34pm
+680,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,775.00,806,2018-04-17 8:39pm
+681,On Premise Contract,,Paid In Full,Check,,,,,,,500.00,807,2018-04-17 8:41pm
+682,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,808,2018-04-17 8:43pm
+683,On Premise Contract,,Paid In Full,Check,,,,,,,,809,2018-04-17 8:53pm
+684,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,810,2018-04-17 8:56pm
+685,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,811,2018-04-17 9:03pm
+686,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,812,2018-04-17 9:06pm
+687,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,813,2018-04-17 9:09pm
+688,On Premise Contract,,Paid In Full,Cash,,,250.00,,,,650.00,814,2018-04-17 9:12pm
+689,On Premise Contract,,Paid In Full,Check,,,,,,,,815,2018-04-17 9:18pm
+690,On Premise Contract,,Paid In Full,Cash,,,,,,,,816,2018-04-17 9:20pm
+691,On Premise Contract,,Paid In Full,Check,,,,,,,525.00,817,2018-04-17 9:22pm
+692,On Premise Contract,,Paid In Full,Check,,,800.00,,,,,818,2018-04-17 9:26pm
+693,On Premise Contract,,Paid In Full,Check,,,,,,,,819,2018-04-17 9:28pm
+694,On Premise Contract,,Paid In Full,Cash,,,,,,,,820,2018-04-17 9:31pm
+695,On Premise Contract,,Paid In Full,Cash,,,,,,,,821,2018-04-17 9:34pm
+696,On Premise Contract,,Paid In Full,Cash,,,,,,,,822,2018-04-17 9:36pm
+697,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,823,2018-04-17 9:38pm
+698,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,475.00,824,2018-04-17 9:50pm
+699,On Premise Contract,,Paid In Full,Check,,,,,,,,825,2018-04-17 9:55pm
+700,On Premise Contract,,Paid In Full,Cash,,,,,,,,826,2018-04-18 2:13pm
+701,On Premise Contract,,Paid In Full,Check,,,,,,,,827,2018-04-18 2:15pm
+702,On Premise Contract,,Paid In Full,Check,,,,,,,,828,2018-04-18 2:18pm
+703,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,829,2018-04-18 2:20pm
+704,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,830,2018-04-18 2:22pm
+705,On Premise Contract,,Paid In Full,Cash,,,,,,,,831,2018-04-18 2:23pm
+706,On Premise Contract,,Paid In Full,Cash,,,,,,,,832,2018-04-18 2:25pm
+707,On Premise Contract,,Paid In Full,Check,,,,,,,,833,2018-04-18 2:27pm
+708,On Premise Contract,,Paid In Full,Cash,,,,,,,,834,2018-04-18 2:37pm
+709,On Premise Contract,,Paid In Full,Unknown,,,,,,,,835,2018-04-18 2:38pm
+710,On Premise Contract,,Paid In Full,Check,,,,,,,,836,2018-04-18 2:41pm
+711,On Premise Contract,,Paid In Full,Cash,,,300.00,,,,,837,2018-04-18 2:43pm
+712,On Premise Contract,,Paid In Full,Cash,,,,,,,,838,2018-04-18 2:44pm
+713,On Premise Contract,,Paid In Full,Cash,,,,,,,475.00,839,2018-04-18 2:49pm
+714,On Premise Contract,,Paid In Full,Check,,,,,,,,840,2018-04-18 3:05pm
+715,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,841,2018-04-18 3:07pm
+716,On Premise Contract,,Paid In Full,Cash,,,,,,,,842,2018-04-18 3:15pm
+717,On Premise Contract,,Paid In Full,Check,,,,,,,750.00,843,2018-04-18 3:17pm
+718,On Premise Contract,,Paid In Full,Cash,,,,,,,,844,2018-04-18 3:19pm
+719,On Premise Contract,,Paid In Full,Cash,,,,,,,650.00,845,2018-04-18 3:22pm
+720,On Premise Contract,,Paid In Full,Cash,,,,,,,,846,2018-04-18 3:25pm
+721,On Premise Contract,,Paid In Full,Check,,,,,,,,847,2018-04-18 3:27pm
+722,On Premise Contract,,Paid In Full,Check,,,,,,,,848,2018-04-18 3:29pm
+723,On Premise Contract,,Paid In Full,Cash,,,,,,,,849,2018-04-18 3:31pm
+724,On Premise Contract,,Paid In Full,Cash,,,,,,,475.00,850,2018-04-18 3:33pm
+725,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,575.00,851,2018-04-18 3:36pm
+726,On Premise Contract,,Paid In Full,Cash,,,200.00,,,,,852,2018-04-18 3:38pm
+727,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,575.00,853,2018-04-18 3:39pm
+728,On Premise Contract,,Paid In Full,Unknown,,,1000.00,,,,275.00,854,2018-04-18 3:42pm
+729,On Premise Contract,,Paid In Full,Unknown,,,,,,,,855,2018-04-18 3:49pm
+730,On Premise Contract,,Paid In Full,Cash,,,,,,,,856,2018-04-18 3:50pm
+731,On Premise Contract,,Paid In Full,Check,,,,,,,,857,2018-04-18 3:52pm
+732,On Premise Contract,,Paid In Full,Check,,,,,,,,858,2018-04-18 3:53pm
+733,On Premise Contract,,Paid In Full,Check,,,,,,,,859,2018-04-18 6:23pm
+734,On Premise Contract,,Paid In Full,Check,,,,,,,,860,2018-04-18 6:25pm
+735,On Premise Contract,,Paid In Full,Check,,,,,,,775.00,861,2018-04-18 6:28pm
+736,On Premise Contract,,Paid In Full,Check,,,,,,,700.00,862,2018-04-18 6:30pm
+737,On Premise Contract,,Paid In Full,Check,,,300.00,,,,,863,2018-04-18 6:32pm
+738,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,864,2018-04-18 6:36pm
+739,On Premise Contract,,Paid In Full,Check,,,,,,,,865,2018-04-18 6:40pm
+740,On Premise Contract,,Paid In Full,Check,,,,,,,,866,2018-04-18 6:43pm
+741,On Premise Contract,,Paid In Full,Check,,,,,,,525.00,867,2018-04-18 6:45pm
+742,On Premise Contract,,Paid In Full,Check,,,,,,,525.00,868,2018-04-18 6:51pm
+743,On Premise Contract,,Paid In Full,Check,,,,,,,750.00,869,2018-04-18 6:56pm
+744,On Premise Contract,,Paid In Full,Check,,,,,,,650.00,870,2018-04-18 7:00pm
+745,On Premise Contract,,Paid In Full,Check,,,,,,,375.00,871,2018-04-18 7:04pm
+746,On Premise Contract,,Paid In Full,Check,,,,,,,,872,2018-04-18 7:44pm
+747,On Premise Contract,,Paid In Full,Check,,,,,,,,873,2018-04-18 7:47pm
+748,On Premise Contract,,Paid In Full,Check,,,,,,,,874,2018-04-18 7:59pm
+749,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,875,2018-04-18 8:01pm
+750,On Premise Contract,,Paid In Full,Unknown,,,,,,,,876,2018-04-18 8:04pm
+751,On Premise Contract,,Paid In Full,Check,,,,,,,,877,2018-04-18 8:07pm
+752,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,878,2018-04-18 8:09pm
+753,On Premise Contract,,Paid In Full,Cash,,,,,,,,879,2018-04-18 8:12pm
+754,On Premise Contract,,Paid In Full,Check,,,,,,,,880,2018-04-18 8:13pm
+755,On Premise Contract,,Paid In Full,Check,,,,,,,,881,2018-04-18 8:16pm
+756,On Premise Contract,,Paid In Full,Cash,,,,,,,,882,2018-04-18 8:19pm
+757,On Premise Contract,,Paid In Full,Check,,,,,,,,883,2018-04-18 8:21pm
+758,On Premise Contract,,Paid In Full,Unknown,,,,,,,,884,2018-04-18 8:25pm
+759,On Premise Contract,,Paid In Full,Check,,,,,,,,885,2018-04-18 8:28pm
+760,On Premise Contract,,Paid In Full,Check,,,,,,,,886,2018-04-18 8:30pm
+761,On Premise Contract,,Paid In Full,Check,,,,,,,,887,2018-04-18 8:33pm
+762,On Premise Contract,,Paid In Full,Check,,,,,,,,888,2018-04-18 8:38pm
+763,On Premise Contract,,Paid In Full,Cash,,,,,,,660.00,889,2018-04-23 2:16pm
+764,On Premise Contract,,Paid In Full,Check,,,,,,,1190.00,890,2018-04-23 3:03pm
+765,On Premise Contract,,Paid In Full,Check,,,,,,,,891,2018-04-23 4:08pm
+766,On Premise Contract,,Paid In Full,Check,,,,,,,,892,2018-04-23 4:14pm
+767,On Premise Contract,,Paid In Full,Check,,,,,,,600.00,893,2018-04-23 4:16pm
+768,On Premise Contract,,Paid In Full,Check,,,,,,,,894,2018-04-23 4:21pm
+769,On Premise Contract,,Paid In Full,Check,,,,,,,1430.00,895,2018-04-23 4:28pm
+770,On Premise Contract,,Paid In Full,Cash,,,,,,,1260.00,896,2018-04-23 4:36pm
+771,On Premise Contract,,Paid In Full,Cash | Check,,,,,,,1350.00,897,2018-04-23 5:25pm
+772,On Premise Contract,,Paid In Full,Unknown,,,700.00,,,,720.00,898,2018-04-23 6:24pm
+773,On Premise Contract,,Paid In Full,Check,,,,,,,1620.00,899,2018-04-23 7:14pm
+774,On Premise Contract,,Paid In Full,Check,,,,,,,280.00,900,2018-04-23 8:42pm
+775,On Premise Contract,,Paid In Full,Check,,,,,,,,901,2018-04-24 1:25pm
+776,On Premise Contract,,Paid In Full,Check,,,,,,,500.00,902,2018-04-24 1:42pm
+777,On Premise Contract,,Paid In Full,Check,,,,,,,600.00,903,2018-04-24 1:45pm
+778,On Premise Contract,,Paid In Full,Check,,,,,,,600.00,904,2018-04-24 1:51pm
+779,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,905,2018-04-24 2:09pm
+780,On Premise Contract,,Paid In Full,Unknown,,,,,,,,906,2018-04-24 2:13pm
+781,On Premise Contract,,Paid In Full,Cash,,,,,,,,907,2018-04-24 2:17pm
+782,On Premise Contract,,Paid In Full,Unknown,,,,,,,,908,2018-04-24 2:20pm
+783,On Premise Contract,,Paid In Full,Unknown,,,,,,,,909,2018-04-24 2:22pm
+784,On Premise Contract,,Paid In Full,Unknown,,,,,,,,910,2018-04-24 2:27pm
+785,On Premise Contract,,Paid In Full,Unknown,,,,,,,,911,2018-04-24 3:19pm
+786,On Premise Contract,,Paid In Full,Unknown,,,,,,,,912,2018-04-24 3:25pm
+787,On Premise Contract,,Paid In Full,Unknown,,,,,,,,913,2018-04-24 3:48pm
+788,On Premise Contract,,Paid In Full,Unknown,,,,,,,,914,2018-04-24 6:29pm
+789,On Premise Contract,,Paid In Full,Unknown,,,,,,,,915,2018-04-24 6:33pm
+790,On Premise Contract,,Paid In Full,Unknown,,,,,,,,916,2018-04-24 7:21pm
+791,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,917,2018-04-24 7:48pm
+792,On Premise Contract,,Paid In Full,Unknown,,,,,,,,918,2018-04-24 7:52pm
+793,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,919,2018-04-24 7:58pm
+794,On Premise Contract,,Paid In Full,Unknown,,,,,,,,920,2018-04-24 8:05pm
+795,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,921,2018-04-24 8:09pm
+796,On Premise Contract,,Paid In Full,Unknown,,,,,,,,922,2018-04-24 8:13pm
+797,On Premise Contract,,Paid In Full,Unknown,,,,,,,,923,2018-04-24 8:15pm
+798,On Premise Contract,,Paid In Full,Unknown,,,,,,,,924,2018-04-24 8:21pm
+799,On Premise Contract,,Paid In Full,Unknown,,,,,,,,925,2018-04-24 8:34pm
+800,On Premise Contract,,Paid In Full,Unknown,,,,,,,,926,2018-04-24 8:35pm
+801,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,927,2018-04-24 8:37pm
+802,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,928,2018-04-24 8:40pm
+803,On Premise Contract,,Paid In Full,Unknown,,,,,,,,929,2018-04-24 8:48pm
+804,On Premise Contract,,Paid In Full,Unknown,,,,,,,,930,2018-04-24 8:51pm
+805,On Premise Contract,,Paid In Full,Unknown,,,,,,,,931,2018-04-24 8:53pm
+806,On Premise Contract,,Paid In Full,Unknown,,,,,,,,932,2018-04-24 9:01pm
+807,On Premise Contract,,Paid In Full,Unknown,,,,,,,,933,2018-04-24 9:06pm
+808,On Premise Contract,,Paid In Full,Unknown,,,,,,,,934,2018-04-24 9:08pm
+809,On Premise Contract,,Paid In Full,Unknown,,,,,,,,935,2018-04-25 2:08pm
+810,On Premise Contract,,Paid In Full,Unknown,,,,,,,,936,2018-04-25 2:16pm
+811,On Premise Contract,,Paid In Full,Unknown,,,,,,,,937,2018-04-25 2:21pm
+812,On Premise Contract,,Paid In Full,Cash,,,,,,,,938,2018-04-25 2:23pm
+813,On Premise Contract,,Paid In Full,Unknown,,,,,,,,939,2018-04-25 2:35pm
+814,On Premise Contract,,Paid In Full,Unknown,,,,,,,,940,2018-04-25 2:48pm
+815,On Premise Contract,,Paid In Full,Unknown,,,,,,,,941,2018-04-25 3:07pm
+816,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,942,2018-04-25 3:11pm
+817,On Premise Contract,,Paid In Full,Unknown,,,,,,,,943,2018-04-25 3:13pm
+818,On Premise Contract,,Paid In Full,Unknown,,,,,,,,944,2018-04-25 3:14pm
+819,On Premise Contract,,Paid In Full,Check,,,,,,,,945,2018-04-25 3:17pm
+820,On Premise Contract,,Paid In Full,Unknown,,,,,,,,946,2018-04-25 3:25pm
+821,On Premise Contract,,Paid In Full,Unknown,,,,,,,,947,2018-04-25 3:27pm
+822,On Premise Contract,,Paid In Full,Unknown,,,,,,,,948,2018-04-25 3:30pm
+823,On Premise Contract,,Paid In Full,Unknown,,,,,,,,949,2018-04-25 3:32pm
+824,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,950,2018-04-25 3:36pm
+825,On Premise Contract,,Paid In Full,Unknown,,,,,,,,951,2018-04-25 3:38pm
+826,On Premise Contract,,Paid In Full,Unknown,,,,,,,,952,2018-04-25 3:40pm
+827,On Premise Contract,,Paid In Full,Unknown,,,,,,,,953,2018-04-25 3:42pm
+828,On Premise Contract,,Paid In Full,Unknown,,,,,,,,954,2018-04-25 3:44pm
+829,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,955,2018-04-25 3:46pm
+830,On Premise Contract,,Paid In Full,Unknown,,,,,,,,956,2018-04-25 3:47pm
+831,On Premise Contract,,Paid In Full,Unknown,,,,,,,,957,2018-04-25 3:49pm
+832,On Premise Contract,,Outstanding Balance,Unknown,,,,1300.00,,,,958,2018-04-25 3:51pm
+833,On Premise Contract,,Paid In Full,Cash,,,,,,,,959,2018-04-25 3:54pm
+834,On Premise Contract,,Paid In Full,Unknown,,,,,,,,960,2018-04-25 3:56pm
+835,On Premise Contract,,Paid In Full,Unknown,,,,,,,,961,2018-04-25 3:58pm
+836,On Premise Contract,,Paid In Full,Unknown,,,350.00,,,,,962,2018-04-25 4:00pm
+837,On Premise Contract,,Outstanding Balance,Unknown,,,,200.00,,,,963,2018-04-25 4:02pm
+838,On Premise Contract,,Paid In Full,Unknown,,,,,,,,964,2018-04-25 4:04pm
+839,On Premise Contract,,Paid In Full,Cash,,,250.00,,,,,965,2018-04-25 4:06pm
+840,On Premise Contract,,Paid In Full,Unknown,,,,,,,,966,2018-04-25 4:11pm
+841,On Premise Contract,,Paid In Full,Unknown,,,,,,,,967,2018-04-25 4:25pm
+842,On Premise Contract,,Paid In Full,Unknown,,,,,,,,968,2018-04-25 4:29pm
+843,On Premise Contract,,Outstanding Balance,Unknown,,,,200.00,,,,969,2018-04-25 4:31pm
+844,On Premise Contract,,Paid In Full,Unknown,,,,,,,,970,2018-04-25 4:33pm
+845,On Premise Contract,,Paid In Full,Unknown,,,,,,,,971,2018-04-25 4:35pm
+846,On Premise Contract,,Paid In Full,Unknown,,,,,,,,972,2018-04-25 4:36pm
+847,Production Invoice,,Paid In Full,Unknown,,,800.00,,,,,973,2018-04-25 4:39pm
+848,On Premise Contract,,Paid In Full,Unknown,,,,,,,,974,2018-04-25 6:34pm
+849,On Premise Contract,,Paid In Full,Unknown,,,,,,,,975,2018-04-25 6:53pm
+850,On Premise Contract,,Paid In Full,Unknown,,,,,,,,976,2018-04-25 6:55pm
+851,On Premise Contract,,Paid In Full,Unknown,,,,,,,,977,2018-04-25 7:05pm
+852,On Premise Contract,,Paid In Full,Unknown,,,,,,,,978,2018-04-25 7:15pm
+853,On Premise Contract,,Paid In Full,Unknown,,,,,,,,979,2018-04-25 7:17pm
+854,On Premise Contract,,Paid In Full,Unknown,,,,,,,,980,2018-04-25 7:19pm
+855,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,981,2018-04-25 7:22pm
+856,On Premise Contract,,Paid In Full,Unknown,,,,,,,,982,2018-04-25 7:25pm
+857,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,983,2018-04-25 7:28pm
+858,On Premise Contract,,Paid In Full,Unknown,,,,,,,,984,2018-04-25 7:29pm
+859,On Premise Contract,,Paid In Full,Unknown,,,,,,,,985,2018-04-25 7:32pm
+860,On Premise Contract,,Paid In Full,Unknown,,,,,,,,986,2018-04-25 7:34pm
+861,On Premise Contract,,Paid In Full,Check,,,,,,,,987,2018-04-25 8:27pm
+862,On Premise Contract,,Paid In Full,Unknown,,,,,,,,988,2018-04-25 8:33pm
+863,On Premise Contract,,Paid In Full,Unknown,,,,,,,,989,2018-04-25 8:36pm
+864,On Premise Contract,,Paid In Full,Unknown,,,,,,,,990,2018-04-25 8:48pm
+865,Production Invoice,,Paid In Full,Unknown,,,,,,,,991,2018-04-30 1:56pm
+866,On Premise Contract,,Paid In Full,Check,,,,,,,,992,2018-04-30 2:25pm
+867,On Premise Contract,,Paid In Full,Unknown,,,,,,,,993,2018-04-30 2:34pm
+868,On Premise Contract,,Paid In Full,Check,,,,,,,,994,2018-04-30 2:41pm
+869,On Premise Contract,,Paid In Full,Unknown,,,,,,,,995,2018-04-30 3:05pm
+870,On Premise Contract,,Paid In Full,Unknown,,,,,,,,996,2018-04-30 3:16pm
+871,Proposal,,Incomplete / Not finished,,,,100.00,,,,,997,2018-04-30 3:21pm
+872,On Premise Contract,,Paid In Full,Check,,,,,,,,998,2018-05-01 4:03pm
+873,Production Invoice,,Paid In Full,Unknown,,,,,,,,999,2018-05-01 4:25pm
+874,On Premise Contract,,Paid In Full,Check,,,,,,,,1000,2018-05-01 4:30pm
+875,Production Invoice,,Paid In Full,Deduction from Commissions,,,,,,,,1001,2018-05-01 4:54pm
+876,On Premise Contract,,Outstanding Balance,Unknown,,,100.00,1060.00,,,,1002,2018-05-01 6:06pm
+877,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1003,2018-05-01 6:58pm
+878,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1004,2018-05-01 7:01pm
+879,On Premise Contract,,Paid In Full,Check,,,,,,,,1005,2018-05-01 7:04pm
+880,Production Invoice,,Paid In Full,Check,,,,,,,,1006,2018-05-01 7:06pm
+881,On Premise Contract,,Paid In Full,Check,,,,1700.00,,,,1007,2018-05-01 7:13pm
+882,On Premise Contract,,Paid In Full,Check,,,,,,,,1008,2018-05-01 7:16pm
+883,Production Invoice,,Paid In Full,Unknown,,,400.00,,,,,1009,2018-05-01 7:33pm
+884,On Premise Contract,,Full Refund,Unknown,,,,,,,,1010,2018-05-01 7:41pm
+885,On Premise Contract,,Paid In Full,Check,,,,,,,,1011,2018-05-01 7:57pm
+886,Production Invoice,,Paid In Full,Check,,,,,,,,1012,2018-05-01 8:00pm
+887,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,1013,2018-05-01 8:05pm
+888,On Premise Contract,,Paid In Full,Check,,,,,,,,1014,2018-05-02 3:32pm
+889,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,1015,2018-05-02 3:50pm
+890,Production Invoice,,Paid In Full,Check,,,,,,,,1016,2018-05-02 3:52pm
+891,Production Invoice,,Paid In Full,Check,,,,,,,,1017,2018-05-02 3:55pm
+892,Production Invoice,,Paid In Full,Check,,,,,,,,1018,2018-05-02 3:58pm
+893,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1019,2018-05-02 4:01pm
+894,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1020,2018-05-02 4:04pm
+895,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1021,2018-05-02 4:07pm
+896,Production Invoice,,Paid In Full,Cash,,,100.00,,,,,1022,2018-05-02 4:09pm
+897,Production Invoice,,Paid In Full,Deduction from Commissions,,,,,,,,1023,2018-05-02 4:16pm
+898,On Premise Contract,,Paid In Full,Check,,,,,,,,1024,2018-05-02 4:20pm
+899,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1025,2018-05-02 4:22pm
+900,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,1026,2018-05-02 4:24pm
+901,On Premise Contract,,Paid In Full,Check,,,,,,,,1027,2018-05-02 4:27pm
+902,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1028,2018-05-02 4:29pm
+903,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1029,2018-05-02 5:26pm
+904,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1030,2018-05-02 5:29pm
+905,On Premise Contract,,Paid In Full,Unknown,,,200.00,,,,,1031,2018-05-02 5:30pm
+906,On Premise Contract,,Paid In Full,Deduction from Commissions,,,,,,,,1032,2018-05-02 5:55pm
+907,On Premise Contract,,Paid In Full,Check,,,,,,,,1033,2018-05-02 5:57pm
+908,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,1034,2018-05-02 5:59pm
+909,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1035,2018-05-02 6:01pm
+910,On Premise Contract,,Paid In Full,Check,,,,,,,,1036,2018-05-02 6:03pm
+911,On Premise Contract,,Paid In Full,Check,,,,,,,,1037,2018-05-02 6:05pm
+912,On Premise Contract,,Paid In Full,Check,,,,,,,,1038,2018-05-02 6:06pm
+913,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1039,2018-05-02 6:08pm
+914,On Premise Contract,,Paid In Full,Check,,,,,,,,1040,2018-05-02 6:10pm
+915,On Premise Contract,,Paid In Full,Check,,,,,,,,1041,2018-05-02 6:12pm
+916,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1042,2018-05-02 6:14pm
+917,On Premise Contract,,Paid In Full,Check,,,,,,,,1043,2018-05-02 6:18pm
+918,On Premise Contract,,Paid In Full,Cash,,,,,,,,1044,2018-05-02 6:21pm
+919,On Premise Contract,,Paid In Full,Check,,,,,,,,1045,2018-05-02 6:23pm
+920,On Premise Contract,,Paid In Full,Check,,,,,,,,1046,2018-05-02 6:30pm
+921,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,1047,2018-05-02 6:35pm
+922,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1048,2018-05-02 6:38pm
+923,Production Invoice,,Paid In Full,Check,,,,,,,,1049,2018-05-02 6:41pm
+924,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1050,2018-05-02 8:10pm
+925,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1051,2018-05-02 8:12pm
+926,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1052,2018-05-02 8:13pm
+927,On Premise Contract,,Partially Refunded,Check,,,,,,600.00,,1053,2018-05-02 8:16pm
+928,Production Invoice,,Paid In Full,Check,,,,,,,,1054,2018-05-02 9:25pm
+929,Production Invoice,,Paid In Full,Unknown,,,,,,,,1055,2018-05-02 9:42pm
+930,On Premise Contract,,Paid In Full,,,,,,,,,1056,2018-05-02 10:03pm
+931,On Premise Contract,,Paid In Full,Check,,,,,,,,1057,2018-05-02 10:05pm
+932,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1058,2018-05-02 10:06pm
+933,On Premise Contract,,Paid In Full,Cash,,,,,,,,1059,2018-05-02 10:08pm
+934,On Premise Contract,,Paid In Full,Check,,,,,,,,1060,2018-05-02 10:10pm
+935,On Premise Contract,,Paid In Full,Check,,,,,,,,1061,2018-05-03 1:41pm
+936,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1062,2018-05-03 1:43pm
+937,On Premise Contract,,Paid In Full,Check,,,,,,,,1063,2018-05-03 1:45pm
+938,On Premise Contract,,Paid In Full,Cash,,,100.00,2050.00,,,,1064,2018-05-03 1:47pm
+939,On Premise Contract,,Paid In Full,Check,,,,,,,,1065,2018-05-03 1:51pm
+940,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1066,2018-05-03 1:54pm
+941,On Premise Contract,,Paid In Full,Check,,,,,,,,1067,2018-05-03 1:56pm
+942,On Premise Contract,,Paid In Full,Check,,,,,,,,1068,2018-05-03 2:00pm
+943,On Premise Contract,,Paid In Full,Check,,,,,,,,1069,2018-05-03 2:02pm
+944,On Premise Contract,,Paid In Full,Cash | Check,,,,275.00,,,,1071,2018-05-03 2:06pm
+945,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1072,2018-05-03 2:09pm
+946,On Premise Contract,,Paid In Full,Check,,,,,,,,1073,2018-05-03 2:11pm
+947,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1074,2018-05-03 2:14pm
+948,On Premise Contract,,Paid In Full,,,,,,,,,1075,2018-05-03 2:15pm
+949,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1076,2018-05-03 2:17pm
+950,On Premise Contract,,Paid In Full,Cash,,,100.00,1900.00,,,,1077,2018-05-03 2:19pm
+951,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1078,2018-05-03 2:21pm
+952,On Premise Contract,,Paid In Full,Check,,,,,,,,1079,2018-05-03 2:26pm
+953,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1080,2018-05-03 2:28pm
+954,On Premise Contract,,Paid In Full,Check,,,100.00,,,,,1081,2018-05-03 2:35pm
+955,On Premise Contract,,Paid In Full,Check,,,,,,,,1082,2018-05-03 2:37pm
+956,On Premise Contract,,Paid In Full,Cash,,,,,,,,1083,2018-05-03 2:38pm
+957,On Premise Contract,,Paid In Full,Check,,,,,,,,1084,2018-05-03 2:41pm
+958,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1085,2018-05-03 2:43pm
+959,On Premise Contract,,Paid In Full,Check,,,,,,,,1086,2018-05-03 2:46pm
+960,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1087,2018-05-03 2:53pm
+961,On Premise Contract,,Paid In Full,Check,,,,,,,,1088,2018-05-03 2:58pm
+962,On Premise Contract,,Paid In Full,Check,,,,,,,,1089,2018-05-03 3:01pm
+963,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,1090,2018-05-03 3:05pm
+964,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1091,2018-05-03 3:09pm
+965,On Premise Contract,,Paid In Full,Check,,,,,,,,1092,2018-05-03 3:12pm
+966,On Premise Contract,,Paid In Full,Check,,,400.00,,,,0.00,1093,2018-05-03 3:15pm
+967,On Premise Contract,,Paid In Full,Check,,,,,,,,1094,2018-05-03 3:21pm
+968,Production Invoice,,Paid In Full,Check,,,,,150.00,,,1095,2018-05-03 3:29pm
+969,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1096,2018-05-03 4:06pm
+970,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1097,2018-05-03 4:14pm
+971,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1098,2018-05-03 4:15pm
+972,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1099,2018-05-03 4:17pm
+973,On Premise Contract,,Paid In Full,Check,,,,,,,,1100,2018-05-03 4:19pm
+974,On Premise Contract,,Paid In Full,Check,,,,,,,,1101,2018-05-03 4:21pm
+975,On Premise Contract,,Paid In Full,Check,,,,,,,,1102,2018-05-03 4:23pm
+976,On Premise Contract,,Paid In Full,Check,,,,,,,,1103,2018-05-03 4:24pm
+977,On Premise Contract,,Paid In Full,Check,,,,,,,,1104,2018-05-03 4:26pm
+978,On Premise Contract,,Paid In Full,Check,,,,,,,,1105,2018-05-03 4:28pm
+979,On Premise Contract,,Paid In Full,Check,,,,,,,,1106,2018-05-03 4:30pm
+980,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1107,2018-05-03 4:32pm
+981,On Premise Contract,,Paid In Full,Check,,,,,,,,1108,2018-05-03 4:33pm
+982,On Premise Contract,,Paid In Full,Check,,,,,,,,1109,2018-05-03 4:36pm
+983,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1110,2018-05-03 4:41pm
+984,On Premise Contract,,Paid In Full,Check,,,,,,,,1111,2018-05-03 4:43pm
+985,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1112,2018-05-03 4:45pm
+986,On Premise Contract,,Paid In Full,Cash,,,,,,,,1113,2018-05-03 5:08pm
+987,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1114,2018-05-03 7:20pm
+988,On Premise Contract,,Paid In Full,Cash,,,,,,,,1115,2018-05-03 7:22pm
+989,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1116,2018-05-03 7:23pm
+990,On Premise Contract,,Paid In Full,Cash,,,,,,,0.00,1117,2018-05-03 7:26pm
+991,On Premise Contract,,Paid In Full,Cash,,,,,,,,1118,2018-05-03 7:30pm
+992,On Premise Contract,,Paid In Full,Check,,,,,,,,1119,2018-05-03 7:33pm
+993,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1120,2018-05-03 7:36pm
+994,On Premise Contract,,Paid In Full,Check,,,,,,,,1121,2018-05-03 7:42pm
+995,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1122,2018-05-03 7:47pm
+996,On Premise Contract,,Paid In Full,Cash,,,,,,,,1123,2018-05-03 7:51pm
+997,On Premise Contract,,Paid In Full,Check,,,,,,,,1124,2018-05-03 7:53pm
+998,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1125,2018-05-03 7:55pm
+999,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1126,2018-05-03 7:56pm
+1000,On Premise Contract,,Paid In Full,Check,,,,,,,,1127,2018-05-03 7:59pm
+1001,On Premise Contract,,Paid In Full,Check,,,,,,,,1128,2018-05-03 8:01pm
+1002,On Premise Contract,,Paid In Full,Cash | Check,,,,1200.00,,,,1129,2018-05-03 8:03pm
+1003,On Premise Contract,,Paid In Full,Cash,,,,,,,,1130,2018-05-03 8:05pm
+1004,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1131,2018-05-03 8:08pm
+1005,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,1132,2018-05-07 3:40pm
+1006,On Premise Contract,,Paid In Full,Cash,,,,,,,,1254,2018-05-22 6:13pm
+1007,On Premise Contract,,Paid In Full,Cash,,,,,,,,1271,2018-05-22 10:36pm
+1008,On Premise Contract,,Paid In Full,Check,,,,,,,0.00,1264,2018-05-22 11:19pm
+1009,Production Invoice,,Paid In Full,Check,,,,,,,,1276,2018-05-24 5:48pm
+1010,Production Invoice,,Paid In Full,Check,,,,,,,,1184,2018-05-25 4:21pm
+1011,On Premise Contract,,Paid In Full,Unknown,,,100.00,,,,,368,2018-05-25 4:29pm
+1012,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1231,2018-05-25 4:31pm
+1013,On Premise Contract,,Paid In Full,Check,,,,,,,,1243,2018-05-25 4:37pm
+1014,On Premise Contract,,Paid In Full,Cash,,,,,,,,1270,2018-05-25 4:39pm
+1015,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1236,2018-05-25 4:42pm
+1016,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1280,2018-05-29 5:41pm
+1017,On Premise Contract,,Paid In Full,,,,,0.00,,,,1206,2018-05-31 7:47pm
+1018,On Premise Contract,,Paid In Full,Cash,,,100.00,1900.00,,,,1205,2018-05-31 8:44pm
+1019,Production Invoice,,Paid In Full,Check,,,,,,,,1281,2018-05-31 9:14pm
+1020,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1279,2018-06-04 5:52pm
+1021,Production Invoice,,Paid In Full,,,,1600.00,,,,,1258,2018-06-04 8:46pm
+1022,Production Invoice,,Paid In Full,Check,,,550.00,,,,,1284,2018-06-04 9:03pm
+1023,Rental Contract,Emailed to Client,Paid In Full,Check,,7/13/2018 BOA #16368,,,,,,1289,2018-06-05 8:22pm
+1024,Production Invoice,,Paid In Full,Check,,6/21,,,,,,552,2018-06-07 3:34pm
+1025,On Premise Contract,,Paid In Full,Check,,Surdyk 5857,,2300.00,,,,1508,2018-06-07 4:03pm
+1026,Production Invoice,,Paid In Full,Deduction from Commissions,,,,,,,,1506,2018-06-08 12:34am
+1027,On Premise Contract,,Paid In Full,Unknown,,,,,,,,1218,2018-06-11 3:42pm
+1028,Production Invoice,,Paid In Full,Check,,,,5000.00,,,,1503,2018-06-12 5:27pm
+1029,Production Invoice,Emailed to Client,Paid In Full,Check,,DMD Flushing Bank #17721,,,,,,1502,2018-06-18 2:44pm
+1030,Rental Contract,Emailed to Client,Not Paid,,,,,,,,,1513,2018-06-18 3:21pm
+1031,Production Invoice,Emailed to Client,Not Paid,,,,,,,,,1514,2018-06-18 3:33pm
+1032,Production Invoice,,Paid In Full,,,,,,,,,1512,2018-06-20 5:15pm
+1033,Production Invoice,,Paid In Full,Check,,,,,,,,1158,2018-06-20 5:26pm
+1034,On Premise Contract,,Paid In Full,Cash,,,,,,,,1273,2018-06-26 7:57pm
+1035,On Premise Contract,,Paid In Full,Cash,,,,,,,,1520,2018-06-26 8:31pm
+1036,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1522,2018-06-26 8:41pm
+1037,Production Invoice,,Paid In Full,Cash,,,,,,,,1212,2018-06-27 2:57pm
+1038,Rental Contract,,Paid In Full,Check,,1244 Capital 6/20/18,,,,,,1529,2018-06-27 4:51pm
+1039,Production Invoice,Emailed to Client,Paid In Full,Check,,7/26/18 #5924,,,,,,1235,2018-06-27 5:08pm
+1040,Production Invoice,,Paid In Full,Check,,6/21 Capital #1077,,,,,,1178,2018-06-27 5:25pm
+1041,Rental Contract,,Paid In Full,Check,,,,,,,,1533,2018-07-06 2:18pm
+1042,Production Invoice,,Paid In Full,Check,,|  EKO's Budget was $2800,1340.00,,,,,1241,2018-07-06 2:28pm
+1043,Production Invoice,Emailed to Client,Not Paid,,,,1250.00,,,,95.00,1534,2018-07-06 3:47pm
+1044,Production Invoice,,Paid In Full,Check,,,,,,,,1535,2018-07-09 6:36pm
+1045,Production Invoice,Emailed to Client,Not Paid,,,,,,,,,1538,2018-07-09 7:29pm
+1046,On Premise Contract,,Paid In Full,Check,,,,,,,,1523,2018-07-23 6:38pm
+1047,On Premise Contract,,Paid In Full,Cash,,,100.00,,,,,1160,2018-07-23 6:40pm
+1048,Production Invoice,,Paid In Full,Check,,Bethpage Federal Credit Union #7435 7/19/18,,,,,,1539,2018-07-23 7:44pm
+1049,Production Invoice,Emailed to Client,Not Paid,,,,,,,,,1552,2018-07-23 8:14pm
+1050,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1180,2018-07-23 8:40pm
+1051,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1229,2018-07-23 11:09pm
+1052,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1183,2018-07-23 11:09pm
+1053,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1240,2018-07-23 11:09pm
+1054,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1197,2018-07-23 11:09pm
+1055,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1219,2018-07-23 11:09pm
+1056,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1186,2018-07-23 11:09pm
+1057,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1201,2018-07-23 11:09pm
+1058,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1228,2018-07-23 11:10pm
+1059,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1511,2018-07-23 11:10pm
+1060,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1179,2018-07-23 11:10pm
+1061,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1227,2018-07-24 1:00am
+1062,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1195,2018-07-24 1:00am
+1063,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1230,2018-07-24 1:01am
+1064,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1238,2018-07-24 1:01am
+1065,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1221,2018-07-24 1:01am
+1066,Production Invoice,Emailed to Client,Paid In Full,Check,,,2150.00,,,,,1208,2018-07-24 1:01am
+1067,Rental Contract,Emailed to Client,Paid In Full,Check,,TD Bank #1291,,,,,,1555,2018-08-07 4:40pm
+1068,Rental Contract,Emailed to Client,Paid In Full,,,,,,,,,1556,2018-08-07 5:02pm
+1069,On Premise Contract,Emailed to Client,Not Paid,Cash,,,1150.00,,,,,1557,2018-08-07 5:18pm
+1070,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1141,2018-08-07 5:20pm
+1071,Rental Contract,Emailed to Client,Paid In Full,Check,,Chase #0231,,,,,,1558,2018-08-07 5:46pm
+1072,On Premise Contract,Emailed to Client,Not Paid,,,,,,,,,1559,2018-08-07 5:51pm
+1073,Production Invoice,Not Sent,Not Paid,,,,725.00,,,,,1561,2018-08-07 6:07pm
+1074,On Premise Contract,Emailed to Client,Paid In Full,Cash,,,100.00,,,,,1526,2018-08-07 7:07pm
+1075,Rental Contract,Emailed to Client,Paid In Full,,,,,,,,,1562,2018-08-07 7:11pm
+1076,Production Invoice,Emailed to Client,Paid In Full,Check,,8/13/2018,,,,,,1554,2018-08-14 4:59pm
+1077,Production Invoice,Emailed to Client,Not Paid,,,,,,,,,1532,2018-08-14 5:05pm
