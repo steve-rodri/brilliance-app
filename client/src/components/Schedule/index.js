@@ -32,7 +32,7 @@ export default class Schedule extends Component {
       if (calendars) {
         const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
         const events = await getGoogleEvents(jobsCalendar.id)
-        const userEvents = events.filter(function(event) {
+        const userEvents = events.filter(event => {
             if (event.attendees) {
               return event.attendees.find(attendee => (attendee.email = user.email))
             }
@@ -72,7 +72,6 @@ export default class Schedule extends Component {
 
   render(){
     const { redirectToLogin, userEvents} = this.state
-    console.log(userEvents)
     const subtitles = ['','title', 'call', 'notes', 'confirmation']
     if (redirectToLogin) return (<Redirect to="/login"/>)
     return (
