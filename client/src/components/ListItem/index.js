@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { title } from './helpers'
+import { eventTitle } from '../Helpers/eventTitle'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircle, faCheckCircle, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
@@ -36,7 +36,7 @@ export default function ListItem(props){
         <Link to={`/admin/${type.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <div>
-              <h3>{event && title(event)}</h3>
+              <h4>{event && eventTitle(event)}</h4>
               <p>{event && event.start && moment(start()).format('ddd, MMM Do')}</p>
               <p>{event && event.start && event.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
