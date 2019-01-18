@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_230930) do
   end
 
   create_table "email_addresses", force: :cascade do |t|
-    t.string "address"
+    t.string "email_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "contact_id"
@@ -92,8 +92,10 @@ ActiveRecord::Schema.define(version: 2019_01_13_230930) do
     t.string "status"
     t.string "payment_status"
     t.string "payment_type"
+    t.string "commission_actual"
     t.string "commission_paid"
     t.string "check_info"
+    t.float "deposit"
     t.float "discount"
     t.float "tip"
     t.float "refund"
