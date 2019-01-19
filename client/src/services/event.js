@@ -14,13 +14,13 @@ const event = {
       const resp = await axios.get(`/api/events/${id}`)
       return resp.data
     } catch (e) {
-      console.log(e)
+      return null
     }
   },
-  createNew: async function() {
+  createNew: async function(data) {
     try {
-      const resp = await axios.post(`/api/events`, {summary:"Untitled"})
-      return resp
+      const resp = await axios.post(`/api/events`, data)
+      return resp.data
     } catch (e) {
       console.log(e)
     }
