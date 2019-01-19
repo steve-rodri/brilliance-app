@@ -12,7 +12,8 @@ export default class ListPage extends Component {
   constructor(props){
     super(props)
     this.state = {
-      redirectToNewRecord: false
+      redirectToNewRecord: false,
+      redirectToCreateNew: false
     }
   }
   componentWillReceiveProps(newProps){
@@ -23,9 +24,15 @@ export default class ListPage extends Component {
     }
   }
 
+  createNew = () => {
+    this.setState({
+      redirectToCreateNew: true
+    })
+  }
+
   render(){
     const { newRecord, match } = this.props
-    if (this.state.redirectToNewRecord) return (<Redirect to={`${match.path}/${newRecord.id}`}/>)
+    if (this.state.redirectToCreateNew) return (<Redirect to={`${match.path}/new`}/>)
     return (
       <div className='ListPage--container'>
         <aside>
@@ -36,7 +43,7 @@ export default class ListPage extends Component {
             ))}
           </div>
           {this.props.title === "Events"?
-            <div className="ListPage--button create" onClick={this.props.create}><span className="button-text">Create New</span>{<FontAwesomeIcon className="plus-icon" icon="plus" size="2x"/>}</div>
+            <div className="ListPage--button create" onClick={this.createNew}><span className="button-text">Create New</span>{<FontAwesomeIcon className="plus-icon" icon="plus" size="2x"/>}</div>
             :
             ''
           }
@@ -47,7 +54,7 @@ export default class ListPage extends Component {
             subtitles={this.props.subtitles}
             items={this.props.data}
             type={this.props.title}
-            create={this.props.create}
+            create={this.createNew}
             handleSelect={this.handleSelect}
           />
         </main>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Header from '../Header/index.js'
 import ListPage from '../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
 import { event } from '../../services/event'
+import { eventTitle } from './Helpers/eventTitle'
 import './index.css'
 
 export default class Events extends Component {
@@ -21,7 +22,15 @@ export default class Events extends Component {
   }
 
   fetchAllEvents = async() => {
-    const events = await event.getAll();
+    const evts = await event.getAll();
+    const updatedEvents = evts.map( async(e) => {
+      if (!e.summary) {
+        e.summary = eventTitle(e)
+        await event.update(e.id, {summary: e.summary})
+      }
+      return e
+    })
+    const events = await Promise.all(updatedEvents)
     this.setState({ events })
   }
 
@@ -69,6 +78,14 @@ export default class Events extends Component {
     )
   }
 
+  Create = ({ match }) => {
+    return (
+      <EventDetail
+        match={this.props.match}
+      />
+    )
+  }
+
   render(){
     const { location, match } = this.props
     return (
@@ -76,8 +93,8 @@ export default class Events extends Component {
         <Header location={location}/>
 
         <Route exact path={match.path} render={this.List}/>
+        <Route exact path={`${match.path}/new`} render={this.Create}/>
         <Route exact path={`${match.path}/:id`} render={this.Show}/>
-        <Route exact path={`${match.path}/new`} render={this.Show}/>
       </div>
     )
   }

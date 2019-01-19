@@ -5,8 +5,11 @@ import Logistics from './Logistics/index.js';
 import Invoice from './Invoice/index.js';
 import CashFlow from './CashFlow/index.js';
 import { event } from '../../../services/event';
-import { client } from '../../../services/client'
-import './index.css'
+import { client } from '../../../services/client';
+import { place } from '../../../services/place';
+import { eventTitle } from '../Helpers/eventTitle';
+import { clientName } from '../Helpers/clientName';
+import './index.css';
 
 export default class EventDetail extends Component {
   constructor(props){
@@ -24,27 +27,19 @@ export default class EventDetail extends Component {
 
   async componentDidMount(){
     window.scrollTo(0,0);
+    await this.setFields();
     await this.getEvent();
     await this.setClientName();
   }
 
   getEvent = async() => {
-    const { e, eventId } = this.props
+    const { e } = this.props
     if (!e) {
-      const evt = await event.getOne(eventId)
-      if (evt) {
-        this.setState({ evt })
-        await this.setFields();
-        // if (this.state.fields) {
-        //   this.setState({editMode: true})
-        // }
-      } else {
-        this.setState({redirectToEvents: true})
-      }
+      this.edit()
     } else {
       this.setState({ evt: e })
-      await this.setFields(e);
     }
+    await this.setFields();
   }
 
   findClients = async(query) => {
@@ -55,23 +50,29 @@ export default class EventDetail extends Component {
     }
   }
 
+  findPlaces = async(query) => {
+    const q = query.split('')
+    if (q.length > 2) {
+      const locations = await place.find(query)
+      return locations
+    }
+  }
+
   setClientName(){
     const { evt } = this.state
     if (evt) {
       if (evt.client) {
-        if (evt.client.contactInfo) {
-          const { client: { contactInfo: { fullName }}} = evt
-          this.setField('client', fullName)
-        }
+        const name = clientName(evt.client)
+        this.setField('client', name)
       }
     }
   }
 
-  setFields = (e) => {
+  setFields = () => {
     const { evt } = this.state
     if (!evt) {
       const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
-      fieldNames.forEach( field => this.setField( field, e[field] ))
+      fieldNames.forEach( field => this.setField( field, null ))
     } else {
       const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
       fieldNames.forEach( field => this.setField( field, evt[field] ))
@@ -84,15 +85,23 @@ export default class EventDetail extends Component {
         ...prevState.fields,
         [name]: value
       }
-    }))
-  }
+    })
+  )}
 
   handleSearchChange = async(e) => {
     const { name, value } = e.target
     this.setField(name, value)
-    if (name === 'client') {
-      const clients = await this.findClients(value)
-      this.setState({ searchFieldData: clients })
+    switch (name) {
+      case 'client':
+        const clients = await this.findClients(value)
+        this.setState({ searchFieldData: clients })
+        break;
+      case 'location':
+        const locations = await this.findPlaces(value)
+        this.setState({ searchFieldData: locations })
+        break;
+      default:
+        break;
     }
   }
 
@@ -101,16 +110,28 @@ export default class EventDetail extends Component {
     const { searchFieldData } = this.state
     if (searchFieldData.length > 0) {
       const item = searchFieldData[index]
+
       switch (name) {
         case 'client':
-          this.setField(name, item.contactInfo.fullName)
+        const client = clientName(item);
           this.setState(prevState => ({
             formData: {
               ...prevState.formData,
               client_id: item.id
             },
+            fields: {
+              ...prevState.fields,
+              [name]: client
+            },
             searchFieldData: null
-          }))
+          }),() => {
+            this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                summary: eventTitle(prevState.fields)
+              }
+            }))
+          })
         break;
         case 'location':
           this.setState(prevState => ({
@@ -136,6 +157,7 @@ export default class EventDetail extends Component {
   }
 
   handleChange = (e) => {
+    const { fields } = this.state
     const {name, value} = e.target
     this.setState(prevState => ({
       fields: {
@@ -146,18 +168,35 @@ export default class EventDetail extends Component {
         ...prevState.formData,
         [name]: value
       }
-    }))
+    }), () => {
+      this.setState(prevState => ({
+        fields: {
+          ...prevState.fields,
+          summary: eventTitle(prevState.fields)
+        },
+        formData: {
+          ...prevState.formData,
+          summary: eventTitle(prevState.fields)
+        }
+      }))
+    })
   }
 
-  handleEditSubmit = async() => {
+  handleSubmit = async() => {
     const { evt, formData, editMode } = this.state
     if (formData) {
-      await event.update(evt.id, formData)
-      this.resetForm();
-      const updatedEvent = await event.getOne(evt.id)
-      this.setState({
-        evt: updatedEvent
-      })
+      if (!evt) {
+        const newEvent = await event.createNew(formData)
+        this.resetForm()
+        this.setState({ evt: newEvent })
+      } else {
+        await event.update(evt.id, formData)
+        this.resetForm();
+        const updatedEvent = await event.getOne(evt.id)
+        this.setState({
+          evt: updatedEvent
+        })
+      }
       await this.setClientName();
       await this.setFields();
       this.props.fetchAllEvents();
@@ -213,7 +252,7 @@ export default class EventDetail extends Component {
             handleChange={this.handleChange}
             handleSearchChange={this.handleSearchChange}
             handleSelect={this.handleSelect}
-            handleSubmit={this.handleEditSubmit}
+            handleSubmit={this.handleSubmit}
           />
         )
       case 'Logistics':

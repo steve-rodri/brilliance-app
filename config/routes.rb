@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :addresses
-  resources :places
   scope '/api' do
+    resources :addresses
     resources :clients do
       get 'find', on: :collection, to: 'clients#find'
     end
@@ -12,6 +11,9 @@ Rails.application.routes.draw do
     resources :companies
     resources :email_addresses
     resources :invoices
+    resources :places do
+      get 'find', on: :collection, to: 'places#find'
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

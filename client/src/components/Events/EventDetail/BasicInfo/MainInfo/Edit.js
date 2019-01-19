@@ -1,5 +1,7 @@
 import React from 'react'
 import moment from 'moment'
+import { clientName } from '../../../Helpers/clientName'
+import { locationName } from '../../../Helpers/locationName'
 import './Edit.css'
 
 export default function Edit(props) {
@@ -36,7 +38,7 @@ export default function Edit(props) {
               props.onSelect(e, 'client', i)
               }}
             >
-            {client.contactInfo.fullName}
+            {clientName(client)}
             </div>
           ))}
         </div>
@@ -48,9 +50,23 @@ export default function Edit(props) {
         </div>
 
       <label>Location</label>
-        <div className="Edit--field">
-          <input className="Edit--input" name='location' value={fields.location? fields.location : ''} onChange={props.handleSearchChange}/>
-        </div>
+        <form className="Edit--field" onSubmit={(e) => props.onSelect(e, 'location', 0)}>
+          <input name='location' className="Edit--input" value={fields.location? fields.location : ''} onChange={props.handleSearchChange}/>
+          <div className="Edit--results" style={displayResults()}>
+            {searchFieldData && searchFieldData !== [] && searchFieldData.map( (location, i) => (
+              <div
+                key={location.id}
+                className="Edit--search-result"
+                onClick={(e) => {
+                e.stopPropagation();
+                props.onSelect(e, 'location', i)
+                }}
+              >
+              {locationName(location)}
+              </div>
+            ))}
+          </div>
+        </form>
 
       <label>Kind</label>
         <div className="Edit--field">
