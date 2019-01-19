@@ -36,7 +36,7 @@ export default function ListItem(props){
         <Link to={`/admin/${type.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
           <div className="List-Item" style={styleColumns(numColumns)}>
             <div>
-              <h4>{event && eventTitle(event)}</h4>
+              <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
               <p>{event && event.start && moment(start()).format('ddd, MMM Do')}</p>
               <p>{event && event.start && event.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
             </div>
@@ -116,6 +116,20 @@ export default function ListItem(props){
   function styleColumns(numColumns){
     return {
       gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+    }
+  }
+
+  function styleSummary(summary) {
+    if (summary) {
+      if (summary.length > 30) {
+        return {
+          fontSize: '12px'
+        }
+      } else {
+        return {}
+      }
+    } else {
+      return {}
     }
   }
 
