@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import List from '../List/index.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -8,7 +9,23 @@ import './ListPage.css'
 library.add(faPlus)
 
 export default class ListPage extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      redirectToNewRecord: false
+    }
+  }
+  componentWillReceiveProps(newProps){
+    if (newProps.newRecord) {
+      this.setState({
+        redirectToNewRecord: true
+      })
+    }
+  }
+
   render(){
+    const { newRecord, match } = this.props
+    if (this.state.redirectToNewRecord) return (<Redirect to={`${match.path}/${newRecord.id}`}/>)
     return (
       <div className='ListPage--container'>
         <aside>

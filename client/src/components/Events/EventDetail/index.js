@@ -25,6 +25,7 @@ export default class EventDetail extends Component {
   async componentDidMount(){
     window.scrollTo(0,0);
     await this.getEvent();
+    await this.setClientName();
   }
 
   getEvent = async() => {
@@ -33,18 +34,16 @@ export default class EventDetail extends Component {
       const evt = await event.getOne(eventId)
       if (evt) {
         this.setState({ evt })
-        await this.setClientName();
         await this.setFields();
-        if (this.state.fields) {
-          this.setState({editMode: true})
-        }
+        // if (this.state.fields) {
+        //   this.setState({editMode: true})
+        // }
       } else {
         this.setState({redirectToEvents: true})
       }
     } else {
       this.setState({ evt: e })
-      await this.setClientName();
-      await this.setFields();
+      await this.setFields(e);
     }
   }
 
@@ -61,17 +60,22 @@ export default class EventDetail extends Component {
     if (evt) {
       if (evt.client) {
         if (evt.client.contactInfo) {
-          const { client: { contactInfo: {fullName}}} = evt
+          const { client: { contactInfo: { fullName }}} = evt
           this.setField('client', fullName)
         }
       }
     }
   }
 
-  setFields = () => {
+  setFields = (e) => {
     const { evt } = this.state
-    const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
-    fieldNames.forEach( field => this.setField( field, evt[field] ))
+    if (!evt) {
+      const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
+      fieldNames.forEach( field => this.setField( field, e[field] ))
+    } else {
+      const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
+      fieldNames.forEach( field => this.setField( field, evt[field] ))
+    }
   }
 
   setField = (name, value) => {
