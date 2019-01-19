@@ -17,19 +17,6 @@ export default class BasicInfo extends Component {
     this.state = {
       redirectToEvents: false
     }
-    this.summary = React.createRef()
-  }
-
-//selects summary field if it is empty or untitled
-  componentDidUpdate(){
-    const { fields } = this.props
-    if (fields) {
-      if (!fields.summary || fields.summary === "Untitled") {
-        if (this.summary.current) {
-          this.summary.current.select()
-        }
-      }
-    }
   }
 
   delete = () => {
@@ -40,16 +27,30 @@ export default class BasicInfo extends Component {
     })
   }
 
+  styleSummary = (summary) => {
+    if (summary) {
+      if (summary.length > 35) {
+        return {
+          fontSize: '45px'
+        }
+      } else {
+        return {}
+      }
+    } else {
+      return {}
+    }
+  }
+
   render(){
     const { event, fields, searchFieldData, editMode, match } = this.props
     if (this.state.redirectToEvents) return (<Redirect to={match.path}/>)
     return (
       <div className="BasicInfo--container">
         <div className="BasicInfo--header">
-          {editMode?
-          <input className="BasicInfo--event-summary" name="summary" value={fields.summary? fields.summary : ''} onChange={this.props.handleChange} ref={this.summary}/>
+          {editMode && event?
+          <input className="BasicInfo--event-summary" style={this.styleSummary(fields && fields.summary)} name="summary" value={fields.summary? fields.summary : ''} onChange={this.props.handleChange}/>
           :
-          <h1 className="BasicInfo--event-title">{fields && fields.summary}</h1>
+          <h1 className="BasicInfo--event-title" style={this.styleSummary(fields && fields.summary)}>{fields && fields.summary}</h1>
           }
           {editMode?
             <div className="BasicInfo--buttons">
@@ -59,7 +60,9 @@ export default class BasicInfo extends Component {
             :
             <div className="BasicInfo--buttons">
               <div className="BasicInfo--button edit" onClick={this.props.edit}><FontAwesomeIcon icon="pencil-alt" size="2x"/></div>
+              {event?
               <div className="BasicInfo--button delete" onClick={this.delete}><FontAwesomeIcon icon="trash" size="2x"/></div>
+              : ''}
             </div>
           }
         </div>
