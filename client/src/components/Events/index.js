@@ -11,12 +11,13 @@ export default class Events extends Component {
     super(props)
     this.state = {
       events: [],
-      newEvent: false
+      newEvent: null
     }
   }
 
   async componentDidMount(){
     await this.fetchAllEvents()
+    this.setState( { newEvent: null })
   }
 
   fetchAllEvents = async() => {
@@ -26,21 +27,20 @@ export default class Events extends Component {
 
   handleDelete = async(id) => {
     await event.delete(id);
+    this.setState({ newEvent: null })
     await this.fetchAllEvents();
   }
 
   handleCreate = async() => {
     const resp = await event.createNew();
-    const evts = [...this.state.events]
-    evts.push(resp.data)
-    this.setState({ events: evts }, () =>
-      this.setState({ newEvent: resp.data })
-    )
-    window.location.reload();
+    this.setState({
+      newEvent: resp.data
+    })
   }
 
   List = () => {
     const { events } = this.state
+    const { newEvent } = this.state
     return (
       <ListPage
         title="Events"
@@ -48,6 +48,8 @@ export default class Events extends Component {
         subtitles={['title', 'client', 'location', 'confirmation', 'scheduled']}
         data={events}
         create={this.handleCreate}
+        newRecord={newEvent}
+        match={this.props.match}
       />
     )
   }
@@ -69,14 +71,13 @@ export default class Events extends Component {
 
   render(){
     const { location, match } = this.props
-    const { newEvent } = this.state
-    if (newEvent) return (<Redirect to={`/admin/events/${newEvent.id}`}/>)
     return (
       <div className='Section'>
         <Header location={location}/>
 
         <Route exact path={match.path} render={this.List}/>
         <Route exact path={`${match.path}/:id`} render={this.Show}/>
+        <Route exact path={`${match.path}/new`} render={this.Show}/>
       </div>
     )
   }

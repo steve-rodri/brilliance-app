@@ -43,12 +43,16 @@ class ClientsController < ApplicationController
     terms = params[:q].split
 
     if terms.length > 1
-      query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0]}%' AND last_name LIKE '%#{terms[1]}%' LIMIT 10"
+      contact_query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0]}%' AND last_name LIKE '%#{terms[1]}%' LIMIT 10"
     else
-      query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0]}%' LIMIT 10"
+      contact_query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0]}%' LIMIT 10"
     end
 
-    contacts = execute_sql(query)
+    company_query = "SELECT * FROM companies WHERE name LIKE '%#{params[:q]}%'"
+
+    contacts = execute_sql(contact_query)
+    companies = execute_sql(company_query)
+
     clients = []
     if contacts
       contacts.each do |contact|
@@ -60,6 +64,18 @@ class ClientsController < ApplicationController
         end
       end
     end
+
+    if companies
+      companies.each do |company|
+        id = company.as_json["id"]
+
+        client = Client.find_by company_id: "#{id}"
+        if client
+          clients.push(client)
+        end
+      end
+    end
+
     render json: clients
   end
 
