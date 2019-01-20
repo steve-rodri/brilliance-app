@@ -92,6 +92,6 @@ aside > h2 {
   }
 
   main {
-    width: 100vw;
+    grid-column: 1 / span 2;
   }
 }

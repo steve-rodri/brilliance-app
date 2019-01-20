@@ -33,9 +33,14 @@ export default class EventDetail extends Component {
   }
 
   getEvent = async() => {
-    const { e } = this.props
+    const { e, eventId } = this.props
     if (!e) {
-      this.edit()
+      const evt = await event.getOne(eventId)
+      if (evt) {
+        this.setState({ evt })
+      } else {
+        this.edit()
+      }
     } else {
       this.setState({ evt: e })
     }
@@ -157,7 +162,6 @@ export default class EventDetail extends Component {
   }
 
   handleChange = (e) => {
-    const { fields } = this.state
     const {name, value} = e.target
     this.setState(prevState => ({
       fields: {
