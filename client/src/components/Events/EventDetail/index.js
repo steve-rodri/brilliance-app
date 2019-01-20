@@ -79,6 +79,8 @@ export default class EventDetail extends Component {
       if (evt.client) {
         const name = clientName(evt.client)
         this.setField('client', name)
+      } else {
+        this.setField('client', null)
       }
     }
   }
@@ -136,11 +138,55 @@ export default class EventDetail extends Component {
     switch (name) {
       case 'client':
         const clients = await this.findClients(value)
-        this.setState({ searchFieldData: clients })
+        if (!value) {
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              client_id: null
+            },
+            searchFieldData: null
+          }),() => {
+            this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                summary: eventTitle(prevState.fields)
+              },
+              formData: {
+                ...prevState.formData,
+                summary: eventTitle(prevState.fields)
+              }
+            }))
+          })
+        }
+        this.setState({ searchFieldData: { clients } })
         break;
       case 'location':
         const locations = await this.findPlaces(value)
-        this.setState({ searchFieldData: locations })
+        if (!value) {
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              location_id: null
+            },
+            fields: {
+              ...prevState.fields,
+              onPremise: null
+            },
+            searchFieldData: null
+          }),() => {
+            this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                summary: eventTitle(prevState.fields)
+              },
+              formData: {
+                ...prevState.formData,
+                summary: eventTitle(prevState.fields)
+              }
+            }))
+          })
+        }
+        this.setState({ searchFieldData: { locations } })
         break;
       default:
         break;
@@ -149,12 +195,16 @@ export default class EventDetail extends Component {
 
   handleSelect = (e, name, index) => {
     e.preventDefault();
+    let item;
     const { searchFieldData } = this.state
-    if (searchFieldData.length > 0) {
-      const item = searchFieldData[index]
+
+    if (searchFieldData) {
       switch (name) {
         case 'client':
+          item = searchFieldData.clients[index]
           const client = clientName(item);
+
+
             this.setState(prevState => ({
               formData: {
                 ...prevState.formData,
@@ -178,7 +228,9 @@ export default class EventDetail extends Component {
               }))
             })
           break;
+
         case 'location':
+          item = searchFieldData.locations[index]
           const location = locationName(item)
           this.setState(prevState => ({
             formData: {
@@ -204,6 +256,7 @@ export default class EventDetail extends Component {
             }))
           })
           break;
+
         default:
           this.setState(prevState => ({
             formData: {
@@ -213,6 +266,7 @@ export default class EventDetail extends Component {
             searchFieldData: null
           }))
           break;
+
       }
       this.resetSearchFieldData()
     }
@@ -279,6 +333,9 @@ export default class EventDetail extends Component {
       formData: null,
       searchFieldData: null
     })
+    this.setFields();
+    this.setClientName();
+    this.setLocationName();
   }
 
   resetSearchFieldData = async() => {
@@ -312,7 +369,7 @@ export default class EventDetail extends Component {
             delete={this.handleDelete}
             handleChange={this.handleChange}
             handleSearchChange={this.handleSearchChange}
-            handleSelect={this.handleSelect}
+            onSelect={this.handleSelect}
             handleSubmit={this.handleSubmit}
           />
         )

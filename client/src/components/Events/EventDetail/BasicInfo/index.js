@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import MainInfo from './MainInfo/index.js'
 import Header from './Header'
 import './index.css'
