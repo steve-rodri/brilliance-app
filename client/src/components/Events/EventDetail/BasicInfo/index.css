@@ -65,6 +65,7 @@ label {
 .BasicInfo--notes {
   border: 1px solid lightgray;
   min-height: 150px;
+  max-height: 300px;
 }
 
 .BasicInfo--notes-readonly {

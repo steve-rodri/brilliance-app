@@ -6,20 +6,27 @@ import './Edit.css'
 
 export default function Edit(props) {
   const { fields, searchFieldData } = props
-  function displayResults(){
+
+  function displayResults(fieldName){
     if (searchFieldData) {
-      return {
-        display: 'block',
-        backgroundColor: 'white',
-        borderTop: '1px solid rgba(0,0,0,.5)',
-        borderRight: '1px solid rgba(0,0,0,.55)',
-        borderLeft: '1px solid rgba(0,0,0,.55)',
-        borderBottom: '1px solid rgba(0,0,0,.55)'
+      switch (fieldName) {
+        case 'client':
+          if (searchFieldData.clients) {
+            return { display: 'block' }
+          } else {
+            return { display: 'none' }
+          }
+        case 'location':
+          if (searchFieldData.locations) {
+            return { display: 'block' }
+          } else {
+            return { display: 'none' }
+          }
+        default:
+          return { display: 'none' }
       }
     } else {
-      return {
-        display: 'none'
-      }
+      return { display: 'none' }
     }
   }
 
@@ -28,8 +35,8 @@ export default function Edit(props) {
       <label>Client</label>
       <form className="Edit--field" onSubmit={(e) => props.onSelect(e, 'client', 0)}>
         <input name='client' className="Edit--input" value={fields.client? fields.client : ''} onChange={props.handleSearchChange}/>
-        <div className="Edit--results" style={displayResults()}>
-          {searchFieldData && searchFieldData !== [] && searchFieldData.map( (client, i) => (
+        <div className="Edit--results" style={displayResults('client')}>
+          {searchFieldData && searchFieldData.clients && searchFieldData.clients.map( (client, i) => (
             <div
               key={client.id}
               className="Edit--search-result"
@@ -52,8 +59,8 @@ export default function Edit(props) {
       <label>Location</label>
         <form className="Edit--field" onSubmit={(e) => props.onSelect(e, 'location', 0)}>
           <input name='location' className="Edit--input" value={fields.location? fields.location : ''} onChange={props.handleSearchChange}/>
-          <div className="Edit--results" style={displayResults()}>
-            {searchFieldData && searchFieldData !== [] && searchFieldData.map( (location, i) => (
+          <div className="Edit--results" style={displayResults('location')}>
+            {searchFieldData && searchFieldData.locations && searchFieldData.locations.map( (location, i) => (
               <div
                 key={location.id}
                 className="Edit--search-result"
