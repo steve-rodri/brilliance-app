@@ -30,8 +30,15 @@ export default class BasicInfo extends Component {
   styleSummary = (summary) => {
     if (summary) {
       if (summary.length > 35) {
-        return {
-          fontSize: '45px'
+        console.log(window.innerWidth)
+        if (window.innerWidth > 600) {
+          return {
+            fontSize: '25px'
+          }
+        } else {
+          return {
+            fontSize: '35px'
+          }
         }
       } else {
         return {}
@@ -48,21 +55,53 @@ export default class BasicInfo extends Component {
       <div className="BasicInfo--container">
         <div className="BasicInfo--header">
           {editMode && event?
-          <input className="BasicInfo--event-summary" style={this.styleSummary(fields && fields.summary)} name="summary" value={fields.summary? fields.summary : ''} onChange={this.props.handleChange}/>
-          :
-          <h1 className="BasicInfo--event-title" style={this.styleSummary(fields && fields.summary)}>{fields && fields.summary}</h1>
+            <input
+              className="BasicInfo--event-summary"
+              style={this.styleSummary(fields && fields.summary)}
+              name="summary" value={fields.summary? fields.summary : ''}
+              onChange={this.props.handleChange}
+            />
+            :
+            <h1
+              className="BasicInfo--event-title"
+              style={this.styleSummary(fields && fields.summary)}
+            >
+              {fields && fields.summary}
+            </h1>
           }
           {editMode?
             <div className="BasicInfo--buttons">
-              <div className="BasicInfo--button close" onClick={this.props.close}><FontAwesomeIcon icon="times" size="2x"/></div>
-              <div className="BasicInfo--button edit" onClick={this.props.handleSubmit}><FontAwesomeIcon icon="check" size="2x"/></div>
+              <div
+                className="BasicInfo--button close"
+                onClick={this.props.close}
+              >
+                <FontAwesomeIcon icon="times" size="2x"/>
+              </div>
+              <div
+                className="BasicInfo--button edit"
+                onClick={this.props.handleSubmit}
+              >
+                <FontAwesomeIcon icon="check" size="2x"/>
+              </div>
             </div>
             :
             <div className="BasicInfo--buttons">
-              <div className="BasicInfo--button edit" onClick={this.props.edit}><FontAwesomeIcon icon="pencil-alt" size="2x"/></div>
-              {event?
-              <div className="BasicInfo--button delete" onClick={this.delete}><FontAwesomeIcon icon="trash" size="2x"/></div>
-              : ''}
+              <div
+                className="BasicInfo--button edit"
+                onClick={this.props.edit}
+              >
+                <FontAwesomeIcon icon="pencil-alt" size="2x"/>
+              </div>
+             {event?
+                <div
+                  className="BasicInfo--button delete"
+                  onClick={this.delete}
+                >
+                  <FontAwesomeIcon icon="trash" size="2x"/>
+                </div>
+                :
+                ''
+              }
             </div>
           }
         </div>
@@ -78,8 +117,7 @@ export default class BasicInfo extends Component {
         />
 
         <div className="BasicInfo--staff-and-notes">
-          <div className="BasicInfo--staff-container">
-          </div>
+          <div className="BasicInfo--staff-container"></div>
           <div className="BasicInfo--notes-container">
             <label>Notes</label>
             {editMode?

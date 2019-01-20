@@ -96,3 +96,10 @@ label {
 .BasicInfo--button:hover {
   cursor: pointer;
 }
+
+
+@media (min-width: 600px) {
+  .BasicInfo--event-title, .BasicInfo--event-summary {
+    font-size: 35px;
+  }
+}
