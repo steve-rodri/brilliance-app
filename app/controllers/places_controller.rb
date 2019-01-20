@@ -5,12 +5,12 @@ class PlacesController < ApplicationController
   def index
     @places = Place.all
 
-    render json: @places
+    render json: @places, include: '**'
   end
 
   # GET /places/1
   def show
-    render json: @place
+    render json: @place, include: '**'
   end
 
   # POST /places
@@ -40,29 +40,10 @@ class PlacesController < ApplicationController
 
   # GET /places/find
   def find
-    terms = params[:q].split
+    @places = Place.where("name LIKE :query OR short_name LIKE :query",
+      {query: "%#{params[:q]}%"})
 
-    name_query = "SELECT * FROM places WHERE name LIKE '%#{params[:q]}%'"
-    short_name_query = "SELECT * FROM places WHERE short_name LIKE '%#{params[:q]}%'"
-
-    names = execute_sql(contact_query)
-    short_names = execute_sql(company_query)
-
-    places = []
-    if places
-      names.each do |name|
-        short_names.each do |short_name|
-          name_id =  name.as_json["id"]
-          short_name_id = short_name.as_json["id"]
-
-          if name_id != short_name_id
-            places.push(name_id)
-          end
-        end
-      end
-    end
-
-    render json: places
+    render json: @places
   end
 
   private

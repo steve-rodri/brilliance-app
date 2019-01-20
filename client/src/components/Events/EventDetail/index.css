@@ -31,3 +31,20 @@
 .EventDetail--tab-control > div:hover {
   cursor: pointer
 }
+
+@media (min-width: 600px) {
+  .EventDetail--tab-control {
+    min-height: 40px;
+    max-height: 40px;
+  }
+
+  .EventDetail--tab-control > div {
+    min-height: 40px;
+    max-height: 40px;
+
+  }
+
+  .EventDetail--tab-control > div > h3 {
+    font-size: 1.1em;
+  }
+}

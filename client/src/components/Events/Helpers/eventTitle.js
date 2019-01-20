@@ -8,13 +8,17 @@ function eventTitle (evt){
 
 function title(evt) {
 
-  function placeName(){
-    if (evt.placeLocation) {
-      if (evt.placeLocation.shortName) {
-        return evt.placeLocation.shortName
-      } else {
-      return evt.placeLocation.name
+  function location(){
+    if (!evt.location) {
+      if (evt.placeLocation) {
+        if (evt.placeLocation.shortName) {
+          return evt.placeLocation.shortName
+        } else {
+        return evt.placeLocation.name
+        }
       }
+    } else {
+      return evt.location
     }
   }
 
@@ -37,38 +41,38 @@ function title(evt) {
   if (evt.confirmation === `Cancelled`) {
     return `CANCELLED`
   } else {
-    if (evt.placeLocation) {
-      if (evt.placeLocation.installation) {
+    if (location()) {
+      if (evt.onPremise) {
         if (!evt.kind) {
           if (!evt.package) {
             if (!client()) {
-              return `${placeName()}`
+              return `${location()}`
             } else {
-              return `${placeName()} - ${client()}`
+              return `${location()} - ${client()}`
             }
           } else {
             if (!client()) {
-              return `${placeName()} - ${evt.package}`
+              return `${location()} - ${evt.package}`
             } else {
-              return `${placeName()} - ${client()}`
+              return `${location()} - ${client()}`
             }
           }
         } else {
-          return `${placeName()} - ${evt.kind}`
+          return `${location()} - ${evt.kind}`
         }
       } else {
         if (!client()) {
           if (!evt.package) {
             if (!evt.kind) {
-              return placeName()
+              return location()
             } else {
-              return `${evt.kind} - ${placeName()}`
+              return `${evt.kind} - ${location()}`
             }
           } else {
             if (!evt.kind) {
-              return `${evt.package} - ${placeName()}`
+              return `${evt.package} - ${location()}`
             } else {
-              return `${evt.kind} - ${placeName()}`
+              return `${evt.kind} - ${location()}`
             }
           }
         } else {
@@ -80,7 +84,7 @@ function title(evt) {
             }
           } else {
             if (!evt.kind) {
-              console.log(client(), placeName())
+              console.log(client(), location())
               return `${client()} - ${evt.package}`
             } else {
               return `${client()} - ${evt.kind}`

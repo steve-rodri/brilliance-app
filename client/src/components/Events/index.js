@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import Header from '../Header/index.js'
 import ListPage from '../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
@@ -34,22 +34,8 @@ export default class Events extends Component {
     this.setState({ events })
   }
 
-  handleDelete = async(id) => {
-    await event.delete(id);
-    this.setState({ newEvent: null })
-    await this.fetchAllEvents();
-  }
-
-  handleCreate = async() => {
-    const resp = await event.createNew();
-    this.setState({
-      newEvent: resp.data
-    })
-  }
-
-  List = () => {
+  List = ({ match }) => {
     const { events } = this.state
-    const { newEvent } = this.state
     return (
       <ListPage
         title="Events"
@@ -57,8 +43,7 @@ export default class Events extends Component {
         subtitles={['title', 'client', 'location', 'confirmation', 'scheduled']}
         data={events}
         create={this.handleCreate}
-        newRecord={newEvent}
-        match={this.props.match}
+        match={match}
       />
     )
   }
@@ -71,17 +56,17 @@ export default class Events extends Component {
       <EventDetail
         e={e}
         eventId={req_id}
-        handleDelete={this.handleDelete}
-        match={this.props.match}
         fetchAllEvents={this.fetchAllEvents}
       />
     )
   }
 
   Create = ({ match }) => {
+    const isNew = match.path === '/admin/events/new'
     return (
       <EventDetail
-        match={this.props.match}
+        isNew={isNew}
+        fetchAllEvents={this.fetchAllEvents}
       />
     )
   }
@@ -92,9 +77,11 @@ export default class Events extends Component {
       <div className='Section'>
         <Header location={location}/>
 
-        <Route exact path={match.path} render={this.List}/>
-        <Route exact path={`${match.path}/new`} render={this.Create}/>
-        <Route exact path={`${match.path}/:id`} render={this.Show}/>
+        <Switch>
+          <Route exact path={match.path} render={(props) => this.List(props)}/>
+          <Route exact path={`${match.path}/new`} render={(props) => this.Create(props)}/>
+          <Route path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
+        </Switch>
       </div>
     )
   }
