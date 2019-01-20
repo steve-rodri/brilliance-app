@@ -79,6 +79,7 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-self: flex-end;
 }
 
 .BasicInfo--button {
@@ -101,5 +102,9 @@ label {
 @media (min-width: 600px) {
   .BasicInfo--event-title, .BasicInfo--event-summary {
     font-size: 35px;
+  }
+
+  .BasicInfo--header {
+    grid-template-columns: 85% 15%;
   }
 }

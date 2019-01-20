@@ -1,119 +1,26 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import MainInfo from './MainInfo/index.js'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPencilAlt, faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
+import Header from './Header'
 import './index.css'
-
-library.add(faPencilAlt)
-library.add(faCheck)
-library.add(faTimes)
-library.add(faTrash)
 
 export default class BasicInfo extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      redirectToEvents: false
-    }
-  }
-
-  delete = () => {
-    const { event } = this.props
-    this.props.delete(event.id)
-    this.setState({
-      redirectToEvents: true
-    })
-  }
-
-  styleSummary = (summary) => {
-    if (summary) {
-      if (summary.length > 35) {
-        console.log(window.innerWidth)
-        if (window.innerWidth > 600) {
-          return {
-            fontSize: '25px'
-          }
-        } else {
-          return {
-            fontSize: '35px'
-          }
-        }
-      } else {
-        return {}
-      }
-    } else {
-      return {}
-    }
+    this.state = {}
   }
 
   render(){
-    const { event, fields, searchFieldData, editMode, match } = this.props
-    if (this.state.redirectToEvents) return (<Redirect to={match.path}/>)
+    const { event, fields, editMode } = this.props
     return (
       <div className="BasicInfo--container">
-        <div className="BasicInfo--header">
-          {editMode && event?
-            <input
-              className="BasicInfo--event-summary"
-              style={this.styleSummary(fields && fields.summary)}
-              name="summary" value={fields.summary? fields.summary : ''}
-              onChange={this.props.handleChange}
-            />
-            :
-            <h1
-              className="BasicInfo--event-title"
-              style={this.styleSummary(fields && fields.summary)}
-            >
-              {fields && fields.summary}
-            </h1>
-          }
-          {editMode?
-            <div className="BasicInfo--buttons">
-              <div
-                className="BasicInfo--button close"
-                onClick={this.props.close}
-              >
-                <FontAwesomeIcon icon="times" size="2x"/>
-              </div>
-              <div
-                className="BasicInfo--button edit"
-                onClick={this.props.handleSubmit}
-              >
-                <FontAwesomeIcon icon="check" size="2x"/>
-              </div>
-            </div>
-            :
-            <div className="BasicInfo--buttons">
-              <div
-                className="BasicInfo--button edit"
-                onClick={this.props.edit}
-              >
-                <FontAwesomeIcon icon="pencil-alt" size="2x"/>
-              </div>
-             {event?
-                <div
-                  className="BasicInfo--button delete"
-                  onClick={this.delete}
-                >
-                  <FontAwesomeIcon icon="trash" size="2x"/>
-                </div>
-                :
-                ''
-              }
-            </div>
-          }
-        </div>
+
+        <Header
+          {...this.props}
+        />
 
         <MainInfo
-          event={event}
-          searchFieldData={searchFieldData}
-          fields={fields}
-          editMode={editMode}
-          handleSelect={this.props.handleSelect}
-          handleChange={this.props.handleChange}
-          handleSearchChange={this.props.handleSearchChange}
+          {...this.props}
         />
 
         <div className="BasicInfo--staff-and-notes">

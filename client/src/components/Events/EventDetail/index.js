@@ -9,6 +9,7 @@ import { client } from '../../../services/client';
 import { place } from '../../../services/place';
 import { eventTitle } from '../Helpers/eventTitle';
 import { clientName } from '../Helpers/clientName';
+import { locationName } from '../Helpers/locationName';
 import './index.css';
 
 export default class EventDetail extends Component {
@@ -21,29 +22,38 @@ export default class EventDetail extends Component {
       searchFieldData: null,
       formData: null,
       editMode: false,
-      redirectToEvents: false
+      redirectToEvents: false,
+      redirectToEvent: false
     }
   }
 
   async componentDidMount(){
     window.scrollTo(0,0);
     await this.setFields();
-    await this.getEvent();
-    await this.setClientName();
+    const { isNew } = this.props
+    if (isNew) {
+      this.edit()
+      this.setField('summary', 'Create a New Event')
+    } else {
+      await this.getEvent();
+      await this.setClientName();
+      await this.setLocationName();
+    }
   }
 
   getEvent = async() => {
     const { e, eventId } = this.props
-    if (!e) {
-      const evt = await event.getOne(eventId)
-      if (evt) {
-        this.setState({ evt })
+      if (!e) {
+        const evt = await event.getOne(eventId)
+        if (evt) {
+          this.setState({ evt })
+        } else {
+          this.setState({ redirectToEvents: true })
+        }
       } else {
-        this.edit()
+        console.log(e)
+        this.setState({ evt: e })
       }
-    } else {
-      this.setState({ evt: e })
-    }
     await this.setFields();
   }
 
@@ -73,6 +83,26 @@ export default class EventDetail extends Component {
     }
   }
 
+  setLocationName(){
+    const { evt } = this.state
+    if (evt) {
+      if (evt.placeLocation) {
+        const location = locationName(evt.placeLocation)
+        if (evt.placeLocation.installation) {
+          this.setState(prevState => ({
+            fields: {
+              ...prevState.fields,
+              location,
+              onPremise: evt.placeLocation.installation
+            }
+          }))
+        } else {
+          this.setField('location', location)
+        }
+      }
+    }
+  }
+
   setFields = () => {
     const { evt } = this.state
     if (!evt) {
@@ -92,6 +122,13 @@ export default class EventDetail extends Component {
       }
     })
   )}
+
+  handleDelete = async() => {
+    const { evt } = this.state
+    await event.delete(evt.id)
+    await this.props.fetchAllEvents()
+    this.setState({ redirectToEvents: true })
+  }
 
   handleSearchChange = async(e) => {
     const { name, value } = e.target
@@ -115,18 +152,43 @@ export default class EventDetail extends Component {
     const { searchFieldData } = this.state
     if (searchFieldData.length > 0) {
       const item = searchFieldData[index]
-
       switch (name) {
         case 'client':
-        const client = clientName(item);
+          const client = clientName(item);
+            this.setState(prevState => ({
+              formData: {
+                ...prevState.formData,
+                client_id: item.id
+              },
+              fields: {
+                ...prevState.fields,
+                client
+              },
+              searchFieldData: null
+            }),() => {
+              this.setState(prevState => ({
+                fields: {
+                  ...prevState.fields,
+                  summary: eventTitle(prevState.fields)
+                },
+                formData: {
+                  ...prevState.formData,
+                  summary: eventTitle(prevState.fields)
+                }
+              }))
+            })
+          break;
+        case 'location':
+          const location = locationName(item)
           this.setState(prevState => ({
             formData: {
               ...prevState.formData,
-              client_id: item.id
+              location_id: item.id
             },
             fields: {
               ...prevState.fields,
-              [name]: client
+              location,
+              onPremise: item.installation
             },
             searchFieldData: null
           }),() => {
@@ -134,19 +196,14 @@ export default class EventDetail extends Component {
               fields: {
                 ...prevState.fields,
                 summary: eventTitle(prevState.fields)
+              },
+              formData: {
+                ...prevState.formData,
+                summary: eventTitle(prevState.fields)
               }
             }))
           })
-        break;
-        case 'location':
-          this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              place_id: item.id
-            },
-            searchFieldData: null
-          }))
-        break;
+          break;
         default:
           this.setState(prevState => ({
             formData: {
@@ -155,7 +212,7 @@ export default class EventDetail extends Component {
             },
             searchFieldData: null
           }))
-        break;
+          break;
       }
       this.resetSearchFieldData()
     }
@@ -188,11 +245,15 @@ export default class EventDetail extends Component {
 
   handleSubmit = async() => {
     const { evt, formData, editMode } = this.state
+    const { isNew } = this.props
     if (formData) {
-      if (!evt) {
+      if (isNew) {
         const newEvent = await event.createNew(formData)
         this.resetForm()
-        this.setState({ evt: newEvent })
+        this.setState({
+          evt: newEvent,
+          redirectToEvents: true
+        })
       } else {
         await event.update(evt.id, formData)
         this.resetForm();
@@ -203,7 +264,7 @@ export default class EventDetail extends Component {
       }
       await this.setClientName();
       await this.setFields();
-      this.props.fetchAllEvents();
+      await this.props.fetchAllEvents();
     }
     this.setState({editMode: !editMode})
   }
@@ -238,21 +299,17 @@ export default class EventDetail extends Component {
   }
 
   view = () => {
-    const { view, evt, fields, searchFieldData, editMode } = this.state
-    switch (view) {
+    switch (this.state.view) {
       case 'Basic Info':
         return (
           <BasicInfo
-            match={this.props.match}
-            event={evt}
-            fields={fields}
-            searchFieldData={searchFieldData}
-            editMode={editMode}
+            {...this.state}
+            {...this.props}
             edit={this.edit}
-            delete={this.props.handleDelete}
             close={this.close}
             setField={this.setField}
             resetForm={this.resetForm}
+            delete={this.handleDelete}
             handleChange={this.handleChange}
             handleSearchChange={this.handleSearchChange}
             handleSelect={this.handleSelect}
@@ -262,23 +319,21 @@ export default class EventDetail extends Component {
       case 'Logistics':
         return (
           <Logistics
-            event={evt}
-            fields={fields}
+            {...this.state}
           />
         )
       case 'Invoice':
         return (
           <Invoice
-            event={evt}
+            {...this.state}
           />
         )
       case 'Cash Flow':
         return (
           <CashFlow
-            event={evt}
+            {...this.state}
           />
         )
-
       default:
     }
   }
@@ -300,8 +355,9 @@ export default class EventDetail extends Component {
   }
 
   render(){
-    const { match } = this.props
-    if (this.state.redirectToEvents) return (<Redirect to={match.path}/>)
+    const { evt } = this.state
+    if (this.state.redirectToEvents) return (<Redirect to='/admin/events'/>)
+    if (this.state.redirectToEvent) return (<Redirect to={`/admin/events/${evt.id}`}/>)
     return (
       <div className="EventDetail--container" onClick={this.resetSearchFieldData}>
         <div className="EventDetail--tab-control">

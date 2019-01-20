@@ -29,7 +29,7 @@ export default function Standard (props){
 
       <label>Start</label>
         <div className="Standard--field">
-          <p>{fields && fields.start? moment(fields.start).format('LLLL'): ''}</p>
+          <p>{fields && fields.start? moment(fields.start).format('llll'): ''}</p>
         </div>
 
       <label>Description</label>
@@ -39,7 +39,7 @@ export default function Standard (props){
 
       <label>End</label>
         <div className="Standard--field">
-          <p>{fields && fields.end? moment(fields.end).format('LLLL') : ''}</p>
+          <p>{fields && fields.end? moment(fields.end).format('llll') : ''}</p>
         </div>
 
       <label>Package</label>

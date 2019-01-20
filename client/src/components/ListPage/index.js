@@ -12,15 +12,7 @@ export default class ListPage extends Component {
   constructor(props){
     super(props)
     this.state = {
-      redirectToNewRecord: false,
       redirectToCreateNew: false
-    }
-  }
-  componentWillReceiveProps(newProps){
-    if (newProps.newRecord) {
-      this.setState({
-        redirectToNewRecord: true
-      })
     }
   }
 
@@ -31,7 +23,7 @@ export default class ListPage extends Component {
   }
 
   render(){
-    const { newRecord, match } = this.props
+    const { match } = this.props
     if (this.state.redirectToCreateNew) return (<Redirect to={`${match.path}/new`}/>)
     return (
       <div className='ListPage--container'>
