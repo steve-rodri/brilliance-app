@@ -78,13 +78,12 @@ function title(evt) {
         } else {
           if (!evt.package) {
             if (!evt.kind) {
-              return client()
+              return `${client()} - ${location()}`
             } else {
               return `${client()} - ${evt.kind}`
             }
           } else {
             if (!evt.kind) {
-              console.log(client(), location())
               return `${client()} - ${evt.package}`
             } else {
               return `${client()} - ${evt.kind}`
