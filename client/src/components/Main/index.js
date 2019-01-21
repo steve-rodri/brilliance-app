@@ -38,7 +38,6 @@ export default class Main extends Component {
 //   const calendars = await getGoogleCalendars();
 //   const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
 //   const events = await getGoogleEvents(jobsCalendar.id)
-//   console.log(events)
 // }
 //
 // async mergeGoogleCalendar(){

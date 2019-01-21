@@ -73,7 +73,6 @@ export default function Header(props){
 function styleSummary(summary) {
   if (summary) {
     if (summary.length > 35) {
-      console.log(window.innerWidth)
       if (window.innerWidth > 600) {
         return {
           fontSize: '25px'
