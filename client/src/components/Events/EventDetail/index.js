@@ -10,6 +10,7 @@ import { place } from '../../../services/place';
 import { eventTitle } from '../Helpers/eventTitle';
 import { clientName } from '../Helpers/clientName';
 import { locationName } from '../Helpers/locationName';
+import moment from 'moment'
 import './index.css';
 
 export default class EventDetail extends Component {
@@ -51,7 +52,6 @@ export default class EventDetail extends Component {
           this.setState({ redirectToEvents: true })
         }
       } else {
-        console.log(e)
         this.setState({ evt: e })
       }
     await this.setFields();
@@ -143,8 +143,7 @@ export default class EventDetail extends Component {
             formData: {
               ...prevState.formData,
               client_id: null
-            },
-            searchFieldData: null
+            }
           }),() => {
             this.setState(prevState => ({
               fields: {
@@ -158,7 +157,12 @@ export default class EventDetail extends Component {
             }))
           })
         }
-        this.setState({ searchFieldData: { clients } })
+        this.setState(prevState => ({
+          searchFieldData: {
+            ...prevState.searchFieldData,
+            clients
+          }
+         }))
         break;
       case 'location':
         const locations = await this.findPlaces(value)
@@ -171,8 +175,7 @@ export default class EventDetail extends Component {
             fields: {
               ...prevState.fields,
               onPremise: null
-            },
-            searchFieldData: null
+            }
           }),() => {
             this.setState(prevState => ({
               fields: {
@@ -186,7 +189,12 @@ export default class EventDetail extends Component {
             }))
           })
         }
-        this.setState({ searchFieldData: { locations } })
+        this.setState(prevState => ({
+          searchFieldData: {
+            ...prevState.searchFieldData,
+            locations
+          }
+         }))
         break;
       default:
         break;
@@ -194,27 +202,53 @@ export default class EventDetail extends Component {
   }
 
   handleSelect = (e, name, index) => {
-    e.preventDefault();
-    let item;
-    const { searchFieldData } = this.state
+    if (e.key === 'Tab' || e.key === 'Enter') {
 
-    if (searchFieldData) {
-      switch (name) {
-        case 'client':
-          item = searchFieldData.clients[index]
-          const client = clientName(item);
+      let item;
+      const { searchFieldData } = this.state
 
+      if (searchFieldData) {
+        switch (name) {
+          case 'client':
+            item = searchFieldData.clients[index]
+            const client = clientName(item);
 
+              this.setState(prevState => ({
+                formData: {
+                  ...prevState.formData,
+                  client_id: item.id
+                },
+                fields: {
+                  ...prevState.fields,
+                  client
+                }
+              }),() => {
+                this.setState(prevState => ({
+                  fields: {
+                    ...prevState.fields,
+                    summary: eventTitle(prevState.fields)
+                  },
+                  formData: {
+                    ...prevState.formData,
+                    summary: eventTitle(prevState.fields)
+                  }
+                }))
+              })
+            break;
+
+          case 'location':
+            item = searchFieldData.locations[index]
+            const location = locationName(item)
             this.setState(prevState => ({
               formData: {
                 ...prevState.formData,
-                client_id: item.id
+                location_id: item.id
               },
               fields: {
                 ...prevState.fields,
-                client
-              },
-              searchFieldData: null
+                location,
+                onPremise: item.installation
+              }
             }),() => {
               this.setState(prevState => ({
                 fields: {
@@ -227,74 +261,61 @@ export default class EventDetail extends Component {
                 }
               }))
             })
-          break;
+            break;
 
-        case 'location':
-          item = searchFieldData.locations[index]
-          const location = locationName(item)
-          this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              location_id: item.id
-            },
-            fields: {
-              ...prevState.fields,
-              location,
-              onPremise: item.installation
-            },
-            searchFieldData: null
-          }),() => {
+          default:
             this.setState(prevState => ({
-              fields: {
-                ...prevState.fields,
-                summary: eventTitle(prevState.fields)
-              },
               formData: {
                 ...prevState.formData,
-                summary: eventTitle(prevState.fields)
+                [name]: item.id
               }
             }))
-          })
-          break;
+            break;
 
-        default:
-          this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              [name]: item.id
-            },
-            searchFieldData: null
-          }))
-          break;
-
+        }
       }
-      this.resetSearchFieldData()
     }
   }
 
   handleChange = (e) => {
-    const {name, value} = e.target
-    this.setState(prevState => ({
-      fields: {
-        ...prevState.fields,
-        [name]: value
-      },
-      formData: {
-        ...prevState.formData,
-        [name]: value
-      }
-    }), () => {
+    if (e) {
+      const {name, value} = e.target
       this.setState(prevState => ({
         fields: {
           ...prevState.fields,
-          summary: eventTitle(prevState.fields)
+          [name]: value
         },
         formData: {
           ...prevState.formData,
-          summary: eventTitle(prevState.fields)
+          [name]: value
         }
-      }))
-    })
+      }), () => {
+        this.setState(prevState => ({
+          fields: {
+            ...prevState.fields,
+            summary: eventTitle(prevState.fields)
+          },
+          formData: {
+            ...prevState.formData,
+            summary: eventTitle(prevState.fields)
+          }
+        }))
+      })
+    }
+  }
+
+  handleDateChange = (field, datetime) => {
+    const dt = moment(datetime).format()
+    this.setState(prevState => ({
+      fields: {
+        ...prevState.fields,
+        [field]: dt
+      },
+      formData: {
+        ...prevState.formData,
+        [field]: dt
+      }
+    }))
   }
 
   handleSubmit = async() => {
@@ -328,11 +349,8 @@ export default class EventDetail extends Component {
   }
 
   close = () => {
-    this.setState({
-      editMode: !this.state.editMode,
-      formData: null,
-      searchFieldData: null
-    })
+    this.resetForm();
+    this.resetSearchFieldData();
     this.setFields();
     this.setClientName();
     this.setLocationName();
@@ -346,8 +364,8 @@ export default class EventDetail extends Component {
 
   resetForm = () => {
     this.setState({
-      formData: {},
-      editMode: false
+      formData: null,
+      editMode: !this.state.editMode
     })
   }
 
@@ -368,6 +386,7 @@ export default class EventDetail extends Component {
             resetForm={this.resetForm}
             delete={this.handleDelete}
             handleChange={this.handleChange}
+            handleDateChange={this.handleDateChange}
             handleSearchChange={this.handleSearchChange}
             onSelect={this.handleSelect}
             handleSubmit={this.handleSubmit}
@@ -416,7 +435,7 @@ export default class EventDetail extends Component {
     if (this.state.redirectToEvents) return (<Redirect to='/admin/events'/>)
     if (this.state.redirectToEvent) return (<Redirect to={`/admin/events/${evt.id}`}/>)
     return (
-      <div className="EventDetail--container" onClick={this.resetSearchFieldData}>
+      <div className="EventDetail--container">
         <div className="EventDetail--tab-control">
           <div className="Tab" style={this.styleTab("Basic Info")}  onClick={() => this.setView("Basic Info")}><h3>BASIC INFO</h3></div>
           <div className="Tab" style={this.styleTab("Logistics")}   onClick={() => this.setView("Logistics")}><h3>LOGISTICS</h3></div>
