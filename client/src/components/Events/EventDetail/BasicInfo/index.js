@@ -27,7 +27,7 @@ export default class BasicInfo extends Component {
           <div className="BasicInfo--notes-container">
             <label>Notes</label>
             {editMode?
-              <textarea className="BasicInfo--notes" type="text" name='notes' value={fields.notes? fields.notes : ''} onChange={this.props.handleChange}/>
+              <textarea className="BasicInfo--notes" type="text" name='notes' value={fields.notes? fields.notes : ''} onChange={this.props.handleChange} tabIndex="9"/>
               :
               <textarea readOnly="readonly" value={event && event.notes? event.notes : ''} className="BasicInfo--notes-readonly"/>
             }
