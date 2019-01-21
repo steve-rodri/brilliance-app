@@ -43,12 +43,12 @@ class ClientsController < ApplicationController
     terms = params[:q].split
 
     if terms.length > 1
-      contact_query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0]}%' AND last_name LIKE '%#{terms[1]}%' LIMIT 10"
+      contact_query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0].capitalize}%' AND last_name LIKE '%#{terms[1].capitalize}%' LIMIT 10"
     else
-      contact_query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0]}%' LIMIT 10"
+      contact_query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0].capitalize}%' LIMIT 10"
     end
 
-    company_query = "SELECT * FROM companies WHERE name LIKE '%#{params[:q]}%'"
+    company_query = "SELECT * FROM companies WHERE name LIKE '%#{params[:q].capitalize}%'"
 
     contacts = execute_sql(contact_query)
     companies = execute_sql(company_query)
