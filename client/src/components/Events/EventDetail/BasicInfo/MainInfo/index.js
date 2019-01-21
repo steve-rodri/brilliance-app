@@ -4,6 +4,7 @@ import Edit from './Edit'
 import './index.css'
 
 export default class MainInfo extends Component {
+  
   view = () => {
     const { editMode } = this.props
     if (editMode) {

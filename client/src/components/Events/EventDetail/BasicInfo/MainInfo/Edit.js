@@ -62,7 +62,7 @@ export default class Edit extends Component {
         default:
           return { display: 'none' }
       }
-      
+
     } else {
       return { display: 'none' }
     }
@@ -105,6 +105,7 @@ export default class Edit extends Component {
             onChange={this.props.handleSearchChange}
             onFocus={this.handleViewResults}
             onBlur={this.handleCloseResults}
+            tabIndex="1"
           />
 
           <div
@@ -133,7 +134,16 @@ export default class Edit extends Component {
         <label>Type/Action</label>
 
           <div className="Edit--field">
-            <input className="Edit--input" type="text" name='action' value={fields.action? fields.action : ''} onChange={this.props.handleChange}/>
+
+            <input
+              className="Edit--input"
+              type="text"
+              name='action'
+              value={fields.action? fields.action : ''}
+              onChange={this.props.handleChange}
+              tabIndex="5"
+            />
+
           </div>
 
         <label>Location</label>
@@ -156,6 +166,7 @@ export default class Edit extends Component {
               onChange={this.props.handleSearchChange}
               onFocus={this.handleViewResults}
               onBlur={this.handleCloseResults}
+              tabIndex="2"
             />
 
             <div
@@ -187,7 +198,15 @@ export default class Edit extends Component {
         <label>Kind</label>
 
           <div className="Edit--field">
-            <input className="Edit--input" type="text" name='kind' value={fields.kind? fields.kind : ''} onChange={this.props.handleChange}/>
+            <input
+              className="Edit--input"
+              type="text"
+              name='kind'
+              value={fields.kind? fields.kind : ''}
+              onChange={this.props.handleChange}
+              tabIndex="6"
+            />
+
           </div>
 
         <label>Start</label>
@@ -196,7 +215,7 @@ export default class Edit extends Component {
 
             <Datetime
               className="Edit--date-input-container"
-              inputProps={{ className:"Edit--input" }}
+              inputProps={{ className:"Edit--input", tabIndex:"3" }}
               value={fields.start? moment(fields.start).format('llll') : ''}
               viewDate={fields.start? fields.start : ''}
               timeConstraints={{ minutes:{ step: 15 } }}
@@ -209,7 +228,15 @@ export default class Edit extends Component {
         <label>Description</label>
 
           <div className="Edit--field">
-            <input className="Edit--input" type="text" name= 'description' value={fields.description? fields.description : ''} onChange={this.props.handleChange}/>
+            <input
+              className="Edit--input"
+              type="text"
+              name= 'description'
+              value={fields.description? fields.description : ''}
+              onChange={this.props.handleChange}
+              tabIndex="7"
+            />
+
           </div>
 
         <label>End</label>
@@ -218,7 +245,7 @@ export default class Edit extends Component {
 
             <Datetime
               className="Edit--date-input-container"
-              inputProps={{ className:"Edit--input" }}
+              inputProps={{ className:"Edit--input", tabIndex:"4" }}
               value={fields.end? moment(fields.end).format('llll') : ''}
               viewDate={fields.end? fields.end : ''}
               timeConstraints={{ minutes:{ step: 15 } }}
@@ -232,7 +259,15 @@ export default class Edit extends Component {
         <label>Package</label>
 
           <div className="Edit--field">
-            <input className="Edit--input" type="text" name='package' value={fields.package? fields.package : ''} onChange={this.props.handleChange}/>
+            <input
+              className="Edit--input"
+              type="text"
+              name='package'
+              value={fields.package? fields.package : ''}
+              onChange={this.props.handleChange}
+              tabIndex="8"
+            />
+
           </div>
 
       </div>
