@@ -3,7 +3,11 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
-    @clients = Client.all.limit(50)
+    items_per_page = 25
+
+    @clients = Client
+    .all
+    .paginate(page: params[:page], per_page: items_per_page)
 
     render json: @clients, include: '**'
   end
