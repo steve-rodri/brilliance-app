@@ -14,18 +14,36 @@ export default class Clients extends Component {
 
   fetchClients = async(page) => {
     const loadedClients = await client.getAll(page);
-    const clients = [...this.state.clients]
-    loadedClients.forEach(c => clients.push(c))
+    this.updateClients(loadedClients)
+  }
 
-    if (loadedClients.length < 25) {
+  fetchClientsByCategory = async(category) => {
+    const loadedClients = await client.findByCategory(category);
+    this.resetClients()
+    this.updateClients(loadedClients)
+  }
 
-      this.setState({
-        clients,
-        hasMore: false
-      })
+  updateClients = (clients) => {
+    if (clients) {
+      const clts = [...this.state.clients]
+      clients.forEach(c => clts.push(c))
+
+      if (clients.length < 25) {
+
+        this.setState({
+          clients,
+          hasMore: false
+        })
+      } else {
+        this.setState({ clients })
+      }
     } else {
-      this.setState({ clients })
+      this.resetClients()
     }
+  }
+
+  resetClients = () => {
+    this.setState({clients: []})
   }
 
   render(){
@@ -41,6 +59,7 @@ export default class Clients extends Component {
           data={clients}
           load={this.fetchClients}
           hasMore={hasMore}
+          fetchByCategory={this.fetchClientsByCategory}
         />
       </div>
     )

@@ -5,11 +5,81 @@ class ClientsController < ApplicationController
   def index
     items_per_page = 25
 
-    @clients = Client
-    .all
-    .paginate(page: params[:page], per_page: items_per_page)
+    if params[:category]
+      if params[:category] == 'All'
 
-    render json: @clients, include: '**'
+        @clients = Client
+          .all
+          .paginate(page: params[:page], per_page: items_per_page)
+
+        render json: @clients, include: '**'
+
+      elsif params[:category] == 'Production'
+        production_queries = []
+        on_premise_locations = Place.where("installation = true")
+
+        on_premise_locations.each do |location|
+          id = location.as_json["id"]
+          production_queries.push("location_id != #{id}")
+        end
+
+        query = production_queries.join(' AND ')
+        production_events = Event.where(query)
+
+        client_queries = []
+
+        production_events.each do |event|
+          id = event.as_json["client_id"]
+          client_queries.push("id = #{id}")
+        end
+
+        query = client_queries.join(' OR ')
+
+        @clients = Client
+          .where(query)
+          .paginate(page: params[:page], per_page: items_per_page)
+
+        render json: @clients, include: '**'
+      else
+
+        location = Place.find_by short_name: params[:category]
+        if location
+
+          location_id = location.as_json["id"]
+
+          events = Event.where("location_id = #{location_id}")
+          puts events
+          if events.length > 0
+
+            client_queries = []
+
+            events.each do |event|
+              id = event.as_json["client_id"]
+              client_queries.push("id = #{id}")
+            end
+
+            query = client_queries.join(' OR ')
+
+            @clients = Client
+              .where(query)
+              .paginate(page: params[:page], per_page: items_per_page)
+
+            render json: @clients, include: '**'
+          else
+            render status: 404
+          end
+
+        else
+          render status: 404
+        end
+      end
+    else
+      @clients = Client
+        .all
+        .paginate(page: params[:page], per_page: items_per_page)
+
+      render json: @clients, include: '**'
+    end
   end
 
   # GET /clients/1
@@ -91,6 +161,6 @@ class ClientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def client_params
-      params.require(:client).permit(:contact_id, :q)
+      params.require(:client).permit(:contact_id, :q, :category)
     end
 end
