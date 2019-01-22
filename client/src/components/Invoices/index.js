@@ -9,29 +9,37 @@ export default class Invoices extends Component {
   constructor(props){
     super(props)
     this.state = {
-      invoices: []
+      invoices: [],
+      hasMore: true
     }
   }
 
-  async componentDidMount(){
-    await this.fetchAllInvoices()
-  }
+  fetchInvoices = async(page) => {
+    const loadedInvoices = await invoice.getAll(page);
+    const invoices = [...this.state.invoices]
+    loadedInvoices.forEach(i => invoices.push(i))
 
-  fetchAllInvoices = async() => {
-    const invoices = await invoice.getAll();
-    this.setState({
-      invoices
-    })
+    if (loadedInvoices.length < 25) {
+
+      this.setState({
+        invoices,
+        hasMore: false
+      })
+    } else {
+      this.setState({ invoices })
+    }
   }
 
   List = () => {
-    const { invoices } = this.state
+    const { invoices, hasMore } = this.state
     return (
       <ListPage
         title="Invoices"
         categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
         subtitles={['client & date', 'type', 'status', 'balance']}
         data={invoices}
+        load={this.fetchInvoices}
+        hasMore={hasMore}
       />
     )
   }
