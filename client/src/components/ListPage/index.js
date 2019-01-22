@@ -31,11 +31,24 @@ export default class ListPage extends Component {
           <h2 className="ListPage--name">{this.props.title}</h2>
           <div className="ListPage--categories">
             {this.props.categories.map((category, id) => (
-              <a href='#'key={id}>{category}</a>
+              <div
+                onClick={(e) => {
+                  e.stopPropagation()
+                  this.props.fetchByCategory(category)
+                }}
+                key={id}>{category}
+              </div>
             ))}
           </div>
           {this.props.title === "Events"?
-            <div className="ListPage--button create" onClick={this.createNew}><span className="button-text">Create New</span>{<FontAwesomeIcon className="plus-icon" icon="plus" size="2x"/>}</div>
+            <div
+              className="ListPage--button create"
+              onClick={this.createNew}
+              style={{border: 'none'}}
+            >
+              <span className="button-text">Create New</span>
+              {<FontAwesomeIcon className="plus-icon" icon="plus" size="2x"/>}
+            </div>
             :
             ''
           }
@@ -47,6 +60,8 @@ export default class ListPage extends Component {
             items={this.props.data}
             type={this.props.title}
             create={this.createNew}
+            load={this.props.load}
+            hasMore={this.props.hasMore}
             handleSelect={this.handleSelect}
           />
         </main>

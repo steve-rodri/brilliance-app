@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import ListItem from '../ListItem/index.js'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import InfiniteScroll from 'react-infinite-scroller'
 import './List.css'
 
-library.add(faPlus)
 
 export default class List extends Component {
   render(){
-    const items = this.props.items
-    const subtitles = this.props.subtitles
+    const {items, subtitles, load, hasMore } = this.props
+
     const style = () => {
       if (subtitles) {
         return this.styleColumns(subtitles.length)
@@ -18,7 +15,6 @@ export default class List extends Component {
         return {}
       }
     }
-
     return (
       <div className="List--container">
         <div className="Titles" style={style()}>
@@ -27,21 +23,24 @@ export default class List extends Component {
           ))}
         </div>
         <div className="List">
-        { items && items.map((item, id) => (
-          <ListItem
-            user={this.props.user}
-            key={id}
-            item={item}
-            type={this.props.type}
-            numColumns={subtitles && subtitles.length}
-            styleColumns={this.styleColumns}
-          />
-        ))}
-        {this.props.type === "Events"?
-          <div className="ListPage--button create" onClick={this.props.create}><span className="button-text">Create New</span>{<FontAwesomeIcon className="plus-icon" icon="plus" size="2x"/>}</div>
-          :
-          ''
-        }
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={load}
+            hasMore={hasMore}
+            loader={<div className="loader">Loading...</div>}
+            useWindow={false}
+          >
+            {items && items.map((item, id) => (
+              <ListItem
+                user={this.props.user}
+                key={id}
+                item={item}
+                type={this.props.type}
+                numColumns={subtitles && subtitles.length}
+                styleColumns={this.styleColumns}
+              />
+            ))}
+          </InfiniteScroll>
         </div>
       </div>
     )

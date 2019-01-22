@@ -21,8 +21,8 @@ export default function ListItem(props){
             <p>{item && timeUntil()}</p>
             <div>
               <h4>{item && item.summary}</h4>
-              <p>{item && item.start && moment(start()).format('dddd, MMMM Do')}</p>
-              <p>{item && item.start && item.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
+              <p>{item && item.start && moment.utc(start()).format('dddd, MMMM Do')}</p>
+              <p>{item && item.start && item.end && `${moment.utc(start()).format('LT')} - ${moment.utc(end()).format('LT')}`}</p>
             </div>
             <p className="List-Item--description">{item && item.description}</p>
             <p>{status(props)}</p>
@@ -36,8 +36,8 @@ export default function ListItem(props){
           <div className="List-Item" style={styleColumns(numColumns)}>
             <div>
               <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
-              <p>{event && event.start && moment(start()).format('ddd, MMM Do')}</p>
-              <p>{event && event.start && event.end && `${moment(start()).format('LT')} - ${moment(end()).format('LT')}`}</p>
+              <p>{event && event.start && moment.utc(start()).format('ddd, MMM Do')}</p>
+              <p>{event && event.start && event.end && `${moment.utc(start()).format('LT')} - ${moment.utc(end()).format('LT')}`}</p>
             </div>
             <div>
               <p>{event && clientName(event)}</p>
@@ -100,18 +100,6 @@ export default function ListItem(props){
     }
   }
 
-  function checkStartType() {
-    if (item) {
-      if (item.start) {
-        if (item.start.date) {
-          return item.start.date
-        } else if (item.start.dateTime) {
-          return item.start.dateTime
-        }
-      }
-    }
-  }
-
   function styleColumns(numColumns){
     return {
       gridTemplateColumns: `repeat(${numColumns}, 1fr)`
@@ -132,15 +120,19 @@ export default function ListItem(props){
     }
   }
 
-  function start(){
-    if (!checkStartType()) {
-      return item.start
-    } else {
-      return checkStartType()
+  function checkStartType() {
+    if (item) {
+      if (item.start) {
+        if (item.start.date) {
+          return item.start.date
+        } else if (item.start.dateTime) {
+          return item.start.dateTime
+        }
+      }
     }
   }
 
-  function end() {
+  function checkEndType() {
     if (item) {
       if (item.end) {
         if (item.end.date) {
@@ -152,8 +144,24 @@ export default function ListItem(props){
     }
   }
 
+  function start(){
+    if (!checkStartType()) {
+      return item.start
+    } else {
+      return checkStartType()
+    }
+  }
+
+  function end() {
+    if (!checkEndType()) {
+      return item.end
+    } else {
+      return checkEndType()
+    }
+  }
+
   function timeUntil(){
-    return moment(start()).fromNow()
+    return moment.utc(start()).fromNow()
   }
 
   function clientName(event) {
