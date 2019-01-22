@@ -12,17 +12,35 @@ export default class Events extends Component {
     super(props)
     this.state = {
       events: [],
-      newEvent: null
+      hasMore: true
     }
   }
 
-  async componentDidMount(){
-    await this.fetchAllEvents()
-    this.setState( { newEvent: null })
+  fetchEvents = async(page) => {
+    const evts = await event.getAll(page);
+    const updatedEvents = evts.map( async(e) => {
+      if (!e.summary) {
+        e.summary = eventTitle(e)
+        await event.update(e.id, {summary: e.summary})
+      }
+      return e
+    })
+    const loadedEvents = await Promise.all(updatedEvents)
+    const events = [...this.state.events]
+    loadedEvents.forEach(e => events.push(e))
+
+    if (loadedEvents.length < 25) {
+      this.setState({
+        events,
+        hasMore: false
+      })
+    } else {
+      this.setState({ events })
+    }
   }
 
-  fetchAllEvents = async() => {
-    const evts = await event.getAll();
+  fetchEventsByCategory = async(category) => {
+    const evts = await event.findByCategory(category);
     const updatedEvents = evts.map( async(e) => {
       if (!e.summary) {
         e.summary = eventTitle(e)
@@ -35,15 +53,19 @@ export default class Events extends Component {
   }
 
   List = ({ match }) => {
-    const { events } = this.state
+    const { events, hasMore } = this.state
     return (
       <ListPage
         title="Events"
         categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
         subtitles={['title', 'client', 'location', 'confirmation', 'scheduled']}
         data={events}
-        create={this.handleCreate}
         match={match}
+        load={this.fetchEvents}
+        hasMore={hasMore}
+        create={this.handleCreate}
+        fetchAllEvents={this.fetchEvents}
+        fetchByCategory={this.fetchEventsByCategory}
       />
     )
   }
@@ -56,7 +78,7 @@ export default class Events extends Component {
       <EventDetail
         e={e}
         eventId={req_id}
-        fetchAllEvents={this.fetchAllEvents}
+        fetchAllEvents={this.fetchEvents}
       />
     )
   }
@@ -66,7 +88,7 @@ export default class Events extends Component {
     return (
       <EventDetail
         isNew={isNew}
-        fetchAllEvents={this.fetchAllEvents}
+        fetchAllEvents={this.fetchEvents}
       />
     )
   }

@@ -3,7 +3,52 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    @events = Event.last(50)
+    items_per_page = 25
+
+    if params[:category]
+      if params[:category] == 'All'
+
+        @events = Event
+          .all
+          .order(start: :desc)
+          .paginate(page: params[:page], per_page: items_per_page)
+
+      elsif params[:category] == 'Production'
+        production_querys = []
+
+        on_premise_locations = Place.where("installation = true")
+
+        on_premise_locations.each do |location|
+          id = location.as_json["id"]
+          production_querys.push("location_id != #{id}")
+        end
+
+        query = production_querys.join(' AND ')
+
+        @events = Event
+          .where(query)
+          .order(start: :desc)
+          .paginate(page: params[:page], per_page: items_per_page)
+
+      else
+
+        location = Place.find_by short_name: params[:category]
+        location_id = location.as_json["id"]
+
+        @events = Event
+          .where("location_id = #{location_id}")
+          .order(start: :desc)
+          .paginate(page: params[:page], per_page: items_per_page)
+
+      end
+    else
+
+      @events = Event
+        .all
+        .order(start: :desc)
+        .paginate(page: params[:page], per_page: items_per_page)
+
+    end
 
     render json: @events, include: '**'
   end
@@ -87,6 +132,7 @@ class EventsController < ApplicationController
         :attendees,
         :break,
         :break_start,
+        :category,
         :call_location_id,
         :call_time,
         :client_id,
