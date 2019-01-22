@@ -1,8 +1,11 @@
 .MainInfo {
+  background-color: var(--light-blue-t);
+  border: 1px dashed var(--light-blue);
   display: grid;
   grid-template-columns: 1fr 5fr 1fr 5fr;
   grid-template-rows: repeat(4, 1fr);
   grid-gap: 15px;
   align-items: center;
   padding: 30px;
+  margin: 20px 20px 0 20px;
 }
