@@ -26,20 +26,10 @@ export default class Main extends Component {
     return(
       <div className="App">
         <Route exact path="/admin" render={(props) => <Dashboard {...props} user={this.user()} /> } />
-        <Route  path="/admin/events" render={(props) => <Events {...props} user={this.user()} /> } />
-        <Route  path="/admin/clients" render={(props) => <Clients {...props} user={this.user()} /> } />
-        <Route  path="/admin/invoices" render={(props) => <Invoices {...props} user={this.user()} /> } />
+        <Route path="/admin/events" render={(props) => <Events {...props} user={this.user()} /> } />
+        <Route path="/admin/clients" render={(props) => <Clients {...props} user={this.user()} /> } />
+        <Route path="/admin/invoices" render={(props) => <Invoices {...props} user={this.user()} /> } />
       </div>
     )
   }
 }
-
-// async fetchAllGoogleEvents(){
-//   const calendars = await getGoogleCalendars();
-//   const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
-//   const events = await getGoogleEvents(jobsCalendar.id)
-// }
-//
-// async mergeGoogleCalendar(){
-//   const events = await this.fetchAllGoogleEvents()
-// }

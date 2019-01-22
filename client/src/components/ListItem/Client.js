@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 export default function Client(props) {
-  const { item, type, styleColumns, numColumns } = props
+  const { item, type, numColumns, styleColumns, styleSummary } = props
   const client = item.contactInfo
   const company = item.company
 
@@ -20,18 +21,25 @@ export default function Client(props) {
           {company && company.website && <a href={`${company.website}`} onClick={(e) => e.stopPropagation()}>{company.website}</a>}
         </div>
         <div className="List-Item--next-event">
-          {<p>{latestEvent(client)}</p>}
+          {latestEvent(client)}
         </div>
       </div>
     </Link>
   )
 
-  function latestEvent(client){
-    if (client) {
-      console.log(client)
-      if (client.events) {
-        client.events.sort(event => event.start)
-        return client.events[0].summary
+  function latestEvent(){
+    if (item) {
+      if (item.events) {
+        console.log(item.events)
+        item.events.sort(event => event.start)
+        const event = item.events[0]
+        return (
+          <div>
+            <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
+            <p>{event.start && moment.utc(event.start).format('ddd, MMM Do')}</p>
+            <p>{event.start && event.end && `${moment.utc(event.start).format('LT')} - ${moment.utc(event.end).format('LT')}`}</p>
+          </div>
+        )
       }
     }
   }
