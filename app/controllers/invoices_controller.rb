@@ -5,11 +5,81 @@ class InvoicesController < ApplicationController
   def index
     items_per_page = 25
 
-    @invoices = Invoice
-    .all
-    .paginate(page: params[:page], per_page: items_per_page)
+    if params[:category]
+      if params[:category] == 'All'
 
-    render json: @invoices, include: '**'
+        @invoices = Invoice
+          .all
+          .paginate(page: params[:page], per_page: items_per_page)
+
+        render json: @invoices, include: '**'
+
+      elsif params[:category] == 'Production'
+        production_queries = []
+        on_premise_locations = Place.where("installation = true")
+
+        on_premise_locations.each do |location|
+          id = location.as_json["id"]
+          production_queries.push("location_id != #{id}")
+        end
+
+        query = production_queries.join(' AND ')
+        production_events = Event.where(query)
+
+        invoice_queries = []
+
+        production_events.each do |event|
+          id = event.as_json["id"]
+          invoice_queries.push("event_id = #{id}")
+        end
+
+        query = invoice_queries.join(' OR ')
+
+        @invoices = Invoice
+          .where("kind = 'Production'")
+          .where(query)
+          .paginate(page: params[:page], per_page: items_per_page)
+
+        render json: @invoices, include: '**'
+      else
+
+        location = Place.find_by short_name: params[:category]
+        if location
+
+          id = location.as_json["id"]
+
+          events = Event.where("location_id = #{id}")
+          if events.length > 0
+
+            invoice_queries = []
+
+            events.each do |event|
+              id = event.as_json["id"]
+              invoice_queries.push("event_id = #{id}")
+            end
+
+            query = invoice_queries.join(' OR ')
+
+            @invoices = Invoice
+              .where(query)
+              .paginate(page: params[:page], per_page: items_per_page)
+
+            render json: @invoices, include: '**'
+          else
+            render status: 404
+          end
+
+        else
+          render status: 404
+        end
+      end
+    else
+      @invoices = Invoice
+        .all
+        .paginate(page: params[:page], per_page: items_per_page)
+
+      render json: @invoices, include: '**'
+    end
   end
 
   # GET /invoices/1
