@@ -27,9 +27,8 @@
   width: 100%;
 }
 
-.ListPage--categories > a {
+.ListPage--categories > div {
   border-bottom: 1px solid white;
-  text-decoration: none;
   font-size: 18px;
   color: white;
   text-align: center;
@@ -38,8 +37,9 @@
   margin: 3px 0;
 }
 
-.ListPage--categories > a:hover {
+.ListPage--categories > div:hover {
   color: rgba(0, 175, 215, 1);
+  cursor: pointer;
 }
 
 .ListPage--button, .create {
