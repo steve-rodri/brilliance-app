@@ -10,18 +10,14 @@ export default class Schedule extends Component {
   constructor(props){
     super(props)
     this.state = {
-      userEvents: null,
+      userEvents: [],
       redirectToLogin: false
     }
   }
 
-  async componentDidMount(){
-    await this.findUpcomingUserEvents()
-  }
-
   async componentWillUnmount(){
     this.setState({
-      userEvents: null
+      userEvents: []
     })
   }
 
@@ -59,7 +55,7 @@ export default class Schedule extends Component {
   }
 
   styleContainer(){
-    if (this.state.userEvents) {
+    if (this.state.userEvents.length > 0) {
       return {
         display: 'block'
       }
@@ -83,9 +79,11 @@ export default class Schedule extends Component {
             type="Schedule"
             items={userEvents}
             subtitles={subtitles}
+            load={this.findUpcomingUserEvents}
+            hasMore={false}
           />
         </div>
-        {!userEvents && <p className="schedule--not-currently" >Not currently scheduled...</p>}
+        {userEvents.length !== [] && <p className="schedule--not-currently" >Not currently scheduled...</p>}
       </React.Fragment>
 
     )
