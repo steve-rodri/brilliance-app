@@ -10,7 +10,7 @@ export default class BasicInfo extends Component {
   }
 
   render(){
-    const { event, fields, editMode } = this.props
+    const { fields, editMode } = this.props
     return (
       <div className="BasicInfo--container">
 
@@ -23,13 +23,25 @@ export default class BasicInfo extends Component {
         />
 
         <div className="BasicInfo--staff-and-notes">
-          <div className="BasicInfo--staff-container"></div>
+          <div className="BasicInfo--staff-container">
+            <label>Staff</label>
+          </div>
           <div className="BasicInfo--notes-container">
             <label>Notes</label>
             {editMode?
-              <textarea className="BasicInfo--notes" type="text" name='notes' value={fields.notes? fields.notes : ''} onChange={this.props.handleChange} tabIndex="9"/>
+              <textarea
+                className="BasicInfo--notes"
+                type="text" name='notes'
+                value={fields.notes? fields.notes : ''}
+                onChange={this.props.handleChange}
+                tabIndex="9"
+              />
               :
-              <textarea readOnly="readonly" value={event && event.notes? event.notes : ''} className="BasicInfo--notes-readonly"/>
+              <textarea
+                className="BasicInfo--notes-readonly"
+                value={fields && fields.notes? fields.notes : ''}
+                readOnly="readonly"
+              />
             }
           </div>
         </div>
