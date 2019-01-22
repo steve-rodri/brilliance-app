@@ -10,8 +10,8 @@
   min-height: 50px;
   max-height: 50px;
   width: 100%;
-  background-color: rgba(0, 125, 180, .6);
-  color: lightgray;
+  background-color: var(--med-dark-blue);
+  color: var(--light-gray);
   align-items: center;
 }
 
@@ -45,6 +45,6 @@
   }
 
   .EventDetail--tab-control > div > h3 {
-    font-size: 1.1em;
+    font-size: 1.5em;
   }
 }

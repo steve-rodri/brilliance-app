@@ -2,7 +2,6 @@
   height: 100vh;
   min-height: 600px;
   width: 100%;
-  padding: 0 10px 20px 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -14,7 +13,8 @@
   align-items: center;
   grid-template-columns: 90% 10%;
   border-bottom: 1px solid black;
-  padding: 10px 0;
+  padding: 10px;
+  margin: 0 10px;
   min-height: 90px;
   max-height: 90px;
 }
@@ -38,7 +38,6 @@ label {
 }
 
 .BasicInfo--staff-and-notes {
-  background-color: aliceblue;
   border-radius: 5px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -46,6 +45,7 @@ label {
   min-height: 300px;
   max-height: 500px;
   padding: 0 30px 30px 30px;
+  margin: 0 20px 20px 20px;
 }
 
 .BasicInfo--notes-container, .BasicInfo--staff-container{
