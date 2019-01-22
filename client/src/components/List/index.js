@@ -6,15 +6,16 @@ import './List.css'
 
 export default class List extends Component {
   render(){
-    const {items, subtitles, load, hasMore } = this.props
+    const {items, type, subtitles, load, hasMore } = this.props
 
     const style = () => {
       if (subtitles) {
-        return this.styleColumns(subtitles.length)
+        return styleColumns(subtitles.length)
       } else {
         return {}
       }
     }
+
     return (
       <div className="List--container">
         <div className="Titles" style={style()}>
@@ -27,7 +28,7 @@ export default class List extends Component {
             pageStart={0}
             loadMore={load}
             hasMore={hasMore}
-            loader={<div className="loader">Loading...</div>}
+            loader={<div className="loader" key={1}>Loading...</div>}
             useWindow={false}
           >
             {items && items.map((item, id) => (
@@ -44,17 +45,17 @@ export default class List extends Component {
         </div>
       </div>
     )
-  }
 
-  styleColumns(numColumns){
-    if (this.props.type === 'Schedule') {
-      return {
-        color: 'white',
+    function styleColumns(numColumns){
+      if (type === 'Schedule') {
+        return {
+          color: 'white',
+          gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+        }
+      } else {
+        return {
         gridTemplateColumns: `repeat(${numColumns}, 1fr)`
-      }
-    } else {
-      return {
-      gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+        }
       }
     }
   }
