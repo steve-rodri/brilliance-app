@@ -18,38 +18,46 @@ export default class Events extends Component {
 
   fetchEvents = async(page) => {
     const evts = await event.getAll(page);
-    const updatedEvents = evts.map( async(e) => {
-      if (!e.summary) {
-        e.summary = eventTitle(e)
-        await event.update(e.id, {summary: e.summary})
-      }
-      return e
-    })
-    const loadedEvents = await Promise.all(updatedEvents)
-    const events = [...this.state.events]
-    loadedEvents.forEach(e => events.push(e))
-
-    if (loadedEvents.length < 25) {
-      this.setState({
-        events,
-        hasMore: false
+    if (evts) {
+      const updatedEvents = evts.map( async(e) => {
+        if (!e.summary) {
+          e.summary = eventTitle(e)
+          await event.update(e.id, {summary: e.summary})
+        }
+        return e
       })
+      const loadedEvents = await Promise.all(updatedEvents)
+      const events = [...this.state.events]
+      loadedEvents.forEach(e => events.push(e))
+
+      if (loadedEvents.length < 25) {
+        this.setState({
+          events,
+          hasMore: false
+        })
+      } else {
+        this.setState({ events })
+      }
     } else {
-      this.setState({ events })
+      this.setState({ events: []})
     }
   }
 
   fetchEventsByCategory = async(category) => {
     const evts = await event.findByCategory(category);
-    const updatedEvents = evts.map( async(e) => {
-      if (!e.summary) {
-        e.summary = eventTitle(e)
-        await event.update(e.id, {summary: e.summary})
-      }
-      return e
-    })
-    const events = await Promise.all(updatedEvents)
-    this.setState({ events })
+    if (evts) {
+      const updatedEvents = evts.map( async(e) => {
+        if (!e.summary) {
+          e.summary = eventTitle(e)
+          await event.update(e.id, {summary: e.summary})
+        }
+        return e
+      })
+      const events = await Promise.all(updatedEvents)
+      this.setState({ events })
+    } else {
+      this.setState({ events: []})
+    }
   }
 
   List = ({ match }) => {
