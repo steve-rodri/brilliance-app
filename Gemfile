@@ -35,6 +35,7 @@ gem 'foreman'
 gem 'activerecord-import'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'seedbank'
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 
 
 group :development, :test do
