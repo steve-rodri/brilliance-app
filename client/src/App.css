@@ -8,6 +8,16 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+
+
+/* Color Palette */
+  --dark-blue: #09639B;
+  --med-dark-blue: #0071B5;
+  --turquoise: #01B0DF;
+  --turquoise-t: rgba(1, 176, 223, .6);
+  --light-blue: #D4F1FF;
+  --light-blue-t: rgba(212,241,255, .3);
+  --light-gray: #DADBE0;
 }
 
 h1 {
