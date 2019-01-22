@@ -30,7 +30,6 @@ export default function Client(props) {
   function latestEvent(){
     if (item) {
       if (item.events) {
-        console.log(item.events)
         item.events.sort(event => event.start)
         const event = item.events[0]
         return (
