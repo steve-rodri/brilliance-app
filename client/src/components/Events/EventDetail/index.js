@@ -7,7 +7,7 @@ import CashFlow from './CashFlow/index.js';
 import { event } from '../../../services/event';
 import { client } from '../../../services/client';
 import { place } from '../../../services/place';
-import { eventTitle } from '../Helpers/eventTitle';
+import { eventTitle } from '../../Helpers/eventTitle';
 import { clientName } from '../Helpers/clientName';
 import { locationName } from '../Helpers/locationName';
 import moment from 'moment'

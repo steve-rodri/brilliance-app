@@ -9,12 +9,12 @@ class InvoicesController < ApplicationController
     .all
     .paginate(page: params[:page], per_page: items_per_page)
 
-    render json: @invoices
+    render json: @invoices, include: '**'
   end
 
   # GET /invoices/1
   def show
-    render json: @invoice
+    render json: @invoice, include: '**'
   end
 
   # POST /invoices
