@@ -22,16 +22,46 @@ export default class ListPage extends Component {
     })
   }
 
+  styleActiveMenu = (category) => {
+    if (this.props.category === category) {
+      return {
+          color: 'white',
+          borderLeft: '1px solid var(--light-gray)',
+          borderRight: '1px solid var(--light-gray)'
+        }
+    } else {
+      return {}
+    }
+  }
+
+  styleSubTitle = () => {
+    if (this.props.category === 'All') {
+      return { display: 'none'}
+    } else {
+      return {}
+    }
+  }
+
+
   render(){
-    const { match } = this.props
+    const { match, category } = this.props
     if (this.state.redirectToCreateNew) return (<Redirect to={`${match.path}/new`}/>)
     return (
       <div className='ListPage--container'>
         <aside>
-          <h2 className="ListPage--name">{this.props.title}</h2>
+          <h2
+            className="ListPage--name"
+            onClick={(e) => {
+              e.stopPropagation()
+              this.props.fetchByCategory('All')
+            }}
+          >
+            {this.props.title}
+          </h2>
           <div className="ListPage--categories">
             {this.props.categories.map((category, id) => (
               <div
+                style={this.styleActiveMenu(category)}
                 onClick={(e) => {
                   e.stopPropagation()
                   this.props.fetchByCategory(category)
@@ -44,17 +74,16 @@ export default class ListPage extends Component {
             <div
               className="ListPage--button create"
               onClick={this.createNew}
-              style={{border: 'none'}}
             >
-              <span className="button-text">Create New</span>
-              {<FontAwesomeIcon className="plus-icon" icon="plus" size="2x"/>}
+              <span className="button-text">Add New</span>
+              {<FontAwesomeIcon className="button-icon" icon="plus" size="2x"/>}
             </div>
             :
             ''
           }
         </aside>
         <main>
-          <h3 className="ListPage--category-title">All</h3>
+          <h3 className="ListPage--category-title" style={this.styleSubTitle()}>{category}</h3>
           <List
             subtitles={this.props.subtitles}
             items={this.props.data}

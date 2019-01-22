@@ -12,12 +12,29 @@ export default class Events extends Component {
     super(props)
     this.state = {
       events: [],
+      category: 'All',
       hasMore: true
     }
   }
 
   fetchEvents = async(page) => {
-    const evts = await event.getAll(page);
+    await this.resetEvents();
+    let evts;
+    if (page) {
+      evts = await event.getAll(page);
+    } else {
+      evts = await event.getAll(1);
+    }
+    await this.updateEvents(evts, 'All');
+  }
+
+  fetchEventsByCategory = async(category) => {
+    const evts = await event.findByCategory(category);
+    await this.resetEvents()
+    await this.updateEvents(evts, category);
+  }
+
+  updateEvents = async(evts, category) => {
     if (evts) {
       const updatedEvents = evts.map( async(e) => {
         if (!e.summary) {
@@ -33,39 +50,36 @@ export default class Events extends Component {
       if (loadedEvents.length < 25) {
         this.setState({
           events,
+          category: category,
           hasMore: false
         })
       } else {
-        this.setState({ events })
+        this.setState({
+          events,
+          category: category
+        })
       }
     } else {
-      this.setState({ events: []})
+      this.setState({
+        events: [],
+        category: category
+      })
     }
   }
 
-  fetchEventsByCategory = async(category) => {
-    const evts = await event.findByCategory(category);
-    if (evts) {
-      const updatedEvents = evts.map( async(e) => {
-        if (!e.summary) {
-          e.summary = eventTitle(e)
-          await event.update(e.id, {summary: e.summary})
-        }
-        return e
-      })
-      const events = await Promise.all(updatedEvents)
-      this.setState({ events })
-    } else {
-      this.setState({ events: []})
-    }
+  resetEvents = async() => {
+    this.setState({
+      events: []
+    })
   }
 
   List = ({ match }) => {
-    const { events, hasMore } = this.state
+    const { events, category, hasMore } = this.state
     return (
       <ListPage
         title="Events"
-        categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
+        category={category}
+        categories={['Production', 'CANS', 'THC', 'CATP']}
         subtitles={['title', 'client', 'location', 'confirmation', 'scheduled']}
         data={events}
         match={match}
