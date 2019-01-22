@@ -1,4 +1,5 @@
 import React from 'react'
+import Client from './Client'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -63,23 +64,8 @@ export default function ListItem(props){
         </Link>
       )
     case 'Clients':
-      const client = item.contactInfo
-      const company = item.company
       return (
-        <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
-          <div className="List-Item" style={styleColumns(numColumns)}>
-            <div>
-              <h3>{client && client.fullName}</h3>
-              <h4>{company && company.name}</h4>
-            </div>
-            <div className="List-Item--contact-info">
-              {client && <p>{client.phoneNumber && `${client.phoneNumber}`}</p>}
-              {client && client.emailAddresses.length > 0 && <a href={`mailto:${client.emailAddresses[0].address}`}>{client.emailAddresses[0].address}</a>}
-              {company && <p>{company.phoneNumber && `${company.phoneNumber}`}</p>}
-              {company && company.website && <a href={`${company.website}`} onClick={(e) => e.stopPropagation()}>{company.website}</a>}
-            </div>
-          </div>
-        </Link>
+        <Client {...props} styleColumns={styleColumns}/>
       )
     default:
   }
