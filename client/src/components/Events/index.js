@@ -4,7 +4,7 @@ import Header from '../Header/index.js'
 import ListPage from '../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
 import { event } from '../../services/event'
-import { eventTitle } from './Helpers/eventTitle'
+import { eventTitle } from '../Helpers/eventTitle'
 import './index.css'
 
 export default class Events extends Component {
