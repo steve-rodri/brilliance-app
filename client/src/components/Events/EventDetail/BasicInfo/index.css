@@ -5,7 +5,7 @@
   padding: 0 10px 20px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .BasicInfo--header {
@@ -38,38 +38,40 @@ label {
 }
 
 .BasicInfo--staff-and-notes {
-  display: flex;
+  background-color: aliceblue;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   height: 100%;
+  min-height: 300px;
+  max-height: 500px;
+  padding: 0 30px 30px 30px;
 }
 
-.BasicInfo--staff-and-notes > * {
-  height: 100%;
-  width: 50%;
-}
-
-.BasicInfo--notes-container {
+.BasicInfo--notes-container, .BasicInfo--staff-container{
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 30px;
 }
 
 .BasicInfo--notes, .BasicInfo--notes-readonly {
+  padding: 5px 0;
   border-radius: 5px;
   font-size: 1em;
   height: 100%;
   width: 100%;
   resize: none;
-  overflow: scroll;
+  overflow: auto;
+  align-self: center;
 }
 
 .BasicInfo--notes {
   border: 1px solid lightgray;
-  min-height: 150px;
-  max-height: 300px;
 }
 
 .BasicInfo--notes-readonly {
-  border: none
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .BasicInfo--notes-readonly:focus {
@@ -98,7 +100,6 @@ label {
 .BasicInfo--button:hover {
   cursor: pointer;
 }
-
 
 @media (min-width: 600px) {
   .BasicInfo--event-title, .BasicInfo--event-summary {
