@@ -1,34 +1,22 @@
 import React from 'react'
+import Schedule from './Schedule'
 import Client from './Client'
 import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircle, faCheckCircle, faTimesCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 import './ListItem.css'
 
-library.add(faCircle)
-library.add(faCheckCircle)
-library.add(faTimesCircle)
-library.add(faQuestionCircle)
 
 export default function ListItem(props){
   const { item, type, numColumns } = props
   switch (type) {
     case 'Schedule':
       return (
-        <a href={item.htmlLink} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black', backgroundColor: 'white'}}>
-          <div className="List-Item" style={styleColumns(numColumns)}>
-            <p>{item && timeUntil()}</p>
-            <div>
-              <h4>{item && item.summary}</h4>
-              <p>{item && item.start && moment.utc(start()).format('dddd, MMMM Do')}</p>
-              <p>{item && item.start && item.end && `${moment.utc(start()).format('LT')} - ${moment.utc(end()).format('LT')}`}</p>
-            </div>
-            <p className="List-Item--description">{item && item.description}</p>
-            <p>{status(props)}</p>
-          </div>
-        </a>
+        <Schedule
+          {...props}
+          start={start()}
+          end={end()}
+          timeUntil={timeUntil()}
+        />
       )
     case 'Events':
     const event = item
@@ -70,22 +58,6 @@ export default function ListItem(props){
     default:
   }
 
-  function status(props){
-    const { user, item } = props
-    const currentUser = item.attendees.find( attendee => attendee.email === user.email)
-    switch (currentUser.responseStatus) {
-      case 'needsAction':
-        return <FontAwesomeIcon icon="circle" size="3x"/>
-      case 'accepted':
-        return <FontAwesomeIcon color="green" icon="check-circle" size="3x"/>
-      case 'tentative':
-        return <FontAwesomeIcon color="gold" icon="question-circle" size="3x"/>
-      case 'declined':
-        return <FontAwesomeIcon color="red" icon="times-circle" size="3x"/>
-      default:
-    }
-  }
-
   function styleColumns(numColumns){
     return {
       gridTemplateColumns: `repeat(${numColumns}, 1fr)`
@@ -106,64 +78,36 @@ export default function ListItem(props){
     }
   }
 
-  function checkStartType() {
+  function start() {
     if (item) {
       if (item.start) {
         if (item.start.date) {
           return item.start.date
         } else if (item.start.dateTime) {
           return item.start.dateTime
+        } else {
+          return item.start
         }
       }
     }
   }
 
-  function checkEndType() {
+  function end() {
     if (item) {
       if (item.end) {
         if (item.end.date) {
           return item.end.date
         } else if (item.end.dateTime) {
           return item.end.dateTime
+        } else {
+          return item.end
         }
       }
     }
   }
 
-  function start(){
-    if (!checkStartType()) {
-      return item.start
-    } else {
-      return checkStartType()
-    }
-  }
-
-  function end() {
-    if (!checkEndType()) {
-      return item.end
-    } else {
-      return checkEndType()
-    }
-  }
-
   function timeUntil(){
     return moment.utc(start()).fromNow()
-  }
-
-  function clientName(event) {
-    if (event.client) {
-      if (event.client.contactInfo) {
-        return event.client.contactInfo.fullName
-      }
-    }
-  }
-
-  function companyName(event) {
-    if (event.client) {
-      if (event.client.company) {
-        return event.client.company.name
-      }
-    }
   }
 
   function styleConfirmation(msg){
@@ -188,4 +132,20 @@ export default function ListItem(props){
         return {}
     }
   }
+
+    function clientName(event) {
+      if (event.client) {
+        if (event.client.contactInfo) {
+          return event.client.contactInfo.fullName
+        }
+      }
+    }
+
+    function companyName(event) {
+      if (event.client) {
+        if (event.client.company) {
+          return event.client.company.name
+        }
+      }
+    }
 }
