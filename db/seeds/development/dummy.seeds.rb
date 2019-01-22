@@ -1,5 +1,6 @@
 Contact.destroy_all
 Company.destroy_all
+Place.destroy_all
 Client.destroy_all
 Event.destroy_all
 Invoice.destroy_all
@@ -43,23 +44,38 @@ Company.create! ([
 ])
 puts "There are now #{Contact.count} rows in the Contact table"
 
+Place.create! ([
+  {
+    installation: false,
+    name: 'Crest Hollow Country Club',
+    short_name: 'CHCC'
+  },
+  {
+    installation: true,
+    name: 'Carlyle at the Palace',
+    short_name: 'CATP'
+  },
+  {
+    installation: true,
+    name: 'The Heritage Club',
+    short_name: 'THC'
+  }
+  ])
+
 #seed Clients
 Client.create! ([
   {
-    contact_id: 1,
-    company_id: 1
+    contact_id: 1
   },
   {
-    contact_id: 2,
-    company_id: 1
+    contact_id: 2
   },
   {
     contact_id: 3,
     company_id: 1
   },
   {
-    contact_id: 4,
-    company_id: 1
+    contact_id: 4
   }
 ])
 puts "There are now #{Client.count} rows in the Clients table"
@@ -72,13 +88,13 @@ Event.create! ([
     confirmation: "Unconfirmed",
     description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
-    end: Time.now(),
+    end: Time.now() + 7200,
     kind: 'Test',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     start: Time.now(),
-    summary: 'Test Event',
 
-    client_id: 2
+    client_id: 2,
+    location_id: 1
   },
   {
     action: 'Set up',
@@ -87,13 +103,13 @@ Event.create! ([
     confirmation: "Confirmed",
     description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
-    end: Time.now(),
+    end: Time.now() + 7200,
     kind: 'Test',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     start: Time.now(),
-    summary: 'Test Event',
 
-    client_id: 1
+    client_id: 1,
+    location_id: 2
   },
   {
     action: 'Set up',
@@ -102,13 +118,13 @@ Event.create! ([
     confirmation: "Confirmed",
     description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
-    end: Time.now(),
+    end: Time.now() + 7200,
     kind: 'Test',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     start: Time.now(),
-    summary: 'Test Event',
 
-    client_id: 3
+    client_id: 3,
+    location_id: 3
   },
   {
     action: 'Set up',
@@ -117,13 +133,13 @@ Event.create! ([
     confirmation: "Confirmed",
     description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
-    end: Time.now(),
+    end: Time.now() + 7200,
     kind: 'Test',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     start: Time.now(),
-    summary: 'Test Event',
 
-    client_id: 4
+    client_id: 4,
+    location_id: 2
   },
   {
     action: 'Set up',
@@ -132,13 +148,13 @@ Event.create! ([
     confirmation: "Unconfirmed",
     description: 'Lorem ipsum dolor sit amet',
     driving_time: Time.now(),
-    end: Time.now(),
+    end: Time.now() + 7200,
     kind: 'Test',
     notes: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     start: Time.now(),
-    summary: 'Test Event',
 
-    client_id: 1
+    client_id: 1,
+    location_id: 1
   }
 ])
 
