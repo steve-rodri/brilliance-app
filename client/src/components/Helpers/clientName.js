@@ -1,3 +1,5 @@
+import React from 'react'
+
 function clientName(client){
   if (client) {
     if (!client.contactInfo) {
@@ -10,7 +12,12 @@ function clientName(client){
       if (!client.company) {
         return client.contactInfo.fullName
       } else {
-        return `${client.contactInfo.fullName} - ${client.company.name}`
+        return (
+          <div>
+            <p>{client.contactInfo.fullName}</p>
+            <h6>c: {client.company.name}</h6>
+          </div>
+        )
       }
     }
   }
