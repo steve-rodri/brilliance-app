@@ -216,8 +216,8 @@ export default class Edit extends Component {
             <Datetime
               className="Edit--date-input-container"
               inputProps={{ className:"Edit--input", tabIndex:"3" }}
-              value={fields.start? moment(fields.start).format('llll') : ''}
-              viewDate={fields.start? fields.start : ''}
+              value={fields.start? moment.utc(fields.start) : ''}
+              viewDate={fields.start? moment.utc(fields.start) : ''}
               timeConstraints={{ minutes:{ step: 15 } }}
               onChange={(datetime) => this.props.handleDateChange('start', datetime)}
               closeOnTab={true}
@@ -246,8 +246,8 @@ export default class Edit extends Component {
             <Datetime
               className="Edit--date-input-container"
               inputProps={{ className:"Edit--input", tabIndex:"4" }}
-              value={fields.end? moment(fields.end).format('llll') : ''}
-              viewDate={fields.end? fields.end : ''}
+              value={fields.end? moment.utc(fields.end) : ''}
+              viewDate={fields.end? moment.utc(fields.end) : ''}
               timeConstraints={{ minutes:{ step: 15 } }}
               isValidDate={(current) => current.isSameOrAfter(moment.utc(fields.start))}
               closeOnTab={true}
