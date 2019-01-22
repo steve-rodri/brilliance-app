@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { clientName } from '../Helpers/clientName'
 import moment from 'moment'
 
 export default function Event(props){
@@ -14,30 +15,13 @@ export default function Event(props){
           <p>{event && event.start && event.end && `${moment.utc(start).format('LT')} - ${moment.utc(end).format('LT')}`}</p>
         </div>
         <div>
-          <p>{event && clientName(event)}</p>
-          <h5>{event && companyName(event)}</h5>
+          <p>{event && clientName(event.client)}</p>
         </div>
         <p>{event && event.placeLocation && event.placeLocation.name}</p>
         <p style={styleConfirmation(event && event.confirmation)}>{event && event.confirmation}</p>
       </div>
     </Link>
   )
-}
-
-function clientName(event) {
-  if (event.client) {
-    if (event.client.contactInfo) {
-      return event.client.contactInfo.fullName
-    }
-  }
-}
-
-function companyName(event) {
-  if (event.client) {
-    if (event.client.company) {
-      return event.client.company.name
-    }
-  }
 }
 
 function styleConfirmation(msg){
