@@ -7,24 +7,30 @@ export default class Clients extends Component {
   constructor(props){
     super(props)
     this.state = {
-      clients: null
+      clients: [],
+      hasMore: true
     }
   }
 
-  async componentDidMount(){
-    await this.fetchAllClients()
-  }
+  fetchClients = async(page) => {
+    const loadedClients = await client.getAll(page);
+    const clients = [...this.state.clients]
+    loadedClients.forEach(c => clients.push(c))
 
-  fetchAllClients = async() => {
-    const clients = await client.getAll();
-    this.setState({
-      clients
-    })
+    if (loadedClients.length < 25) {
+
+      this.setState({
+        clients,
+        hasMore: false
+      })
+    } else {
+      this.setState({ clients })
+    }
   }
 
   render(){
     const { location } = this.props
-    const { clients } = this.state
+    const { clients, hasMore } = this.state
     return (
       <div className="Section">
         <Header location={location} />
@@ -33,6 +39,8 @@ export default class Clients extends Component {
           categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
           subtitles={['name / company', 'contact info', 'next event', 'balance']}
           data={clients}
+          load={this.fetchClients}
+          hasMore={hasMore}
         />
       </div>
     )
