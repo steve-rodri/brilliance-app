@@ -10,36 +10,65 @@ export default class Invoices extends Component {
     super(props)
     this.state = {
       invoices: [],
+      category: 'All',
       hasMore: true
     }
   }
 
   fetchInvoices = async(page) => {
     const loadedInvoices = await invoice.getAll(page);
-    const invoices = [...this.state.invoices]
-    loadedInvoices.forEach(i => invoices.push(i))
+    this.updateInvoices(loadedInvoices, 'All')
+  }
 
-    if (loadedInvoices.length < 25) {
+  fetchInvoicesByCategory = async(category) => {
+    const loadedInvoices = await invoice.findByCategory(category);
+    this.resetInvoices();
+    this.updateInvoices(loadedInvoices, category)
+  }
 
-      this.setState({
-        invoices,
-        hasMore: false
-      })
+  updateInvoices = (invoices, category) => {
+    if (invoices) {
+      const invcs = [...this.state.invoices]
+      invoices.forEach(i => invcs.push(i))
+
+      if (invoices.length < 25) {
+
+        this.setState({
+          invoices,
+          category: category,
+          hasMore: false
+        })
+      } else {
+        this.setState({
+          invoices,
+          category: category
+        })
+      }
     } else {
-      this.setState({ invoices })
+      this.setState({
+        invoices: [],
+        category: category
+      })
     }
   }
 
+  resetInvoices = () => {
+    this.setState({ invoices: [] })
+  }
+
   List = () => {
-    const { invoices, hasMore } = this.state
+    const { invoices, category, hasMore } = this.state
     return (
       <ListPage
         title="Invoices"
-        categories={['All', 'Production', 'CANS', 'THC', 'CATP']}
+        category={category}
+        categories={['Production', 'CANS', 'THC', 'CATP']}
         subtitles={['client & date', 'type', 'status', 'balance']}
         data={invoices}
         load={this.fetchInvoices}
         hasMore={hasMore}
+        fetchAllInvoices={this.fetchInvoices}
+        fetchByCategory={this.fetchInvoicesByCategory}
       />
     )
   }
