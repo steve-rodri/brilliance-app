@@ -15,7 +15,7 @@ export default function Event(props){
           <p>{event && event.start && event.end && `${moment.utc(start).format('LT')} - ${moment.utc(end).format('LT')}`}</p>
         </div>
         <div>
-          <p>{event && clientName(event.client)}</p>
+          {event && clientName(event.client)}
         </div>
         <p>{event && event.placeLocation && event.placeLocation.name}</p>
         <p style={styleConfirmation(event && event.confirmation)}>{event && event.confirmation}</p>

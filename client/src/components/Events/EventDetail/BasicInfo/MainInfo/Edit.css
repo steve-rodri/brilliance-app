@@ -50,5 +50,5 @@
 
 .Edit--search-result:hover {
   cursor: pointer;
-  background-color: aliceblue;
+  background-color: var(--light-blue);
 }

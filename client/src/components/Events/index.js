@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Header from '../Header/index.js'
 import ListPage from '../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
+import moment from 'moment'
 import { event } from '../../services/event'
 import { eventTitle } from '../Helpers/eventTitle'
 import './index.css'
@@ -18,19 +19,44 @@ export default class Events extends Component {
   }
 
   fetchEvents = async(page) => {
-    await this.resetEvents();
-    let evts;
-    if (page) {
-      evts = await event.getAll(page);
-    } else {
-      evts = await event.getAll(1);
-    }
+    const evts = await event.getAll(page);
     await this.updateEvents(evts, 'All');
+  }
+
+  refreshEvents = async() => {
+    this.resetEvents()
+    const evts = await event.getAll(1);
+    await this.updateEvents(evts, 'All')
+  }
+
+  addEvent = async(newEvent) => {
+    let events = [...this.state.events]
+    events.push(newEvent)
+    events = events.sort((evtOne, evtTwo) => {
+      return moment(evtOne.start).isBefore(evtTwo.start)
+    })
+    this.setState({ events })
+    await this.refreshEvents()
+  }
+
+  deleteEvent = async(id) => {
+    let events = [...this.state.events]
+    events = events.filter(evt => evt.id !== id)
+    this.setState({ events })
+    await this.refreshEvents()
+  }
+
+  updateEvent = async(evt) => {
+    let events = [...this.state.events]
+    const id = events.findIndex((event) => event.id === evt.id)
+    events[id] = evt
+    this.setState({ events })
+    await this.refreshEvents()
   }
 
   fetchEventsByCategory = async(category) => {
     const evts = await event.findByCategory(category);
-    await this.resetEvents()
+    this.resetEvents()
     await this.updateEvents(evts, category);
   }
 
@@ -86,7 +112,7 @@ export default class Events extends Component {
         load={this.fetchEvents}
         hasMore={hasMore}
         create={this.handleCreate}
-        fetchAllEvents={this.fetchEvents}
+        refresh={this.refreshEvents}
         fetchByCategory={this.fetchEventsByCategory}
       />
     )
@@ -100,7 +126,8 @@ export default class Events extends Component {
       <EventDetail
         e={e}
         eventId={req_id}
-        fetchAllEvents={this.fetchEvents}
+        handleDelete={this.deleteEvent}
+        handleUpdate={this.updateEvent}
       />
     )
   }
@@ -110,7 +137,9 @@ export default class Events extends Component {
     return (
       <EventDetail
         isNew={isNew}
-        fetchAllEvents={this.fetchEvents}
+        handleCreate={this.addEvent}
+        handleDelete={this.deleteEvent}
+        handleUpdate={this.updateEvent}
       />
     )
   }
@@ -130,7 +159,6 @@ export default class Events extends Component {
     )
   }
 }
-
 
 // async fetchAllGoogleEvents(){
 //   const calendars = await getGoogleCalendars();
