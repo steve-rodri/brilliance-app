@@ -9,10 +9,10 @@ library.add(faTimes)
 library.add(faTrash)
 
 export default function Header(props){
-  const { event, fields, isNew, editMode } = props
+  const { evt, fields, isNew, editMode } = props
   return (
     <div className="BasicInfo--header">
-      {editMode && event?
+      {editMode && evt?
         <input
           className="BasicInfo--event-summary"
           style={styleSummary(fields && fields.summary)}
@@ -29,7 +29,7 @@ export default function Header(props){
       }
       {editMode?
         <div className="BasicInfo--buttons">
-          {isNew || event?
+          {isNew && !evt?
             ""
             :
             <div
@@ -54,7 +54,7 @@ export default function Header(props){
           >
             <FontAwesomeIcon icon="pencil-alt" size="2x"/>
           </div>
-         {event?
+         {!evt?
            ""
            :
             <div

@@ -16,12 +16,14 @@ export default class Edit extends Component {
   }
 
   choosingResult = (e) => {
+    e.stopPropagation()
     this.setState({
       hoveringResults: true
     })
   }
 
-  leavingResults = () => {
+  leavingResults = (e) => {
+    e.stopPropagation()
     this.setState({
       hoveringResults: false
     })
@@ -93,7 +95,7 @@ export default class Edit extends Component {
           onSubmit={(e) => e.preventDefault()}
           onKeyDown={(e) => {
             if ( (e.key === 'Tab' || e.key === 'Enter') && searchFieldData && searchFieldData.clients) {
-              this.props.onSelect(e, 'client', 0)
+              this.props.onEnter(e, 'client', 0)
               this.handleCloseResults()
             }
           }}

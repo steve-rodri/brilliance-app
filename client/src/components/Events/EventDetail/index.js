@@ -19,12 +19,12 @@ export default class EventDetail extends Component {
     this.state = {
       view: 'Basic Info',
       evt: null,
+      newEvt: null,
       fields: null,
       searchFieldData: null,
       formData: null,
       editMode: false,
       redirectToEvents: false,
-      redirectToEvent: false
     }
   }
 
@@ -36,20 +36,34 @@ export default class EventDetail extends Component {
       this.edit()
       this.setField('summary', 'Create a New Event')
     } else {
-      await this.getEvent();
-      await this.setClientName();
-      await this.setLocationName();
+      await this.initialSetup()
     }
   }
 
-  getEvent = async() => {
+  initialSetup = async(newEvt) => {
+    await this.getEvent(newEvt);
+    await this.setClientName();
+    await this.setLocationName();
+  }
+
+  resetNewEvent = () => {
+    this.setState({ newEvt: null })
+  }
+
+  getEvent = async(newEvt) => {
     const { e, eventId } = this.props
       if (!e) {
-        const evt = await event.getOne(eventId)
-        if (evt) {
-          this.setState({ evt })
+        let evt;
+        if (!newEvt) {
+          evt = await event.getOne(eventId)
+          if (evt) {
+            this.setState({ evt })
+          } else {
+            this.setState({ redirectToEvents: true })
+          }
         } else {
-          this.setState({ redirectToEvents: true })
+          evt = await event.getOne(newEvt.id)
+          await this.setState({ evt })
         }
       } else {
         this.setState({ evt: e })
@@ -107,11 +121,10 @@ export default class EventDetail extends Component {
 
   setFields = () => {
     const { evt } = this.state
+    const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
     if (!evt) {
-      const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
       fieldNames.forEach( field => this.setField( field, null ))
     } else {
-      const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
       fieldNames.forEach( field => this.setField( field, evt[field] ))
     }
   }
@@ -128,13 +141,14 @@ export default class EventDetail extends Component {
   handleDelete = async() => {
     const { evt } = this.state
     await event.delete(evt.id)
-    await this.props.fetchAllEvents()
+    await this.props.handleDelete(evt.id)
     this.setState({ redirectToEvents: true })
   }
 
   handleSearchChange = async(e) => {
     const { name, value } = e.target
     this.setField(name, value)
+
     switch (name) {
       case 'client':
         const clients = await this.findClients(value)
@@ -163,9 +177,12 @@ export default class EventDetail extends Component {
             clients
           }
          }))
+
         break;
+
       case 'location':
         const locations = await this.findPlaces(value)
+
         if (!value) {
           this.setState(prevState => ({
             formData: {
@@ -188,6 +205,7 @@ export default class EventDetail extends Component {
               }
             }))
           })
+
         }
         this.setState(prevState => ({
           searchFieldData: {
@@ -195,59 +213,38 @@ export default class EventDetail extends Component {
             locations
           }
          }))
+
         break;
+
       default:
         break;
     }
   }
 
-  handleSelect = (e, name, index) => {
+  handleFormSubmit = (e, name, index) => {
     if (e.key === 'Tab' || e.key === 'Enter') {
+      this.handleSelect( e, name, index)
+    }
+  }
 
-      let item;
-      const { searchFieldData } = this.state
+  handleSelect = (e, name, index) => {
+    let item;
+    const { searchFieldData } = this.state
 
-      if (searchFieldData) {
-        switch (name) {
-          case 'client':
-            item = searchFieldData.clients[index]
-            const client = clientName(item);
+    if (searchFieldData) {
+      switch (name) {
+        case 'client':
+          item = searchFieldData.clients[index]
+          const client = clientName(item);
 
-              this.setState(prevState => ({
-                formData: {
-                  ...prevState.formData,
-                  client_id: item.id
-                },
-                fields: {
-                  ...prevState.fields,
-                  client
-                }
-              }),() => {
-                this.setState(prevState => ({
-                  fields: {
-                    ...prevState.fields,
-                    summary: eventTitle(prevState.fields)
-                  },
-                  formData: {
-                    ...prevState.formData,
-                    summary: eventTitle(prevState.fields)
-                  }
-                }))
-              })
-            break;
-
-          case 'location':
-            item = searchFieldData.locations[index]
-            const location = locationName(item)
             this.setState(prevState => ({
               formData: {
                 ...prevState.formData,
-                location_id: item.id
+                client_id: item.id
               },
               fields: {
                 ...prevState.fields,
-                location,
-                onPremise: item.installation
+                client
               }
             }),() => {
               this.setState(prevState => ({
@@ -261,18 +258,43 @@ export default class EventDetail extends Component {
                 }
               }))
             })
-            break;
+          break;
 
-          default:
+        case 'location':
+          item = searchFieldData.locations[index]
+          const location = locationName(item)
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              location_id: item.id
+            },
+            fields: {
+              ...prevState.fields,
+              location,
+              onPremise: item.installation
+            }
+          }),() => {
             this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                summary: eventTitle(prevState.fields)
+              },
               formData: {
                 ...prevState.formData,
-                [name]: item.id
+                summary: eventTitle(prevState.fields)
               }
             }))
-            break;
+          })
+          break;
 
-        }
+        default:
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              [name]: item.id
+            }
+          }))
+          break;
       }
     }
   }
@@ -322,25 +344,26 @@ export default class EventDetail extends Component {
     const { evt, formData, editMode } = this.state
     const { isNew } = this.props
     if (formData) {
+
       if (isNew) {
-        const newEvent = await event.createNew(formData)
-        this.resetForm()
-        this.setState({
-          evt: newEvent,
-          redirectToEvents: true
-        })
+
+        const newEvt = await event.createNew(formData)
+        await this.props.handleCreate(newEvt);
+        this.setState({ newEvt }, async() => await this.initialSetup(newEvt))
+
       } else {
+
         await event.update(evt.id, formData)
-        this.resetForm();
         const updatedEvent = await event.getOne(evt.id)
-        this.setState({
-          evt: updatedEvent
-        })
+        this.setState({ evt: updatedEvent })
+        await this.props.handleUpdate(updatedEvent)
+        
+        await this.resetForm()
+        await this.setClientName();
+        await this.setFields();
       }
-      await this.setClientName();
-      await this.setFields();
-      await this.props.fetchAllEvents();
     }
+
     this.setState({editMode: !editMode})
   }
 
@@ -382,13 +405,12 @@ export default class EventDetail extends Component {
             {...this.props}
             edit={this.edit}
             close={this.close}
-            setField={this.setField}
-            resetForm={this.resetForm}
             delete={this.handleDelete}
             handleChange={this.handleChange}
             handleDateChange={this.handleDateChange}
             handleSearchChange={this.handleSearchChange}
             onSelect={this.handleSelect}
+            onEnter={this.handleFormSubmit}
             handleSubmit={this.handleSubmit}
           />
         )
@@ -431,16 +453,14 @@ export default class EventDetail extends Component {
   }
 
   render(){
-    const { evt } = this.state
     if (this.state.redirectToEvents) return (<Redirect to='/admin/events'/>)
-    if (this.state.redirectToEvent) return (<Redirect to={`/admin/events/${evt.id}`}/>)
     return (
       <div className="EventDetail--container">
         <div className="EventDetail--tab-control">
-          <div className="Tab" style={this.styleTab("Basic Info")}  onClick={() => this.setView("Basic Info")}><h3>BASIC INFO</h3></div>
-          <div className="Tab" style={this.styleTab("Logistics")}   onClick={() => this.setView("Logistics")}><h3>LOGISTICS</h3></div>
+          <div className="Tab" style={this.styleTab("Basic Info")} onClick={() => this.setView("Basic Info")}><h3>BASIC INFO</h3></div>
+          <div className="Tab" style={this.styleTab("Logistics")}  onClick={() => this.setView("Logistics")}><h3>LOGISTICS</h3></div>
           <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>INVOICE</h3></div>
-          <div className="Tab" style={this.styleTab("Cash Flow")}   onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
+          <div className="Tab" style={this.styleTab("Cash Flow")}  onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
         </div>
         {this.view()}
       </div>
