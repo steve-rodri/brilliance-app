@@ -35,8 +35,8 @@ export default function Client(props) {
         return (
           <div>
             <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
-            <p>{event.start && moment.utc(event.start).format('ddd, MMM Do')}</p>
-            <p>{event.start && event.end && `${moment.utc(event.start).format('LT')} - ${moment.utc(event.end).format('LT')}`}</p>
+            <p>{event && event.start && moment.utc(event.start).format('ddd, MMM Do')}</p>
+            <p>{event && event.start && event.end && `${moment.utc(event.start).format('LT')} - ${moment.utc(event.end).format('LT')}`}</p>
           </div>
         )
       }
