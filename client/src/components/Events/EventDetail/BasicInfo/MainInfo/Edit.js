@@ -102,6 +102,7 @@ export default class Edit extends Component {
         >
           <input
             name='client'
+            placeholder= 'search clients...'
             className="Edit--input"
             value={fields.client? fields.client : ''}
             onChange={this.props.handleSearchChange}
@@ -163,6 +164,7 @@ export default class Edit extends Component {
           >
             <input
               name='location'
+              placeholder= 'search locations...'
               className="Edit--input"
               value={fields.location? fields.location : ''}
               onChange={this.props.handleSearchChange}
