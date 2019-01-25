@@ -1,6 +1,6 @@
 import React from 'react'
 
-function clientName(client){
+function clientName(client, oneLine){
   if (client) {
     if (!client.contactInfo) {
       if (!client.company) {
@@ -11,6 +11,8 @@ function clientName(client){
     } else {
       if (!client.company) {
         return client.contactInfo.fullName
+      } else if (oneLine) {
+        return `${client.contactInfo.fullName} : ${client.company.name}`
       } else {
         return (
           <div>
@@ -22,6 +24,7 @@ function clientName(client){
     }
   }
 }
+
 
 export {
   clientName
