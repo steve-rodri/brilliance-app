@@ -91,7 +91,7 @@ export default class EventDetail extends Component {
     const { evt } = this.state
     if (evt) {
       if (evt.client) {
-        const name = clientName(evt.client)
+        const name = clientName(evt.client, true)
         this.setField('client', name)
       } else {
         this.setField('client', null)
@@ -357,7 +357,7 @@ export default class EventDetail extends Component {
         const updatedEvent = await event.getOne(evt.id)
         this.setState({ evt: updatedEvent })
         await this.props.handleUpdate(updatedEvent)
-        
+
         await this.resetForm()
         await this.setClientName();
         await this.setFields();
