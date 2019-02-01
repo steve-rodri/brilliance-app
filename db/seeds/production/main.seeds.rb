@@ -1,13 +1,13 @@
 require 'csv'
 
+Contact.destroy_all
+Company.destroy_all
+Place.destroy_all
+EmailAddress.destroy_all
+Address.destroy_all
 Client.destroy_all
 Event.destroy_all
 Invoice.destroy_all
-Contact.destroy_all
-Company.destroy_all
-EmailAddress.destroy_all
-Address.destroy_all
-Place.destroy_all
 
 #seed Contacts
 csv_text = File.read(Rails.root.join('lib','seeds', 'Contacts.csv'))
