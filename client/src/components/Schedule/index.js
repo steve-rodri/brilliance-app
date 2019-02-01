@@ -15,6 +15,10 @@ export default class Schedule extends Component {
     }
   }
 
+  async componentDidMount(){
+    await this.findUpcomingUserEvents()
+  }
+
   async componentWillUnmount(){
     this.setState({
       userEvents: []
