@@ -87,7 +87,7 @@ export default class Schedule extends Component {
             hasMore={false}
           />
         </div>
-        {userEvents.length !== [] && <p className="schedule--not-currently" >Not currently scheduled...</p>}
+        {!userEvents && userEvents.length === 0 && <p className="schedule--not-currently" >Not currently scheduled...</p>}
       </React.Fragment>
 
     )

@@ -17,6 +17,7 @@ export default function ListItem(props){
           end={end()}
           timeUntil={timeUntil()}
           styleColumns={styleColumns}
+          styleContainer={styleSchedule}
         />
       )
     case 'Events':
@@ -77,6 +78,19 @@ export default function ListItem(props){
 
   function timeUntil(){
     return moment.utc(start()).fromNow()
+  }
+
+  function styleSchedule(item, numColumns){
+    if (type === 'Schedule') {
+      return {
+        backgroundColor: '#eeeeee',
+        gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+      }
+    } else {
+      return {
+        gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+      }
+    }
   }
 
   function styleColumns(numColumns){
