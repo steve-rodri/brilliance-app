@@ -10,10 +10,10 @@ library.add(faTimesCircle)
 library.add(faQuestionCircle)
 
 export default function Schedule(props){
-  const { user, item, start, end, timeUntil, numColumns, styleColumns } = props
+  const { user, item, start, end, timeUntil, numColumns, styleContainer } = props
   return (
-    <a href={item.htmlLink} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black', backgroundColor: 'white'}}>
-      <div className="List-Item" style={styleColumns(numColumns)}>
+    <a href={item.htmlLink} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
+      <div className="List-Item" style={styleContainer(item, numColumns)}>
         <p>{item && timeUntil}</p>
         <div>
           <h4>{item && item.summary}</h4>
