@@ -25,7 +25,7 @@ csv.each do |row|
     created_at: row['created_at']
   })
 end
-puts "There are now #{Contact.count} rows in the Contact table"
+puts "There are now #{Contact.count} rows in the Contacts table"
 
 #seed Companies
 csv_text = File.read(Rails.root.join('lib','seeds', 'Companies.csv'))
@@ -40,7 +40,7 @@ csv.each do |row|
     created_at: row['created_at']
   })
 end
-puts "There are now #{Company.count} rows in the Company table"
+puts "There are now #{Company.count} rows in the Companies table"
 
 #seed Addresses
 csv_text = File.read(Rails.root.join('lib','seeds', 'Addresses.csv'))
