@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { clientName } from '../Helpers/clientName'
+import { styleConfirmation } from '../Helpers/styleConfirmation'
 import moment from 'moment'
 
 export default function Event(props){
@@ -22,27 +23,4 @@ export default function Event(props){
       </div>
     </Link>
   )
-}
-
-function styleConfirmation(msg){
-  switch (msg) {
-    case "Unconfirmed":
-      return {
-        backgroundColor: 'gold',
-        borderRadius: '10px',
-        padding: '5px',
-        width: '70%'
-      }
-    case "Confirmed":
-      return {
-        backgroundColor: 'limegreen',
-        fontWeight: 'bold',
-        padding: '5px',
-        color: 'white',
-        borderRadius: '10px',
-        width: '70%'
-      }
-    default:
-      return {}
-  }
 }
