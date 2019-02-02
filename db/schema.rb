@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_230930) do
     t.datetime "break_start"
     t.datetime "call_time"
     t.datetime "clock_out"
-    t.string "confirmation"
+    t.string "confirmation", default: "Unconfirmed"
     t.string "creator"
     t.string "description"
     t.string "driving_time"
