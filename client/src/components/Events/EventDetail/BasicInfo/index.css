@@ -12,12 +12,16 @@
   display: grid;
   justify-items: center;
   align-items: center;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 85% 5% auto;
   border-bottom: 1px solid black;
   padding: 10px;
   margin: 0 10px;
   min-height: 90px;
   max-height: 90px;
+}
+
+.BasicInfo--event-status {
+  grid-column: 2 / span 1;
 }
 
 .BasicInfo--event-title, .BasicInfo--event-summary {
@@ -30,6 +34,16 @@
   width: 100%;
   border: none;
   padding: 0;
+}
+
+@media (min-width: 600px) {
+  .BasicInfo--event-title, .BasicInfo--event-summary {
+    font-size: 35px;
+  }
+
+  .BasicInfo--header {
+    grid-template-columns: 75% 15% auto;
+  }
 }
 
 label {
@@ -80,6 +94,7 @@ label {
 }
 
 .BasicInfo--buttons {
+  grid-column: 3 / span 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,24 +105,14 @@ label {
   padding: 10px;
 }
 
-.close {
+.left {
   right: 8%;
 }
 
-.edit {
+.right {
   right: 1.5%;
 }
 
-.BasicInfo--button:hover {
+.BasicInfo--button:hover, .BasicInfo--event-status:hover {
   cursor: pointer;
-}
-
-@media (min-width: 600px) {
-  .BasicInfo--event-title, .BasicInfo--event-summary {
-    font-size: 35px;
-  }
-
-  .BasicInfo--header {
-    grid-template-columns: 85% 15%;
-  }
 }
