@@ -33,7 +33,7 @@ export default class EventDetail extends Component {
     await this.setFields();
     const { isNew } = this.props
     if (isNew) {
-      this.edit()
+      this.switchEditMode()
       this.setField('summary', 'Create a New Event')
     } else {
       await this.initialSetup()
@@ -121,7 +121,7 @@ export default class EventDetail extends Component {
 
   setFields = () => {
     const { evt } = this.state
-    const fieldNames = ['summary','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
+    const fieldNames = ['summary', 'confirmation','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
     if (!evt) {
       fieldNames.forEach( field => this.setField( field, null ))
     } else {
@@ -340,12 +340,25 @@ export default class EventDetail extends Component {
     }))
   }
 
+  handleStatusChange = (name, value) => {
+    this.setState(prevState => ({
+      fields: {
+        ...prevState.fields,
+        [name]: value
+      },
+      formData: {
+        ...prevState.formData,
+        [name]: value
+      }
+    }), async() => await this.handleSubmit())
+  }
+
   handleSubmit = async() => {
-    const { evt, formData, editMode } = this.state
+    const { evt, newEvt, formData, editMode } = this.state
     const { isNew } = this.props
     if (formData) {
 
-      if (isNew) {
+      if (isNew && !newEvt) {
 
         const newEvt = await event.createNew(formData)
         await this.props.handleCreate(newEvt);
@@ -362,18 +375,22 @@ export default class EventDetail extends Component {
         await this.setClientName();
         await this.setFields();
       }
-    }
 
-    this.setState({editMode: !editMode})
+      if (editMode) {
+        this.switchEditMode()
+      }
+
+    }
   }
 
-  edit = () => {
+  switchEditMode = () => {
     this.setState({editMode: !this.state.editMode})
   }
 
   close = () => {
     this.resetForm();
     this.resetSearchFieldData();
+    this.switchEditMode();
     this.setFields();
     this.setClientName();
     this.setLocationName();
@@ -388,7 +405,6 @@ export default class EventDetail extends Component {
   resetForm = () => {
     this.setState({
       formData: null,
-      editMode: !this.state.editMode
     })
   }
 
@@ -403,15 +419,16 @@ export default class EventDetail extends Component {
           <BasicInfo
             {...this.state}
             {...this.props}
-            edit={this.edit}
+            edit={this.switchEditMode}
             close={this.close}
             delete={this.handleDelete}
             handleChange={this.handleChange}
+            handleStatusChange={this.handleStatusChange}
             handleDateChange={this.handleDateChange}
             handleSearchChange={this.handleSearchChange}
+            handleSubmit={this.handleSubmit}
             onSelect={this.handleSelect}
             onEnter={this.handleFormSubmit}
-            handleSubmit={this.handleSubmit}
           />
         )
       case 'Logistics':
