@@ -12,8 +12,8 @@ export default function Event(props){
       <div className="List-Item" style={styleColumns(numColumns)}>
         <div>
           <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
-          <p>{event && event.start && moment.utc(start).format('ddd, MMM Do')}</p>
-          <p>{event && event.start && event.end && `${moment.utc(start).format('LT')} - ${moment.utc(end).format('LT')}`}</p>
+          <p>{event && event.start && moment(start).format('ddd, MMM Do')}</p>
+          <p>{event && event.start && event.end && `${moment(start).format('LT')} - ${moment(end).format('LT')}`}</p>
         </div>
         <div>
           {event && clientName(event.client)}
