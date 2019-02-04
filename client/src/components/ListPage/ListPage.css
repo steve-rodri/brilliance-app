@@ -49,6 +49,26 @@
   border-right: 1px solid var(--light-gray);
 }
 
+.ListPage--modal {
+  position: absolute;
+  height: 50%;
+  width: 50%;
+  background-color: #DADBE0;
+}
+
+.ListPage--modal-overlay {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0,0,0,.75)
+}
+
 .ListPage--button, .create {
   background-color: var(--med-dark-blue);
   position: relative;

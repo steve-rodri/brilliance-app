@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactModal from 'react-modal';
 import Header from '../Header/index.js'
 import Search from '../Search/index.js'
 import Schedule from '../Schedule/index.js'
