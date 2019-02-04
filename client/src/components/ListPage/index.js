@@ -44,11 +44,13 @@ export default class ListPage extends Component {
 
 
   render(){
-    const { match, category } = this.props
+    const { match, category, title } = this.props
     if (this.state.redirectToCreateNew) return (<Redirect to={`${match.path}/new`}/>)
     return (
       <div className='ListPage--container'>
         <aside>
+
+          {/* Title */}
           <h2
             className="ListPage--name"
             onClick={(e) => {
@@ -56,8 +58,10 @@ export default class ListPage extends Component {
               this.props.fetchByCategory('All')
             }}
           >
-            {this.props.title}
+            {title}
           </h2>
+
+          {/* Categories */}
           <div className="ListPage--categories">
             {this.props.categories.map((category, id) => (
               <div
@@ -70,7 +74,9 @@ export default class ListPage extends Component {
               </div>
             ))}
           </div>
-          {this.props.title === "Events"?
+
+          {/* Add New Button */}
+          {title === "Events" || title === "Clients"?
             <div
               className="ListPage--button create"
               onClick={this.createNew}
@@ -82,7 +88,9 @@ export default class ListPage extends Component {
             ''
           }
         </aside>
+
         <main>
+
           <h3 className="ListPage--category-title" style={this.styleSubTitle()}>{category}</h3>
           <List
             subtitles={this.props.subtitles}
@@ -93,6 +101,7 @@ export default class ListPage extends Component {
             hasMore={this.props.hasMore}
             handleSelect={this.handleSelect}
           />
+
         </main>
       </div>
     )
