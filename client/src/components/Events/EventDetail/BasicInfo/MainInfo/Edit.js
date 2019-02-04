@@ -219,11 +219,12 @@ export default class Edit extends Component {
 
             <Datetime
               className="Edit--date-input-container"
-              inputProps={{ className:"Edit--input", tabIndex:"3" }}
-              value={fields.start? moment.utc(fields.start) : ''}
-              viewDate={fields.start? moment.utc(fields.start) : ''}
-              timeConstraints={{ minutes:{ step: 15 } }}
+              inputProps={{ className: "Edit--input", tabIndex: "3" }}
+              value={fields.start? moment(fields.start) : ''}
+              viewDate={fields.start? moment(fields.start) : ''}
+              timeConstraints={{ minutes:{ step: 5 } }}
               onChange={(datetime) => this.props.handleDateChange('start', datetime)}
+              closeOnSelect={true}
               closeOnTab={true}
             />
 
@@ -250,12 +251,13 @@ export default class Edit extends Component {
             <Datetime
               className="Edit--date-input-container"
               inputProps={{ className:"Edit--input", tabIndex:"4" }}
-              value={fields.end? moment.utc(fields.end) : ''}
-              viewDate={fields.end? moment.utc(fields.end) : ''}
-              timeConstraints={{ minutes:{ step: 15 } }}
-              isValidDate={(current) => current.isSameOrAfter(moment.utc(fields.start))}
-              closeOnTab={true}
+              value={fields.end? moment(fields.end) : ''}
+              viewDate={fields.end? moment(fields.end) : ''}
+              timeConstraints={{ minutes:{ step: 5 } }}
+              isValidDate={(current) => current.isSameOrAfter(moment(fields.start))}
               onChange={(datetime) => this.props.handleDateChange('end', datetime)}
+              closeOnSelect={true}
+              closeOnTab={true}
             />
 
           </div>
