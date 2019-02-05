@@ -15,16 +15,27 @@ export default class ListPage extends Component {
     super(props)
     this.state = {
       redirectToCreateNew: false,
-      showModal: false
+      showModal: false,
+      modalData: null
     }
   }
 
-  handleOpenModal = () => {
-    this.setState({ showModal: true })
+  componentWillReceiveProps(nextProps){
+    if (nextProps.modalData) {
+      this.setState({
+        modalData: nextProps.modalData,
+        showModal: true
+      })
+    }
   }
 
   handleCloseModal = () => {
-    this.setState({ showModal: false })
+    const { history, title } = this.props
+    this.setState({
+      showModal: false,
+      modalData: null
+    })
+    history.push(`/admin/${title.toLowerCase()}`)
   }
 
 
