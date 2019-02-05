@@ -11,7 +11,8 @@ export default class Clients extends Component {
     this.state = {
       clients: [],
       category: 'All',
-      hasMore: true
+      hasMore: true,
+      formData: null
     }
   }
 
@@ -94,7 +95,7 @@ export default class Clients extends Component {
     this.setState({ clients: [] })
   }
 
-  List = ({ match }) => {
+  List = ({ match, history }) => {
     const { clients, category, hasMore } = this.state
     return (
       <ListPage
@@ -104,6 +105,7 @@ export default class Clients extends Component {
         subtitles={['name / company', 'contact info', 'next event', 'balance']}
         data={clients}
         match={match}
+        history={history}
         load={this.fetchClients}
         hasMore={hasMore}
         refresh={this.refreshClients}
@@ -137,6 +139,28 @@ export default class Clients extends Component {
     )
   }
 
+  Create = ({ match, history }) => {
+    const { clients, category, hasMore } = this.state
+    return (
+      <ListPage
+        createNew={true}
+        formData={this.state.formData}
+        title="Clients"
+        category={category}
+        categories={['Production', 'CANS', 'THC', 'CATP']}
+        subtitles={['name / company', 'contact info', 'next event', 'balance']}
+        modalData={client}
+        data={clients}
+        match={match}
+        history={history}
+        load={this.fetchClients}
+        hasMore={hasMore}
+        refresh={this.refreshClients}
+        fetchByCategory={this.fetchClientsByCategory}
+      />
+    )
+  }
+
   render(){
     const { location, match } = this.props
     return (
@@ -145,7 +169,8 @@ export default class Clients extends Component {
 
         <Switch>
           <Route exact path={match.path} render={(props) => this.List(props)}/>
-          <Route path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
+          <Route exact path={`${match.path}/new`} render={(props) => this.Create(props)}/>
+          <Route exact path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
         </Switch>
       </div>
     )
