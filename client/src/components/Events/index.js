@@ -94,9 +94,7 @@ export default class Events extends Component {
   }
 
   resetEvents = async() => {
-    this.setState({
-      events: []
-    })
+    this.setState({ events: [] })
   }
 
   List = ({ match }) => {
