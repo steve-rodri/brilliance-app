@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import Modal from 'react-modal';
 import { Redirect } from 'react-router-dom'
+import Modal from 'react-modal';
+import Show from './Show';
+import Create from './Create';
 import List from '../List/index.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -16,7 +18,7 @@ export default class ListPage extends Component {
     this.state = {
       redirectToCreateNew: false,
       showModal: false,
-      modalData: null
+      modalData: null,
     }
   }
 
@@ -25,6 +27,11 @@ export default class ListPage extends Component {
       this.setState({
         modalData: nextProps.modalData,
         showModal: true
+      })
+    }
+    if (nextProps.createNew) {
+      this.setState({
+        showModal: true,
       })
     }
   }
@@ -38,11 +45,11 @@ export default class ListPage extends Component {
     history.push(`/admin/${title.toLowerCase()}`)
   }
 
-
   createNew = (title) => {
+    const { history } = this.props
     switch (title) {
-      case "Clients":
-        this.handleOpenModal();
+      case 'Clients':
+        history.push(`/admin/${title.toLowerCase()}/new`)
         break;
       default:
         this.setState({
@@ -72,10 +79,12 @@ export default class ListPage extends Component {
     }
   }
 
-
   render(){
-    const { match, category, title } = this.props
-    if (this.state.redirectToCreateNew) return (<Redirect to={`${match.path}/new`}/>)
+    const { match, categories, category, title, subtitles, formData, data, hasMore } = this.props
+    const { redirectToCreateNew, showModal, modalData } = this.state
+
+    if (redirectToCreateNew) return (<Redirect to={`${match.path}/new`}/>)
+
     return (
       <div className='ListPage--container'>
         <aside>
@@ -93,7 +102,7 @@ export default class ListPage extends Component {
 
           {/* Categories */}
           <div className="ListPage--categories">
-            {this.props.categories.map((category, id) => (
+            {categories.map((category, id) => (
               <div
                 style={this.styleActiveMenu(category)}
                 onClick={(e) => {
@@ -123,24 +132,29 @@ export default class ListPage extends Component {
 
           <h3 className="ListPage--category-title" style={this.styleSubTitle()}>{category}</h3>
           <List
-            subtitles={this.props.subtitles}
-            items={this.props.data}
-            type={this.props.title}
+            subtitles={subtitles}
+            items={data}
+            type={title}
             create={this.createNew}
             load={this.props.load}
-            hasMore={this.props.hasMore}
+            hasMore={hasMore}
             handleSelect={this.handleSelect}
           />
 
         </main>
 
         <Modal
-          isOpen={this.state.showModal}
+          isOpen={showModal}
           onRequestClose={this.handleCloseModal}
           className="ListPage--modal"
           overlayClassName="ListPage--modal-overlay"
         >
 
+          {modalData?
+            <Show modalData={modalData}/>
+            :
+            <Create formData={formData}/>
+          }
         </Modal>
 
       </div>
