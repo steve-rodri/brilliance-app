@@ -25,7 +25,6 @@ function clientName(client, oneLine){
   }
 }
 
-
 export {
   clientName
 }
