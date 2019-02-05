@@ -50,6 +50,9 @@
 }
 
 .ListPage--modal, .ListPage--modal:active {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   position: absolute;
   height: 50%;
   width: 50%;
