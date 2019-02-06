@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :addresses
     resources :clients do
       get 'find', on: :collection, to: 'clients#find'
+      get 'events', on: :collection, to: 'clients#events'
     end
     resources :events do
       put 'sync', to: 'events#bulk_update'

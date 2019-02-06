@@ -4,7 +4,6 @@ class ClientsController < ApplicationController
   # GET /clients
   def index
     items_per_page = 25
-
     if params[:category]
       if params[:category] == 'All'
 
@@ -85,6 +84,16 @@ class ClientsController < ApplicationController
   # GET /clients/1
   def show
     render json: @client, include: '**'
+  end
+
+  #GET /clients/1/events
+  def events
+    items_per_page = 25
+    @events = Event
+      .where("client_id = #{params[:id]}")
+      .paginate(page: params[:page], per_page: items_per_page)
+
+    render json: @events, include: '**'
   end
 
   # POST /clients
