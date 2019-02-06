@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { clientName } from '../Helpers/clientName'
+import { clientName } from '../Helpers/clientHelpers'
 import { styleConfirmation } from '../Helpers/styleConfirmation'
 import moment from 'moment'
 

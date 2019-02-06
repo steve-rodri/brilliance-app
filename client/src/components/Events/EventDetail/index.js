@@ -8,7 +8,7 @@ import { event } from '../../../services/event';
 import { client } from '../../../services/client';
 import { place } from '../../../services/place';
 import { eventTitle } from '../../Helpers/eventTitle';
-import { clientName } from '../../Helpers/clientName';
+import { clientName } from '../../Helpers/clientHelpers';
 import { locationName } from '../../Helpers/locationName';
 import moment from 'moment'
 import './index.css';
