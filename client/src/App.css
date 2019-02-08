@@ -24,3 +24,20 @@ h1 {
   font-size: 60px;
   font-weight: 400;
 }
+
+button:hover {
+  cursor: pointer
+}
+
+label {
+  text-align: left;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.client {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
