@@ -1,18 +1,88 @@
 header {
   min-height: 75px;
-  min-width: 705px;
+  height: 150px;
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-columns: 15% 70% 15%;
+  grid-template-columns: repeat(2, 1fr);
   background: black;
 }
+
+@media (min-width: 1000px) {
+  header {
+    height: 100px;
+    grid-template-columns: 15% 75% 10%
+  }
+}
+
+/*-----------------Logo---------------- */
+.logo {
+  justify-self: start;
+  width: 150px;
+  height: 37px;
+  margin: 10px;
+}
+
+@media (min-width: 1000px) {
+  .logo {
+    width: 150px;
+    height: 37px;
+  }
+}
+
+/*-----------------DropDown-Nav-Menu---------------- */
+.Header--nav-menu {
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.95);
+  border-bottom: 1px solid var(--light-gray);
+  z-index: 10;
+  height: calc(100vh - 150px);
+  width: 100vw;
+  transition: all 500ms ease;
+}
+
+.Header--nav-menu > a {
+  height: 75px;
+  width: 100%;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--dark-blue);
+  border-bottom: 1px solid var(--light-gray);
+  font-family: 'Gruppo';
+  font-weight: bold;
+}
+
+.Header__bars {
+  justify-self: end;
+  margin: .2em .4em;
+}
+
+.Header__bars:hover {
+  color: #dddddd;
+  cursor: pointer;
+}
+
+@media (min-width: 1000px) {
+  .Header--Bars {
+    display: none;
+  }
+}
+
+/*-----------------Traditional-Nav---------------- */
 
 nav {
   justify-self: center;
   height: 33%;
   width: 90%;
-  display: flex;
+  display: none;
   align-items: center;
   border-left: 1px solid white;
   border-right: 1px solid white;
@@ -51,22 +121,27 @@ nav > *:active {
   background-color: lightgray;
 }
 
-.logo {
-  width: 100px;
-  height: 25px;
-  margin: 10px;
-}
-
 .user-circle:hover, .logo:hover {
   cursor: pointer
 }
 
 .user-circle {
+  display: none;
   justify-self: right;
   padding: 1px;
   background: white;
   border-radius: 100%;
   margin: 10px;
+}
+
+@media (min-width: 1000px) {
+  nav {
+    display: flex;
+  }
+
+  .user-circle {
+    display: block;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -78,12 +153,5 @@ nav > *:active {
 @media (max-width: 1000px) {
   nav > * > div {
     font-size: 16px;
-  }
-}
-
-@media (min-width: 750px) {
-  .logo {
-    width: 140px;
-    height: 33px;
   }
 }
