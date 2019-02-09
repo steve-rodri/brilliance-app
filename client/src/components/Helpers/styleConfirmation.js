@@ -5,26 +5,23 @@ function styleConfirmation(msg){
         backgroundColor: 'gold',
         fontWeight: 'bold',
         borderRadius: '10px',
-        padding: '5px',
-        width: '70%'
+        padding: '5px 15px',
       }
     case "Confirmed":
       return {
         backgroundColor: 'limegreen',
         fontWeight: 'bold',
-        padding: '5px',
+        padding: '5px 15px',
         color: 'white',
         borderRadius: '10px',
-        width: '70%'
       }
     case "Cancelled":
       return {
         backgroundColor: 'darkred',
         fontWeight: 'bold',
-        padding: '5px',
+        padding: '5px 15px',
         color: 'white',
         borderRadius: '10px',
-        width: '70%'
       }
     default:
       return {}
