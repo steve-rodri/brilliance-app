@@ -31,24 +31,35 @@ header {
 }
 
 /*-----------------DropDown-Nav-Menu---------------- */
-.Header--nav-menu {
+.Header--drop-down {
   overflow: hidden;
   display: none;
-  flex-direction: column;
-  justify-content: center;
+  grid-template-rows: 3fr 1fr;
   align-items: center;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.95);
-  border-bottom: 1px solid var(--light-gray);
+  justify-items: center;
   z-index: 10;
   height: calc(100vh - 150px);
   width: 100vw;
+  border-bottom: 1px solid var(--light-gray);
+  background: rgba(0, 0, 0, 0.95);
+  position: absolute;
   transition: all 500ms ease;
 }
 
-.Header--nav-menu > a {
-  height: 75px;
+.Header--nav-menu {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / span 2;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   width: 100%;
+}
+
+.Header--nav-menu > a {
+  height: 100%;
+  width: 80%;
   font-size: 35px;
   display: flex;
   justify-content: center;
@@ -68,6 +79,19 @@ header {
 .Header__bars:hover {
   color: #dddddd;
   cursor: pointer;
+}
+
+.Header--Log-Out {
+  grid-column: 1 / span 2;
+  background: var(--light-gray);
+  color: darkred;
+  font-weight: bold;
+  font-size: 20px;
+  border: 2px solid darkred;
+  border-radius: 5px;
+  width: 200px;
+  height: 65px;
+  margin: 25px;
 }
 
 @media (min-width: 1000px) {

@@ -79,12 +79,15 @@ export default class Header extends Component {
           </nav>
           <div className="user-circle" onClick={this.logOut}><FontAwesomeIcon icon="user-circle" size="3x"/></div>
         </header>
-        <div className="Header--nav-menu" style={this.styleNav()}>
-          <Link to='/admin/events' onClick={this.changeNav}><div>Events</div></Link>
-          <Link to='/admin/clients' onClick={this.changeNav}><div>Clients</div></Link>
-          <Link to='/admin/invoices' onClick={this.changeNav}><div>Invoices</div></Link>
-          <Link to='/admin/staff' onClick={this.changeNav}><div>Staff</div></Link>
-          <Link to='/admin/inventory' onClick={this.changeNav}><div>Inventory</div></Link>
+        <div className="Header--drop-down" style={this.styleNav()}>
+          <div className="Header--nav-menu">
+            <Link to='/admin/events' onClick={this.changeNav}><div>Events</div></Link>
+            <Link to='/admin/clients' onClick={this.changeNav}><div>Clients</div></Link>
+            <Link to='/admin/invoices' onClick={this.changeNav}><div>Invoices</div></Link>
+            <Link to='/admin/staff' onClick={this.changeNav}><div>Staff</div></Link>
+            <Link to='/admin/inventory' onClick={this.changeNav}><div>Inventory</div></Link>
+          </div>
+          <button className="Header--Log-Out" onClick={this.logOut}>Log Out</button>
         </div>
       </div>
     )
