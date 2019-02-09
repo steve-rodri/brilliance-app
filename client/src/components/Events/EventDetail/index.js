@@ -151,38 +151,35 @@ export default class EventDetail extends Component {
     switch (name) {
       case 'client':
         const clients = await this.findClients(value)
-        if (!value) {
+        if (!value || !clients || clients.length < 0) {
+
           this.setState(prevState => ({
             formData: {
               ...prevState.formData,
               client_id: null
             }
-          }),() => {
-            this.setState(prevState => ({
-              fields: {
-                ...prevState.fields,
-                summary: eventTitle(prevState.fields)
-              },
-              formData: {
-                ...prevState.formData,
-                summary: eventTitle(prevState.fields)
-              }
-            }))
+          }), () => {
+            if (value.length === 0 || value.length > 2) {
+              this.updateSummaryField()
+            }
           })
+
         }
+
         this.setState(prevState => ({
           searchFieldData: {
             ...prevState.searchFieldData,
             clients
           }
-         }))
+        }))
 
-        break;
+      break;
 
       case 'location':
         const locations = await this.findPlaces(value)
 
-        if (!value) {
+        if (!value || !locations || locations.length < 0) {
+
           this.setState(prevState => ({
             formData: {
               ...prevState.formData,
@@ -192,31 +189,25 @@ export default class EventDetail extends Component {
               ...prevState.fields,
               onPremise: null
             }
-          }),() => {
-            this.setState(prevState => ({
-              fields: {
-                ...prevState.fields,
-                summary: eventTitle(prevState.fields)
-              },
-              formData: {
-                ...prevState.formData,
-                summary: eventTitle(prevState.fields)
-              }
-            }))
+          }), () => {
+            if (value.length === 0 || value.length > 2) {
+              this.updateSummaryField()
+            }
           })
 
         }
+
         this.setState(prevState => ({
           searchFieldData: {
             ...prevState.searchFieldData,
             locations
           }
-         }))
+        }))
 
-        break;
+      break;
 
       default:
-        break;
+      break;
     }
   }
 
@@ -232,10 +223,11 @@ export default class EventDetail extends Component {
 
     if (searchFieldData) {
       switch (name) {
+
         case 'client':
           item = searchFieldData.clients[index]
           const client = clientName(item);
-
+          if (item) {
             this.setState(prevState => ({
               formData: {
                 ...prevState.formData,
@@ -245,46 +237,30 @@ export default class EventDetail extends Component {
                 ...prevState.fields,
                 client
               }
-            }),() => {
-              this.setState(prevState => ({
-                fields: {
-                  ...prevState.fields,
-                  summary: eventTitle(prevState.fields)
-                },
-                formData: {
-                  ...prevState.formData,
-                  summary: eventTitle(prevState.fields)
-                }
-              }))
-            })
-          break;
+            }), () => this.updateSummaryField())
+          }
+
+        break;
 
         case 'location':
           item = searchFieldData.locations[index]
           const location = locationName(item)
-          this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              location_id: item.id
-            },
-            fields: {
-              ...prevState.fields,
-              location,
-              onPremise: item.installation
-            }
-          }),() => {
+
+          if (item) {
             this.setState(prevState => ({
-              fields: {
-                ...prevState.fields,
-                summary: eventTitle(prevState.fields)
-              },
               formData: {
                 ...prevState.formData,
-                summary: eventTitle(prevState.fields)
+                location_id: item.id
+              },
+              fields: {
+                ...prevState.fields,
+                location,
+                onPremise: item.installation
               }
-            }))
-          })
-          break;
+            }), () => this.updateSummaryField())
+          }
+
+        break;
 
         default:
           this.setState(prevState => ({
@@ -293,7 +269,7 @@ export default class EventDetail extends Component {
               [name]: item.id
             }
           }))
-          break;
+        break;
       }
     }
   }
@@ -301,6 +277,7 @@ export default class EventDetail extends Component {
   handleChange = (e) => {
     if (e) {
       const {name, value} = e.target
+
       this.setState(prevState => ({
         fields: {
           ...prevState.fields,
@@ -310,18 +287,8 @@ export default class EventDetail extends Component {
           ...prevState.formData,
           [name]: value
         }
-      }), () => {
-        this.setState(prevState => ({
-          fields: {
-            ...prevState.fields,
-            summary: eventTitle(prevState.fields)
-          },
-          formData: {
-            ...prevState.formData,
-            summary: eventTitle(prevState.fields)
-          }
-        }))
-      })
+      }), () => this.updateSummaryField())
+
     }
   }
 
@@ -380,6 +347,19 @@ export default class EventDetail extends Component {
       }
 
     }
+  }
+
+  updateSummaryField = () => {
+    this.setState(prevState => ({
+      fields: {
+        ...prevState.fields,
+        summary: eventTitle(prevState.fields)
+      },
+      formData: {
+        ...prevState.formData,
+        summary: eventTitle(prevState.fields)
+      }
+    }))
   }
 
   switchEditMode = () => {
@@ -452,6 +432,16 @@ export default class EventDetail extends Component {
     }
   }
 
+  styleTabControl = () => {
+    const isNew = this.props.isNew
+    const newEvt = this.state.newEvt
+    if (isNew && !newEvt) {
+      return { display: 'none' }
+    } else {
+      return {}
+    }
+  }
+
   styleTab = (view) => {
     if (view === this.state.view) {
       return this.highlight()
@@ -472,8 +462,8 @@ export default class EventDetail extends Component {
     if (this.state.redirectToEvents) return (<Redirect to='/admin/events'/>)
     return (
       <div className="EventDetail--container">
-        <div className="EventDetail--tab-control">
-          <div className="Tab" style={this.styleTab("Basic Info")} onClick={() => this.setView("Basic Info")}><h3>BASIC INFO</h3></div>
+        <div className="EventDetail--tab-control" style={this.styleTabControl()}>
+          <div className="Tab" style={this.styleTab("Basic Info")} onClick={() => this.setView("Basic Info")}><h3>MAIN</h3></div>
           <div className="Tab" style={this.styleTab("Logistics")}  onClick={() => this.setView("Logistics")}><h3>LOGISTICS</h3></div>
           <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>INVOICE</h3></div>
           <div className="Tab" style={this.styleTab("Cash Flow")}  onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
