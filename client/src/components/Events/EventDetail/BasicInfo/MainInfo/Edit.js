@@ -105,9 +105,14 @@ export default class Edit extends Component {
             placeholder= 'search clients...'
             className="Edit--input"
             value={fields.client? fields.client : ''}
-            onChange={this.props.handleSearchChange}
+            onChange={(e) => this.props.handleSearchChange(e.target.name, e.target.value)}
             onFocus={this.handleViewResults}
-            onBlur={this.handleCloseResults}
+            onBlur={(e) => {
+              if (!this.props.formData.client_id) {
+                this.props.handleSearchChange('client', '')
+              }
+              this.handleCloseResults()
+            }}
             tabIndex="1"
           />
 
@@ -167,9 +172,15 @@ export default class Edit extends Component {
               placeholder= 'search locations...'
               className="Edit--input"
               value={fields.location? fields.location : ''}
-              onChange={this.props.handleSearchChange}
+              onChange={(e) => this.props.handleSearchChange(e.target.name, e.target.value)}
               onFocus={this.handleViewResults}
-              onBlur={this.handleCloseResults}
+              onBlur={(e) => {
+                console.log(this.props.formData)
+                if (!this.props.formData.location_id) {
+                  this.props.handleSearchChange('location', '')
+                }
+                this.handleCloseResults()
+              }}
               tabIndex="2"
             />
 
@@ -219,12 +230,12 @@ export default class Edit extends Component {
 
             <Datetime
               className="Edit--date-input-container"
-              inputProps={{ className: "Edit--input", tabIndex: "3" }}
+              inputProps={{ className: "Edit--input", tabIndex: "3"}}
               value={fields.start? moment(fields.start) : ''}
               viewDate={fields.start? moment(fields.start) : ''}
               timeConstraints={{ minutes:{ step: 5 } }}
               onChange={(datetime) => this.props.handleDateChange('start', datetime)}
-              closeOnSelect={true}
+              closeOnSelect={false}
               closeOnTab={true}
             />
 
@@ -252,9 +263,10 @@ export default class Edit extends Component {
               className="Edit--date-input-container"
               inputProps={{ className:"Edit--input", tabIndex:"4" }}
               value={fields.end? moment(fields.end) : ''}
-              viewDate={fields.end? moment(fields.end) : ''}
+              viewDate={fields.start? moment(fields.start) : fields.end? moment(fields.end): ''}
+              viewMode={'time'}
               timeConstraints={{ minutes:{ step: 5 } }}
-              isValidDate={(current) => current.isSameOrAfter(moment(fields.start))}
+              isValidDate={(current) => current.isSameOrAfter(moment(fields.start), 'day')}
               onChange={(datetime) => this.props.handleDateChange('end', datetime)}
               closeOnSelect={true}
               closeOnTab={true}
@@ -273,7 +285,6 @@ export default class Edit extends Component {
               onChange={this.props.handleChange}
               tabIndex="8"
             />
-
           </div>
 
       </div>

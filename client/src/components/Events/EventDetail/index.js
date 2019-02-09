@@ -145,8 +145,7 @@ export default class EventDetail extends Component {
     this.setState({ redirectToEvents: true })
   }
 
-  handleSearchChange = async(e) => {
-    const { name, value } = e.target
+  handleSearchChange = async(name, value) => {
     this.setField(name, value)
 
     switch (name) {
@@ -463,7 +462,7 @@ export default class EventDetail extends Component {
 
   highlight = () => {
     return {
-      backgroundColor: 'white',
+      backgroundColor: 'var(--light-gray)',
       color: 'rgba(0,0,0,.88)',
       borderTop:'1px solid rgba(0,0,0,.88) '
     }

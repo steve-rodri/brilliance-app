@@ -41,7 +41,7 @@ class PlacesController < ApplicationController
   # GET /places/find
   def find
     @places = Place.where("name LIKE :query OR short_name LIKE :query",
-      {query: "%#{params[:q]}%"})
+      {query: "%#{params[:q].capitalize}%"})
 
     render json: @places
   end
