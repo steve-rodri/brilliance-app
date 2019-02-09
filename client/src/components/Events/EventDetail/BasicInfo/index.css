@@ -96,7 +96,7 @@
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   .BasicInfo--event-title, .BasicInfo--event-summary {
     font-size: 60px;
   }
