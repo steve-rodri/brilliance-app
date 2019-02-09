@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Header from '../Header/index.js'
 import ListPage from '../ListPage/index.js'
 import { client } from '../../services/client'
-import { clientName } from '../Helpers/clientName'
+import { clientName } from '../Helpers/clientHelpers'
 
 export default class Clients extends Component {
   constructor(props){
@@ -11,14 +11,52 @@ export default class Clients extends Component {
     this.state = {
       clients: [],
       category: 'All',
-      hasMore: true,
-      formData: null
+      categories: ['Production', 'CANS', 'THC', 'CATP'],
+      columnHeaders: ['name / company', 'contact info', 'next event', 'balance'],
+
+      hasMoreClients: true,
+      formData: null,
+      events: [],
+      hasMoreEvents: true,
+      invoices: [],
+      hasMoreInvoices: true,
     }
+  }
+
+  updateColumnHeaders = (e) => {
+    const width = window.innerWidth
+    if (width < 500) {
+      this.setState({
+        columnHeaders: ['name / company', 'balance']
+      })
+    } else if (width < 700) {
+      this.setState({
+        columnHeaders: ['name / company', 'next event', 'balance']
+      })
+    } else {
+      this.setState({
+        columnHeaders: ['name / company', 'contact info', 'next event', 'balance']
+      })
+    }
+  }
+
+  componentDidMount() {
+    this.updateColumnHeaders();
+    window.addEventListener("resize", this.updateColumnHeaders);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateColumnHeaders);
   }
 
   fetchClients = async(page) => {
     const clients = await client.getAll(page);
     this.updateClients(clients, "All")
+  }
+
+  fetchClientEvents = async(page, clientId) => {
+    const events = await client.getEvents(page, clientId)
+    this.updateEvents(events)
   }
 
   refreshClients = async() => {
@@ -75,7 +113,7 @@ export default class Clients extends Component {
         this.setState({
           clients,
           category: category,
-          hasMore: false
+          hasMoreClients: false
         })
       } else {
         this.setState({
@@ -91,23 +129,42 @@ export default class Clients extends Component {
     }
   }
 
+  updateEvents = (evts) => {
+    if (evts) {
+      let events = [...this.state.events]
+      evts.forEach(e => events.push(e))
+      if (events.length < 25) {
+
+        this.setState({
+          events,
+          hasMoreEvents: false
+        })
+      } else {
+        this.setState({ events })
+      }
+    } else {
+      this.setState({ events: [] })
+    }
+  }
+
   resetClients = () => {
     this.setState({ clients: [] })
   }
 
   List = ({ match, history }) => {
-    const { clients, category, hasMore } = this.state
+    const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
     return (
       <ListPage
         title="Clients"
+        type="Clients"
         category={category}
-        categories={['Production', 'CANS', 'THC', 'CATP']}
-        subtitles={['name / company', 'contact info', 'next event', 'balance']}
+        categories={categories}
+        subtitles={columnHeaders}
         data={clients}
         match={match}
         history={history}
         load={this.fetchClients}
-        hasMore={hasMore}
+        hasMore={hasMoreClients}
         refresh={this.refreshClients}
         fetchByCategory={this.fetchClientsByCategory}
       />
@@ -115,7 +172,8 @@ export default class Clients extends Component {
   }
 
   Show = ({ match, history }) => {
-    const { clients, category, hasMore } = this.state
+    console.log('show')
+    const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
     let client;
     if (match.params.id) {
       const req_id = parseInt(match.params.id)
@@ -124,15 +182,16 @@ export default class Clients extends Component {
     return (
       <ListPage
         title="Clients"
+        type="Clients"
         category={category}
-        categories={['Production', 'CANS', 'THC', 'CATP']}
-        subtitles={['name / company', 'contact info', 'next event', 'balance']}
+        categories={categories}
+        subtitles={columnHeaders}
         modalData={client}
         data={clients}
         match={match}
         history={history}
         load={this.fetchClients}
-        hasMore={hasMore}
+        hasMore={hasMoreClients}
         refresh={this.refreshClients}
         fetchByCategory={this.fetchClientsByCategory}
       />
@@ -140,23 +199,47 @@ export default class Clients extends Component {
   }
 
   Create = ({ match, history }) => {
-    const { clients, category, hasMore } = this.state
+    console.log('create')
+    const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
     return (
       <ListPage
         createNew={true}
         formData={this.state.formData}
         title="Clients"
+        type="Clients"
         category={category}
-        categories={['Production', 'CANS', 'THC', 'CATP']}
-        subtitles={['name / company', 'contact info', 'next event', 'balance']}
-        modalData={client}
+        categories={categories}
+        subtitles={columnHeaders}
         data={clients}
         match={match}
         history={history}
         load={this.fetchClients}
-        hasMore={hasMore}
+        hasMore={hasMoreClients}
         refresh={this.refreshClients}
         fetchByCategory={this.fetchClientsByCategory}
+      />
+    )
+  }
+
+  ListEvents = async({ match, history }) => {
+    console.log(match)
+    const { clients, events, hasMoreEvents } = this.state
+    let client;
+    if (match.params.id) {
+      const req_id = parseInt(match.params.id)
+      client = clients.find(clt => clt.id === req_id)
+    }
+    return (
+      <ListPage
+        title={clientName(client)}
+        type="Events"
+        category="All"
+        subtitles={['title', 'location', 'confirmation', 'scheduled']}
+        data={events}
+        match={match}
+        history={history}
+        load={(page) => this.fetchClientEvents(page, client.id)}
+        hasMore={hasMoreEvents}
       />
     )
   }
@@ -171,6 +254,8 @@ export default class Clients extends Component {
           <Route exact path={match.path} render={(props) => this.List(props)}/>
           <Route exact path={`${match.path}/new`} render={(props) => this.Create(props)}/>
           <Route exact path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
+          <Route exact path={`${match.path}/:id/events`} render={(props) => this.ListEvents(props)}/>
+
         </Switch>
       </div>
     )

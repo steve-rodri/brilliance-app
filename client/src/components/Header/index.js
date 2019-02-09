@@ -24,6 +24,20 @@ export default class Header extends Component {
     this.setState({ location })
   }
 
+  componentDidMount() {
+    this.updateNav();
+    window.addEventListener("resize", this.updateNav);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateNav);
+  }
+
+  updateNav = (e) => {
+    if (window.innerWidth > 1000) {
+      this.setState({ displayNav: false })
+    }
+  }
 
   logOut = () => {
     localStorage.clear()

@@ -3,26 +3,30 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 
 export default function Client(props) {
-  const { item, type, numColumns, styleColumns, styleSummary } = props
+  const { item, type, numColumns, displayColumn, styleColumns, styleSummary } = props
   const client = item.contactInfo
   const company = item.company
 
   return (
     <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
       <div className="List-Item" style={styleColumns(numColumns)}>
-        <div>
+
+        <div style={displayColumn('name / company')}>
           <h3>{client && client.fullName}</h3>
           <h4>{company && company.name}</h4>
         </div>
-        <div className="List-Item--contact-info">
+
+        <div style={displayColumn('contact info')} className="List-Item--contact-info">
           {client && <p>{client.phoneNumber && `${client.phoneNumber}`}</p>}
           {client && client.emailAddresses.length > 0 && <a href={`mailto:${client.emailAddresses[0].address}`}>{client.emailAddresses[0].address}</a>}
           {company && <p>{company.phoneNumber && `${company.phoneNumber}`}</p>}
           {company && company.website && <a href={`${company.website}`} onClick={(e) => e.stopPropagation()}>{company.website}</a>}
         </div>
-        <div className="List-Item--next-event">
+
+        <div style={displayColumn('next event')} className="List-Item--next-event">
           {latestEvent(client)}
         </div>
+
       </div>
     </Link>
   )

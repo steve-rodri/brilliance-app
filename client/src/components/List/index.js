@@ -37,6 +37,7 @@ export default class List extends Component {
                 key={id}
                 item={item}
                 type={this.props.type}
+                displayColumn={displayColumn}
                 numColumns={subtitles && subtitles.length}
                 styleColumns={this.styleColumns}
               />
@@ -55,6 +56,16 @@ export default class List extends Component {
       } else {
         return {
         gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+        }
+      }
+    }
+
+    function displayColumn(headerName){
+      if ( subtitles.find( header => header === headerName ) ) {
+        return {}
+      } else {
+        return {
+          display: 'none'
         }
       }
     }
