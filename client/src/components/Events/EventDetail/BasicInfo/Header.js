@@ -163,8 +163,10 @@ export default function Header(props){
   return (
     <div className="BasicInfo--header">
       {displaySummary()}
-      {displayConfirmation()}
-      {displayButtons()}
+      <div className="BasicInfo--header-right">
+        {displayConfirmation()}
+        {displayButtons()}
+      </div>
     </div>
   )
 }

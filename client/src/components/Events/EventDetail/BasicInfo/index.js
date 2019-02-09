@@ -23,9 +23,7 @@ export default class BasicInfo extends Component {
         />
 
         <div className="BasicInfo--staff-and-notes">
-          <div className="BasicInfo--staff-container">
-            <label>Staff</label>
-          </div>
+
           <div className="BasicInfo--notes-container">
             <label>Notes</label>
             {editMode?
@@ -37,13 +35,18 @@ export default class BasicInfo extends Component {
                 tabIndex="9"
               />
               :
-              <textarea
+              <p
                 className="BasicInfo--notes-readonly"
-                value={fields && fields.notes? fields.notes : ''}
-                readOnly="readonly"
-              />
+                // value={fields && fields.notes? fields.notes : ''}
+                // readOnly="readonly"
+              >{fields && fields.notes? fields.notes : ''}</p>
             }
           </div>
+
+          <div className="BasicInfo--staff-container">
+            <label>Staff</label>
+          </div>
+
         </div>
       </div>
     )
