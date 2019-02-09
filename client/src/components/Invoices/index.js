@@ -11,8 +11,36 @@ export default class Invoices extends Component {
     this.state = {
       invoices: [],
       category: 'All',
+      categories: ['Production', 'CANS', 'THC', 'CATP'],
+      columnHeaders: ['client & date', 'type', 'status', 'balance'],
       hasMore: true
     }
+  }
+
+  updateColumnHeaders = (e) => {
+    const width = window.innerWidth
+    if (width < 500) {
+      this.setState({
+        columnHeaders: ['client & date', 'status']
+      })
+    } else if (width < 700) {
+      this.setState({
+        columnHeaders: ['client & date', 'status', 'balance']
+      })
+    } else {
+      this.setState({
+        columnHeaders: ['client & date', 'type', 'status', 'balance']
+      })
+    }
+  }
+
+  componentDidMount() {
+    this.updateColumnHeaders();
+    window.addEventListener("resize", this.updateColumnHeaders);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateColumnHeaders);
   }
 
   fetchInvoices = async(page) => {
@@ -57,13 +85,14 @@ export default class Invoices extends Component {
   }
 
   List = () => {
-    const { invoices, category, hasMore } = this.state
+    const { invoices, categories, category, columnHeaders, hasMore } = this.state
     return (
       <ListPage
         title="Invoices"
+        type="Invoices"
         category={category}
-        categories={['Production', 'CANS', 'THC', 'CATP']}
-        subtitles={['client & date', 'type', 'status', 'balance']}
+        categories={categories}
+        subtitles={columnHeaders}
         data={invoices}
         load={this.fetchInvoices}
         hasMore={hasMore}

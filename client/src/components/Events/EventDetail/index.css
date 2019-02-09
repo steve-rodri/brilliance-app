@@ -2,11 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--light-gray);
   height: calc(100vh - 75px);
 }
 
+
+/* ------------------Tab-Control--------------------- */
 .EventDetail--tab-control {
-  display: flex;
+  display: none;
   min-height: 50px;
   max-height: 50px;
   width: 100%;
@@ -32,8 +35,9 @@
   cursor: pointer
 }
 
-@media (min-width: 600px) {
+@media (min-width: 750px) {
   .EventDetail--tab-control {
+    display: flex;
     min-height: 40px;
     max-height: 40px;
   }

@@ -28,28 +28,31 @@ export default class ListPage extends Component {
         modalData: nextProps.modalData,
         showModal: true
       })
-    }
-    if (nextProps.createNew) {
+    } else if (nextProps.createNew) {
       this.setState({
         showModal: true,
+      })
+    } else {
+      this.setState({
+        showModal: false
       })
     }
   }
 
   handleCloseModal = () => {
-    const { history, title } = this.props
+    const { history, type } = this.props
     this.setState({
       showModal: false,
       modalData: null
     })
-    history.push(`/admin/${title.toLowerCase()}`)
+    history.push(`/admin/${type.toLowerCase()}`)
   }
 
-  createNew = (title) => {
+  createNew = (type) => {
     const { history } = this.props
-    switch (title) {
+    switch (type) {
       case 'Clients':
-        history.push(`/admin/${title.toLowerCase()}/new`)
+        history.push(`/admin/${type.toLowerCase()}/new`)
         break;
       default:
         this.setState({
@@ -80,7 +83,7 @@ export default class ListPage extends Component {
   }
 
   render(){
-    const { match, categories, category, title, subtitles, formData, data, hasMore } = this.props
+    const { match, history, categories, category, title, type, subtitles, formData, data, hasMore } = this.props
     const { redirectToCreateNew, showModal, modalData } = this.state
 
     if (redirectToCreateNew) return (<Redirect to={`${match.path}/new`}/>)
@@ -102,7 +105,7 @@ export default class ListPage extends Component {
 
           {/* Categories */}
           <div className="ListPage--categories">
-            {categories.map((category, id) => (
+            {categories && categories.map((category, id) => (
               <div
                 style={this.styleActiveMenu(category)}
                 onClick={(e) => {
@@ -115,10 +118,10 @@ export default class ListPage extends Component {
           </div>
 
           {/* Add New Button */}
-          {title === "Events" || title === "Clients"?
+          {type === "Events" || type === "Clients"?
             <div
               className="ListPage--button create"
-              onClick={() => this.createNew(title)}
+              onClick={() => this.createNew(type)}
             >
               <span className="button-text">Add New</span>
               {<FontAwesomeIcon className="button-icon" icon="plus" size="2x"/>}
@@ -134,7 +137,7 @@ export default class ListPage extends Component {
           <List
             subtitles={subtitles}
             items={data}
-            type={title}
+            type={type}
             create={this.createNew}
             load={this.props.load}
             hasMore={hasMore}
@@ -151,9 +154,16 @@ export default class ListPage extends Component {
         >
 
           {modalData?
-            <Show modalData={modalData}/>
+            <Show
+              modalData={modalData}
+              match={match}
+              history={history}
+              type={type}
+            />
             :
-            <Create formData={formData}/>
+            <Create
+              formData={formData}
+            />
           }
         </Modal>
 

@@ -13,9 +13,41 @@ export default class Events extends Component {
     super(props)
     this.state = {
       events: [],
+      hasMore: true,
       category: 'All',
-      hasMore: true
+      categories: ['Production', 'CANS', 'THC', 'CATP'],
+      columnHeaders: ['title', 'client', 'location', 'confirmation', 'scheduled']
     }
+  }
+
+  updateColumnHeaders = (e) => {
+    const width = window.innerWidth
+    if (width < 500) {
+      this.setState({
+        columnHeaders: ['title', 'confirmation']
+      })
+    } else if (width < 700) {
+      this.setState({
+        columnHeaders: ['title', 'confirmation', 'scheduled']
+      })
+    } else if (width < 900) {
+      this.setState({
+        columnHeaders: ['title', 'client', 'confirmation', 'scheduled']
+      })
+    } else {
+      this.setState({
+        columnHeaders: ['title', 'client', 'location', 'confirmation', 'scheduled']
+      })
+    }
+  }
+
+  componentDidMount() {
+    this.updateColumnHeaders();
+    window.addEventListener("resize", this.updateColumnHeaders);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateColumnHeaders);
   }
 
   fetchEvents = async(page) => {
@@ -98,13 +130,14 @@ export default class Events extends Component {
   }
 
   List = ({ match }) => {
-    const { events, category, hasMore } = this.state
+    const { events, category, categories, columnHeaders, hasMore } = this.state
     return (
       <ListPage
         title="Events"
+        type="Events"
         category={category}
-        categories={['Production', 'CANS', 'THC', 'CATP']}
-        subtitles={['title', 'client', 'location', 'confirmation', 'scheduled']}
+        categories={categories}
+        subtitles={columnHeaders}
         data={events}
         match={match}
         load={this.fetchEvents}
