@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Dashboard from '../Dashboard/index.js'
-import Clients from '../Clients/index.js'
-import Events from '../Events/index.js'
-import Invoices from '../Invoices/index.js'
+import Dashboard from './Views/Dashboard/index.js'
+import Clients from './Views/Clients/index.js'
+import Events from './Views/Events/index.js'
+import Invoices from './Views/Invoices/index.js'
 
 export default class Admin extends Component {
   render(){

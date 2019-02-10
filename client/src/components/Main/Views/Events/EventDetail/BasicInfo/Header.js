@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPencilAlt, faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { styleConfirmation } from '../../../Helpers/styleConfirmation'
+import { styleConfirmation } from '../../../../../Helpers/styleConfirmation'
 
 library.add(faPencilAlt)
 library.add(faCheck)

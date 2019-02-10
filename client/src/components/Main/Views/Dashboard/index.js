@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-// import Search from '../Search/index.js'
-import Schedule from '../Schedule/index.js'
+// import Search from '../../../Search/index.js'
+import Schedule from './Schedule/index.js'
 import moment from 'moment'
 import './Dashboard.css'
 

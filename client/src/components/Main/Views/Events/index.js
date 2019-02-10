@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import ListPage from '../ListPage/index.js'
+import ListPage from '../../../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
 import moment from 'moment'
-import { event } from '../../services/event'
-import { eventTitle } from '../Helpers/eventTitle'
-import './index.css'
+import { event } from '../../../../services/event'
+import { eventTitle } from '../../../Helpers/eventTitle'
 
 export default class Events extends Component {
   constructor(props){
