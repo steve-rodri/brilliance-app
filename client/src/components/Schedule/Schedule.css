@@ -1,4 +1,4 @@
-.schedule--container {
+.Schedule--container {
   display: none;
   background-color: rgba(0,0,0,.88);
   margin: 20px auto;
@@ -6,7 +6,7 @@
   width: 95%;
 }
 
-.schedule--title {
+.Schedule--title {
   color: white;
   margin: 2px auto;
   font-size: 32px;
@@ -16,15 +16,6 @@
   padding: 5px 0 10px 0;
 }
 
-.schedule--subtitles {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr)
-}
-
-.schedule--subtitles > p {
-  color: white;
-}
-
-.schedule--not-currently {
+.Schedule--not-currently {
   color: white;
 }

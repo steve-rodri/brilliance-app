@@ -8,7 +8,6 @@
 
 .List-Item--description {
   font-size: 11px;
-  grid-column-start: 4;
 }
 
 .List-Item:hover {

@@ -15,11 +15,31 @@ export default class Schedule extends Component {
     }
   }
 
+  updateColumnHeaders = (e) => {
+    const width = window.innerWidth
+    if (width < 500) {
+      this.setState({
+        columnHeaders: ['time until', 'title']
+      })
+    } else if (width < 700) {
+      this.setState({
+        columnHeaders: ['time until', 'title', 'confirmation']
+      })
+    } else {
+      this.setState({
+        columnHeaders: ['time until', 'title', 'notes', 'confirmation']
+      })
+    }
+  }
+
   async componentDidMount(){
+    this.updateColumnHeaders();
+    window.addEventListener("resize", this.updateColumnHeaders);
     await this.findUpcomingUserEvents()
   }
 
   async componentWillUnmount(){
+    window.removeEventListener("resize", this.updateColumnHeaders);
     this.setState({
       userEvents: []
     })
@@ -71,29 +91,28 @@ export default class Schedule extends Component {
   }
 
   render(){
-    const { redirectToLogin, userEvents} = this.state
-    const subtitles = ['','title', 'call', 'notes', 'confirmation']
+    const { redirectToLogin, userEvents, columnHeaders } = this.state
+
     if (redirectToLogin) return (<Redirect to="/login"/>)
+
     return (
       <React.Fragment>
-        <div className="schedule--container" style={this.styleContainer()}>
-          <h2 className='schedule--title'>Schedule</h2>
+        <div className="Schedule--container" style={this.styleContainer()}>
+          <h2 className='Schedule--title'>Schedule</h2>
           <List
             user={this.props.user}
             type="Schedule"
             items={userEvents}
-            subtitles={subtitles}
+            subtitles={columnHeaders}
             load={this.findUpcomingUserEvents}
             hasMore={false}
           />
         </div>
-        {!userEvents && userEvents.length === 0 && <p className="schedule--not-currently" >Not currently scheduled...</p>}
+        {!userEvents && userEvents.length === 0 && <p className="Schedule--not-currently" >Not currently scheduled...</p>}
       </React.Fragment>
-
     )
   }
 }
-
 
 function start(event) {
   if (event) {
