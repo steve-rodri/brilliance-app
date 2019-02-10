@@ -35,7 +35,7 @@
 
 .BasicInfo--event-title, .BasicInfo--event-summary {
   width: 100%;
-  font-size: 35px;
+  font-size: 24px;
   grid-column: 1 / span 1;
   justify-self: start;
 }
