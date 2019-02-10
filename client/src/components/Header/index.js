@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom'
-import Bars from '../buttons/Bars'
+import Bars from '../Buttons/Bars/index.js'
 import logo_t from '../../images/logo_t.GIF'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'

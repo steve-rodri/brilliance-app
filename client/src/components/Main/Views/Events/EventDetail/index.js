@@ -4,12 +4,12 @@ import BasicInfo from './BasicInfo/index.js';
 import Logistics from './Logistics/index.js';
 import Invoice from './Invoice/index.js';
 import CashFlow from './CashFlow/index.js';
-import { event } from '../../../services/event';
-import { client } from '../../../services/client';
-import { place } from '../../../services/place';
-import { eventTitle } from '../../Helpers/eventTitle';
-import { clientName } from '../../Helpers/clientHelpers';
-import { locationName } from '../../Helpers/locationName';
+import { event } from '../../../../../services/event';
+import { client } from '../../../../../services/client';
+import { place } from '../../../../../services/place';
+import { eventTitle } from '../../../../Helpers/eventTitle';
+import { clientName } from '../../../../Helpers/clientHelpers';
+import { locationName } from '../../../../Helpers/locationName';
 import moment from 'moment'
 import './index.css';
 

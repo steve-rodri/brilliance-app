@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import ListPage from '../ListPage/index.js'
-import { client } from '../../services/client'
-import { clientName } from '../Helpers/clientHelpers'
+import ListPage from '../../../ListPage/index.js'
+import { client } from '../../../../services/client'
+import { clientName } from '../../../Helpers/clientHelpers'
 
 export default class Clients extends Component {
   constructor(props){

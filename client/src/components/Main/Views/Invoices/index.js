@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import ListPage from '../ListPage/index.js'
+import ListPage from '../../../ListPage/index.js'
 import InvoiceDetail from './InvoiceDetail/index.js'
-import { invoice } from '../../services/invoice'
+import { invoice } from '../../../../services/invoice'
 
 export default class Invoices extends Component {
   constructor(props){
