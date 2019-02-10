@@ -175,8 +175,7 @@ export default class Edit extends Component {
               onChange={(e) => this.props.handleSearchChange(e.target.name, e.target.value)}
               onFocus={this.handleViewResults}
               onBlur={(e) => {
-                console.log(this.props.formData)
-                if (!this.props.formData.location_id) {
+                if (this.props.formData && !this.props.formData.location_id) {
                   this.props.handleSearchChange('location', '')
                 }
                 this.handleCloseResults()

@@ -1,24 +1,35 @@
 .Dashboard {
-  height: 100vh;
+  height: calc(100vh - 150px);
   width: 100vw;
-}
-
-.Dashboard--main {
   display: grid;
   grid-template-rows: .4fr auto;
-  justify-content: center;
+  justify-items: center;
   align-items: start;
-  height: calc(100vh - 75px);
-  max-width: 100%;
-  min-width: 725px;
   background-color: rgba(0, 0, 0, 0.88);
 }
 
 .Dashboard--intro {
+  font-size: 40px;
+  font-family: 'Rokkitt', serif;
   min-width: 50%;
   justify-self: center;
   align-self: center;
   color: white;
-  font-family: 'Rokkitt', serif;
   border-bottom: 1px solid white;
+}
+
+@media (min-width: 700px) {
+  .Dashboard--intro {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Dashboard {
+    height: calc(100vh - 100px)
+  }
+
+  .Dashboard--intro {
+    font-size: 60px;
+  }
 }

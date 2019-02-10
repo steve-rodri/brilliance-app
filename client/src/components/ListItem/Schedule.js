@@ -10,18 +10,34 @@ library.add(faTimesCircle)
 library.add(faQuestionCircle)
 
 export default function Schedule(props){
-  const { user, item, start, end, timeUntil, numColumns, styleContainer } = props
+  const {
+    user,
+    item,
+    start,
+    end,
+    timeUntil,
+    displayColumn,
+    numColumns,
+    styleContainer
+  }
+  = props
+
   return (
     <a href={item.htmlLink} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
       <div className="List-Item" style={styleContainer(item, numColumns)}>
-        <p>{item && timeUntil}</p>
-        <div>
+
+        <p style={displayColumn('time until')}>{item && timeUntil}</p>
+
+        <div style={displayColumn('title')}>
           <h4>{item && item.summary}</h4>
           <p>{item && item.start && moment.utc(start).format('dddd, MMMM Do')}</p>
           <p>{item && item.start && item.end && `${moment.utc(start).format('LT')} - ${moment.utc(end).format('LT')}`}</p>
         </div>
-        <p className="List-Item--description">{item && item.description}</p>
-        <p>{status()}</p>
+
+        <p style={displayColumn('notes')} className="List-Item--description">{item && item.description}</p>
+
+        <p style={displayColumn('confirmation')}>{status()}</p>
+
       </div>
     </a>
   )
