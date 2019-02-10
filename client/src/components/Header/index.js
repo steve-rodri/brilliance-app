@@ -73,16 +73,17 @@ export default class Header extends Component {
 
   render(){
     const { redirectToLogin, redirectToDashboard } = this.state
+
     if (redirectToLogin) return (<Redirect to="/login"/>)
-    if (redirectToDashboard) return (<Redirect to="/admin"/>)
+    if (redirectToDashboard) return (<Redirect to="/"/>)
+
     return(
       <div>
         <header>
 
-
           <img onClick={this.toDashboard} className="logo" src={logo_t} alt='logo'/>
-          <Bars changeNav={this.changeNav} open={this.state.displayNav}/>
 
+          <Bars changeNav={this.changeNav} open={this.state.displayNav}/>
 
           <nav>
             <Link to='/admin/events'><div>Events</div></Link>
@@ -91,9 +92,13 @@ export default class Header extends Component {
             <Link to='/admin/staff'><div>Staff</div></Link>
             <Link to='/admin/inventory'><div>Inventory</div></Link>
           </nav>
+
           <div className="user-circle" onClick={this.logOut}><FontAwesomeIcon icon="user-circle" size="3x"/></div>
+
         </header>
+
         <div className="Header--drop-down" style={this.styleNav()}>
+
           <div className="Header--nav-menu">
             <Link to='/admin/events' onClick={this.changeNav}><div>Events</div></Link>
             <Link to='/admin/clients' onClick={this.changeNav}><div>Clients</div></Link>
@@ -101,8 +106,11 @@ export default class Header extends Component {
             <Link to='/admin/staff' onClick={this.changeNav}><div>Staff</div></Link>
             <Link to='/admin/inventory' onClick={this.changeNav}><div>Inventory</div></Link>
           </div>
+
           <button className="Header--Log-Out" onClick={this.logOut}>Log Out</button>
+
         </div>
+
       </div>
     )
   }

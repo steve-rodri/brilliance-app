@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Header from '../Header/index.js'
 import ListPage from '../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
 import moment from 'moment'
@@ -176,17 +175,13 @@ export default class Events extends Component {
   }
 
   render(){
-    const { location, match } = this.props
+    const { match } = this.props
     return (
-      <div className='Section'>
-        <Header location={location}/>
-
-        <Switch>
-          <Route exact path={match.path} render={(props) => this.List(props)}/>
-          <Route exact path={`${match.path}/new`} render={(props) => this.Create(props)}/>
-          <Route path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path={match.path} render={ props => this.List(props)} />
+        <Route path={`${match.path}/new`} render={ props => this.Create(props)} />
+        <Route path={`${match.path}/:id`} render={ props => this.Show(props)} />
+      </Switch>
     )
   }
 }

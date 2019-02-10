@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
-import Header from '../Header/index.js'
+import { Switch, Route } from 'react-router-dom'
 import ListPage from '../ListPage/index.js'
 import InvoiceDetail from './InvoiceDetail/index.js'
 import { invoice } from '../../services/invoice'
@@ -114,12 +113,10 @@ export default class Invoices extends Component {
   render(){
     const { location, match } = this.props
     return (
-      <div className="Section">
-        <Header location={location}/>
-
+      <Switch>
         <Route exact path={match.path} render={this.List}/>
         <Route exact path={`${match.path}/:id`} render={this.Show}/>
-      </div>
+      </Switch>
     )
   }
 }
