@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Header from '../Header/index.js'
 import ListPage from '../ListPage/index.js'
 import { client } from '../../services/client'
 import { clientName } from '../Helpers/clientHelpers'
@@ -172,7 +171,6 @@ export default class Clients extends Component {
   }
 
   Show = ({ match, history }) => {
-    console.log('show')
     const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
     let client;
     if (match.params.id) {
@@ -245,19 +243,14 @@ export default class Clients extends Component {
   }
 
   render(){
-    const { location, match } = this.props
+    const { match } = this.props
     return (
-      <div className="Section">
-        <Header location={location} />
-
-        <Switch>
-          <Route exact path={match.path} render={(props) => this.List(props)}/>
-          <Route exact path={`${match.path}/new`} render={(props) => this.Create(props)}/>
-          <Route exact path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
-          <Route exact path={`${match.path}/:id/events`} render={(props) => this.ListEvents(props)}/>
-
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path={match.path} render={(props) => this.List(props)}/>
+        <Route exact path={`${match.path}/new`} render={(props) => this.Create(props)}/>
+        <Route exact path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
+        <Route exact path={`${match.path}/:id/events`} render={(props) => this.ListEvents(props)}/>
+      </Switch>
     )
   }
 }

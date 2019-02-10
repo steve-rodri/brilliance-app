@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import Dashboard from '../Dashboard/index.js'
-import Clients from '../Clients/index.js'
-import Events from '../Events/index.js'
-import Invoices from '../Invoices/index.js'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Header from '../Header/index.js'
+import Admin from './Admin'
 
 export default class Main extends Component {
   constructor(props){
@@ -25,10 +23,10 @@ export default class Main extends Component {
     if (!token ) return (<Redirect to="/login"/>)
     return(
       <div className="App">
-        <Route exact path="/admin" render={(props) => <Dashboard {...props} user={this.user()} /> } />
-        <Route path="/admin/events" render={(props) => <Events {...props} user={this.user()} /> } />
-        <Route path="/admin/clients" render={(props) => <Clients {...props} user={this.user()} /> } />
-        <Route path="/admin/invoices" render={(props) => <Invoices {...props} user={this.user()} /> } />
+        <Header {...this.props}/>
+        <Switch>
+          <Route path="/admin" render={ props => <Admin {...props} user={this.user()} /> } />
+        </Switch>
       </div>
     )
   }

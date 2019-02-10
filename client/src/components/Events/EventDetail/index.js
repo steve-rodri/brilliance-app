@@ -294,16 +294,37 @@ export default class EventDetail extends Component {
 
   handleDateChange = (field, datetime) => {
     const dt = moment(datetime).format()
-    this.setState(prevState => ({
-      fields: {
-        ...prevState.fields,
-        [field]: dt
-      },
-      formData: {
-        ...prevState.formData,
-        [field]: dt
-      }
-    }))
+    switch (field) {
+
+      case 'start':
+        this.setState(prevState => ({
+          fields: {
+            ...prevState.fields,
+            [field]: dt
+          },
+          formData: {
+            ...prevState.formData,
+            [field]: dt
+          }
+        }))
+      break;
+
+      case 'end':
+        this.setState(prevState => ({
+          fields: {
+            ...prevState.fields,
+            [field]: dt
+          },
+          formData: {
+            ...prevState.formData,
+            [field]: dt
+          }
+        }))
+      break;
+
+      default:
+      break;
+    }
   }
 
   handleStatusChange = (name, value) => {
