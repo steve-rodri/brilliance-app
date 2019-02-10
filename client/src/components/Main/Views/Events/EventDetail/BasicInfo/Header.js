@@ -14,12 +14,12 @@ export default function Header(props){
   const { evt, fields, isNew, editMode } = props
 
   // Functions to Show Summary field based on Mode ----------------------
+
   function displaySummary(){
     if (editMode && evt) {
       return (
         <input
           className="BasicInfo--event-summary"
-          style={styleSummary()}
           name="summary" value={fields.summary? fields.summary : ''}
           onChange={props.handleChange}
         />
@@ -28,31 +28,10 @@ export default function Header(props){
       return (
         <h1
           className="BasicInfo--event-title"
-          style={styleSummary()}
         >
           {fields && fields.summary}
         </h1>
       )
-    }
-  }
-
-  function styleSummary() {
-    if (fields && fields.summary) {
-      if (fields.summary.length > 35) {
-        if (window.innerWidth > 600) {
-          return {
-            fontSize: '25px'
-          }
-        } else {
-          return {
-            fontSize: '35px'
-          }
-        }
-      } else {
-        return {}
-      }
-    } else {
-      return {}
     }
   }
 
