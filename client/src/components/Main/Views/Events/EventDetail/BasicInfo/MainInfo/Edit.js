@@ -88,7 +88,7 @@ export default class Edit extends Component {
               className="Edit--date-input-container"
               inputProps={{ className: "Edit--input", tabIndex: "3"}}
               value={fields.start? moment(fields.start) : ''}
-              viewDate={fields.start? moment(fields.start) : ''}
+              viewDate={fields.start && fields.start !== ''? moment(fields.start) : moment().startOf('hour')}
               timeConstraints={{ minutes:{ step: 5 } }}
               onChange={(datetime) => this.props.handleDateChange('start', datetime)}
               closeOnSelect={false}
@@ -116,7 +116,7 @@ export default class Edit extends Component {
               className="Edit--date-input-container"
               inputProps={{ className:"Edit--input", tabIndex:"4" }}
               value={fields.end? moment(fields.end) : ''}
-              viewDate={fields.start? moment(fields.start) : fields.end? moment(fields.end): ''}
+              viewDate={fields.start? moment(fields.start) : fields.end? moment(fields.end): moment().startOf('hour')}
               viewMode={'time'}
               timeConstraints={{ minutes:{ step: 5 } }}
               isValidDate={(current) => current.isSameOrAfter(moment(fields.start), 'day')}
@@ -138,7 +138,7 @@ export default class Edit extends Component {
               tabIndex="8"
             />
           </div>
-          
+
       </div>
     )
   }

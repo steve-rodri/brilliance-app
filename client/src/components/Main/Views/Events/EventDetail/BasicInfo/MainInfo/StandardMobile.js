@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import { date, time } from '../../../../../../Helpers/datetime'
 import './Standard.css'
 
