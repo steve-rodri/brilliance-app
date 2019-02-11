@@ -29,6 +29,8 @@ export default class EventDetail extends Component {
   }
 
   async componentDidMount(){
+    this.resetView()
+    window.addEventListener('resize', this.resetView)
     window.scrollTo(0,0);
     await this.setFields();
     const { isNew } = this.props
@@ -37,6 +39,17 @@ export default class EventDetail extends Component {
       this.setField('summary', 'Create a New Event')
     } else {
       await this.initialSetup()
+    }
+  }
+
+  async componentWillUnmount(){
+    window.removeEventListener('resize', this.resetView)
+  }
+
+  resetView = () => {
+    const width = window.innerWidth;
+    if (width < 750) {
+      this.setView('Basic Info')
     }
   }
 
