@@ -226,7 +226,7 @@ export default class EventDetail extends Component {
 
         case 'client':
           item = searchFieldData.clients[index]
-          const client = clientName(item);
+          const client = clientName(item, true);
           if (item) {
             this.setState(prevState => ({
               formData: {
@@ -287,7 +287,11 @@ export default class EventDetail extends Component {
           ...prevState.formData,
           [name]: value
         }
-      }), () => this.updateSummaryField())
+      }), () => {
+        if (name !== 'summary') {
+          this.updateSummaryField()
+        }
+      })
 
     }
   }
@@ -300,11 +304,13 @@ export default class EventDetail extends Component {
         this.setState(prevState => ({
           fields: {
             ...prevState.fields,
-            [field]: dt
+            [field]: dt,
+            end: dt
           },
           formData: {
             ...prevState.formData,
-            [field]: dt
+            [field]: dt,
+            end: dt
           }
         }))
       break;
