@@ -1,5 +1,6 @@
 .Edit--field {
   position: relative;
+  min-height: 45px;
   height: 100%;
   width: 100%;
   display: flex;

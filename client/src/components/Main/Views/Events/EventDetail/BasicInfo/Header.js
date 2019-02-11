@@ -20,7 +20,8 @@ export default function Header(props){
       return (
         <input
           className="BasicInfo--event-summary"
-          name="summary" value={fields.summary? fields.summary : ''}
+          name="summary"
+          value={fields.summary? fields.summary : ''}
           onChange={props.handleChange}
         />
       )
