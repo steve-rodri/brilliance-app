@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Standard from './Standard'
 import StandardMobile from './StandardMobile';
 import Edit from './Edit'
+import EditMobile from './EditMobile'
 import './index.css'
 
 export default class MainInfo extends Component {
@@ -34,11 +35,19 @@ export default class MainInfo extends Component {
     const { editMode } = this.props
     const { mobile } = this.state
     if (editMode) {
-      return (
-        <Edit
-        {...this.props}
-        />
-      )
+      if (mobile) {
+        return (
+          <EditMobile
+          {...this.props}
+          />
+        )
+      } else {
+        return (
+          <Edit
+          {...this.props}
+          />
+        )
+      }
     } else {
       if (mobile) {
         return (
