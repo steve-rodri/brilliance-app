@@ -19,12 +19,17 @@ export default class EventDetail extends Component {
     this.state = {
       view: 'Basic Info',
       evt: null,
-      newEvt: null,
       fields: null,
       searchFieldData: null,
       formData: null,
       editMode: false,
       redirectToEvents: false,
+    }
+  }
+
+  async componentWillReceiveProps(nextProps){
+    if (nextProps.evtId) {
+      await this.initialSetup(nextProps.evtId)
     }
   }
 
@@ -59,24 +64,19 @@ export default class EventDetail extends Component {
     await this.setLocationName();
   }
 
-  resetNewEvent = () => {
-    this.setState({ newEvt: null })
-  }
-
   getEvent = async(newEvt) => {
-    const { e, eventId } = this.props
+    const { e, evtId } = this.props
       if (!e) {
         let evt;
-        if (!newEvt) {
-          evt = await event.getOne(eventId)
-          if (evt) {
-            this.setState({ evt })
-          } else {
-            this.setState({ redirectToEvents: true })
-          }
+        if (newEvt) {
+          evt = await event.getOne(newEvt)
         } else {
-          evt = await event.getOne(newEvt.id)
-          await this.setState({ evt })
+          evt = await event.getOne(evtId)
+        }
+        if (evt) {
+          this.setState({ evt })
+        } else {
+          this.setState({ redirectToEvents: true })
         }
       } else {
         this.setState({ evt: e })
@@ -360,15 +360,21 @@ export default class EventDetail extends Component {
   }
 
   handleSubmit = async() => {
-    const { evt, newEvt, formData, editMode } = this.state
-    const { isNew } = this.props
+    const { evt, formData, editMode } = this.state
+    const { isNew, match, history } = this.props
     if (formData) {
 
-      if (isNew && !newEvt) {
+      if (isNew) {
 
         const newEvt = await event.createNew(formData)
         await this.props.handleCreate(newEvt);
-        this.setState({ newEvt }, async() => await this.initialSetup(newEvt))
+        const url = () => {
+          let words = `${match.path}`.split('/')
+          words.pop()
+          const link = words.join('/')
+          return link
+        }
+        history.push(`${url()}/${newEvt.id}`)
 
       } else {
 
@@ -474,8 +480,7 @@ export default class EventDetail extends Component {
 
   styleTabControl = () => {
     const isNew = this.props.isNew
-    const newEvt = this.state.newEvt
-    if (isNew && !newEvt) {
+    if (isNew) {
       return { display: 'none' }
     } else {
       return {}

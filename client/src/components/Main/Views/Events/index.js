@@ -147,25 +147,29 @@ export default class Events extends Component {
     )
   }
 
-  Show = ({ match }) => {
+  Show = ({ match, history }) => {
     const req_id = parseInt(match.params.id)
     const events = this.state.events
     const e = events.find(event => event.id === req_id)
     return (
       <EventDetail
         e={e}
-        eventId={req_id}
+        evtId={req_id}
+        match={match}
+        history={history}
         handleDelete={this.deleteEvent}
         handleUpdate={this.updateEvent}
       />
     )
   }
 
-  Create = ({ match }) => {
+  Create = ({ match, history }) => {
     const isNew = match.path === '/admin/events/new'
     return (
       <EventDetail
         isNew={isNew}
+        match={match}
+        history={history}
         handleCreate={this.addEvent}
         handleDelete={this.deleteEvent}
         handleUpdate={this.updateEvent}

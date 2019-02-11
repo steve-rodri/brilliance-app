@@ -12,7 +12,6 @@ library.add(faTrash)
 export default function Header(props){
 
   const { evt, fields, isNew, editMode } = props
-
   // Functions to Show Summary field based on Mode ----------------------
 
   function displaySummary(){
