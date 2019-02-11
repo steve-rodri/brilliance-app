@@ -111,7 +111,7 @@ export default class Invoices extends Component {
   }
 
   render(){
-    const { location, match } = this.props
+    const { match } = this.props
     return (
       <Switch>
         <Route exact path={match.path} render={this.List}/>
