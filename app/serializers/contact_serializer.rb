@@ -8,7 +8,19 @@ class ContactSerializer < ActiveModel::Serializer
   :phone_number,
   :work_email
 
+  has_many :email_address, key: 'email_addresses'
+
   def full_name
-    "#{object.first_name} #{object.last_name}"
+    if object.first_name
+      if object.last_name
+        "#{object.first_name} #{object.last_name}"
+      else
+        "#{object.first_name}"
+      end
+    else
+      if object.last_name
+        "#{object.last_name}"
+      end
+    end
   end
 end
