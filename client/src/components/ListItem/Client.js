@@ -18,7 +18,7 @@ export default function Client(props) {
 
         <div style={displayColumn('contact info')} className="List-Item--contact-info">
           {client && <p>{client.phoneNumber && `${client.phoneNumber}`}</p>}
-          {client && client.emailAddresses.length > 0 && <a href={`mailto:${client.emailAddresses[0].address}`}>{client.emailAddresses[0].address}</a>}
+          {client && client.emailAddresses && client.emailAddresses.length > 0 && <a href={`mailto:${client.emailAddresses[0].address}`}>{client.emailAddresses[0].address}</a>}
           {company && <p>{company.phoneNumber && `${company.phoneNumber}`}</p>}
           {company && company.website && <a href={`${company.website}`} onClick={(e) => e.stopPropagation()}>{company.website}</a>}
         </div>
