@@ -22,20 +22,18 @@ export default class ListPage extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    if (nextProps.modalData) {
+  async componentWillReceiveProps(nextProps){
+    if (nextProps.fetchModalData) {
+      const modalData = await nextProps.fetchModalData()
       this.setState({
-        modalData: nextProps.modalData,
+        modalData,
         showModal: true
       })
     } else if (nextProps.createNew) {
-      this.setState({
-        showModal: true,
-      })
+      this.setState({ showModal: true })
+
     } else {
-      this.setState({
-        showModal: false
-      })
+      this.setState({ showModal: false })
     }
   }
 
@@ -83,8 +81,29 @@ export default class ListPage extends Component {
   }
 
   render(){
-    const { match, history, categories, category, title, type, subtitles, formData, data, hasMore } = this.props
-    const { redirectToCreateNew, showModal, modalData } = this.state
+
+    const {
+      title,
+      subtitles,
+      type,
+      category,
+      categories,
+      data,
+      hasMore,
+      create,
+      update,
+      dlete,
+      match,
+      history,
+    }
+    = this.props
+
+    const {
+      redirectToCreateNew,
+      showModal,
+      modalData
+    }
+    = this.state
 
     if (redirectToCreateNew) return (<Redirect to={`${match.path}/new`}/>)
 
@@ -155,14 +174,20 @@ export default class ListPage extends Component {
 
           {modalData?
             <Show
+              {...this.props}
+              type={type}
               modalData={modalData}
+              update={update}
+              dlete={dlete}
               match={match}
               history={history}
-              type={type}
             />
             :
             <Create
-              formData={formData}
+              {...this.props}
+              create={create}
+              match={match}
+              history={history}
             />
           }
         </Modal>

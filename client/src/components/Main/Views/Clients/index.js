@@ -14,11 +14,12 @@ export default class Clients extends Component {
       columnHeaders: ['name / company', 'contact info', 'next event', 'balance'],
 
       hasMoreClients: true,
-      formData: null,
-      events: [],
       hasMoreEvents: true,
-      invoices: [],
+      events: [],
       hasMoreInvoices: true,
+      invoices: [],
+
+      searchFieldData: null
     }
   }
 
@@ -46,6 +47,15 @@ export default class Clients extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
+  }
+
+  fetchClient = async(id) => {
+    const clients = [...this.state.clients]
+    let clt = clients.find(c => c.id === id)
+    if (!clt) {
+      clt = await client.findById(id);
+    }
+    return clt
   }
 
   fetchClients = async(page) => {
@@ -81,17 +91,26 @@ export default class Clients extends Component {
     return clients
   }
 
+  createClient = async(data) => {
+    console.log(data)
+    const clt = await client.create(data);
+    await this.addClient(clt)
+    return clt;
+  }
+
   deleteClient = async(id) => {
+    await client.delete(id)
     let clients = [...this.state.clients]
     clients = clients.filter(clt => clt.id !== id)
     this.setState({ clients })
     await this.refreshClients()
   }
 
-  updateClient = async(clt) => {
+  updateClient = async(id, data) => {
+    let clt = await client.update(id, data);
     let clients = [...this.state.clients]
-    const id = clients.findIndex((client) => client.id === clt.id)
-    clients[id] = clt
+    const clientId = clients.findIndex((client) => client.id === clt.id)
+    clients[clientId] = clt
     this.setState({ clients })
     await this.refreshClients()
   }
@@ -106,8 +125,8 @@ export default class Clients extends Component {
     if (clts) {
       let clients = [...this.state.clients]
       clts.forEach(c => clients.push(c))
-      clients = this.sortClients(clients)
-      if (clients.length < 25) {
+      // clients = this.sortClients(clients)
+      if (clts.length < 25) {
 
         this.setState({
           clients,
@@ -146,6 +165,10 @@ export default class Clients extends Component {
     }
   }
 
+  resetClient = () => {
+    this.setState({ client: null })
+  }
+
   resetClients = () => {
     this.setState({ clients: [] })
   }
@@ -165,18 +188,15 @@ export default class Clients extends Component {
         load={this.fetchClients}
         hasMore={hasMoreClients}
         refresh={this.refreshClients}
+        deleteClient={this.deleteClient}
         fetchByCategory={this.fetchClientsByCategory}
       />
     )
   }
 
   Show = ({ match, history }) => {
-    const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
-    let client;
-    if (match.params.id) {
-      const req_id = parseInt(match.params.id)
-      client = clients.find(clt => clt.id === req_id)
-    }
+    const {clients, category, categories, columnHeaders, hasMoreClients } = this.state
+    const req_id = parseInt(match.params.id)
     return (
       <ListPage
         title="Clients"
@@ -184,12 +204,14 @@ export default class Clients extends Component {
         category={category}
         categories={categories}
         subtitles={columnHeaders}
-        modalData={client}
+        fetchModalData={() => this.fetchClient(req_id)}
         data={clients}
         match={match}
         history={history}
         load={this.fetchClients}
         hasMore={hasMoreClients}
+        update={this.updateClient}
+        dlete={this.deleteClient}
         refresh={this.refreshClients}
         fetchByCategory={this.fetchClientsByCategory}
       />
@@ -197,12 +219,12 @@ export default class Clients extends Component {
   }
 
   Create = ({ match, history }) => {
-    console.log('create')
-    const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
+    const { clients, category, categories, columnHeaders, hasMoreClients, searchFieldData } = this.state
     return (
       <ListPage
         createNew={true}
-        formData={this.state.formData}
+        create={this.createClient}
+        searchFieldData={searchFieldData}
         title="Clients"
         type="Clients"
         category={category}
@@ -220,7 +242,6 @@ export default class Clients extends Component {
   }
 
   ListEvents = async({ match, history }) => {
-    console.log(match)
     const { clients, events, hasMoreEvents } = this.state
     let client;
     if (match.params.id) {
