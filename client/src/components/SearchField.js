@@ -190,7 +190,7 @@ export default class SearchField extends Component {
               this.handleCloseResults()
               }}
             >
-              {formatResult(item)}
+              {formatResult && formatResult(item)}
             </div>
           ))}
         </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Datetime from 'react-datetime'
-import SearchField from './SearchField'
+import SearchField from '../../../../../../SearchField'
 import moment from 'moment'
 import { clientName } from '../../../../../../Helpers/clientHelpers'
 import { locationName } from '../../../../../../Helpers/locationName'
