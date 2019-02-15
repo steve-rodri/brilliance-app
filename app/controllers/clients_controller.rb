@@ -9,6 +9,10 @@ class ClientsController < ApplicationController
 
         @clients = Client
           .all
+          .joins(:contact, :company)
+          .order('contacts.first_name')
+          .order('contacts.last_name')
+          .order('companies.name')
           .paginate(page: params[:page], per_page: items_per_page)
 
         render json: @clients, include: '**'
@@ -75,6 +79,9 @@ class ClientsController < ApplicationController
     else
       @clients = Client
         .all
+        .joins(:contact)
+        .order('contacts.first_name')
+        .order('contacts.last_name')
         .paginate(page: params[:page], per_page: items_per_page)
 
       render json: @clients, include: '**'

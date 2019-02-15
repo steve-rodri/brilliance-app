@@ -60,9 +60,18 @@ function clientInfo(client){
   }
 }
 
+function contactName(contact){
+  return contact.fullName
+}
+
+function companyName(company){
+  return company.name
+}
 
 
 export {
   clientName,
-  clientInfo
+  clientInfo,
+  contactName,
+  companyName
 }
