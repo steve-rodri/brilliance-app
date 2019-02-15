@@ -9,6 +9,38 @@ const client = {
       console.log(e)
     }
   },
+  create: async function (data) {
+    try {
+      const resp = await axios.post(`/api/clients/`, data)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  update: async function (id, data) {
+    try {
+      const resp = await axios.put(`/api/clients/${id}`, data)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  delete: async function (id) {
+    try {
+      const resp = await axios.delete(`/api/clients/${id}`)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  find: async function (query){
+    try {
+      const resp = await axios.get(`/api/clients/find?q=${query}`)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
   findById: async function (id) {
     try {
       const resp = await axios.get(`/api/clients/${id}`)
@@ -20,14 +52,6 @@ const client = {
   findByCategory: async function (category){
     try {
       const resp = await axios.get(`/api/clients?category=${category}`)
-      return resp.data
-    } catch (e) {
-      console.log(e)
-    }
-  },
-  find: async function (query){
-    try {
-      const resp = await axios.get(`/api/clients/find?q=${query}`)
       return resp.data
     } catch (e) {
       console.log(e)
