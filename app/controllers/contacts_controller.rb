@@ -5,12 +5,12 @@ class ContactsController < ApplicationController
   def index
     @contacts = Contact.all
 
-    render json: @contacts
+    render json: @contacts, include: '**'
   end
 
   # GET /contacts/1
   def show
-    render json: @contact
+    render json: @contact, include: '**'
   end
 
   # POST /contacts
@@ -38,6 +38,30 @@ class ContactsController < ApplicationController
     @contact.destroy
   end
 
+  def find
+    terms = params[:q].split
+
+    if terms.length > 1
+
+      contact_query = "
+      clients.id IS NULL
+      AND first_name
+      LIKE '%#{terms[0].capitalize}%'
+      AND last_name
+      LIKE '%#{terms[1].capitalize}%'"
+    else
+      contact_query = "
+      clients.id IS NULL
+      AND first_name
+      LIKE '%#{terms[0].capitalize}%'"
+    end
+
+    #contacts found based on query
+    @contacts = Contact.left_outer_joins(:client).where(contact_query)
+
+    render json: @contacts
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
@@ -46,6 +70,6 @@ class ContactsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def contact_params
-      params.require(:contact).permit(:Photo, :Prefix, :First_Name, :Last_Name, :Phone_Number, :Work_Email, :SS)
+      params.require(:contact).permit(:Photo, :Prefix, :First_Name, :Last_Name, :Phone_Number, :Work_Email, :SS, :q)
     end
 end

@@ -38,6 +38,15 @@ class CompaniesController < ApplicationController
     @company.destroy
   end
 
+  # GET /companies/find?q=
+  def find
+    company_query = "clients.id IS NULL AND name LIKE '%#{params[:q].capitalize}%'"
+
+    @companies = Company.left_outer_joins(:client).where(company_query)
+
+    render json: @companies
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
