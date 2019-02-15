@@ -35,7 +35,7 @@ export default class Show extends Component {
             </div>
           <label className="Modal--Label">Email</label>
             <div className="Modal--Field">
-              <a href={`mailto:${contactInfo && contactInfo.emailAddresses[0]}`}>{contactInfo && contactInfo.emailAddresses? contactInfo.emailAddresses[0] : ''}</a>
+              <a href={`mailto:${contactInfo && contactInfo.emailAddresses && contactInfo.emailAddresses[0]}`}>{contactInfo && contactInfo.emailAddresses? contactInfo.emailAddresses[0] : ''}</a>
             </div>
         </div>
 
