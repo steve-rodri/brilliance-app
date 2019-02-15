@@ -8,8 +8,12 @@ Rails.application.routes.draw do
     resources :events do
       put 'sync', to: 'events#bulk_update'
     end
-    resources :contacts
-    resources :companies
+    resources :contacts do
+      get 'find', on: :collection, to: 'contacts#find'
+    end
+    resources :companies do
+      get 'find', on: :collection, to: 'companies#find'
+    end
     resources :email_addresses
     resources :invoices
     resources :places do
