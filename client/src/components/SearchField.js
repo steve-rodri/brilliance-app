@@ -11,9 +11,21 @@ export default class SearchField extends Component {
     this.searchResults = React.createRef();
   }
 
+  componentWillReceiveProps(nextProps){
+      const { highlightedResult } = this.state;
+      const { searchResults } = nextProps;
+      if (searchResults && searchResults.length) {
+        if (highlightedResult > searchResults.length - 1) {
+          this.setState({ highlightedResult: 0 })
+        }
+        this.setState({ searchResults })
+      } else {
+        this.setState({ searchResults: null })
+      }
+  }
+
   displayResults = () => {
-    const { searchResults } = this.props
-    const { fieldActive } = this.state
+    const { fieldActive, searchResults } = this.state
     if (searchResults) {
       if (fieldActive) {
         return { display: 'block' }
@@ -40,7 +52,8 @@ export default class SearchField extends Component {
   choosingResult = (e) => {
     e.stopPropagation()
     this.setState({
-      hoveringResults: true
+      hoveringResults: true,
+      highlightedResult: 0
     })
   }
 
@@ -98,9 +111,8 @@ export default class SearchField extends Component {
   }
 
   render(){
-    const { highlightedResult, hoveringResults } = this.state
+    const { highlightedResult, hoveringResults, searchResults } = this.state
     const {
-      searchResults,
       formClassName,
       resultClassName,
       resultsClassName,
@@ -137,14 +149,17 @@ export default class SearchField extends Component {
           className={className}
           value={value}
           tabIndex={tabIndex}
-          onChange={(e) => handleChange(e.target.name, e.target.value)}
+          onChange={(e) => {
+            handleChange(e.target.name, e.target.value)
+            this.handleViewResults()
+          }}
           onFocus={this.handleViewResults}
           onBlur={(e) => {
             if (!formDataValue && !hoveringResults) {
               handleChange(name, '')
             }
             if (!hoveringResults) {
-              this.handleCloseResults()
+            this.handleCloseResults()
             }
           }}
           onKeyDown={(e) => {
