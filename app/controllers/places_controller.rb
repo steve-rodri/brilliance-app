@@ -40,8 +40,12 @@ class PlacesController < ApplicationController
 
   # GET /places/find
   def find
-    @places = Place.where("name LIKE :query OR short_name LIKE :query",
-      {query: "%#{params[:q].capitalize}%"})
+    terms = params[:q].split
+
+    terms.each do |term|
+      @places = Place.where("name LIKE :query OR short_name LIKE :query",
+        {query: "%#{term.capitalize}%"})
+    end
 
     render json: @places
   end
