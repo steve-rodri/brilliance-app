@@ -4,15 +4,137 @@ class ClientsController < ApplicationController
   # GET /clients
   def index
     items_per_page = 25
+    client_select_query = "clients.*,
+    contacts.photo,
+    contacts.prefix,
+    contacts.first_name,
+    contacts.last_name,
+    contacts.phone_number,
+    contacts.work_email,
+    contacts.ss,
+    companies.name AS company_name,
+    companies.phone_number,
+    companies.logo,
+    companies.website,
+    (
+      CASE
+        WHEN contacts.first_name IS NOT NULL
+          THEN
+            CASE
+              WHEN contacts.last_name IS NOT NULL
+                THEN
+                CONCAT(contacts.first_name, ' ', contacts.last_name)
+
+                ELSE
+                contacts.first_name
+            END
+
+        ELSE
+          CASE
+            WHEN contacts.last_name IS NOT NULL
+              THEN
+              contacts.last_name
+          END
+      END
+
+    ) AS full_name,
+    (
+      CASE
+        WHEN
+        (
+          CASE
+            WHEN contacts.first_name IS NOT NULL
+              THEN
+                CASE
+                  WHEN contacts.last_name IS NOT NULL
+                    THEN
+                CONCAT(contacts.first_name, ' ', contacts.last_name)
+
+                    ELSE
+                    contacts.first_name
+                END
+
+            ELSE
+              CASE
+                WHEN contacts.last_name IS NOT NULL
+                  THEN
+                  contacts.last_name
+              END
+          END
+
+        ) IS NOT NULL THEN
+
+            CASE
+              WHEN companies.name IS NOT NULL
+                THEN
+                CONCAT(
+                  (
+                    CASE
+                      WHEN contacts.first_name IS NOT NULL
+                        THEN
+                          CASE
+                            WHEN contacts.last_name IS NOT NULL
+                              THEN
+                          CONCAT(contacts.first_name, ' ', contacts.last_name)
+
+                              ELSE
+                              contacts.first_name
+                          END
+
+                      ELSE
+                        CASE
+                          WHEN contacts.last_name IS NOT NULL
+                            THEN
+                            contacts.last_name
+                        END
+                    END
+
+                  ),
+                  ' - ',
+                  companies.name
+                )
+
+                ELSE
+                (
+                  CASE
+                    WHEN contacts.first_name IS NOT NULL
+                      THEN
+                        CASE
+                          WHEN contacts.last_name IS NOT NULL
+                            THEN
+                        CONCAT(contacts.first_name, ' ', contacts.last_name)
+
+                            ELSE
+                            contacts.first_name
+                        END
+
+                    ELSE
+                      CASE
+                        WHEN contacts.last_name IS NOT NULL
+                          THEN
+                          contacts.last_name
+                      END
+                  END
+                )
+            END
+
+        ELSE
+          CASE
+            WHEN companies.name IS NOT NULL
+              THEN
+              companies.name
+
+          END
+      END
+
+    ) AS sorting_name"
     if params[:category]
       if params[:category] == 'All'
 
         @clients = Client
-          .all
-          .joins(:contact, :company)
-          .order('contacts.first_name')
-          .order('contacts.last_name')
-          .order('companies.name')
+          .select(client_select_query)
+          .left_outer_joins(:contact, :company)
+          .order('sorting_name')
           .paginate(page: params[:page], per_page: items_per_page)
 
         render json: @clients, include: '**'
@@ -23,7 +145,9 @@ class ClientsController < ApplicationController
 
         on_premise_locations.each do |location|
           id = location.as_json["id"]
-          production_queries.push("location_id != #{id}")
+          if id
+            production_queries.push("location_id != #{id}")
+          end
         end
 
         query = production_queries.join(' AND ')
@@ -33,12 +157,17 @@ class ClientsController < ApplicationController
 
         production_events.each do |event|
           id = event.as_json["client_id"]
-          client_queries.push("id = #{id}")
+          if id
+            client_queries.push("clients.id = #{id}")
+          end
         end
 
         query = client_queries.join(' OR ')
 
         @clients = Client
+          .select(client_select_query)
+          .left_outer_joins(:contact, :company)
+          .order('sorting_name')
           .where(query)
           .paginate(page: params[:page], per_page: items_per_page)
 
@@ -58,12 +187,17 @@ class ClientsController < ApplicationController
 
             events.each do |event|
               id = event.as_json["client_id"]
-              client_queries.push("id = #{id}")
+              if id
+                client_queries.push("clients.id = #{id}")
+              end
             end
 
             query = client_queries.join(' OR ')
 
             @clients = Client
+              .select(client_select_query)
+              .left_outer_joins(:contact, :company)
+              .order('sorting_name')
               .where(query)
               .paginate(page: params[:page], per_page: items_per_page)
 
@@ -78,10 +212,9 @@ class ClientsController < ApplicationController
       end
     else
       @clients = Client
-        .all
-        .joins(:contact)
-        .order('contacts.first_name')
-        .order('contacts.last_name')
+        .select(client_select_query)
+        .left_outer_joins(:contact, :company)
+        .order('sorting_name')
         .paginate(page: params[:page], per_page: items_per_page)
 
       render json: @clients, include: '**'
