@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import { client } from '../../../../services/client'
 import { clientName } from '../../../Helpers/clientHelpers'
@@ -19,7 +20,8 @@ export default class Clients extends Component {
       hasMoreInvoices: true,
       invoices: [],
 
-      searchFieldData: null
+      searchFieldData: null,
+      page: 1
     }
   }
 
@@ -40,9 +42,34 @@ export default class Clients extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillReceiveProps(nextProps){
+    const queries = queryString.parse(nextProps.location.search)
+    if (queries.category) {
+      console.log(queries.category)
+      this.setState(prevState => {
+        if (prevState.category !== queries.category) {
+          return {
+            category: queries.category,
+            page: 1
+          }
+        } else {
+          return {
+            categoryChange: false
+          }
+        }
+      }, async () => {
+        await this.resetClients()
+        await this.fetchClients()
+      })
+    } else {
+      this.setState({ category: 'All'})
+    }
+  }
+
+  async componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
+    await this.fetchClients()
   }
 
   componentWillUnmount() {
@@ -58,9 +85,23 @@ export default class Clients extends Component {
     return clt
   }
 
-  fetchClients = async(page) => {
-    const clients = await client.getAll(page);
-    this.updateClients(clients, "All")
+  fetchClients = async() => {
+    const { category, page } = this.state
+    console.log(page)
+    const clients = await client.getAll(page, category);
+    this.incrementPage()
+    console.log(clients)
+    this.updateClients(clients)
+  }
+
+  resetPage = () => {
+    this.setState({ page: 1})
+  }
+
+  incrementPage = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1
+    }))
   }
 
   fetchClientEvents = async(page, clientId) => {
@@ -70,14 +111,14 @@ export default class Clients extends Component {
 
   refreshClients = async() => {
     this.resetClients()
-    const clients = await client.getAll(1);
-    await this.updateClients(clients, "All");
+    const clients = await client.getAll(1, "All");
+    this.updateClients(clients);
+    this.setCategory('All');
   }
 
   addClient =  async(newClient) => {
     let clients = [...this.state.clients]
     clients.push(newClient)
-    clients = this.sortClients(clients)
     this.setState({ clients })
     await this.refreshClients()
   }
@@ -112,38 +153,43 @@ export default class Clients extends Component {
     const clientId = clients.findIndex((client) => client.id === clt.id)
     clients[clientId] = clt
     this.setState({ clients })
-    await this.refreshClients()
-  }
-
-  fetchClientsByCategory = async(category) => {
-    const loadedClients = await client.findByCategory(category);
-    this.resetClients()
-    this.updateClients(loadedClients, category)
+    this.refreshClients()
   }
 
   updateClients = (clts, category) => {
     if (clts) {
       let clients = [...this.state.clients]
       clts.forEach(c => clients.push(c))
-      // clients = this.sortClients(clients)
       if (clts.length < 25) {
+        this.setState({
+          clients,
+          hasMoreClients: false
+        })
+
+      } else {
 
         this.setState({
           clients,
-          category: category,
-          hasMoreClients: false
+          hasMoreClients: true
         })
-      } else {
-        this.setState({
-          clients,
-          category: category
-        })
+
       }
+
     } else {
       this.setState({
         clients: [],
-        category: category
       })
+    }
+  }
+
+  changeCategory = (category) => {
+    this.setCategory(category);
+    this.resetClients();
+  }
+
+  setCategory = (category) => {
+    if (category) {
+      this.setState({ category })
     }
   }
 
@@ -152,7 +198,6 @@ export default class Clients extends Component {
       let events = [...this.state.events]
       evts.forEach(e => events.push(e))
       if (events.length < 25) {
-
         this.setState({
           events,
           hasMoreEvents: false
@@ -173,7 +218,7 @@ export default class Clients extends Component {
     this.setState({ clients: [] })
   }
 
-  List = ({ match, history }) => {
+  List = ({ match, location, history }) => {
     const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
     return (
       <ListPage
@@ -189,7 +234,7 @@ export default class Clients extends Component {
         hasMore={hasMoreClients}
         refresh={this.refreshClients}
         deleteClient={this.deleteClient}
-        fetchByCategory={this.fetchClientsByCategory}
+        changeCategory={this.changeCategory}
       />
     )
   }
@@ -213,7 +258,7 @@ export default class Clients extends Component {
         update={this.updateClient}
         dlete={this.deleteClient}
         refresh={this.refreshClients}
-        fetchByCategory={this.fetchClientsByCategory}
+        changeCategory={this.changeCategory}
       />
     )
   }
@@ -236,7 +281,7 @@ export default class Clients extends Component {
         load={this.fetchClients}
         hasMore={hasMoreClients}
         refresh={this.refreshClients}
-        fetchByCategory={this.fetchClientsByCategory}
+        changeCategory={this.changeCategory}
       />
     )
   }

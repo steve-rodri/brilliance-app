@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const client = {
-  getAll: async function (page){
+  getAll: async function (page, category) {
     try {
-      const resp = await axios.get(`/api/clients?page=${page}`)
+      const resp = await axios.get(`/api/clients?page=${page}&category=${category}`)
       return resp.data
     } catch (e) {
       console.log(e)
@@ -44,14 +44,6 @@ const client = {
   findById: async function (id) {
     try {
       const resp = await axios.get(`/api/clients/${id}`)
-      return resp.data
-    } catch (e) {
-      console.log(e)
-    }
-  },
-  findByCategory: async function (category){
-    try {
-      const resp = await axios.get(`/api/clients?category=${category}`)
       return resp.data
     } catch (e) {
       console.log(e)
