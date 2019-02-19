@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import ListItem from '../ListItem/index.js'
-import InfiniteScroll from 'react-infinite-scroller'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import './List.css'
 
 
 export default class List extends Component {
   render(){
-    const {items, type, subtitles, load, hasMore } = this.props
+    const {category, items, type, subtitles, load, hasMore } = this.props
 
     const style = () => {
       if (subtitles) {
@@ -23,13 +23,14 @@ export default class List extends Component {
             <h5 key={id}>{subtitle}</h5>
           ))}
         </div>
-        <div className="List">
+        <div id="List" className="List">
           <InfiniteScroll
-            pageStart={0}
-            loadMore={load}
+            dataLength={items.length}
+            next={load}
             hasMore={hasMore}
-            loader={<div className="loader" key={1}>Loading...</div>}
-            useWindow={false}
+            loader={<div className="loader">Loading...</div>}
+            scrollableTarget="List"
+            key={category}
           >
             {items && items.map((item, id) => (
               <ListItem
