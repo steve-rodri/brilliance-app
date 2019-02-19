@@ -116,7 +116,7 @@ export default class ListPage extends Component {
             className="ListPage--name"
             onClick={(e) => {
               e.stopPropagation()
-              this.props.fetchByCategory('All')
+              history.push(match.path)
             }}
           >
             {title}
@@ -129,7 +129,7 @@ export default class ListPage extends Component {
                 style={this.styleActiveMenu(category)}
                 onClick={(e) => {
                   e.stopPropagation()
-                  this.props.fetchByCategory(category)
+                  history.push(`${match.path}?category=${category}`)
                 }}
                 key={id}>{category}
               </div>
@@ -154,6 +154,7 @@ export default class ListPage extends Component {
 
           <h3 className="ListPage--category-title" style={this.styleSubTitle()}>{category}</h3>
           <List
+            title={category}
             subtitles={subtitles}
             items={data}
             type={type}
