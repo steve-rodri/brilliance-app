@@ -12,5 +12,6 @@
 .List {
   width: 100%;
   max-height: calc(100vh - 147px);
+  padding-bottom: 25px;
   overflow: auto;
 }
