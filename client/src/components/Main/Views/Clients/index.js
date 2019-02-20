@@ -227,7 +227,6 @@ export default class Clients extends Component {
         hasMore={hasMoreClients}
         refresh={this.refreshClients}
         deleteClient={this.deleteClient}
-        changeCategory={this.changeCategory}
       />
     )
   }
