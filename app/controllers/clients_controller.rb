@@ -1,100 +1,70 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :update, :destroy]
 
-  # GET /clients
-  def index
-    items_per_page = 25
-    client_select_query = "clients.*,
-    contacts.photo,
-    contacts.prefix,
-    contacts.first_name,
-    contacts.last_name,
-    contacts.phone_number,
-    contacts.work_email,
-    contacts.ss,
-    companies.name AS company_name,
-    companies.phone_number,
-    companies.logo,
-    companies.website,
-    (
-      CASE
-        WHEN contacts.first_name IS NOT NULL
-          THEN
-            CASE
-              WHEN contacts.last_name IS NOT NULL
-                THEN
-                CONCAT(contacts.first_name, ' ', contacts.last_name)
-
-                ELSE
-                contacts.first_name
-            END
-
-        ELSE
+  @@clients_select_query = "clients.*,
+  contacts.photo,
+  contacts.prefix,
+  contacts.first_name,
+  contacts.last_name,
+  contacts.phone_number,
+  contacts.work_email,
+  contacts.ss,
+  companies.name AS company_name,
+  companies.phone_number,
+  companies.logo,
+  companies.website,
+  (
+    CASE
+      WHEN contacts.first_name IS NOT NULL
+        THEN
           CASE
             WHEN contacts.last_name IS NOT NULL
               THEN
-              contacts.last_name
+              CONCAT(contacts.first_name, ' ', contacts.last_name)
+
+              ELSE
+              contacts.first_name
           END
-      END
 
-    ) AS full_name,
-    (
-      CASE
-        WHEN
-        (
-          CASE
-            WHEN contacts.first_name IS NOT NULL
-              THEN
-                CASE
-                  WHEN contacts.last_name IS NOT NULL
-                    THEN
-                CONCAT(contacts.first_name, ' ', contacts.last_name)
+      ELSE
+        CASE
+          WHEN contacts.last_name IS NOT NULL
+            THEN
+            contacts.last_name
+        END
+    END
 
-                    ELSE
-                    contacts.first_name
-                END
-
-            ELSE
+  ) AS full_name,
+  (
+    CASE
+      WHEN
+      (
+        CASE
+          WHEN contacts.first_name IS NOT NULL
+            THEN
               CASE
                 WHEN contacts.last_name IS NOT NULL
                   THEN
-                  contacts.last_name
+              CONCAT(contacts.first_name, ' ', contacts.last_name)
+
+                  ELSE
+                  contacts.first_name
               END
-          END
 
-        ) IS NOT NULL THEN
-
+          ELSE
             CASE
-              WHEN companies.name IS NOT NULL
+              WHEN contacts.last_name IS NOT NULL
                 THEN
-                CONCAT(
-                  (
-                    CASE
-                      WHEN contacts.first_name IS NOT NULL
-                        THEN
-                          CASE
-                            WHEN contacts.last_name IS NOT NULL
-                              THEN
-                          CONCAT(contacts.first_name, ' ', contacts.last_name)
+                contacts.last_name
+            END
+        END
 
-                              ELSE
-                              contacts.first_name
-                          END
+      ) IS NOT NULL THEN
 
-                      ELSE
-                        CASE
-                          WHEN contacts.last_name IS NOT NULL
-                            THEN
-                            contacts.last_name
-                        END
-                    END
-
-                  ),
-                  ' - ',
-                  companies.name
-                )
-
-                ELSE
+          CASE
+            WHEN companies.name IS NOT NULL
+              THEN
+              CONCAT(
                 (
                   CASE
                     WHEN contacts.first_name IS NOT NULL
@@ -115,24 +85,54 @@ class ClientsController < ApplicationController
                           contacts.last_name
                       END
                   END
-                )
-            END
 
-        ELSE
-          CASE
-            WHEN companies.name IS NOT NULL
-              THEN
-              companies.name
+                ),
+                ' - ',
+                companies.name
+              )
 
+              ELSE
+              (
+                CASE
+                  WHEN contacts.first_name IS NOT NULL
+                    THEN
+                      CASE
+                        WHEN contacts.last_name IS NOT NULL
+                          THEN
+                      CONCAT(contacts.first_name, ' ', contacts.last_name)
+
+                          ELSE
+                          contacts.first_name
+                      END
+
+                  ELSE
+                    CASE
+                      WHEN contacts.last_name IS NOT NULL
+                        THEN
+                        contacts.last_name
+                    END
+                END
+              )
           END
-      END
 
-    ) AS sorting_name"
+      ELSE
+        CASE
+          WHEN companies.name IS NOT NULL
+            THEN
+            companies.name
+
+        END
+    END
+
+  ) AS sorting_name"
+
+  # GET /clients
+  def index
+    items_per_page = 25
     if params[:category]
       if params[:category] == 'All'
-
         @clients = Client
-          .select(client_select_query)
+          .select(@@clients_select_query)
           .left_outer_joins(:contact, :company)
           .order('sorting_name')
           .paginate(page: params[:page], per_page: items_per_page)
@@ -165,7 +165,7 @@ class ClientsController < ApplicationController
         query = client_queries.join(' OR ')
 
         @clients = Client
-          .select(client_select_query)
+          .select(@@clients_select_query)
           .left_outer_joins(:contact, :company)
           .order('sorting_name')
           .where(query)
@@ -195,7 +195,7 @@ class ClientsController < ApplicationController
             query = client_queries.join(' OR ')
 
             @clients = Client
-              .select(client_select_query)
+              .select(@@clients_select_query)
               .left_outer_joins(:contact, :company)
               .order('sorting_name')
               .where(query)
@@ -212,7 +212,7 @@ class ClientsController < ApplicationController
       end
     else
       @clients = Client
-        .select(client_select_query)
+        .select(@@clients_select_query)
         .left_outer_joins(:contact, :company)
         .order('sorting_name')
         .paginate(page: params[:page], per_page: items_per_page)
@@ -265,41 +265,20 @@ class ClientsController < ApplicationController
   def find
     terms = params[:q].split
 
-    if terms.length > 1
-      contact_query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0].capitalize}%' AND last_name LIKE '%#{terms[1].capitalize}%' LIMIT 10"
-    else
-      contact_query = "SELECT * FROM contacts WHERE first_name LIKE '%#{terms[0].capitalize}%' LIMIT 10"
+    terms.each do |term|
+      @clients = Client
+      .select(@@clients_select_query)
+      .left_outer_joins(:contact, :company)
+      .order('sorting_name')
+      .where(
+        "contacts.first_name LIKE '%#{term.capitalize}%'
+         OR contacts.last_name LIKE '%#{term.capitalize}%'
+         OR companies.name LIKE '%#{term.capitalize}%'"
+      )
+      .limit(10)
     end
 
-    company_query = "SELECT * FROM companies WHERE name LIKE '%#{params[:q].capitalize}%'"
-
-    contacts = execute_sql(contact_query)
-    companies = execute_sql(company_query)
-
-    clients = []
-    if contacts
-      contacts.each do |contact|
-        id =  contact.as_json["id"]
-
-        client = Client.find_by contact_id: "#{id}"
-        if client
-          clients.push(client)
-        end
-      end
-    end
-
-    if companies
-      companies.each do |company|
-        id = company.as_json["id"]
-
-        client = Client.find_by company_id: "#{id}"
-        if client
-          clients.push(client)
-        end
-      end
-    end
-
-    render json: clients
+    render json: @clients, include: '**'
   end
 
   private
