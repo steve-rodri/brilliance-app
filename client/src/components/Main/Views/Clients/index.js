@@ -45,16 +45,11 @@ export default class Clients extends Component {
   componentWillReceiveProps(nextProps){
     const queries = queryString.parse(nextProps.location.search)
     if (queries.category) {
-      console.log(queries.category)
       this.setState(prevState => {
         if (prevState.category !== queries.category) {
           return {
             category: queries.category,
             page: 1
-          }
-        } else {
-          return {
-            categoryChange: false
           }
         }
       }, async () => {
@@ -87,10 +82,8 @@ export default class Clients extends Component {
 
   fetchClients = async() => {
     const { category, page } = this.state
-    console.log(page)
     const clients = await client.getAll(page, category);
     this.incrementPage()
-    console.log(clients)
     this.updateClients(clients)
   }
 
@@ -156,7 +149,7 @@ export default class Clients extends Component {
     this.refreshClients()
   }
 
-  updateClients = (clts, category) => {
+  updateClients = (clts) => {
     if (clts) {
       let clients = [...this.state.clients]
       clts.forEach(c => clients.push(c))
@@ -218,7 +211,7 @@ export default class Clients extends Component {
     this.setState({ clients: [] })
   }
 
-  List = ({ match, location, history }) => {
+  List = ({ match, history }) => {
     const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
     return (
       <ListPage
