@@ -43,35 +43,71 @@ export default class Events extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    const queries = queryString.parse(nextProps.location.search)
-    if (queries.category) {
-      this.setState(prevState => {
-        if (prevState.category !== queries.category) {
-          return {
-            category: queries.category,
-            page: 1
-          }
-        }
-      }, async () => {
-        await this.resetEvents()
-        await this.fetchEvents()
-      })
-    }
+    this.setEvents(nextProps)
   }
 
   componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
-    this.fetchEvents()
+    this.setEvents(this.props)
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
   }
 
+  setEvents = async(props) => {
+    const { category } = this.state
+    const queries = queryString.parse(props.location.search)
+
+    if (queries.category && queries.category !== category) {
+
+      this.setState(
+      {
+        category: queries.category,
+        query: null,
+        page: 1
+      },
+        async () => {
+        await this.resetEvents()
+        await this.fetchEvents()
+      })
+
+    } else if (queries.q) {
+
+      this.setState(
+      {
+        query: queries.q,
+        category: 'All',
+        page: 1
+      },
+        async () => {
+        await this.resetEvents()
+        await this.fetchEvents()
+      })
+
+    } else {
+      this.setState(
+      {
+        query: null,
+        category: 'All',
+        page: 1
+      },
+        async () => {
+        await this.resetEvents()
+        await this.fetchEvents()
+      })
+    }
+  }
+
   fetchEvents = async() => {
-    const { category, page } = this.state
-    const evts = await event.getAll(page, category);
+    const { page, category, query } = this.state
+    let evts;
+    if (query) {
+      evts = await event.find(page, query)
+    } else {
+      evts = await event.getAll(page, category);
+    }
     this.incrementPage()
     await this.updateEvents(evts);
   }
