@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import Header from '../Header/index.js'
 import Admin from './Admin'
 
 export default class Main extends Component {
@@ -23,7 +22,6 @@ export default class Main extends Component {
     if (!token ) return (<Redirect to="/login"/>)
     return(
       <div className="App">
-        <Header {...this.props}/>
         <Switch>
           <Route path="/admin" render={ props => <Admin {...props} user={this.user()} /> } />
         </Switch>
