@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import InvoiceDetail from './InvoiceDetail/index.js'
 import { invoice } from '../../../../services/invoice'
@@ -12,7 +13,9 @@ export default class Invoices extends Component {
       category: 'All',
       categories: ['Production', 'CANS', 'THC', 'CATP'],
       columnHeaders: ['client & date', 'type', 'status', 'balance'],
-      hasMore: true
+      hasMore: true,
+
+      page: 1
     }
   }
 
@@ -33,24 +36,50 @@ export default class Invoices extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillReceiveProps(nextProps){
+    const queries = queryString.parse(nextProps.location.search)
+    if (queries.category) {
+      this.setState(prevState => {
+        if (prevState.category !== queries.category) {
+          return {
+            category: queries.category,
+            page: 1
+          }
+        }
+      }, async () => {
+        await this.resetInvoices()
+        await this.fetchInvoices()
+      })
+    } else {
+      this.setState({ category: 'All' })
+    }
+  }
+
+  async componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
+    await this.fetchInvoices();
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
   }
 
-  fetchInvoices = async(page) => {
-    const loadedInvoices = await invoice.getAll(page);
-    this.updateInvoices(loadedInvoices, 'All')
+  fetchInvoices = async() => {
+    const { category, page } = this.state
+    const loadedInvoices = await invoice.getAll(page, category);
+    this.incrementPage()
+    this.updateInvoices(loadedInvoices)
   }
 
-  fetchInvoicesByCategory = async(category) => {
-    const loadedInvoices = await invoice.findByCategory(category);
-    this.resetInvoices();
-    this.updateInvoices(loadedInvoices, category)
+  resetPage = () => {
+    this.setState({ page: 1 })
+  }
+
+  incrementPage = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1
+    }))
   }
 
   updateInvoices = (invoices, category) => {
@@ -62,20 +91,29 @@ export default class Invoices extends Component {
 
         this.setState({
           invoices,
-          category: category,
           hasMore: false
         })
       } else {
         this.setState({
           invoices,
-          category: category
+          hasMore: true
         })
       }
     } else {
       this.setState({
         invoices: [],
-        category: category
       })
+    }
+  }
+
+  changeCategory = (category) => {
+    this.setCategory(category);
+    this.resetInvoices();
+  }
+
+  setCategory = (category) => {
+    if (category) {
+      this.setState({ category })
     }
   }
 
@@ -83,7 +121,7 @@ export default class Invoices extends Component {
     this.setState({ invoices: [] })
   }
 
-  List = () => {
+  List = ({ match, history }) => {
     const { invoices, categories, category, columnHeaders, hasMore } = this.state
     return (
       <ListPage
@@ -93,10 +131,11 @@ export default class Invoices extends Component {
         categories={categories}
         subtitles={columnHeaders}
         data={invoices}
+        match={match}
+        history={history}
         load={this.fetchInvoices}
         hasMore={hasMore}
         fetchAllInvoices={this.fetchInvoices}
-        fetchByCategory={this.fetchInvoicesByCategory}
       />
     )
   }
