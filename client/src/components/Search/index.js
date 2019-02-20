@@ -15,13 +15,20 @@ export default class Search extends Component {
     })
   }
 
+  handleSubmit = (e) => {
+    const { url, history } = this.props
+    e.preventDefault();
+    history.push(`${url}?q=${this.state.query}`)
+  }
+
   render(){
+    const { subject } = this.props
     return(
-      <form className="search">
+      <form className="search" autoComplete="off" onSubmit={this.handleSubmit}>
         <input
           name="query"
           type="text"
-          placeholder="search..."
+          placeholder={`search ${subject.toLowerCase()}...`}
           value={this.state.query}
           onChange={this.handleChange}
         />
