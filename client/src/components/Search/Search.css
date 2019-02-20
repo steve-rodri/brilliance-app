@@ -1,5 +1,7 @@
 .search {
-  height: 50px;
+  height: 35px;
+  width: 90%;
+  margin-bottom: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,15 +9,15 @@
 
 .search > * {
   padding: 0 15px;
-  font-size: 24px;
+  font-size: 18px;
   height: 100%;
-  width: 75%;
+  width: 100%;
   border-radius: 25px;
-  border: 2px solid gray;
+  border: none;
 }
 
 .search > *:focus{
   outline: none;
   border: none;
-  box-shadow: 0 0 2px 3pt rgba(0, 127, 255, .7);
+  box-shadow: 0 0 2px 3pt var(--light-blue);
 }
