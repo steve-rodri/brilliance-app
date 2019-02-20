@@ -17,6 +17,14 @@ const event = {
       return null
     }
   },
+  find: async function(page, query){
+    try {
+      const resp = await axios.get(`/api/events/find?page=${page}&q=${query}`)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
   createNew: async function(data) {
     try {
       const resp = await axios.post(`/api/events`, data)
