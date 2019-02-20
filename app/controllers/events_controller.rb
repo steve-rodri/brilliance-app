@@ -1,17 +1,17 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
 
+  @@items_per_page = 25
+
   # GET /events
   def index
-    items_per_page = 25
-
     if params[:category]
       if params[:category] == 'All'
 
         @events = Event
           .all
           .order(start: :desc)
-          .paginate(page: params[:page], per_page: items_per_page)
+          .paginate(page: params[:page], per_page: @@items_per_page)
 
       elsif params[:category] == 'Production'
         production_querys = []
@@ -28,7 +28,7 @@ class EventsController < ApplicationController
         @events = Event
           .where(query)
           .order(start: :desc)
-          .paginate(page: params[:page], per_page: items_per_page)
+          .paginate(page: params[:page], per_page: @@items_per_page)
 
       else
 
@@ -38,7 +38,7 @@ class EventsController < ApplicationController
         @events = Event
           .where("location_id = #{location_id}")
           .order(start: :desc)
-          .paginate(page: params[:page], per_page: items_per_page)
+          .paginate(page: params[:page], per_page: @@items_per_page)
 
       end
     else
@@ -46,7 +46,7 @@ class EventsController < ApplicationController
       @events = Event
         .all
         .order(start: :desc)
-        .paginate(page: params[:page], per_page: items_per_page)
+        .paginate(page: params[:page], per_page: @@items_per_page)
 
     end
 
@@ -117,6 +117,44 @@ class EventsController < ApplicationController
   # DELETE /events/1
   def destroy
     @event.destroy
+  end
+
+  def find
+    terms = params[:q].split
+
+    terms.each do |term|
+      @events = Event
+      .select(
+        'events.*,
+        contacts.first_name AS client_first_name,
+        contacts.last_name AS client_last_name,
+        companies.name AS company_name,
+        places.name AS location,
+        places.short_name AS location_short_name'
+      )
+      .joins('LEFT JOIN clients on clients.id = events.client_id')
+      .joins('LEFT JOIN contacts on contacts.id = clients.contact_id')
+      .joins('LEFT JOIN companies on companies.id = clients.company_id')
+      .joins('LEFT JOIN places on places.id = events.location_id')
+      .where(
+        "contacts.first_name LIKE '%#{term.capitalize}%'
+         OR contacts.last_name LIKE '%#{term.capitalize}%'
+         OR companies.name LIKE '%#{term.capitalize}%'
+         OR action LIKE '%#{term.capitalize}%'
+         OR kind LIKE '%#{term.capitalize}%'
+         OR description LIKE '%#{term.capitalize}%'
+         OR tags LIKE '%#{term.capitalize}%'
+         OR summary LIKE '%#{term.capitalize}%'
+         OR places.name LIKE '%#{term.capitalize}%'
+         OR places.short_name LIKE '%#{term}%'
+         OR places.short_name LIKE '%#{term.upcase}%'"
+
+      )
+      .order(start: :desc)
+      .paginate(page: params[:page], per_page: @@items_per_page)
+    end
+
+    render json: @events, include: '**'
   end
 
   private
