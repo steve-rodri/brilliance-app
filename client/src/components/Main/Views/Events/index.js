@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
 import moment from 'moment'
@@ -14,7 +15,9 @@ export default class Events extends Component {
       hasMore: true,
       category: 'All',
       categories: ['Production', 'CANS', 'THC', 'CATP'],
-      columnHeaders: ['title', 'client', 'location', 'confirmation', 'scheduled']
+      columnHeaders: ['title', 'client', 'location', 'confirmation', 'scheduled'],
+
+      page: 1
     }
   }
 
@@ -39,18 +42,48 @@ export default class Events extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    const queries = queryString.parse(nextProps.location.search)
+    if (queries.category) {
+      this.setState(prevState => {
+        if (prevState.category !== queries.category) {
+          return {
+            category: queries.category,
+            page: 1
+          }
+        }
+      }, async () => {
+        await this.resetEvents()
+        await this.fetchEvents()
+      })
+    }
+  }
+
   componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
+    this.fetchEvents()
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
   }
 
-  fetchEvents = async(page) => {
-    const evts = await event.getAll(page);
-    await this.updateEvents(evts, 'All');
+  fetchEvents = async() => {
+    const { category, page } = this.state
+    const evts = await event.getAll(page, category);
+    this.incrementPage()
+    await this.updateEvents(evts);
+  }
+
+  resetPage = () => {
+    this.setState({ page: 1 })
+  }
+
+  incrementPage = () => {
+    this.setState(prevState => ({
+      page: prevState.page +1
+    }))
   }
 
   refreshEvents = async() => {
@@ -84,13 +117,7 @@ export default class Events extends Component {
     await this.refreshEvents()
   }
 
-  fetchEventsByCategory = async(category) => {
-    const evts = await event.findByCategory(category);
-    this.resetEvents()
-    await this.updateEvents(evts, category);
-  }
-
-  updateEvents = async(evts, category) => {
+  updateEvents = async(evts) => {
     if (evts) {
       const updatedEvents = evts.map( async(e) => {
         if (!e.summary) {
@@ -106,20 +133,32 @@ export default class Events extends Component {
       if (loadedEvents.length < 25) {
         this.setState({
           events,
-          category: category,
           hasMore: false
         })
+
       } else {
+
         this.setState({
           events,
-          category: category
+          hasMore: true
         })
       }
+
     } else {
       this.setState({
         events: [],
-        category: category
       })
+    }
+  }
+
+  changeCategory = (category) => {
+    this.setCategory(category);
+    this.resetEvents();
+  }
+
+  setCategory = (category) => {
+    if (category) {
+      this.setState({ category })
     }
   }
 
@@ -127,7 +166,7 @@ export default class Events extends Component {
     this.setState({ events: [] })
   }
 
-  List = ({ match }) => {
+  List = ({ match, history }) => {
     const { events, category, categories, columnHeaders, hasMore } = this.state
     return (
       <ListPage
@@ -138,11 +177,11 @@ export default class Events extends Component {
         subtitles={columnHeaders}
         data={events}
         match={match}
+        history={history}
         load={this.fetchEvents}
         hasMore={hasMore}
         create={this.handleCreate}
         refresh={this.refreshEvents}
-        fetchByCategory={this.fetchEventsByCategory}
       />
     )
   }

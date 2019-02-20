@@ -1,17 +1,9 @@
 import axios from 'axios'
 
 const event = {
-  getAll: async function(page){
+  getAll: async function(page, category){
     try {
-      const resp = await axios.get(`/api/events?page=${page}`)
-      return resp.data
-    } catch (e) {
-      console.log(e)
-    }
-  },
-  findByCategory: async function(category){
-    try {
-      const resp = await axios.get(`/api/events?category=${category}`)
+      const resp = await axios.get(`/api/events?page=${page}&category=${category}`)
       return resp.data
     } catch (e) {
       console.log(e)
