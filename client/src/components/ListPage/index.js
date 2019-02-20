@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import Show from './Show';
 import Create from './Create';
 import List from '../List/index.js'
+import Search from '../Search/index.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -121,6 +122,15 @@ export default class ListPage extends Component {
           >
             {title}
           </h2>
+
+
+          {/* Search */}
+
+          <Search
+            subject={title}
+            url={match.path}
+            history={history}
+          />
 
           {/* Categories */}
           <div className="ListPage--categories">
