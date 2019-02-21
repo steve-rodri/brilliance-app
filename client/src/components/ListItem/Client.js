@@ -8,7 +8,7 @@ export default function Client(props) {
   const company = item.company
 
   return (
-    <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
+    <Link to={{pathname: `/admin/${type.toLowerCase()}/${item.id}`, state: { modal: true } }} style={{textDecoration: 'none', color: 'black'}}>
       <div className="List-Item" style={styleColumns(numColumns)}>
 
         <div style={displayColumn('name / company')}>
