@@ -24,6 +24,7 @@ export default class Main extends Component {
       <div className="App">
         <Switch>
           <Route path="/admin" render={ props => <Admin {...props} user={this.user()} /> } />
+          <Redirect to="/"/>
         </Switch>
       </div>
     )
