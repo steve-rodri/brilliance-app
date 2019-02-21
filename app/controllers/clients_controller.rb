@@ -223,7 +223,6 @@ class ClientsController < ApplicationController
 
   # GET /clients/1
   def show
-    @client = Client.select(@@clients_select_query).where(`clients.id = #{params[:id]}`)
     render json: @client, include: '**'
   end
 
