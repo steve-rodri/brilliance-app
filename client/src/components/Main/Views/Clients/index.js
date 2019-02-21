@@ -22,7 +22,9 @@ export default class Clients extends Component {
       invoices: [],
 
       searchFieldData: null,
-      page: 1
+      page: 1,
+
+      willRefresh: true,
     }
   }
 
@@ -62,19 +64,23 @@ export default class Clients extends Component {
     // set previousLocation if props.location is not modal
     if (
       nextProps.history.action !== "POP" &&
-      (!location.state || !location.state.modal))
+      (!location.state || !location.state.modal)
+    )
     {
       this.previousLocation = this.props.location;
     }
+
+    this.prevLocation = nextProps.location
   }
 
   setClients = async(props) => {
-    const { category } = this.state
-    const queries = queryString.parse(props.location.search)
-    if (!props.location.state) {
+    const { willRefresh } = this.state
+    const { location } = props
+    const queries = queryString.parse(location.search)
 
-      if (queries.category && queries.category !== category) {
+    if (!location.state && willRefresh) {
 
+      if (queries.category) {
         this.setState(
         {
           category: queries.category,
@@ -259,6 +265,14 @@ export default class Clients extends Component {
     this.setState({ clients: [] })
   }
 
+  setRefresh = (value) => {
+    this.setState({ willRefresh: value })
+  }
+
+  handleModal = (value) => {
+    this.setState({ showModal: value })
+  }
+
   List = ({ match, history }) => {
     const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
     return (
@@ -275,29 +289,40 @@ export default class Clients extends Component {
         hasMore={hasMoreClients}
         refresh={this.refreshClients}
         deleteClient={this.deleteClient}
+        showModal={() => this.handleModal(true)}
       />
     )
   }
 
-  Show = ({ match, history }) => {
+  Show = (props, previousLocation) => {
+    const { match, history, location } = props
     const reqId = parseInt(match.params.id)
     return (
       <Modal
         type="Show"
-        client={() => this.fetchClient(reqId)}
+        clt={() => this.fetchClient(reqId)}
         match={match}
         history={history}
+        location={location}
+        prevLocation={previousLocation}
+        doNotRefresh={() => this.setRefresh(false)}
+        closeModal={() => this.handleModal(false)}
       />
     )
   }
 
-  Create = ({ match, history }) => {
+  Create = (props, previousLocation) => {
+    const { match, history, location } = props
     return (
       <Modal
         type="Create"
         create={this.createClient}
         match={match}
         history={history}
+        location={location}
+        prevLocation={previousLocation}
+        doNotRefresh={() => this.setRefresh(false)}
+        closeModal={() => this.handleModal(false)}
       />
     )
   }
@@ -344,8 +369,8 @@ export default class Clients extends Component {
 
         {isModal?
           <Switch>
-            <Route exact path={`${match.path}/new`} render={(props) => this.Create(props)}/>
-            <Route exact path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
+            <Route exact path={`${match.path}/new`} render={(props) => this.Create(props, this.previousLocation)}/>
+            <Route exact path={`${match.path}/:id`} render={(props) => this.Show(props, this.previousLocation)}/>
           </Switch>
           :
           null

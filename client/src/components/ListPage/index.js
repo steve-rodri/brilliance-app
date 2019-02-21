@@ -15,6 +15,19 @@ export default class ListPage extends Component {
     this.state = {}
   }
 
+  componentDidMount(){
+    const { match, showModal } = this.props
+    if (match) {
+      if (match.params) {
+        if (match.params.id) {
+          if (showModal) {
+            showModal()
+          }
+        }
+      }
+    }
+  }
+
   styleActiveMenu = (category) => {
     if (this.props.category === category) {
       return (
