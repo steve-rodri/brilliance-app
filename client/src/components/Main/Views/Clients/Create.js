@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import SearchField from '../SearchField';
-import { contactName, companyName } from '../Helpers/clientHelpers'
-import { contact } from '../../services/contact'
-import { company } from '../../services/company'
-import './Modal.css'
+import SearchField from '../../../SearchField';
+import { contactName, companyName } from '../../../Helpers/clientHelpers'
+import { contact } from '../../../../services/contact'
+import { company } from '../../../../services/company'
 
 export default class Create extends Component {
   constructor(props){
@@ -172,7 +171,7 @@ export default class Create extends Component {
     = this.state
 
     return (
-      <div className="Modal">
+      <div className="Modal--Content">
         <h2 className="Modal--Title">Create New Client</h2>
 
         <div className="Modal--Fields">

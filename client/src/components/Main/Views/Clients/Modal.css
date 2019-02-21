@@ -1,4 +1,33 @@
-.Modal {
+.Modal--Overlay {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0,0,0,.75)
+}
+
+.Modal, .Modal:active {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  height: 50%;
+  min-height: 300px;
+  max-height: 500px;
+  width: 50%;
+  min-width: 300px;
+  max-width: 500px;
+  background-color: #DADBE0;
+  border-radius: 10px;
+  outline: none;
+}
+
+.Modal--Content {
   display: grid;
   grid-template-rows: 2fr 3fr 2fr;
   justify-items: center;
