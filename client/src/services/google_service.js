@@ -3,14 +3,13 @@ import axios from 'axios';
 async function getUser(){
   const accessToken = localStorage.getItem('google_access_token');
   try {
-    const resp = await axios({
+      await axios({
       method: 'get',
       url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
     })
-    return resp.data
   } catch (e) {
     localStorage.clear()
     return null
