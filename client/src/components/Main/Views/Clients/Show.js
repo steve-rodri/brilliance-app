@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { clientName, clientInfo } from '../Helpers/clientHelpers'
-import './Modal.css';
+import { clientName, clientInfo } from '../../../Helpers/clientHelpers'
 
 export default class Show extends Component {
   constructor(props){
     super(props)
     this.state = {}
+  }
+
+  async componentDidMount(){
+    const client = await this.props.client()
+    this.setState({ client })
   }
 
   handleGetClientEvents = () => {
@@ -19,14 +23,12 @@ export default class Show extends Component {
   }
 
   render(){
-    const { modalData } = this.props
-
-    const client = modalData
+    const { client } = this.state
     const name = clientName(client)
     const contactInfo = clientInfo(client)
 
     return (
-      <div className="Modal">
+      <div className="Modal--Content">
         <h2 className="Modal--Title">{name}</h2>
         <div className="Modal--Fields">
           <label className="Modal--Label">Phone</label>
