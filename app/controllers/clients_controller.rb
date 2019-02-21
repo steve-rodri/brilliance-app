@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :update, :destroy]
 
+  @@items_per_page = 25
   @@clients_select_query = "clients.*,
   contacts.photo,
   contacts.prefix,
@@ -128,14 +129,13 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
-    items_per_page = 25
     if params[:category]
       if params[:category] == 'All'
         @clients = Client
           .select(@@clients_select_query)
           .left_outer_joins(:contact, :company)
           .order('sorting_name')
-          .paginate(page: params[:page], per_page: items_per_page)
+          .paginate(page: params[:page], per_page: @@items_per_page)
 
         render json: @clients, include: '**'
 
@@ -169,7 +169,7 @@ class ClientsController < ApplicationController
           .left_outer_joins(:contact, :company)
           .order('sorting_name')
           .where(query)
-          .paginate(page: params[:page], per_page: items_per_page)
+          .paginate(page: params[:page], per_page: @@items_per_page)
 
         render json: @clients, include: '**'
       else
@@ -199,7 +199,7 @@ class ClientsController < ApplicationController
               .left_outer_joins(:contact, :company)
               .order('sorting_name')
               .where(query)
-              .paginate(page: params[:page], per_page: items_per_page)
+              .paginate(page: params[:page], per_page: @@items_per_page)
 
             render json: @clients, include: '**'
           else
@@ -215,7 +215,7 @@ class ClientsController < ApplicationController
         .select(@@clients_select_query)
         .left_outer_joins(:contact, :company)
         .order('sorting_name')
-        .paginate(page: params[:page], per_page: items_per_page)
+        .paginate(page: params[:page], per_page: @@items_per_page)
 
       render json: @clients, include: '**'
     end
@@ -223,15 +223,15 @@ class ClientsController < ApplicationController
 
   # GET /clients/1
   def show
+    @client = Client.select(@@clients_select_query).where(`clients.id = #{params[:id]}`)
     render json: @client, include: '**'
   end
 
   #GET /clients/1/events
   def events
-    items_per_page = 25
     @events = Event
       .where("client_id = #{params[:id]}")
-      .paginate(page: params[:page], per_page: items_per_page)
+      .paginate(page: params[:page], per_page: @@items_per_page)
 
     render json: @events, include: '**'
   end
@@ -273,9 +273,10 @@ class ClientsController < ApplicationController
       .where(
         "contacts.first_name LIKE '%#{term.capitalize}%'
          OR contacts.last_name LIKE '%#{term.capitalize}%'
-         OR companies.name LIKE '%#{term.capitalize}%'"
+         OR companies.name LIKE '%#{term}%'
+         OR companies.name LIKE '%#{term.upcase}%'"
       )
-      .limit(10)
+      .paginate(page: params[:page], per_page: @@items_per_page)
     end
 
     render json: @clients, include: '**'
