@@ -33,9 +33,9 @@ const client = {
       console.log(e)
     }
   },
-  find: async function (query){
+  find: async function (page, query){
     try {
-      const resp = await axios.get(`/api/clients/find?q=${query}`)
+      const resp = await axios.get(`/api/clients/find?page=${page}&q=${query}`)
       return resp.data
     } catch (e) {
       console.log(e)

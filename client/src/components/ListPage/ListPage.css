@@ -123,35 +123,3 @@ aside > h2 {
   margin: 0 10px;
   color: white;
 }
-
-
-/* ------------------------Modal---------------------------- */
-
-.ListPage--modal, .ListPage--modal:active {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  position: absolute;
-  height: 50%;
-  min-height: 300px;
-  max-height: 500px;
-  width: 50%;
-  min-width: 300px;
-  max-width: 500px;
-  background-color: #DADBE0;
-  border-radius: 10px;
-  outline: none;
-}
-
-.ListPage--modal-overlay {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  background-color: rgba(0,0,0,.75)
-}

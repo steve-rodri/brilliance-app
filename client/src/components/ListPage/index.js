@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
-import Modal from 'react-modal';
-import Show from './Show';
-import Create from './Create';
+import { Link } from 'react-router-dom'
 import List from '../List/index.js'
 import Search from '../Search/index.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,63 +8,22 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import './ListPage.css'
 
 library.add(faPlus)
-Modal.setAppElement('#root');
 
 export default class ListPage extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      redirectToCreateNew: false,
-      showModal: false,
-      modalData: null,
-    }
-  }
-
-  async componentWillReceiveProps(nextProps){
-    if (nextProps.fetchModalData) {
-      const modalData = await nextProps.fetchModalData()
-      this.setState({
-        modalData,
-        showModal: true
-      })
-    } else if (nextProps.createNew) {
-      this.setState({ showModal: true })
-
-    } else {
-      this.setState({ showModal: false })
-    }
-  }
-
-  handleCloseModal = () => {
-    const { history, type } = this.props
-    this.setState({
-      showModal: false,
-      modalData: null
-    })
-    history.push(`/admin/${type.toLowerCase()}`)
-  }
-
-  createNew = (type) => {
-    const { history } = this.props
-    switch (type) {
-      case 'Clients':
-        history.push(`/admin/${type.toLowerCase()}/new`)
-        break;
-      default:
-        this.setState({
-          redirectToCreateNew: true
-        })
-        break;
-    }
+    this.state = {}
   }
 
   styleActiveMenu = (category) => {
     if (this.props.category === category) {
-      return {
+      return (
+        {
           color: 'white',
           borderLeft: '1px solid var(--light-gray)',
           borderRight: '1px solid var(--light-gray)'
         }
+      )
     } else {
       return {}
     }
@@ -82,7 +38,6 @@ export default class ListPage extends Component {
   }
 
   render(){
-
     const {
       title,
       subtitles,
@@ -91,22 +46,9 @@ export default class ListPage extends Component {
       categories,
       data,
       hasMore,
-      create,
-      update,
-      dlete,
       match,
       history,
-    }
-    = this.props
-
-    const {
-      redirectToCreateNew,
-      showModal,
-      modalData
-    }
-    = this.state
-
-    if (redirectToCreateNew) return (<Redirect to={`${match.path}/new`}/>)
+    } = this.props
 
     return (
       <div className='ListPage--container'>
@@ -123,9 +65,7 @@ export default class ListPage extends Component {
             {title}
           </h2>
 
-
           {/* Search */}
-
           <Search
             subject={title}
             url={match.path}
@@ -148,16 +88,21 @@ export default class ListPage extends Component {
 
           {/* Add New Button */}
           {type === "Events" || type === "Clients"?
-            <div
-              className="ListPage--button create"
-              onClick={() => this.createNew(type)}
+            <Link
+              to={{pathname: `${match.path}/new`, state: { modal: true } }}
+              style={{textDecoration: 'none', color: 'black', width: '100%'}}
             >
-              <span className="button-text">Add New</span>
-              {<FontAwesomeIcon className="button-icon" icon="plus" size="2x"/>}
-            </div>
+
+              <div className="ListPage--button create">
+                <span className="button-text">Add New</span>
+                {<FontAwesomeIcon className="button-icon" icon="plus" size="2x"/>}
+              </div>
+
+            </Link>
             :
-            ''
+            null
           }
+
         </aside>
 
         <main>
@@ -175,33 +120,6 @@ export default class ListPage extends Component {
           />
 
         </main>
-
-        <Modal
-          isOpen={showModal}
-          onRequestClose={this.handleCloseModal}
-          className="ListPage--modal"
-          overlayClassName="ListPage--modal-overlay"
-        >
-
-          {modalData?
-            <Show
-              {...this.props}
-              type={type}
-              modalData={modalData}
-              update={update}
-              dlete={dlete}
-              match={match}
-              history={history}
-            />
-            :
-            <Create
-              {...this.props}
-              create={create}
-              match={match}
-              history={history}
-            />
-          }
-        </Modal>
 
       </div>
     )

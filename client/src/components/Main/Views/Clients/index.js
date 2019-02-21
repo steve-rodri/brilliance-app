@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
+import Modal from './Modal';
 import { client } from '../../../../services/client'
 import { clientName } from '../../../Helpers/clientHelpers'
 
@@ -43,32 +44,74 @@ export default class Clients extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    const queries = queryString.parse(nextProps.location.search)
-    if (queries.category) {
-      this.setState(prevState => {
-        if (prevState.category !== queries.category) {
-          return {
-            category: queries.category,
-            page: 1
-          }
-        }
-      }, async () => {
-        await this.resetClients()
-        await this.fetchClients()
-      })
-    } else {
-      this.setState({ category: 'All'})
-    }
+    this.setClients(nextProps)
   }
 
   async componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
-    await this.fetchClients()
+    await this.setClients(this.props)
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
+  }
+
+  componentWillUpdate(nextProps) {
+    const { location } = this.props;
+    // set previousLocation if props.location is not modal
+    if (
+      nextProps.history.action !== "POP" &&
+      (!location.state || !location.state.modal))
+    {
+      this.previousLocation = this.props.location;
+    }
+  }
+
+  setClients = async(props) => {
+    const { category } = this.state
+    const queries = queryString.parse(props.location.search)
+    if (!props.location.state) {
+
+      if (queries.category && queries.category !== category) {
+
+        this.setState(
+        {
+          category: queries.category,
+          query: null,
+          page: 1
+        },
+          async () => {
+          await this.resetClients()
+          await this.fetchClients()
+        })
+
+      } else if (queries.q) {
+
+        this.setState(
+        {
+          query: queries.q,
+          category: 'All',
+          page: 1
+        },
+          async () => {
+          await this.resetClients()
+          await this.fetchClients()
+        })
+
+      } else {
+        this.setState(
+        {
+          query: null,
+          category: 'All',
+          page: 1
+        },
+          async () => {
+          await this.resetClients()
+          await this.fetchClients()
+        })
+      }
+    }
   }
 
   fetchClient = async(id) => {
@@ -81,8 +124,13 @@ export default class Clients extends Component {
   }
 
   fetchClients = async() => {
-    const { category, page } = this.state
-    const clients = await client.getAll(page, category);
+    const { page, category, query } = this.state
+    let clients;
+    if (query) {
+      clients = await client.find(page, query)
+    } else {
+      clients = await client.getAll(page, category)
+    }
     this.incrementPage()
     this.updateClients(clients)
   }
@@ -232,48 +280,24 @@ export default class Clients extends Component {
   }
 
   Show = ({ match, history }) => {
-    const {clients, category, categories, columnHeaders, hasMoreClients } = this.state
-    const req_id = parseInt(match.params.id)
+    const reqId = parseInt(match.params.id)
     return (
-      <ListPage
-        title="Clients"
-        type="Clients"
-        category={category}
-        categories={categories}
-        subtitles={columnHeaders}
-        fetchModalData={() => this.fetchClient(req_id)}
-        data={clients}
+      <Modal
+        type="Show"
+        client={() => this.fetchClient(reqId)}
         match={match}
         history={history}
-        load={this.fetchClients}
-        hasMore={hasMoreClients}
-        update={this.updateClient}
-        dlete={this.deleteClient}
-        refresh={this.refreshClients}
-        changeCategory={this.changeCategory}
       />
     )
   }
 
   Create = ({ match, history }) => {
-    const { clients, category, categories, columnHeaders, hasMoreClients, searchFieldData } = this.state
     return (
-      <ListPage
-        createNew={true}
+      <Modal
+        type="Create"
         create={this.createClient}
-        searchFieldData={searchFieldData}
-        title="Clients"
-        type="Clients"
-        category={category}
-        categories={categories}
-        subtitles={columnHeaders}
-        data={clients}
         match={match}
         history={history}
-        load={this.fetchClients}
-        hasMore={hasMoreClients}
-        refresh={this.refreshClients}
-        changeCategory={this.changeCategory}
       />
     )
   }
@@ -300,15 +324,34 @@ export default class Clients extends Component {
     )
   }
 
+  previousLocation = this.props.location;
   render(){
-    const { match } = this.props
+    const { match, location } = this.props
+    const isModal = !!(
+      location.state &&
+      location.state.modal &&
+      this.previousLocation !== location
+    ) || this.state.showModal;
     return (
-      <Switch>
-        <Route exact path={match.path} render={(props) => this.List(props)}/>
-        <Route exact path={`${match.path}/new`} render={(props) => this.Create(props)}/>
-        <Route exact path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
-        <Route exact path={`${match.path}/:id/events`} render={(props) => this.ListEvents(props)}/>
-      </Switch>
+      <Fragment>
+
+        <Switch location={isModal? this.previousLocation: location}>
+          <Route exact path={match.path} render={(props) => this.List(props)}/>
+          <Route exact path={`${match.path}/new`} render={(props) => this.List(props)}/>
+          <Route exact path={`${match.path}/:id`} render={(props) => this.List(props)}/>
+          <Route exact path={`${match.path}/:id/events`} render={(props) => this.ListEvents(props)}/>
+        </Switch>
+
+        {isModal?
+          <Switch>
+            <Route exact path={`${match.path}/new`} render={(props) => this.Create(props)}/>
+            <Route exact path={`${match.path}/:id`} render={(props) => this.Show(props)}/>
+          </Switch>
+          :
+          null
+        }
+
+      </Fragment>
     )
   }
 }
