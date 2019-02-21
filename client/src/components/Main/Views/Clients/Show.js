@@ -8,7 +8,8 @@ export default class Show extends Component {
   }
 
   async componentDidMount(){
-    const client = await this.props.client()
+    const { clt } = this.props
+    const client = await clt()
     this.setState({ client })
   }
 

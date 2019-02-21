@@ -5,18 +5,30 @@ import './Modal.css'
 
 export default class Modal extends Component {
 
+  componentDidMount(){
+    this.props.doNotRefresh()
+  }
+
   render(){
-    const { history, type } = this.props
+    const { closeModal, match, history, location, prevLocation, type } = this.props
     const back = e => {
       e.stopPropagation();
-      history.goBack();
+      closeModal();
+      if (location !== prevLocation) {
+        history.goBack();
+      } else {
+        const words = (match.url).split('/')
+        words.pop()
+        const url = words.join('/')
+        history.push(url)
+      }
     };
     return (
       <div
         onClick={back}
         className="Modal--Overlay"
       >
-        <div className="Modal">
+        <div className="Modal" onClick={e => e.stopPropagation()}>
           {type === 'Create'?
             <Create
               {...this.props}
