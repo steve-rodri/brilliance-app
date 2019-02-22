@@ -1,11 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { clientName } from '../Helpers/clientHelpers'
-import { styleConfirmation } from '../Helpers/styleConfirmation'
+import { styleConfirmation, changeConfirmation } from '../Helpers/eventConfirmation'
 import moment from 'moment'
 
 export default function Event(props){
-  const { item, type, start, end, displayColumn, numColumns, styleColumns, styleSummary } = props
+  const {
+    item,
+    type,
+    start,
+    end,
+    handleStatusChange,
+    displayColumn,
+    numColumns,
+    styleColumns,
+    styleSummary } = props
+
   const event = item
 
   return (
@@ -25,7 +35,16 @@ export default function Event(props){
         <p style={displayColumn('location')}>{event && event.placeLocation && event.placeLocation.name}</p>
 
         <div style={displayColumn('confirmation')}>
-          <p style={styleConfirmation(event && event.confirmation)}>{event && event.confirmation}</p>
+          <p
+            style={styleConfirmation(event && event.confirmation)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleStatusChange(item.id, 'confirmation', changeConfirmation(event && event.confirmation))
+            }}
+          >
+            {event && event.confirmation}
+          </p>
         </div>
 
       </div>
