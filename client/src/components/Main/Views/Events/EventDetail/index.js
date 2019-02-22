@@ -377,11 +377,9 @@ export default class EventDetail extends Component {
         history.push(`${url()}/${newEvt.id}`)
 
       } else {
-
         await event.update(evt.id, formData)
         const updatedEvent = await event.getOne(evt.id)
-        this.setState({ evt: updatedEvent })
-        await this.props.handleUpdate(updatedEvent)
+        await this.setState({ evt: updatedEvent })
 
         await this.resetForm()
         await this.setClientName();

@@ -122,12 +122,6 @@ export default class Events extends Component {
     }))
   }
 
-  refreshEvents = async() => {
-    this.resetEvents()
-    const evts = await event.getAll(1);
-    await this.updateEvents(evts, 'All')
-  }
-
   addEvent = async(newEvent) => {
     let events = [...this.state.events]
     events.push(newEvent)
@@ -135,14 +129,12 @@ export default class Events extends Component {
       return moment(evtOne.start).isBefore(evtTwo.start)
     })
     this.setState({ events })
-    await this.refreshEvents()
   }
 
   deleteEvent = async(id) => {
     let events = [...this.state.events]
     events = events.filter(evt => evt.id !== id)
     this.setState({ events })
-    await this.refreshEvents()
   }
 
   updateEvent = async(evt) => {
@@ -212,10 +204,12 @@ export default class Events extends Component {
 
   handleStatusChange = async (id, name, value) => {
     let events = [...this.state.events]
-    const evt = events.find((event) => event.id === id)
-    evt[name] = value;
-    this.setState({ events })
-    await event.update(id, { [name]: value } )
+    if (events) {
+      const evt = events.find((event) => event.id === id)
+      evt[name] = value;
+      this.setState({ events })
+      await event.update(id, { [name]: value } )
+    }
   }
 
   List = ({ match, history }) => {
@@ -242,7 +236,10 @@ export default class Events extends Component {
   Show = ({ match, history }) => {
     const req_id = parseInt(match.params.id)
     const events = this.state.events
-    const e = events.find(event => event.id === req_id)
+    let e;
+    if (events) {
+      e = events.find(event => event.id === req_id)
+    }
     return (
       <EventDetail
         e={e}
