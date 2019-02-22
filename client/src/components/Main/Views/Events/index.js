@@ -11,7 +11,7 @@ export default class Events extends Component {
   constructor(props){
     super(props)
     this.state = {
-      events: [],
+      events: null,
       hasMore: true,
       category: 'All',
       categories: ['Production', 'CANS', 'THC', 'CATP'],
@@ -150,7 +150,6 @@ export default class Events extends Component {
     const id = events.findIndex((event) => event.id === evt.id)
     events[id] = evt
     this.setState({ events })
-    await this.refreshEvents()
   }
 
   updateEvents = async(evts) => {
@@ -202,6 +201,23 @@ export default class Events extends Component {
     this.setState({ events: [] })
   }
 
+  setRefresh = (value, url) => {
+    const { history } = this.props
+    this.setState({ willRefresh: value }, () => {
+      if (url) {
+        history.push(url)
+      }
+    })
+  }
+
+  handleStatusChange = async (id, name, value) => {
+    let events = [...this.state.events]
+    const evt = events.find((event) => event.id === id)
+    evt[name] = value;
+    this.setState({ events })
+    await event.update(id, { [name]: value } )
+  }
+
   List = ({ match, history }) => {
     const { events, category, categories, columnHeaders, hasMore } = this.state
     return (
@@ -214,10 +230,11 @@ export default class Events extends Component {
         data={events}
         match={match}
         history={history}
-        load={this.fetchEvents}
         hasMore={hasMore}
+        load={this.fetchEvents}
         create={this.handleCreate}
-        refresh={this.refreshEvents}
+        refresh={this.setRefresh}
+        handleStatusChange={this.handleStatusChange}
       />
     )
   }

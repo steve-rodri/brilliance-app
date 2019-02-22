@@ -5,10 +5,25 @@
   align-items: flex-start;
 }
 
+.ListPage--category-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--med-dark-blue);
+  color: var(--light-gray);
+}
+
+.ListPage--category-title {
+  font-size: 28px;
+  font-family: 'Josefin Slab', serif;
+  padding: 5px 0;
+}
+
 main {
   height: 100%;
   grid-column: 2 / span 1;
-  background-color: var(--light-gray)
+  background-color: var(--light-gray);
+
 }
 
 @media (max-width: 1000px) {
@@ -46,14 +61,6 @@ aside > h2 {
 
 .ListPage--name:hover {
   cursor: pointer
-}
-
-.ListPage--category-title {
-  font-size: 28px;
-  font-family: 'Josefin Slab', serif;
-  background-color: var(--med-dark-blue);
-  color: var(--light-gray);
-  padding: 5px 0;
 }
 
 .ListPage--categories {
