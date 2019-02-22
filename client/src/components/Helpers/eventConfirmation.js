@@ -28,6 +28,20 @@ function styleConfirmation(msg){
   }
 }
 
+function changeConfirmation(msg){
+  switch (msg) {
+    case "Unconfirmed":
+      return "Confirmed"
+    case "Confirmed":
+      return "Cancelled"
+    case "Cancelled":
+      return "Unconfirmed"
+    default:
+    break;
+  }
+}
+
 export {
-  styleConfirmation
+  styleConfirmation,
+  changeConfirmation
 }

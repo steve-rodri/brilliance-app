@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPencilAlt, faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { styleConfirmation } from '../../../../../Helpers/styleConfirmation'
+import { styleConfirmation, changeConfirmation } from '../../../../../Helpers/eventConfirmation'
 
 library.add(faPencilAlt)
 library.add(faCheck)
@@ -53,20 +53,6 @@ export default function Header(props){
       </div>
     )
   }
-
-  function changeConfirmation(msg){
-    switch (msg) {
-      case "Unconfirmed":
-        return "Confirmed"
-      case "Confirmed":
-        return "Cancelled"
-      case "Cancelled":
-        return "Unconfirmed"
-      default:
-      break;
-    }
-  }
-
 
   //----------------------------------------------------------------------
 
