@@ -16,9 +16,9 @@ export default class Search extends Component {
   }
 
   handleSubmit = (e) => {
-    const { url, history } = this.props
+    const { url, refresh } = this.props
     e.preventDefault();
-    history.push(`${url}?q=${this.state.query}`)
+    refresh(true, `${url}?q=${this.state.query}`)
   }
 
   render(){

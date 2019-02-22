@@ -16,34 +16,61 @@ export default class List extends Component {
       }
     }
 
+    const styleList = () => {
+      if (items && items.length) {
+        return {}
+      } else {
+        return {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+          width: '100%'
+        }
+      }
+    }
+
     return (
       <div className="List--container">
-        <div className="Titles" style={style()}>
-          {subtitles && subtitles.map((subtitle, id) => (
+        {type !== 'Clients' &&
+          <div className="Titles" style={style()}>
+            {subtitles && subtitles.map((subtitle, id) => (
             <h5 key={id}>{subtitle}</h5>
-          ))}
-        </div>
-        <div id="List" className="List">
-          <InfiniteScroll
-            dataLength={items.length}
-            next={load}
-            hasMore={hasMore}
-            loader={<div className="loader">Loading...</div>}
-            scrollableTarget="List"
-            key={category}
-          >
-            {items && items.map((item, id) => (
-              <ListItem
-                user={this.props.user}
-                key={id}
-                item={item}
-                type={this.props.type}
-                displayColumn={displayColumn}
-                numColumns={subtitles && subtitles.length}
-                styleColumns={this.styleColumns}
-              />
             ))}
-          </InfiniteScroll>
+          </div>
+        }
+        <div id="List" className="List" style={styleList()}>
+            <InfiniteScroll
+              dataLength={items && items.length}
+              next={load}
+              hasMore={hasMore}
+              loader={<div className="List--Loader"></div>}
+              endMessage=
+              {
+                <div className="List--End-Message">
+                  {items?
+                    <div style={{height: '35px', backgroundColor: 'var(--med-dark-blue)'}}></div>
+                    :
+                    <div>None Found</div>
+                  }
+                </div>
+              }
+              scrollableTarget="List"
+              key={category}
+            >
+              {items && items.map((item, id) => (
+                <ListItem
+                  user={this.props.user}
+                  key={id}
+                  item={item}
+                  type={this.props.type}
+                  handleStatusChange={this.props.handleStatusChange}
+                  displayColumn={displayColumn}
+                  numColumns={subtitles && subtitles.length}
+                  styleColumns={this.styleColumns}
+                />
+              ))}
+            </InfiniteScroll>
         </div>
       </div>
     )

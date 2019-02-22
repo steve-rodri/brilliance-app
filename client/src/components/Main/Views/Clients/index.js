@@ -10,16 +10,16 @@ export default class Clients extends Component {
   constructor(props){
     super(props)
     this.state = {
-      clients: [],
+      clients: null,
       category: 'All',
-      categories: ['Production', 'CANS', 'THC', 'CATP'],
+      categories: ['Production','CANS', 'THC', 'CATP'],
       columnHeaders: ['name / company', 'contact info', 'next event', 'balance'],
 
       hasMoreClients: true,
       hasMoreEvents: true,
-      events: [],
+      events: null,
       hasMoreInvoices: true,
-      invoices: [],
+      invoices: null,
 
       searchFieldData: null,
       page: 1,
@@ -34,13 +34,9 @@ export default class Clients extends Component {
       this.setState({
         columnHeaders: ['name / company', 'balance']
       })
-    } else if (width < 700) {
-      this.setState({
-        columnHeaders: ['name / company', 'next event', 'balance']
-      })
     } else {
       this.setState({
-        columnHeaders: ['name / company', 'contact info', 'next event', 'balance']
+        columnHeaders: ['name / company', 'next event', 'balance']
       })
     }
   }
@@ -121,8 +117,11 @@ export default class Clients extends Component {
   }
 
   fetchClient = async(id) => {
-    const clients = [...this.state.clients]
-    let clt = clients.find(c => c.id === id)
+    let clt;
+    if (this.state.clients) {
+      const clients = [...this.state.clients]
+      clt = clients.find(c => c.id === id)
+    }
     if (!clt) {
       clt = await client.findById(id);
     }
@@ -204,27 +203,40 @@ export default class Clients extends Component {
   }
 
   updateClients = (clts) => {
-    if (clts) {
+    const { match } = this.props
+
+    if (clts && clts.length) {
+
       let clients = [...this.state.clients]
       clts.forEach(c => clients.push(c))
-      if (clts.length < 25) {
-        this.setState({
-          clients,
-          hasMoreClients: false
-        })
+
+      if (clts.length < 25 ) {
+
+        if (clts.length === 1) {
+          this.setState({
+            clients,
+            hasMoreClients: false
+          },() => {
+            this.setRefresh(false, `${match.url}/${clients[0].id}` )
+            this.handleModal(true)
+          })
+        } else {
+          this.setState({
+            clients,
+            hasMoreClients: false
+          })
+        }
 
       } else {
-
         this.setState({
           clients,
           hasMoreClients: true
         })
-
       }
 
     } else {
       this.setState({
-        clients: [],
+        clients: null,
       })
     }
   }
@@ -265,8 +277,13 @@ export default class Clients extends Component {
     this.setState({ clients: [] })
   }
 
-  setRefresh = (value) => {
-    this.setState({ willRefresh: value })
+  setRefresh = (value, url) => {
+    const { history } = this.props
+    this.setState({ willRefresh: value }, () => {
+      if (url) {
+        history.push(url)
+      }
+    })
   }
 
   handleModal = (value) => {
@@ -287,9 +304,9 @@ export default class Clients extends Component {
         history={history}
         load={this.fetchClients}
         hasMore={hasMoreClients}
-        refresh={this.refreshClients}
         deleteClient={this.deleteClient}
         showModal={() => this.handleModal(true)}
+        refresh={this.setRefresh}
       />
     )
   }
@@ -343,6 +360,7 @@ export default class Clients extends Component {
         data={events}
         match={match}
         history={history}
+        refresh={() => this.setRefresh(true)}
         load={(page) => this.fetchClientEvents(page, client.id)}
         hasMore={hasMoreEvents}
       />

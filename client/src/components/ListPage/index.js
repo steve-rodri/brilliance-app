@@ -16,7 +16,11 @@ export default class ListPage extends Component {
   }
 
   componentDidMount(){
-    const { match, showModal } = this.props
+    this.showModal(this.props)
+  }
+
+  showModal = (props) => {
+    const { match, showModal } = props
     if (match) {
       if (match.params) {
         if (match.params.id) {
@@ -60,7 +64,7 @@ export default class ListPage extends Component {
       data,
       hasMore,
       match,
-      history,
+      refresh
     } = this.props
 
     return (
@@ -72,7 +76,7 @@ export default class ListPage extends Component {
             className="ListPage--name"
             onClick={(e) => {
               e.stopPropagation()
-              history.push(match.path)
+              refresh(true, match.path)
             }}
           >
             {title}
@@ -82,7 +86,7 @@ export default class ListPage extends Component {
           <Search
             subject={title}
             url={match.path}
-            history={history}
+            refresh={refresh}
           />
 
           {/* Categories */}
@@ -92,7 +96,7 @@ export default class ListPage extends Component {
                 style={this.styleActiveMenu(category)}
                 onClick={(e) => {
                   e.stopPropagation()
-                  history.push(`${match.path}?category=${category}`)
+                  refresh(true, `${match.path}?category=${category}`);
                 }}
                 key={id}>{category}
               </div>
@@ -120,15 +124,12 @@ export default class ListPage extends Component {
 
         <main>
 
-          <h3 className="ListPage--category-title" style={this.styleSubTitle()}>{category}</h3>
+          <div className="ListPage--category-title-container" style={this.styleSubTitle()}><h3 className="ListPage--category-title">{category}</h3></div>
           <List
+            {...this.props}
             title={category}
-            subtitles={subtitles}
             items={data}
-            type={type}
             create={this.createNew}
-            load={this.props.load}
-            hasMore={hasMore}
             handleSelect={this.handleSelect}
           />
 
