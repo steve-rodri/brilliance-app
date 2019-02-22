@@ -13,6 +13,7 @@
 /* Color Palette */
   --dark-blue: #09639B;
   --med-dark-blue: #0071B5;
+  --med-dark-blue-t: rgba(0, 113, 181, .4);
   --turquoise: #01B0DF;
   --turquoise-t: rgba(1, 176, 223, .6);
   --light-blue: #D4F1FF;
