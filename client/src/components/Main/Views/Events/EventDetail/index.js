@@ -55,7 +55,14 @@ export default class EventDetail extends Component {
     const width = window.innerWidth;
     if (width < 750) {
       this.setView('Basic Info')
+      this.displayMobile(true)
+    } else {
+      this.displayMobile(false)
     }
+  }
+
+  displayMobile = (value) => {
+    this.setState({ mobile: value })
   }
 
   initialSetup = async(newEvt) => {
@@ -87,7 +94,7 @@ export default class EventDetail extends Component {
   findClients = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const clients = await client.find(query)
+      const clients = await client.find(1, query)
       return clients
     }
   }
@@ -95,7 +102,7 @@ export default class EventDetail extends Component {
   findPlaces = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const locations = await place.find(query)
+      const locations = await place.find(1, query)
       return locations
     }
   }
@@ -505,13 +512,19 @@ export default class EventDetail extends Component {
     if (this.state.redirectToEvents) return (<Redirect to='/admin/events'/>)
     return (
       <div className="EventDetail--container">
-        <div className="EventDetail--tab-control" style={this.styleTabControl()}>
-          <div className="Tab" style={this.styleTab("Basic Info")} onClick={() => this.setView("Basic Info")}><h3>MAIN</h3></div>
-          <div className="Tab" style={this.styleTab("Logistics")}  onClick={() => this.setView("Logistics")}><h3>LOGISTICS</h3></div>
-          <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>INVOICE</h3></div>
-          <div className="Tab" style={this.styleTab("Cash Flow")}  onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
-        </div>
+        {
+          this.state.mobile?
+          null
+          :
+          <div className="EventDetail--tab-control" style={this.styleTabControl()}>
+            <div className="Tab" style={this.styleTab("Basic Info")} onClick={() => this.setView("Basic Info")}><h3>MAIN</h3></div>
+            <div className="Tab" style={this.styleTab("Logistics")}  onClick={() => this.setView("Logistics")}><h3>LOGISTICS</h3></div>
+            <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>INVOICE</h3></div>
+            <div className="Tab" style={this.styleTab("Cash Flow")}  onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
+          </div>
+        }
         {this.view()}
+
       </div>
     )
   }

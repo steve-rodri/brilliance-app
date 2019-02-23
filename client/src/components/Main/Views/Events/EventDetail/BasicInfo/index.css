@@ -1,13 +1,19 @@
 .BasicInfo--container {
   overflow: auto;
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-rows: 90px 1fr 1fr auto;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-items: center;
+  align-items: flex-start;
+  height: calc(100vh - 150px);
+  background-color: var(--dark-gray);
 }
 
 @media (min-width: 750px) {
   .BasicInfo--container {
+    display: flex;
+    background-color: inherit;
     height: calc(100vh - 100px);
     min-height: 600px;
   }
@@ -15,14 +21,16 @@
 
 /* -----------------------Header----------------------- */
 .BasicInfo--header {
+  height: 90px;
+  width: 100%;
+  /* position: -webkit-sticky; /* Safari */
+  /* position: sticky; */
+  /* top: 0; */
   display: grid;
   justify-items: center;
   align-items: center;
-  border-bottom: 1px solid black;
-  padding: 10px;
-  margin: 0 10px;
-  min-height: 90px;
-  max-height: 90px;
+  background-color: var(--dark-blue);
+  color: var(--light-gray);
 }
 
 .BasicInfo--header-right {
@@ -35,9 +43,9 @@
 
 .BasicInfo--event-title, .BasicInfo--event-summary {
   text-align: center;
-  height: 45px;
   width: 100%;
   font-size: 24px;
+  font-weight: bold;
   grid-column: 1 / span 1;
   justify-self: start;
 }
@@ -49,12 +57,16 @@
   padding: 5px;
 }
 
+input, .BasicInfo--event-summary {
+  background-color: #eeeeee;
+}
+
 .BasicInfo--event-status {
   width: 130px;
   grid-column: 2 / span 1;
 }
 
-.BasicInfo--buttons {
+.BasicInfo--icons {
   grid-column: 3 / span 1;
   display: flex;
   justify-content: center;
@@ -62,7 +74,7 @@
   justify-self: flex-end;
 }
 
-.BasicInfo--button {
+.BasicInfo--icon {
   padding: 10px;
 }
 
@@ -81,14 +93,18 @@
 @media (min-width: 600px) {
   .BasicInfo--event-title, .BasicInfo--event-summary {
     font-size: 35px;
-    height: 55px;
   }
 }
 
 @media (min-width: 750px) {
   .BasicInfo--header {
+    background-color: inherit;
+    color: inherit;
     justify-items: left;
     grid-template-columns: auto 235px;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    margin: 0 10px;
   }
 
   .BasicInfo--header-right {
@@ -114,25 +130,22 @@
 /* ------------------------Main-Info-------------------------- */
 
 .MainInfo {
+  width: 100%;
   display: grid;
   grid-template-rows: repeat(3, auto);
-  grid-gap: 15px;
   justify-items: center;
   align-items: center;
-  margin: 20px 20px 0 20px;
-  border-radius: 10px;
+  padding: 10px;
+  background-color: var(--dark-gray);
 }
 
 .MainInfo--Area {
   height: 100%;
-  width: 85%;
+  width: 100%;
   min-width: 350px;
-  max-width: 400px;
-  border: 2px solid var(--dark-blue);
-  border-radius: 5px;
+  color: #eeeeee;
   padding: 5px;
   display: grid;
-  grid-template-columns: repeat(2, auto);
   align-items: center;
   justify-items: start;
 }
@@ -140,28 +153,41 @@
 label {
   width: 100%;
   text-align: left;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 400;
   padding: 10px 0;
+  color: var(--turquoise);
 }
 
 @media (min-width: 750px) {
   .MainInfo {
+    width: auto;
     background-color: var(--light-blue-t);
     border: 1px dashed var(--light-blue);
+    border-radius: 10px;
     grid-template-columns: 1fr 5fr 1fr 5fr;
     grid-template-rows: repeat(4, 1fr);
+    grid-gap: 15px;
     padding: 30px;
+    margin: 20px 20px 0 20px;
+  }
+
+  label {
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    padding: 10px 0;
   }
 }
 
 /* ------------------------Staff-and-Notes--------------------- */
 
 .BasicInfo--staff-and-notes {
+  width: 100%;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  min-height: 300px;
-  padding: 0 15px 30px 15px;
+  padding: 0 10px 20px 10px;
 }
 
 .BasicInfo--notes-container, .BasicInfo--staff-container {
@@ -174,25 +200,28 @@ label {
 }
 
 .BasicInfo--notes, .BasicInfo--notes-readonly {
-  padding: 5px 0;
-  border-radius: 5px;
-  font-size: 1em;
   height: 100%;
-  min-height: 200px;
   width: 100%;
-  align-self: center;
   resize: none;
   overflow: auto;
+  align-self: center;
+  font-size: 1em;
+  border-radius: 5px;
+  padding: 5px 0;
 }
 
 .BasicInfo--notes {
   border: 1px solid lightgray;
+  color: black;
+  background-color: #eeeeee;
+  min-height: 350px;
 }
 
 .BasicInfo--notes-readonly {
   border: none;
   text-align: left;
   background-color: rgba(0, 0, 0, 0);
+  color: var(--light-gray);
 }
 
 .BasicInfo--notes-readonly:focus {
@@ -206,6 +235,42 @@ label {
     grid-template-columns: repeat(2, 1fr);
     padding: 0 30px 30px 30px;
     height: 100%;
+    min-height: 300px;
     max-height: 500px;
   }
+
+  .BasicInfo--notes, .BasicInfo--notes-readonly {
+    min-height: 200px;
+  }
+}
+
+.BasicInfo--Buttons {
+  display: grid;
+  grid-gap: 7.5px;
+  grid-template-rows: repeat(2, auto);
+  width: 100%;
+  padding: 10px;
+  background-color: var(--dark-gray);
+}
+
+.BasicInfo--Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: none;
+  background: #111111;
+  border-radius: 5px;
+  font-size: 20px;
+  color: white;
+  height: 50px;
+  width: 100%;
+}
+
+.BasicInfo--Button-Icon {
+  position: absolute;
+  height: 100%;
+  right: 0%;
+  margin: 0 10px;
+  padding: 10px;
 }

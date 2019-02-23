@@ -6,34 +6,10 @@ import EditMobile from './EditMobile'
 import './index.css'
 
 export default class MainInfo extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      mobile: false
-    }
-  }
-
-  updateView = (e) => {
-    const width = window.innerWidth;
-    if (width < 750) {
-      this.setState({ mobile: true })
-    } else {
-      this.setState({ mobile: false })
-    }
-  }
-
-  componentDidMount() {
-    this.updateView();
-    window.addEventListener("resize", this.updateView);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateView);
-  }
 
   view = () => {
-    const { editMode } = this.props
-    const { mobile } = this.state
+    const { editMode, mobile } = this.props
+    
     if (editMode) {
       if (mobile) {
         return (

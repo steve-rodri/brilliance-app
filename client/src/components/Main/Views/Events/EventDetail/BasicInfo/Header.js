@@ -11,11 +11,11 @@ library.add(faTrash)
 
 export default function Header(props){
 
-  const { evt, fields, isNew, editMode } = props
+  const { evt, fields, isNew, editMode, mobile } = props
   // Functions to Show Summary field based on Mode ----------------------
 
   function displaySummary(){
-    if (editMode && evt) {
+    if (editMode && evt && !mobile) {
       return (
         <input
           className="BasicInfo--event-summary"
@@ -61,7 +61,7 @@ export default function Header(props){
     if (!isNew && evt) {
       return (
         <div
-          className="BasicInfo--button left"
+          className="BasicInfo--icon left"
           onClick={props.close}
         >
           <FontAwesomeIcon icon="times" size="2x"/>
@@ -73,7 +73,7 @@ export default function Header(props){
   function edit(){
     return (
       <div
-        className="BasicInfo--button right"
+        className="BasicInfo--icon right"
         onClick={props.edit}
       >
         <FontAwesomeIcon icon="pencil-alt" size="2x"/>
@@ -85,7 +85,7 @@ export default function Header(props){
     if (evt) {
       return (
         <div
-          className="BasicInfo--button right"
+          className="BasicInfo--icon right"
           onClick={props.delete}
         >
           <FontAwesomeIcon icon="trash" size="2x"/>
@@ -97,7 +97,7 @@ export default function Header(props){
   function submit(){
     return (
       <div
-        className="BasicInfo--button right"
+        className="BasicInfo--icon right"
         onClick={props.handleSubmit}
       >
         <FontAwesomeIcon icon="check" size="2x"/>
@@ -108,14 +108,14 @@ export default function Header(props){
   function displayButtons(){
     if (editMode) {
       return (
-        <div className="BasicInfo--buttons">
+        <div className="BasicInfo--icons">
           {close()}
           {submit()}
         </div>
       )
     } else {
       return (
-        <div className="BasicInfo--buttons">
+        <div className="BasicInfo--icons">
           {edit()}
           {trash()}
         </div>

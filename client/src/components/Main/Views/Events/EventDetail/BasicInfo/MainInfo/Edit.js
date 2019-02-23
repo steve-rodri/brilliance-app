@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import moment from 'moment'
 import Datetime from 'react-datetime'
 import SearchField from '../../../../../../SearchField'
+import moment from 'moment'
 import { clientName } from '../../../../../../Helpers/clientHelpers'
 import { locationName } from '../../../../../../Helpers/locationName'
 import './react-datetime.css'
