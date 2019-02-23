@@ -19,6 +19,7 @@
   --light-blue: #D4F1FF;
   --light-blue-t: rgba(212,241,255, .3);
   --light-gray: #DADBE0;
+  --dark-gray: #333333;
 }
 
 h1 {
@@ -28,6 +29,10 @@ h1 {
 
 button:hover {
   cursor: pointer
+}
+
+button:active, button:focus {
+  outline: none;
 }
 
 label {
