@@ -5,7 +5,7 @@ header {
   align-items: center;
   justify-items: center;
   grid-template-columns: repeat(2, 1fr);
-  background: black;
+  background: #111111;
 }
 
 @media (min-width: 1000px) {
@@ -18,8 +18,8 @@ header {
 /*-----------------Logo---------------- */
 .logo {
   justify-self: start;
-  width: 150px;
-  height: 37px;
+  width: 225px;
+  height: 55px;
   margin: 10px;
 }
 
@@ -54,7 +54,8 @@ header {
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 100%;
+  width: 90%;
+  border-bottom: 5px solid rgba(255,255,255, .2)
 }
 
 .Header--nav-menu > a {
@@ -65,8 +66,7 @@ header {
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: var(--dark-blue);
-  border-bottom: 1px solid var(--light-gray);
+  color: white;
   font-family: 'Gruppo';
   font-weight: bold;
 }
@@ -83,13 +83,13 @@ header {
 
 .Header--Log-Out {
   grid-column: 1 / span 2;
-  background: var(--light-gray);
-  color: darkred;
+  background: darkred;
+  color: white;
   font-weight: bold;
   font-size: 20px;
   border: 2px solid darkred;
   border-radius: 5px;
-  width: 200px;
+  width: 80%;
   height: 65px;
   margin: 25px;
 }
