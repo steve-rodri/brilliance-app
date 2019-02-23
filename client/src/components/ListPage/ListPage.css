@@ -22,7 +22,7 @@
 main {
   height: 100%;
   grid-column: 2 / span 1;
-  background-color: var(--light-gray);
+  background-color: var(--dark-blue);
 
 }
 

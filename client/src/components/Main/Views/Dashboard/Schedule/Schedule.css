@@ -1,21 +1,25 @@
 .Schedule--container {
-  display: none;
-  background-color: rgba(0,0,0,.88);
   margin: 20px auto;
-  border-radius: 10px;
-  width: 95%;
+  width: 100%;
 }
 
-.Schedule--title {
+.Schedule--dialog {
   color: white;
   margin: 2px auto;
-  font-size: 32px;
-  font-family: 'Josefin Slab', sans-serif;
+  font-size: 18px;
+  text-align: left;
+  font-family: sans-serif;
   width: 98.5%;
-  border-bottom: 1px solid white;
   padding: 5px 0 10px 0;
 }
 
 .Schedule--not-currently {
   color: white;
+}
+
+@media (min-width: 750px) {
+  .Schedule--container {
+    margin: 20px auto;
+    width: 75%;
+  }
 }

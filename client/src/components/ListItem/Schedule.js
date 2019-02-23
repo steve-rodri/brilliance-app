@@ -13,18 +13,19 @@ export default function Schedule(props){
   const {
     user,
     item,
+    type,
     start,
     end,
     timeUntil,
     displayColumn,
     numColumns,
-    styleContainer
+    styleItem
   }
   = props
 
   return (
     <a href={item.htmlLink} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
-      <div className="List-Item" style={styleContainer(item, numColumns)}>
+      <div className="List-Item" style={styleItem(item, type, numColumns)}>
 
         <p style={displayColumn('time until')}>{item && timeUntil}</p>
 

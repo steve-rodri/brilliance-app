@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
 import List from '../../../../List/index.js'
 import moment from 'moment'
@@ -19,7 +19,7 @@ export default class Schedule extends Component {
     const width = window.innerWidth
     if (width < 500) {
       this.setState({
-        columnHeaders: ['time until', 'title']
+        columnHeaders: ['title', 'confirmation']
       })
     } else if (width < 700) {
       this.setState({
@@ -40,9 +40,7 @@ export default class Schedule extends Component {
 
   async componentWillUnmount(){
     window.removeEventListener("resize", this.updateColumnHeaders);
-    this.setState({
-      userEvents: []
-    })
+    this.setState({ userEvents: null })
   }
 
   findAllUserEvents = async() => {
@@ -52,11 +50,10 @@ export default class Schedule extends Component {
       if (calendars) {
         const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
         const events = await getGoogleEvents(jobsCalendar.id)
-        const userEvents = events.filter(event => {
-            if (event.attendees) {
-              return event.attendees.find(attendee => (attendee.email = user.email))
-            }
-          }
+        const userEvents = events.filter(event =>
+          event.attendees?
+          event.attendees.find(attendee => (attendee.email = user.email))
+          : null
         )
         return userEvents
       } else {
@@ -78,40 +75,45 @@ export default class Schedule extends Component {
     }
   }
 
-  styleContainer(){
-    if (this.state.userEvents.length > 0) {
-      return {
-        display: 'block'
-      }
-    } else {
-      return {
-        display: 'none'
-      }
-    }
-  }
-
   render(){
     const { redirectToLogin, userEvents, columnHeaders } = this.state
 
     if (redirectToLogin) return (<Redirect to="/login"/>)
-
     return (
-      <React.Fragment>
-        <div className="Schedule--container" style={this.styleContainer()}>
-          <h2 className='Schedule--title'>Schedule</h2>
-          <List
-            user={this.props.user}
-            type="Schedule"
-            items={userEvents}
-            subtitles={columnHeaders}
-            load={this.findUpcomingUserEvents}
-            hasMore={false}
-          />
-        </div>
-        {!userEvents && userEvents.length === 0 && <p className="Schedule--not-currently" >Not currently scheduled...</p>}
-      </React.Fragment>
+      <Fragment>
+        {userEvents && userEvents.length?
+          <div className="Schedule--container">
+            <div className='Schedule--dialog'>
+              <p>{schedule(userEvents)}</p>
+              <p></p>
+            </div>
+            <List
+              user={this.props.user}
+              type="Schedule"
+              items={userEvents}
+              subtitles={columnHeaders}
+              load={this.findUpcomingUserEvents}
+              hasMore={false}
+            />
+          </div>
+          :
+          <p className="Schedule--not-currently">Not currently scheduled...</p>
+        }
+      </Fragment>
     )
   }
+}
+
+function schedule(userEvents) {
+  if (numEventsGreaterThanOne(userEvents)) {
+    return `You are currently scheduled on ${userEvents.length} events.`
+  } else {
+    return `You are currently scheduled on 1 event.`
+  }
+}
+
+function numEventsGreaterThanOne(userEvents){
+  return userEvents.length > 1
 }
 
 function start(event) {

@@ -16,8 +16,7 @@ export default function ListItem(props){
           start={start()}
           end={end()}
           timeUntil={timeUntil()}
-          styleColumns={styleColumns}
-          styleContainer={styleSchedule}
+          styleItem={styleItem}
         />
       )
     case 'Events':
@@ -26,7 +25,7 @@ export default function ListItem(props){
           {...props}
           start={start()}
           end={end()}
-          styleColumns={styleColumns}
+          styleItem={styleItem}
           styleSummary={styleSummary}
         />
       )
@@ -34,14 +33,14 @@ export default function ListItem(props){
       return (
         <Invoice
           {...props}
-          styleColumns={styleColumns}
+          styleItem={styleItem}
         />
       )
     case 'Clients':
       return (
         <Client
           {...props}
-          styleColumns={styleColumns}
+          styleItem={styleItem}
           styleSummary={styleSummary}
         />
       )
@@ -80,22 +79,30 @@ export default function ListItem(props){
     return moment.utc(start()).fromNow()
   }
 
-  function styleSchedule(item, numColumns){
-    if (type === 'Schedule') {
+  function styleItem(item, type, numColumns){
+    switch (type) {
+      case 'Events':
+      const event = item;
+        if ( event && event.start && moment(event.start).isSameOrAfter(moment()) ) {
+          return {
+            gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+          }
+        } else {
+          return {
+            color: 'rgba(0,0,0,.5)',
+            backgroundColor: 'rgba(0,0,0,.5)',
+            gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+          }
+        }
+      case 'Schedule':
+        return {
+          backgroundColor: '#eeeeee',
+          gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+        }
+      default:
       return {
-        backgroundColor: '#eeeeee',
         gridTemplateColumns: `repeat(${numColumns}, 1fr)`
       }
-    } else {
-      return {
-        gridTemplateColumns: `repeat(${numColumns}, 1fr)`
-      }
-    }
-  }
-
-  function styleColumns(numColumns){
-    return {
-      gridTemplateColumns: `repeat(${numColumns}, 1fr)`
     }
   }
 

@@ -25,7 +25,7 @@ export default class Events extends Component {
     const width = window.innerWidth
     if (width < 500) {
       this.setState({
-        columnHeaders: ['title', 'confirmation']
+        columnHeaders: ['title']
       })
     } else if (width < 700) {
       this.setState({

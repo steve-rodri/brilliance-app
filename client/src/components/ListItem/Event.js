@@ -13,14 +13,14 @@ export default function Event(props){
     handleStatusChange,
     displayColumn,
     numColumns,
-    styleColumns,
+    styleItem,
     styleSummary } = props
 
   const event = item
 
   return (
     <Link to={`/admin/${type.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
-      <div className="List-Item" style={styleColumns(numColumns)}>
+      <div className="List-Item" style={styleItem(item, type, numColumns)}>
 
         <div style={displayColumn('title')}>
           <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
@@ -35,16 +35,21 @@ export default function Event(props){
         <p style={displayColumn('location')}>{event && event.placeLocation && event.placeLocation.name}</p>
 
         <div style={displayColumn('confirmation')}>
-          <p
-            style={styleConfirmation(event && event.confirmation)}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              handleStatusChange(item.id, 'confirmation', changeConfirmation(event && event.confirmation))
-            }}
-          >
-            {event && event.confirmation}
-          </p>
+          {
+            event && event.start && moment(event.start).isSameOrAfter(moment(), 'days')?
+            <p
+              style={styleConfirmation(event && event.confirmation)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleStatusChange(item.id, 'confirmation', changeConfirmation(event && event.confirmation))
+              }}
+            >
+              {event && event.confirmation}
+            </p>
+            :
+            null
+          }
         </div>
 
       </div>
