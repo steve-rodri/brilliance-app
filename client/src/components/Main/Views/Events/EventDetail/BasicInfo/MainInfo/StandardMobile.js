@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { date, time } from '../../../../../../Helpers/datetime'
 import './Standard.css'
 
@@ -8,15 +8,28 @@ export default function Standard (props){
     <div className="MainInfo">
 
       <div className="MainInfo--Area">
-        <label>Client</label>
-          <div className="Standard--field">
-            <p>{fields && fields.client}</p>
-          </div>
-
-        <label>Location</label>
-          <div className="Standard--field">
-            <p>{fields && fields.location}</p>
-          </div>
+        {
+          fields && fields.client?
+          <Fragment>
+            <label>Client</label>
+              <div className="Standard--field">
+                <p>{fields.client}</p>
+              </div>
+          </Fragment>
+            :
+            null
+        }
+        {
+          fields && fields.location?
+          <Fragment>
+            <label>Location</label>
+              <div className="Standard--field">
+                <p>{fields && fields.location}</p>
+              </div>
+          </Fragment>
+          :
+          null
+        }
       </div>
 
 
@@ -34,27 +47,54 @@ export default function Standard (props){
 
 
       <div className="MainInfo--Area">
-        <label>Type/Action</label>
-          <div className="Standard--field">
-            <p>{fields && fields.action? fields.action : ''}</p>
-          </div>
+        {
+          fields && fields.action?
+          <Fragment>
+            <label>Action</label>
+              <div className="Standard--field">
+                <p>{fields.action}</p>
+              </div>
+          </Fragment>
+          :
+          null
+        }
 
-        <label>Kind</label>
-          <div className="Standard--field">
-            <p>{fields && fields.kind? fields.kind : ''}</p>
-          </div>
+        {
+          fields && fields.kind?
+          <Fragment>
+            <label>Kind</label>
+              <div className="Standard--field">
+                <p>{fields.kind}</p>
+              </div>
+          </Fragment>
+          :
+          null
+        }
 
-        <label>Description</label>
-          <div className="Standard--field">
-            <p>{fields && fields.description? fields.description : ''}</p>
-          </div>
+        {
+          fields && fields.package?
+          <Fragment>
+            <label>Package</label>
+              <div className="Standard--field">
+                <p>{fields.package}</p>
+              </div>
+          </Fragment>
+          :
+          null
+        }
 
-        <label>Package</label>
-          <div className="Standard--field">
-            <p>{fields && fields.package? fields.package : ''}</p>
-          </div>
+        {
+          fields && fields.description?
+          <Fragment>
+            <label>Description</label>
+              <div className="Standard--field">
+                <p>{fields.description}</p>
+              </div>
+          </Fragment>
+          :
+          null
+        }
       </div>
-
     </div>
   )
 }
