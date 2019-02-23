@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 
 export default function Client(props) {
-  const { item, type, numColumns, displayColumn, styleColumns, styleSummary } = props
+  const { item, type, numColumns, displayColumn, styleItem, styleSummary } = props
   const client = item.contactInfo
   const company = item.company
 
   return (
     <Link to={{pathname: `/admin/${type.toLowerCase()}/${item.id}`, state: { modal: true } }} style={{textDecoration: 'none', color: 'black'}}>
-      <div className="List-Item" style={styleColumns(numColumns)}>
+      <div className="List-Item" style={styleItem(item, type, numColumns)}>
 
         <div style={displayColumn('name / company')}>
           <h3>{client && client.fullName}</h3>
