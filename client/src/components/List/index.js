@@ -49,7 +49,7 @@ export default class List extends Component {
               {
                 <div className="List--End-Message">
                   {items?
-                    <div style={{height: '35px', backgroundColor: 'var(--med-dark-blue)'}}></div>
+                    <div></div>
                     :
                     <div>None Found</div>
                   }
