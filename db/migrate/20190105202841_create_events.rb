@@ -7,12 +7,12 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.datetime :call_time
       t.datetime :clock_out
       t.string :confirmation, default: 'Unconfirmed'
-      t.string :creator
       t.string :description
       t.string :driving_time
       t.datetime :end
       t.string :gc_id
       t.string :html_link
+      t.string :i_cal_UID
       t.string :kind
       t.text :notes
       t.datetime :start
@@ -45,7 +45,7 @@ end
 # start: "2012-09-06T00:00:00.000Z"
 # start: {dateTime: "2019-01-16T13:30:00-05:00"}
 
-# creator: {email: "steve@brilliancepro.com"}
+# creator: {email: "steve@brilliancepro.com"} //find email address in email address table
 
 # created_at: "2019-01-08T15:03:03.024Z"
 # created: "2019-01-08T02:44:48.000Z"

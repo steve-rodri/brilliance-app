@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
     resources :events do
       get 'find', on: :collection, to: 'events#find'
-      put 'sync', to: 'events#bulk_update'
+      put 'sync', on: :collection, to: 'events#sync'
     end
     resources :contacts do
       get 'find', on: :collection, to: 'contacts#find'
@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     resources :companies do
       get 'find', on: :collection, to: 'companies#find'
     end
-    resources :email_addresses
+    resources :email_addresses do
+      get 'find', on: :collection, to: 'email_addresses#find'
+    end
     resources :invoices
     resources :places do
       get 'find', on: :collection, to: 'places#find'

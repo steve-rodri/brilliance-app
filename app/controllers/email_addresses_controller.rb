@@ -38,6 +38,11 @@ class EmailAddressesController < ApplicationController
     @email_address.destroy
   end
 
+  def find
+    @email_address = EmailAddress.where("email_address = '#{params[:q]}'")
+    render json: @email_address
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_email_address
