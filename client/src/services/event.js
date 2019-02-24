@@ -49,9 +49,10 @@ const event = {
       console.log(e)
     }
   },
-  bulkUpdate: async function(data){
+  sync: async function(data){
     try {
-      // const resp = await axios.put('/api/events/', data)
+      const resp = await axios.put('/api/events/sync', data)
+      return resp.data
     } catch (e) {
       console.log(e)
     }
