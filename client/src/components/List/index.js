@@ -32,12 +32,14 @@ export default class List extends Component {
 
     return (
       <div className="List--container">
-        {type !== 'Clients' &&
+        {type !== 'Clients'?
           <div className="Titles" style={style()}>
             {subtitles && subtitles.map((subtitle, id) => (
             <h5 key={id}>{subtitle}</h5>
             ))}
           </div>
+          :
+          null
         }
         <div id="List" className="List" style={styleList()}>
             <InfiniteScroll

@@ -22,8 +22,6 @@
 main {
   height: 100%;
   grid-column: 2 / span 1;
-  background-color: var(--dark-blue);
-
 }
 
 @media (max-width: 1000px) {

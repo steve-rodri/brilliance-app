@@ -14,14 +14,15 @@
   justify-content: center;
   border-bottom: 1px solid black;
   font-size: 20px;
-  background-color: var(--light-gray);
+  background-color: rgba(0,0,0,.88);
+  color: var(--light-gray);
 }
 
 .List {
   width: 100%;
   max-height: calc(100vh - 150px);
   overflow: auto;
-  background-color: var(--light-gray);
+  background-color: var(--dark-blue);
 }
 
 @media (min-width: 1000px) {

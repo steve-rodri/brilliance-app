@@ -5,6 +5,7 @@
   justify-items: center;
   align-items: center;
   border-bottom: 1px solid #eeeeee;
+  background-color: var(--light-gray);
 }
 
 .List-Item--description {
