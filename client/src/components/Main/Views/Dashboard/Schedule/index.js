@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
 import List from '../../../../List/index.js'
+import { GOOGLE } from '../../../../../services/google_service'
 import moment from 'moment'
 import './Schedule.css'
-
-import { getGoogleCalendars, getGoogleEvents } from '../../../../../services/google_service'
 
 export default class Schedule extends Component {
   constructor(props){
@@ -19,15 +18,15 @@ export default class Schedule extends Component {
     const width = window.innerWidth
     if (width < 500) {
       this.setState({
-        columnHeaders: ['title', 'confirmation']
+        columnHeaders: ['event', 'confirmation']
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['time until', 'title', 'confirmation']
+        columnHeaders: ['time until', 'event', 'confirmation']
       })
     } else {
       this.setState({
-        columnHeaders: ['time until', 'title', 'notes', 'confirmation']
+        columnHeaders: ['time until', 'event', 'notes', 'confirmation']
       })
     }
   }
@@ -46,11 +45,12 @@ export default class Schedule extends Component {
   findAllUserEvents = async() => {
     const user = this.props.user
     if (user) {
-      const calendars = await getGoogleCalendars();
+      const calendars = await GOOGLE.getCalendars();
       if (calendars) {
         const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
-        const events = await getGoogleEvents(jobsCalendar.id)
-        const userEvents = events.filter(event =>
+        const events = await GOOGLE.getEvents(jobsCalendar.id)
+        const userEvents = events.filter(
+          event =>
           event.attendees?
           event.attendees.find(attendee => (attendee.email = user.email))
           : null
@@ -67,7 +67,7 @@ export default class Schedule extends Component {
     if (userEvents) {
       const upcomingEvents = userEvents.filter(function(event){
         const now = moment().format()
-        return moment(start(event)).isAfter(now)
+        return ( moment(start(event)).isSameOrAfter(now) || moment(now).isSameOrBefore(end(event)) )
       })
       if (upcomingEvents.length > 0) {
         this.setState({ userEvents: upcomingEvents })
@@ -85,7 +85,7 @@ export default class Schedule extends Component {
           <div className="Schedule--container">
             <div className='Schedule--dialog'>
               <p>{schedule(userEvents)}</p>
-              <p></p>
+              <p>Please confirm if you will be able to work by clicking/tapping on the confirmation button </p>
             </div>
             <List
               user={this.props.user}
@@ -123,6 +123,18 @@ function start(event) {
         return event.start.date
       } else if (event.start.dateTime) {
         return event.start.dateTime
+      }
+    }
+  }
+}
+
+function end(event) {
+  if (event) {
+    if (event.end) {
+      if (event.end.date) {
+        return event.end.date
+      } else if (event.end.dateTime) {
+        return event.end.dateTime
       }
     }
   }
