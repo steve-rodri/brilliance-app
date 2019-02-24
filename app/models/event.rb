@@ -3,4 +3,6 @@ class Event < ApplicationRecord
   has_one :invoice, dependent: :nullify
   belongs_to :place_location, class_name: 'Place', foreign_key: 'location_id', optional: true
   belongs_to :place_call_location, class_name: 'Place', foreign_key: 'call_location_id', optional: true
+  belongs_to :organizer, class_name: 'EmailAddress', foreign_key: 'organizer', optional: true
+  belongs_to :creator, class_name: 'EmailAddress', foreign_key: 'creator', optional: true
 end

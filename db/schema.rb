@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_230930) do
+ActiveRecord::Schema.define(version: 2019_02_24_040701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,12 +68,12 @@ ActiveRecord::Schema.define(version: 2019_01_13_230930) do
     t.datetime "call_time"
     t.datetime "clock_out"
     t.string "confirmation", default: "Unconfirmed"
-    t.string "creator"
     t.string "description"
     t.string "driving_time"
     t.datetime "end"
     t.string "gc_id"
     t.string "html_link"
+    t.string "i_cal_UID"
     t.string "kind"
     t.text "notes"
     t.datetime "start"
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 2019_01_13_230930) do
     t.bigint "client_id"
     t.integer "location_id"
     t.integer "call_location_id"
+    t.integer "organizer"
+    t.integer "creator"
     t.index ["client_id"], name: "index_events_on_client_id"
   end
 
@@ -124,6 +126,8 @@ ActiveRecord::Schema.define(version: 2019_01_13_230930) do
   add_foreign_key "email_addresses", "companies"
   add_foreign_key "email_addresses", "contacts"
   add_foreign_key "events", "clients"
+  add_foreign_key "events", "email_addresses", column: "creator"
+  add_foreign_key "events", "email_addresses", column: "organizer"
   add_foreign_key "events", "places", column: "call_location_id"
   add_foreign_key "events", "places", column: "location_id"
   add_foreign_key "invoices", "events"
