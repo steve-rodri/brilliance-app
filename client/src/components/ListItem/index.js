@@ -4,7 +4,14 @@ import Event from './Event'
 import Invoice from './Invoice'
 import Client from './Client'
 import moment from 'moment'
+import countdown from 'countdown'
 import './ListItem.css'
+
+countdown.setLabels(
+' || m| hr |||||||',
+' || m| hrs |||||||',
+', '
+)
 
 export default function ListItem(props){
   const { item, type } = props
@@ -76,7 +83,27 @@ export default function ListItem(props){
   }
 
   function timeUntil(){
-    return moment.utc(start()).fromNow()
+    const now = moment().format();
+    const eStart = moment(start(item));
+    const eEnd = moment(end(item));
+    const fromStart = countdown(eStart, null, countdown.HOURS|countdown.MINUTES, 2).toString();
+    const fromEnd = countdown(null, eEnd, countdown.HOURS | countdown.MINUTES, 2).toString();
+
+    function trim(duration){
+      return duration.split(',').map(str => str.replace(/\s/g,'')).join(' ')
+    }
+
+    if ( eStart.isSameOrAfter(now) || moment(now).isSameOrBefore(eEnd) ) {
+      return (
+        <div>
+          <h4 style={{color: 'darkred'}}>IN PROGRESS</h4>
+          <p style={{textAlign: 'left'}}>started <span style={{fontWeight:'bold'}}>{trim(fromStart)}</span> ago</p>
+          <p style={{textAlign: 'left'}}>ends in <span style={{fontWeight:'bold'}}>{trim(fromEnd)}</span></p>
+        </div>
+      )
+    } else {
+      return moment(start(item)).toNow()
+    }
   }
 
   function styleItem(item, type, numColumns){
@@ -90,7 +117,7 @@ export default function ListItem(props){
         } else {
           return {
             color: 'rgba(0,0,0,.5)',
-            backgroundColor: 'rgba(0,0,0,.5)',
+            backgroundColor: '#999999',
             gridTemplateColumns: `repeat(${numColumns}, 1fr)`
           }
         }
