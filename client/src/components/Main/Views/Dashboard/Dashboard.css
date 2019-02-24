@@ -2,14 +2,14 @@
   height: calc(100vh - 150px);
   width: 100vw;
   display: grid;
-  grid-template-rows: .4fr auto;
+  grid-template-rows: 100px auto;
   justify-items: center;
   align-items: start;
   background-color: rgba(0, 0, 0, 0.88);
 }
 
 .Dashboard--intro {
-  font-size: 40px;
+  font-size: 35px;
   font-family: 'Rokkitt', serif;
   min-width: 50%;
   justify-self: center;
