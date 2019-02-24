@@ -27,17 +27,22 @@ export default function Schedule(props){
     <a href={item.htmlLink} target="_blank" rel="noopener noreferrer" style={{textDecoration: 'none', color: 'black'}}>
       <div className="List-Item" style={styleItem(item, type, numColumns)}>
 
-        <p style={displayColumn('time until')}>{item && timeUntil}</p>
+        <div style={displayColumn('time until')}>{item && timeUntil}</div>
 
-        <div style={displayColumn('title')}>
+        <div style={displayColumn('event')}>
           <h4>{item && item.summary}</h4>
-          <p>{item && item.start && moment.utc(start).format('dddd, MMMM Do')}</p>
-          <p>{item && item.start && item.end && `${moment.utc(start).format('LT')} - ${moment.utc(end).format('LT')}`}</p>
+          <p>{item && item.start && moment(start).format('dddd, MMMM Do')}</p>
+          <p>{item && item.start && item.end && `${moment(start).format('LT')} - ${moment(end).format('LT')}`}</p>
         </div>
 
         <p style={displayColumn('notes')} className="List-Item--description">{item && item.description}</p>
 
-        <p style={displayColumn('confirmation')}>{status()}</p>
+        <div
+          style={displayColumn('confirmation')}
+
+        >
+          {status()}
+        </div>
 
       </div>
     </a>
