@@ -69,6 +69,7 @@ export default function Buttons(props) {
     if (editMode) {
       return (
         <Fragment>
+          {trash()}
           {submit()}
         </Fragment>
       )
@@ -76,7 +77,6 @@ export default function Buttons(props) {
       return (
         <Fragment>
           {edit()}
-          {trash()}
         </Fragment>
       )
     }

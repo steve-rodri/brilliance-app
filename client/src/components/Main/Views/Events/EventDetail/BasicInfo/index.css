@@ -78,6 +78,10 @@ input, .BasicInfo--event-summary {
   padding: 10px;
 }
 
+.BasicInfo--icon:hover {
+  cursor: pointer;
+}
+
 .left {
   right: 8%;
 }
