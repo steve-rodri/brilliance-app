@@ -17,7 +17,7 @@ function date(fields){
 function time(fields){
 
   if (fields) {
-    if (fields.start && fields.end && moment(fields.end).isAfter(fields.start, 'day')) {
+    if (fields.start && fields.end && moment(fields.end).isSameOrAfter(fields.start, 'day')) {
       const startOfDay = moment(fields.start).startOf('day')
       if (moment(fields.start).isSame(startOfDay, 'minute') && moment(fields.end).isSame(startOfDay, 'minute')) {
         return (
