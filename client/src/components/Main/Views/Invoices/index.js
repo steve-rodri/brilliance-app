@@ -23,7 +23,7 @@ export default class Invoices extends Component {
     const width = window.innerWidth
     if (width < 500) {
       this.setState({
-        columnHeaders: ['client & date', 'status']
+        columnHeaders: null
       })
     } else if (width < 700) {
       this.setState({
