@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns:  25% 75%;
   align-items: flex-start;
+  overflow: hidden;
 }
 
 .ListPage--category-title-container {
@@ -22,6 +23,7 @@
 main {
   height: 100%;
   grid-column: 2 / span 1;
+  overflow: hidden;
 }
 
 @media (max-width: 1000px) {
