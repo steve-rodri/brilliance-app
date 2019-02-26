@@ -129,7 +129,7 @@ export default class Invoices extends Component {
         type="Invoices"
         category={category}
         categories={categories}
-        subtitles={columnHeaders}
+        columnHeaders={columnHeaders}
         data={invoices}
         match={match}
         history={history}
