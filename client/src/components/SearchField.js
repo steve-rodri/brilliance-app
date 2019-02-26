@@ -155,7 +155,7 @@ export default class SearchField extends Component {
           }}
           onFocus={this.handleViewResults}
           onBlur={(e) => {
-            if (!formDataValue && !hoveringResults) {
+            if (value && !formDataValue && !hoveringResults) {
               handleChange(name, '')
             }
             if (!hoveringResults) {
