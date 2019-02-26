@@ -15,28 +15,20 @@ export default class BasicInfo extends Component {
 
         <MainInfo {...this.props} />
 
-        {
-          this.props.fields && (this.props.fields.notes || this.props.fields.staff)?
           <div className="BasicInfo--staff-and-notes">
 
-            {
-              this.props.fields.notes?
-              <Notes {...this.props} />
-              :
-              null
-            }
+
+
+            <Notes {...this.props} />
 
             {
-              this.props.fields.staff?
+              this.props.fields && this.props.fields.staff?
               <Staff {...this.props} />
               :
               null
             }
 
           </div>
-          :
-          null
-        }
 
         {this.props.mobile?
           <Buttons {...this.props}/>
