@@ -6,7 +6,7 @@ import './List.css'
 
 export default class List extends Component {
   render(){
-    const {category, items, type, subtitles, load, hasMore } = this.props
+    const {items, type, subtitles, load, hasMore } = this.props
 
     const style = () => {
       if (subtitles) {

@@ -265,7 +265,7 @@ export default class Events extends Component {
       />
     )
   }
-
+  
   render(){
     const { match } = this.props
     return (
@@ -277,13 +277,3 @@ export default class Events extends Component {
     )
   }
 }
-
-// async fetchAllGoogleEvents(){
-//   const calendars = await getGoogleCalendars();
-//   const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
-//   const events = await getGoogleEvents(jobsCalendar.id)
-// }
-//
-// async mergeGoogleCalendar(){
-//   const events = await this.fetchAllGoogleEvents()
-// }
