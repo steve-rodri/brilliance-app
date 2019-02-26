@@ -298,7 +298,7 @@ export default class Clients extends Component {
         type="Clients"
         category={category}
         categories={categories}
-        subtitles={columnHeaders}
+        columnHeaders={columnHeaders}
         data={clients}
         match={match}
         history={history}
@@ -356,7 +356,7 @@ export default class Clients extends Component {
         title={clientName(client)}
         type="Events"
         category="All"
-        subtitles={['title', 'location', 'confirmation', 'scheduled']}
+        columnHeaders={['title', 'location', 'confirmation', 'scheduled']}
         data={events}
         match={match}
         history={history}

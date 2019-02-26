@@ -127,8 +127,6 @@ export default class ListPage extends Component {
             {...this.props}
             title={category}
             items={data}
-            create={this.createNew}
-            handleSelect={this.handleSelect}
           />
 
         </main>
