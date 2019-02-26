@@ -21,13 +21,15 @@ export default function Notes(props){
     return (
       <div className="BasicInfo--notes-container">
         <label>Notes</label>
-        <p className="BasicInfo--notes-readonly">
-          {fields.notes? fields.notes : ''}
-        </p>
+        <textarea
+          className="BasicInfo--notes-readonly"
+          readOnly
+          value={fields.notes? fields.notes : ''}
+        />
       </div>
     )
   } else {
     return null
   }
-  
+
 }
