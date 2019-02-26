@@ -43,6 +43,7 @@ export default class List extends Component {
         }
         <div id="List" className="List" style={styleList()}>
             <InfiniteScroll
+              style={{overflow: 'hidden'}}
               dataLength={items && items.length}
               next={load}
               hasMore={hasMore}
@@ -58,7 +59,6 @@ export default class List extends Component {
                 </div>
               }
               scrollableTarget="List"
-              key={category}
             >
               {items && items.map((item, id) => (
                 <ListItem
