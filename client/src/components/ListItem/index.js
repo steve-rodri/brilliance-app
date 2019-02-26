@@ -5,7 +5,7 @@ import Invoice from './Invoice'
 import Client from './Client'
 import moment from 'moment'
 import countdown from 'countdown'
-import './ListItem.css'
+import './index.css'
 
 countdown.setLabels(
 ' || m| hr |||||||',
@@ -110,15 +110,26 @@ export default function ListItem(props){
     switch (type) {
       case 'Events':
       const event = item;
-        if ( event && event.start && moment(event.start).isSameOrAfter(moment()) ) {
-          return {
-            gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+        if (numColumns) {
+          if ( event && event.start && moment(event.start).isSameOrAfter(moment()) ) {
+            return {
+              gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+            }
+          } else {
+            return {
+              color: 'rgba(0,0,0,.5)',
+              backgroundColor: '#999999',
+              gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+            }
           }
         } else {
-          return {
-            color: 'rgba(0,0,0,.5)',
-            backgroundColor: '#999999',
-            gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+          if ( event && event.start && moment(event.start).isSameOrAfter(moment()) ) {
+            return {}
+          } else {
+            return {
+              color: 'rgba(0,0,0,.5)',
+              backgroundColor: '#999999',
+            }
           }
         }
       case 'Schedule':

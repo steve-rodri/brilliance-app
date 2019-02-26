@@ -1,0 +1,26 @@
+.Event--confirmation {
+  height: 90%;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Event--summary {
+  align-self: start;
+  justify-self: start;
+  grid-column: 1 / span 2;
+  font-size: 20px;
+  padding: 3px;
+}
+
+.Event--time {
+  padding-right: 10px;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+}

@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-function date(fields){
+function date(fields, short){
   if (fields) {
     if (fields.start && fields.end ) {
       const startOfDay = moment(fields.start).startOf('day')
@@ -9,19 +9,37 @@ function date(fields){
 
       if (start.diff(end, 'minutes') < 1440 && end.diff(startOfDay, 'minutes') <= 1440) {
 
-        return (
-          start.format('MMMM Do')
-        )
-
-      } else {
-        if ( end.diff(startOfDay, 'minutes') % 1440 === 0 ) {
+        if (short) {
           return (
-            `${start.format('MMMM Do')} - ${end.subtract(1,'day').format('MMMM Do')}`
+            start.format('MMM Do')
           )
         } else {
           return (
-            `${start.format('MMMM Do')} - ${end.format('MMMM Do')}`
+            start.format('MMMM Do')
           )
+        }
+
+      } else {
+        if ( end.diff(startOfDay, 'minutes') % 1440 === 0 ) {
+          if (short) {
+            return (
+              `${start.format('MMM Do')} - ${end.subtract(1,'day').format('MMM Do')}`
+            )
+          } else {
+            return (
+              `${start.format('MMMM Do')} - ${end.subtract(1,'day').format('MMMM Do')}`
+            )
+          }
+        } else {
+          if (short) {
+            return (
+              `${start.format('MMM Do')} - ${end.format('MMM Do')}`
+            )
+          } else {
+            return (
+              `${start.format('MMMM Do')} - ${end.format('MMMM Do')}`
+            )
+          }
         }
       }
     }
