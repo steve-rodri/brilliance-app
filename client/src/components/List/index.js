@@ -34,7 +34,7 @@ export default class List extends Component {
     return (
       <div className="List--container">
         <div id="List" className="List" style={styleList()}>
-          {columnHeaders && type !== 'Clients'?
+          {columnHeaders?
             <div className="Titles" style={style()}>
               {columnHeaders && columnHeaders.map((header, id) => (
               <h5 key={id}>{header}</h5>
@@ -83,6 +83,10 @@ export default class List extends Component {
         return {
           color: 'white',
           gridTemplateColumns: `repeat(${numColumns}, 1fr)`
+        }
+      } else if (type === "Clients") {
+        return {
+          gridTemplateColumns: `1fr 2fr 1fr`
         }
       } else {
         return {

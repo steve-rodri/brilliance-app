@@ -49,7 +49,7 @@ export default function Header(props){
         )}}
         style={styleConfirmation(fields && fields.confirmation)}
       >
-        {fields && fields.confirmation}
+        <p>{fields && fields.confirmation}</p>
       </div>
     )
   }
@@ -128,8 +128,8 @@ export default function Header(props){
   return (
     <div className="BasicInfo--header">
       {displaySummary()}
+      {displayConfirmation()}
       <div className="BasicInfo--header-right">
-        {displayConfirmation()}
         {displayButtons()}
       </div>
     </div>

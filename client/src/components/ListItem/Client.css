@@ -21,6 +21,7 @@
   }
 
   .Client--balance {
+    justify-self: center;
     grid-column: auto;
     grid-row: auto;
   }
