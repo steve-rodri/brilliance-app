@@ -1,0 +1,27 @@
+.Client--name {
+  grid-column: 1 / span 3;
+  grid-row: 2 / span 1;
+}
+
+.Client--event {
+  justify-self: end;
+}
+
+.Client--balance {
+  justify-self: right;
+  padding: 0 5px;
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 1;
+}
+
+@media (min-width: 500px) {
+  .Client--name {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .Client--balance {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
