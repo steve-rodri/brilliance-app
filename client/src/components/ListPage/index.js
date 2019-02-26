@@ -57,12 +57,10 @@ export default class ListPage extends Component {
   render(){
     const {
       title,
-      subtitles,
       type,
       category,
       categories,
       data,
-      hasMore,
       match,
       refresh
     } = this.props

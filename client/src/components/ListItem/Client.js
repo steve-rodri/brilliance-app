@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 
 export default function Client(props) {
-  const { item, type, numColumns, displayColumn, styleItem, styleSummary } = props
+  const { item, type, numColumns, displayColumn, styleItem } = props
   const client = item.contactInfo
   const company = item.company
 
