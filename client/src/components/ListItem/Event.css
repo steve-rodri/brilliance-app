@@ -1,5 +1,5 @@
 .Event--confirmation {
-  height: 90%;
+  height: 95%;
   width: 95%;
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@
   justify-self: start;
   grid-column: 1 / span 2;
   font-size: 20px;
-  padding: 3px;
+  padding: 2px;
 }
 
 .Event--time {
