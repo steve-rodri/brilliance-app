@@ -25,19 +25,19 @@ export default class Events extends Component {
     const width = window.innerWidth
     if (width < 500) {
       this.setState({
-        columnHeaders: ['title']
+        columnHeaders: null
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['title', 'confirmation', 'scheduled']
+        columnHeaders: ['title', 'scheduled', 'confirmation']
       })
     } else if (width < 900) {
       this.setState({
-        columnHeaders: ['title', 'client', 'confirmation', 'scheduled']
+        columnHeaders: ['title', 'client', 'scheduled', 'confirmation']
       })
     } else {
       this.setState({
-        columnHeaders: ['title', 'client', 'location', 'confirmation', 'scheduled']
+        columnHeaders: ['title', 'client', 'location', 'scheduled', 'confirmation']
       })
     }
   }
@@ -220,7 +220,7 @@ export default class Events extends Component {
         type="Events"
         category={category}
         categories={categories}
-        subtitles={columnHeaders}
+        columnHeaders={columnHeaders}
         data={events}
         match={match}
         history={history}
@@ -265,7 +265,7 @@ export default class Events extends Component {
       />
     )
   }
-  
+
   render(){
     const { match } = this.props
     return (

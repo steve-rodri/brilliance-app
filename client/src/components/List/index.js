@@ -5,12 +5,13 @@ import './List.css'
 
 
 export default class List extends Component {
+
   render(){
-    const {items, type, subtitles, load, hasMore } = this.props
+    const {items, type, columnHeaders, load, hasMore } = this.props
 
     const style = () => {
-      if (subtitles) {
-        return styleColumns(subtitles.length)
+      if (columnHeaders) {
+        return styleColumns(columnHeaders.length)
       } else {
         return {}
       }
@@ -32,16 +33,16 @@ export default class List extends Component {
 
     return (
       <div className="List--container">
-        {type !== 'Clients'?
-          <div className="Titles" style={style()}>
-            {subtitles && subtitles.map((subtitle, id) => (
-            <h5 key={id}>{subtitle}</h5>
-            ))}
-          </div>
-          :
-          null
-        }
         <div id="List" className="List" style={styleList()}>
+          {columnHeaders && type !== 'Clients'?
+            <div className="Titles" style={style()}>
+              {columnHeaders && columnHeaders.map((header, id) => (
+              <h5 key={id}>{header}</h5>
+              ))}
+            </div>
+            :
+            null
+          }
             <InfiniteScroll
               style={{overflow: 'hidden'}}
               dataLength={items && items.length}
@@ -68,7 +69,7 @@ export default class List extends Component {
                   type={this.props.type}
                   handleStatusChange={this.props.handleStatusChange}
                   displayColumn={displayColumn}
-                  numColumns={subtitles && subtitles.length}
+                  numColumns={columnHeaders && columnHeaders.length}
                   styleColumns={this.styleColumns}
                 />
               ))}
@@ -91,12 +92,14 @@ export default class List extends Component {
     }
 
     function displayColumn(headerName){
-      if ( subtitles.find( header => header === headerName ) ) {
-        return {}
-      } else {
-        return {
-          display: 'none'
+      if (columnHeaders) {
+        if ( columnHeaders.find( header => header === headerName ) ) {
+          return {}
+        } else {
+          return { display: 'none' }
         }
+      } else {
+        return { display: 'none' }
       }
     }
   }
