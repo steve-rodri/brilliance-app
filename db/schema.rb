@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_040701) do
+ActiveRecord::Schema.define(version: 2019_02_25_155953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(version: 2019_02_24_040701) do
     t.bigint "client_id"
     t.integer "location_id"
     t.integer "call_location_id"
-    t.integer "organizer"
     t.integer "creator"
     t.index ["client_id"], name: "index_events_on_client_id"
   end
@@ -126,8 +125,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_040701) do
   add_foreign_key "email_addresses", "companies"
   add_foreign_key "email_addresses", "contacts"
   add_foreign_key "events", "clients"
-  add_foreign_key "events", "email_addresses", column: "creator"
-  add_foreign_key "events", "email_addresses", column: "organizer"
+  add_foreign_key "events", "contacts", column: "creator"
   add_foreign_key "events", "places", column: "call_location_id"
   add_foreign_key "events", "places", column: "location_id"
   add_foreign_key "invoices", "events"

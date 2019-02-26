@@ -4,6 +4,5 @@ class EventSerializer < ActiveModel::Serializer
   has_one :invoice, serializer: NestedInvoiceSerializer
   has_one :place_location, serializer: NestedPlaceLocationSerializer
   has_one :place_call_location, serializer: NestedPlaceCallLocationSerializer
-  has_one :organizer, serializer: NestedEmailAddressSerializer
-  has_one :creator, serializer: NestedEmailAddressSerializer
+  has_one :creator, serializer: ContactSerializer
 end
