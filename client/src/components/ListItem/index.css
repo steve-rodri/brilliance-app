@@ -3,7 +3,7 @@
   height: 85px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, auto);
+  grid-template-rows: repeat(3, 1fr);
   justify-items: center;
   align-items: center;
   border-bottom: 1px solid #eeeeee;
@@ -15,6 +15,7 @@
   .List-Item {
    grid-template-rows: auto;
    background-color: var(--light-gray);
+   color: black;
   }
 }
 
