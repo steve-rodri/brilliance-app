@@ -102,7 +102,7 @@ export default class EventDetail extends Component {
   findPlaces = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const locations = await place.find(1, query)
+      const locations = await place.find(query)
       return locations
     }
   }
@@ -113,6 +113,7 @@ export default class EventDetail extends Component {
       if (evt.client) {
         const name = clientName(evt.client, true)
         this.setField('client', name)
+        this.setFormData('client_id', evt.client.id)
       } else {
         this.setField('client', null)
       }
@@ -130,10 +131,14 @@ export default class EventDetail extends Component {
               ...prevState.fields,
               location,
               onPremise: evt.placeLocation.installation
+            },
+            formData: {
+              location_id: evt.placeLocation.id
             }
           }))
         } else {
           this.setField('location', location)
+          this.setFormData('location_id', evt.client.id)
         }
       }
     }
@@ -157,6 +162,15 @@ export default class EventDetail extends Component {
       }
     })
   )}
+
+  setFormData = (name, value) => {
+    this.setState(prevState => ({
+      formData: {
+        ...prevState.formData,
+        [name]: value
+      }
+    }))
+  }
 
   handleDelete = async() => {
     const { evt } = this.state
@@ -317,35 +331,63 @@ export default class EventDetail extends Component {
   }
 
   handleDateChange = (field, datetime) => {
-    const dt = moment(datetime).format()
+    let start;
+    let end;
+    console.log('works')
     switch (field) {
-
       case 'start':
-        this.setState(prevState => ({
-          fields: {
-            ...prevState.fields,
-            [field]: dt,
-            end: dt
-          },
-          formData: {
-            ...prevState.formData,
-            [field]: dt,
-            end: dt
-          }
-        }))
+        start = moment(datetime).format()
+        end = moment(this.state.fields.end)
+
+        if (end.isSameOrBefore(start) || !this.state.fields.end) {
+
+          end = moment(start).add(1, 'hour').format()
+
+          this.setState(prevState => ({
+            fields: {
+              ...prevState.fields,
+              start: start,
+              end: end
+            },
+            formData: {
+              ...prevState.formData,
+              start: start,
+              end: end
+            }
+          }))
+
+        } else {
+
+          this.setState(prevState => ({
+            fields: {
+              ...prevState.fields,
+              start: start.format()
+            },
+            formData: {
+              ...prevState.formData,
+              start: start.format()
+            }
+          }))
+
+        }
       break;
 
       case 'end':
-        this.setState(prevState => ({
-          fields: {
-            ...prevState.fields,
-            [field]: dt
-          },
-          formData: {
-            ...prevState.formData,
-            [field]: dt
-          }
-        }))
+        end = moment(datetime);
+        start = moment(this.state.fields.start)
+
+        if (end.isAfter(start)) {
+          this.setState(prevState => ({
+            fields: {
+              ...prevState.fields,
+              end: end.format()
+            },
+            formData: {
+              ...prevState.formData,
+              end: end.format()
+            }
+          }))
+        }
       break;
 
       default:
@@ -397,6 +439,8 @@ export default class EventDetail extends Component {
         this.switchEditMode()
       }
 
+    } else {
+      this.close()
     }
   }
 
