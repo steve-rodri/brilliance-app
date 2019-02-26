@@ -39,27 +39,34 @@ class ContactsController < ApplicationController
   end
 
   def find
-    terms = params[:q].split
+    if params[:q]
+      terms = params[:q].split
 
-    if terms.length > 1
+      if terms.length > 1
 
-      contact_query = "
-      clients.id IS NULL
-      AND first_name
-      LIKE '%#{terms[0].capitalize}%'
-      AND last_name
-      LIKE '%#{terms[1].capitalize}%'"
-    else
-      contact_query = "
-      clients.id IS NULL
-      AND first_name
-      LIKE '%#{terms[0].capitalize}%'"
+        contact_query = "
+        clients.id IS NULL
+        AND first_name
+        LIKE '%#{terms[0].capitalize}%'
+        AND last_name
+        LIKE '%#{terms[1].capitalize}%'"
+      else
+        contact_query = "
+        clients.id IS NULL
+        AND first_name
+        LIKE '%#{terms[0].capitalize}%'"
+      end
+
+      #contacts found based on query
+      @contacts = Contact.left_outer_joins(:client).where(contact_query)
+
+      render json: @contacts
     end
 
-    #contacts found based on query
-    @contacts = Contact.left_outer_joins(:client).where(contact_query)
-
-    render json: @contacts
+    if params[:email]
+      @contact = Contact.left_outer_joins(:email_address).where("email_addresses.email_address = '#{params[:email]}'").first_or_create
+      render json: @contact
+    end
   end
 
   private
