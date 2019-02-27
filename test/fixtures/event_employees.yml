@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  confirmation: MyString
+  paid?: false
+  position: MyString
+  rate_override: 1.5
+  clock_in: 2019-02-27
+  clock_out: 2019-02-27
+  break(minutes): 1
+  break?: false
+  hourly?: false
+  employee: one
+  event: one
+
+two:
+  confirmation: MyString
+  paid?: false
+  position: MyString
+  rate_override: 1.5
+  clock_in: 2019-02-27
+  clock_out: 2019-02-27
+  break(minutes): 1
+  break?: false
+  hourly?: false
+  employee: two
+  event: two
