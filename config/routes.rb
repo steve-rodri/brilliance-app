@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :event_employees
   scope '/api' do
     resources :addresses
     resources :clients do
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
     resources :places do
       get 'find', on: :collection, to: 'places#find'
     end
+    resources :employees
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

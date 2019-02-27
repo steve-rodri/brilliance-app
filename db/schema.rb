@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_25_155953) do
+ActiveRecord::Schema.define(version: 2019_02_27_170306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,40 @@ ActiveRecord::Schema.define(version: 2019_02_25_155953) do
     t.bigint "company_id"
     t.index ["company_id"], name: "index_email_addresses_on_company_id"
     t.index ["contact_id"], name: "index_email_addresses_on_contact_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.boolean "active?"
+    t.boolean "labor?"
+    t.float "rate_hand_per_job"
+    t.float "rate_full_job"
+    t.float "rate_on_premise_one_man"
+    t.float "rate_on_premise"
+    t.float "rate_hourly"
+    t.float "rate_hourly_office_shop"
+    t.float "rate_demo"
+    t.bigint "contact_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_employees_on_contact_id"
+  end
+
+  create_table "event_employees", force: :cascade do |t|
+    t.string "confirmation"
+    t.boolean "paid?"
+    t.string "position"
+    t.float "rate"
+    t.date "clock_in"
+    t.date "clock_out"
+    t.integer "break_minutes"
+    t.boolean "break?"
+    t.boolean "hourly?"
+    t.bigint "employee_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_event_employees_on_employee_id"
+    t.index ["event_id"], name: "index_event_employees_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -124,6 +158,9 @@ ActiveRecord::Schema.define(version: 2019_02_25_155953) do
   add_foreign_key "clients", "contacts"
   add_foreign_key "email_addresses", "companies"
   add_foreign_key "email_addresses", "contacts"
+  add_foreign_key "employees", "contacts"
+  add_foreign_key "event_employees", "employees"
+  add_foreign_key "event_employees", "events"
   add_foreign_key "events", "clients"
   add_foreign_key "events", "contacts", column: "creator"
   add_foreign_key "events", "places", column: "call_location_id"
