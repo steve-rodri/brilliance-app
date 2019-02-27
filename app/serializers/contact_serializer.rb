@@ -8,7 +8,7 @@ class ContactSerializer < ActiveModel::Serializer
   :phone_number,
   :work_email
 
-  has_many :email_address, key: 'email_addresses'
+  has_many :email_address, key: 'email_addresses', serializer: NestedEmailAddressSerializer
 
   def full_name
     if object.first_name
