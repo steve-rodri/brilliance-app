@@ -4,6 +4,7 @@ class Event < ApplicationRecord
   belongs_to :place_location, class_name: 'Place', foreign_key: 'location_id', optional: true
   belongs_to :place_call_location, class_name: 'Place', foreign_key: 'call_location_id', optional: true
   belongs_to :creator, class_name: 'Contact', foreign_key: 'creator', optional: true
-  has_many :event_employees
+  has_many :event_employees, dependent: :destroy
   has_many :employees, through: :event_employees
+  accepts_nested_attributes_for  :event_employees
 end
