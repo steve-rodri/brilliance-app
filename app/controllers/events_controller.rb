@@ -79,39 +79,14 @@ class EventsController < ApplicationController
   end
 
   # PATCH/PUT /events/
-  def bulk_update
-    render json: {msg: "batch update"}
-    # updateEvents = @event.import[event_params], on_duplicate_key_update: {
-    #   conflict_target: [:gc_id],
-    #   columns: [
-    #     :action,
-    #     :break,
-    #     :break_start,
-    #     :call_time,
-    #     :clock_out,
-    #     :confirmation,
-    #     :creator,
-    #     :description,
-    #     :driving_time,
-    #     :end,
-    #     :gc_id,
-    #     :html_link,
-    #     :id,
-    #     :kind,
-    #     :notes,
-    #     :start,
-    #     :summary,
-    #     :tags
-    #   ]
-    # }
-    # if updateEvents.results
-    #   render json: {@event.failed_instances}
-    # end
-    # else
-    #   render json: @event.errors, status: :unprocessable_entity
-    #end
+  def sync
+    @event = Event.where(:i_cal_UID => params[:i_cal_UID]).first_or_create(event_params)
 
+    if @event
+      @event.update(event_params)
+    end
 
+    render json: {msg: 'synced'}
   end
 
   # DELETE /events/1
@@ -148,7 +123,6 @@ class EventsController < ApplicationController
          OR places.name LIKE '%#{term.capitalize}%'
          OR places.short_name LIKE '%#{term}%'
          OR places.short_name LIKE '%#{term.upcase}%'"
-
       )
       .order(start: :desc)
       .paginate(page: params[:page], per_page: @@items_per_page)
@@ -167,7 +141,6 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(
         :action,
-        :attendees,
         :break,
         :break_start,
         :category,
@@ -176,15 +149,18 @@ class EventsController < ApplicationController
         :client_id,
         :clock_out,
         :confirmation,
-        :created,
+        :created_at,
         :creator,
         :description,
         :driving_time,
+        :employee_id,
+        :employees,
         :end,
         :etag,
         :extendedProperties,
         :gc_id,
         :html_link,
+        :i_cal_UID,
         :id,
         :kind,
         :location_id,
@@ -196,7 +172,22 @@ class EventsController < ApplicationController
         :status,
         :summary,
         :tags,
-        :updated
+        :updated_at,
+        event_employees_attributes:
+        [
+          :id,
+          :confirmation,
+          :paid?,
+          :position,
+          :rate,
+          :clock_in,
+          :clock_out,
+          :break_minutes,
+          :break?,
+          :hourly?,
+          :employee_id,
+          :event_id
+        ]
       )
     end
 end
