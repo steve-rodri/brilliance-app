@@ -1,6 +1,17 @@
 class EmployeeSerializer < ActiveModel::Serializer
-  attributes :id, :active?, :labor?, :rate_hand_per_job, :rate_full_job, :rate_on_premise_one_man, :rate_on_premise, :rate_hourly, :rate_hourly_office_shop, :rate_demo
+  attributes :id, :active?, :labor?, :rates
   has_one :contact
-  has_many :event_employees
-  has_many :events, through: :event_employees
+
+  def rates
+    {
+      hand_per_job: object.rate_hand_per_job,
+      full_job: object.rate_full_job,
+      on_premise_one_man: object.rate_on_premise_one_man,
+      on_premise: object.rate_on_premise,
+      hourly: object.rate_hourly,
+      hourly_office_shop: object.rate_hourly_office_shop,
+      demo: object.rate_demo
+    }
+  end
+
 end
