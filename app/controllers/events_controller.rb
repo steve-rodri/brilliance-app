@@ -80,13 +80,30 @@ class EventsController < ApplicationController
 
   # PATCH/PUT /events/
   def sync
-    @event = Event.where(:i_cal_UID => params[:i_cal_UID]).first_or_create(event_params)
 
+    event_only_params = event_params.except(:event_employees_attributes)
+    event_employees_params = event_params.slice(:event_employees_attributes)
+    employee_params = [ event_employees_params[:event_employees_attributes] ]
+
+    @event = Event.where(:i_cal_UID => params[:i_cal_UID]).first_or_create(event_params)
     if @event
-      @event.update(event_params)
+      @event.update(event_only_params)
+      if @event.event_employees
+        employee_params.each do |p|
+          if p
+            if p[0]
+              worker = @event.event_employees.where( employee_id: p[0][:employee_id] ).first_or_create
+              if worker
+                worker.update(p[0])
+              end
+            end
+          end
+        end
+      end
     end
 
     render json: {msg: 'synced'}
+
   end
 
   # DELETE /events/1
@@ -173,6 +190,7 @@ class EventsController < ApplicationController
         :summary,
         :tags,
         :updated_at,
+        employee_ids: [],
         event_employees_attributes:
         [
           :id,
