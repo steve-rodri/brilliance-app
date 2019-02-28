@@ -333,7 +333,6 @@ export default class EventDetail extends Component {
   handleDateChange = (field, datetime) => {
     let start;
     let end;
-    console.log('works')
     switch (field) {
       case 'start':
         start = moment(datetime).format()

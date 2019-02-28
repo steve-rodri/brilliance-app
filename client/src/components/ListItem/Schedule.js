@@ -37,10 +37,7 @@ export default function Schedule(props){
 
         <p style={displayColumn('notes')} className="List-Item--description">{item && item.description}</p>
 
-        <div
-          style={displayColumn('confirmation')}
-
-        >
+        <div style={displayColumn('confirmation')}>
           {status()}
         </div>
 
