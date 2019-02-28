@@ -3,7 +3,16 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   def index
-    @employees = Employee.all
+
+    if params[:email]
+      @employees = Employee
+        .joins(contact: :email_address)
+        .where("email_address = #{params[:email]}")
+        .first
+    else
+      @employees = Employee.all
+
+    end
 
     render json: @employees
   end
@@ -46,6 +55,6 @@ class EmployeesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def employee_params
-      params.require(:employee).permit(:active?, :labor?, :rate_hand_per_job, :rate_full_job, :rate_on_premise_one_man, :rate_on_premise, :rate_hourly, :rate_hourly_office_shop, :rate_demo, :contact_id)
+      params.require(:employee).permit(:active?, :labor?, :rate_hand_per_job, :rate_full_job, :rate_on_premise_one_man, :rate_on_premise, :rate_hourly, :rate_hourly_office_shop, :rate_demo, :email, :contact_id)
     end
 end
