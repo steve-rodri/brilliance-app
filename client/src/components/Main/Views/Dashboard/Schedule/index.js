@@ -9,7 +9,7 @@ export default class Schedule extends Component {
   constructor(props){
     super(props)
     this.state = {
-      userEvents: [],
+      userEvents: null,
       redirectToLogin: false
     }
   }
@@ -52,7 +52,7 @@ export default class Schedule extends Component {
         const userEvents = events.filter(
           event =>
           event.attendees?
-          event.attendees.find(attendee => (attendee.email = user.email))
+          event.attendees.find(attendee => (attendee.email === user.email))
           : null
         )
         return userEvents
@@ -85,13 +85,13 @@ export default class Schedule extends Component {
           <div className="Schedule--container">
             <div className='Schedule--dialog'>
               <p>{schedule(userEvents)}</p>
-              <p>Please confirm if you will be able to work by clicking/tapping on the confirmation button </p>
+              <p>Please confirm if you will be able to work by clicking/tapping on the confirmation button</p>
             </div>
             <List
               user={this.props.user}
               type="Schedule"
               items={userEvents}
-              subtitles={columnHeaders}
+              columnHeaders={columnHeaders}
               load={this.findUpcomingUserEvents}
               hasMore={false}
             />

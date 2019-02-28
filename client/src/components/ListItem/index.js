@@ -134,7 +134,6 @@ export default function ListItem(props){
         }
       case 'Schedule':
         return {
-          backgroundColor: '#eeeeee',
           gridTemplateColumns: `repeat(${numColumns}, 1fr)`
         }
       default:
