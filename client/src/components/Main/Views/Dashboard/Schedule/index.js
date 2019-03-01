@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
 import List from '../../../../List/index.js'
 import { GOOGLE } from '../../../../../services/google_service'
+import { event } from '../../../../../services/event'
+import { start, end } from '../../../../Helpers/datetime'
 import moment from 'moment'
 import './Schedule.css'
 
@@ -34,7 +36,14 @@ export default class Schedule extends Component {
   async componentDidMount(){
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
-    await this.findUpcomingUserEvents()
+    this.setState(
+    {
+      page: 1
+    },
+      async () => {
+      await this.resetUserEvents()
+      await this.findUpcomingUserEvents()
+    })
   }
 
   async componentWillUnmount(){
@@ -42,7 +51,7 @@ export default class Schedule extends Component {
     this.setState({ userEvents: null })
   }
 
-  findAllUserEvents = async() => {
+  findAllUserEventsFromGoogle = async() => {
     const user = this.props.user
     if (user) {
       const calendars = await GOOGLE.getCalendars();
@@ -62,17 +71,49 @@ export default class Schedule extends Component {
     }
   }
 
+  findAllUserEvents = async() => {
+    const { page } = this.state
+    const { user } = this.props
+    if (user) {
+      const events = await event.findByEmail(page, user.email)
+      return events
+    }
+  }
+
   findUpcomingUserEvents = async() => {
     const userEvents = await this.findAllUserEvents();
     if (userEvents) {
-      const upcomingEvents = userEvents.filter(function(event){
-        const now = moment().format()
-        return ( moment(start(event)).isSameOrAfter(now) || moment(now).isSameOrBefore(end(event)) )
+      const upcomingEvents = userEvents.filter( evt => {
+        const now = moment()
+        return (
+          start(evt)
+          &&
+          (
+            moment(start(evt)).isSameOrAfter(now)
+            ||
+            moment(now).isSameOrBefore(end(evt))
+          )
+        )
       })
       if (upcomingEvents.length > 0) {
         this.setState({ userEvents: upcomingEvents })
       }
+      this.incrementPage()
     }
+  }
+
+  resetUserEvents = () => {
+    this.setState({ userEvents: null })
+  }
+
+  resetPage = () => {
+    this.setState({ page: 1 })
+  }
+
+  incrementPage = () => {
+    this.setState(prevState => ({
+      page: prevState.page +1
+    }))
   }
 
   render(){
@@ -94,6 +135,7 @@ export default class Schedule extends Component {
               columnHeaders={columnHeaders}
               load={this.findUpcomingUserEvents}
               hasMore={false}
+              match={this.props.match}
             />
           </div>
           :
@@ -114,28 +156,4 @@ function schedule(userEvents) {
 
 function numEventsGreaterThanOne(userEvents){
   return userEvents.length > 1
-}
-
-function start(event) {
-  if (event) {
-    if (event.start) {
-      if (event.start.date) {
-        return event.start.date
-      } else if (event.start.dateTime) {
-        return event.start.dateTime
-      }
-    }
-  }
-}
-
-function end(event) {
-  if (event) {
-    if (event.end) {
-      if (event.end.date) {
-        return event.end.date
-      } else if (event.end.dateTime) {
-        return event.end.dateTime
-      }
-    }
-  }
 }
