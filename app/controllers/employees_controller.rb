@@ -9,9 +9,18 @@ class EmployeesController < ApplicationController
         .joins(contact: :email_address)
         .where("email_address = #{params[:email]}")
         .first
+    elsif params[:q]
+      query = params[:q]
+      @employees = Employee
+        .joins(:contact, contact: :email_address)
+        .where(
+          "contacts.first_name LIKE '%#{query}%' OR
+           contacts.last_name LIKE '%#{query}%' OR
+           email_addresses.email_address LIKE '%#{query}%'
+          "
+        )
     else
       @employees = Employee.all
-
     end
 
     render json: @employees

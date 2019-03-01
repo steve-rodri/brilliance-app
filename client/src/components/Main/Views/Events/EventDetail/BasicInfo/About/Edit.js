@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
-import Datetime from 'react-datetime'
 import SearchField from '../../../../../../SearchField'
-import moment from 'moment'
 import { clientName } from '../../../../../../Helpers/clientHelpers'
 import { locationName } from '../../../../../../Helpers/locationName'
-import './react-datetime.css'
-import './Edit.css'
 
 export default class Edit extends Component {
   render(){
     const { fields, searchFieldData } = this.props
     return (
-      <div className="MainInfo">
+      <div className="About">
 
         <label>Client</label>
 
@@ -23,7 +19,7 @@ export default class Edit extends Component {
             formDataValue={this.props.formData && this.props.formData.client_id}
             formatResult={clientName}
             input={{
-              className:'Edit--input',
+              className:'Input',
               placeholder:'search clients...',
               name: 'client',
               value: fields.client? fields.client : '',
@@ -44,7 +40,7 @@ export default class Edit extends Component {
             formDataValue={this.props.formData && this.props.formData.location_id}
             formatResult={locationName}
             input={{
-              className:'Edit--input',
+              className:'Input',
               placeholder:'search locations...',
               name: 'location',
               value: fields.location? fields.location : '',
@@ -55,43 +51,11 @@ export default class Edit extends Component {
             onSelect={this.props.onSelect}
           />
 
-        <label>Start</label>
-
-          <div className="Edit--field datetime">
-            <Datetime
-              className="Edit--date-input-container"
-              inputProps={{ className: "Edit--input", tabIndex: "3"}}
-              value={fields.start? moment(fields.start) : ''}
-              viewDate={fields.start? moment(fields.start) : ''}
-              timeConstraints={{ minutes:{ step: 5 } }}
-              onChange={(datetime) => this.props.handleDateChange('start', datetime)}
-              closeOnSelect={false}
-              closeOnTab={true}
-            />
-          </div>
-
-        <label>End</label>
-
-          <div className="Edit--field datetime">
-            <Datetime
-              className="Edit--date-input-container"
-              inputProps={{ className:"Edit--input", tabIndex:"4" }}
-              value={fields.end? moment(fields.end) : ''}
-              viewDate={fields.start? moment(fields.start) : fields.end? moment(fields.end): ''}
-              viewMode={'time'}
-              timeConstraints={{ minutes:{ step: 5 } }}
-              isValidDate={(current) => current.isSameOrAfter(moment(fields.start), 'day')}
-              onChange={(datetime) => this.props.handleDateChange('end', datetime)}
-              closeOnSelect={true}
-              closeOnTab={true}
-            />
-          </div>
-
-        <label>Type/Action</label>
+        <label>Action</label>
 
           <div className="Edit--field">
             <input
-              className="Edit--input"
+              className="Input"
               type="text"
               name='action'
               value={fields.action? fields.action : ''}
@@ -104,7 +68,7 @@ export default class Edit extends Component {
 
           <div className="Edit--field">
             <input
-              className="Edit--input"
+              className="Input"
               type="text"
               name='kind'
               value={fields.kind? fields.kind : ''}
@@ -113,24 +77,11 @@ export default class Edit extends Component {
             />
           </div>
 
-        <label>Description</label>
-
-          <div className="Edit--field">
-            <input
-              className="Edit--input"
-              type="text"
-              name= 'description'
-              value={fields.description? fields.description : ''}
-              onChange={this.props.handleChange}
-              tabIndex="7"
-            />
-          </div>
-
         <label>Package</label>
 
           <div className="Edit--field">
             <input
-              className="Edit--input"
+              className="Input"
               type="text"
               name='package'
               value={fields.package? fields.package : ''}

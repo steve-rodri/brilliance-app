@@ -4,15 +4,8 @@ import Event from './Event'
 import Invoice from './Invoice'
 import Client from './Client'
 import moment from 'moment'
-import countdown from 'countdown'
-import { start, end } from '../Helpers/datetime'
+import { start, end, timeUntil } from '../Helpers/datetime'
 import './index.css'
-
-countdown.setLabels(
-' || m| hr |||||||',
-' || m| hrs |||||||',
-', '
-)
 
 export default function ListItem(props){
   const { item, type } = props
@@ -23,7 +16,7 @@ export default function ListItem(props){
           {...props}
           start={start()}
           end={end()}
-          timeUntil={timeUntil()}
+          timeUntil={timeUntil(item)}
           styleItem={styleItem}
         />
       )
@@ -53,31 +46,6 @@ export default function ListItem(props){
         />
       )
     default:
-  }
-
-  function timeUntil(){
-    const now = moment();
-    const eStart = moment(start(item));
-    const eEnd = moment(end(item));
-    const inProgress = now.isSameOrAfter(eStart) && now.isSameOrBefore(eEnd)
-    const fromStart = countdown(eStart, now, countdown.HOURS|countdown.MINUTES, 2).toString();
-    const fromEnd = countdown(now, eEnd, countdown.HOURS | countdown.MINUTES, 2).toString();
-
-    function trim(duration){
-      return duration.split(',').map(str => str.replace(/\s/g,'')).join(' ')
-    }
-
-    if ( inProgress ) {
-      return (
-        <div>
-          <h4 style={{color: 'darkred'}}>IN PROGRESS</h4>
-          <p style={{textAlign: 'left'}}>started <span style={{fontWeight:'bold'}}>{trim(fromStart)}</span> ago</p>
-          <p style={{textAlign: 'left'}}>ends in <span style={{fontWeight:'bold'}}>{trim(fromEnd)}</span></p>
-        </div>
-      )
-    } else {
-      return moment(start(item)).fromNow()
-    }
   }
 
   function styleItem(item, type, numColumns){
