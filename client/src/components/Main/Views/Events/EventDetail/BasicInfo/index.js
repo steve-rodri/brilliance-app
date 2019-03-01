@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Header from './Header'
+import Header from './Header/index.js'
 import MainInfo from './MainInfo/index.js'
 import Notes from './Notes/index.js'
 import Staff from './Staff/index.js'
@@ -17,16 +17,9 @@ export default class BasicInfo extends Component {
 
           <div className="BasicInfo--staff-and-notes">
 
-
-
             <Notes {...this.props} />
 
-            {
-              this.props.fields && this.props.fields.staff?
-              <Staff {...this.props} />
-              :
-              null
-            }
+            <Staff {...this.props} />
 
           </div>
 
