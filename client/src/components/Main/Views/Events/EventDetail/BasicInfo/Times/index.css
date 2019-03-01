@@ -1,0 +1,24 @@
+.Times--container {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.Times {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+  color: #eeeeee;
+}
+
+@media (min-width: 750px) {
+  .Times {
+    padding: 0 30px 30px 30px;
+    color: inherit;
+  }
+}

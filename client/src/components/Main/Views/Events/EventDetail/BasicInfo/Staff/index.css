@@ -1,0 +1,44 @@
+.Staff--container {
+  height: 100%;
+  width: 100%;
+  padding: 0 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Staff {
+  width: 100%;
+}
+
+.Staff--worker {
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px;
+  background-color: #eeeeee;
+  border-radius: 5px;
+}
+
+.Staff--worker-head, .Staff--worker-name {
+  text-align: left;
+}
+
+.Staff--icon, .Staff--icon-head {
+  padding: 0px;
+}
+
+
+@media (min-width: 750px) {
+  .Staff--container {
+    padding: 0 30px 30px 30px;
+  }
+
+  .Staff--worker {
+    background-color: inherit;
+  }
+
+  .Staff--worker-name {
+    font-size: 25px;
+  }
+}

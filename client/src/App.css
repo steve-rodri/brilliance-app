@@ -27,7 +27,7 @@ h1 {
   font-weight: 400;
 }
 
-button:hover {
+button:hover, .Icon:hover {
   cursor: pointer
 }
 
@@ -35,10 +35,18 @@ button:active, button:focus {
   outline: none;
 }
 
+
 label {
-  text-align: left;
+  width: 100%;
+  padding: 5px 0;
+  font-size: 16px;
   font-weight: bold;
-  padding: 10px 0;
+  text-align: left;
+  color: var(--turquoise);
+}
+
+th, td {
+  padding: 15px;
 }
 
 .client {

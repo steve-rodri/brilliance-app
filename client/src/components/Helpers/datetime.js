@@ -1,4 +1,11 @@
+import React from 'react'
 import moment from 'moment'
+import countdown from 'countdown'
+countdown.setLabels(
+' || m| hr |||||||',
+' || m| hrs |||||||',
+', '
+)
 
 function date(fields, short){
   if (fields) {
@@ -66,6 +73,36 @@ function time(fields){
   }
 }
 
+function duration(start, end, unit){
+  const time = countdown(start, end, countdown.HOURS|countdown.MINUTES, 2).toString();
+  return time.split(',').map(str => str.replace(/\s/g,'')).join(' ')
+}
+
+function timeUntil(item){
+  const now = moment();
+  const eStart = moment(start(item));
+  const eEnd = moment(end(item));
+  const inProgress = now.isSameOrAfter(eStart) && now.isSameOrBefore(eEnd)
+  const fromStart = countdown(eStart, now, countdown.HOURS|countdown.MINUTES, 2).toString();
+  const fromEnd = countdown(now, eEnd, countdown.HOURS | countdown.MINUTES, 2).toString();
+
+  function trim(duration){
+    return duration.split(',').map(str => str.replace(/\s/g,'')).join(' ')
+  }
+
+  if ( inProgress ) {
+    return (
+      <div>
+        <h4 style={{color: 'darkred'}}>IN PROGRESS</h4>
+        <p style={{textAlign: 'left'}}>started <span style={{fontWeight:'bold'}}>{trim(fromStart)}</span> ago</p>
+        <p style={{textAlign: 'left'}}>ends in <span style={{fontWeight:'bold'}}>{trim(fromEnd)}</span></p>
+      </div>
+    )
+  } else {
+    return moment(start(item)).fromNow()
+  }
+}
+
 function start(item) {
   if (item) {
     if (item.start) {
@@ -97,6 +134,8 @@ function end(item) {
 export {
   date,
   time,
+  duration,
+  timeUntil,
   start,
   end
 }

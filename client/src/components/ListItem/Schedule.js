@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { statusIcon } from '../Helpers/eventConfirmation'
+import { statusIcon } from '../Helpers/icons'
 import moment from 'moment'
 
 export default function Schedule(props){

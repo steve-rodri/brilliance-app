@@ -1,45 +1,172 @@
 .BasicInfo--container {
   display: grid;
-  grid-template-rows: 90px 1fr 1fr auto;
+  grid-template-rows: 100px auto 125px;
   align-items: start;
   justify-items: center;
-  width: 100%;
   height: calc(100vh - 150px);
+  width: 100%;
   background-color: var(--dark-gray);
   overflow: auto;
 }
 
+.BasicInfo--components {
+  display: grid;
+  grid-gap: 2px;
+  width: 100%;
+}
+
+.BasicInfo--component {
+  display: grid;
+  grid-template-rows: auto;
+  align-items: center;
+  justify-items: center;
+  width: auto;
+  background-color: var(--dark-gray);
+}
+
+.BasicInfo--component-title {
+  display: none;
+}
+
+label {
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 0;
+  color: var(--turquoise);
+}
+
 @media (min-width: 750px) {
   .BasicInfo--container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: calc(100vh - 100px);
+    grid-template-rows: 150px auto 150px;
+    height: calc(100vh - 140px);
     min-height: 600px;
     background-color: inherit;
+    margin: 5px 20px 0 20px;
+  }
+
+  .BasicInfo--component {
+    width: auto;
+    min-height: 300px;
+    grid-template-rows: 30px auto;
+    background-color: var(--light-blue-t);
+    border: 1px dashed var(--light-blue);
+    border-radius: 10px;
+  }
+
+  .BasicInfo--components {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    width: 90%;
+  }
+
+  .BasicInfo--component-title {
+    display: block;
+    font-size: 17px;
+  }
+
+  label {
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    padding: 0 0 0 0;
   }
 }
 
-/* ------------------------Staff-and-Notes--------------------- */
+/* -----------Fields------------ */
 
-.BasicInfo--staff-and-notes {
-  display: flex;
-  flex-direction: column;
+.Field {
+  height: 100%;
+  min-height: 36px;
   width: 100%;
-  padding: 0 10px 20px 10px;
-  border-radius: 5px;
+  padding: 5px;
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Field > p {
+  width: 100%;
 }
 
 @media (min-width: 750px) {
-  .BasicInfo--staff-and-notes {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  .Field {
     height: 100%;
-    min-height: 300px;
-    max-height: 500px;
-    margin: 0 20px 20px 20px;
-    padding: 0 30px 30px 30px;
+    min-height: 36px;
+    width: 100%;
+    padding: 5px;
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+
+  .Field > p {
+    width: 100%;
+  }
+}
+
+.Edit--field {
+  position: relative;
+  min-height: 45px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* -----------Inputs------------- */
+
+.Input--container {
+  width: 100%;
+  height: 100%;
+}
+
+.Input {
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  background-color: #eeeeee;
+}
+
+.Input, .datetime {
+  font-family: "Helvetica neue"
+}
+
+/* -------------------------Search-Results------------------------ */
+
+.Edit--results {
+  display: none;
+  z-index: 1;
+  position: absolute;
+  top: 125%;
+  width: 100%;
+  height: 600%;
+  overflow: auto;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 0 3px 2px lightgray;
+}
+
+.Edit--search-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  height: 33%;
+  z-index: 2;
+}
+
+.Edit--search-result:hover {
+  cursor: pointer;
+  background-color: var(--light-blue);
 }
 
 /* -------------------------Buttons-------------------------- */
