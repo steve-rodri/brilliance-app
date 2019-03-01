@@ -71,6 +71,7 @@ export default class List extends Component {
                   displayColumn={displayColumn}
                   numColumns={columnHeaders && columnHeaders.length}
                   styleColumns={this.styleColumns}
+                  match={this.props.match}
                 />
               ))}
             </InfiniteScroll>

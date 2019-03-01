@@ -27,7 +27,15 @@ export default function Event(props){
 
           <div style={displayColumn('title')}>
             <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
-            <p>{event && event.start && moment(start).format('ddd, MMM Do')}</p>
+
+            {
+              event && event.start && moment(start).isSame(moment(), 'year')?
+
+              <p>{event && event.start && moment(start).format('ddd, MMM Do')}</p>
+              :
+              <p>{event && event.start && moment(start).format('ddd, MMM Do, YYYY')}</p>
+            }
+
             <p>{event && event.start && event.end && `${moment(start).format('LT')} - ${moment(end).format('LT')}`}</p>
           </div>
 
@@ -42,6 +50,7 @@ export default function Event(props){
           <div className="List-Item--Cell" style={displayColumn('confirmation')}>
             {
               event && event.start && moment(event.start).isSameOrAfter(moment(), 'days')?
+              
               <div
                 className="Event--confirmation"
                 style={styleConfirmation(event && event.confirmation)}
