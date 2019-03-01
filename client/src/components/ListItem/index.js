@@ -5,6 +5,7 @@ import Invoice from './Invoice'
 import Client from './Client'
 import moment from 'moment'
 import countdown from 'countdown'
+import { start, end } from '../Helpers/datetime'
 import './index.css'
 
 countdown.setLabels(
@@ -54,46 +55,19 @@ export default function ListItem(props){
     default:
   }
 
-  function start() {
-    if (item) {
-      if (item.start) {
-        if (item.start.date) {
-          return item.start.date
-        } else if (item.start.dateTime) {
-          return item.start.dateTime
-        } else {
-          return item.start
-        }
-      }
-    }
-  }
-
-  function end() {
-    if (item) {
-      if (item.end) {
-        if (item.end.date) {
-          return item.end.date
-        } else if (item.end.dateTime) {
-          return item.end.dateTime
-        } else {
-          return item.end
-        }
-      }
-    }
-  }
-
   function timeUntil(){
-    const now = moment().format();
+    const now = moment();
     const eStart = moment(start(item));
     const eEnd = moment(end(item));
-    const fromStart = countdown(eStart, null, countdown.HOURS|countdown.MINUTES, 2).toString();
-    const fromEnd = countdown(null, eEnd, countdown.HOURS | countdown.MINUTES, 2).toString();
+    const inProgress = now.isSameOrAfter(eStart) && now.isSameOrBefore(eEnd)
+    const fromStart = countdown(eStart, now, countdown.HOURS|countdown.MINUTES, 2).toString();
+    const fromEnd = countdown(now, eEnd, countdown.HOURS | countdown.MINUTES, 2).toString();
 
     function trim(duration){
       return duration.split(',').map(str => str.replace(/\s/g,'')).join(' ')
     }
 
-    if ( eStart.isSameOrAfter(now) || moment(now).isSameOrBefore(eEnd) ) {
+    if ( inProgress ) {
       return (
         <div>
           <h4 style={{color: 'darkred'}}>IN PROGRESS</h4>
@@ -102,7 +76,7 @@ export default function ListItem(props){
         </div>
       )
     } else {
-      return moment(start(item)).toNow()
+      return moment(start(item)).fromNow()
     }
   }
 
