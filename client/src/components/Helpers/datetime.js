@@ -73,6 +73,8 @@ function start(item) {
         return item.start.date
       } else if (item.start.dateTime) {
         return item.start.dateTime
+      } else {
+        return item.start
       }
     }
   }
@@ -85,6 +87,8 @@ function end(item) {
         return item.end.date
       } else if (item.end.dateTime) {
         return item.end.dateTime
+      } else {
+        return item.end
       }
     }
   }
