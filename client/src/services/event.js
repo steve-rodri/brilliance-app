@@ -25,6 +25,14 @@ const event = {
       console.log(e)
     }
   },
+  findByEmail: async function(page, email){
+    try {
+      const resp = await axios.get(`/api/events/find?page=${page}&email=${email}`)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
   createNew: async function(data) {
     try {
       const resp = await axios.post(`/api/events`, data)
