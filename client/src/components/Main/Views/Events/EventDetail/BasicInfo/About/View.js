@@ -35,7 +35,7 @@ export default function View (props){
         <Fragment>
           <label>Date</label>
           <div className="Field">
-            <p>{date(fields)}</p>
+            <p>{date(fields, false, true)}</p>
           </div>
         </Fragment>
           :
