@@ -9,6 +9,7 @@ export default function Notes(props){
       <div className="BasicInfo--component">
         <h3 className="BasicInfo--component-title">Notes</h3>
         <div className="Notes--container">
+          <label>Notes</label>
           <textarea
             className="Notes"
             type="text"
@@ -25,6 +26,7 @@ export default function Notes(props){
       <div className="BasicInfo--component">
         <h3 className="BasicInfo--component-title">Notes</h3>
         <div className="Notes--container">
+        <label>Notes</label>
           <textarea
             className="Notes--readonly"
             readOnly
