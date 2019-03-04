@@ -5,12 +5,12 @@ class EventEmployeesController < ApplicationController
   def index
     @event_employees = EventEmployee.all
 
-    render json: @event_employees
+    render json: @event_employees, include: '**'
   end
 
   # GET /event_employees/1
   def show
-    render json: @event_employee
+    render json: @event_employee, include: '**'
   end
 
   # POST /event_employees
@@ -18,9 +18,9 @@ class EventEmployeesController < ApplicationController
     @event_employee = EventEmployee.new(event_employee_params)
 
     if @event_employee.save
-      render json: @event_employee, status: :created, location: @event_employee
+      render json: @event_employee, status: :created, location: @event_employee, include: '**'
     else
-      render json: @event_employee.errors, status: :unprocessable_entity
+      render json: @event_employee.errors, status: :unprocessable_entity, include: '**'
     end
   end
 
@@ -29,7 +29,7 @@ class EventEmployeesController < ApplicationController
     if @event_employee.update(event_employee_params)
       render json: @event_employee
     else
-      render json: @event_employee.errors, status: :unprocessable_entity
+      render json: @event_employee.errors, status: :unprocessable_entity, include: '**'
     end
   end
 
