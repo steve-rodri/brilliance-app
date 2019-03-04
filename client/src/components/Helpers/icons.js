@@ -8,9 +8,15 @@ import {
   faQuestionCircle,
   faMinusCircle,
   faPlusCircle,
-  faTimes
+  faTimes,
+  faPencilAlt,
+  faCheck,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons'
 
+library.add(faPencilAlt)
+library.add(faCheck)
+library.add(faTrash)
 library.add(faCircle)
 library.add(faCheckCircle)
 library.add(faTimesCircle)
@@ -24,7 +30,7 @@ function statusIcon(str, size){
     case 'needsAction':
       return <FontAwesomeIcon className="Icon" icon="circle" size={size}/>
     case 'accepted':
-      return <FontAwesomeIcon className="Icon" color="green" icon="check-circle" size={size}/>
+      return <FontAwesomeIcon className="Icon" color="limegreen" icon="check-circle" size={size}/>
     case 'tentative':
       return <FontAwesomeIcon className="Icon" color="gold" icon="question-circle" size={size}/>
     case 'declined':
@@ -34,7 +40,7 @@ function statusIcon(str, size){
 }
 
 function addIcon(size){
-  return <FontAwesomeIcon className="Icon" color="green" icon="plus-circle" size={size}/>
+  return <FontAwesomeIcon className="Icon" color="limegreen" icon="plus-circle" size={size}/>
 }
 
 function deleteIcon(size){
@@ -45,9 +51,24 @@ function closeIcon(size){
   return <FontAwesomeIcon className="Icon" color="gray" icon="times" size={size}/>
 }
 
+function pencil(size, color){
+  return <FontAwesomeIcon className="BasicInfo--Button-Icon" icon="pencil-alt" color={color} size={size}/>
+}
+
+function trash(size, color){
+  return <FontAwesomeIcon className="BasicInfo--Button-Icon" icon="trash" color={color} size={size}/>
+}
+
+function check(size, color){
+  return <FontAwesomeIcon className="BasicInfo--Button-Icon" icon="check" color={color? color : null} size={size? size : '1x'}/>
+}
+
 export {
   statusIcon,
   addIcon,
   deleteIcon,
-  closeIcon
+  closeIcon,
+  pencil,
+  trash,
+  check
 }
