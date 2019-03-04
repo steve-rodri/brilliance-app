@@ -28,8 +28,8 @@ export default class EventDetail extends Component {
   }
 
   async componentWillReceiveProps(nextProps){
-    if (nextProps.evtId) {
-      await this.initialSetup(nextProps.evtId)
+    if (nextProps.e || nextProps.evtId) {
+      await this.initialSetup(nextProps)
     }
   }
 
@@ -43,7 +43,7 @@ export default class EventDetail extends Component {
       this.switchEditMode()
       this.setField('summary', 'Create a New Event')
     } else {
-      await this.initialSetup()
+      await this.initialSetup(this.props)
     }
   }
 
@@ -65,26 +65,23 @@ export default class EventDetail extends Component {
     this.setState({ mobile: value })
   }
 
-  initialSetup = async(newEvt) => {
-    await this.getEvent(newEvt);
+  initialSetup = async(props) => {
+    await this.getEvent(props);
     await this.setClientName();
     await this.setLocationName();
   }
 
-  getEvent = async(newEvt) => {
-    const { e, evtId } = this.props
+  getEvent = async(props) => {
+    const { e, evtId } = props
       if (!e) {
-        let evt;
-        if (newEvt) {
-          evt = await event.getOne(newEvt)
-        } else {
-          evt = await event.getOne(evtId)
-        }
+
+        const evt = await event.getOne(evtId)
         if (evt) {
           this.setState({ evt })
         } else {
           this.setState({ redirectToEvents: true })
         }
+
       } else {
         this.setState({ evt: e })
       }

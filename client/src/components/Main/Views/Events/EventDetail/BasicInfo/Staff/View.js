@@ -4,27 +4,21 @@ import { statusIcon } from '../../../../../../Helpers/icons'
 export default function View(props){
   const { workers, iconSize } = props
   return (
-    <div className="Staff--container">
-      <table className="Staff">
-        <thead>
-          <tr>
-            <th className="Staff--worker-head">name</th>
-            <th className="Staff--status-head">status</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div className="Staff--container Staff--View">
+      <div className="Staff Staff--View">
+      <label>Staff</label>
         {workers?
           workers.map( worker => (
-            <tr className="Staff--worker" key={worker.id}>
-              <td className="Staff--worker-name">{worker.info.contact.fullName}</td>
-              <td className="Staff--worker-status">{statusIcon(worker.confirmation, iconSize)}</td>
-            </tr>
+            <div className="Staff--worker Staff--View" key={worker.id}>
+              <p className="Staff--worker-status Staff--View">{statusIcon(worker.confirmation, iconSize)}</p>
+              <p className="Staff--worker-name Staff--View">{worker.info.contact.fullName}</p>
+            </div>
           ))
           :
           null
         }
-        </tbody>
-      </table>
+
+      </div>
     </div>
   )
 }
