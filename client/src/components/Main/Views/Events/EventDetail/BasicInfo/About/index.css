@@ -10,8 +10,8 @@
 .About {
   display: grid;
   justify-items: center;
+  grid-gap: 5px;
   align-items: center;
-  padding: 15px;
   width: 100%;
   color: #eeeeee;
 }

@@ -18,11 +18,11 @@ function date(fields, short){
 
         if (short) {
           return (
-            start.format('MMM Do')
+            start.format('ddd, MMM Do')
           )
         } else {
           return (
-            start.format('MMMM Do')
+            start.format('dddd, MMMM Do')
           )
         }
 
@@ -30,21 +30,21 @@ function date(fields, short){
         if ( end.diff(startOfDay, 'minutes') % 1440 === 0 ) {
           if (short) {
             return (
-              `${start.format('MMM Do')} - ${end.subtract(1,'day').format('MMM Do')}`
+              `${start.format('ddd MMM Do')} - ${end.subtract(1,'day').format('ddd MMM Do')}`
             )
           } else {
             return (
-              `${start.format('MMMM Do')} - ${end.subtract(1,'day').format('MMMM Do')}`
+              `${start.format('ddd MMMM Do')} - ${end.subtract(1,'day').format('ddd MMMM Do')}`
             )
           }
         } else {
           if (short) {
             return (
-              `${start.format('MMM Do')} - ${end.format('MMM Do')}`
+              `${start.format('ddd MMM Do')} - ${end.format('ddd MMM Do')}`
             )
           } else {
             return (
-              `${start.format('MMMM Do')} - ${end.format('MMMM Do')}`
+              `${start.format('ddd MMMM Do')} - ${end.format('ddd MMMM Do')}`
             )
           }
         }
