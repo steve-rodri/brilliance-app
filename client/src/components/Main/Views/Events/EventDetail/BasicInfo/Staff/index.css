@@ -1,33 +1,122 @@
 .Staff--container {
+  align-self: flex-start;
   height: 100%;
   width: 100%;
-  padding: 0 10px 10px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
-.Staff {
-  width: 100%;
+.Staff--none {
+  color: red;
+  font-size: 20px;
 }
 
-.Staff--worker {
+.Staff--modal {
+  height: 65%;
+  width: 85%;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  WebkitOverflowScrolling: touch;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Staff--modal-overlay {
+  position: fixed;
+  height: calc(100vh - 150px);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.88);
+}
+
+.Staff--modal-content {
+  height: 100%;
   width: 100%;
-  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-items: center;
+}
+
+.Staff--worker-name {
+  font-size: 20px;
+}
+
+/*------------------------Edit------------------- */
+.Staff--Edit .Staff {
+  height: 80%;
+  width: 100%;
   padding: 5px;
+  border-spacing: 5px;
   background-color: #eeeeee;
   border-radius: 5px;
 }
 
-.Staff--worker-head, .Staff--worker-name {
+.Staff--Edit .Staff--worker {
+  width: 100%;
+  background-color: var(--light-gray);
+  max-height: 55px;
+}
+
+.Staff--Edit .Staff--worker > * {
+  border-radius: 5px;
+  border: 3px solid var(--light-gray);
+  max-height: 55px;
+}
+
+.Staff--Edit .Staff--icon-head {
+  width: 5px;
+}
+
+.Staff--Edit .Staff--icon {
+  width: 5px;
+}
+
+.Staff--Edit .Staff--search {
+  padding: 0;
+}
+
+/*----------------View-------------------- */
+.Staff--View .Staff--worker {
+  font-size: 20px;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  align-items: center;
+  grid-gap: 5px;
+}
+
+.Staff--View .Staff--worker > * {
+  color: #eeeeee;
+}
+
+.Staff--View .Staff {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+}
+
+.Staff--View .Staff--worker {
+  font-size: 20px;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  align-items: center;
+  grid-gap: 5px;
+}
+
+.Staff--View .Staff--worker-name {
   text-align: left;
 }
-
-.Staff--icon, .Staff--icon-head {
-  padding: 0px;
-}
-
 
 @media (min-width: 750px) {
   .Staff--container {

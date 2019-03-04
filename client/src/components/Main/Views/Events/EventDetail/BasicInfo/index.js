@@ -8,27 +8,47 @@ import Buttons from './Buttons'
 import './index.css'
 
 export default class BasicInfo extends Component {
-  render(){
-    const { mobile } = this.props
-    return (
-      <div className="BasicInfo--container">
+  constructor(props){
+    super(props)
+    this.container = React.createRef()
+  }
 
-        <Header {...this.props} />
+  scrollToTop = () => {
+    this.container.current.scrollTop = 0
+  }
+
+  render(){
+    const { mobile, editMode } = this.props;
+    return (
+      <div className="BasicInfo--container" ref={this.container}>
+
+
+        {
+          editMode?
+          null
+          :
+          <Header {...this.props} />
+        }
 
         <div className="BasicInfo--components">
+
           <About {...this.props} />
-          <Staff {...this.props} />
+
+          <Staff {...this.props} parentContainer={this.container}/>
+
           {
             mobile?
             null
             :
             <Times {...this.props}/>
           }
+
           <Notes {...this.props} />
+
         </div>
 
         {this.props.mobile?
-          <Buttons {...this.props}/>
+          <Buttons {...this.props} scrollToTop={this.scrollToTop}/>
           :
           null
         }

@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import Edit from './Edit'
 import View from './View'
+import Modal from 'react-modal'
+import StaffSelector from './StaffSelector'
+import { eventEmployee } from '../../../../../../../services/eventEmployee'
 import { employee } from '../../../../../../../services/employee'
 import './index.css'
+
+Modal.setAppElement('#root')
 
 export default class Staff extends Component {
   constructor(props){
     super(props)
     this.state = {
       workers: null,
-      workerField: '',
-      searchResults: null
+      employees: null,
     }
   }
 
@@ -26,6 +30,7 @@ export default class Staff extends Component {
     const { evt } = props
     if (evt) {
       if (evt.staff) {
+        console.log(evt.staff)
         this.setState({
           workers: evt.staff
         })
@@ -33,39 +38,60 @@ export default class Staff extends Component {
     }
   }
 
-  addWorker = () => {
+  getParent = () => {
+    return document.querySelector('.BasicInfo--container')
+  }
+
+  openModal = () => {
+    this.setState({ showModal: true })
+  }
+
+  closeModal = () => {
+    this.setState({ showModal: false })
+  }
+
+  chooseWorker = async() => {
+    await this.getActiveEmployees()
+    await this.openModal()
+  }
+
+  handleEmployeeSelect = (employee) => {
     const workers = [...this.state.workers]
-    workers.push( { isNew: true } )
-    this.setState({ workers })
+    const scheduled = workers.find(worker => worker.info.id === employee.id)
+    if (scheduled) {
+      this.removeWorker(scheduled)
+    } else {
+      this.addWorker(employee)
+    }
   }
 
-  removeWorker = (index) => {
+  addWorker = async (employee) => {
+    const evt  = { ...this.props.evt }
     const workers = [...this.state.workers]
-    workers.splice(index, 1)
+    const newWorker = await eventEmployee.create({
+      event_id: evt.id,
+      employee_id: employee.id
+    })
+    workers.push(newWorker)
     this.setState({ workers })
+    evt.staff = workers
+    this.props.handleUpdate(evt)
   }
 
-  handleWorkerSearchChange = async(name, value) => {
-    this.setState({ workerField: value })
-    const employees = await this.findEmployees(value)
-    if (!value || !employees || employees.length < 0) {
-      // this.setState(prevState => ({
-      //   formData: {
-      //     ...prevState.formData,
-      //     client_id: null
-      //   }
-      // }))
-    }
-
-    this.setState({ searchResults: employees })
+  removeWorker = async (worker) => {
+    const evt  = { ...this.props.evt }
+    const workers = [...this.state.workers]
+    await eventEmployee.delete(worker.id)
+    const updatedWorkers = workers.filter(w => w.id !== worker.id)
+    this.setState({ workers: updatedWorkers })
+    evt.staff = updatedWorkers
+    this.props.handleUpdate(evt)
   }
 
-  findEmployees = async(query) => {
-    const q = query.split('')
-    if (q.length > 2) {
-      const employees = await employee.find(query)
-      return employees
-    }
+  getActiveEmployees = async() => {
+    const allEmployees = await employee.getAll()
+    const employees = allEmployees.filter(employee => employee['active?'])
+    this.setState({ employees })
   }
 
   iconSize = () => {
@@ -83,22 +109,30 @@ export default class Staff extends Component {
       return (
         <Edit
           {...this.props}
-          handleWorkerSearchChange={this.handleWorkerSearchChange}
-          workerField={this.state.workerField}
-          searchResults={this.state.searchResults}
+          workers={this.state.workers}
+          chooseWorker={this.chooseWorker}
           addWorker={this.addWorker}
           removeWorker={this.removeWorker}
-          workers={this.state.workers}
           iconSize={this.iconSize()}
         />
       )
-    } else {
+    } else if (this.state.workers) {
       return (
         <View
           {...this.props}
           workers={this.state.workers}
           iconSize={this.iconSize()}
         />
+      )
+    } else {
+      return (
+        <div className="Staff--container">
+          <label>Staff</label>
+          <div className="Staff--none">
+            <p>No one has been scheduled</p>
+            <p>to work this event...</p>
+          </div>
+        </div>
       )
     }
   }
@@ -108,6 +142,26 @@ export default class Staff extends Component {
       <div className="BasicInfo--component">
         <h3 className="BasicInfo--component-title">Staff</h3>
           {this.view()}
+        <Modal
+          isOpen={this.state.showModal}
+          onRequestClose={this.closeModal}
+          parentSelector={this.getParent}
+          overlayClassName="Staff--modal-overlay"
+          className="Staff--modal"
+        >
+          <div className="Staff--modal-content">
+            <StaffSelector
+              workers={this.state.workers}
+              employees={this.state.employees}
+              handleEmployeeSelect={this.handleEmployeeSelect}
+            />
+
+            <button onClick={this.closeModal}>
+              Close
+            </button>
+          </div>
+
+        </Modal>
       </div>
     )
   }

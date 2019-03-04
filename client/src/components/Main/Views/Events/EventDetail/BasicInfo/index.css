@@ -1,6 +1,7 @@
 .BasicInfo--container {
+  position: relative;
   display: grid;
-  grid-template-rows: 100px auto 125px;
+  grid-template-rows: repeat(3, auto);
   align-items: start;
   justify-items: center;
   height: calc(100vh - 150px);
@@ -10,6 +11,7 @@
 }
 
 .BasicInfo--components {
+  grid-row: 2 / span 1;
   display: grid;
   grid-gap: 2px;
   width: 100%;
@@ -20,8 +22,8 @@
   grid-template-rows: auto;
   align-items: center;
   justify-items: center;
-  width: auto;
   background-color: var(--dark-gray);
+  padding: 15px 30px;
 }
 
 .BasicInfo--component-title {
@@ -172,11 +174,13 @@ label {
 /* -------------------------Buttons-------------------------- */
 
 .BasicInfo--Buttons {
+  grid-row: 3 / span 1;
+  align-self: end;
   display: grid;
   grid-template-rows: repeat(2, auto);
-  grid-gap: 7.5px;
+  grid-gap: 20px;
   width: 100%;
-  padding: 10px;
+  padding: 30px;
   background-color: var(--dark-gray);
 }
 
@@ -185,7 +189,7 @@ label {
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 50px;
+  height: 55px;
   width: 100%;
   background: #111111;
   border: none;
@@ -200,4 +204,26 @@ label {
   height: 100%;
   margin: 0 10px;
   padding: 10px;
+}
+
+.Submit {
+  border: 2px solid rgb(0,150,0);
+  color: rgb(0, 150, 0);
+  background-color: inherit;
+}
+
+.Submit:active, .Submit:hover {
+  background-color: rgb(0, 150, 0);
+  color: white;
+}
+
+.Delete {
+  border: 2px solid red;
+  color: red;
+  background-color: inherit;
+}
+
+.Delete:active, .Delete:hover {
+  background-color: red;
+  color: white;
 }
