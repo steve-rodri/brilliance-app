@@ -7,7 +7,8 @@ import {
   faTimesCircle,
   faQuestionCircle,
   faMinusCircle,
-  faPlusCircle
+  faPlusCircle,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faCircle)
@@ -16,6 +17,7 @@ library.add(faTimesCircle)
 library.add(faQuestionCircle)
 library.add(faMinusCircle)
 library.add(faPlusCircle)
+library.add(faTimes)
 
 function statusIcon(str, size){
   switch (str) {
@@ -39,8 +41,13 @@ function deleteIcon(size){
   return <FontAwesomeIcon className="Icon" color="red" icon="minus-circle" size={size}/>
 }
 
+function closeIcon(size){
+  return <FontAwesomeIcon className="Icon" color="gray" icon="times" size={size}/>
+}
+
 export {
   statusIcon,
   addIcon,
-  deleteIcon
+  deleteIcon,
+  closeIcon
 }
