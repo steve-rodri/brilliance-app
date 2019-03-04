@@ -18,20 +18,24 @@ export default function Header(props){
   function displaySummary(){
     if (editMode && evt && !mobile) {
       return (
-        <input
-          className="BasicInfo--event-summary"
-          name="summary"
-          value={fields.summary? fields.summary : ''}
-          onChange={props.handleChange}
-        />
+        <div className="BasicInfo--event-title-container">
+          <input
+            className="BasicInfo--event-summary"
+            name="summary"
+            value={fields.summary? fields.summary : ''}
+            onChange={props.handleChange}
+          />
+        </div>
       )
     } else {
       return (
-        <h1
-          className="BasicInfo--event-title"
-        >
-          {fields && fields.summary}
-        </h1>
+        <div className="BasicInfo--event-title-container">
+          <h1
+            className="BasicInfo--event-title"
+          >
+            {fields && fields.summary}
+          </h1>
+        </div>
       )
     }
   }
