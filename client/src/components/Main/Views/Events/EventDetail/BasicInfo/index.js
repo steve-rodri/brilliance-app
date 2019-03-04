@@ -24,7 +24,7 @@ export default class BasicInfo extends Component {
 
 
         {
-          editMode?
+          mobile && editMode?
           null
           :
           <Header {...this.props} />
