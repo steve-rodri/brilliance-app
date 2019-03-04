@@ -32,7 +32,7 @@ export default class Clients extends Component {
     const width = window.innerWidth
     if (width < 500) {
       this.setState({
-        columnHeaders: ['name / company', 'balance']
+        columnHeaders: null
       })
     } else {
       this.setState({
