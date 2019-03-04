@@ -1,12 +1,6 @@
 import React, { Fragment } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPencilAlt, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { pencil, check, trash } from '../../../../../Helpers/icons'
 import { styleConfirmation, changeConfirmation } from '../../../../../Helpers/eventConfirmation'
-
-library.add(faPencilAlt)
-library.add(faCheck)
-library.add(faTrash)
 
 export default function Buttons(props) {
   // Functions to Dynamically change buttons based on Mode ---------------
@@ -16,26 +10,26 @@ export default function Buttons(props) {
   function edit(){
     return (
       <button
-        className="BasicInfo--Button"
+        className="BasicInfo--button"
         onClick={() => {
           props.edit()
           props.scrollToTop()
         }}
       >
-        <span className="BasicInfo--Button-Text">Edit</span>
-        {<FontAwesomeIcon className="BasicInfo--Button-Icon" icon="pencil-alt" size="2x"/>}
+        <span className="BasicInfo--button-text">Edit</span>
+        {pencil('2x', 'BasicInfo--button-icon')}
       </button>
     )
   }
 
-  function trash(){
+  function trashCan(){
     if (evt) {
       return (
         <button
-          className="BasicInfo--Button Delete"
+          className="BasicInfo--button Delete"
         >
-          <span className="BasicInfo--Button-Text">DELETE</span>
-          {<FontAwesomeIcon className="BasicInfo--Button-Icon" icon="trash" size="2x"/>}
+          <span className="BasicInfo--button-text">DELETE</span>
+          {trash('2x', 'BasicInfo--button-icon')}
         </button>
       )
     }
@@ -44,11 +38,11 @@ export default function Buttons(props) {
   function submit(){
     return (
       <button
-        className="BasicInfo--Button Submit"
+        className="BasicInfo--button Submit"
         onClick={props.handleSubmit}
       >
-        <span className="BasicInfo--Button-Text">SUBMIT</span>
-        {<FontAwesomeIcon className="BasicInfo--Button-Icon" icon="check" size="2x"/>}
+        <span className="BasicInfo--button-text">SUBMIT</span>
+        {check('2x', 'BasicInfo--button-icon')}
       </button>
     )
   }
@@ -56,7 +50,7 @@ export default function Buttons(props) {
   function confirmation(){
     return (
       <div
-        className="BasicInfo--event-status BasicInfo--Button"
+        className="BasicInfo--event-status BasicInfo--button"
         name="confirmation"
         onClick={(e) => {
           e.stopPropagation();
@@ -73,7 +67,7 @@ export default function Buttons(props) {
     if (editMode) {
       return (
         <Fragment>
-          {trash()}
+          {trashCan()}
           {submit()}
         </Fragment>
       )
@@ -87,7 +81,7 @@ export default function Buttons(props) {
     }
   }
   return (
-    <div className="BasicInfo--Buttons">
+    <div className="BasicInfo--buttons">
       {displayButtons()}
     </div>
   )
