@@ -47,20 +47,20 @@ function deleteIcon(size){
   return <FontAwesomeIcon className="Icon" color="red" icon="minus-circle" size={size}/>
 }
 
-function closeIcon(size){
-  return <FontAwesomeIcon className="Icon" color="gray" icon="times" size={size}/>
+function closeIcon(size, className, color){
+  return <FontAwesomeIcon className={`Icon ${className}`} color="gray" icon="times" size={size}/>
 }
 
-function pencil(size, color){
-  return <FontAwesomeIcon className="BasicInfo--Button-Icon" icon="pencil-alt" color={color} size={size}/>
+function pencil(size, className, color){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="pencil-alt" color={color? color : null} size={size}/>
 }
 
-function trash(size, color){
-  return <FontAwesomeIcon className="BasicInfo--Button-Icon" icon="trash" color={color} size={size}/>
+function trash(size, className, color){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="trash" color={color? color : null} size={size}/>
 }
 
-function check(size, color){
-  return <FontAwesomeIcon className="BasicInfo--Button-Icon" icon="check" color={color? color : null} size={size? size : '1x'}/>
+function check(size, className, color){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="check" color={color? color : null} size={size? size : '1x'}/>
 }
 
 export {

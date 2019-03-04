@@ -1,14 +1,7 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPencilAlt, faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { pencil, check, closeIcon, trash } from '../../../../../../Helpers/icons'
 import { styleConfirmation, changeConfirmation } from '../../../../../../Helpers/eventConfirmation'
 import './index.css'
-
-library.add(faPencilAlt)
-library.add(faCheck)
-library.add(faTimes)
-library.add(faTrash)
 
 export default function Header(props){
 
@@ -69,7 +62,7 @@ export default function Header(props){
           className="BasicInfo--icon left"
           onClick={props.close}
         >
-          <FontAwesomeIcon icon="times" size="2x"/>
+          {closeIcon('2x')}
         </div>
       )
     }
@@ -81,19 +74,19 @@ export default function Header(props){
         className="BasicInfo--icon right"
         onClick={props.edit}
       >
-        <FontAwesomeIcon icon="pencil-alt" size="2x"/>
+        {pencil('2x')}
       </div>
     )
   }
 
-  function trash(){
+  function trashCan(){
     if (evt) {
       return (
         <div
           className="BasicInfo--icon right"
           onClick={props.delete}
         >
-          <FontAwesomeIcon icon="trash" size="2x"/>
+          {trash('2x')}
         </div>
       )
     }
@@ -105,7 +98,7 @@ export default function Header(props){
         className="BasicInfo--icon right"
         onClick={props.handleSubmit}
       >
-        <FontAwesomeIcon icon="check" size="2x"/>
+        {check('2x')}
       </div>
     )
   }
@@ -122,7 +115,7 @@ export default function Header(props){
       return (
         <div className="BasicInfo--icons">
           {edit()}
-          {trash()}
+          {trashCan()}
         </div>
       )
     }
