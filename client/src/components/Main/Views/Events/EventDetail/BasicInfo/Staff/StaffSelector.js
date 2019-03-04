@@ -7,8 +7,10 @@ export default class StaffSelector extends Component {
     const { workers } = this.props
     if (workers && workers.find(worker => worker.info.id === employee.id)) {
       return {
-        backgroundColor: 'green',
-        border: '2px solid green'
+        backgroundColor: 'limegreen',
+        border: '2px solid limegreen',
+        color: 'white',
+        fontWeight: 'bold'
       }
     } else {
       return {
