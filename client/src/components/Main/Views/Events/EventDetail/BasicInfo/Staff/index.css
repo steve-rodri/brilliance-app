@@ -14,7 +14,7 @@
 }
 
 .Staff--modal {
-  height: 65%;
+  height: 60%;
   width: 85%;
   border: 1px solid #ccc;
   background: #fff;
@@ -40,12 +40,18 @@
 }
 
 .Staff--modal-content {
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-items: center;
+}
+
+.Staff--modal-close {
+  position: absolute;
+  top: 0%;
+  right: 0%;
 }
 
 .Staff--worker-name {

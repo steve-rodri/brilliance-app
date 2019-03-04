@@ -5,6 +5,7 @@ import Modal from 'react-modal'
 import StaffSelector from './StaffSelector'
 import { eventEmployee } from '../../../../../../../services/eventEmployee'
 import { employee } from '../../../../../../../services/employee'
+import { closeIcon } from '../../../../../../Helpers/icons'
 import './index.css'
 
 Modal.setAppElement('#root')
@@ -30,7 +31,6 @@ export default class Staff extends Component {
     const { evt } = props
     if (evt) {
       if (evt.staff) {
-        console.log(evt.staff)
         this.setState({
           workers: evt.staff
         })
@@ -150,15 +150,12 @@ export default class Staff extends Component {
           className="Staff--modal"
         >
           <div className="Staff--modal-content">
+            <div onClick={this.closeModal} className="Staff--modal-close">{closeIcon('2x')}</div>
             <StaffSelector
               workers={this.state.workers}
               employees={this.state.employees}
               handleEmployeeSelect={this.handleEmployeeSelect}
             />
-
-            <button onClick={this.closeModal}>
-              Close
-            </button>
           </div>
 
         </Modal>
