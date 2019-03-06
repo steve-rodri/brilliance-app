@@ -13,53 +13,12 @@
   font-size: 20px;
 }
 
-.Staff--modal {
-  height: 450px;
-  width: 85%;
-  border: 1px solid #ccc;
-  background: #fff;
-  overflow: auto;
-  WebkitOverflowScrolling: touch;
-  border-radius: 5px;
-  outline: none;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.Staff--modal-overlay {
-  position: fixed;
-  height: calc(100vh - 150px);
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.88);
-  z-index: 500;
-}
-
-.Staff--modal-content {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-items: center;
-}
-
-.Staff--modal-close {
-  position: absolute;
-  top: 0%;
-  right: 0%;
-}
-
 .Staff--worker-name {
   font-size: 20px;
 }
 
 /*------------------------Edit------------------- */
+
 .Staff--Edit .Staff {
   height: 80%;
   width: 100%;
@@ -72,13 +31,15 @@
 .Staff--Edit .Staff--worker {
   width: 100%;
   background-color: var(--light-gray);
-  max-height: 55px;
 }
 
 .Staff--Edit .Staff--worker > * {
   border-radius: 5px;
   border: 3px solid var(--light-gray);
-  max-height: 55px;
+}
+
+.Staff--Edit .Staff--worker * {
+  max-height: 30px;
 }
 
 .Staff--Edit .Staff--icon-head {
@@ -93,7 +54,35 @@
   padding: 0;
 }
 
+@media (min-width: 750px) {
+  .Staff--Edit .Staff {
+    height: auto;
+    padding: 0;
+    background-color: inherit;
+  }
+
+  .Staff--Edit .Staff--worker-name {
+    font-size: 20px;
+  }
+
+  .Staff--Edit .Staff--icon-head {
+    width: 5px;
+    padding: 5px;
+  }
+
+  .Staff--Edit .Staff--icon {
+    width: 5px;
+    padding: 7.5px;
+  }
+
+  .Staff--Edit .Staff--worker > * {
+    border-radius: 5px;
+    border: none;
+  }
+}
+
 /*----------------View-------------------- */
+
 .Staff--View .Staff--worker {
   font-size: 20px;
   display: grid;
@@ -125,9 +114,14 @@
   text-align: left;
 }
 
+/* ------------Media Queries--------------- */
+
 @media (min-width: 750px) {
   .Staff--container {
     padding: 0 30px 30px 30px;
+    display: grid;
+    height: auto;
+    justify-content: inherit;
   }
 
   .Staff--worker {
