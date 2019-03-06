@@ -4,9 +4,12 @@ import BasicInfo from './BasicInfo/index.js';
 import Logistics from './Logistics/index.js';
 import Invoice from './Invoice/index.js';
 import CashFlow from './CashFlow/index.js';
+import StaffModal from './StaffModal.js';
 import { event } from '../../../../../services/event';
 import { client } from '../../../../../services/client';
 import { place } from '../../../../../services/place';
+import { eventEmployee } from '../../../../../services/eventEmployee'
+import { employee } from '../../../../../services/employee'
 import { eventTitle } from '../../../../Helpers/eventTitle';
 import { clientName } from '../../../../Helpers/clientHelpers';
 import { locationName } from '../../../../Helpers/locationName';
@@ -23,9 +26,12 @@ export default class EventDetail extends Component {
       searchFieldData: null,
       formData: null,
       editMode: false,
+      showStaffModal: false,
       redirectToEvents: false,
     }
   }
+
+// ---------------------------------LifeCycle-----------------------------------
 
   async componentWillReceiveProps(nextProps){
     if (nextProps.e || nextProps.evtId) {
@@ -51,94 +57,29 @@ export default class EventDetail extends Component {
     window.removeEventListener('resize', this.resetView)
   }
 
-  resetView = () => {
-    const width = window.innerWidth;
-    if (width < 750) {
-      this.setView('Basic Info')
-      this.displayMobile(true)
-    } else {
-      this.displayMobile(false)
-    }
-  }
-
-  displayMobile = (value) => {
-    this.setState({ mobile: value })
-  }
+// ----------------------------Getters-and-Setters------------------------------
 
   initialSetup = async(props) => {
-    await this.getEvent(props);
+    await this.setEvent(props);
     await this.setClientName();
     await this.setLocationName();
   }
 
-  getEvent = async(props) => {
+  setEvent = async(props) => {
     const { e, evtId } = props
-      if (!e) {
+    if (!e) {
 
-        const evt = await event.getOne(evtId)
-        if (evt) {
-          this.setState({ evt })
-        } else {
-          this.setState({ redirectToEvents: true })
-        }
-
+      const evt = await event.getOne(evtId)
+      if (evt) {
+        this.setState({ evt, workers: evt.staff })
       } else {
-        this.setState({ evt: e })
+        this.setState({ redirectToEvents: true })
       }
+
+    } else {
+      this.setState({ evt: e, workers: e.staff })
+    }
     await this.setFields();
-  }
-
-  findClients = async(query) => {
-    const q = query.split('')
-    if (q.length > 2) {
-      const clients = await client.find(1, query)
-      return clients
-    }
-  }
-
-  findPlaces = async(query) => {
-    const q = query.split('')
-    if (q.length > 2) {
-      const locations = await place.find(query)
-      return locations
-    }
-  }
-
-  setClientName(){
-    const { evt } = this.state
-    if (evt) {
-      if (evt.client) {
-        const name = clientName(evt.client, true)
-        this.setField('client', name)
-        this.setFormData('client_id', evt.client.id)
-      } else {
-        this.setField('client', null)
-      }
-    }
-  }
-
-  setLocationName(){
-    const { evt } = this.state
-    if (evt) {
-      if (evt.placeLocation) {
-        const location = locationName(evt.placeLocation)
-        if (evt.placeLocation.installation) {
-          this.setState(prevState => ({
-            fields: {
-              ...prevState.fields,
-              location,
-              onPremise: evt.placeLocation.installation
-            },
-            formData: {
-              location_id: evt.placeLocation.id
-            }
-          }))
-        } else {
-          this.setField('location', location)
-          this.setFormData('location_id', evt.client.id)
-        }
-      }
-    }
   }
 
   setFields = () => {
@@ -169,141 +110,69 @@ export default class EventDetail extends Component {
     }))
   }
 
-  handleDelete = async() => {
+  setClientName = () => {
     const { evt } = this.state
-    await event.delete(evt.id)
-    await this.props.handleDelete(evt.id)
-    this.setState({ redirectToEvents: true })
-  }
-
-  handleSearchChange = async(name, value) => {
-    this.setField(name, value)
-
-    switch (name) {
-      case 'client':
-        const clients = await this.findClients(value)
-        if (!value || !clients || clients.length < 0) {
-
-          this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              client_id: null
-            }
-          }), () => {
-            if (value.length === 0 || value.length > 2) {
-              this.updateSummaryField()
-            }
-          })
-
-        }
-
-        this.setState(prevState => ({
-          searchFieldData: {
-            ...prevState.searchFieldData,
-            clients
-          }
-        }))
-
-      break;
-
-      case 'location':
-        const locations = await this.findPlaces(value)
-
-        if (!value || !locations || locations.length < 0) {
-
-          this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              location_id: null
-            },
-            fields: {
-              ...prevState.fields,
-              onPremise: null
-            }
-          }), () => {
-            if (value.length === 0 || value.length > 2) {
-              this.updateSummaryField()
-            }
-          })
-
-        }
-
-        this.setState(prevState => ({
-          searchFieldData: {
-            ...prevState.searchFieldData,
-            locations
-          }
-        }))
-
-      break;
-
-      default:
-      break;
-    }
-  }
-
-  handleFormSubmit = (e, name, index) => {
-    if (e.key === 'Tab' || e.key === 'Enter') {
-      this.handleSelect( e, name, index)
-    }
-  }
-
-  handleSelect = (e, name, index) => {
-    let item;
-    const { searchFieldData } = this.state
-
-    if (searchFieldData) {
-      switch (name) {
-
-        case 'client':
-          item = searchFieldData.clients[index]
-          const client = clientName(item, true);
-          if (item) {
-            this.setState(prevState => ({
-              formData: {
-                ...prevState.formData,
-                client_id: item.id
-              },
-              fields: {
-                ...prevState.fields,
-                client
-              }
-            }), () => this.updateSummaryField())
-          }
-
-        break;
-
-        case 'location':
-          item = searchFieldData.locations[index]
-          const location = locationName(item)
-
-          if (item) {
-            this.setState(prevState => ({
-              formData: {
-                ...prevState.formData,
-                location_id: item.id
-              },
-              fields: {
-                ...prevState.fields,
-                location,
-                onPremise: item.installation
-              }
-            }), () => this.updateSummaryField())
-          }
-
-        break;
-
-        default:
-          this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              [name]: item.id
-            }
-          }))
-        break;
+    if (evt) {
+      if (evt.client) {
+        const name = clientName(evt.client, true)
+        this.setField('client', name)
+        this.setFormData('client_id', evt.client.id)
+      } else {
+        this.setField('client', null)
       }
     }
   }
+
+  setLocationName = () => {
+    const { evt } = this.state
+    if (evt) {
+      if (evt.placeLocation) {
+        const location = locationName(evt.placeLocation)
+        if (evt.placeLocation.installation) {
+          this.setState(prevState => ({
+            fields: {
+              ...prevState.fields,
+              location,
+              onPremise: evt.placeLocation.installation
+            },
+            formData: {
+              location_id: evt.placeLocation.id
+            }
+          }))
+        } else {
+          this.setField('location', location)
+          this.setFormData('location_id', evt.client.id)
+        }
+      }
+    }
+  }
+
+  resetForm = () => {
+    this.setState({
+      formData: null,
+    })
+  }
+
+  resetSearchFieldData = async() => {
+    this.setState({
+      searchFieldData: null
+    })
+  }
+
+  updateSummaryField = () => {
+    this.setState(prevState => ({
+      fields: {
+        ...prevState.fields,
+        summary: eventTitle(prevState.fields)
+      },
+      formData: {
+        ...prevState.formData,
+        summary: eventTitle(prevState.fields)
+      }
+    }))
+  }
+
+// -------------------------------Handle-Changes--------------------------------
 
   handleChange = (e) => {
     if (e) {
@@ -404,6 +273,211 @@ export default class EventDetail extends Component {
     }), async() => await this.handleSubmit())
   }
 
+  handleSearchChange = async(name, value) => {
+    this.setField(name, value)
+
+    switch (name) {
+      case 'client':
+        const clients = await this.findClients(value)
+        if (!value || !clients || clients.length < 0) {
+
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              client_id: null
+            }
+          }), () => {
+            if (value.length === 0 || value.length > 2) {
+              this.updateSummaryField()
+            }
+          })
+
+        }
+
+        this.setState(prevState => ({
+          searchFieldData: {
+            ...prevState.searchFieldData,
+            clients
+          }
+        }))
+
+      break;
+
+      case 'location':
+        const locations = await this.findPlaces(value)
+
+        if (!value || !locations || locations.length < 0) {
+
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              location_id: null
+            },
+            fields: {
+              ...prevState.fields,
+              onPremise: null
+            }
+          }), () => {
+            if (value.length === 0 || value.length > 2) {
+              this.updateSummaryField()
+            }
+          })
+
+        }
+
+        this.setState(prevState => ({
+          searchFieldData: {
+            ...prevState.searchFieldData,
+            locations
+          }
+        }))
+
+      break;
+
+      default:
+      break;
+    }
+  }
+
+// --------------------------------Search-Field---------------------------------
+
+  handleSelect = (e, name, index) => {
+    let item;
+    const { searchFieldData } = this.state
+
+    if (searchFieldData) {
+      switch (name) {
+
+        case 'client':
+          item = searchFieldData.clients[index]
+          const client = clientName(item, true);
+          if (item) {
+            this.setState(prevState => ({
+              formData: {
+                ...prevState.formData,
+                client_id: item.id
+              },
+              fields: {
+                ...prevState.fields,
+                client
+              }
+            }), () => this.updateSummaryField())
+          }
+
+        break;
+
+        case 'location':
+          item = searchFieldData.locations[index]
+          const location = locationName(item)
+
+          if (item) {
+            this.setState(prevState => ({
+              formData: {
+                ...prevState.formData,
+                location_id: item.id
+              },
+              fields: {
+                ...prevState.fields,
+                location,
+                onPremise: item.installation
+              }
+            }), () => this.updateSummaryField())
+          }
+
+        break;
+
+        default:
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              [name]: item.id
+            }
+          }))
+        break;
+      }
+    }
+  }
+
+  handleFormSubmit = (e, name, index) => {
+    if (e.key === 'Tab' || e.key === 'Enter') {
+      this.handleSelect( e, name, index)
+    }
+  }
+
+// -----------------------------Search-Field-Data-------------------------------
+
+  findClients = async(query) => {
+    const q = query.split('')
+    if (q.length > 2) {
+      const clients = await client.find(1, query)
+      return clients
+    }
+  }
+
+  findPlaces = async(query) => {
+    const q = query.split('')
+    if (q.length > 2) {
+      const locations = await place.find(query)
+      return locations
+    }
+  }
+
+// --------------------------------Event-Staff----------------------------------
+
+  openStaffModal = () => {
+    this.setState({ showStaffModal: true })
+  }
+
+  closeStaffModal = () => {
+    this.setState({ showStaffModal: false })
+  }
+
+  chooseWorker = async() => {
+    await this.getActiveEmployees()
+    await this.openStaffModal()
+  }
+
+  handleEmployeeSelect = (employee) => {
+    const workers = [...this.state.workers]
+    const scheduled = workers.find(worker => worker.info.id === employee.id)
+    if (scheduled) {
+      this.removeWorker(scheduled)
+    } else {
+      this.addWorker(employee)
+    }
+  }
+
+  addWorker = async (employee) => {
+    const evt  = { ...this.state.evt }
+    const workers = [...this.state.workers]
+    const newWorker = await eventEmployee.create({
+      event_id: evt.id,
+      employee_id: employee.id
+    })
+    workers.push(newWorker)
+    this.setState({ workers })
+    evt.staff = workers
+    this.props.handleUpdate(evt)
+  }
+
+  removeWorker = async (worker) => {
+    const evt  = { ...this.state.evt }
+    const workers = [...this.state.workers]
+    await eventEmployee.delete(worker.id)
+    const updatedWorkers = workers.filter(w => w.id !== worker.id)
+    this.setState({ workers: updatedWorkers })
+    evt.staff = updatedWorkers
+    this.props.handleUpdate(evt)
+  }
+
+  getActiveEmployees = async() => {
+    const allEmployees = await employee.getAll()
+    const employees = allEmployees.filter(employee => employee['active?'])
+    this.setState({ employees })
+  }
+
+// ----------------------------------DB-CRUD------------------------------------
+
   handleSubmit = async() => {
     const { evt, formData, editMode } = this.state
     const { isNew, match, history } = this.props
@@ -440,47 +514,14 @@ export default class EventDetail extends Component {
     }
   }
 
-  updateSummaryField = () => {
-    this.setState(prevState => ({
-      fields: {
-        ...prevState.fields,
-        summary: eventTitle(prevState.fields)
-      },
-      formData: {
-        ...prevState.formData,
-        summary: eventTitle(prevState.fields)
-      }
-    }))
+  handleDelete = async() => {
+    const { evt } = this.state
+    await event.delete(evt.id)
+    await this.props.handleDelete(evt.id)
+    this.setState({ redirectToEvents: true })
   }
 
-  switchEditMode = () => {
-    this.setState({editMode: !this.state.editMode})
-  }
-
-  close = () => {
-    this.resetForm();
-    this.resetSearchFieldData();
-    this.switchEditMode();
-    this.setFields();
-    this.setClientName();
-    this.setLocationName();
-  }
-
-  resetSearchFieldData = async() => {
-    this.setState({
-      searchFieldData: null
-    })
-  }
-
-  resetForm = () => {
-    this.setState({
-      formData: null,
-    })
-  }
-
-  setView = (view) => {
-    this.setState({ view })
-  }
+// -----------------------------------Views-------------------------------------
 
   view = () => {
     switch (this.state.view) {
@@ -489,16 +530,23 @@ export default class EventDetail extends Component {
           <BasicInfo
             {...this.state}
             {...this.props}
+
             edit={this.switchEditMode}
             close={this.close}
             delete={this.handleDelete}
+
             handleChange={this.handleChange}
             handleStatusChange={this.handleStatusChange}
             handleDateChange={this.handleDateChange}
             handleSearchChange={this.handleSearchChange}
+
             handleSubmit={this.handleSubmit}
             onSelect={this.handleSelect}
             onEnter={this.handleFormSubmit}
+
+            chooseWorker={this.chooseWorker}
+            addWorker={this.addWorker}
+            removeWorker={this.removeWorker}
           />
         )
       case 'Logistics':
@@ -523,18 +571,51 @@ export default class EventDetail extends Component {
     }
   }
 
-  styleTabControl = () => {
-    const isNew = this.props.isNew
-    if (isNew) {
-      return { display: 'none' }
+  setView = (view) => {
+    this.setState({ view })
+  }
+
+  resetView = () => {
+    const width = window.innerWidth;
+    if (width < 750) {
+      this.setView('Basic Info')
+      this.displayMobile(true)
+    } else {
+      this.displayMobile(false)
+    }
+  }
+
+  close = () => {
+    this.resetForm();
+    this.resetSearchFieldData();
+    this.switchEditMode();
+    this.setFields();
+    this.setClientName();
+    this.setLocationName();
+  }
+
+  switchEditMode = () => {
+    this.setState({editMode: !this.state.editMode})
+  }
+
+  displayMobile = (value) => {
+    this.setState({ mobile: value })
+  }
+
+// -----------------------------------Styles------------------------------------
+
+  styleTab = (view) => {
+    if (view === this.state.view) {
+      return this.highlight()
     } else {
       return {}
     }
   }
 
-  styleTab = (view) => {
-    if (view === this.state.view) {
-      return this.highlight()
+  styleTabControl = () => {
+    const isNew = this.props.isNew
+    if (isNew) {
+      return { display: 'none' }
     } else {
       return {}
     }
@@ -547,6 +628,8 @@ export default class EventDetail extends Component {
       borderTop:'1px solid rgba(0,0,0,.88) '
     }
   }
+
+// -----------------------------------Render------------------------------------
 
   render(){
     if (this.state.redirectToEvents) return (<Redirect to='/admin/events'/>)
@@ -564,8 +647,19 @@ export default class EventDetail extends Component {
           </div>
         }
         {this.view()}
-
+        {
+          this.state.showStaffModal?
+          <StaffModal
+            close={this.closeStaffModal}
+            workers={this.state.workers}
+            employees={this.state.employees}
+            handleEmployeeSelect={this.handleEmployeeSelect}
+          />
+          :
+          null
+        }
       </div>
     )
   }
+
 }
