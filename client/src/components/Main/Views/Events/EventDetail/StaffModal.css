@@ -1,5 +1,6 @@
 .StaffModal {
-  height: 450px;
+  min-height: 450px;
+  max-height: 650px;
   width: 85%;
   border: 1px solid #ccc;
   background: #fff;
@@ -29,13 +30,28 @@
   position: relative;
   height: 100%;
   width: 100%;
-  display: flex;
+  display: grid;
   align-items: center;
   justify-items: center;
+  grid-gap: 20px;
 }
 
 .StaffModal--close {
   position: absolute;
-  top: 0%;
-  right: 0%;
+  top: -1%;
+  right: -1%;
+}
+
+.StaffModal--done {
+  width: 100px;
+  height: 50px;
+  background-color: inherit;
+  color: var(--med-dark-blue);
+  font-weight: bold;
+  border: 3px solid var(--med-dark-blue);
+}
+
+.StaffModal--done:hover {
+  background-color: var(--med-dark-blue);
+  color: #eeeeee;
 }
