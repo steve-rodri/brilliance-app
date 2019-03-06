@@ -32,7 +32,10 @@ export default class StaffSelector extends Component {
               className="StaffSelector--employee"
               key={employee.id}
               style={this.style(employee)}
-              onClick={() => handleEmployeeSelect(employee)}
+              onClick={(e) => {
+                e.stopPropagation()
+                handleEmployeeSelect(employee)
+              }}
             >
               <p>{employee.contact.fullName}</p>
             </button>
@@ -45,7 +48,10 @@ export default class StaffSelector extends Component {
               className="StaffSelector--employee"
               key={employee.id}
               style={this.style(employee)}
-              onClick={() => handleEmployeeSelect(employee)}
+              onClick={(e) => {
+                e.stopPropagation()
+                handleEmployeeSelect(employee)
+              }}
             >
               <p>{employee.contact.fullName}</p>
             </button>
