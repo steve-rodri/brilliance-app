@@ -119,32 +119,28 @@ class EventsController < ApplicationController
 
       terms.each do |term|
         @events = Event
-        .select(
-          'events.*,
-          contacts.first_name AS client_first_name,
-          contacts.last_name AS client_last_name,
-          companies.name AS company_name,
-          places.name AS location,
-          places.short_name AS location_short_name'
+        .left_outer_joins(
+          client: [ :contact, :company ],
+          event_employees: [{employee: [{contact: :email_address }]}]
         )
-        .joins('LEFT JOIN clients ON clients.id = events.client_id')
-        .joins('LEFT JOIN contacts ON contacts.id = clients.contact_id')
-        .joins('LEFT JOIN companies ON companies.id = clients.company_id')
-        .joins('LEFT JOIN places ON places.id = events.location_id')
-        .joins('LEFT JOIN event_employees ON events.id = event_employees.event_id')
-        .joins(event_employees: [{employee: [{contact: :email_address }]}])
+        .joins('LEFT OUTER JOIN places places_location ON places_location.id = events.location_id')
+        .joins('LEFT OUTER JOIN places places_call_location ON places_call_location.id = events.call_location_id')
         .where(
           "contacts.first_name LIKE '%#{term.capitalize}%'
            OR contacts.last_name LIKE '%#{term.capitalize}%'
            OR companies.name LIKE '%#{term.capitalize}%'
-           OR action LIKE '%#{term.capitalize}%'
-           OR kind LIKE '%#{term.capitalize}%'
-           OR description LIKE '%#{term.capitalize}%'
-           OR tags LIKE '%#{term.capitalize}%'
-           OR summary LIKE '%#{term.capitalize}%'
-           OR places.name LIKE '%#{term.capitalize}%'
-           OR places.short_name LIKE '%#{term}%'
-           OR places.short_name LIKE '%#{term.upcase}%'
+           OR events.action LIKE '%#{term.capitalize}%'
+           OR events.kind LIKE '%#{term.capitalize}%'
+           OR events.description LIKE '%#{term.capitalize}%'
+           OR events.tags LIKE '%#{term.capitalize}%'
+           OR events.summary LIKE '%#{term.capitalize}%'
+           OR events.summary LIKE '%#{term}%'
+           OR places_location.name LIKE '%#{term.capitalize}%'
+           OR places_location.short_name LIKE '%#{term}%'
+           OR places_location.short_name LIKE '%#{term.upcase}%'
+           OR places_call_location.name LIKE '%#{term.capitalize}%'
+           OR places_call_location.short_name LIKE '%#{term}%'
+           OR places_call_location.short_name LIKE '%#{term.upcase}%'
            OR email_addresses.email_address LIKE '%#{term}%'"
         )
         .order(start: :desc)
