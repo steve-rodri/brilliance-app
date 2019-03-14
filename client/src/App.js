@@ -10,7 +10,19 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/login"/>}/>
+          <Route exact path="/" render={() => {
+              const token = localStorage.getItem('google_access_token')
+              if (!token) {
+                return (
+                  <Redirect to="/login"/>
+                )
+              } else {
+                return (
+                  <Redirect to="/admin"/>
+                )
+              }
+            }}
+          />
           <Route path="/login" component={Login}/>
           <Route component={Main}/>
         </Switch>

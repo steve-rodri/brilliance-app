@@ -33,9 +33,17 @@ const event = {
       console.log(e)
     }
   },
+  findByUID: async function (iCalUID){
+    try {
+      const resp = await axios.get(`/api/events/find?iCalUID=${iCalUID}`)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
   createNew: async function(data) {
     try {
-      const resp = await axios.post(`/api/events`, data)
+      const resp = await axios.post(`/api/events`, { event: data })
       return resp.data
     } catch (e) {
       console.log(e)
@@ -51,7 +59,7 @@ const event = {
   },
   update: async function(id, data){
     try {
-      const resp = await axios.put(`/api/events/${id}`, data)
+      const resp = await axios.put(`/api/events/${id}`, { event: data })
       return resp.data
     } catch (e) {
       console.log(e)

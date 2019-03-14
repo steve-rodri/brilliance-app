@@ -8,8 +8,8 @@ export default function View(props){
       <div className="Staff Staff--View">
       <label>Staff</label>
         {workers?
-          workers.map( worker => (
-            <div className="Staff--worker Staff--View" key={worker.id}>
+          workers.map( (worker, i) => (
+            <div className="Staff--worker Staff--View" key={i}>
               <p className="Staff--worker-status Staff--View">{statusIcon(worker.confirmation, iconSize)}</p>
               <p className="Staff--worker-name Staff--View">{worker.info.contact.fullName}</p>
             </div>

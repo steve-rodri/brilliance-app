@@ -7,7 +7,6 @@
 .Notes, .Notes--readonly {
   border: none;
   align-self: center;
-  min-height: 100px;
   height: 100%;
   width: 100%;
   padding: 15px;
@@ -19,6 +18,7 @@
 .Notes {
   color: black;
   background-color: #eeeeee;
+  min-height: 100px;
 }
 
 .Notes--readonly {
@@ -38,11 +38,14 @@
     padding: 0 30px 30px 30px;
   }
 
-  .Notes, .Notes--readonly {
+  .Notes {
     min-height: 300px;
+    overflow: auto;
+  }
+
+  .Notes, .Notes--readonly {
     color: black;
     padding: 5px;
-    overflow: auto;
   }
 
   .Notes--readonly {

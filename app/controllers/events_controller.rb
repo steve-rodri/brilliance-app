@@ -63,7 +63,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     if @event.save
-      render json: @event, status: :created, location: @event
+      render json: @event, status: :created, location: @event, include: '**'
     else
       render json: @event.errors, status: :unprocessable_entity
     end
@@ -72,7 +72,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   def update
     if @event.update(event_params)
-      render json: @event
+      render json: @event, include: '**'
     else
       render json: @event.errors, status: :unprocessable_entity
     end
@@ -102,7 +102,7 @@ class EventsController < ApplicationController
       end
     end
 
-    render json: {msg: 'synced'}
+    render json: @event, include: '**'
 
   end
 
@@ -150,6 +150,8 @@ class EventsController < ApplicationController
         .order(start: :desc)
         .paginate(page: params[:page], per_page: @@items_per_page)
       end
+
+      render json: @events, include: '**'
     end
 
     if params[:email]
@@ -162,9 +164,14 @@ class EventsController < ApplicationController
       .order(start: :desc)
       .paginate(page: params[:page], per_page: @@items_per_page)
 
+      render json: @events, include: '**'
     end
 
-    render json: @events, include: '**'
+    if params[:iCalUID]
+      id = params[:iCalUID]
+      @event = Event.where( i_cal_UID: "#{id}").first
+      render json: @event, include: '**'
+    end
   end
 
   private
@@ -186,11 +193,9 @@ class EventsController < ApplicationController
         :clock_out,
         :confirmation,
         :created_at,
-        :creator,
+        :creator_id,
         :description,
         :driving_time,
-        :employee_id,
-        :employees,
         :end,
         :etag,
         :extendedProperties,
@@ -209,7 +214,6 @@ class EventsController < ApplicationController
         :summary,
         :tags,
         :updated_at,
-        employee_ids: [],
         event_employees_attributes:
         [
           :id,

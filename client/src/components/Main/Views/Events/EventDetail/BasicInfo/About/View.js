@@ -66,26 +66,6 @@ export default function View (props){
           null
       }
 
-      {/* <label>Type/Action</label>
-      <div className="Field">
-      <p>{fields && fields.action? fields.action : ''}</p>
-      </div>
-
-      <label>Kind</label>
-      <div className="Field">
-      <p>{fields && fields.kind? fields.kind : ''}</p>
-      </div>
-
-      <label>Description</label>
-      <div className="Field">
-      <p>{fields && fields.description? fields.description : ''}</p>
-      </div>
-
-      <label>Package</label>
-      <div className="Field">
-      <p>{fields && fields.package? fields.package : ''}</p>
-      </div> */}
-
     </div>
   )
 }

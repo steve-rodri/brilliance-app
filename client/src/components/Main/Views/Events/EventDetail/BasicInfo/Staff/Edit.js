@@ -32,7 +32,7 @@ export default class Edit extends Component {
           <tbody>
           {workers?
             workers.map( (worker, i) =>
-              <tr className="Staff--worker Staff--Edit" key={worker.id} style={this.styleRow()}>
+              <tr className="Staff--worker Staff--Edit" key={i} style={this.styleRow()}>
                 <td className="Staff--icon Staff--Edit"><div onClick={() => this.props.removeWorker(worker)}>{deleteIcon(iconSize)}</div></td>
                 <td className="Staff--worker-name Staff--Edit">{worker.info.contact.fullName}</td>
               </tr>

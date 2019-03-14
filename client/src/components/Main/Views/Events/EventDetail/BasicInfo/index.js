@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import Header from './Header/index.js'
 import About from './About/index.js'
-import Times from './Times/index.js'
+import Logistics from './Logistics/index.js'
 import Notes from './Notes/index.js'
 import Staff from './Staff/index.js'
 import Buttons from './Buttons'
+import { date, time } from '../../../../../Helpers/datetime'
 import './index.css'
 
 export default class BasicInfo extends Component {
@@ -18,7 +19,8 @@ export default class BasicInfo extends Component {
   }
 
   render(){
-    const { mobile, editMode } = this.props;
+    const { mobile, editMode, fields } = this.props;
+    const about = fields && (fields.client || fields.location || date(fields) || time(fields));
     return (
       <div className="BasicInfo--container" ref={this.container}>
 
@@ -32,20 +34,31 @@ export default class BasicInfo extends Component {
 
         <div className="BasicInfo--components">
 
-          <About {...this.props} />
+          {
+            about?
+            <About {...this.props} />
+            :
+            null
+          }
 
-          <Staff {...this.props} parentContainer={this.container}/>
+          {
+            about?
+            <Staff {...this.props}/>
+            :
+            null
+          }
 
           {
             mobile?
             null
             :
-            <Times {...this.props}/>
+            <Logistics {...this.props}/>
           }
 
           <Notes {...this.props} />
 
         </div>
+
 
         {this.props.mobile?
           <Buttons {...this.props} scrollToTop={this.scrollToTop}/>

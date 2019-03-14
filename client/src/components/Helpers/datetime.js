@@ -101,11 +101,12 @@ function time(fields){
         return (
           'All-Day'
         )
+      } else {
+        return (
+          `${moment(fields.start).format('LT')} - ${moment(fields.end).format('LT')}`
+        )
       }
     }
-    return (
-      `${moment(fields.start).format('LT')} - ${moment(fields.end).format('LT')}`
-    )
   }
 }
 

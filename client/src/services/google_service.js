@@ -4,13 +4,14 @@ const GOOGLE = {
   getUser: async function(){
     const accessToken = localStorage.getItem('google_access_token');
     try {
-        await axios({
+      const resp = await axios({
         method: 'get',
         url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       })
+      return resp.data
     } catch (e) {
       localStorage.clear()
       return null
@@ -51,6 +52,23 @@ const GOOGLE = {
     }
   },
 
+  getEvent: async function (calendarId, eventId) {
+    const accessToken = localStorage.getItem('google_access_token');
+    try {
+      const resp = await axios({
+        method: 'get',
+        url:`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events/${eventId}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        },
+      })
+      return resp.data
+    } catch (e) {
+      localStorage.clear()
+      return null
+    }
+  },
+
   createEvent: async function(calendarId, data){
     //required data properties
     // start : { dateTime }
@@ -76,19 +94,31 @@ const GOOGLE = {
     }
   },
 
-  patchEvent: async function(calendarId, eventId, data){
-    //optional data properties
-    // start : { dateTime }
-    // end : { dateTime }
-    // description
-    // location
-    // summary
-    // transparency
+  deleteEvent: async function(calendarId, eventId){
+    const accessToken = localStorage.getItem('google_access_token');
+    try {
+      const resp = await axios({
+        method: 'delete',
+        url:`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events/${eventId}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        },
+      })
+      return resp.data;
+    } catch (e) {
+      return null
+    }
+  },
+
+  patchEvent: async function(calendarId, eventId, data, sendUpdates){
+    if (!sendUpdates) {
+      sendUpdates = 'none'
+    }
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
         method: 'patch',
-        url:`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events/${eventId}?sendUpdates='none'`,
+        url:`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events/${eventId}?sendUpdates=${sendUpdates}`,
         headers: {
           Authorization: `Bearer ${accessToken}`
         },

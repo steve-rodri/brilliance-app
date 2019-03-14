@@ -10,8 +10,6 @@ export default function Event(props){
   const {
     item,
     type,
-    start,
-    end,
     handleStatusChange,
     displayColumn,
     numColumns,
@@ -35,7 +33,7 @@ export default function Event(props){
             {event && clientName(event.client)}
           </div>
 
-          <div style={displayColumn('location')}>{event && event.placeLocation && event.placeLocation.name}</div>
+          <div style={displayColumn('location')}>{event && event.location && event.location.name}</div>
 
           <div style={displayColumn('scheduled')}></div>
 
@@ -49,7 +47,7 @@ export default function Event(props){
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  handleStatusChange(item.id, 'confirmation', changeConfirmation(event && event.confirmation))
+                  handleStatusChange(item, 'confirmation', changeConfirmation(event && event.confirmation))
                 }}
               >
                 <p>{event && event.confirmation.toUpperCase()}</p>

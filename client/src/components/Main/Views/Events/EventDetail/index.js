@@ -5,14 +5,16 @@ import Logistics from './Logistics/index.js';
 import Invoice from './Invoice/index.js';
 import CashFlow from './CashFlow/index.js';
 import StaffModal from './StaffModal.js';
+import { GOOGLE } from '../../../../../services/google_service';
 import { event } from '../../../../../services/event';
 import { client } from '../../../../../services/client';
 import { place } from '../../../../../services/place';
-import { eventEmployee } from '../../../../../services/eventEmployee'
+import { eventEmployee } from '../../../../../services/eventEmployee';
 import { employee } from '../../../../../services/employee'
 import { eventTitle } from '../../../../Helpers/eventTitle';
 import { clientName } from '../../../../Helpers/clientHelpers';
 import { locationName } from '../../../../Helpers/locationName';
+import { formatFromGoogle } from '../../../../Helpers/googleFormatters';
 import moment from 'moment'
 import './index.css';
 
@@ -22,6 +24,7 @@ export default class EventDetail extends Component {
     this.state = {
       view: 'Basic Info',
       evt: null,
+      workers: [],
       fields: null,
       searchFieldData: null,
       formData: null,
@@ -47,7 +50,9 @@ export default class EventDetail extends Component {
     const { isNew } = this.props
     if (isNew) {
       this.switchEditMode()
-      this.setField('summary', 'Create a New Event')
+      this.setField('summary', 'New Event')
+      this.setFormData('summary', 'New Event')
+      this.handleDateChange('start', moment().startOf('hour').format())
     } else {
       await this.initialSetup(this.props)
     }
@@ -65,26 +70,36 @@ export default class EventDetail extends Component {
     await this.setLocationName();
   }
 
+  synchronizeWithGoogle = async (evt) => {
+    const gcId = localStorage.getItem('google_calendar_id');
+    const e = await GOOGLE.getEvent(gcId, evt.gcId)
+    const formatted = await formatFromGoogle(e)
+    const synced = await event.sync(formatted)
+    return synced
+  }
+
   setEvent = async(props) => {
     const { e, evtId } = props
-    if (!e) {
 
-      const evt = await event.getOne(evtId)
+    if (!e) {
+      let evt = await event.getOne(evtId)
       if (evt) {
+        evt = await this.synchronizeWithGoogle(evt);
         this.setState({ evt, workers: evt.staff })
       } else {
         this.setState({ redirectToEvents: true })
       }
-
     } else {
-      this.setState({ evt: e, workers: e.staff })
+      const evt = await this.synchronizeWithGoogle(e);
+      this.setState({ evt, workers: e.staff })
     }
+
     await this.setFields();
   }
 
   setFields = () => {
     const { evt } = this.state
-    const fieldNames = ['summary', 'confirmation','start', 'end', 'action', 'kind', 'description', 'notes', 'package']
+    const fieldNames = ['summary', 'confirmation','start', 'end', 'callTime', 'action', 'kind', 'description', 'notes', 'package']
     if (!evt) {
       fieldNames.forEach( field => this.setField( field, null ))
     } else {
@@ -126,23 +141,34 @@ export default class EventDetail extends Component {
   setLocationName = () => {
     const { evt } = this.state
     if (evt) {
-      if (evt.placeLocation) {
-        const location = locationName(evt.placeLocation)
-        if (evt.placeLocation.installation) {
+      if (evt.location) {
+        const location = locationName(evt.location)
+        if (evt.location.installation) {
           this.setState(prevState => ({
             fields: {
               ...prevState.fields,
               location,
-              onPremise: evt.placeLocation.installation
+              onPremise: evt.location.installation
             },
             formData: {
-              location_id: evt.placeLocation.id
+              location_id: evt.location.id
             }
           }))
         } else {
           this.setField('location', location)
-          this.setFormData('location_id', evt.client.id)
+          this.setFormData('location_id', evt.location.id)
         }
+      }
+    }
+  }
+
+  setCallLocationName = () => {
+    const { evt } = this.state
+    if (evt) {
+      if (evt.callLocation) {
+        const callLocation = locationName(evt.callLocation)
+        this.setField('callLocation', callLocation)
+        this.setFormData('call_location_id', evt.callLocation.id)
       }
     }
   }
@@ -157,6 +183,38 @@ export default class EventDetail extends Component {
     this.setState({
       searchFieldData: null
     })
+  }
+
+  resetStaff = async() => {
+    const { formData, workers } = this.state
+    if (formData) {
+      if (formData.employee_ids && formData.employee_ids.length) {
+
+        //for each employee id, find workers with no corresponding employee id
+        const originals = workers.filter( worker => {
+          return formData.employee_ids.find( id => worker.info.id !== id)
+        })
+
+        //for each employee id, find workers with a corresponding employee id
+        const addedWorkers = workers.filter( worker => {
+          return formData.employee_ids.find( id => worker.info.id === id)
+        })
+
+        //delete addedWorkers
+        await Promise.all(addedWorkers.map( async worker => {
+          await eventEmployee.delete(worker.id)
+        }))
+
+        //set state with original workers, and reset employee ids
+        this.setState(prevState => ({
+          workers: originals,
+          formData: {
+            ...prevState.formData,
+            employee_ids: []
+          }
+        }))
+      }
+    }
   }
 
   updateSummaryField = () => {
@@ -177,7 +235,6 @@ export default class EventDetail extends Component {
   handleChange = (e) => {
     if (e) {
       const {name, value} = e.target
-
       this.setState(prevState => ({
         fields: {
           ...prevState.fields,
@@ -188,7 +245,7 @@ export default class EventDetail extends Component {
           [name]: value
         }
       }), () => {
-        if (name !== 'summary') {
+        if (name !== 'summary' && name !== 'notes') {
           this.updateSummaryField()
         }
       })
@@ -199,64 +256,166 @@ export default class EventDetail extends Component {
   handleDateChange = (field, datetime) => {
     let start;
     let end;
-    switch (field) {
-      case 'start':
-        start = moment(datetime).format()
-        end = moment(this.state.fields.end)
+    let call;
+    if (datetime) {
+      switch (field) {
+        case 'start':
+          start = moment(datetime).format()
+          end = moment(this.state.fields.end)
+          call = moment(this.state.fields.callTime)
 
-        if (end.isSameOrBefore(start) || !this.state.fields.end) {
+          if (
+            (moment(end).isSameOrBefore(moment(start)) || !this.state.fields.end) &&
+            (moment(call).isSameOrAfter(moment(start)) || !this.state.fields.callTime)
+          )
+          {
+            call = start
+            end = moment(start).add(1, 'hour').format()
 
-          end = moment(start).add(1, 'hour').format()
+            this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                start,
+                end,
+                callTime: call
+              },
+              formData: {
+                ...prevState.formData,
+                start,
+                end,
+                call_time: call
+              }
+            }))
 
+          } else if (moment(end).isSameOrBefore(moment(start)) || !this.state.fields.end) {
+
+            end = moment(start).add(1, 'hour').format()
+
+            this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                start,
+                end
+              },
+              formData: {
+                ...prevState.formData,
+                start,
+                end
+              }
+            }))
+
+          } else if (moment(call).isSameOrAfter(moment(start)) || !this.state.fields.callTime) {
+            call = start
+
+            this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                start,
+                callTime: call
+              },
+              formData: {
+                ...prevState.formData,
+                start,
+                call_time: call
+              }
+            }))
+
+          } else {
+
+            this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                start
+              },
+              formData: {
+                ...prevState.formData,
+                start
+              }
+            }))
+
+          }
+        break;
+
+        case 'end':
+          end = moment(datetime).format();
+          start = moment(this.state.fields.start)
+
+          if (moment(end).isAfter(start)) {
+            this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                end
+              },
+              formData: {
+                ...prevState.formData,
+                end
+              }
+            }))
+          }
+        break;
+
+        case 'call':
+          call = moment(datetime).format();
+          start = moment(this.state.fields.start)
+
+          if (moment(call).isSameOrBefore(start)) {
+            this.setState(prevState => ({
+              fields: {
+                ...prevState.fields,
+                callTime: call
+              },
+              formData: {
+                ...prevState.formData,
+                call_time: call
+              }
+            }))
+          }
+        break;
+
+        default:
+        break;
+      }
+    } else {
+      switch (field) {
+        case 'start':
           this.setState(prevState => ({
             fields: {
               ...prevState.fields,
-              start: start,
-              end: end
+              start: ''
             },
             formData: {
               ...prevState.formData,
-              start: start,
-              end: end
+              start: ''
             }
           }))
-
-        } else {
-
+        break;
+        case 'end':
           this.setState(prevState => ({
             fields: {
               ...prevState.fields,
-              start: start.format()
+              end: ''
             },
             formData: {
               ...prevState.formData,
-              start: start.format()
+              end: ''
             }
           }))
-
-        }
-      break;
-
-      case 'end':
-        end = moment(datetime);
-        start = moment(this.state.fields.start)
-
-        if (end.isAfter(start)) {
+        break;
+        case 'call':
           this.setState(prevState => ({
             fields: {
               ...prevState.fields,
-              end: end.format()
+              callTime: ''
             },
             formData: {
               ...prevState.formData,
-              end: end.format()
+              call_time: ''
             }
           }))
-        }
-      break;
-
-      default:
-      break;
+        break;
+        default:
+        break;
+      }
     }
   }
 
@@ -275,7 +434,6 @@ export default class EventDetail extends Component {
 
   handleSearchChange = async(name, value) => {
     this.setField(name, value)
-
     switch (name) {
       case 'client':
         const clients = await this.findClients(value)
@@ -334,6 +492,29 @@ export default class EventDetail extends Component {
 
       break;
 
+      case 'callLocation':
+        const callLocations = await this.findPlaces(value)
+
+        if (!value || !callLocations || callLocations.length < 0) {
+
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              call_location_id: null
+            }
+          }))
+
+        }
+
+        this.setState(prevState => ({
+          searchFieldData: {
+            ...prevState.searchFieldData,
+            callLocations
+          }
+        }))
+
+      break;
+
       default:
       break;
     }
@@ -384,6 +565,24 @@ export default class EventDetail extends Component {
             }), () => this.updateSummaryField())
           }
 
+        break;
+
+        case 'callLocation':
+          item = searchFieldData.callLocations[index]
+          const callLocation = locationName(item)
+
+          if (item) {
+            this.setState(prevState => ({
+              formData: {
+                ...prevState.formData,
+                call_location_id: item.id
+              },
+              fields: {
+                ...prevState.fields,
+                callLocation
+              }
+            }))
+          }
         break;
 
         default:
@@ -438,36 +637,128 @@ export default class EventDetail extends Component {
   }
 
   handleEmployeeSelect = (employee) => {
-    const workers = [...this.state.workers]
-    const scheduled = workers.find(worker => worker.info.id === employee.id)
-    if (scheduled) {
-      this.removeWorker(scheduled)
+    const { workers, formData } = this.state
+    if (formData) {
+      const { employee_ids } = formData
+      const scheduled = workers.find(worker => worker.info.id === employee.id) || (employee_ids && employee_ids.find(id => id === employee.id))
+      if (scheduled) {
+        this.removeWorker(scheduled)
+      } else {
+        this.addWorker(employee)
+      }
     } else {
       this.addWorker(employee)
     }
   }
 
   addWorker = async (employee) => {
-    const evt  = { ...this.state.evt }
-    const workers = [...this.state.workers]
-    const newWorker = await eventEmployee.create({
-      event_id: evt.id,
-      employee_id: employee.id
-    })
-    workers.push(newWorker)
-    this.setState({ workers })
-    evt.staff = workers
-    this.props.handleUpdate(evt)
+    const { formData } = this.state
+    if (this.props.isNew) {
+      if (formData) {
+        if (formData.event_employees_attributes && formData.event_employees_attributes.length) {
+          this.setState(prevState => ({
+            formData:{
+              ...prevState.formData,
+              event_employees_attributes:[
+                ...prevState.formData.event_employees_attributes,
+                { employee_id: employee.id }
+              ]
+            },
+            workers: [
+              ...prevState.workers,
+              { info: employee }
+            ]
+          }))
+        } else {
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              event_employees_attributes:[ { employee_id: employee.id } ]
+            },
+            workers: [ { info: employee } ]
+          }))
+        }
+      } else {
+        this.setState({
+          formData:{ event_employees_attributes:[ { employee_id: employee.id } ] },
+          workers: [ { info: employee } ]
+        })
+      }
+    } else {
+
+      const evt  = { ...this.state.evt }
+      const workers = [...this.state.workers]
+      const newWorker = await eventEmployee.create({
+        event_id: evt.id,
+        employee_id: employee.id
+      })
+      workers.push(newWorker)
+      evt.staff = workers
+      this.setState({ evt, workers })
+
+      if (formData) {
+        if (formData.event_employees_attributes && formData.event_employees_attributes.length) {
+          this.setState(prevState => ({
+            formData:{
+              ...prevState.formData,
+              event_employees_attributes:[
+                ...prevState.formData.event_employees_attributes,
+                { id: newWorker.id, employee_id: employee.id }
+              ]
+            }
+          }))
+        } else {
+          this.setState(prevState => ({
+            formData: {
+              ...prevState.formData,
+              event_employees_attributes:[ { id: newWorker.id, employee_id: employee.id } ]
+            }
+          }))
+        }
+      } else {
+        this.setState({
+          formData:{ event_employees_attributes:[ { id: newWorker.id, employee_id: employee.id } ] }
+        })
+      }
+    }
   }
 
   removeWorker = async (worker) => {
     const evt  = { ...this.state.evt }
     const workers = [...this.state.workers]
-    await eventEmployee.delete(worker.id)
+    const { formData } = this.state
+
+    if (!this.props.isNew) {
+      await eventEmployee.delete(worker.id)
+    }
+
     const updatedWorkers = workers.filter(w => w.id !== worker.id)
-    this.setState({ workers: updatedWorkers })
     evt.staff = updatedWorkers
-    this.props.handleUpdate(evt)
+
+    if (formData && formData.event_employees_attributes && formData.event_employees_attributes.length) {
+
+      const event_employees_attributes = formData.event_employees_attributes.filter( obj => {
+        const worker = workers.find(worker => worker.info.id !== obj.employee_id)
+        return worker
+      })
+
+      this.setState(prevState => ({
+        formData: {
+          ...prevState.formData,
+          event_employees_attributes
+        },
+        evt,
+        workers: updatedWorkers
+      }))
+
+    } else {
+
+      this.setState(prevState => ({
+        evt,
+        workers: updatedWorkers
+      }))
+
+    }
   }
 
   getActiveEmployees = async() => {
@@ -481,12 +772,9 @@ export default class EventDetail extends Component {
   handleSubmit = async() => {
     const { evt, formData, editMode } = this.state
     const { isNew, match, history } = this.props
-    if (formData) {
-
-      if (isNew) {
-
-        const newEvt = await event.createNew(formData)
-        await this.props.handleCreate(newEvt);
+    if (isNew) {
+      if (formData) {
+        const newEvt = await this.props.handleCreate(formData);
         const url = () => {
           let words = `${match.path}`.split('/')
           words.pop()
@@ -494,30 +782,26 @@ export default class EventDetail extends Component {
           return link
         }
         history.push(`${url()}/${newEvt.id}`)
-
       } else {
-        await event.update(evt.id, formData)
-        const updatedEvent = await event.getOne(evt.id)
-        await this.setState({ evt: updatedEvent })
-
-        await this.resetForm()
-        await this.setClientName();
-        await this.setFields();
+        this.close()
       }
-
-      if (editMode) {
-        this.switchEditMode()
-      }
-
     } else {
-      this.close()
+      const updatedEvent = await this.props.handleUpdate(evt, formData)
+      await this.setState({ evt: updatedEvent })
+
+      await this.resetForm()
+      await this.setClientName();
+      await this.setFields();
+    }
+
+    if (editMode) {
+      this.switchEditMode()
     }
   }
 
   handleDelete = async() => {
     const { evt } = this.state
-    await event.delete(evt.id)
-    await this.props.handleDelete(evt.id)
+    await this.props.handleDelete(evt)
     this.setState({ redirectToEvents: true })
   }
 
@@ -588,6 +872,7 @@ export default class EventDetail extends Component {
   close = () => {
     this.resetForm();
     this.resetSearchFieldData();
+    this.resetStaff();
     this.switchEditMode();
     this.setFields();
     this.setClientName();
@@ -661,5 +946,4 @@ export default class EventDetail extends Component {
       </div>
     )
   }
-
 }

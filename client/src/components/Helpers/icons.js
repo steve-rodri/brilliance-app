@@ -44,7 +44,7 @@ function addIcon(size){
 }
 
 function deleteIcon(size){
-  return <FontAwesomeIcon  className="Icon" color="red" icon="minus-circle" size={size}/>
+  return <FontAwesomeIcon className="Icon" color="red" icon="minus-circle" size={size}/>
 }
 
 function closeIcon(size, color, className){

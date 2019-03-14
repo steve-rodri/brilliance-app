@@ -4,8 +4,12 @@ import './StaffSelector.css'
 export default class StaffSelector extends Component {
 
   style = (employee) => {
-    const { workers } = this.props
-    if (workers && workers.find(worker => worker.info.id === employee.id)) {
+    const { workers, employee_ids } = this.props
+    if (
+        (workers && workers.find(worker => worker.info.id === employee.id))
+        ||
+        (employee_ids && employee_ids.find(id => id === employee.id))
+      ) {
       return {
         backgroundColor: 'limegreen',
         border: '2px solid limegreen',

@@ -78,15 +78,15 @@ ActiveRecord::Schema.define(version: 2019_02_27_170306) do
   end
 
   create_table "event_employees", force: :cascade do |t|
-    t.string "confirmation"
-    t.boolean "paid?"
+    t.string "confirmation", default: "needsAction"
+    t.boolean "paid?", default: false
     t.string "position"
-    t.float "rate"
+    t.float "rate", default: 0.0
     t.date "clock_in"
     t.date "clock_out"
-    t.integer "break_minutes"
-    t.boolean "break?"
-    t.boolean "hourly?"
+    t.integer "break_minutes", default: 0
+    t.boolean "break?", default: false
+    t.boolean "hourly?", default: false
     t.bigint "employee_id"
     t.bigint "event_id"
     t.datetime "created_at", null: false
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_170306) do
     t.bigint "client_id"
     t.integer "location_id"
     t.integer "call_location_id"
-    t.integer "creator"
+    t.integer "creator_id"
     t.index ["client_id"], name: "index_events_on_client_id"
   end
 
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_170306) do
   add_foreign_key "event_employees", "employees"
   add_foreign_key "event_employees", "events"
   add_foreign_key "events", "clients"
-  add_foreign_key "events", "contacts", column: "creator"
+  add_foreign_key "events", "contacts", column: "creator_id"
   add_foreign_key "events", "places", column: "call_location_id"
   add_foreign_key "events", "places", column: "location_id"
   add_foreign_key "invoices", "events"
