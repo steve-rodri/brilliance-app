@@ -9,16 +9,14 @@ function eventTitle (evt){
 function title(evt) {
 
   function location(){
-    if (!evt.location) {
-      if (evt.placeLocation) {
-        if (evt.placeLocation.shortName) {
-          return evt.placeLocation.shortName
-        } else {
-        return evt.placeLocation.name
-        }
+    if (evt.location) {
+      if (evt.location.shortName) {
+        return evt.location.shortName
+      } else if (evt.location.name) {
+        return evt.location.name  
+      } else {
+        return evt.location
       }
-    } else {
-      return evt.location
     }
   }
 

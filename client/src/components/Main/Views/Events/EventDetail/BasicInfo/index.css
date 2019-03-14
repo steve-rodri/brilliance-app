@@ -49,7 +49,6 @@ label {
 
   .BasicInfo--component {
     width: auto;
-    min-height: 300px;
     grid-template-rows: 30px auto;
     background-color: var(--light-blue-t);
     border: 1px dashed var(--light-blue);

@@ -4,6 +4,8 @@ import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
 import moment from 'moment'
+import { GOOGLE } from '../../../../services/google_service'
+import { formatToGoogle, formatFromGoogle } from '../../../Helpers/googleFormatters'
 import { event } from '../../../../services/event'
 import { eventTitle } from '../../../Helpers/eventTitle'
 
@@ -16,7 +18,6 @@ export default class Events extends Component {
       category: 'All',
       categories: ['Production', 'CANS', 'THC', 'CATP'],
       columnHeaders: ['title', 'client', 'location', 'confirmation', 'scheduled'],
-
       page: 1
     }
   }
@@ -49,6 +50,8 @@ export default class Events extends Component {
   componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
+    const gcId = localStorage.getItem('google_calendar_id');
+    this.setState({ gcId })
     this.setEvents(this.props)
   }
 
@@ -122,26 +125,94 @@ export default class Events extends Component {
     }))
   }
 
-  addEvent = async(newEvent) => {
+  addEvent = async(formData) => {
+    const { gcId } = this.state
     let events = [...this.state.events]
-    events.push(newEvent)
+    const newEvent = await event.createNew(formData)
+    const newGoogleEvent = await GOOGLE.createEvent(gcId, formatToGoogle(newEvent))
+    let formatted = await formatFromGoogle(newGoogleEvent)
+
+    if (formatted.event_employees_attributes) {
+
+      let update = formatted.event_employees_attributes.filter(ee => {
+
+        if (newEvent.staff && newEvent.staff.length) {
+          return newEvent.staff.find(worker => worker.info.id !== ee.employee_id)
+        } else {
+          return 1
+        }
+
+      })
+
+      if (update && update.length) {
+        formatted.event_employees_attributes = update
+      } else {
+        delete formatted.event_employees_attributes
+      }
+
+    }
+
+    const evt = await event.update(newEvent.id, formatted)
+    events.push(evt)
     events = events.sort((evtOne, evtTwo) => {
-      return moment(evtOne.start).isBefore(evtTwo.start)
+      return moment(evtOne.start).isBefore(moment(evtTwo.start))
     })
     this.setState({ events })
+    return evt
   }
 
-  deleteEvent = async(id) => {
-    let events = [...this.state.events]
-    events = events.filter(evt => evt.id !== id)
-    this.setState({ events })
+  deleteEvent = async(evt) => {
+    const { gcId } = this.state
+    await event.delete(evt.id)
+    if (evt.gcId) {
+      await GOOGLE.deleteEvent(gcId, evt.gcId)
+    }
   }
 
-  updateEvent = async(evt) => {
-    let events = [...this.state.events]
-    const id = events.findIndex((event) => event.id === evt.id)
-    events[id] = evt
-    this.setState({ events })
+  updateEvent = async(e, data) => {
+    const { gcId } = this.state
+    if (e) {
+      let events = [...this.state.events]
+      let updatedEvent;
+      if (data) {
+        updatedEvent = await event.update(e.id, data)
+      } else {
+        updatedEvent = e
+      }
+      //FIX ISSUE
+      if (e.gcId) {
+        await GOOGLE.patchEvent(gcId, e.gcId, formatToGoogle(updatedEvent))
+      } else {
+        const newGoogleEvent = await GOOGLE.createEvent(gcId, formatToGoogle(updatedEvent))
+        let formatted = await formatFromGoogle(newGoogleEvent)
+
+        formatted = {
+          ...data,
+          ...formatted,
+        }
+
+        if (formatted.event_employees_attributes) {
+
+          let update = formatted.event_employees_attributes.filter(ee => {
+
+            if (formatted.employee_ids && formatted.employee_ids.length) {
+              return formatted.employee_ids.find(id => ee.employee_id !== id)
+            } else {
+              return 1
+            }
+
+          })
+
+          formatted.event_employees_attributes = update
+        }
+        updatedEvent = await event.update(e.id, formatted)
+      }
+
+      const index = events.findIndex((event) => event.id === e.id)
+      events[index] = updatedEvent
+      this.setState({ events })
+      return updatedEvent
+    }
   }
 
   updateEvents = async(evts) => {
@@ -151,7 +222,12 @@ export default class Events extends Component {
           e.summary = eventTitle(e)
           await event.update(e.id, {summary: e.summary})
         }
-        return e
+        const evt = await this.synchronizeWithGoogle(e)
+        if (evt) {
+          return evt
+        } else {
+          return e
+        }
       })
       const loadedEvents = await Promise.all(updatedEvents)
       const events = [...this.state.events]
@@ -202,13 +278,17 @@ export default class Events extends Component {
     })
   }
 
-  handleStatusChange = async (id, name, value) => {
-    let events = [...this.state.events]
-    if (events) {
-      const evt = events.find((event) => event.id === id)
-      evt[name] = value;
-      this.setState({ events })
-      await event.update(id, { [name]: value } )
+  handleStatusChange = async (evt, name, value) => {
+    await this.updateEvent(evt, { [name]: value } )
+  }
+
+  synchronizeWithGoogle = async (evt) => {
+    const gcId = localStorage.getItem('google_calendar_id');
+    if (evt.gcId) {
+      const e = await GOOGLE.getEvent(gcId, evt.gcId)
+      const formatted = await formatFromGoogle(e)
+      const synced = await event.sync(formatted)
+      return synced
     }
   }
 
@@ -271,7 +351,7 @@ export default class Events extends Component {
     return (
       <Switch>
         <Route exact path={match.path} render={ props => this.List(props)} />
-        <Route path={`${match.path}/new`} render={ props => this.Create(props)} />
+        <Route exact path={`${match.path}/new`} render={ props => this.Create(props)} />
         <Route path={`${match.path}/:id`} render={ props => this.Show(props)} />
       </Switch>
     )

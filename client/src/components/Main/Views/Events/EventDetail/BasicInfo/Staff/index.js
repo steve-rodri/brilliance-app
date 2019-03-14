@@ -19,7 +19,7 @@ export default class Staff extends Component {
   }
 
   view = () => {
-    const { editMode } = this.props
+    const { editMode, workers } = this.props
     if (editMode) {
       return (
         <Edit
@@ -27,7 +27,7 @@ export default class Staff extends Component {
           iconSize={this.iconSize()}
         />
       )
-    } else if (this.state.workers) {
+    } else if (workers && workers.length) {
       return (
         <View
           {...this.props}

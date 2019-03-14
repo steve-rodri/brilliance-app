@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import GoogleLogin from 'react-google-login'
 import { Redirect } from 'react-router-dom'
+import { GOOGLE } from '../../services/google_service'
 import logo_t from '../../images/logo_t.GIF'
 import './Login.css'
 
@@ -12,9 +13,9 @@ export default class Login extends Component {
     }
   }
 
-  componentWillMount(){
-    const token = localStorage.getItem('google_access_token');
-    if (token) {
+  async componentDidMount(){
+    const user = await GOOGLE.getUser()
+    if (user) {
       this.setState({ redirectToDashboard: true })
     }
   }
@@ -28,26 +29,23 @@ export default class Login extends Component {
   }
 
   render(){
-    if (this.state.redirectToDashboard) {
-      return (<Redirect to="/admin" />)
-    } else {
-      return (
-        <div className="login-page">
-          <div className="login-form">
-            <div className="logo-container">
-              <img className="logo" src={logo_t} alt='logo'/>
-            </div>
-            <div className='google-login-container'>
-              <GoogleLogin
-                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                scope="https://www.googleapis.com/auth/calendar"
-                buttonText="Login with Google"
-                onSuccess={this.responseGoogle}
-              />
-            </div>
+    if (this.state.redirectToDashboard) return (<Redirect to="/admin" />)
+    return (
+      <div className="login-page">
+        <div className="login-form">
+          <div className="logo-container">
+            <img className="logo" src={logo_t} alt='logo'/>
+          </div>
+          <div className='google-login-container'>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              scope="https://www.googleapis.com/auth/calendar"
+              buttonText="Login with Google"
+              onSuccess={this.responseGoogle}
+            />
           </div>
         </div>
-      )
-    }
+      </div>
+    )
   }
 }

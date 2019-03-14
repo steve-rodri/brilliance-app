@@ -27,16 +27,27 @@ export default function Notes(props){
         <h3 className="BasicInfo--component-title">Notes</h3>
         <div className="Notes--container">
         <label>Notes</label>
-          <textarea
-            className="Notes--readonly"
-            readOnly
-            value={fields.notes? fields.notes : ''}
-          />
+          <div className="Notes--readonly">
+            {
+              fields && fields.notes?
+              notes(fields.notes)
+              :
+              null
+            }
+          </div>
+
         </div>
       </div>
     )
   } else {
     return null
+  }
+
+  function notes(text){
+    const arr = text.split(`\n`)
+    return arr.map((p, id) => (
+      <p key={id}>{p}</p>
+    ))
   }
 
 }

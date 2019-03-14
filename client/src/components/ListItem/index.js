@@ -53,7 +53,21 @@ export default function ListItem(props){
       case 'Events':
       const event = item;
         if (numColumns) {
-          if ( event && event.start && moment(event.start).isSameOrAfter(moment()) ) {
+          if (
+            event &&
+            event.start &&
+            event.end &&
+            moment(event.start).isSameOrBefore(moment()) &&
+            moment(event.end).isSameOrAfter(moment())
+          ) {
+            return {
+              color: '#eeeeee',
+              backgroundColor: 'var(--med-dark-blue)',
+              gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
+              border: 'none'
+            }
+          }
+          if ( event && event.end && moment(event.end).isSameOrAfter(moment()) ) {
             return {
               gridTemplateColumns: `repeat(${numColumns}, 1fr)`
             }
@@ -65,7 +79,7 @@ export default function ListItem(props){
             }
           }
         } else {
-          if ( event && event.start && moment(event.start).isSameOrAfter(moment()) ) {
+          if ( event && event.start && moment(event.end).isSameOrAfter(moment()) ) {
             return {}
           } else {
             return {

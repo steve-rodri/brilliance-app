@@ -8,7 +8,7 @@ export default class Dashboard extends Component {
 
   greeting = () => {
     const { user } = this.props
-    const username = user? user.givenName : ''
+    const username = user? user.given_name : ''
 
     const currentTime = moment().format();
     const morningZ = moment().startOf('day').add(6, "hours");
