@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  inc: false
+  inc_in_commission: false
+  discount_adj: 1.5
+  invoice: one
+  item: one
+
+two:
+  inc: false
+  inc_in_commission: false
+  discount_adj: 1.5
+  invoice: two
+  item: two
