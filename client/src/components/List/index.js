@@ -17,23 +17,9 @@ export default class List extends Component {
       }
     }
 
-    const styleList = () => {
-      if (items && items.length) {
-        return {}
-      } else {
-        return {
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100%',
-          width: '100%'
-        }
-      }
-    }
-
     return (
       <div className="List--container">
-        <div id="List" className="List" style={styleList()}>
+        <div id="List" className="List">
           {columnHeaders?
             <div className="Titles" style={style()}>
               {columnHeaders && columnHeaders.map((header, id) => (
@@ -44,19 +30,33 @@ export default class List extends Component {
             null
           }
             <InfiniteScroll
-              style={{overflow: 'hidden'}}
               dataLength={items && items.length}
               next={load}
               hasMore={hasMore}
-              loader={<div className="List--Loader"></div>}
-              endMessage=
+              loader=
               {
+                <div className="List--Loader">
+                  <div className="lds-ellipsis">
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                  </div>
+                </div>
+              }
+              endMessage=
+              { items && items.length?
                 <div className="List--End-Message">
-                  {items?
-                    <div></div>
-                    :
-                    <div>None Found</div>
-                  }
+                  <h4>{`Found ${items.length} ${type}`}</h4>
+                </div>
+                :
+                <div className="List--None-Found">
+                  <h2>Nothing Found</h2>
+                  <p>Try another search...</p>
                 </div>
               }
               scrollableTarget="List"
