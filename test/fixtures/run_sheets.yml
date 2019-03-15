@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  guest_of_honor: MyString
+  dj: MyString
+  walls_foundation: MyString
+  dome_foundation: MyString
+  coffer_foundation: MyString
+  columns_foundation: MyString
+  elevator: MyString
+  bar: MyString
+  tier: MyString
+  walls_entrance: MyString
+  intells_entrance: MyString
+  dome_entrance: MyString
+  candle_lighting: MyString
+  logo: MyString
+  montage: MyString
+  screens: MyString
+  bar_screens_adult_cocktail: MyString
+  kids_zeus_room: MyString
+  zapshots: MyString
+  foundation: MyString
+  intro_bridal_party: MyString
+  bride_and_groom: MyString
+  first_dance: MyString
+  toast: MyString
+  dinner: MyString
+  cake_cutting: MyString
+  bride_and_father: MyString
+  groom_and_mother: MyString
+  comments: MyString
+  event: one
+
+two:
+  guest_of_honor: MyString
+  dj: MyString
+  walls_foundation: MyString
+  dome_foundation: MyString
+  coffer_foundation: MyString
+  columns_foundation: MyString
+  elevator: MyString
+  bar: MyString
+  tier: MyString
+  walls_entrance: MyString
+  intells_entrance: MyString
+  dome_entrance: MyString
+  candle_lighting: MyString
+  logo: MyString
+  montage: MyString
+  screens: MyString
+  bar_screens_adult_cocktail: MyString
+  kids_zeus_room: MyString
+  zapshots: MyString
+  foundation: MyString
+  intro_bridal_party: MyString
+  bride_and_groom: MyString
+  first_dance: MyString
+  toast: MyString
+  dinner: MyString
+  cake_cutting: MyString
+  bride_and_father: MyString
+  groom_and_mother: MyString
+  comments: MyString
+  event: two
