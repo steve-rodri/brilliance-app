@@ -10,6 +10,13 @@ Event.destroy_all
 Invoice.destroy_all
 Employee.destroy_all
 EventEmployee.destroy_all
+RunSheet.destroy_all
+Line.destroy_all
+Item.destroy_all
+ItemContent.destroy_all
+Content.destroy_all
+Inventory.destroy_all
+Expense.destroy_all
 
 #seed Contacts
 csv_text = File.read(Rails.root.join('lib','seeds', 'Contacts.csv'))
@@ -194,3 +201,140 @@ csv.each do |row|
   })
 end
 puts "There are now #{EventEmployee.count} rows in the EventEmployees table"
+
+#seed Line
+csv_text = File.read(Rails.root.join('lib','seeds', 'Lines.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  Line.create! ({
+    inc: row['inc'],
+    inc_in_commission: row['inc_in_commission'],
+    discount_adj: row['discount_adj'],
+
+    invoice_id: row['invoice_id'],
+    item_id: row['item_id'],
+    created_at: row['created_at']
+  })
+end
+puts "There are now #{Line.count} rows in the Lines table"
+
+#seed Item
+csv_text = File.read(Rails.root.join('lib','seeds', 'Items.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  Item.create! ({
+    kind: row['kind'],
+    install: row['install'],
+    description: row['description'],
+    additional_notes: row['additional_notes'],
+    quantity: row['quantity'],
+    discount_adj: row['discount_adj'],
+
+    created_at: row['created_at']
+  })
+end
+puts "There are now #{Item.count} rows in the Items table"
+
+#seed ItemContent
+csv_text = File.read(Rails.root.join('lib','seeds', 'Item_Content.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  ItemContent.create! ({
+
+    created_at: row['created_at']
+  })
+end
+puts "There are now #{ItemContent.count} rows in the ItemContent table"
+
+#seed Content
+csv_text = File.read(Rails.root.join('lib','seeds', 'Contents.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  Content.create! ({
+
+    item_id: row['item_id'],
+    content_id: row['content_id'],
+    created_at: row['created_at']
+  })
+end
+puts "There are now #{Content.count} rows in the Contents table"
+
+#seed Inventory
+csv_text = File.read(Rails.root.join('lib','seeds', 'Inventory.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  Inventory.create! ({
+
+    category: row['category'],
+    name: row['name'],
+    manufacturer: row['manufacturer'],
+    picture: row['picture'],
+    total_owned: row['total_owned'],
+    sell_price: row['sell_price'],
+    rental_price: row['rental_price'],
+    net_cost_per_invoice: row['net_cost_per_invoice'],
+    purchase_price: row['purchase_price'],
+
+    created_at: row['created_at']
+  })
+end
+puts "There are now #{Inventory.count} rows in the Inventories table"
+
+#seed RunSheet
+csv_text = File.read(Rails.root.join('lib','seeds', 'Run_Sheets.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  RunSheet.create! ({
+    guest_of_honor: row['guest_of_honor'],
+    dj: row['dj'],
+    walls_foundation: row['walls_foundation'],
+    dome_foundation: row['dome_foundation'],
+    coffer_foundation: row['coffer_foundation'],
+    columns_foundation: row['columns_foundation'],
+    elevator: row['elevator'],
+    bar: row['bar'],
+    tier: row['tier'],
+    walls_entrance: row['walls_entrance'],
+    intells_entrance: row['intells_entrance'],
+    dome_entrance: row['dome_entrance'],
+    candle_lighting: row['candle_lighting'],
+    logo: row['logo'],
+    montage: row['montage'],
+    screens: row['screens'],
+    bar_screens_adult_cocktail: row['bar_screens_adult_cocktail'],
+    kids_zeus_room: row['kids_zeus_room'],
+    zapshots: row['zapshots'],
+    foundation: row['foundation'],
+    intro_bridal_party: row['intro_bridal_party'],
+    bride_and_groom: row['bride_and_groom'],
+    first_dance: row['first_dance'],
+    toast: row['toast'],
+    dinner: row['dinner'],
+    cake_cutting: row['cake_cutting'],
+    bride_and_father: row['bride_and_father'],
+    groom_and_mother: row['groom_and_mother'],
+    comments: row['comments'],
+
+    event_id: row['event_id'],
+    created_at: row['created_at']
+  })
+end
+puts "There are now #{RunSheet.count} rows in the RunSheets table"
+
+#seed Expense
+csv_text = File.read(Rails.root.join('lib','seeds', 'Expenses.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  Expense.create! ({
+    type: row['type'],
+    amount: row['amount'],
+    reimbursement_type: row['reimbursement_type'],
+    receipt: row['receipt'],
+    paid: row['paid'],
+    notes: row['notes'],
+    staff_id: row['staff_id'],
+    event_id: row['event_id'], 
+    created_at: row['created_at']
+  })
+end
+puts "There are now #{Expense.count} rows in the Expenses table"
