@@ -18,12 +18,19 @@ Rails.application.routes.draw do
     resources :email_addresses do
       get 'find', on: :collection, to: 'email_addresses#find'
     end
-    resources :invoices
     resources :places do
       get 'find', on: :collection, to: 'places#find'
     end
     resources :employees
     resources :event_employees
+    resources :run_sheets
+    resources :invoices
+    resources :lines
+    resources :items
+    resources :item_contents
+    resources :contents
+    resources :inventories
+    resources :expenses
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
