@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: MyString
+  name: MyString
+  manufacturer: MyString
+  picture: MyString
+  total_owned: 1
+  sell_price: 1.5
+  rental_price: 1.5
+  net_cost_per_invoice: 1.5
+  purchase_price: 1.5
+
+two:
+  category: MyString
+  name: MyString
+  manufacturer: MyString
+  picture: MyString
+  total_owned: 1
+  sell_price: 1.5
+  rental_price: 1.5
+  net_cost_per_invoice: 1.5
+  purchase_price: 1.5
