@@ -24,6 +24,7 @@ main {
   height: 100%;
   grid-column: 2 / span 1;
   overflow: hidden;
+  background-color: var(--med-dark-blue);
 }
 
 @media (max-width: 1000px) {

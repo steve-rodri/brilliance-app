@@ -20,7 +20,7 @@ export default class List extends Component {
     return (
       <div className="List--container">
         <div id="List" className="List">
-          {columnHeaders?
+          {columnHeaders && items && items.length?
             <div className="Titles" style={style()}>
               {columnHeaders && columnHeaders.map((header, id) => (
               <h5 key={id}>{header}</h5>

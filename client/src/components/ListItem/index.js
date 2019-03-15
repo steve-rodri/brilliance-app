@@ -54,7 +54,7 @@ export default function ListItem(props){
         const event = item;
         const past = event && event.end && moment(event.end).isBefore(moment())
         const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
-        const iCalUID = event && event.iCalUid;
+        // const iCalUID = event && event.iCalUid;
         let style = {};
 
         if (numColumns) {
