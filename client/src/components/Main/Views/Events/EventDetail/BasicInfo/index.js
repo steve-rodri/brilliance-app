@@ -32,31 +32,33 @@ export default class BasicInfo extends Component {
           <Header {...this.props} />
         }
 
-        <div className="BasicInfo--components">
+        <div className="BasicInfo--components-container">
+          <div className="BasicInfo--components">
 
-          {
-            about?
-            <About {...this.props} />
-            :
-            null
-          }
+            {
+              about?
+              <About {...this.props} />
+              :
+              null
+            }
 
-          {
-            about?
-            <Staff {...this.props}/>
-            :
-            null
-          }
+            {
+              about?
+              <Staff {...this.props}/>
+              :
+              null
+            }
 
-          {
-            mobile?
-            null
-            :
-            <Logistics {...this.props}/>
-          }
+            {
+              mobile?
+              null
+              :
+              <Logistics {...this.props}/>
+            }
 
-          <Notes {...this.props} />
+            <Notes {...this.props} />
 
+          </div>
         </div>
 
 
