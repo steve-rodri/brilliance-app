@@ -23,19 +23,23 @@ export default function Event(props){
       {numColumns?
         <div className="List-Item" style={styleItem(item, type, numColumns)}>
 
-          <div style={displayColumn('title')}>
-            <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
+          <div className="List-Item--Cell" style={displayColumn('title')}>
+            <div>
+              <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
               <p>{date(event, true)}</p>
               <p>{time(event)}</p>
+            </div>
           </div>
 
-          <div style={displayColumn('client')}>
+          <div className="List-Item--Cell" style={displayColumn('client')}>
             {event && clientName(event.client)}
           </div>
 
-          <div style={displayColumn('location')}>{event && event.location && event.location.name}</div>
+          <div className="List-Item--Cell" style={displayColumn('location')}>{event && event.location && event.location.name}</div>
 
-          <div style={displayColumn('scheduled')}></div>
+          <div className="List-Item--Cell" style={displayColumn('scheduled')}>
+            {scheduled(event)}
+          </div>
 
           <div className="List-Item--Cell" style={displayColumn('confirmation')}>
             {
@@ -103,6 +107,87 @@ function summary(event){
       return <h4>{summary}</h4>
     } else {
       return <h4>{summary}</h4>
+    }
+  }
+}
+
+
+function scheduled(evt){
+  if (evt && evt.start && moment(evt.start).isSameOrAfter(moment(), 'days')) {
+    if (evt && evt.staff && evt.staff.length) {
+      let needsAction = 0;
+      let declined = 0;
+      let tentative = 0;
+      let accepted = 0;
+
+      evt.staff.forEach(worker => {
+        switch (worker.confirmation) {
+          case 'needsAction':
+            needsAction += 1
+            break;
+          case 'declined':
+            declined += 1
+            break;
+          case 'tentative':
+            tentative += 1
+            break;
+          case 'accepted':
+            accepted += 1
+            break;
+          default:
+            break;
+        }
+      })
+
+      if (accepted === evt.staff.length) {
+        return (
+          <div className="Event--scheduled" style={{ backgroundColor: 'limegreen', color: 'white'}}>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid white', width: '100%', height: '100%'}}>
+              <p>{`${evt.staff.length} scheduled`}</p>
+            </div>
+            <div className="Event--scheduled-details">
+              <h4>ALL CONFIRMED</h4>
+            </div>
+          </div>
+        )
+      } else if (!accepted) {
+        return (
+          <div className="Event--scheduled" style={{ backgroundColor: 'red', color: 'white' }}>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid white', width: '100%', height: '100%'}}>
+              <p>{`${evt.staff.length} scheduled`}</p>
+            </div>
+            <div className="Event--scheduled-details">
+              <div style={{textAlign: 'left'}}>
+                {tentative + needsAction? <p>{`${tentative + needsAction} unconfirmed`}</p> : null}
+                {declined? <p>{`${declined} declined`}</p> : null}
+              </div>
+            </div>
+          </div>
+        )
+      } else {
+        return (
+          <div className="Event--scheduled" style={{ backgroundColor: 'gold', color: 'black' }}>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid black', width: '100%', height: '100%'}}>
+              <p>{`${evt.staff.length} scheduled`}</p>
+            </div>
+            <div className="Event--scheduled-details">
+              <div style={{textAlign: 'left'}}>
+                <p>{`${accepted} confirmed`}</p>
+                {tentative + needsAction? <p>{`${tentative + needsAction} unconfirmed`}</p> : null}
+                {declined? <p>{`${declined} declined`}</p> : null}
+              </div>
+            </div>
+          </div>
+        )
+      }
+    } else {
+      return (
+        <div className="Event--scheduled" style={{ border: '2px dashed darkred' }}>
+          <div className="Event--scheduled-details" style={{gridRow: '1 / span 2'}}>
+            <p style={{ color: 'darkred' }}>NONE</p>
+          </div>
+        </div>
+      )
     }
   }
 }
