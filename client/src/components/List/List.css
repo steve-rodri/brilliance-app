@@ -26,7 +26,7 @@
   width: 100%;
   max-height: calc(100vh - 150px);
   overflow: auto;
-  background-color: var(--dark-blue);
+  background-color: var(--med-dark-blue);
 }
 
 .infinite-scroll-component {

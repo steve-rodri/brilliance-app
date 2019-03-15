@@ -44,13 +44,14 @@ async function formatFromGoogle(evt){
 }
 
 async function creator(e){
-  const ct = await contact.findByEmail(e.creator.email)
-  if (ct) {
-    return ct.id
-  } else {
-    return null
+  if (e) {
+    const ct = await contact.findByEmail(e.creator.email)
+    if (ct) {
+      return ct.id
+    } else {
+      return null
+    }
   }
-
 }
 
 async function attendees(evt){
@@ -120,28 +121,32 @@ async function attendees(evt){
 }
 
 function status (evt) {
-  switch (evt.status) {
-    case 'tentative':
-      return 'Unconfirmed'
-    case 'confirmed':
-      return 'Confirmed'
-    case 'cancelled':
-      return 'Cancelled'
-    default:
-      break;
+  if (evt) {
+    switch (evt.status) {
+      case 'tentative':
+        return 'Unconfirmed'
+      case 'confirmed':
+        return 'Confirmed'
+      case 'cancelled':
+        return 'Cancelled'
+      default:
+        break;
+    }
   }
 }
 
 function description(evt){
-  if (evt.description) {
-    const subsection = evt.description.includes('******************************')
-    if (subsection) {
-      let length = '******************************\n\n'.length
-      let i = evt.description.indexOf('******************************')
-      let notes = evt.description.slice(i+length)
-      return notes
-    } else {
-      return evt.description
+  if (evt) {
+    if (evt.description) {
+      const subsection = evt.description.includes('******************************')
+      if (subsection) {
+        let length = '******************************\n\n'.length
+        let i = evt.description.indexOf('******************************')
+        let notes = evt.description.slice(i+length)
+        return notes
+      } else {
+        return evt.description
+      }
     }
   }
 }

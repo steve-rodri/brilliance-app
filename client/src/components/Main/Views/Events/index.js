@@ -81,7 +81,7 @@ export default class Events extends Component {
       this.setState(
       {
         query: queries.q,
-        category: 'All',
+        category: queries.q,
         page: 1
       },
         async () => {

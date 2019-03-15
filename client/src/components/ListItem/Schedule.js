@@ -52,7 +52,7 @@ export default function Schedule(props){
     })
 
     if (currentUser) {
-      return statusIcon(currentUser.confirmation)
+      return statusIcon(currentUser.confirmation, '2x')
     }
   }
 
