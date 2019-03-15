@@ -51,43 +51,33 @@ export default function ListItem(props){
   function styleItem(item, type, numColumns){
     switch (type) {
       case 'Events':
-      const event = item;
+        const event = item;
+        const past = event && event.end && moment(event.end).isBefore(moment())
+        const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
+        const iCalUID = event && event.iCalUid;
+        let style = {};
+
         if (numColumns) {
-          if (
-            event &&
-            event.start &&
-            event.end &&
-            moment(event.start).isSameOrBefore(moment()) &&
-            moment(event.end).isSameOrAfter(moment())
-          ) {
-            return {
-              color: '#eeeeee',
-              backgroundColor: 'var(--med-dark-blue)',
-              gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
-              border: 'none'
-            }
-          }
-          if ( event && event.end && moment(event.end).isSameOrAfter(moment()) ) {
-            return {
-              gridTemplateColumns: `repeat(${numColumns}, 1fr)`
-            }
-          } else {
-            return {
-              color: 'rgba(0,0,0,.5)',
-              backgroundColor: '#999999',
-              gridTemplateColumns: `repeat(${numColumns}, 1fr)`
-            }
-          }
-        } else {
-          if ( event && event.start && moment(event.end).isSameOrAfter(moment()) ) {
-            return {}
-          } else {
-            return {
-              color: 'rgba(0,0,0,.5)',
-              backgroundColor: '#999999',
-            }
-          }
+          style.gridTemplateColumns =  `repeat(${numColumns}, 1fr)`
         }
+
+        if (past) {
+          style.color = 'rgba(0,0,0,.5)'
+          style.backgroundColor = '#999999'
+        }
+
+        if (inProgress) {
+          style.color = '#eeeeee'
+          style.backgroundColor = 'var(--med-dark-blue)'
+          style.border = 'none'
+        }
+
+        // if (iCalUID) {
+        //   style.backgroundColor = 'blue'
+        // }
+
+        return style
+
       case 'Schedule':
         return {
           gridTemplateColumns: `repeat(${numColumns}, 1fr)`
