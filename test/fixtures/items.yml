@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kind: MyString
+  install: MyString
+  description: MyString
+  additional_notes: MyString
+  quantity: 1
+  discount_adj: MyString
+
+two:
+  kind: MyString
+  install: MyString
+  description: MyString
+  additional_notes: MyString
+  quantity: 1
+  discount_adj: MyString
