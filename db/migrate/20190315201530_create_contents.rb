@@ -2,9 +2,9 @@ class CreateContents < ActiveRecord::Migration[5.2]
   def change
     create_table :contents do |t|
       t.string :description
-      t.integer :quantity
-      t.boolean :inc
-      t.float :discount_adj
+      t.integer :quantity, default: 1
+      t.boolean :inc, default: false
+      t.float :discount_adj, default: 0
       t.string :kind
       t.integer :hours_for_labor_only
       t.boolean :description_only
