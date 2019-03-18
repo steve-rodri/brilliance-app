@@ -6,5 +6,6 @@ class Event < ApplicationRecord
   belongs_to :contact_creator, class_name: 'Contact', foreign_key: 'creator_id', optional: true
   has_many :event_employees, dependent: :destroy
   has_many :employees, through: :event_employees
+  has_many :expenses
   accepts_nested_attributes_for  :event_employees
 end

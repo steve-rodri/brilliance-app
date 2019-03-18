@@ -11,4 +11,5 @@ class InvoiceSerializer < ActiveModel::Serializer
   :refund
 
   belongs_to :event, foreign_key: true, serializer: NestedEventUnderInvoiceSerializer
+  has_many :lines, serializer: NestedLineSerializer
 end

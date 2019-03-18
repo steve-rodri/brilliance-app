@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_170306) do
+ActiveRecord::Schema.define(version: 2019_03_18_143901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,21 @@ ActiveRecord::Schema.define(version: 2019_02_27_170306) do
     t.string "ss"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.string "description"
+    t.integer "quantity"
+    t.boolean "inc"
+    t.float "discount_adj"
+    t.string "kind"
+    t.integer "hours_for_labor_only"
+    t.boolean "description_only"
+    t.boolean "inc_discount_in_opct"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "inventory_id"
+    t.index ["inventory_id"], name: "index_contents_on_inventory_id"
   end
 
   create_table "email_addresses", force: :cascade do |t|
@@ -122,6 +137,35 @@ ActiveRecord::Schema.define(version: 2019_02_27_170306) do
     t.index ["client_id"], name: "index_events_on_client_id"
   end
 
+  create_table "expenses", force: :cascade do |t|
+    t.string "kind"
+    t.float "amount"
+    t.string "reimbursement_type"
+    t.string "receipt"
+    t.boolean "paid"
+    t.string "notes"
+    t.bigint "employee_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_expenses_on_employee_id"
+    t.index ["event_id"], name: "index_expenses_on_event_id"
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.string "category"
+    t.string "name"
+    t.string "manufacturer"
+    t.string "picture"
+    t.integer "total_owned"
+    t.float "sell_price"
+    t.float "rental_price"
+    t.float "net_cost_per_invoice"
+    t.float "purchase_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.string "kind"
     t.string "status"
@@ -140,6 +184,41 @@ ActiveRecord::Schema.define(version: 2019_02_27_170306) do
     t.index ["event_id"], name: "index_invoices_on_event_id"
   end
 
+  create_table "item_contents", force: :cascade do |t|
+    t.bigint "item_id"
+    t.bigint "content_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_item_contents_on_content_id"
+    t.index ["item_id"], name: "index_item_contents_on_item_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "kind"
+    t.string "install"
+    t.string "description"
+    t.string "additional_notes"
+    t.integer "quantity"
+    t.string "discount_adj"
+    t.boolean "use_description"
+    t.boolean "use_description_only"
+    t.boolean "use_quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lines", force: :cascade do |t|
+    t.boolean "inc"
+    t.boolean "inc_in_commission"
+    t.float "discount_adj"
+    t.bigint "invoice_id"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_lines_on_invoice_id"
+    t.index ["item_id"], name: "index_lines_on_item_id"
+  end
+
   create_table "places", force: :cascade do |t|
     t.boolean "installation"
     t.string "photo"
@@ -154,8 +233,45 @@ ActiveRecord::Schema.define(version: 2019_02_27_170306) do
     t.index ["company_id"], name: "index_places_on_company_id"
   end
 
+  create_table "run_sheets", force: :cascade do |t|
+    t.string "guest_of_honor"
+    t.string "dj"
+    t.string "walls_foundation"
+    t.string "dome_foundation"
+    t.string "coffer_foundation"
+    t.string "columns_foundation"
+    t.string "elevator"
+    t.string "bar"
+    t.string "tier"
+    t.string "walls_entrance"
+    t.string "intells_entrance"
+    t.string "dome_entrance"
+    t.string "candle_lighting"
+    t.string "logo"
+    t.string "montage"
+    t.string "screens"
+    t.string "bar_screens_adult_cocktail"
+    t.string "kids_zeus_room"
+    t.string "zapshots"
+    t.string "foundation"
+    t.string "intro_bridal_party"
+    t.string "bride_and_groom"
+    t.string "first_dance"
+    t.string "toast"
+    t.string "dinner"
+    t.string "cake_cutting"
+    t.string "bride_and_father"
+    t.string "groom_and_mother"
+    t.string "comments"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_run_sheets_on_event_id"
+  end
+
   add_foreign_key "clients", "companies"
   add_foreign_key "clients", "contacts"
+  add_foreign_key "contents", "inventories"
   add_foreign_key "email_addresses", "companies"
   add_foreign_key "email_addresses", "contacts"
   add_foreign_key "employees", "contacts"
@@ -165,7 +281,14 @@ ActiveRecord::Schema.define(version: 2019_02_27_170306) do
   add_foreign_key "events", "contacts", column: "creator_id"
   add_foreign_key "events", "places", column: "call_location_id"
   add_foreign_key "events", "places", column: "location_id"
+  add_foreign_key "expenses", "employees"
+  add_foreign_key "expenses", "events"
   add_foreign_key "invoices", "events"
+  add_foreign_key "item_contents", "contents"
+  add_foreign_key "item_contents", "items"
+  add_foreign_key "lines", "invoices"
+  add_foreign_key "lines", "items"
   add_foreign_key "places", "addresses"
   add_foreign_key "places", "companies"
+  add_foreign_key "run_sheets", "events"
 end
