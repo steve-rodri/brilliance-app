@@ -1,16 +1,16 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :update, :destroy]
-
+  @@items_per_page = 25
   # GET /invoices
   def index
-    items_per_page = 25
-
     if params[:category]
       if params[:category] == 'All'
 
         @invoices = Invoice
           .all
-          .paginate(page: params[:page], per_page: items_per_page)
+          .joins(:event)
+          .order("events.start DESC")
+          .paginate(page: params[:page], per_page: @@items_per_page)
 
         render json: @invoices, include: '**'
 
@@ -42,7 +42,9 @@ class InvoicesController < ApplicationController
         @invoices = Invoice
           .where("kind = 'Production'")
           .where(query)
-          .paginate(page: params[:page], per_page: items_per_page)
+          .joins(:event)
+          .order("events.start DESC")
+          .paginate(page: params[:page], per_page: @@items_per_page)
 
         render json: @invoices, include: '**'
 
@@ -69,7 +71,9 @@ class InvoicesController < ApplicationController
 
               @invoices = Invoice
                 .where(query)
-                .paginate(page: params[:page], per_page: items_per_page)
+                .joins(:event)
+                .order("events.start DESC")
+                .paginate(page: params[:page], per_page: @@items_per_page)
 
               render json: @invoices, include: '**'
             else
@@ -84,7 +88,9 @@ class InvoicesController < ApplicationController
     else
       @invoices = Invoice
         .all
-        .paginate(page: params[:page], per_page: items_per_page)
+        .joins(:event)
+        .order("events.start DESC")
+        .paginate(page: params[:page], per_page: @@items_per_page)
 
       render json: @invoices, include: '**'
     end

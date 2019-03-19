@@ -14,7 +14,6 @@ export default class Invoices extends Component {
       categories: ['Production', 'CANS', 'THC', 'CATP'],
       columnHeaders: ['client & date', 'type', 'status', 'balance'],
       hasMore: true,
-
       page: 1
     }
   }
@@ -37,39 +36,73 @@ export default class Invoices extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    const queries = queryString.parse(nextProps.location.search)
-    if (queries.category) {
-      this.setState(prevState => {
-        if (prevState.category !== queries.category) {
-          return {
-            category: queries.category,
-            page: 1
-          }
-        }
-      }, async () => {
-        await this.resetInvoices()
-        await this.fetchInvoices()
-      })
-    } else {
-      this.setState({ category: 'All' })
-    }
+    this.setInvoices(nextProps, 0)
   }
 
   async componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
-    await this.fetchInvoices();
+    await this.setInvoices(this.props, 1);
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
   }
 
+  setInvoices = async(props, mounted) => {
+    const { category } = this.state
+    const queries = queryString.parse(props.location.search)
+
+    if (queries.category && queries.category !== category) {
+
+      this.setState(
+      {
+        category: queries.category,
+        query: null,
+        page: 1
+      },
+        async () => {
+        await this.resetInvoices()
+        await this.fetchInvoices()
+      })
+
+    } else if (queries.q) {
+
+      this.setState(
+      {
+        query: queries.q,
+        category: queries.q,
+        page: 1
+      },
+        async () => {
+        await this.resetInvoices()
+        await this.fetchInvoices()
+      })
+
+    } else if (mounted) {
+      this.setState(
+      {
+        query: null,
+        category: 'All',
+        page: 1
+      },
+        async () => {
+        await this.resetInvoices()
+        await this.fetchInvoices()
+      })
+    }
+  }
+
   fetchInvoices = async() => {
-    const { category, page } = this.state
-    const loadedInvoices = await invoice.getAll(page, category);
+    const { page, category, query } = this.state
+    let invcs;
+    if (query) {
+      invcs = await invoice.find(page, query)
+    } else {
+      invcs = await invoice.getAll(page, category)
+    }
     this.incrementPage()
-    this.updateInvoices(loadedInvoices)
+    await this.updateInvoices(invcs);
   }
 
   resetPage = () => {
@@ -82,22 +115,24 @@ export default class Invoices extends Component {
     }))
   }
 
-  updateInvoices = (invoices, category) => {
-    if (invoices) {
-      const invcs = [...this.state.invoices]
-      invoices.forEach(i => invcs.push(i))
-
-      if (invoices.length < 25) {
+  updateInvoices = (invcs, category) => {
+    if (invcs) {
+      const invoices = [...this.state.invoices]
+      invcs.forEach(i => invoices.push(i))
+      if (invcs.length < 25) {
 
         this.setState({
           invoices,
           hasMore: false
         })
+
       } else {
+
         this.setState({
           invoices,
           hasMore: true
         })
+
       }
     } else {
       this.setState({
@@ -121,6 +156,15 @@ export default class Invoices extends Component {
     this.setState({ invoices: [] })
   }
 
+  setRefresh = (value, url) => {
+    const { history } = this.props
+    this.setState({ willRefresh: value }, () => {
+      if (url) {
+        history.push(url)
+      }
+    })
+  }
+
   List = ({ match, history }) => {
     const { invoices, categories, category, columnHeaders, hasMore } = this.state
     return (
@@ -133,19 +177,19 @@ export default class Invoices extends Component {
         data={invoices}
         match={match}
         history={history}
-        load={this.fetchInvoices}
         hasMore={hasMore}
-        fetchAllInvoices={this.fetchInvoices}
+        load={this.fetchInvoices}
+        refresh={this.setRefresh}
       />
     )
   }
 
   Show = ({ match }) => {
     const req_id = parseInt(match.params.id)
-    const invoices = this.state.invoices
+    const invoices = [...this.state.invoices]
     const invoice = invoices.find(invoice => invoice.id === req_id)
     return (
-      <InvoiceDetail invoice={invoice} invoiceId={req_id}/>
+      <InvoiceDetail inv={invoice} invoiceId={req_id}/>
     )
   }
 

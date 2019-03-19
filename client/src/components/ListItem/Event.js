@@ -37,7 +37,7 @@ export default function Event(props){
 
           <div className="List-Item--Cell" style={displayColumn('location')}>{event && event.location && event.location.name}</div>
 
-          <div className="List-Item--Cell" style={displayColumn('scheduled')}>
+          <div className="List-Item--Cell" style={displayColumn('staff')}>
             {scheduled(event)}
           </div>
 
