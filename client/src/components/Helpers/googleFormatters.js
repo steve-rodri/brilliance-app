@@ -8,39 +8,52 @@ import moment from 'moment'
 //--------------Format FROM Google----------------------
 
 async function formatFromGoogle(evt){
-  const workers = await attendees(evt);
-  const eCreator = await creator(evt);
-  const confirmation = status(evt);
-  const notes = description(evt)
+  if (evt) {
+    const workers = await attendees(evt);
+    const eCreator = await creator(evt);
+    const confirmation = status(evt);
+    const notes = description(evt)
 
-  let data = {
-    i_cal_UID: evt.iCalUID,
-    gc_id: evt.id,
-    start: moment(start(evt)).format(),
-    end: moment(end(evt)).format(),
-  };
+    let data = {};
 
-  if (evt.summary) {
-    data.summary = evt.summary
+    if (evt.id) {
+      data.gc_id = evt.id
+    }
+
+    if (evt.iCalUID) {
+      data.i_cal_UID = evt.iCalUID
+    }
+
+    if (evt.start) {
+      data.start = moment(start(evt)).format()
+    }
+
+    if (evt.end) {
+      data.end = moment(end(evt)).format()
+    }
+
+    if (evt.summary) {
+      data.summary = evt.summary
+    }
+
+    if (confirmation) {
+      data.confirmation = confirmation
+    }
+
+    if (notes) {
+      data.notes = notes
+    }
+
+    if (workers) {
+      data.event_employees_attributes = workers;
+    }
+
+    if (eCreator) {
+      data.creator_id = eCreator
+    }
+
+    return data
   }
-
-  if (confirmation) {
-    data.confirmation = confirmation
-  }
-
-  if (notes) {
-    data.notes = notes
-  }
-
-  if (workers) {
-    data.event_employees_attributes = workers;
-  }
-
-  if (eCreator) {
-    data.creator_id = eCreator
-  }
-
-  return data
 }
 
 async function creator(e){

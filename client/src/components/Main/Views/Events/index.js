@@ -17,7 +17,7 @@ export default class Events extends Component {
       hasMore: true,
       category: 'All',
       categories: ['Production', 'CANS', 'THC', 'CATP'],
-      columnHeaders: ['title', 'client', 'location', 'confirmation', 'scheduled'],
+      columnHeaders: ['title', 'client', 'location', 'confirmation', 'staff'],
       page: 1
     }
   }
@@ -30,21 +30,21 @@ export default class Events extends Component {
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['title', 'scheduled', 'confirmation']
+        columnHeaders: ['title', 'staff', 'confirmation']
       })
     } else if (width < 900) {
       this.setState({
-        columnHeaders: ['title', 'client', 'scheduled', 'confirmation']
+        columnHeaders: ['title', 'client', 'staff', 'confirmation']
       })
     } else {
       this.setState({
-        columnHeaders: ['title', 'client', 'location', 'scheduled', 'confirmation']
+        columnHeaders: ['title', 'client', 'location', 'staff', 'confirmation']
       })
     }
   }
 
   componentWillReceiveProps(nextProps){
-    this.setEvents(nextProps)
+    this.setEvents(nextProps, 0)
   }
 
   componentDidMount() {
@@ -52,14 +52,14 @@ export default class Events extends Component {
     window.addEventListener("resize", this.updateColumnHeaders);
     const gcId = localStorage.getItem('google_calendar_id');
     this.setState({ gcId })
-    this.setEvents(this.props)
+    this.setEvents(this.props, 1)
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
   }
 
-  setEvents = async(props) => {
+  setEvents = async(props, mounted) => {
     const { category } = this.state
     const queries = queryString.parse(props.location.search)
 
@@ -89,7 +89,7 @@ export default class Events extends Component {
         await this.fetchEvents()
       })
 
-    } else {
+    } else if (mounted) {
       this.setState(
       {
         query: null,
@@ -163,10 +163,13 @@ export default class Events extends Component {
 
   deleteEvent = async(evt) => {
     const { gcId } = this.state
+    let events = [...this.state.events]
     await event.delete(evt.id)
     if (evt.gcId) {
       await GOOGLE.deleteEvent(gcId, evt.gcId)
     }
+    events = events.filter( e => e.id !== evt.id)
+    this.setState({ events })
   }
 
   updateEvent = async(e, data) => {

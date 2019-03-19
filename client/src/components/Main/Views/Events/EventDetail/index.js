@@ -72,10 +72,24 @@ export default class EventDetail extends Component {
 
   synchronizeWithGoogle = async (evt) => {
     const gcId = localStorage.getItem('google_calendar_id');
-    const e = await GOOGLE.getEvent(gcId, evt.gcId)
-    const formatted = await formatFromGoogle(e)
-    const synced = await event.sync(formatted)
-    return synced
+    if (gcId) {
+      try {
+        const e = await GOOGLE.getEvent(gcId, evt.gcId)
+        if (e) {
+          const formatted = await formatFromGoogle(e)
+          const synced = await event.sync(formatted)
+          return synced
+        }
+        else {
+          return evt
+        }
+
+      } catch (e) {
+        return evt
+      }
+    } else {
+      return evt
+    }
   }
 
   setEvent = async(props) => {
@@ -926,7 +940,6 @@ export default class EventDetail extends Component {
           :
           <div className="EventDetail--tab-control" style={this.styleTabControl()}>
             <div className="Tab" style={this.styleTab("Basic Info")} onClick={() => this.setView("Basic Info")}><h3>MAIN</h3></div>
-            <div className="Tab" style={this.styleTab("Logistics")}  onClick={() => this.setView("Logistics")}><h3>LOGISTICS</h3></div>
             <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>INVOICE</h3></div>
             <div className="Tab" style={this.styleTab("Cash Flow")}  onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
           </div>

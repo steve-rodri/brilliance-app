@@ -14,73 +14,150 @@ function date(fields, short, days){
       const start = moment(fields.start)
       const end = moment(fields.end)
 
-      if (start.diff(end, 'minutes') < 1440 && end.diff(startOfDay, 'minutes') <= 1440) {
+      if (moment(fields.start).isBefore(moment(), 'year')) {
 
-        if (short) {
-          if (days) {
-            return (
-              start.format('ddd, MMM Do')
-            )
+        if (start.diff(end, 'minutes') < 1440 && end.diff(startOfDay, 'minutes') <= 1440) {
+
+          if (short) {
+            if (days) {
+              return (
+                start.format('ddd, MMM Do YYYY')
+              )
+            } else {
+              return (
+                start.format('MMM Do YYYY')
+              )
+            }
           } else {
-            return (
-              start.format('MMM Do')
-            )
+            if (days) {
+              return (
+                start.format('dddd, MMM Do YYYY')
+              )
+            } else {
+              return (
+                start.format('MMM Do YYYY')
+              )
+            }
           }
+
         } else {
-          if (days) {
-            return (
-              start.format('dddd, MMM Do')
-            )
+          if ( end.diff(startOfDay, 'minutes') % 1440 === 0 ) {
+            if (short) {
+              if (days) {
+                return (
+                  `${start.format('ddd MMM Do YYYY')} - ${end.subtract(1,'day').format('ddd MMM Do YYYY')}`
+                )
+              } else {
+                return (
+                  `${start.format('MMM Do YYYY')} - ${end.subtract(1,'day').format('MMM Do YYYY')}`
+                )
+              }
+            } else {
+              if (days) {
+                return (
+                  `${start.format('ddd MMMM Do YYYY')} - ${end.subtract(1,'day').format('ddd MMMM Do YYYY')}`
+                )
+              } else {
+                return (
+                  `${start.format('MMMM Do YYYY')} - ${end.subtract(1,'day').format('MMMM Do YYYY')}`
+                )
+              }
+            }
           } else {
-            return (
-              start.format('MMM Do')
-            )
+            if (short) {
+              if (days) {
+                return (
+                  `${start.format('ddd MMM Do YYYY')} - ${end.format('ddd MMM Do YYYY')}`
+                )
+              } else {
+                return (
+                  `${start.format('MMM Do YYYY')} - ${end.format('MMM Do YYYY')}`
+                )
+              }
+            } else {
+              if (days) {
+                return (
+                  `${start.format('ddd MMMM Do YYYY')} - ${end.format('ddd MMMM Do YYYY')}`
+                )
+              } else {
+                return (
+                  `${start.format('MMMM Do YYYY')} - ${end.format('MMMM Do YYYY')}`
+                )
+              }
+            }
           }
         }
 
       } else {
-        if ( end.diff(startOfDay, 'minutes') % 1440 === 0 ) {
+
+        if (start.diff(end, 'minutes') < 1440 && end.diff(startOfDay, 'minutes') <= 1440) {
+
           if (short) {
             if (days) {
               return (
-                `${start.format('ddd MMM Do')} - ${end.subtract(1,'day').format('ddd MMM Do')}`
+                start.format('ddd, MMM Do')
               )
             } else {
               return (
-                `${start.format('MMM Do')} - ${end.subtract(1,'day').format('MMM Do')}`
+                start.format('MMM Do')
               )
             }
           } else {
             if (days) {
               return (
-                `${start.format('ddd MMMM Do')} - ${end.subtract(1,'day').format('ddd MMMM Do')}`
+                start.format('dddd, MMM Do')
               )
             } else {
               return (
-                `${start.format('MMMM Do')} - ${end.subtract(1,'day').format('MMMM Do')}`
+                start.format('MMM Do')
               )
             }
           }
+
         } else {
-          if (short) {
-            if (days) {
-              return (
-                `${start.format('ddd MMM Do')} - ${end.format('ddd MMM Do')}`
-              )
+          if ( end.diff(startOfDay, 'minutes') % 1440 === 0 ) {
+            if (short) {
+              if (days) {
+                return (
+                  `${start.format('ddd MMM Do')} - ${end.subtract(1,'day').format('ddd MMM Do')}`
+                )
+              } else {
+                return (
+                  `${start.format('MMM Do')} - ${end.subtract(1,'day').format('MMM Do')}`
+                )
+              }
             } else {
-              return (
-                `${start.format('MMM Do')} - ${end.format('MMM Do')}`
-              )
+              if (days) {
+                return (
+                  `${start.format('ddd MMMM Do')} - ${end.subtract(1,'day').format('ddd MMMM Do')}`
+                )
+              } else {
+                return (
+                  `${start.format('MMMM Do')} - ${end.subtract(1,'day').format('MMMM Do')}`
+                )
+              }
             }
           } else {
-            if (days) {
-              return (
-                `${start.format('ddd MMMM Do')} - ${end.format('ddd MMMM Do')}`
-              )
+            if (short) {
+              if (days) {
+                return (
+                  `${start.format('ddd MMM Do')} - ${end.format('ddd MMM Do')}`
+                )
+              } else {
+                return (
+                  `${start.format('MMM Do')} - ${end.format('MMM Do')}`
+                )
+              }
             } else {
-              return (
-                `${start.format('MMMM Do')} - ${end.format('MMMM Do')}`
-              )
+              if (days) {
+                return (
+                  `${start.format('ddd MMMM Do')} - ${end.format('ddd MMMM Do')}`
+                )
+              } else {
+                return (
+                  `${start.format('MMMM Do')} - ${end.format('MMMM Do')}`
+                )
+              }
             }
           }
         }

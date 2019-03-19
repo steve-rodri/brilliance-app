@@ -1,0 +1,10 @@
+.Invoice {
+  align-self: start;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  width: 95%;
+}
+
+.Invoice > table {
+  width: 100%;
+}

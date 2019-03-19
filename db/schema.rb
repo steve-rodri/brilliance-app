@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
 
   create_table "contents", force: :cascade do |t|
     t.string "description"
-    t.integer "quantity"
-    t.boolean "inc"
-    t.float "discount_adj"
+    t.integer "quantity", default: 1
+    t.boolean "inc", default: false
+    t.float "discount_adj", default: 0.0
     t.string "kind"
     t.integer "hours_for_labor_only"
     t.boolean "description_only"
@@ -139,10 +139,10 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
 
   create_table "expenses", force: :cascade do |t|
     t.string "kind"
-    t.float "amount"
+    t.float "amount", default: 0.0
     t.string "reimbursement_type"
     t.string "receipt"
-    t.boolean "paid"
+    t.boolean "paid", default: false
     t.string "notes"
     t.bigint "employee_id"
     t.bigint "event_id"
@@ -158,10 +158,10 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
     t.string "manufacturer"
     t.string "picture"
     t.integer "total_owned"
-    t.float "sell_price"
-    t.float "rental_price"
-    t.float "net_cost_per_invoice"
-    t.float "purchase_price"
+    t.float "sell_price", default: 0.0
+    t.float "rental_price", default: 0.0
+    t.float "net_cost_per_invoice", default: 0.0
+    t.float "purchase_price", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -198,19 +198,19 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
     t.string "install"
     t.string "description"
     t.string "additional_notes"
-    t.integer "quantity"
-    t.string "discount_adj"
-    t.boolean "use_description"
-    t.boolean "use_description_only"
-    t.boolean "use_quantity"
+    t.integer "quantity", default: 1
+    t.string "discount_adj", default: "0"
+    t.boolean "use_description", default: false
+    t.boolean "use_description_only", default: false
+    t.boolean "use_quantity", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "lines", force: :cascade do |t|
-    t.boolean "inc"
-    t.boolean "inc_in_commission"
-    t.float "discount_adj"
+    t.boolean "inc", default: false
+    t.boolean "inc_in_commission", default: false
+    t.float "discount_adj", default: 0.0
     t.bigint "invoice_id"
     t.bigint "item_id"
     t.datetime "created_at", null: false
