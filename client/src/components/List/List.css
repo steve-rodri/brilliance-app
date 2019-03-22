@@ -42,11 +42,11 @@
 
 @media (min-width: 1000px) {
   .List {
-    max-height: calc(100vh - 100px)
+    max-height: calc(100vh - 75px)
   }
 
   .infinite-scroll-component {
-    height: calc(100vh - 135px) !important;
+    height: calc(100vh - 110px) !important;
   }
 }
 

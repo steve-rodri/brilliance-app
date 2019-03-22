@@ -1,0 +1,88 @@
+.Line > :first-child {
+  border-left: 2px solid var(--light-blue-t);
+  /* border-radius: 10px 0 0 10px; */
+}
+
+.Line > :last-child {
+  border-right: 2px solid var(--light-blue-t);
+  /* border-radius: 0 10px 10px 0; */
+}
+
+.Line--add-delete:hover {
+  cursor: pointer;
+}
+
+.Line--input {
+  font-size: 18px;
+  width: 100%;
+  border: 2px solid var(--light-gray);
+  border-radius: 5px;
+  outline: none;
+}
+
+.Line--input:focus {
+  border-color: var(--turquoise-t);
+  box-shadow: 0 0 2px 2px var(--turquoise-t);
+}
+
+/* --------------------Quantity-------------- */
+
+.Line--quantity {
+  width: 50px;
+}
+
+.Line--quantity > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Line--quantity > div > input {
+  text-align: center;
+}
+
+.Line--quantity > p {
+  padding: 5px 0;
+}
+
+
+/* --------------------Item-------------- */
+
+.Line--item-contents {
+  padding: 5px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.Line--item, .Invoice--header-item {
+  text-align: left;
+}
+
+/* --------------------Price-------------- */
+
+.Invoice--header-price > p {
+  padding-right: 5px;
+}
+
+.Line--price, .Invoice--header-price {
+  width: 125px;
+  text-align: right;
+}
+
+.Line--price > div {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  align-items: center;
+  justify-items: center;
+  font-size: 18px;
+}
+
+.Line--price > div > p {
+  padding: 3px;
+}
+
+.Line--price > div > input {
+  text-align: right;
+}

@@ -1,0 +1,26 @@
+.Summary {
+  width: 100%;
+  align-self: start;
+  padding: 0 30px;
+  display: grid;
+}
+
+.Summary--totals {
+  display: table-cell;
+  align-self: start;
+  justify-self: end;
+  margin: 30px 0;
+  padding: 12px;
+  text-align: left;
+  background-color: var(--light-blue-t);
+  border: 1px dashed var(--light-blue);
+  border-radius: 5px;
+}
+
+.Summary--totals > * {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-items: end;
+}

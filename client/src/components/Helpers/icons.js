@@ -11,19 +11,27 @@ import {
   faTimes,
   faPencilAlt,
   faCheck,
-  faTrash
+  faTrash,
+  faSquare as fasSquare
 } from '@fortawesome/free-solid-svg-icons'
+import {
+  faSquare as farSquare
+} from '@fortawesome/free-regular-svg-icons'
 
-library.add(faPencilAlt)
-library.add(faCheck)
-library.add(faTrash)
-library.add(faCircle)
-library.add(faCheckCircle)
-library.add(faTimesCircle)
-library.add(faQuestionCircle)
-library.add(faMinusCircle)
-library.add(faPlusCircle)
-library.add(faTimes)
+library.add(
+  faPencilAlt,
+  faCheck,
+  faTrash,
+  faCircle,
+  faCheckCircle,
+  faTimesCircle,
+  faQuestionCircle,
+  faMinusCircle,
+  faPlusCircle,
+  faTimes,
+  farSquare,
+  fasSquare
+)
 
 function statusIcon(str, size){
   switch (str) {
@@ -63,6 +71,10 @@ function check(size, className, color){
   return <FontAwesomeIcon  className={`Icon ${className}`} icon="check" color={color? color : null} size={size? size : '1x'}/>
 }
 
+function square(style, size, className, color){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon={style} color={color? color : null} size={size? size : '1x'}/>
+}
+
 export {
   statusIcon,
   addIcon,
@@ -70,5 +82,6 @@ export {
   closeIcon,
   pencil,
   trash,
-  check
+  check,
+  square
 }

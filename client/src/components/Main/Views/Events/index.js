@@ -182,7 +182,7 @@ export default class Events extends Component {
       } else {
         updatedEvent = e
       }
-      //FIX ISSUE
+      
       if (e.gcId) {
         await GOOGLE.patchEvent(gcId, e.gcId, formatToGoogle(updatedEvent))
       } else {

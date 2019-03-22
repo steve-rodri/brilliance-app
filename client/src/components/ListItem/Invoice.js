@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { clientName } from '../Helpers/clientHelpers'
 import moment from 'moment'
+import numeral from 'numeral'
 import './Invoice.css'
 
 export default function Invoice(props){
@@ -26,7 +27,7 @@ export default function Invoice(props){
             <h4>{invoice.paymentType !== 'Unknown'? invoice.paymentType : null}</h4>
           </div>
 
-          <div className="Invoice--balance" style={displayColumn('balance')}>$0.00</div>
+          <div className="Invoice--balance" style={displayColumn('balance')}>{numeral(invoice.balance).format('$0,0.00')}</div>
         </div>
         :
         <div className="List-Item">
@@ -37,11 +38,11 @@ export default function Invoice(props){
           </div>
 
           <div className="Invoice--status">
-            <div className="Invoice--balance">$0.00</div>
+            <div className="Invoice--balance">{numeral(invoice.balance).format('$0,0.00')}</div>
             <h3>{invoice.paymentStatus}</h3>
             <h4>{invoice.paymentType !== 'Unknown'? invoice.paymentType : null}</h4>
           </div>
-          
+
         </div>
       }
     </Link>
