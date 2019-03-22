@@ -42,13 +42,13 @@ export default class Clients extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this.setClients(nextProps)
+    this.setClients(nextProps, 0)
   }
 
   async componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
-    await this.setClients(this.props)
+    await this.setClients(this.props, 1)
   }
 
   componentWillUnmount() {
@@ -69,7 +69,7 @@ export default class Clients extends Component {
     this.prevLocation = nextProps.location
   }
 
-  setClients = async(props) => {
+  setClients = async(props, mounted) => {
     const { willRefresh } = this.state
     const { location } = props
     const queries = queryString.parse(location.search)
@@ -101,7 +101,7 @@ export default class Clients extends Component {
           await this.fetchClients()
         })
 
-      } else {
+      } else if (mounted) {
         this.setState(
         {
           query: null,

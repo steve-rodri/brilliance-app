@@ -1,34 +1,62 @@
 import React, { Component } from 'react'
-import { line } from '../../../../../Helpers/invoiceLineHelpers'
+import Line from './Line/index.js'
+import { addIcon } from '../../../../../Helpers/icons'
 import './index.css'
 
 export default class Invoice extends Component {
-
   lines = () => {
     const { invoice } = this.props
-
     if (invoice && invoice.lines) {
       const lines = [...invoice.lines]
-      return lines.reverse().map(data => line(data))
+      return lines.reverse().map(line =>
+        <Line
+          {...this.props}
+          key={line.id}
+          line={line}
+        />
+      )
     }
   }
 
   render(){
+    const { editMode } = this.props
     return (
-      <div className="Invoice">
-        <table>
-          <thead>
-            <tr>
-              <td>Item</td>
-              <td>Content</td>
-              <td>Inc</td>
-              <td>Price</td>
-            </tr>
-          </thead>
-          <tbody>
-            {this.lines()}
-          </tbody>
-        </table>
+      <div className="Invoice--container">
+        <div className="Invoice">
+
+          <table>
+
+            <thead className="Invoice--header">
+              <tr className= "Invoice--header-row">
+                {editMode? <th className="Invoice--header-cell Invoice--header-edit"></th> : null}
+                <th className="Invoice--header-cell Invoice--header-quantity"><p>Quantity</p></th>
+                <th className="Invoice--header-cell Invoice--header-item"><p>Item</p></th>
+                {editMode? <th className="Invoice--header-cell Invoice--header-inc"><p>Inc</p></th> : null}
+                <th className="Invoice--header-cell Invoice--header-price"><p>Price</p></th>
+              </tr>
+            </thead>
+
+            <tbody className="Invoice--body">
+              {this.lines()}
+
+              {
+                editMode?
+                <tr className="Line">
+                  <td className="Invoice--cell Line--add-delete" onClick={this.props.addLine}>{addIcon('1x')}</td>
+                  <td className="Invoice--cell Line--quantity"></td>
+                  <td className="Invoice--cell Line--item"></td>
+                  <td className="Invoice--cell Line--inc"></td>
+                  <td className="Invoice--cell Line--price"></td>
+                </tr>
+                :
+                null
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
       </div>
     )
   }

@@ -1,0 +1,86 @@
+.Header {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  background-color: var(--dark-blue);
+  color: var(--light-gray);
+  z-index: 5;
+}
+
+.Header--right {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  justify-self: end;
+}
+
+.Header--name {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  justify-self: start;
+}
+
+.Header--icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: flex-end;
+}
+
+.Header--icon {
+  padding: 10px;
+}
+
+.Header--icon:hover {
+  cursor: pointer;
+}
+
+.left {
+  right: 8%;
+}
+
+.right {
+  right: 1.5%;
+}
+
+.Header--button:hover  {
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .Header--name {
+    font-size: 35px;
+  }
+}
+
+@media (min-width: 750px) {
+  .Header {
+    height: auto;
+    width: 95%;
+    background-color: inherit;
+    color: inherit;
+    justify-items: center;
+    grid-gap: 5px;
+    grid-template-columns: auto 100px;
+    border-bottom: 1px solid black;
+    padding: 10px;
+  }
+
+  .Header--name {
+    font-size: 25px;
+    text-align: left;
+  }
+
+  .Header--right {
+    display: flex;
+    grid-column: 2 / span 1;
+  }
+
+  .Header--buttons {
+    display: flex;
+  }
+}

@@ -1,14 +1,16 @@
 .InvoiceDetail {
-  height: 100%;
+  height: calc(100vh - 150px);
   width: 100%;
   display: grid;
-  grid-template-rows: 75px 250px auto;
+  grid-template-rows: 110px 300px auto 1fr;
   justify-items: center;
   align-items: center;
+  overflow: auto;
 }
 
 @media (min-width: 750px) {
   .InvoiceDetail {
     background-color: var(--light-gray);
+    height: calc(100vh - 75px);
   }
 }

@@ -4,6 +4,7 @@ import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import InvoiceDetail from './InvoiceDetail/index.js'
 import { invoice } from '../../../../services/invoice'
+import { price } from './InvoiceDetail/Invoice/Line/Helpers'
 
 export default class Invoices extends Component {
   constructor(props){
@@ -115,10 +116,34 @@ export default class Invoices extends Component {
     }))
   }
 
-  updateInvoices = (invcs, category) => {
+  updateInvoices = async(invcs, category) => {
     if (invcs) {
+      const updatedInvoices = invcs.map( async(i) => {
+        const { lines } = i
+        if (lines && lines.length) {
+          const prices = lines.map(line => price(line, invoice.kind))
+          const subTotal = prices.reduce((a, b) => a + b)
+
+          i.subTotal = subTotal
+          i.total = subTotal - i.discount
+          if (i.paymentStatus !== 'Paid In Full') {
+            i.balance = i.total - i.deposit
+          } else {
+            i.balance = 0
+          }
+
+          await invoice.update(i.id, {
+            sub_total: subTotal,
+            total: subTotal - i.discount,
+            balance: i.paymentStatus !=='Paid In Full'? subTotal - i.discount - i.deposit : 0
+          })
+
+          return i
+        }
+      })
+      const loadedInvoices = await Promise.all(updatedInvoices)
       const invoices = [...this.state.invoices]
-      invcs.forEach(i => invoices.push(i))
+      loadedInvoices.forEach(i => invoices.push(i))
       if (invcs.length < 25) {
 
         this.setState({

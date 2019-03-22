@@ -10,7 +10,7 @@ header {
 
 @media (min-width: 1000px) {
   header {
-    height: 100px;
+    height: 75px;
     grid-template-columns: 15% 75% 10%
   }
 }
