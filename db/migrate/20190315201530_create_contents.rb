@@ -4,7 +4,7 @@ class CreateContents < ActiveRecord::Migration[5.2]
       t.string :description
       t.integer :quantity, default: 1
       t.boolean :inc, default: false
-      t.float :discount_adj, default: 0
+      t.float :discount_adj, default: 0.00
       t.string :kind
       t.integer :hours_for_labor_only
       t.boolean :description_only

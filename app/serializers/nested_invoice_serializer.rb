@@ -7,6 +7,12 @@ class NestedInvoiceSerializer < ActiveModel::Serializer
   :commission_paid,
   :check_info,
   :discount,
+  :deposit,
   :tip,
-  :refund
+  :refund,
+  :sub_total,
+  :total,
+  :balance
+
+  has_many :lines, serializer: NestedLineSerializer
 end

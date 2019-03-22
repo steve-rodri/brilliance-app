@@ -171,13 +171,16 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
     t.string "status"
     t.string "payment_status"
     t.string "payment_type"
-    t.string "commission_actual"
-    t.string "commission_paid"
+    t.float "commission_actual"
+    t.boolean "commission_paid"
     t.string "check_info"
-    t.float "deposit"
-    t.float "discount"
-    t.float "tip"
-    t.float "refund"
+    t.float "deposit", default: 0.0
+    t.float "discount", default: 0.0
+    t.float "tip", default: 0.0
+    t.float "refund", default: 0.0
+    t.float "sub_total", default: 0.0
+    t.float "total", default: 0.0
+    t.float "balance", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "event_id"
@@ -199,10 +202,10 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
     t.string "description"
     t.string "additional_notes"
     t.integer "quantity", default: 1
-    t.string "discount_adj", default: "0"
-    t.boolean "use_description", default: false
+    t.float "discount_adj", default: 0.0
+    t.boolean "use_description", default: true
     t.boolean "use_description_only", default: false
-    t.boolean "use_quantity", default: false
+    t.boolean "use_quantity", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

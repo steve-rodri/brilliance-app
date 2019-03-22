@@ -6,10 +6,10 @@ class CreateInventories < ActiveRecord::Migration[5.2]
       t.string :manufacturer
       t.string :picture
       t.integer :total_owned
-      t.float :sell_price, default: 0
-      t.float :rental_price, default: 0
-      t.float :net_cost_per_invoice, default: 0
-      t.float :purchase_price, default: 0
+      t.float :sell_price, default: 0.00
+      t.float :rental_price, default: 0.00
+      t.float :net_cost_per_invoice, default: 0.00
+      t.float :purchase_price, default: 0.00
 
       t.timestamps
     end

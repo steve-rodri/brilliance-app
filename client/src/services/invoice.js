@@ -11,7 +11,6 @@ const invoice = {
   },
   getAll: async function (page, category){
     try {
-      console.log(page, category)
       const resp = await axios.get(`/api/invoices?page=${page}&category=${category}`)
       return resp.data
     } catch (e) {
@@ -21,6 +20,14 @@ const invoice = {
   find: async function (page, query){
     try {
       const resp = await axios.get(`/api/invoices?page=${page}$q=${query}`)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  update: async function(id, data){
+    try {
+      const resp = await axios.put(`/api/invoices/${id}`, data)
       return resp.data
     } catch (e) {
       console.log(e)
