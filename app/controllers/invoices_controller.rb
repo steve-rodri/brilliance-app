@@ -134,6 +134,29 @@ class InvoicesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def invoice_params
-      params.require(:invoice).permit(:Type, :Status, :Payment_Status, :Payment_Type, :Commission_Paid, :Check_Info, :Discount, :Tip, :Refund, :event_id)
+      params.require(:invoice).permit(
+        :kind,
+        :status,
+        :payment_status,
+        :payment_type,
+        :commission_paid,
+        :commission_actual,
+        :check_info,
+        :deposit,
+        :discount,
+        :tip,
+        :refund,
+        :sub_total,
+        :total,
+        :balance,
+        :event_id,
+        lines_attributes: [
+          :id,
+          :item_id,
+          :inc,
+          :inc_in_commission,
+          :discount_adj
+        ]
+      )
     end
 end

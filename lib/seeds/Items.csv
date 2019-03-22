@@ -1,372 +1,372 @@
-﻿id,kind,install,description,additional_notes,use_description,use_description_only,use_quantity,quantity,discount_adj,created_at
-1,Package,CATP,Bar/Bat Mitzvah Package #2,,checked,,,,,2018-01-28T23:01:29.000Z
-2,Package,CATP,Bar/Bat Mitzvah Package #3,,checked,,,,,2018-01-28T23:01:45.000Z
-3,Package,CATP,Bar/Bat Mitzvah Package #4,,checked,,,,300.00,2018-01-28T23:01:46.000Z
-4,Package,CATP,Sweet Sixteen Package #1,,checked,checked,,,200.00,2018-01-28T23:11:52.000Z
-5,Package,CATP,Sweet Sixteen Package #2,,checked,,,,200.00,2018-01-28T23:12:05.000Z
-6,Package,CATP,Sweet Sixteen Package #3,,checked,,,,500.00,2018-01-28T23:12:06.000Z
-7,Package,CATP,Sweet Sixteen Package #4,,checked,,,,500.00,2018-01-28T23:12:07.000Z
-8,Package,CATP,Wedding Package #1,,checked,checked,,,450.00,2018-01-28T23:12:18.000Z
-9,Package,CATP,Wedding Package #2,,checked,,,,450.00,2018-01-28T23:12:27.000Z
-10,Package,CATP,Wedding Package #3,,checked,,,,600.00,2018-01-28T23:12:34.000Z
-11,Package,CATP,Wedding Package #4,,checked,,,,800.00,2018-01-28T23:13:18.000Z
-12,Package,COTG/HC,Lighting Package #1,,checked,checked,,,,2018-01-28T23:13:24.000Z
-13,Package,COTG/HC,Lighting Package #2,,checked,,,,,2018-01-28T23:13:32.000Z
-14,Package,COTG/HC,Lighting Package #3,,checked,,,,,2018-01-28T23:13:37.000Z
-15,Ordered,,,,,,checked,1,,2018-01-30T00:02:38.000Z
-16,Invoice Specific,,PAR’s for ceremony,,checked,,checked,4,,2018-01-30T00:02:38.000Z
-17,Group,,Zaps w/ Zapshot Technician,,checked,,,,-100.00,2018-01-30T00:02:38.000Z
-18,Invoice Specific,,Leko’s,,checked,,,,,2018-01-30T00:02:38.000Z
-19,Invoice Specific,,,,,,checked,4,,2018-01-30T00:02:38.000Z
-20,Installed,CATP,,,,,,,,2018-01-30T00:02:38.000Z
-21,Stock,,,,,,,,,2018-01-30T00:02:38.000Z
-22,Stock,,,,,,,,,2018-01-30T00:02:38.000Z
-23,Invoice Specific,,lobby lighting,,checked,,,,,2018-01-30T00:02:38.000Z
-24,Invoice Specific,,Outside lighting,,checked,,,,,2018-01-30T00:02:38.000Z
-25,Invoice Specific,,,,,,checked,3,,2018-01-30T00:02:38.000Z
-26,Stock,,Snow Machine,,checked,checked,,,,2018-01-30T00:02:38.000Z
-27,Invoice Specific,,additional LED lighting,,checked,,,,-950.00,2018-01-30T00:02:38.000Z
-28,Invoice Specific,,Sound,,checked,checked,,,,2018-01-30T00:02:38.000Z
-29,Invoice Specific,,Stage Lighting,,checked,,,,,2018-01-30T00:02:38.000Z
-30,Ordered,,,,,,,,,2018-01-30T00:02:38.000Z
-31,Package,CATP,Custom Package (#3),,checked,,,,,2018-01-30T02:09:23.000Z
-32,Package,CATP,"Custom Package (LED's, Video Screens, Operator)",,checked,,,,,2018-01-30T04:27:23.000Z
-33,Package,CATP,"Custom Package (Video Screens, Operator)",,checked,,,,,2018-01-30T04:55:16.000Z
-34,Package,CATP,Fundraiser Package #4,,checked,,,,0.00,2018-01-30T05:05:54.000Z
-35,Group,CATP,Lounge Night Lighting,,checked,,,,,2018-01-30T05:24:46.000Z
-36,Package,CATP,Custom Package (#4),,checked,,,,,2018-01-30T14:41:56.000Z
-37,Package,CATP,Corporate Package (#3) (1 Operator),,checked,,,,-300.00,2018-01-30T15:00:11.000Z
-38,Package,CATP,"Custom Package (LED's, Moving Lights, Operator)",,checked,,,,,2018-01-30T16:47:20.000Z
-39,Package,CATP,"Custom Package (Static LED's, Video Screens, Operator)",,checked,,,,,2018-01-30T17:26:16.000Z
-40,Invoice Specific,,Sound,,checked,,,,,2018-01-30T17:51:00.000Z
-41,Package,CATP,Communion Package #4,,checked,,,,300.00,2018-01-30T18:13:23.000Z
-42,Package,CATP,"Custom Package (Static LED's, Moving Lights, Video Screens, Operator)",,checked,,,,,2018-01-30T18:28:22.000Z
-43,Package,CATP,"Custom Package (Static LED's, Moving Lights, Operator)",,checked,,,,,2018-01-30T18:49:13.000Z
-44,Package,CATP,Prom Package #4 (1 Operator),,checked,,,,500.00,2018-01-30T18:56:42.000Z
-45,Package,CATP,Custom Package (#4) (1 Operator),,checked,,,,,2018-01-30T19:06:27.000Z
-46,Invoice Specific,,Black Stages,,checked,,checked,4,,2018-01-30T20:39:42.000Z
-47,Package,CATP,Custom Package (#2),,checked,,,,,2018-01-31T16:15:48.000Z
-48,Package,CATP,Custom Package (#1),,checked,checked,,,,2018-01-31T16:17:46.000Z
-49,Invoice Specific,,Leko's,,checked,,,,,2018-01-31T16:18:28.000Z
-50,Stock,,Console,,checked,,,,,2018-01-31T20:17:18.000Z
-51,Package,CATP,"Custom Package (Video Screens, No Operator)",,checked,checked,,,,2018-01-31T20:39:15.000Z
-52,Package,CATP,Fundraiser Package #3 (1 Operator),,checked,,,,350.00,2018-02-05T04:04:03.000Z
-53,Package,CATP,Custom Package (#3) ( 1 Operator),,checked,,,,-300.00,2018-02-05T04:45:23.000Z
-54,Package,CATP,Bar/Bat Mitzvah Package #3 (1 Operator),,checked,,,,,2018-02-05T04:55:39.000Z
-55,Package,CATP,Bar/Bat Mitzvah Package #4 (1 Operator),,checked,,,,,2018-02-05T05:14:12.000Z
-56,Package,CATP,Sweet Sixteen Package #3 (1 Operator),,checked,,,,200.00,2018-02-05T05:21:22.000Z
-57,Package,CATP,Sweet Sixteen Package #4 (1 Operator),,checked,,,,200.00,2018-02-05T05:23:46.000Z
-58,Package,CATP,Wedding Package #4 (1 Operator),,checked,,,,500.00,2018-02-06T16:49:11.000Z
-59,Package,CATP,Christening Package #4 (1 Operator),,checked,,,,300.00,2018-02-06T17:01:01.000Z
-60,Invoice Specific,,Service Lighting,,checked,,,,,2018-02-06T17:42:04.000Z
-61,Invoice Specific,,Service Sound,,checked,,,,,2018-02-06T22:08:04.000Z
-62,Package,CATP,Bar/Bat Mitzvah Package #4**,Labor Included in this item,checked,,,,-300.00,2018-02-12T01:30:26.000Z
-63,Invoice Specific,,Sound,,checked,checked,,,,2018-02-12T19:39:15.000Z
-64,Package,CATP,Custom Package (#3) no charge for video operator,,checked,,,,,2018-02-12T20:26:49.000Z
-65,Invoice Specific,,to light runway,,checked,,checked,2,,2018-02-19T21:30:08.000Z
-66,Installed,CATP,All Screens for Skype Only,,checked,,,,,2018-02-20T15:54:20.000Z
-67,Installed,CATP,for Name and Montage,,checked,,,,,2018-02-20T16:04:13.000Z
-68,Installed,CATP,for Montage Only,,checked,,,,,2018-02-20T17:02:09.000Z
-69,Invoice Specific,,for Lobby & Bar,,checked,,checked,16,,2018-02-20T18:11:24.000Z
-70,Ordered,,,,,,checked,2,,2018-02-20T18:55:28.000Z
-71,Invoice Specific,,,,,,checked,1,,2018-02-26T15:11:46.000Z
-72,Invoice Specific,,Wireless LED's to light up cubes,,checked,checked,checked,5,,2018-02-26T15:53:42.000Z
-73,Package,CATP,"Custom Package (Video Screens, Moving Lights, Operator)",,checked,,,,,2018-02-26T19:41:21.000Z
-74,Invoice Specific,,Wireless LED lights,,checked,checked,checked,15,,2018-02-26T20:03:39.000Z
-75,Invoice Specific,,Wireless LED's for the Lobby,,checked,checked,checked,10,,2018-02-26T20:50:13.000Z
-76,Invoice Specific,,8 Leko's w/ black pipe and base for the Bar/Buffet Station,,checked,checked,,,,2018-02-26T20:51:50.000Z
-77,Package,CATP,Wedding Package #3 (1 Operator),,checked,,,,600.00,2018-02-26T21:24:35.000Z
-78,Invoice Specific,,,,,,checked,10,,2018-02-27T17:03:49.000Z
-79,Invoice Specific,,Leko's (Vine Pattern),,checked,checked,checked,2,,2018-02-27T17:05:17.000Z
-80,Package,CATP,"Custom Package (Static LEDs, Video Screens)",,checked,,,,,2018-02-27T20:54:06.000Z
-81,Invoice Specific,,Wireless Handheld Microphones,,checked,checked,checked,2,,2018-02-27T21:19:36.000Z
-82,Stock,,16 channel sound desk,,checked,checked,,,,2018-02-27T21:22:21.000Z
-83,Labor,,Sound Engineer,,checked,checked,,,,2018-02-27T21:37:11.000Z
-84,Invoice Specific,,Speakers w/ Amp rack,,checked,checked,,,,2018-02-28T15:46:53.000Z
-85,Invoice Specific,,Sound Package,,checked,checked,,,,2018-02-28T19:15:19.000Z
-86,Invoice Specific,,JBL Eon speakers,,checked,checked,checked,2,,2018-02-28T20:14:57.000Z
-87,Invoice Specific,,Speaker Stands,,checked,checked,checked,2,,2018-02-28T20:18:26.000Z
-88,Invoice Specific,,Cable Package,,checked,checked,,,,2018-02-28T20:19:11.000Z
-89,Invoice Specific,,Disco Ball / Moveable / Spins,,checked,,checked,1,,2018-02-28T21:03:09.000Z
-90,Invoice Specific,,Disco Ball/ Non  - Moveable,,checked,,checked,1,,2018-02-28T21:04:00.000Z
-91,Invoice Specific,,Uplight Cabana,,checked,checked,,,,2018-03-05T14:43:52.000Z
-92,Package,CATP,"Custom Package (Video Screens, Moving Lights ""inc"", Operator )",,checked,,,,,2018-03-05T15:29:45.000Z
-93,Invoice Specific,,Sound,,checked,checked,,,-50.00,2018-03-05T15:48:35.000Z
-94,Invoice Specific,,at $25/each,,checked,,,,,2018-03-05T20:02:54.000Z
-95,Invoice Specific,,Video,,checked,checked,,,,2018-03-05T20:49:52.000Z
-96,Invoice Specific,,Sound,,checked,checked,,,,2018-03-05T20:57:37.000Z
-97,Labor,,Labor,,checked,checked,,,,2018-03-05T20:59:42.000Z
-98,Invoice Specific,,,,,,,,,2018-03-06T15:09:04.000Z
-99,Invoice Specific,,,,,,checked,6,,2018-03-06T20:52:23.000Z
-100,Invoice Specific,,Wireless LED's ,,checked,checked,checked,22,,2018-03-06T21:05:04.000Z
-101,Invoice Specific,,Sound,,checked,,,,,2018-03-08T15:01:51.000Z
-102,Invoice Specific,,Sound,,checked,,,,,2018-03-08T16:03:06.000Z
-103,Invoice Specific,,Sound,,checked,,,,,2018-03-08T16:43:35.000Z
-104,Invoice Specific,,,,,,checked,2,,2018-03-08T17:17:19.000Z
-105,Invoice Specific,,,,,,checked,1,,2018-03-08T17:36:00.000Z
-106,Invoice Specific,,Sound,,checked,,,,,2018-03-08T17:40:16.000Z
-107,Invoice Specific,,LED Uplights,,checked,checked,checked,3,,2018-03-08T18:15:47.000Z
-108,Invoice Specific,,DJ Sound,,checked,checked,,,,2018-03-13T15:50:45.000Z
-109,Invoice Specific,,Sound,,checked,,,,,2018-03-13T15:51:34.000Z
-110,Package,COTG/HC,Lighting Package #4,,checked,,,,,2018-04-02T14:41:06.000Z
-111,Invoice Specific,,"""Show n' Go"" Video Package",,checked,,,,,2018-04-02T14:46:43.000Z
-112,Invoice Specific,,,,,,checked,16,,2018-04-09T14:18:34.000Z
-113,Invoice Specific,,,,,,checked,12,,2018-04-09T14:29:20.000Z
-114,Invoice Specific,,,,,,checked,18,,2018-04-09T14:52:19.000Z
-115,Invoice Specific,COTG/HC,Grand Ballroom,,checked,,,,,2018-04-09T16:41:02.000Z
-116,Invoice Specific,COTG/HC,Heritage Room,,checked,checked,,,,2018-04-09T16:49:56.000Z
-117,Invoice Specific,COTG/HC,Lobby,,checked,checked,,,,2018-04-09T17:16:14.000Z
-118,Invoice Specific,COTG/HC,Hallway,,checked,checked,,,,2018-04-09T17:19:47.000Z
-119,Invoice Specific,COTG/HC,Lenox Room,,checked,checked,,,,2018-04-09T17:45:26.000Z
-120,Labor,,Labor,,checked,checked,,,,2018-04-09T17:48:56.000Z
-121,Invoice Specific,,Fuschia Uplighting in Heritage Room,,checked,checked,,,,2018-04-10T17:22:13.000Z
-122,Invoice Specific,,"50"" plasma for photo loop with dvd player",,checked,checked,checked,1,,2018-04-12T16:01:15.000Z
-123,Invoice Specific,,Flood Lights for after hour party,,checked,checked,checked,2,,2018-04-12T16:09:07.000Z
-124,Invoice Specific,,for cocktail hour,,checked,,checked,8,,2018-04-12T16:14:53.000Z
-125,Invoice Specific,,w/ Blue gel for after hours,,checked,,checked,2,,2018-04-12T16:44:52.000Z
-126,Invoice Specific,,"60"" Plasmas for Powerpoint",,checked,checked,checked,2,,2018-04-12T17:35:49.000Z
-127,Invoice Specific,,60in. Plasmas,,,,,,,2018-04-12T17:45:25.000Z
-128,Invoice Specific,,Sound & Video,,checked,checked,,,,2018-04-17T21:04:29.000Z
-129,Invoice Specific,,,,,,checked,40,,2018-04-18T14:28:44.000Z
-130,Invoice Specific,,Full Sound,,checked,,,,,2018-04-18T14:51:28.000Z
-131,Invoice Specific,,LED Uplight's in the Lenox Room,,checked,checked,checked,12,,2018-04-18T15:43:50.000Z
-132,Invoice Specific,,8 ft. Uprights with Intells on Stage,,checked,,checked,2,,2018-04-18T19:06:25.000Z
-133,Package,CAL,Lighting Package #1 (CAL),,checked,checked,,,,2018-04-18T19:31:14.000Z
-134,Package,CAL,Lighting Package #2 (CAL),,checked,checked,,,,2018-04-18T19:33:37.000Z
-135,Invoice Specific,,LED Uplights for front of building,,checked,checked,checked,4,,2018-04-18T20:16:43.000Z
-136,Package,Ultimate Gaga/575,Ultimate Gaga Bar/Bat Mitzvah Package #1,,checked,checked,,,,2018-04-23T13:57:12.000Z
-137,Package,Ultimate Gaga/575,Ultimate Gaga Bar/Bat Mitzvah Package #3,,checked,checked,,,,2018-04-23T14:02:58.000Z
-138,Package,Ultimate Gaga/575,Ultimate Gaga Bar/Bat Mitzvah Package #4,,checked,checked,,,,2018-04-23T14:03:00.000Z
-139,Invoice Specific,,32' x 32' White Dance Floor,,checked,checked,,,,2018-04-23T15:04:17.000Z
-140,Invoice Specific,,24' x 24' White Dance Floor,,checked,checked,,,,2018-04-23T16:38:02.000Z
-141,Package,Ultimate Gaga/575,"Ultimate 575/Gaga Custom Package ( LED Walls, Video Screens )",,checked,,,,,2018-04-23T17:26:50.000Z
-142,Invoice Specific,,ETC 50 degree ellipsoidals (break up),,checked,checked,checked,5,,2018-04-23T18:25:02.000Z
-143,Invoice Specific,,Ellipsoidals to light Bar & Buffett,,checked,checked,checked,4,,2018-04-23T18:27:05.000Z
-144,Invoice Specific,,Pin Spot All Tables,,checked,checked,,,,2018-04-23T18:30:07.000Z
-145,Invoice Specific,,Three phase power distribution box with power drops for outside vendors,,checked,checked,checked,1,,2018-04-23T18:31:27.000Z
-146,Invoice Specific,,20 amp power drop for band/DJ on stage,,checked,checked,checked,6,,2018-04-23T18:35:41.000Z
-147,Invoice Specific,,2 - Video Projectors for cocktail hour,,checked,checked,,,,2018-04-23T18:36:31.000Z
-148,Labor,,Labor - Rigging all chandeliers over dance floor scissor lift supplied by client,,checked,checked,,,,2018-04-23T18:45:56.000Z
-149,Invoice Specific,,Leko's @ $50 each,,checked,checked,checked,10,,2018-04-23T20:33:45.000Z
-150,Invoice Specific,,White Dance Floor,,checked,checked,,,,2018-04-23T20:37:00.000Z
-151,Invoice Specific,,ETC Source Four 575 watt flood lights for stage with cable,,checked,checked,checked,16,,2018-04-23T20:43:41.000Z
-152,Stock,,,,,,checked,1,,2018-04-23T20:45:16.000Z
-153,Stock,,,,,,checked,1,,2018-04-23T20:47:41.000Z
-154,Labor,,2 - Men to rig all lighting,,checked,checked,,,,2018-04-23T20:51:15.000Z
-155,Package,Ultimate Gaga/575,Ultimate 575/Gaga Custom Package ( Screens ),,checked,checked,,,,2018-04-24T13:26:09.000Z
-156,Invoice Specific,,"50"" Plasma in hallway with DVD Player",,checked,,checked,1,,2018-04-24T14:30:11.000Z
+id,kind,install,description,additional_notes,use_description,,use_description_only,,use_quantity,,quantity,discount_adj,created_at
+1,Package,CATP,Bar/Bat Mitzvah Package #2,,1,checked,0,,0,,1,0.00,2018-01-28T23:01:29.000Z
+2,Package,CATP,Bar/Bat Mitzvah Package #3,,1,checked,0,,0,,1,0.00,2018-01-28T23:01:45.000Z
+3,Package,CATP,Bar/Bat Mitzvah Package #4,,1,checked,0,,0,,1,300.00,2018-01-28T23:01:46.000Z
+4,Package,CATP,Sweet Sixteen Package #1,,1,checked,1,checked,0,,1,200.00,2018-01-28T23:11:52.000Z
+5,Package,CATP,Sweet Sixteen Package #2,,1,checked,0,,0,,1,200.00,2018-01-28T23:12:05.000Z
+6,Package,CATP,Sweet Sixteen Package #3,,1,checked,0,,0,,1,500.00,2018-01-28T23:12:06.000Z
+7,Package,CATP,Sweet Sixteen Package #4,,1,checked,0,,0,,1,500.00,2018-01-28T23:12:07.000Z
+8,Package,CATP,Wedding Package #1,,1,checked,1,checked,0,,1,450.00,2018-01-28T23:12:18.000Z
+9,Package,CATP,Wedding Package #2,,1,checked,0,,0,,1,450.00,2018-01-28T23:12:27.000Z
+10,Package,CATP,Wedding Package #3,,1,checked,0,,0,,1,600.00,2018-01-28T23:12:34.000Z
+11,Package,CATP,Wedding Package #4,,1,checked,0,,0,,1,800.00,2018-01-28T23:13:18.000Z
+12,Package,COTG/HC,Lighting Package #1,,1,checked,1,checked,0,,1,0.00,2018-01-28T23:13:24.000Z
+13,Package,COTG/HC,Lighting Package #2,,1,checked,0,,0,,1,0.00,2018-01-28T23:13:32.000Z
+14,Package,COTG/HC,Lighting Package #3,,1,checked,0,,0,,1,0.00,2018-01-28T23:13:37.000Z
+15,Ordered,,,,0,,0,,1,checked,1,0.00,2018-01-30T00:02:38.000Z
+16,Invoice Specific,,PAR’s for ceremony,,1,checked,0,,1,checked,4,0.00,2018-01-30T00:02:38.000Z
+17,Group,,Zaps w/ Zapshot Technician,,1,checked,0,,0,,1,-100.00,2018-01-30T00:02:38.000Z
+18,Invoice Specific,,Leko’s,,1,checked,0,,0,,1,0.00,2018-01-30T00:02:38.000Z
+19,Invoice Specific,,,,0,,0,,1,checked,4,0.00,2018-01-30T00:02:38.000Z
+20,Installed,CATP,,,0,,0,,0,,1,0.00,2018-01-30T00:02:38.000Z
+21,Stock,,,,0,,0,,0,,1,0.00,2018-01-30T00:02:38.000Z
+22,Stock,,,,0,,0,,0,,1,0.00,2018-01-30T00:02:38.000Z
+23,Invoice Specific,,lobby lighting,,1,checked,0,,0,,1,0.00,2018-01-30T00:02:38.000Z
+24,Invoice Specific,,Outside lighting,,1,checked,0,,0,,1,0.00,2018-01-30T00:02:38.000Z
+25,Invoice Specific,,,,0,,0,,1,checked,3,0.00,2018-01-30T00:02:38.000Z
+26,Stock,,Snow Machine,,1,checked,1,checked,0,,1,0.00,2018-01-30T00:02:38.000Z
+27,Invoice Specific,,additional LED lighting,,1,checked,0,,0,,1,-950.00,2018-01-30T00:02:38.000Z
+28,Invoice Specific,,Sound,,1,checked,1,checked,0,,1,0.00,2018-01-30T00:02:38.000Z
+29,Invoice Specific,,Stage Lighting,,1,checked,0,,0,,1,0.00,2018-01-30T00:02:38.000Z
+30,Ordered,,,,0,,0,,0,,1,0.00,2018-01-30T00:02:38.000Z
+31,Package,CATP,Custom Package (#3),,1,checked,0,,0,,1,0.00,2018-01-30T02:09:23.000Z
+32,Package,CATP,"Custom Package (LED's, Video Screens, Operator)",,1,checked,0,,0,,1,0.00,2018-01-30T04:27:23.000Z
+33,Package,CATP,"Custom Package (Video Screens, Operator)",,1,checked,0,,0,,1,0.00,2018-01-30T04:55:16.000Z
+34,Package,CATP,Fundraiser Package #4,,1,checked,0,,0,,1,0.00,2018-01-30T05:05:54.000Z
+35,Group,CATP,Lounge Night Lighting,,1,checked,0,,0,,1,0.00,2018-01-30T05:24:46.000Z
+36,Package,CATP,Custom Package (#4),,1,checked,0,,0,,1,0.00,2018-01-30T14:41:56.000Z
+37,Package,CATP,Corporate Package (#3) (1 Operator),,1,checked,0,,0,,1,-300.00,2018-01-30T15:00:11.000Z
+38,Package,CATP,"Custom Package (LED's, Moving Lights, Operator)",,1,checked,0,,0,,1,0.00,2018-01-30T16:47:20.000Z
+39,Package,CATP,"Custom Package (Static LED's, Video Screens, Operator)",,1,checked,0,,0,,1,0.00,2018-01-30T17:26:16.000Z
+40,Invoice Specific,,Sound,,1,checked,0,,0,,1,0.00,2018-01-30T17:51:00.000Z
+41,Package,CATP,Communion Package #4,,1,checked,0,,0,,1,300.00,2018-01-30T18:13:23.000Z
+42,Package,CATP,"Custom Package (Static LED's, Moving Lights, Video Screens, Operator)",,1,checked,0,,0,,1,0.00,2018-01-30T18:28:22.000Z
+43,Package,CATP,"Custom Package (Static LED's, Moving Lights, Operator)",,1,checked,0,,0,,1,0.00,2018-01-30T18:49:13.000Z
+44,Package,CATP,Prom Package #4 (1 Operator),,1,checked,0,,0,,1,500.00,2018-01-30T18:56:42.000Z
+45,Package,CATP,Custom Package (#4) (1 Operator),,1,checked,0,,0,,1,0.00,2018-01-30T19:06:27.000Z
+46,Invoice Specific,,Black Stages,,1,checked,0,,1,checked,4,0.00,2018-01-30T20:39:42.000Z
+47,Package,CATP,Custom Package (#2),,1,checked,0,,0,,1,0.00,2018-01-31T16:15:48.000Z
+48,Package,CATP,Custom Package (#1),,1,checked,1,checked,0,,1,0.00,2018-01-31T16:17:46.000Z
+49,Invoice Specific,,Leko's,,1,checked,0,,0,,1,0.00,2018-01-31T16:18:28.000Z
+50,Stock,,Console,,1,checked,0,,0,,1,0.00,2018-01-31T20:17:18.000Z
+51,Package,CATP,"Custom Package (Video Screens, No Operator)",,1,checked,1,checked,0,,1,0.00,2018-01-31T20:39:15.000Z
+52,Package,CATP,Fundraiser Package #3 (1 Operator),,1,checked,0,,0,,1,350.00,2018-02-05T04:04:03.000Z
+53,Package,CATP,Custom Package (#3) ( 1 Operator),,1,checked,0,,0,,1,-300.00,2018-02-05T04:45:23.000Z
+54,Package,CATP,Bar/Bat Mitzvah Package #3 (1 Operator),,1,checked,0,,0,,1,0.00,2018-02-05T04:55:39.000Z
+55,Package,CATP,Bar/Bat Mitzvah Package #4 (1 Operator),,1,checked,0,,0,,1,0.00,2018-02-05T05:14:12.000Z
+56,Package,CATP,Sweet Sixteen Package #3 (1 Operator),,1,checked,0,,0,,1,200.00,2018-02-05T05:21:22.000Z
+57,Package,CATP,Sweet Sixteen Package #4 (1 Operator),,1,checked,0,,0,,1,200.00,2018-02-05T05:23:46.000Z
+58,Package,CATP,Wedding Package #4 (1 Operator),,1,checked,0,,0,,1,500.00,2018-02-06T16:49:11.000Z
+59,Package,CATP,Christening Package #4 (1 Operator),,1,checked,0,,0,,1,300.00,2018-02-06T17:01:01.000Z
+60,Invoice Specific,,Service Lighting,,1,checked,0,,0,,1,0.00,2018-02-06T17:42:04.000Z
+61,Invoice Specific,,Service Sound,,1,checked,0,,0,,1,0.00,2018-02-06T22:08:04.000Z
+62,Package,CATP,Bar/Bat Mitzvah Package #4**,Labor Included in this item,1,checked,0,,0,,1,-300.00,2018-02-12T01:30:26.000Z
+63,Invoice Specific,,Sound,,1,checked,1,checked,0,,1,0.00,2018-02-12T19:39:15.000Z
+64,Package,CATP,Custom Package (#3) no charge for video operator,,1,checked,0,,0,,1,0.00,2018-02-12T20:26:49.000Z
+65,Invoice Specific,,to light runway,,1,checked,0,,1,checked,2,0.00,2018-02-19T21:30:08.000Z
+66,Installed,CATP,All Screens for Skype Only,,1,checked,0,,0,,1,0.00,2018-02-20T15:54:20.000Z
+67,Installed,CATP,for Name and Montage,,1,checked,0,,0,,1,0.00,2018-02-20T16:04:13.000Z
+68,Installed,CATP,for Montage Only,,1,checked,0,,0,,1,0.00,2018-02-20T17:02:09.000Z
+69,Invoice Specific,,for Lobby & Bar,,1,checked,0,,1,checked,16,0.00,2018-02-20T18:11:24.000Z
+70,Ordered,,,,0,,0,,1,checked,2,0.00,2018-02-20T18:55:28.000Z
+71,Invoice Specific,,,,0,,0,,1,checked,1,0.00,2018-02-26T15:11:46.000Z
+72,Invoice Specific,,Wireless LED's to light up cubes,,1,checked,1,checked,1,checked,5,0.00,2018-02-26T15:53:42.000Z
+73,Package,CATP,"Custom Package (Video Screens, Moving Lights, Operator)",,1,checked,0,,0,,1,0.00,2018-02-26T19:41:21.000Z
+74,Invoice Specific,,Wireless LED lights,,1,checked,1,checked,1,checked,15,0.00,2018-02-26T20:03:39.000Z
+75,Invoice Specific,,Wireless LED's for the Lobby,,1,checked,1,checked,1,checked,10,0.00,2018-02-26T20:50:13.000Z
+76,Invoice Specific,,8 Leko's w/ black pipe and base for the Bar/Buffet Station,,1,checked,1,checked,0,,1,0.00,2018-02-26T20:51:50.000Z
+77,Package,CATP,Wedding Package #3 (1 Operator),,1,checked,0,,0,,1,600.00,2018-02-26T21:24:35.000Z
+78,Invoice Specific,,,,0,,0,,1,checked,10,0.00,2018-02-27T17:03:49.000Z
+79,Invoice Specific,,Leko's (Vine Pattern),,1,checked,1,checked,1,checked,2,0.00,2018-02-27T17:05:17.000Z
+80,Package,CATP,"Custom Package (Static LEDs, Video Screens)",,1,checked,0,,0,,1,0.00,2018-02-27T20:54:06.000Z
+81,Invoice Specific,,Wireless Handheld Microphones,,1,checked,1,checked,1,checked,2,0.00,2018-02-27T21:19:36.000Z
+82,Stock,,16 channel sound desk,,1,checked,1,checked,0,,1,0.00,2018-02-27T21:22:21.000Z
+83,Labor,,Sound Engineer,,1,checked,1,checked,0,,1,0.00,2018-02-27T21:37:11.000Z
+84,Invoice Specific,,Speakers w/ Amp rack,,1,checked,1,checked,0,,1,0.00,2018-02-28T15:46:53.000Z
+85,Invoice Specific,,Sound Package,,1,checked,1,checked,0,,1,0.00,2018-02-28T19:15:19.000Z
+86,Invoice Specific,,JBL Eon speakers,,1,checked,1,checked,1,checked,2,0.00,2018-02-28T20:14:57.000Z
+87,Invoice Specific,,Speaker Stands,,1,checked,1,checked,1,checked,2,0.00,2018-02-28T20:18:26.000Z
+88,Invoice Specific,,Cable Package,,1,checked,1,checked,0,,1,0.00,2018-02-28T20:19:11.000Z
+89,Invoice Specific,,Disco Ball / Moveable / Spins,,1,checked,0,,1,checked,1,0.00,2018-02-28T21:03:09.000Z
+90,Invoice Specific,,Disco Ball/ Non  - Moveable,,1,checked,0,,1,checked,1,0.00,2018-02-28T21:04:00.000Z
+91,Invoice Specific,,Uplight Cabana,,1,checked,1,checked,0,,1,0.00,2018-03-05T14:43:52.000Z
+92,Package,CATP,"Custom Package (Video Screens, Moving Lights ""inc"", Operator )",,1,checked,0,,0,,1,0.00,2018-03-05T15:29:45.000Z
+93,Invoice Specific,,Sound,,1,checked,1,checked,0,,1,-50.00,2018-03-05T15:48:35.000Z
+94,Invoice Specific,,at $25/each,,1,checked,0,,0,,1,0.00,2018-03-05T20:02:54.000Z
+95,Invoice Specific,,Video,,1,checked,1,checked,0,,1,0.00,2018-03-05T20:49:52.000Z
+96,Invoice Specific,,Sound,,1,checked,1,checked,0,,1,0.00,2018-03-05T20:57:37.000Z
+97,Labor,,Labor,,1,checked,1,checked,0,,1,0.00,2018-03-05T20:59:42.000Z
+98,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-03-06T15:09:04.000Z
+99,Invoice Specific,,,,0,,0,,1,checked,6,0.00,2018-03-06T20:52:23.000Z
+100,Invoice Specific,,Wireless LED's ,,1,checked,1,checked,1,checked,22,0.00,2018-03-06T21:05:04.000Z
+101,Invoice Specific,,Sound,,1,checked,0,,0,,1,0.00,2018-03-08T15:01:51.000Z
+102,Invoice Specific,,Sound,,1,checked,0,,0,,1,0.00,2018-03-08T16:03:06.000Z
+103,Invoice Specific,,Sound,,1,checked,0,,0,,1,0.00,2018-03-08T16:43:35.000Z
+104,Invoice Specific,,,,0,,0,,1,checked,2,0.00,2018-03-08T17:17:19.000Z
+105,Invoice Specific,,,,0,,0,,1,checked,1,0.00,2018-03-08T17:36:00.000Z
+106,Invoice Specific,,Sound,,1,checked,0,,0,,1,0.00,2018-03-08T17:40:16.000Z
+107,Invoice Specific,,LED Uplights,,1,checked,1,checked,1,checked,3,0.00,2018-03-08T18:15:47.000Z
+108,Invoice Specific,,DJ Sound,,1,checked,1,checked,0,,1,0.00,2018-03-13T15:50:45.000Z
+109,Invoice Specific,,Sound,,1,checked,0,,0,,1,0.00,2018-03-13T15:51:34.000Z
+110,Package,COTG/HC,Lighting Package #4,,1,checked,0,,0,,1,0.00,2018-04-02T14:41:06.000Z
+111,Invoice Specific,,"""Show n' Go"" Video Package",,1,checked,0,,0,,1,0.00,2018-04-02T14:46:43.000Z
+112,Invoice Specific,,,,0,,0,,1,checked,16,0.00,2018-04-09T14:18:34.000Z
+113,Invoice Specific,,,,0,,0,,1,checked,12,0.00,2018-04-09T14:29:20.000Z
+114,Invoice Specific,,,,0,,0,,1,checked,18,0.00,2018-04-09T14:52:19.000Z
+115,Invoice Specific,COTG/HC,Grand Ballroom,,1,checked,0,,0,,1,0.00,2018-04-09T16:41:02.000Z
+116,Invoice Specific,COTG/HC,Heritage Room,,1,checked,1,checked,0,,1,0.00,2018-04-09T16:49:56.000Z
+117,Invoice Specific,COTG/HC,Lobby,,1,checked,1,checked,0,,1,0.00,2018-04-09T17:16:14.000Z
+118,Invoice Specific,COTG/HC,Hallway,,1,checked,1,checked,0,,1,0.00,2018-04-09T17:19:47.000Z
+119,Invoice Specific,COTG/HC,Lenox Room,,1,checked,1,checked,0,,1,0.00,2018-04-09T17:45:26.000Z
+120,Labor,,Labor,,1,checked,1,checked,0,,1,0.00,2018-04-09T17:48:56.000Z
+121,Invoice Specific,,Fuschia Uplighting in Heritage Room,,1,checked,1,checked,0,,1,0.00,2018-04-10T17:22:13.000Z
+122,Invoice Specific,,"50"" plasma for photo loop with dvd player",,1,checked,1,checked,1,checked,1,0.00,2018-04-12T16:01:15.000Z
+123,Invoice Specific,,Flood Lights for after hour party,,1,checked,1,checked,1,checked,2,0.00,2018-04-12T16:09:07.000Z
+124,Invoice Specific,,for cocktail hour,,1,checked,0,,1,checked,8,0.00,2018-04-12T16:14:53.000Z
+125,Invoice Specific,,w/ Blue gel for after hours,,1,checked,0,,1,checked,2,0.00,2018-04-12T16:44:52.000Z
+126,Invoice Specific,,"60"" Plasmas for Powerpoint",,1,checked,1,checked,1,checked,2,0.00,2018-04-12T17:35:49.000Z
+127,Invoice Specific,,60in. Plasmas,,0,,0,,0,,1,0.00,2018-04-12T17:45:25.000Z
+128,Invoice Specific,,Sound & Video,,1,checked,1,checked,0,,1,0.00,2018-04-17T21:04:29.000Z
+129,Invoice Specific,,,,0,,0,,1,checked,40,0.00,2018-04-18T14:28:44.000Z
+130,Invoice Specific,,Full Sound,,1,checked,0,,0,,1,0.00,2018-04-18T14:51:28.000Z
+131,Invoice Specific,,LED Uplight's in the Lenox Room,,1,checked,1,checked,1,checked,12,0.00,2018-04-18T15:43:50.000Z
+132,Invoice Specific,,8 ft. Uprights with Intells on Stage,,1,checked,0,,1,checked,2,0.00,2018-04-18T19:06:25.000Z
+133,Package,CAL,Lighting Package #1 (CAL),,1,checked,1,checked,0,,1,0.00,2018-04-18T19:31:14.000Z
+134,Package,CAL,Lighting Package #2 (CAL),,1,checked,1,checked,0,,1,0.00,2018-04-18T19:33:37.000Z
+135,Invoice Specific,,LED Uplights for front of building,,1,checked,1,checked,1,checked,4,0.00,2018-04-18T20:16:43.000Z
+136,Package,Ultimate Gaga/575,Ultimate Gaga Bar/Bat Mitzvah Package #1,,1,checked,1,checked,0,,1,0.00,2018-04-23T13:57:12.000Z
+137,Package,Ultimate Gaga/575,Ultimate Gaga Bar/Bat Mitzvah Package #3,,1,checked,1,checked,0,,1,0.00,2018-04-23T14:02:58.000Z
+138,Package,Ultimate Gaga/575,Ultimate Gaga Bar/Bat Mitzvah Package #4,,1,checked,1,checked,0,,1,0.00,2018-04-23T14:03:00.000Z
+139,Invoice Specific,,32' x 32' White Dance Floor,,1,checked,1,checked,0,,1,0.00,2018-04-23T15:04:17.000Z
+140,Invoice Specific,,24' x 24' White Dance Floor,,1,checked,1,checked,0,,1,0.00,2018-04-23T16:38:02.000Z
+141,Package,Ultimate Gaga/575,"Ultimate 575/Gaga Custom Package ( LED Walls, Video Screens )",,1,checked,0,,0,,1,0.00,2018-04-23T17:26:50.000Z
+142,Invoice Specific,,ETC 50 degree ellipsoidals (break up),,1,checked,1,checked,1,checked,5,0.00,2018-04-23T18:25:02.000Z
+143,Invoice Specific,,Ellipsoidals to light Bar & Buffett,,1,checked,1,checked,1,checked,4,0.00,2018-04-23T18:27:05.000Z
+144,Invoice Specific,,Pin Spot All Tables,,1,checked,1,checked,0,,1,0.00,2018-04-23T18:30:07.000Z
+145,Invoice Specific,,Three phase power distribution box with power drops for outside vendors,,1,checked,1,checked,1,checked,1,0.00,2018-04-23T18:31:27.000Z
+146,Invoice Specific,,20 amp power drop for band/DJ on stage,,1,checked,1,checked,1,checked,6,0.00,2018-04-23T18:35:41.000Z
+147,Invoice Specific,,2 - Video Projectors for cocktail hour,,1,checked,1,checked,0,,1,0.00,2018-04-23T18:36:31.000Z
+148,Labor,,Labor - Rigging all chandeliers over dance floor scissor lift supplied by client,,1,checked,1,checked,0,,1,0.00,2018-04-23T18:45:56.000Z
+149,Invoice Specific,,Leko's @ $50 each,,1,checked,1,checked,1,checked,10,0.00,2018-04-23T20:33:45.000Z
+150,Invoice Specific,,White Dance Floor,,1,checked,1,checked,0,,1,0.00,2018-04-23T20:37:00.000Z
+151,Invoice Specific,,ETC Source Four 575 watt flood lights for stage with cable,,1,checked,1,checked,1,checked,16,0.00,2018-04-23T20:43:41.000Z
+152,Stock,,,,0,,0,,1,checked,1,0.00,2018-04-23T20:45:16.000Z
+153,Stock,,,,0,,0,,1,checked,1,0.00,2018-04-23T20:47:41.000Z
+154,Labor,,2 - Men to rig all lighting,,1,checked,1,checked,0,,1,0.00,2018-04-23T20:51:15.000Z
+155,Package,Ultimate Gaga/575,Ultimate 575/Gaga Custom Package ( Screens ),,1,checked,1,checked,0,,1,0.00,2018-04-24T13:26:09.000Z
+156,Invoice Specific,,"50"" Plasma in hallway with DVD Player",,1,checked,0,,1,checked,1,0.00,2018-04-24T14:30:11.000Z
 157,Invoice Specific,,"4 - Vertical Uprights
-includes scrim, color kinetics and Mac 250 Moving Lights",,checked,,,,,2018-04-24T14:33:27.000Z
-158,Invoice Specific,,,,,,checked,20,,2018-04-24T20:16:01.000Z
-159,Invoice Specific,,Confetti cannons,,checked,checked,checked,2,,2018-04-24T20:48:40.000Z
-160,Invoice Specific,,Service Charge 20% for programming lighting & Installation of gobo 3.5 hours,,checked,checked,,,,2018-04-24T21:02:19.000Z
-161,Group,,Color Kinetic DJ Facade,,checked,,checked,1,,2018-04-24T21:10:05.000Z
-162,Package,COTG/HC,"Custom Package (Moving Lights, Operator)",,checked,checked,,,,2018-04-25T15:08:33.000Z
-163,Invoice Specific,,w/ Cyan Gel for After hours,,checked,,,,,2018-04-25T15:27:54.000Z
-164,Invoice Specific,,Ceremony Lighting in Gazebo,,checked,checked,,,,2018-04-25T15:33:35.000Z
-165,Invoice Specific,,Ceremony Lighting ,,checked,,,,,2018-04-25T16:11:41.000Z
-166,Invoice Specific,,to be placed in the Ballroom around the center chandelier,,checked,,,,,2018-04-25T16:26:48.000Z
-167,Invoice Specific,,,,,,checked,17,,2018-04-25T16:31:59.000Z
-168,Invoice Specific,,to support monitors,,checked,,,,,2018-04-25T16:40:15.000Z
-169,Invoice Specific,,,,,,checked,4,,2018-04-25T16:41:30.000Z
-170,Stock,,,,,,checked,1,,2018-04-25T16:42:45.000Z
-171,Stock,,50ft mini pin to RCA audio cable,,checked,,checked,1,,2018-04-25T16:43:43.000Z
-172,Labor,,2 - Techs to set up all gear,,checked,checked,,,,2018-04-25T16:44:19.000Z
-173,Invoice Specific,,2 - 6' x 8' Video Screens w/ Projectors,,checked,,,,,2018-04-25T19:08:00.000Z
-174,Invoice Specific,,,,,,,,,2018-04-25T19:35:40.000Z
-175,Invoice Specific,COTG/HC,Grand Ballroom,,checked,,,,,2018-04-30T13:57:32.000Z
-176,Invoice Specific,,Outside Lighting for back of Building,,checked,,,,,2018-04-30T14:01:13.000Z
-177,Invoice Specific,,Outside Lighting for Front of Building,,checked,,,,,2018-04-30T14:04:10.000Z
-178,Invoice Specific,,Lighting ,,checked,checked,,,,2018-04-30T15:22:22.000Z
-179,Invoice Specific,,Sound,,checked,,,,,2018-04-30T15:43:32.000Z
-180,Invoice Specific,,Video,,checked,,,,,2018-04-30T15:47:51.000Z
-181,Invoice Specific,,Wireless LED Uplights,,checked,checked,checked,20,,2018-05-01T16:04:00.000Z
-182,Invoice Specific,,Leko to illuminate centerpiece,,checked,,,,,2018-05-01T16:05:41.000Z
-183,Invoice Specific,,,,,,checked,20,,2018-05-01T16:50:12.000Z
-184,Invoice Specific,,6' x 8' Video screen w/ projector,,checked,,checked,1,,2018-05-01T16:55:12.000Z
-185,Invoice Specific,,Sound,,checked,,,,,2018-05-01T19:33:39.000Z
-186,Stock,,,,,,,,,2018-05-01T20:01:34.000Z
-187,Package,COTG/HC,"Custom Package (Static LEDs, Moving lights)",,checked,,,,,2018-05-02T15:48:10.000Z
-188,Invoice Specific,,to be used for Slideshow,,checked,,checked,1,,2018-05-02T16:17:09.000Z
-189,Invoice Specific,,Wireless LED's to light Chuppah,,checked,checked,checked,4,,2018-05-02T18:24:16.000Z
-190,Invoice Specific,,Video,,checked,,,,,2018-05-02T21:26:41.000Z
-191,Labor,,Labor,,checked,checked,,,,2018-05-02T21:30:15.000Z
-192,Invoice Specific,,Furniture Rental,,checked,checked,,,,2018-05-02T21:44:48.000Z
-193,Invoice Specific,,DJ Sound System,,checked,,,,,2018-05-02T21:46:09.000Z
-194,Invoice Specific,,"DJ Console, Mixer, CD Players, Serato, and Wireless Mics",,checked,,,,,2018-05-02T21:48:49.000Z
-195,Subcontracted,,8' x 5' Video Wall,,checked,,,,,2018-05-02T21:49:36.000Z
-196,Invoice Specific,COTG/HC,Heritage Room,,checked,checked,,,,2018-05-02T21:51:09.000Z
-197,Invoice Specific,COTG/HC,Tillinghast,,checked,,,,,2018-05-02T21:52:32.000Z
-198,Invoice Specific,COTG/HC,Hallway,,checked,,,,,2018-05-02T21:56:47.000Z
-199,Invoice Specific,COTG/HC,Lenox Room,,checked,checked,,,,2018-05-02T21:58:39.000Z
-200,Invoice Specific,,Sound,,checked,,,,,2018-05-03T15:15:25.000Z
-201,Invoice Specific,,Sound System,,checked,,,,,2018-05-03T15:40:35.000Z
-202,Invoice Specific,,for tables,,checked,,checked,24,,2018-05-03T16:28:53.000Z
-203,Package,CANS,Package #2,,checked,checked,,,,2018-05-03T17:56:16.000Z
-204,Package,CANS,Package #3,,checked,checked,,,,2018-05-03T17:56:22.000Z
-205,Package,CANS,Package #4,,checked,checked,,,,2018-05-03T17:56:25.000Z
-206,Package,CANS,"Custom Package (LEDs, Moving Lights, Operator)",,checked,,,,,2018-05-03T19:26:41.000Z
-207,Package,CANS,"Custom Package (Static LEDS, Video Screens, Operator)",,checked,,,,,2018-05-03T20:06:11.000Z
-208,Invoice Specific,,Wireless LEDS,,checked,,checked,4,,2018-05-24T17:58:35.000Z
-209,Invoice Specific,,on Uprights,,checked,,checked,6,,2018-05-24T18:10:10.000Z
-210,Labor,,,,,,,,,2018-05-24T18:20:10.000Z
-211,Invoice Specific,,,,,,,,,2018-05-25T16:24:49.000Z
-212,Invoice Specific,,10' Black Pipe and Base,,checked,,checked,1,,2018-05-25T16:26:02.000Z
-213,Invoice Specific,,,,,,checked,1,,2018-05-25T16:27:21.000Z
-214,Invoice Specific,,Speakers w/ Mixer and Microphones,,checked,,,,,2018-05-31T21:17:02.000Z
-215,Invoice Specific,,Wireless Handheld Microphone,,checked,checked,checked,1,,2018-06-04T15:59:04.000Z
-216,Invoice Specific,,4 - Uprights w/ Moving Light Fixtures,,checked,checked,,,,2018-06-04T18:25:04.000Z
-217,Invoice Specific,,,,,,checked,12,,2018-06-04T20:46:51.000Z
-218,Invoice Specific,,,,,,checked,12,,2018-06-04T20:47:34.000Z
-219,Invoice Specific,,10' black pipe and base,,checked,checked,checked,4,,2018-06-04T20:48:38.000Z
-220,Invoice Specific,,,,,,checked,4,,2018-06-04T21:07:33.000Z
-221,Invoice Specific,,,,,,checked,6,,2018-06-05T16:35:31.000Z
-222,Invoice Specific,,,,,,checked,6,,2018-06-05T16:36:28.000Z
-223,Invoice Specific,,10' Pipe and base w/ cheeseborough on Top,,checked,,,,,2018-06-05T16:37:53.000Z
-224,Labor,,Labor,,checked,checked,,,,2018-06-05T16:40:02.000Z
-225,Invoice Specific,,,,,,checked,2,,2018-06-05T20:22:44.000Z
-226,Invoice Specific,,2 - 6' x 8' Video Screens w/ Projectors,,checked,checked,,,,2018-06-07T15:50:19.000Z
-227,Invoice Specific,,Sony Video Camera,,checked,,,,,2018-06-07T15:53:25.000Z
-228,Invoice Specific,,Video Playback Console,,checked,,,,,2018-06-07T15:54:03.000Z
-229,Labor,,Camera Operator,,checked,checked,,,,2018-06-07T15:54:38.000Z
-230,Labor,,Video Technician,,checked,checked,,,,2018-06-07T15:57:10.000Z
-231,Package,CATP,Sweet 16 Package #4,,checked,,,,200.00,2018-06-07T16:14:09.000Z
-232,Invoice Specific,,,,,,,,,2018-06-08T00:34:56.000Z
-233,Invoice Specific,,,,,,,,,2018-06-08T00:36:28.000Z
-234,Invoice Specific,,,,,,,,,2018-06-08T00:38:18.000Z
-235,Installed,CATP,,,,,,,,2018-06-08T00:41:35.000Z
-236,Invoice Specific,,4Wall Gear Rental,,checked,,,,,2018-06-12T17:29:52.000Z
-237,Invoice Specific,,to strike gear,,checked,,,,,2018-06-12T17:30:20.000Z
-238,Labor,,"for Tie in, 8 hour call",,checked,,,,,2018-06-12T17:32:35.000Z
-239,Invoice Specific,,for Floor Power,,checked,,,,,2018-06-12T17:34:56.000Z
-240,Invoice Specific,,,,,,,,,2018-06-12T17:36:53.000Z
-241,Invoice Specific,, with 8 hour call @$300,,checked,,,,,2018-06-12T17:45:25.000Z
-242,Invoice Specific,,,,,,,,,2018-06-12T17:47:44.000Z
-243,Invoice Specific,,,,,,checked,12,,2018-06-12T18:20:37.000Z
-244,Stock,,,,,,,,,2018-06-12T18:21:21.000Z
-245,Subcontracted,,75in. LED Screens with Stands,,checked,,checked,2,-550.00,2018-06-18T14:45:33.000Z
-246,,,,,,,,,,2018-06-18T14:49:43.000Z
-247,Invoice Specific,,,,,,,,,2018-06-18T14:57:37.000Z
-248,Invoice Specific,,,,,,,,,2018-06-18T15:00:45.000Z
-249,Stock,,Mac Computers,,checked,checked,,,,2018-06-18T15:12:13.000Z
-250,Invoice Specific,,300 ft. SDI Cable,,checked,,,,,2018-06-18T15:16:50.000Z
-251,Invoice Specific,,50 ft. HDMI Cable,,checked,checked,,,,2018-06-18T15:18:09.000Z
-252,,,,,,,,,,2018-06-18T15:21:43.000Z
-253,Invoice Specific,,,,,,checked,30,,2018-06-18T15:33:37.000Z
-254,Invoice Specific,,,,,,checked,2,,2018-06-18T15:35:35.000Z
-255,,,Delivery & Labor,,checked,checked,,,,2018-06-18T15:36:36.000Z
-256,Invoice Specific,,Delivery Charge,,checked,checked,,,,2018-06-18T18:40:16.000Z
-257,,,,,,,,,,2018-06-20T17:16:41.000Z
-258,Invoice Specific,,for stage wash,,checked,,,,,2018-06-20T17:19:26.000Z
-259,Invoice Specific,,Stage Decks,,checked,,checked,25,,2018-06-20T17:27:17.000Z
-260,Invoice Specific,,,,,,checked,22,,2018-06-20T17:46:33.000Z
-261,,,,,,,,,,2018-06-20T17:50:18.000Z
-262,,,Overall Lead Offset,,checked,checked,,,,2018-06-27T14:47:37.000Z
-263,Invoice Specific,,2 - 8' Upright box truss w/ 4 Vizi Beams on black pipe,,checked,checked,,,,2018-06-27T14:57:46.000Z
-264,Invoice Specific,,10ft Rear projection screens (front of building),,checked,checked,checked,2,,2018-06-27T15:39:03.000Z
-265,Invoice Specific,,,,,,checked,2,,2018-06-27T15:44:54.000Z
-266,Labor,,Labor for Set-Up & Strike / 2 Techs,,checked,checked,,,,2018-06-27T15:53:33.000Z
-267,Subcontracted,,,,,,,,,2018-06-27T15:58:16.000Z
-268,Invoice Specific,,4' x 8' Black Stages,,checked,,checked,8,,2018-06-27T16:52:34.000Z
-269,Invoice Specific,,,,,,checked,5,,2018-06-27T16:56:22.000Z
-270,,,Ratchet and Cleats,,checked,,,,,2018-06-27T16:58:59.000Z
-271,,,,,,,checked,8,,2018-06-27T17:08:36.000Z
-272,Invoice Specific,,,,,,checked,2,,2018-06-27T17:11:00.000Z
-273,,,,,,,,,,2018-06-27T17:15:21.000Z
-274,Labor,,,,,,,,,2018-06-27T17:21:07.000Z
-275,Labor,,Labor & Technician Fees,,checked,checked,,,,2018-06-27T17:21:50.000Z
-276,Invoice Specific,,Trucking for Pick up only,,checked,checked,,,,2018-06-27T17:22:35.000Z
-277,Invoice Specific,,Trucking for Drop off,,checked,checked,,,,2018-06-27T17:23:00.000Z
-278,Invoice Specific,,"Cable Package ( Saco, XLR, Stinger, etc. )",,checked,checked,,,,2018-06-27T17:24:15.000Z
+includes scrim, color kinetics and Mac 250 Moving Lights",,1,checked,0,,0,,1,0.00,2018-04-24T14:33:27.000Z
+158,Invoice Specific,,,,0,,0,,1,checked,20,0.00,2018-04-24T20:16:01.000Z
+159,Invoice Specific,,Confetti cannons,,1,checked,1,checked,1,checked,2,0.00,2018-04-24T20:48:40.000Z
+160,Invoice Specific,,Service Charge 20% for programming lighting & Installation of gobo 3.5 hours,,1,checked,1,checked,0,,1,0.00,2018-04-24T21:02:19.000Z
+161,Group,,Color Kinetic DJ Facade,,1,checked,0,,1,checked,1,0.00,2018-04-24T21:10:05.000Z
+162,Package,COTG/HC,"Custom Package (Moving Lights, Operator)",,1,checked,1,checked,0,,1,0.00,2018-04-25T15:08:33.000Z
+163,Invoice Specific,,w/ Cyan Gel for After hours,,1,checked,0,,0,,1,0.00,2018-04-25T15:27:54.000Z
+164,Invoice Specific,,Ceremony Lighting in Gazebo,,1,checked,1,checked,0,,1,0.00,2018-04-25T15:33:35.000Z
+165,Invoice Specific,,Ceremony Lighting ,,1,checked,0,,0,,1,0.00,2018-04-25T16:11:41.000Z
+166,Invoice Specific,,to be placed in the Ballroom around the center chandelier,,1,checked,0,,0,,1,0.00,2018-04-25T16:26:48.000Z
+167,Invoice Specific,,,,0,,0,,1,checked,17,0.00,2018-04-25T16:31:59.000Z
+168,Invoice Specific,,to support monitors,,1,checked,0,,0,,1,0.00,2018-04-25T16:40:15.000Z
+169,Invoice Specific,,,,0,,0,,1,checked,4,0.00,2018-04-25T16:41:30.000Z
+170,Stock,,,,0,,0,,1,checked,1,0.00,2018-04-25T16:42:45.000Z
+171,Stock,,50ft mini pin to RCA audio cable,,1,checked,0,,1,checked,1,0.00,2018-04-25T16:43:43.000Z
+172,Labor,,2 - Techs to set up all gear,,1,checked,1,checked,0,,1,0.00,2018-04-25T16:44:19.000Z
+173,Invoice Specific,,2 - 6' x 8' Video Screens w/ Projectors,,1,checked,0,,0,,1,0.00,2018-04-25T19:08:00.000Z
+174,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-04-25T19:35:40.000Z
+175,Invoice Specific,COTG/HC,Grand Ballroom,,1,checked,0,,0,,1,0.00,2018-04-30T13:57:32.000Z
+176,Invoice Specific,,Outside Lighting for back of Building,,1,checked,0,,0,,1,0.00,2018-04-30T14:01:13.000Z
+177,Invoice Specific,,Outside Lighting for Front of Building,,1,checked,0,,0,,1,0.00,2018-04-30T14:04:10.000Z
+178,Invoice Specific,,Lighting ,,1,checked,1,checked,0,,1,0.00,2018-04-30T15:22:22.000Z
+179,Invoice Specific,,Sound,,1,checked,0,,0,,1,0.00,2018-04-30T15:43:32.000Z
+180,Invoice Specific,,Video,,1,checked,0,,0,,1,0.00,2018-04-30T15:47:51.000Z
+181,Invoice Specific,,Wireless LED Uplights,,1,checked,1,checked,1,checked,20,0.00,2018-05-01T16:04:00.000Z
+182,Invoice Specific,,Leko to illuminate centerpiece,,1,checked,0,,0,,1,0.00,2018-05-01T16:05:41.000Z
+183,Invoice Specific,,,,0,,0,,1,checked,20,0.00,2018-05-01T16:50:12.000Z
+184,Invoice Specific,,6' x 8' Video screen w/ projector,,1,checked,0,,1,checked,1,0.00,2018-05-01T16:55:12.000Z
+185,Invoice Specific,,Sound,,1,checked,0,,0,,1,0.00,2018-05-01T19:33:39.000Z
+186,Stock,,,,0,,0,,0,,1,0.00,2018-05-01T20:01:34.000Z
+187,Package,COTG/HC,"Custom Package (Static LEDs, Moving lights)",,1,checked,0,,0,,1,0.00,2018-05-02T15:48:10.000Z
+188,Invoice Specific,,to be used for Slideshow,,1,checked,0,,1,checked,1,0.00,2018-05-02T16:17:09.000Z
+189,Invoice Specific,,Wireless LED's to light Chuppah,,1,checked,1,checked,1,checked,4,0.00,2018-05-02T18:24:16.000Z
+190,Invoice Specific,,Video,,1,checked,0,,0,,1,0.00,2018-05-02T21:26:41.000Z
+191,Labor,,Labor,,1,checked,1,checked,0,,1,0.00,2018-05-02T21:30:15.000Z
+192,Invoice Specific,,Furniture Rental,,1,checked,1,checked,0,,1,0.00,2018-05-02T21:44:48.000Z
+193,Invoice Specific,,DJ Sound System,,1,checked,0,,0,,1,0.00,2018-05-02T21:46:09.000Z
+194,Invoice Specific,,"DJ Console, Mixer, CD Players, Serato, and Wireless Mics",,1,checked,0,,0,,1,0.00,2018-05-02T21:48:49.000Z
+195,Subcontracted,,8' x 5' Video Wall,,1,checked,0,,0,,1,0.00,2018-05-02T21:49:36.000Z
+196,Invoice Specific,COTG/HC,Heritage Room,,1,checked,1,checked,0,,1,0.00,2018-05-02T21:51:09.000Z
+197,Invoice Specific,COTG/HC,Tillinghast,,1,checked,0,,0,,1,0.00,2018-05-02T21:52:32.000Z
+198,Invoice Specific,COTG/HC,Hallway,,1,checked,0,,0,,1,0.00,2018-05-02T21:56:47.000Z
+199,Invoice Specific,COTG/HC,Lenox Room,,1,checked,1,checked,0,,1,0.00,2018-05-02T21:58:39.000Z
+200,Invoice Specific,,Sound,,1,checked,0,,0,,1,0.00,2018-05-03T15:15:25.000Z
+201,Invoice Specific,,Sound System,,1,checked,0,,0,,1,0.00,2018-05-03T15:40:35.000Z
+202,Invoice Specific,,for tables,,1,checked,0,,1,checked,24,0.00,2018-05-03T16:28:53.000Z
+203,Package,CANS,Package #2,,1,checked,1,checked,0,,1,0.00,2018-05-03T17:56:16.000Z
+204,Package,CANS,Package #3,,1,checked,1,checked,0,,1,0.00,2018-05-03T17:56:22.000Z
+205,Package,CANS,Package #4,,1,checked,1,checked,0,,1,0.00,2018-05-03T17:56:25.000Z
+206,Package,CANS,"Custom Package (LEDs, Moving Lights, Operator)",,1,checked,0,,0,,1,0.00,2018-05-03T19:26:41.000Z
+207,Package,CANS,"Custom Package (Static LEDS, Video Screens, Operator)",,1,checked,0,,0,,1,0.00,2018-05-03T20:06:11.000Z
+208,Invoice Specific,,Wireless LEDS,,1,checked,0,,1,checked,4,0.00,2018-05-24T17:58:35.000Z
+209,Invoice Specific,,on Uprights,,1,checked,0,,1,checked,6,0.00,2018-05-24T18:10:10.000Z
+210,Labor,,,,0,,0,,0,,1,0.00,2018-05-24T18:20:10.000Z
+211,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-05-25T16:24:49.000Z
+212,Invoice Specific,,10' Black Pipe and Base,,1,checked,0,,1,checked,1,0.00,2018-05-25T16:26:02.000Z
+213,Invoice Specific,,,,0,,0,,1,checked,1,0.00,2018-05-25T16:27:21.000Z
+214,Invoice Specific,,Speakers w/ Mixer and Microphones,,1,checked,0,,0,,1,0.00,2018-05-31T21:17:02.000Z
+215,Invoice Specific,,Wireless Handheld Microphone,,1,checked,1,checked,1,checked,1,0.00,2018-06-04T15:59:04.000Z
+216,Invoice Specific,,4 - Uprights w/ Moving Light Fixtures,,1,checked,1,checked,0,,1,0.00,2018-06-04T18:25:04.000Z
+217,Invoice Specific,,,,0,,0,,1,checked,12,0.00,2018-06-04T20:46:51.000Z
+218,Invoice Specific,,,,0,,0,,1,checked,12,0.00,2018-06-04T20:47:34.000Z
+219,Invoice Specific,,10' black pipe and base,,1,checked,1,checked,1,checked,4,0.00,2018-06-04T20:48:38.000Z
+220,Invoice Specific,,,,0,,0,,1,checked,4,0.00,2018-06-04T21:07:33.000Z
+221,Invoice Specific,,,,0,,0,,1,checked,6,0.00,2018-06-05T16:35:31.000Z
+222,Invoice Specific,,,,0,,0,,1,checked,6,0.00,2018-06-05T16:36:28.000Z
+223,Invoice Specific,,10' Pipe and base w/ cheeseborough on Top,,1,checked,0,,0,,1,0.00,2018-06-05T16:37:53.000Z
+224,Labor,,Labor,,1,checked,1,checked,0,,1,0.00,2018-06-05T16:40:02.000Z
+225,Invoice Specific,,,,0,,0,,1,checked,2,0.00,2018-06-05T20:22:44.000Z
+226,Invoice Specific,,2 - 6' x 8' Video Screens w/ Projectors,,1,checked,1,checked,0,,1,0.00,2018-06-07T15:50:19.000Z
+227,Invoice Specific,,Sony Video Camera,,1,checked,0,,0,,1,0.00,2018-06-07T15:53:25.000Z
+228,Invoice Specific,,Video Playback Console,,1,checked,0,,0,,1,0.00,2018-06-07T15:54:03.000Z
+229,Labor,,Camera Operator,,1,checked,1,checked,0,,1,0.00,2018-06-07T15:54:38.000Z
+230,Labor,,Video Technician,,1,checked,1,checked,0,,1,0.00,2018-06-07T15:57:10.000Z
+231,Package,CATP,Sweet 16 Package #4,,1,checked,0,,0,,1,200.00,2018-06-07T16:14:09.000Z
+232,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-06-08T00:34:56.000Z
+233,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-06-08T00:36:28.000Z
+234,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-06-08T00:38:18.000Z
+235,Installed,CATP,,,0,,0,,0,,1,0.00,2018-06-08T00:41:35.000Z
+236,Invoice Specific,,4Wall Gear Rental,,1,checked,0,,0,,1,0.00,2018-06-12T17:29:52.000Z
+237,Invoice Specific,,to strike gear,,1,checked,0,,0,,1,0.00,2018-06-12T17:30:20.000Z
+238,Labor,,"for Tie in, 8 hour call",,1,checked,0,,0,,1,0.00,2018-06-12T17:32:35.000Z
+239,Invoice Specific,,for Floor Power,,1,checked,0,,0,,1,0.00,2018-06-12T17:34:56.000Z
+240,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-06-12T17:36:53.000Z
+241,Invoice Specific,,with 8 hour call @$300,,1,checked,0,,0,,1,0.00,2018-06-12T17:45:25.000Z
+242,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-06-12T17:47:44.000Z
+243,Invoice Specific,,,,0,,0,,1,checked,12,0.00,2018-06-12T18:20:37.000Z
+244,Stock,,,,0,,0,,0,,1,0.00,2018-06-12T18:21:21.000Z
+245,Subcontracted,,75in. LED Screens with Stands,,1,checked,0,,1,checked,2,-550.00,2018-06-18T14:45:33.000Z
+246,,,,,0,,0,,0,,1,0.00,2018-06-18T14:49:43.000Z
+247,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-06-18T14:57:37.000Z
+248,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-06-18T15:00:45.000Z
+249,Stock,,Mac Computers,,1,checked,1,checked,0,,1,0.00,2018-06-18T15:12:13.000Z
+250,Invoice Specific,,300 ft. SDI Cable,,1,checked,0,,0,,1,0.00,2018-06-18T15:16:50.000Z
+251,Invoice Specific,,50 ft. HDMI Cable,,1,checked,1,checked,0,,1,0.00,2018-06-18T15:18:09.000Z
+252,,,,,0,,0,,0,,1,0.00,2018-06-18T15:21:43.000Z
+253,Invoice Specific,,,,0,,0,,1,checked,30,0.00,2018-06-18T15:33:37.000Z
+254,Invoice Specific,,,,0,,0,,1,checked,2,0.00,2018-06-18T15:35:35.000Z
+255,,,Delivery & Labor,,1,checked,1,checked,0,,1,0.00,2018-06-18T15:36:36.000Z
+256,Invoice Specific,,Delivery Charge,,1,checked,1,checked,0,,1,0.00,2018-06-18T18:40:16.000Z
+257,,,,,0,,0,,0,,1,0.00,2018-06-20T17:16:41.000Z
+258,Invoice Specific,,for stage wash,,1,checked,0,,0,,1,0.00,2018-06-20T17:19:26.000Z
+259,Invoice Specific,,Stage Decks,,1,checked,0,,1,checked,25,0.00,2018-06-20T17:27:17.000Z
+260,Invoice Specific,,,,0,,0,,1,checked,22,0.00,2018-06-20T17:46:33.000Z
+261,,,,,0,,0,,0,,1,0.00,2018-06-20T17:50:18.000Z
+262,,,Overall Lead Offset,,1,checked,1,checked,0,,1,0.00,2018-06-27T14:47:37.000Z
+263,Invoice Specific,,2 - 8' Upright box truss w/ 4 Vizi Beams on black pipe,,1,checked,1,checked,0,,1,0.00,2018-06-27T14:57:46.000Z
+264,Invoice Specific,,10ft Rear projection screens (front of building),,1,checked,1,checked,1,checked,2,0.00,2018-06-27T15:39:03.000Z
+265,Invoice Specific,,,,0,,0,,1,checked,2,0.00,2018-06-27T15:44:54.000Z
+266,Labor,,Labor for Set-Up & Strike / 2 Techs,,1,checked,1,checked,0,,1,0.00,2018-06-27T15:53:33.000Z
+267,Subcontracted,,,,0,,0,,0,,1,0.00,2018-06-27T15:58:16.000Z
+268,Invoice Specific,,4' x 8' Black Stages,,1,checked,0,,1,checked,8,0.00,2018-06-27T16:52:34.000Z
+269,Invoice Specific,,,,0,,0,,1,checked,5,0.00,2018-06-27T16:56:22.000Z
+270,,,Ratchet and Cleats,,1,checked,0,,0,,1,0.00,2018-06-27T16:58:59.000Z
+271,,,,,0,,0,,1,checked,8,0.00,2018-06-27T17:08:36.000Z
+272,Invoice Specific,,,,0,,0,,1,checked,2,0.00,2018-06-27T17:11:00.000Z
+273,,,,,0,,0,,0,,1,0.00,2018-06-27T17:15:21.000Z
+274,Labor,,,,0,,0,,0,,1,0.00,2018-06-27T17:21:07.000Z
+275,Labor,,Labor & Technician Fees,,1,checked,1,checked,0,,1,0.00,2018-06-27T17:21:50.000Z
+276,Invoice Specific,,Trucking for Pick up only,,1,checked,1,checked,0,,1,0.00,2018-06-27T17:22:35.000Z
+277,Invoice Specific,,Trucking for Drop off,,1,checked,1,checked,0,,1,0.00,2018-06-27T17:23:00.000Z
+278,Invoice Specific,,"Cable Package ( Saco, XLR, Stinger, etc. )",,1,checked,1,checked,0,,1,0.00,2018-06-27T17:24:15.000Z
 279,Room/Location,,Plaza Room,"Bill Taylor Subbed for Sound System
-Rented DJ Mixer and CD Tables from Rainbow Sound",checked,checked,,,,2018-06-27T17:26:07.000Z
-280,Room/Location,,Outside Main Stage,,checked,checked,,,,2018-06-27T17:47:16.000Z
-281,Room/Location,,Outside Courtyard (Johnny Avino),,checked,checked,,,,2018-07-05T18:57:52.000Z
-282,Room/Location,,Outside Northeast Beach (Steel Drums),,checked,checked,,,,2018-07-05T19:02:08.000Z
-283,Room/Location,,Coral Beach (Scotto's Wild Kingdom),,checked,checked,,,,2018-07-05T19:07:16.000Z
-284,Room/Location,,Veranda Bay (Next Level),,checked,checked,,,,2018-07-05T19:14:33.000Z
-285,Labor,,Labor,,checked,checked,,,,2018-07-05T19:16:29.000Z
-286,Invoice Specific,,,,,,,,,2018-07-05T19:22:13.000Z
-287,,,,,,,,,,2018-07-05T19:23:37.000Z
-288,Invoice Specific,,,,,,,,,2018-07-05T19:29:17.000Z
-289,Invoice Specific,,,,,,,,,2018-07-05T19:45:02.000Z
-290,,,,,,,,,,2018-07-05T19:48:38.000Z
-291,,,,,,,,,,2018-07-05T19:54:53.000Z
-292,,,,,,,,,,2018-07-05T19:55:43.000Z
-293,Stock,,,,,,,,,2018-07-05T20:00:07.000Z
-294,Stock,,,,,,,,,2018-07-05T20:03:55.000Z
-295,Invoice Specific,,,,,,,,,2018-07-05T20:07:23.000Z
-296,Stock,,,,,,,,,2018-07-05T20:09:30.000Z
-297,Stock,,,,,,,,,2018-07-05T20:11:17.000Z
-298,Labor,,Labor - 5 men 10 hours for setup and strike,,checked,checked,,,,2018-07-05T20:15:28.000Z
-299,Invoice Specific,,Trucking for delivery and return,,checked,checked,,,,2018-07-05T20:16:09.000Z
-300,Invoice Specific,,,,,,,,,2018-07-06T14:11:49.000Z
-301,Invoice Specific,,,,,,,,,2018-07-06T14:13:47.000Z
-302,,,,,,,checked,1,,2018-07-06T14:19:07.000Z
-303,Invoice Specific,,,,,,checked,8,,2018-07-06T14:22:58.000Z
-304,Invoice Specific,,,,,,checked,10,,2018-07-06T14:24:08.000Z
-305,Invoice Specific,,,,,,checked,10,,2018-07-06T14:25:26.000Z
-306,,,,,,,checked,6,,2018-07-06T14:28:34.000Z
-307,Invoice Specific,,4 - 7' Uprights (12in x 12in) with Plates,,checked,checked,,,,2018-07-06T14:29:53.000Z
-308,,,,,,,checked,6,,2018-07-06T14:54:46.000Z
-309,Invoice Specific,,,,,,,,,2018-07-06T14:57:04.000Z
-310,Invoice Specific,,,,,,,,,2018-07-06T14:58:16.000Z
-311,Stock,,12 Channel Dimmer Rack,,checked,checked,,,,2018-07-06T14:59:33.000Z
-312,,,Soco Cable,,checked,checked,,,,2018-07-06T15:02:40.000Z
-313,,,Snake,,checked,checked,,,,2018-07-06T15:02:57.000Z
-314,,,Power Cable,,checked,checked,,,,2018-07-06T15:03:38.000Z
-315,Stock,,,,,,,,,2018-07-06T15:04:18.000Z
-316,Stock,,3 Phase Distro,,checked,checked,,,,2018-07-06T15:05:30.000Z
-317,Invoice Specific,,,,,,,,,2018-07-06T15:07:45.000Z
-318,Invoice Specific,,,,,,,,,2018-07-06T15:50:16.000Z
-319,,,,,,,,,,2018-07-06T15:51:38.000Z
-320,,,,,,,,,,2018-07-06T15:55:49.000Z
-321,Invoice Specific,,,,,,,,,2018-07-06T15:56:11.000Z
-322,Stock,,,,,,,,,2018-07-06T15:56:59.000Z
-323,,,,,,,,,,2018-07-06T15:58:05.000Z
-324,Invoice Specific,,,,,,,,,2018-07-06T15:58:45.000Z
-325,,,,,,,,,,2018-07-06T15:59:45.000Z
-326,Invoice Specific,,,,,,,,,2018-07-06T16:00:59.000Z
-327,,,,,,,,,,2018-07-06T16:01:47.000Z
-328,Labor,,Audio Technician,,checked,checked,,,,2018-07-06T16:03:10.000Z
-329,,,,,,,,,,2018-07-09T18:41:47.000Z
-330,Invoice Specific,,,,,,,,,2018-07-09T18:42:25.000Z
-331,Invoice Specific,,,,,,,,,2018-07-09T18:44:35.000Z
-332,Invoice Specific,,(16' x 24' Stage),,checked,,checked,12,,2018-07-09T18:55:02.000Z
-333,Invoice Specific,,Parking Lot Sound,,checked,checked,,,,2018-07-23T19:44:40.000Z
-334,Invoice Specific,,Finish Line Sound,,checked,checked,,,,2018-07-23T19:53:16.000Z
-335,Labor,,Labor,,checked,checked,,,,2018-07-23T19:59:11.000Z
-336,Invoice Specific,,Roland Direct Boxes,,checked,checked,,,,2018-07-23T20:16:04.000Z
-337,Invoice Specific,,Yamaha Keyboard w/ Stand,,checked,checked,,,,2018-07-23T20:16:34.000Z
-338,Invoice Specific,,Amp Rack / Crown Amplifiers,,checked,checked,,,,2018-07-23T20:20:04.000Z
-339,Invoice Specific,,,,,,,,,2018-07-23T20:22:14.000Z
-340,Labor,,Labor/ Stage Hand (Set - up & Strike),,checked,checked,,,,2018-07-23T20:23:28.000Z
-341,,,,,,,,,,2018-07-23T20:42:26.000Z
-342,Invoice Specific,,,,,,,,,2018-07-23T20:43:29.000Z
-343,Invoice Specific,,,,,,,,,2018-07-23T20:44:52.000Z
-344,Invoice Specific,,,,,,,,,2018-07-23T20:45:57.000Z
-345,Invoice Specific,,,,,,checked,2,,2018-07-23T21:05:31.000Z
-346,Labor,,Lighting Technician,,checked,checked,,,,2018-07-23T21:55:00.000Z
-347,,,Followspot Operator,,checked,checked,,,,2018-07-23T21:56:02.000Z
-348,Invoice Specific,,Three Phase Distribution w/ feeder cable,,checked,checked,,,,2018-07-23T22:00:31.000Z
-349,Invoice Specific,,,,,,,,,2018-08-07T16:42:06.000Z
-350,Invoice Specific,,,,,,,,,2018-08-07T16:46:18.000Z
-351,Invoice Specific,,,,,,,,,2018-08-07T16:48:54.000Z
-352,Invoice Specific,,,,,,checked,3,,2018-08-07T16:50:14.000Z
-353,Invoice Specific,,,,,,checked,2,,2018-08-07T16:52:45.000Z
-354,,,,,,,,,,2018-08-07T18:10:55.000Z
-355,Invoice Specific,,,,,,,,,2018-08-07T18:20:40.000Z
-356,Invoice Specific,,,,,,,,,2018-08-07T18:23:59.000Z
-357,Invoice Specific,,,,,,,,,2018-08-07T18:26:48.000Z
-358,Stock,,,,,,,,,2018-08-07T18:33:22.000Z
-359,Invoice Specific,,Light Jockey,,checked,checked,,,,2018-08-07T18:35:26.000Z
-360,Labor,,Lighting Operators,,,,,,,2018-08-07T18:36:35.000Z
-361,Invoice Specific,,,,,,,,,2018-08-07T18:39:26.000Z
-362,Invoice Specific,,,,,,,,,2018-08-07T18:41:22.000Z
-363,Invoice Specific,,,,,,,,,2018-08-07T18:51:16.000Z
-364,Invoice Specific,,,,,,,,,2018-08-07T18:54:51.000Z
-365,,,,,,,,,,2018-08-07T19:01:01.000Z
-366,Invoice Specific,,,,,,,,,2018-08-07T19:01:51.000Z
-367,Invoice Specific,,,,,,,,,2018-08-07T20:18:35.000Z
-368,Invoice Specific,,,,,,,,,2018-08-07T20:20:03.000Z
-369,Invoice Specific,,,,,,,,,2018-08-14T17:00:03.000Z
+Rented DJ Mixer and CD Tables from Rainbow Sound",1,checked,1,checked,0,,1,0.00,2018-06-27T17:26:07.000Z
+280,Room/Location,,Outside Main Stage,,1,checked,1,checked,0,,1,0.00,2018-06-27T17:47:16.000Z
+281,Room/Location,,Outside Courtyard (Johnny Avino),,1,checked,1,checked,0,,1,0.00,2018-07-05T18:57:52.000Z
+282,Room/Location,,Outside Northeast Beach (Steel Drums),,1,checked,1,checked,0,,1,0.00,2018-07-05T19:02:08.000Z
+283,Room/Location,,Coral Beach (Scotto's Wild Kingdom),,1,checked,1,checked,0,,1,0.00,2018-07-05T19:07:16.000Z
+284,Room/Location,,Veranda Bay (Next Level),,1,checked,1,checked,0,,1,0.00,2018-07-05T19:14:33.000Z
+285,Labor,,Labor,,1,checked,1,checked,0,,1,0.00,2018-07-05T19:16:29.000Z
+286,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-05T19:22:13.000Z
+287,,,,,0,,0,,0,,1,0.00,2018-07-05T19:23:37.000Z
+288,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-05T19:29:17.000Z
+289,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-05T19:45:02.000Z
+290,,,,,0,,0,,0,,1,0.00,2018-07-05T19:48:38.000Z
+291,,,,,0,,0,,0,,1,0.00,2018-07-05T19:54:53.000Z
+292,,,,,0,,0,,0,,1,0.00,2018-07-05T19:55:43.000Z
+293,Stock,,,,0,,0,,0,,1,0.00,2018-07-05T20:00:07.000Z
+294,Stock,,,,0,,0,,0,,1,0.00,2018-07-05T20:03:55.000Z
+295,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-05T20:07:23.000Z
+296,Stock,,,,0,,0,,0,,1,0.00,2018-07-05T20:09:30.000Z
+297,Stock,,,,0,,0,,0,,1,0.00,2018-07-05T20:11:17.000Z
+298,Labor,,Labor - 5 men 10 hours for setup and strike,,1,checked,1,checked,0,,1,0.00,2018-07-05T20:15:28.000Z
+299,Invoice Specific,,Trucking for delivery and return,,1,checked,1,checked,0,,1,0.00,2018-07-05T20:16:09.000Z
+300,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-06T14:11:49.000Z
+301,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-06T14:13:47.000Z
+302,,,,,0,,0,,1,checked,1,0.00,2018-07-06T14:19:07.000Z
+303,Invoice Specific,,,,0,,0,,1,checked,8,0.00,2018-07-06T14:22:58.000Z
+304,Invoice Specific,,,,0,,0,,1,checked,10,0.00,2018-07-06T14:24:08.000Z
+305,Invoice Specific,,,,0,,0,,1,checked,10,0.00,2018-07-06T14:25:26.000Z
+306,,,,,0,,0,,1,checked,6,0.00,2018-07-06T14:28:34.000Z
+307,Invoice Specific,,4 - 7' Uprights (12in x 12in) with Plates,,1,checked,1,checked,0,,1,0.00,2018-07-06T14:29:53.000Z
+308,,,,,0,,0,,1,checked,6,0.00,2018-07-06T14:54:46.000Z
+309,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-06T14:57:04.000Z
+310,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-06T14:58:16.000Z
+311,Stock,,12 Channel Dimmer Rack,,1,checked,1,checked,0,,1,0.00,2018-07-06T14:59:33.000Z
+312,,,Soco Cable,,1,checked,1,checked,0,,1,0.00,2018-07-06T15:02:40.000Z
+313,,,Snake,,1,checked,1,checked,0,,1,0.00,2018-07-06T15:02:57.000Z
+314,,,Power Cable,,1,checked,1,checked,0,,1,0.00,2018-07-06T15:03:38.000Z
+315,Stock,,,,0,,0,,0,,1,0.00,2018-07-06T15:04:18.000Z
+316,Stock,,3 Phase Distro,,1,checked,1,checked,0,,1,0.00,2018-07-06T15:05:30.000Z
+317,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-06T15:07:45.000Z
+318,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-06T15:50:16.000Z
+319,,,,,0,,0,,0,,1,0.00,2018-07-06T15:51:38.000Z
+320,,,,,0,,0,,0,,1,0.00,2018-07-06T15:55:49.000Z
+321,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-06T15:56:11.000Z
+322,Stock,,,,0,,0,,0,,1,0.00,2018-07-06T15:56:59.000Z
+323,,,,,0,,0,,0,,1,0.00,2018-07-06T15:58:05.000Z
+324,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-06T15:58:45.000Z
+325,,,,,0,,0,,0,,1,0.00,2018-07-06T15:59:45.000Z
+326,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-06T16:00:59.000Z
+327,,,,,0,,0,,0,,1,0.00,2018-07-06T16:01:47.000Z
+328,Labor,,Audio Technician,,1,checked,1,checked,0,,1,0.00,2018-07-06T16:03:10.000Z
+329,,,,,0,,0,,0,,1,0.00,2018-07-09T18:41:47.000Z
+330,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-09T18:42:25.000Z
+331,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-09T18:44:35.000Z
+332,Invoice Specific,,(16' x 24' Stage),,1,checked,0,,1,checked,12,0.00,2018-07-09T18:55:02.000Z
+333,Invoice Specific,,Parking Lot Sound,,1,checked,1,checked,0,,1,0.00,2018-07-23T19:44:40.000Z
+334,Invoice Specific,,Finish Line Sound,,1,checked,1,checked,0,,1,0.00,2018-07-23T19:53:16.000Z
+335,Labor,,Labor,,1,checked,1,checked,0,,1,0.00,2018-07-23T19:59:11.000Z
+336,Invoice Specific,,Roland Direct Boxes,,1,checked,1,checked,0,,1,0.00,2018-07-23T20:16:04.000Z
+337,Invoice Specific,,Yamaha Keyboard w/ Stand,,1,checked,1,checked,0,,1,0.00,2018-07-23T20:16:34.000Z
+338,Invoice Specific,,Amp Rack / Crown Amplifiers,,1,checked,1,checked,0,,1,0.00,2018-07-23T20:20:04.000Z
+339,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-23T20:22:14.000Z
+340,Labor,,Labor/ Stage Hand (Set - up & Strike),,1,checked,1,checked,0,,1,0.00,2018-07-23T20:23:28.000Z
+341,,,,,0,,0,,0,,1,0.00,2018-07-23T20:42:26.000Z
+342,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-23T20:43:29.000Z
+343,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-23T20:44:52.000Z
+344,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-07-23T20:45:57.000Z
+345,Invoice Specific,,,,0,,0,,1,checked,2,0.00,2018-07-23T21:05:31.000Z
+346,Labor,,Lighting Technician,,1,checked,1,checked,0,,1,0.00,2018-07-23T21:55:00.000Z
+347,,,Followspot Operator,,1,checked,1,checked,0,,1,0.00,2018-07-23T21:56:02.000Z
+348,Invoice Specific,,Three Phase Distribution w/ feeder cable,,1,checked,1,checked,0,,1,0.00,2018-07-23T22:00:31.000Z
+349,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T16:42:06.000Z
+350,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T16:46:18.000Z
+351,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T16:48:54.000Z
+352,Invoice Specific,,,,0,,0,,1,checked,3,0.00,2018-08-07T16:50:14.000Z
+353,Invoice Specific,,,,0,,0,,1,checked,2,0.00,2018-08-07T16:52:45.000Z
+354,,,,,0,,0,,0,,1,0.00,2018-08-07T18:10:55.000Z
+355,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T18:20:40.000Z
+356,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T18:23:59.000Z
+357,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T18:26:48.000Z
+358,Stock,,,,0,,0,,0,,1,0.00,2018-08-07T18:33:22.000Z
+359,Invoice Specific,,Light Jockey,,1,checked,1,checked,0,,1,0.00,2018-08-07T18:35:26.000Z
+360,Labor,,Lighting Operators,,0,,0,,0,,1,0.00,2018-08-07T18:36:35.000Z
+361,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T18:39:26.000Z
+362,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T18:41:22.000Z
+363,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T18:51:16.000Z
+364,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T18:54:51.000Z
+365,,,,,0,,0,,0,,1,0.00,2018-08-07T19:01:01.000Z
+366,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T19:01:51.000Z
+367,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T20:18:35.000Z
+368,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-07T20:20:03.000Z
+369,Invoice Specific,,,,0,,0,,0,,1,0.00,2018-08-14T17:00:03.000Z

@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const event = {
   getAll: async function(page, category){
-    console.log(page, category)
     try {
       const resp = await axios.get(`/api/events?page=${page}&category=${category}`)
       return resp.data

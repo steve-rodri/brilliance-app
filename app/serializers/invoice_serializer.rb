@@ -7,8 +7,12 @@ class InvoiceSerializer < ActiveModel::Serializer
   :commission_paid,
   :check_info,
   :discount,
+  :deposit,
   :tip,
-  :refund
+  :refund,
+  :sub_total,
+  :total,
+  :balance
 
   belongs_to :event, foreign_key: true, serializer: NestedEventUnderInvoiceSerializer
   has_many :lines, serializer: NestedLineSerializer

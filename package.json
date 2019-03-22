@@ -1,12 +1,13 @@
 {
   "name": "brilliance-app",
-    "license": "MIT",
-    "engines": {
-      "node": "11.6.0"
-    },
-    "scripts": {
-      "build": "npm --prefix client install && npm run build --prefix client",
-      "deploy": "cp -a client/build/. public/",
-      "heroku-postbuild": "npm run build && npm run deploy"
-    }
+  "license": "MIT",
+  "engines": {
+    "node": "11.6.0"
+  },
+  "scripts": {
+    "build": "npm --prefix client install && npm run build --prefix client",
+    "deploy": "cp -a client/build/. public/",
+    "heroku-postbuild": "npm run build && npm run deploy"
+  },
+  "dependencies": {}
 }

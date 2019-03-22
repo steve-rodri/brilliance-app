@@ -5,13 +5,16 @@ class CreateInvoices < ActiveRecord::Migration[5.2]
       t.string :status
       t.string :payment_status
       t.string :payment_type
-      t.string :commission_actual
-      t.string :commission_paid
+      t.float :commission_actual
+      t.boolean:commission_paid
       t.string :check_info
-      t.float :deposit
-      t.float :discount
-      t.float :tip
-      t.float :refund
+      t.float :deposit, default: 0
+      t.float :discount, default: 0
+      t.float :tip, default: 0
+      t.float :refund, default: 0
+      t.float :sub_total, default: 0
+      t.float :total, default: 0
+      t.float :balance, default: 0
 
       t.timestamps
     end
