@@ -1,0 +1,54 @@
+.Buttons {
+  /* grid-row: 3 / span 1; */
+  align-self: end;
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 20px;
+  width: 100%;
+  padding: 30px;
+  background-color: var(--dark-gray);
+}
+
+.Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 55px;
+  width: 100%;
+  background: #111111;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  color: white;
+}
+
+.Button-icon {
+  position: absolute;
+  right: 0%;
+  height: 100%;
+  margin: 0 10px;
+  padding: 10px;
+}
+
+.Submit {
+  border: 2px solid limegreen;
+  color: limegreen;
+  background-color: inherit;
+}
+
+.Submit:active, .Submit:hover {
+  background-color: limegreen;
+  color: white;
+}
+
+.Delete {
+  border: 2px solid red;
+  color: red;
+  background-color: inherit;
+}
+
+.Delete:active, .Delete:hover {
+  background-color: red;
+  color: white;
+}

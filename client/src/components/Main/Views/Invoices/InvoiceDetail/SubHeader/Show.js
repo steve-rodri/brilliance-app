@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import { clientName } from '../../../../Helpers/clientHelpers'
-import './SubHeader.css'
+import { Link } from 'react-router-dom'
+import { clientName } from '../../../../../Helpers/clientHelpers'
+import './index.css'
 
 export default class SubHeader extends Component {
 
   type = () => {
     const { invoice } = this.props
-    if (invoice) {
+    if (invoice && invoice.kind) {
       return (
         <Fragment>
           <label>Type</label>
@@ -17,17 +18,34 @@ export default class SubHeader extends Component {
   }
 
   client = () => {
+    let event;
+    const { invoice, evt } = this.props
+    if (invoice && invoice.event) {
+      event = invoice.event
+    } else if (evt) {
+      event = evt
+    }
+
+    if (event && event.client) {
+      return (
+        <Fragment>
+          <label>Client</label>
+          <div className="Field">{clientName(event.client)}</div>
+        </Fragment>
+      )
+    }
+  }
+
+  event = () => {
     const { invoice } = this.props
     if (invoice && invoice.event) {
       const { event } = invoice
-      if (event && event.client) {
-        return (
-          <Fragment>
-            <label>Client</label>
-            <div className="Field">{clientName(event.client)}</div>
-          </Fragment>
-        )
-      }
+      return (
+        <Fragment>
+          <label>Job</label>
+          <Link to={`/admin/events/${event.id}`}><div>View Job</div></Link>
+        </Fragment>
+      )
     }
   }
 
@@ -63,6 +81,7 @@ export default class SubHeader extends Component {
         <div className="SubHeader--fields">
           {this.type()}
           {this.client()}
+          {this.event()}
         </div>
 
         <div className="SubHeader--status">

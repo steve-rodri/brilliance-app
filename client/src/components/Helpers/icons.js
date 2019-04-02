@@ -12,7 +12,8 @@ import {
   faPencilAlt,
   faCheck,
   faTrash,
-  faSquare as fasSquare
+  faSquare as fasSquare,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faSquare as farSquare
@@ -30,7 +31,8 @@ library.add(
   faPlusCircle,
   faTimes,
   farSquare,
-  fasSquare
+  fasSquare,
+  faPlus
 )
 
 function statusIcon(str, size){
@@ -45,6 +47,10 @@ function statusIcon(str, size){
       return <FontAwesomeIcon  className="Icon" color="red" icon="times-circle" size={size}/>
     default:
   }
+}
+
+function plusIcon(size, className){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="plus" size={size}/>
 }
 
 function addIcon(size){
@@ -76,6 +82,7 @@ function square(style, size, className, color){
 }
 
 export {
+  plusIcon,
   statusIcon,
   addIcon,
   deleteIcon,

@@ -29,16 +29,12 @@ export default function Header(props){
         e = evt
       }
 
-      if (c) {
-        return (
-          <Fragment>
-            <h2>{clientName(c, true)}</h2>
-            <h2 style={{fontWeight: '400'}}>{moment(e.start).format('MMMM Do YYYY')}</h2>
-          </Fragment>
-        )
-      } else {
-        return moment(e.start).format('MMMM Do YYYY')
-      }
+      return (
+        <Fragment>
+          {c? <h2>{clientName(c, true)}</h2> : null}
+          {e? <h2 style={{fontWeight: '400'}}>{moment(e.start).format('MMMM Do YYYY')}</h2> : null}
+        </Fragment>
+      )
     }
   }
 

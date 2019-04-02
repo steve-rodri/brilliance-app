@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
 import InvoiceDetail from '../../../Invoices/InvoiceDetail'
+import AddNew from '../../../../../Buttons/AddNew'
+import './index.css'
 
 export default class Invoice extends Component {
   render(){
-    const { evt } = this.props
-    console.log(evt)
+    const { evt, match } = this.props
+
+    const addNewPath = () => {
+      if (match) {
+        return {
+          pathname: `/admin/invoices/new`,
+          state: { eventId: match.params.id }
+        }
+      }
+    }
+
     if (evt) {
       if (evt.invoice) {
         return (
@@ -12,10 +23,12 @@ export default class Invoice extends Component {
         )
       } else {
         return  (
-          <div>
-            <h1>There is no Invoice associated with this Event.</h1>
-            <p>Add One below...</p>
-            <button>Create Invoice</button>
+          <div className="Event--invoice">
+            <div className="Event--no-invoice">
+              <h2>There is no Invoice associated with this Event.</h2>
+              <p>Add one below...</p>
+              <AddNew linkPath={addNewPath()}/>
+            </div>
           </div>
         )
       }

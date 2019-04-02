@@ -1,0 +1,43 @@
+.SubHeader {
+  width: 100%;
+  display: grid;
+  padding: 30px;
+}
+
+.SubHeader--fields {
+  width: 100%;
+  display: grid;
+  grid-gap: 5px;
+}
+
+.SubHeader--status {
+  padding: 30px;
+}
+
+@media (min-width: 750px) {
+  .SubHeader {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat( 2, 1fr);
+    padding: 30px;
+  }
+
+  .SubHeader--fields {
+   display: grid;
+   background-color: var(--light-blue-t);
+   border: 1px dashed var(--light-blue);
+   border-radius: 10px;
+   padding: 30px;
+  }
+
+  .SubHeader--status {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--light-blue-t);
+    border: 1px dashed var(--light-blue);
+    border-radius: 10px;
+  }
+}

@@ -214,7 +214,17 @@ export default class Invoices extends Component {
     const invoices = [...this.state.invoices]
     const invoice = invoices.find(invoice => invoice.id === req_id)
     return (
-      <InvoiceDetail inv={invoice} invoiceId={req_id}/>
+      <InvoiceDetail inv={invoice} invoiceId={req_id} scrollToTop={this.scrollToTop}/>
+    )
+  }
+
+  Create = ({match, location, history}) => {
+    let evtId;
+    if (location.state && location.state.eventId) {
+      evtId = location.state.eventId
+    }
+    return (
+      <InvoiceDetail evtId={evtId} isNew={true} />
     )
   }
 
@@ -223,6 +233,7 @@ export default class Invoices extends Component {
     return (
       <Switch>
         <Route exact path={match.path} render={this.List}/>
+        <Route exact path={`${match.path}/new`} render={this.Create}/>
         <Route exact path={`${match.path}/:id`} render={this.Show}/>
       </Switch>
     )

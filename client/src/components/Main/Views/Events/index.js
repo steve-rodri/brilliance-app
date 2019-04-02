@@ -182,7 +182,7 @@ export default class Events extends Component {
       } else {
         updatedEvent = e
       }
-      
+
       if (e.gcId) {
         await GOOGLE.patchEvent(gcId, e.gcId, formatToGoogle(updatedEvent))
       } else {
@@ -287,7 +287,7 @@ export default class Events extends Component {
 
   synchronizeWithGoogle = async (evt) => {
     const gcId = localStorage.getItem('google_calendar_id');
-    if (evt.gcId) {
+    if (gcId && evt.gcId) {
       const e = await GOOGLE.getEvent(gcId, evt.gcId)
       const formatted = await formatFromGoogle(e)
       const synced = await event.sync(formatted)
