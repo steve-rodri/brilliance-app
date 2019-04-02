@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import BasicInfo from './BasicInfo/index.js';
-import Logistics from './Logistics/index.js';
 import Invoice from './Invoice/index.js';
 import CashFlow from './CashFlow/index.js';
 import StaffModal from './StaffModal.js';
@@ -72,7 +71,7 @@ export default class EventDetail extends Component {
 
   synchronizeWithGoogle = async (evt) => {
     const gcId = localStorage.getItem('google_calendar_id');
-    if (gcId) {
+    if (gcId && evt.gcId) {
       try {
         const e = await GOOGLE.getEvent(gcId, evt.gcId)
         if (e) {
@@ -847,16 +846,11 @@ export default class EventDetail extends Component {
             removeWorker={this.removeWorker}
           />
         )
-      case 'Logistics':
-        return (
-          <Logistics
-            {...this.state}
-          />
-        )
       case 'Invoice':
         return (
           <Invoice
             {...this.state}
+            {...this.props}
           />
         )
       case 'Cash Flow':

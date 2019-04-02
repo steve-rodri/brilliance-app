@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import List from '../List/index.js'
 import Search from '../Search/index.js'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import AddNew from '../Buttons/AddNew'
 import './ListPage.css'
-
-library.add(faPlus)
 
 export default class ListPage extends Component {
   constructor(props){
@@ -103,17 +98,9 @@ export default class ListPage extends Component {
 
           {/* Add New Button */}
           {type === "Events" || type === "Clients"?
-            <Link
-              to={{pathname: `${match.path}/new`, state: { modal: true } }}
-              style={{textDecoration: 'none', color: 'black', width: '100%'}}
-            >
-
-              <div className="ListPage--button create">
-                <span className="button-text">Add New</span>
-                {<FontAwesomeIcon className="button-icon" icon="plus" size="2x"/>}
-              </div>
-
-            </Link>
+            <AddNew
+              linkPath={{pathname: `${match.path}/new`, state: { modal: true } }}
+            />
             :
             null
           }

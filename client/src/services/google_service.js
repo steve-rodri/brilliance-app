@@ -64,7 +64,6 @@ const GOOGLE = {
       })
       return resp.data
     } catch (e) {
-      localStorage.clear()
       return null
     }
   },

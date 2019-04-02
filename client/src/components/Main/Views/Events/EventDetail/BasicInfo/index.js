@@ -4,7 +4,7 @@ import About from './About/index.js'
 import Logistics from './Logistics/index.js'
 import Notes from './Notes/index.js'
 import Staff from './Staff/index.js'
-import Buttons from './Buttons'
+import Buttons from '../../../../../Buttons/Buttons'
 import { date, time } from '../../../../../Helpers/datetime'
 import './index.css'
 

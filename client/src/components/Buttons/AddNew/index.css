@@ -1,0 +1,41 @@
+.AddNew {
+  background-color: var(--med-dark-blue);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  width: 88%;
+  margin: 20px auto;
+  border-bottom: 5px solid var(--dark-blue);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.AddNew > * {
+  padding: 0 5px;
+}
+
+.AddNew:hover {
+  cursor: pointer;
+}
+
+.AddNew:active {
+  border: none;
+  background-color: var(--dark-blue);
+}
+
+.AddNew--button-text {
+  font-family: 'Gruppo';
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+}
+
+.AddNew--button-icon {
+  position: absolute;
+  height: 100%;
+  right: 0%;
+  margin: 0 10px;
+  color: white;
+}
