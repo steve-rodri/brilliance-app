@@ -70,10 +70,10 @@ export default class EventDetail extends Component {
   }
 
   synchronizeWithGoogle = async (evt) => {
-    const gcId = localStorage.getItem('google_calendar_id');
-    if (gcId && evt.gcId) {
+    const calendarId = localStorage.getItem('google_calendar_id');
+    if (calendarId && evt.gcId) {
       try {
-        const e = await GOOGLE.getEvent(gcId, evt.gcId)
+        const e = await GOOGLE.getEvent(calendarId, evt.gcId)
         if (e) {
           const formatted = await formatFromGoogle(e)
           const synced = await event.sync(formatted)

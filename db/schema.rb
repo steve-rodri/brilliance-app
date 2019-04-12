@@ -58,8 +58,9 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
     t.float "discount_adj", default: 0.0
     t.string "kind"
     t.integer "hours_for_labor_only"
-    t.boolean "description_only"
-    t.boolean "inc_discount_in_opct"
+    t.boolean "description_only", default: false
+    t.boolean "inc_discount_in_opct", default: false
+    t.boolean "subcontracted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "inventory_id"
@@ -169,10 +170,10 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
   create_table "invoices", force: :cascade do |t|
     t.string "kind"
     t.string "status"
-    t.string "payment_status"
+    t.string "payment_status", default: "Not Paid"
     t.string "payment_type"
     t.float "commission_actual"
-    t.boolean "commission_paid"
+    t.boolean "commission_paid", default: false
     t.string "check_info"
     t.float "deposit", default: 0.0
     t.float "discount", default: 0.0
