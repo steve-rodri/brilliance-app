@@ -25,6 +25,14 @@ const event = {
       console.log(e)
     }
   },
+  findByClient: async function(page, clientId){
+    try {
+      const resp = await axios.get(`/api/events/find?page=${page}&client_id=${clientId}`)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
   findByEmail: async function(page, email){
     try {
       const resp = await axios.get(`/api/events/find?page=${page}&email=${email}`)

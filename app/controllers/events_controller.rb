@@ -79,7 +79,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/
+  # PATCH/PUT /events
   def sync
 
     event_only_params = event_params.except(:event_employees_attributes)
@@ -112,6 +112,7 @@ class EventsController < ApplicationController
     @event.destroy
   end
 
+  # GET /events/find
   def find
 
     if params[:q]
@@ -168,6 +169,12 @@ class EventsController < ApplicationController
       id = params[:iCalUID]
       @event = Event.where( i_cal_UID: "#{id}").first
       render json: @event, include: '**'
+    end
+
+    if params[:client_id]
+      id = params[:client_id]
+      @events = Event.where( client_id: "#{id}" )
+      render json: @events, include: '**'
     end
   end
 

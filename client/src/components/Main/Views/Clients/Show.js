@@ -15,12 +15,12 @@ export default class Show extends Component {
 
   handleGetClientEvents = () => {
     const { match, history } = this.props
-    history.push(match.url + '/events')
+    history.push(`/admin/events?client=${match.params.id}`)
   }
 
   handleGetClientInvoices = () => {
     const { match, history } = this.props
-    history.push(match.url + '/invoices')
+    history.push(`/admin/invoices?client=${match.params.id}`)
   }
 
   render(){
