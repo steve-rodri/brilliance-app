@@ -47,14 +47,14 @@ export default function Event(props){
 
               <div
                 className="Event--confirmation"
-                style={styleConfirmation(event && event.confirmation)}
+                style={styleConfirmation(event.confirmation)}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  handleStatusChange(item, 'confirmation', changeConfirmation(event && event.confirmation))
+                  handleStatusChange(event, 'confirmation', changeConfirmation(event.confirmation))
                 }}
               >
-                <p>{event && event.confirmation.toUpperCase()}</p>
+                <p>{event.confirmation.toUpperCase()}</p>
               </div>
               :
               null

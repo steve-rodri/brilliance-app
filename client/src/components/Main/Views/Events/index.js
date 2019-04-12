@@ -50,9 +50,9 @@ export default class Events extends Component {
   componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
-    const gcId = localStorage.getItem('google_calendar_id');
-    this.setState({ gcId })
-    this.setEvents(this.props, 1)
+    const calendarId = localStorage.getItem('google_calendar_id');
+    this.setState({ calendarId })
+    this.setEvents(this.props, true)
   }
 
   componentWillUnmount() {
@@ -126,10 +126,10 @@ export default class Events extends Component {
   }
 
   addEvent = async(formData) => {
-    const { gcId } = this.state
+    const { calendarId } = this.state
     let events = [...this.state.events]
     const newEvent = await event.createNew(formData)
-    const newGoogleEvent = await GOOGLE.createEvent(gcId, formatToGoogle(newEvent))
+    const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(newEvent))
     let formatted = await formatFromGoogle(newGoogleEvent)
 
     if (formatted.event_employees_attributes) {
@@ -162,18 +162,18 @@ export default class Events extends Component {
   }
 
   deleteEvent = async(evt) => {
-    const { gcId } = this.state
+    const { calendarId } = this.state
     let events = [...this.state.events]
     await event.delete(evt.id)
     if (evt.gcId) {
-      await GOOGLE.deleteEvent(gcId, evt.gcId)
+      await GOOGLE.deleteEvent(calendarId, evt.gcId)
     }
     events = events.filter( e => e.id !== evt.id)
     this.setState({ events })
   }
 
   updateEvent = async(e, data) => {
-    const { gcId } = this.state
+    const { calendarId } = this.state
     if (e) {
       let events = [...this.state.events]
       let updatedEvent;
@@ -182,11 +182,10 @@ export default class Events extends Component {
       } else {
         updatedEvent = e
       }
-
       if (e.gcId) {
-        await GOOGLE.patchEvent(gcId, e.gcId, formatToGoogle(updatedEvent))
-      } else {
-        const newGoogleEvent = await GOOGLE.createEvent(gcId, formatToGoogle(updatedEvent))
+        await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent))
+      } else if (this.state.calendarId) {
+        const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent))
         let formatted = await formatFromGoogle(newGoogleEvent)
 
         formatted = {
@@ -286,9 +285,9 @@ export default class Events extends Component {
   }
 
   synchronizeWithGoogle = async (evt) => {
-    const gcId = localStorage.getItem('google_calendar_id');
-    if (gcId && evt.gcId) {
-      const e = await GOOGLE.getEvent(gcId, evt.gcId)
+    const { calendarId } = this.state
+    if (calendarId && evt.gcId) {
+      const e = await GOOGLE.getEvent(calendarId, evt.gcId)
       const formatted = await formatFromGoogle(e)
       const synced = await event.sync(formatted)
       return synced
