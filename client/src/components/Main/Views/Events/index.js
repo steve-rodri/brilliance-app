@@ -7,6 +7,8 @@ import moment from 'moment'
 import { GOOGLE } from '../../../../services/google_service'
 import { formatToGoogle, formatFromGoogle } from '../../../Helpers/googleFormatters'
 import { event } from '../../../../services/event'
+import { client } from '../../../../services/client'
+import { clientName } from '../../../Helpers/clientHelpers'
 import { eventTitle } from '../../../Helpers/eventTitle'
 
 export default class Events extends Component {
@@ -69,6 +71,7 @@ export default class Events extends Component {
       {
         category: queries.category,
         query: null,
+        client: null,
         page: 1
       },
         async () => {
@@ -82,6 +85,7 @@ export default class Events extends Component {
       {
         query: queries.q,
         category: queries.q,
+        client: null,
         page: 1
       },
         async () => {
@@ -89,10 +93,25 @@ export default class Events extends Component {
         await this.fetchEvents()
       })
 
+    } else if (queries.client) {
+        const clt = await client.findById(queries.client)
+        this.setState(
+        {
+          query: null,
+          category: clientName(clt),
+          client: queries.client,
+          page: 1
+        },
+          async () => {
+          await this.resetEvents()
+          await this.fetchEvents()
+        })
+
     } else if (mounted) {
       this.setState(
       {
         query: null,
+        client: null,
         category: 'All',
         page: 1
       },
@@ -104,10 +123,12 @@ export default class Events extends Component {
   }
 
   fetchEvents = async() => {
-    const { page, category, query } = this.state
+    const { page, category, query, client } = this.state
     let evts;
     if (query) {
       evts = await event.find(page, query)
+    } else if (client) {
+      evts = await event.findByClient(page, client)
     } else {
       evts = await event.getAll(page, category);
     }
