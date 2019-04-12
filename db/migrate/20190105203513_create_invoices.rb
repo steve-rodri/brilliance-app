@@ -3,10 +3,10 @@ class CreateInvoices < ActiveRecord::Migration[5.2]
     create_table :invoices do |t|
       t.string :kind
       t.string :status
-      t.string :payment_status
+      t.string :payment_status, default: 'Not Paid'
       t.string :payment_type
       t.float :commission_actual
-      t.boolean:commission_paid
+      t.boolean:commission_paid, default: false
       t.string :check_info
       t.float :deposit, default: 0
       t.float :discount, default: 0
