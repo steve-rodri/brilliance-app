@@ -13,7 +13,7 @@ EventEmployee.create! ([
   {
     confirmation: 'needsAction',
 
-    employee_id: 4,
+    employee_id: 1,
     event_id: 1,
   },
   {
@@ -37,7 +37,7 @@ EventEmployee.create! ([
   {
     confirmation: 'accepted',
 
-    employee_id: 4,
+    employee_id: 1,
     event_id: 3,
   },
   {
