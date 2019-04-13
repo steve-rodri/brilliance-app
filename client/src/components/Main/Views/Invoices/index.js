@@ -4,6 +4,8 @@ import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import InvoiceDetail from './InvoiceDetail/index.js'
 import { invoice } from '../../../../services/invoice'
+import { client } from '../../../../services/client'
+import { clientName } from '../../../Helpers/clientHelpers'
 import { price } from './InvoiceDetail/Invoice/Line/Helpers'
 
 export default class Invoices extends Component {
@@ -60,6 +62,7 @@ export default class Invoices extends Component {
       {
         category: queries.category,
         query: null,
+        client: null,
         page: 1
       },
         async () => {
@@ -73,6 +76,22 @@ export default class Invoices extends Component {
       {
         query: queries.q,
         category: queries.q,
+        client: null,
+        page: 1
+      },
+        async () => {
+        await this.resetInvoices()
+        await this.fetchInvoices()
+      })
+
+    } else if (queries.client) {
+
+      const clt = await client.findById(queries.client)
+      this.setState(
+      {
+        query: null,
+        category: clientName(clt),
+        client: queries.client,
         page: 1
       },
         async () => {
@@ -84,6 +103,7 @@ export default class Invoices extends Component {
       this.setState(
       {
         query: null,
+        client: null,
         category: 'All',
         page: 1
       },
@@ -95,10 +115,12 @@ export default class Invoices extends Component {
   }
 
   fetchInvoices = async() => {
-    const { page, category, query } = this.state
+    const { page, category, query, client } = this.state
     let invcs;
     if (query) {
       invcs = await invoice.find(page, query)
+    } else if (client) {
+      invcs = await invoice.findByClient(page, client)
     } else {
       invcs = await invoice.getAll(page, category)
     }
