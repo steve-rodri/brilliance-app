@@ -1,4 +1,4 @@
-class NestedEmployeeSerializer < ActiveModel::Serializer
+class NestedEmployeeSerializer < ApplicationSerializer
   attributes :id, :active?, :labor?, :rates
   has_one :contact
 

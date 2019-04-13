@@ -1,4 +1,4 @@
-class NestedInvoiceSerializer < ActiveModel::Serializer
+class NestedInvoiceSerializer < ApplicationSerializer
   attributes :id,
   :kind,
   :status,

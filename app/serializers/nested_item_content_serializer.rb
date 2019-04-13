@@ -1,4 +1,4 @@
-class NestedItemContentSerializer < ActiveModel::Serializer
+class NestedItemContentSerializer < ApplicationSerializer
   attributes :description, :description_only, :discount_adj, :hours_for_labor_only, :id, :inc, :inc_discount_in_opct, :inventory, :kind, :quantity
 
   has_one :content, key: 'inventory' do | serializer |

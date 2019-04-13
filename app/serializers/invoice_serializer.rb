@@ -1,4 +1,4 @@
-class InvoiceSerializer < ActiveModel::Serializer
+class InvoiceSerializer < ApplicationSerializer
   attributes :id,
   :kind,
   :status,
