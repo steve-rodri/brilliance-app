@@ -19,7 +19,15 @@ const invoice = {
   },
   find: async function (page, query){
     try {
-      const resp = await axios.get(`/api/invoices?page=${page}$q=${query}`)
+      const resp = await axios.get(`/api/invoices?page=${page}&q=${query}`)
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  findByClient: async function (page, clientId) {
+    try {
+      const resp = await axios.get(`/api/invoices?page=${page}&client_id=${clientId}`)
       return resp.data
     } catch (e) {
       console.log(e)

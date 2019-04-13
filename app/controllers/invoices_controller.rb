@@ -85,6 +85,19 @@ class InvoicesController < ApplicationController
           render status: 404
         end
       end
+
+    elsif params[:client_id]
+
+      id = params[:client_id]
+
+      @invoices = Invoice
+        .joins(event: :client)
+        .where("clients.id = #{id}")
+        .order("events.start DESC")
+        .paginate(page: params[:page], per_page: @@items_per_page)
+
+      render json: @invoices, include: '**'
+
     else
       @invoices = Invoice
         .all
@@ -150,6 +163,7 @@ class InvoicesController < ApplicationController
         :total,
         :balance,
         :event_id,
+        :client_id,
         lines_attributes: [
           :id,
           :item_id,
