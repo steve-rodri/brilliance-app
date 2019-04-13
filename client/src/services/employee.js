@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const employee = {
-  getAll: async function () {
+  getAll: async function (page) {
     try {
-      const resp = await axios.get(`/api/employees`)
+      const resp = await axios.get(`/api/employees?page=${page}`)
       return resp.data
     } catch (e) {
       console.log(e)
