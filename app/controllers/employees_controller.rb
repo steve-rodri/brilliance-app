@@ -23,12 +23,12 @@ class EmployeesController < ApplicationController
       @employees = Employee.all
     end
 
-    render json: @employees
+    render json: @employees, include: '**'
   end
 
   # GET /employees/1
   def show
-    render json: @employee
+    render json: @employee, include: '**'
   end
 
   # POST /employees
