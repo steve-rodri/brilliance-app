@@ -1,3 +1,3 @@
-class NestedEmailAddressSerializer < ActiveModel::Serializer
+class NestedEmailAddressSerializer < ApplicationSerializer
   attributes :id, :email_address
 end

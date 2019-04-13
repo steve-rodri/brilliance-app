@@ -1,4 +1,4 @@
-class NestedEventSerializer < ActiveModel::Serializer
+class NestedEventSerializer < ApplicationSerializer
   attributes :id, :action, :break, :break_start, :call_time, :clock_out, :confirmation, :description, :driving_time, :end, :gc_id, :html_link, :kind, :notes, :start, :summary, :tags
   has_one :invoice, serializer: NestedInvoiceSerializer
   has_one :place_location, key: 'location', serializer: NestedPlaceLocationSerializer

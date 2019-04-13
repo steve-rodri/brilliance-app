@@ -1,4 +1,4 @@
-class ClientSerializer < ActiveModel::Serializer
+class ClientSerializer < ApplicationSerializer
   attributes :id
   has_many :event, key: 'events', serializer: NestedEventSerializer
   has_one :contact, key: 'contact_info', serializer: NestedContactSerializer

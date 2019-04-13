@@ -1,4 +1,4 @@
-class NestedCompanySerializer < ActiveModel::Serializer
+class NestedCompanySerializer < ApplicationSerializer
   attributes :id,
   :name,
   :logo,
