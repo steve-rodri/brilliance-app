@@ -42,10 +42,11 @@ export default class ListPage extends Component {
   }
 
   styleSubTitle = () => {
-    if (this.props.category === 'All') {
-      return { display: 'none'}
-    } else {
+    const { category } = this.props
+    if (category && category !== 'All') {
       return {}
+    } else {
+      return { display: 'none'}
     }
   }
 
@@ -97,7 +98,7 @@ export default class ListPage extends Component {
           </div>
 
           {/* Add New Button */}
-          {type === "Events" || type === "Clients"?
+          {type === "Events" || type === "Clients" || type === "Staff"?
             <AddNew
               linkPath={{pathname: `${match.path}/new`, state: { modal: true } }}
             />

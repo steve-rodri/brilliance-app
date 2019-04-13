@@ -3,6 +3,7 @@ import Schedule from './Schedule'
 import Event from './Event'
 import Invoice from './Invoice'
 import Client from './Client'
+import Staff from './Staff'
 import moment from 'moment'
 import { start, end, timeUntil } from '../Helpers/datetime'
 import './index.css'
@@ -43,6 +44,13 @@ export default function ListItem(props){
           {...props}
           styleItem={styleItem}
           styleSummary={styleSummary}
+        />
+      )
+    case 'Staff':
+      return (
+        <Staff
+          {...props}
+          styleItem={styleItem}
         />
       )
     default:
