@@ -25,15 +25,11 @@ export default class SearchField extends Component {
   }
 
   displayResults = () => {
-    const { fieldActive, searchResults } = this.state
-    if (searchResults) {
-      if (fieldActive) {
-        return { display: 'block' }
-      } else {
-        return { display: 'none' }
-      }
+    const { fieldActive  } = this.state
+    if (fieldActive) {
+      return { display: 'block' }
     } else {
-      return { display: 'none'}
+      return { display: 'none' }
     }
   }
 
