@@ -56,7 +56,6 @@ export default class Staff extends Component {
   fetchStaff = async() => {
     const { page } = this.state
     let workers = await employee.getAll(page)
-    console.log(workers)
     this.incrementPage()
     await this.updateStaff(workers);
   }

@@ -41,7 +41,7 @@ export default class StaffSelector extends Component {
                 handleEmployeeSelect(employee)
               }}
             >
-              <p>{employee.contact.fullName}</p>
+              <p>{employee.contactInfo.fullName}</p>
             </button>
           )}
         </div>
@@ -57,7 +57,7 @@ export default class StaffSelector extends Component {
                 handleEmployeeSelect(employee)
               }}
             >
-              <p>{employee.contact.fullName}</p>
+              <p>{employee.contactInfo.fullName}</p>
             </button>
           )}
         </div>
