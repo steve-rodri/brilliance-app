@@ -5,7 +5,7 @@ import './index.css'
 
 export default class Invoice extends Component {
   render(){
-    const { evt, match } = this.props
+    const { evt, match, setView } = this.props
 
     const addNewPath = () => {
       if (match) {
@@ -19,7 +19,7 @@ export default class Invoice extends Component {
     if (evt) {
       if (evt.invoice) {
         return (
-          <InvoiceDetail inv={evt.invoice} evt={evt} />
+          <InvoiceDetail inv={evt.invoice} evt={evt} setView={setView} />
         )
       } else {
         return  (

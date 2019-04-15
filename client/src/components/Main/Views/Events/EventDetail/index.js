@@ -67,6 +67,7 @@ export default class EventDetail extends Component {
     await this.setEvent(props);
     await this.setClientName();
     await this.setLocationName();
+    if (props.view) this.setView(props.view)
   }
 
   synchronizeWithGoogle = async (evt) => {
@@ -851,6 +852,7 @@ export default class EventDetail extends Component {
           <Invoice
             {...this.state}
             {...this.props}
+            setView={this.setView}
           />
         )
       case 'Cash Flow':

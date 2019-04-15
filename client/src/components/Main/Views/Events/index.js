@@ -337,18 +337,24 @@ export default class Events extends Component {
   }
 
   Show = ({ match, history }) => {
+    let view;
+    if (history.location.state) {
+      view = history.location.state.view
+    }
     const req_id = parseInt(match.params.id)
     const events = this.state.events
     let e;
     if (events) {
       e = events.find(event => event.id === req_id)
     }
+
     return (
       <EventDetail
         e={e}
         evtId={req_id}
         match={match}
         history={history}
+        view={view}
         handleDelete={this.deleteEvent}
         handleUpdate={this.updateEvent}
       />
