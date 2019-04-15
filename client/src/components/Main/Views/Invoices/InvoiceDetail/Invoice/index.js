@@ -5,9 +5,9 @@ import './index.css'
 
 export default class Invoice extends Component {
   lines = () => {
-    const { invoice } = this.props
-    if (invoice && invoice.lines) {
-      const lines = [...invoice.lines]
+    const { inv } = this.props
+    if (inv && inv.lines) {
+      const lines = [...inv.lines]
       return lines.reverse().map(line =>
         <Line
           {...this.props}

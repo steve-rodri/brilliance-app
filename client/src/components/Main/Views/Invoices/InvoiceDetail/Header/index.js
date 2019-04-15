@@ -6,7 +6,7 @@ import './index.css'
 
 export default function Header(props){
 
-  const { invoice, evt, isNew, editMode  } = props
+  const { inv, evt, isNew, editMode  } = props
   // Functions to Show Summary field based on Mode ----------------------
 
   function displaySummary(){
@@ -18,12 +18,12 @@ export default function Header(props){
   }
 
   function clientAndDate(){
-    if (invoice) {
+    if (inv) {
       let c;
       let e;
-      if (invoice.event) {
-        c = invoice.event.client
-        e = invoice.event
+      if (inv.event) {
+        c = inv.event.client
+        e = inv.event
       } else if (evt) {
         c = evt.client
         e = evt
@@ -43,7 +43,7 @@ export default function Header(props){
 
   // Functions to Dynamically change buttons based on Mode ---------------
   function close(){
-    if (!isNew && invoice) {
+    if (!isNew && inv) {
       return (
         <div
           className="Header--icon left"
@@ -67,7 +67,7 @@ export default function Header(props){
   }
 
   function trashCan(){
-    if (invoice) {
+    if (inv) {
       return (
         <div
           className="Header--icon right"
@@ -83,7 +83,7 @@ export default function Header(props){
     return (
       <div
         className="Header--icon right"
-        onClick={props.handleSubmit}
+        onClick={props.submit}
       >
         {check('2x')}
       </div>

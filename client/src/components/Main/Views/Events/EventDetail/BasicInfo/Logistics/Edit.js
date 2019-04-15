@@ -12,7 +12,7 @@ export default class Edit extends Component {
       <div className="Logistics">
         <label>Start</label>
 
-          <div className="Edit--field datetime">
+          <div className="Edit--Field datetime">
             <Datetime
               className="Input--container"
               inputProps={{ className: "Input", tabIndex: "6"}}
@@ -27,7 +27,7 @@ export default class Edit extends Component {
 
         <label>End</label>
 
-          <div className="Edit--field datetime">
+          <div className="Edit--Field datetime">
             <Datetime
               className="Input--container"
               inputProps={{ className:"Input", tabIndex:"7" }}
@@ -44,7 +44,7 @@ export default class Edit extends Component {
 
         <label>Call</label>
 
-          <div className="Edit--field datetime">
+          <div className="Edit--Field datetime">
             <Datetime
               className="Input--container"
               inputProps={{ className: "Input", tabIndex: "8"}}
@@ -63,7 +63,7 @@ export default class Edit extends Component {
 
           <SearchField
             searchResults={searchFieldData && searchFieldData.callLocations}
-            formClassName='Edit--field'
+            formClassName='Edit--Field'
             resultClassName='Edit--search-result'
             resultsClassName='Edit--results'
             formDataValue={this.props.formData && this.props.formData.call_location_id}

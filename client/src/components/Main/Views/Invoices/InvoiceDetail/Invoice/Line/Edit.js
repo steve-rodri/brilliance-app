@@ -3,7 +3,7 @@ import { quantity, description, contents, price, inc } from './Helpers'
 import { deleteIcon } from '../../../../../../Helpers/icons'
 
 export default function Edit(props){
-  const { invoice, line, handleInc } = props
+  const { inv, line, handleInc } = props
   const c = contents(line.item)
   return (
     <tr key={line.id} className="Line">
@@ -43,7 +43,7 @@ export default function Edit(props){
             className="Line--input"
             name="price"
             type="number"
-            value={price(line, invoice.kind)}
+            value={price(line, inv.kind)}
 
           />
         </div>
