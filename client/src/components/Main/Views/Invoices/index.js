@@ -212,6 +212,32 @@ export default class Invoices extends Component {
     })
   }
 
+  addInvoice = async(data) => {
+    let invoices = [...this.state.invoices]
+    const newInvoice = await invoice.create(data)
+    invoices.shift(newInvoice)
+    this.setState({ invoices })
+    return newInvoice
+  }
+
+  updateInvoice = async(i, data) => {
+    let invoices = [...this.state.invoices]
+    const updatedInvoice = await invoice.update(i.id, data)
+    const index = invoices.findIndex((inv) => i.id === inv.id)
+    invoices[index] = updatedInvoice
+    this.setState({ invoices })
+    return updatedInvoice
+  }
+
+  deleteInvoice = async(i) => {
+    let invoices = [...this.state.invoices]
+    await invoice.delete(i.id)
+
+    const index = invoices.findIndex((inv) => i.id === inv.id)
+    invoices.splice(index, 1)
+    this.setState({ invoices })
+  }
+
   List = ({ match, history }) => {
     const { invoices, categories, category, columnHeaders, hasMore } = this.state
     return (
@@ -231,12 +257,22 @@ export default class Invoices extends Component {
     )
   }
 
-  Show = ({ match }) => {
+  Show = ({ match, location, history }) => {
     const req_id = parseInt(match.params.id)
     const invoices = [...this.state.invoices]
-    const invoice = invoices.find(invoice => invoice.id === req_id)
+    const inv = invoices.find(invoice => invoice.id === req_id)
     return (
-      <InvoiceDetail inv={invoice} invoiceId={req_id} scrollToTop={this.scrollToTop}/>
+      <InvoiceDetail
+        match={match}
+        location={location}
+        history={history}
+        inv={inv}
+        invoiceId={req_id}
+        handleCreate={this.addInvoice}
+        handleUpdate={this.updateInvoice}
+        handleDelete={this.deleteInvoice}
+        scrollToTop={this.scrollToTop}
+      />
     )
   }
 
@@ -246,7 +282,16 @@ export default class Invoices extends Component {
       evtId = location.state.eventId
     }
     return (
-      <InvoiceDetail evtId={evtId} isNew={true} />
+      <InvoiceDetail
+        match={match}
+        location={location}
+        history={history}
+        evtId={evtId}
+        isNew={true}
+        handleCreate={this.addInvoice}
+        handleUpdate={this.updateInvoice}
+        handleDelete={this.deleteInvoice}
+      />
     )
   }
 
