@@ -6,12 +6,12 @@ import './index.css'
 export default class SubHeader extends Component {
 
   type = () => {
-    const { invoice } = this.props
-    if (invoice && invoice.kind) {
+    const { inv } = this.props
+    if (inv && inv.kind) {
       return (
         <Fragment>
           <label>Type</label>
-          <div className="Field">{invoice.kind}</div>
+          <div className="Show Field">{inv.kind}</div>
         </Fragment>
       )
     }
@@ -19,9 +19,9 @@ export default class SubHeader extends Component {
 
   client = () => {
     let event;
-    const { invoice, evt } = this.props
-    if (invoice && invoice.event) {
-      event = invoice.event
+    const { inv, evt } = this.props
+    if (inv && inv.event) {
+      event = inv.event
     } else if (evt) {
       event = evt
     }
@@ -30,16 +30,16 @@ export default class SubHeader extends Component {
       return (
         <Fragment>
           <label>Client</label>
-          <div className="Field">{clientName(event.client)}</div>
+          <div className="Show Field">{clientName(event.client)}</div>
         </Fragment>
       )
     }
   }
 
   event = () => {
-    const { invoice } = this.props
-    if (invoice && invoice.event) {
-      const { event } = invoice
+    const { inv } = this.props
+    if (inv && inv.event) {
+      const { event } = inv
       return (
         <Fragment>
           <label>Job</label>
@@ -50,26 +50,26 @@ export default class SubHeader extends Component {
   }
 
   paymentStatus = () => {
-    const { invoice } = this.props
-    if (invoice) {
-      return <h2>{invoice.paymentStatus}</h2>
+    const { inv } = this.props
+    if (inv) {
+      return <h2>{inv.paymentStatus}</h2>
     }
   }
 
   paymentType = () => {
-    const { invoice } = this.props
-    if (invoice) {
-      if (invoice.paymentType && invoice.paymentType !== "Unknown") {
-        return <h4>{invoice.paymentType}</h4>
+    const { inv } = this.props
+    if (inv) {
+      if (inv.paymentType && inv.paymentType !== "Unknown") {
+        return <h4>{inv.paymentType}</h4>
       }
     }
   }
 
   checkInfo = () => {
-    const { invoice } = this.props
-    if (invoice) {
-      if (invoice.checkInfo) {
-        return <p>{invoice.checkInfo}</p>
+    const { inv } = this.props
+    if (inv) {
+      if (inv.checkInfo) {
+        return <p>{inv.checkInfo}</p>
       }
     }
   }
@@ -78,13 +78,13 @@ export default class SubHeader extends Component {
     return (
       <div className="SubHeader">
 
-        <div className="SubHeader--fields">
+        <div className="SubHeader--Show SubHeader--fields">
           {this.type()}
           {this.client()}
           {this.event()}
         </div>
 
-        <div className="SubHeader--status">
+        <div className="SubHeader--Show SubHeader--status">
         {this.paymentStatus()}
         {this.paymentType()}
         {this.checkInfo()}

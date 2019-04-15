@@ -4,11 +4,16 @@ import { clientName } from '../../../../../Helpers/clientHelpers'
 
 export default class Edit extends Component {
 
-  type = (value) => {
+  type = (value, change) => {
     return (
       <Fragment>
         <label>Type</label>
-        <select style={{height: '100%', fontSize: '18px'}}>
+        <select
+          className="Edit--Field"
+          name="kind"
+          value={value}
+          onChange={change}
+        >
           <option>Proposal</option>
           <option>Production Invoice</option>
           <option>On Premise Contract</option>
@@ -19,38 +24,43 @@ export default class Edit extends Component {
     )
   }
 
-  client = (value, searchResults) => {
+  client = (value, searchFieldData) => {
+    const { handleClientChange, onSelect, onEnter, formData } = this.props
     return (
       <Fragment>
         <label>Client</label>
-        <SearchField
-          searchResults={searchResults}
-          formClassName='Edit--field'
-          resultClassName='Edit--search-result'
-          resultsClassName='Edit--results'
-          formDataValue={this.props.formData && this.props.formData.client_id}
-          formatResult={clientName}
-          input={{
-            className:'Input',
-            placeholder:'search clients...',
-            name: 'client',
-            value: value,
-            tabIndex: 1
-          }}
-          handleChange={this.props.handleSearchChange}
-          onEnter={this.props.onEnter}
-          onSelect={this.props.onSelect}
-        />
+          <SearchField
+            searchResults={searchFieldData && searchFieldData.clients}
+            formClassName='Edit--Field'
+            resultClassName='Edit--search-result'
+            resultsClassName='Edit--results'
+            formDataValue={formData && formData.client_id}
+            formatResult={clientName}
+            input={{
+              className:'Input',
+              placeholder:'search clients...',
+              name: 'client',
+              value: value,
+              tabIndex: 1
+            }}
+            handleChange={handleClientChange}
+            onEnter={onEnter}
+            onSelect={onSelect}
+          />
       </Fragment>
     )
   }
 
-  paymentStatus = (value) => {
+  paymentStatus = (value, change) => {
     return (
       <Fragment>
         <label>Payment Status</label>
-        <select style={{height: '100%', fontSize: '18px'}}>
-          <option></option>
+        <select
+          className="Edit--Field"
+          name="paymentStatus"
+          value={value}
+          onChange={change}
+        >
           <option>Not Paid</option>
           <option>Outstanding Balance</option>
           <option>Paid In Full</option>
@@ -61,45 +71,59 @@ export default class Edit extends Component {
     )
   }
 
-  paymentType = (value) => {
+  paymentType = (value, change) => {
     return (
       <Fragment>
         <label>Payment Type</label>
-        <select style={{height: '100%', fontSize: '18px'}}>
-          <option></option>
+        <select
+          className="Edit--Field"
+          name="paymentType"
+          value={value}
+          onChange={change}
+        >
+          <option>-</option>
           <option>Cash</option>
           <option>Check</option>
-          <option>Cash | Check</option>
+          <option>Cash & Check</option>
           <option>Deducted From Commissions</option>
-          <option>Check | Deducted From Commissions</option>
+          <option>Check & Deducted From Commissions</option>
         </select>
       </Fragment>
     )
   }
 
-  checkInfo = (value) => {
+  checkInfo = (value, change) => {
     return (
       <Fragment>
-        <label>Check</label>
+        <label>Check Information</label>
         <input
+          className="Edit--Field"
           type="text"
           name="check"
           value={value}
+          onChange={change}
         />
       </Fragment>
     )
   }
 
-  commission = (value, paid) => {
+  commission = (value, paid, change) => {
     return (
       <Fragment>
         <label>Commission</label>
         <input
+          className="Edit--Field"
           type='number'
           name="commissionValue"
           value={value}
+          onChange={change}
         />
-        <select>
+        <select
+          className="Edit--Field"
+          name="commissionPaid"
+          value={paid}
+          onChange={change}
+        >
           <option>Not Paid</option>
           <option>Paid</option>
         </select>
@@ -107,28 +131,44 @@ export default class Edit extends Component {
     )
   }
 
-  render(){
-    const { fields, clientSearchResults } = this.props
-    if (fields) {
+  status = (fields, change) => {
+    if (fields.kind !== 'Proposal') {
+      return (
+        <Fragment>
+          {this.paymentStatus(fields.paymentStatus, change)}
+          {this.paymentType(fields.paymentType, change)}
+          {
+            fields.paymentType && fields.paymentType.includes('Check')?
+            this.checkInfo(fields.check, change)
+            :
+            null
+          }
+          {
+            fields.kind === 'On Premise Contract'?
+            this.commission(fields.commission, fields.commissionPaid, change)
+            :
+            null
+          }
+        </Fragment>
+      )
+    } else {
+      return null
+    }
+  }
 
+  render(){
+    const { fields, handleChange, searchFieldData } = this.props
+    if (fields) {
       return (
         <div className="SubHeader">
 
           <div className="SubHeader--fields">
-            {this.type(fields.kind)}
-            {this.client(fields.client, clientSearchResults)}
+            {this.type(fields.kind, handleChange)}
+            {this.client(fields.client, searchFieldData)}
           </div>
 
           <div className="SubHeader--status">
-          {this.paymentStatus(fields.paymentStatus)}
-          {this.paymentType(fields.paymentType)}
-          {this.checkInfo(fields.check)}
-          {
-            fields.type === 'On Premise Contract'?
-            this.commission(fields.commission, fields.commissionPaid)
-            :
-            null
-          }
+            {this.status(fields, handleChange)}
           </div>
 
         </div>

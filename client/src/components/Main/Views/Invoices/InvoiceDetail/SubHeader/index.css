@@ -1,11 +1,11 @@
 .SubHeader {
   width: 100%;
+  min-height: 300px;
   display: grid;
   padding: 30px;
 }
 
-.SubHeader--fields {
-  width: 100%;
+.SubHeader--fields, .SubHeader--status {
   display: grid;
   grid-gap: 5px;
 }
@@ -20,24 +20,21 @@
     width: 100%;
     display: grid;
     grid-gap: 30px;
-    grid-template-columns: repeat( 2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     padding: 30px;
   }
 
-  .SubHeader--fields {
-   display: grid;
+  .SubHeader--fields, .SubHeader--status {
+   justify-items: center;
+   align-content: start;
+   align-items: center;
    background-color: var(--light-blue-t);
    border: 1px dashed var(--light-blue);
    border-radius: 10px;
    padding: 30px;
   }
 
-  .SubHeader--status {
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    background-color: var(--light-blue-t);
-    border: 1px dashed var(--light-blue);
-    border-radius: 10px;
+  .SubHeader--Show {
+    align-content: center;
   }
 }
