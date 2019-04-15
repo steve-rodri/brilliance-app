@@ -3,7 +3,7 @@
   background-color: var(--dark-gray);
   width: 100%;
   display: grid;
-  grid-template-rows: 110px 300px auto 1fr;
+  grid-template-rows: 110px auto auto 1fr;
   justify-items: center;
   align-items: center;
   overflow: auto;

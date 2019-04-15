@@ -12,7 +12,7 @@ export default class Edit extends Component {
   styleRow = () => {
     return (
       {
-        backgroundColor: '#eeeeee'
+        backgroundColor: '#F8F8F8'
       }
     )
   }
