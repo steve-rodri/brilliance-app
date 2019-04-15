@@ -61,17 +61,25 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+select {
+  text-align-last: center;
+}
+
 /* -----------Fields------------ */
+
+.Field, .Edit--Field {
+  font-size: 22px;
+}
 
 .Field {
   height: 100%;
   min-height: 36px;
   width: 100%;
   padding: 5px;
-  font-size: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
 }
 
 .Field > p {
@@ -80,11 +88,9 @@ input[type="number"] {
 
 @media (min-width: 750px) {
   .Field {
-    height: 100%;
-    min-height: 36px;
+    height: 36px;
     width: 100%;
     padding: 5px;
-    font-size: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,14 +101,16 @@ input[type="number"] {
   }
 }
 
-.Edit--field {
+.Edit--Field {
   position: relative;
-  min-height: 45px;
-  height: 100%;
+  height: 36px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #F8F8F8;
+  border: 1px solid #BBBBBB;
+  border-radius: 5px;
 }
 
 /* -----------Inputs------------- */
@@ -113,13 +121,13 @@ input[type="number"] {
 }
 
 .Input {
+  height: 100%;
+  width: 100%;
   text-align: center;
   border-radius: 5px;
   border: none;
-  height: 100%;
-  width: 100%;
   font-size: 20px;
-  background-color: #eeeeee;
+  background-color: #F8F8F8;
 }
 
 .Input, .datetime {
@@ -134,7 +142,7 @@ input[type="number"] {
   position: absolute;
   top: 125%;
   width: 100%;
-  height: 300%;
+  height: 400%;
   overflow: auto;
   border-radius: 5px;
   background-color: white;
@@ -145,23 +153,11 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5px 5px 0 0;
   width: 100%;
-  height: 33%;
+  height: 33.3%;
+  font-size: 22px;
   color: black;
   z-index: 2;
-}
-
-@media (min-width: 750px) {
-  .Edit--results {
-    width: 100%;
-    height: 600%;
-  }
-
-  .Edit--search-result {
-    width: 100%;
-    height: 33%;
-  }
 }
 
 .Edit--search-result:hover {

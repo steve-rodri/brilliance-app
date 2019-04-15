@@ -9,6 +9,7 @@
 
 .Logistics {
   display: grid;
+  grid-gap: 5px;
   justify-items: center;
   align-items: center;
   padding: 15px;
