@@ -3,8 +3,8 @@ import numeral from 'numeral'
 import { quantity, description, contents, price } from './Helpers'
 
 export default function Show(props){
-  const { invoice, line } = props
-  const p = price(line, invoice.kind)
+  const { inv, line } = props
+  const p = price(line, inv.kind)
   const c = contents(line.item)
   return (
     <tr key={line.id} className="Line">

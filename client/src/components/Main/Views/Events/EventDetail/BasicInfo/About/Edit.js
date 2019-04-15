@@ -13,7 +13,7 @@ export default class Edit extends Component {
 
           <SearchField
             searchResults={searchFieldData && searchFieldData.clients}
-            formClassName='Edit--field'
+            formClassName='Edit--Field'
             resultClassName='Edit--search-result'
             resultsClassName='Edit--results'
             formDataValue={this.props.formData && this.props.formData.client_id}
@@ -34,7 +34,7 @@ export default class Edit extends Component {
 
           <SearchField
             searchResults={searchFieldData && searchFieldData.locations}
-            formClassName='Edit--field'
+            formClassName='Edit--Field'
             resultClassName='Edit--search-result'
             resultsClassName='Edit--results'
             formDataValue={this.props.formData && this.props.formData.location_id}
@@ -53,7 +53,7 @@ export default class Edit extends Component {
 
         <label>Action</label>
 
-          <div className="Edit--field">
+          <div className="Edit--Field">
             <input
               className="Input"
               type="text"
@@ -66,7 +66,7 @@ export default class Edit extends Component {
 
         <label>Kind</label>
 
-          <div className="Edit--field">
+          <div className="Edit--Field">
             <input
               className="Input"
               type="text"
@@ -79,7 +79,7 @@ export default class Edit extends Component {
 
         <label>Package</label>
 
-          <div className="Edit--field">
+          <div className="Edit--Field">
             <input
               className="Input"
               type="text"
