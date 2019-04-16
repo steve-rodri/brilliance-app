@@ -1,28 +1,34 @@
 import axios from 'axios'
 
 const employee = {
-  getAll: async function (page) {
+  getAll: async function (page, cancelToken) {
     try {
-      const resp = await axios.get(`/api/employees?page=${page}`)
+      const resp = await axios.get(`/api/employees?page=${page}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Employee Request Canceled')
+      }
     }
   },
-  find: async function (query) {
+  find: async function (query, cancelToken) {
     try {
-      const resp = await axios.get(`/api/employees?q=${query}`)
+      const resp = await axios.get(`/api/employees?q=${query}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Employee Request Canceled')
+      }
     }
   },
-  findByEmail: async function (email){
+  findByEmail: async function (email, cancelToken){
     try {
-      const resp = await axios.get(`/api/employees?email='${email}'`)
+      const resp = await axios.get(`/api/employees?email='${email}'`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Employee Request Canceled')
+      }
     }
   }
 }
