@@ -7,10 +7,10 @@ import moment from 'moment'
 
 //--------------Format FROM Google----------------------
 
-async function formatFromGoogle(evt){
+async function formatFromGoogle(evt, cancelToken){
   if (evt) {
-    const workers = await attendees(evt);
-    const eCreator = await creator(evt);
+    const workers = await attendees(evt, cancelToken);
+    const eCreator = await creator(evt, cancelToken);
     const confirmation = status(evt);
     const notes = description(evt)
 
@@ -56,9 +56,9 @@ async function formatFromGoogle(evt){
   }
 }
 
-async function creator(e){
+async function creator(e, cancelToken){
   if (e) {
-    const ct = await contact.findByEmail(e.creator.email)
+    const ct = await contact.findByEmail(e.creator.email, cancelToken)
     if (ct) {
       return ct.id
     } else {
@@ -67,11 +67,11 @@ async function creator(e){
   }
 }
 
-async function attendees(evt){
+async function attendees(evt, cancelToken){
   if (evt) {
     if (evt.attendees) {
       //for each attendee, find corresponding worker/staff member by contact email
-      let e = await event.findByUID(evt.iCalUID)
+      let e = await event.findByUID(evt.iCalUID, cancelToken)
 
       if (e) {
         //if event has staff update staff with google attendee info
@@ -95,7 +95,7 @@ async function attendees(evt){
           // else create new staff with google attendee info
         } else {
           const staff = await Promise.all(evt.attendees.map(async attendee => {
-            const worker = await employee.findByEmail(attendee.email)
+            const worker = await employee.findByEmail(attendee.email, cancelToken)
             if (worker) {
               worker.confirmation = attendee.responseStatus
               return worker
@@ -113,7 +113,7 @@ async function attendees(evt){
         }
       } else {
         const staff = await Promise.all(evt.attendees.map(async attendee => {
-          const worker = await employee.findByEmail(attendee.email)
+          const worker = await employee.findByEmail(attendee.email, cancelToken)
           if (worker) {
             worker.confirmation = attendee.responseStatus
             return worker

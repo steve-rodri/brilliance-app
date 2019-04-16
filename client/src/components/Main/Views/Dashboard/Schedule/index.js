@@ -5,6 +5,7 @@ import { GOOGLE } from '../../../../../services/google_service'
 import { event } from '../../../../../services/event'
 import { start, end } from '../../../../Helpers/datetime'
 import moment from 'moment'
+import axios from 'axios'
 import './Schedule.css'
 
 export default class Schedule extends Component {
@@ -14,6 +15,7 @@ export default class Schedule extends Component {
       userEvents: null,
       redirectToLogin: false
     }
+    this.axiosRequestSource = axios.CancelToken.source()
   }
 
   updateColumnHeaders = (e) => {
@@ -49,15 +51,16 @@ export default class Schedule extends Component {
   async componentWillUnmount(){
     window.removeEventListener("resize", this.updateColumnHeaders);
     this.setState({ userEvents: null })
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
   findAllUserEventsFromGoogle = async() => {
     const user = this.props.user
     if (user) {
-      const calendars = await GOOGLE.getCalendars();
+      const calendars = await GOOGLE.getCalendars(this.axiosRequestSource.token);
       if (calendars) {
         const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
-        const events = await GOOGLE.getEvents(jobsCalendar.id)
+        const events = await GOOGLE.getEvents(jobsCalendar.id, this.axiosRequestSource.token)
         const userEvents = events.filter(
           event =>
           event.attendees?
@@ -75,7 +78,7 @@ export default class Schedule extends Component {
     const { page } = this.state
     const { user } = this.props
     if (user) {
-      const events = await event.findByEmail(page, user.email)
+      const events = await event.findByEmail(page, user.email, this.axiosRequestSource.token)
       return events
     }
   }

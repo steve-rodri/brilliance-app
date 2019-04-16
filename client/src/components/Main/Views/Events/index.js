@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
-import moment from 'moment'
 import { GOOGLE } from '../../../../services/google_service'
 import { formatToGoogle, formatFromGoogle } from '../../../Helpers/googleFormatters'
 import { event } from '../../../../services/event'
 import { client } from '../../../../services/client'
 import { clientName } from '../../../Helpers/clientHelpers'
 import { eventTitle } from '../../../Helpers/eventTitle'
+import queryString from 'query-string'
+import moment from 'moment'
+import axios from 'axios'
 
 export default class Events extends Component {
   constructor(props){
@@ -22,6 +23,7 @@ export default class Events extends Component {
       columnHeaders: ['title', 'client', 'location', 'confirmation', 'staff'],
       page: 1
     }
+    this.axiosRequestSource = axios.CancelToken.source()
   }
 
   updateColumnHeaders = (e) => {
@@ -59,6 +61,7 @@ export default class Events extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
   setEvents = async(props, mounted) => {
@@ -94,7 +97,7 @@ export default class Events extends Component {
       })
 
     } else if (queries.client) {
-        const clt = await client.findById(queries.client)
+        const clt = await client.findById(queries.client, this.axiosRequestSource.token)
         this.setState(
         {
           query: null,
@@ -126,11 +129,11 @@ export default class Events extends Component {
     const { page, category, query, client } = this.state
     let evts;
     if (query) {
-      evts = await event.find(page, query)
+      evts = await event.find(page, query, this.axiosRequestSource.token)
     } else if (client) {
-      evts = await event.findByClient(page, client)
+      evts = await event.findByClient(page, client, this.axiosRequestSource.token)
     } else {
-      evts = await event.getAll(page, category);
+      evts = await event.getAll(page, category, this.axiosRequestSource.token);
     }
     this.incrementPage()
     await this.updateEvents(evts);
@@ -149,9 +152,9 @@ export default class Events extends Component {
   addEvent = async(formData) => {
     const { calendarId } = this.state
     let events = [...this.state.events]
-    const newEvent = await event.createNew(formData)
+    const newEvent = await event.createNew(formData, this.axiosRequestSource.token)
     const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(newEvent))
-    let formatted = await formatFromGoogle(newGoogleEvent)
+    let formatted = await formatFromGoogle(newGoogleEvent, this.axiosRequestSource.token)
 
     if (formatted.event_employees_attributes) {
 
@@ -173,7 +176,7 @@ export default class Events extends Component {
 
     }
 
-    const evt = await event.update(newEvent.id, formatted)
+    const evt = await event.update(newEvent.id, formatted, this.axiosRequestSource.token)
     events.push(evt)
     events = events.sort((evtOne, evtTwo) => {
       return moment(evtOne.start).isBefore(moment(evtTwo.start))
@@ -185,9 +188,9 @@ export default class Events extends Component {
   deleteEvent = async(evt) => {
     const { calendarId } = this.state
     let events = [...this.state.events]
-    await event.delete(evt.id)
+    await event.delete(evt.id, this.axiosRequestSource.token)
     if (evt.gcId) {
-      await GOOGLE.deleteEvent(calendarId, evt.gcId)
+      await GOOGLE.deleteEvent(calendarId, evt.gcId, this.axiosRequestSource.token)
     }
     events = events.filter( e => e.id !== evt.id)
     this.setState({ events })
@@ -199,15 +202,15 @@ export default class Events extends Component {
       let events = [...this.state.events]
       let updatedEvent;
       if (data) {
-        updatedEvent = await event.update(e.id, data)
+        updatedEvent = await event.update(e.id, data, this.axiosRequestSource.token)
       } else {
         updatedEvent = e
       }
       if (e.gcId) {
-        await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent))
+        await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent), null, this.axiosRequestSource.token)
       } else if (this.state.calendarId) {
-        const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent))
-        let formatted = await formatFromGoogle(newGoogleEvent)
+        const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.axiosRequestSource.token)
+        let formatted = await formatFromGoogle(newGoogleEvent, this.axiosRequestSource.token)
 
         formatted = {
           ...data,
@@ -228,7 +231,7 @@ export default class Events extends Component {
 
           formatted.event_employees_attributes = update
         }
-        updatedEvent = await event.update(e.id, formatted)
+        updatedEvent = await event.update(e.id, formatted, this.axiosRequestSource.token)
       }
 
       const index = events.findIndex((event) => event.id === e.id)
@@ -243,7 +246,7 @@ export default class Events extends Component {
       const updatedEvents = evts.map( async(e) => {
         if (!e.summary) {
           e.summary = eventTitle(e)
-          await event.update(e.id, {summary: e.summary})
+          await event.update(e.id, {summary: e.summary}, this.axiosRequestSource.token)
         }
         const evt = await this.synchronizeWithGoogle(e)
         if (evt) {
@@ -308,9 +311,9 @@ export default class Events extends Component {
   synchronizeWithGoogle = async (evt) => {
     const { calendarId } = this.state
     if (calendarId && evt.gcId) {
-      const e = await GOOGLE.getEvent(calendarId, evt.gcId)
-      const formatted = await formatFromGoogle(e)
-      const synced = await event.sync(formatted)
+      const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.axiosRequestSource.token)
+      const formatted = await formatFromGoogle(e, this.axiosRequestSource.token)
+      const synced = await event.sync(formatted, this.axiosRequestSource.token)
       return synced
     }
   }
