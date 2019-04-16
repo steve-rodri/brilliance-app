@@ -119,7 +119,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new(invoice_params)
 
     if @invoice.save
-      render json: @invoice, status: :created, location: @invoice
+      render json: @invoice, include: '**', status: :created, location: @invoice
     else
       render json: @invoice.errors, status: :unprocessable_entity
     end
@@ -128,7 +128,7 @@ class InvoicesController < ApplicationController
   # PATCH/PUT /invoices/1
   def update
     if @invoice.update(invoice_params)
-      render json: @invoice
+      render json: @invoice, include: '**'
     else
       render json: @invoice.errors, status: :unprocessable_entity
     end
