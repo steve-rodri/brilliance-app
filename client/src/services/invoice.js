@@ -1,60 +1,74 @@
 import axios from 'axios'
 
 const invoice = {
-  get: async function(id){
+  get: async function(id, cancelToken){
     try {
-      const resp = await axios.get(`/api/invoices/${id}`)
+      const resp = await axios.get(`/api/invoices/${id}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Invoice Request Canceled')
+      }
     }
   },
-  getAll: async function (page, category){
+  getAll: async function (page, category, cancelToken){
     try {
-      const resp = await axios.get(`/api/invoices?page=${page}&category=${category}`)
+      const resp = await axios.get(`/api/invoices?page=${page}&category=${category}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Invoice Request Canceled')
+      }
     }
   },
-  find: async function (page, query){
+  find: async function (page, query, cancelToken){
     try {
-      const resp = await axios.get(`/api/invoices?page=${page}&q=${query}`)
+      const resp = await axios.get(`/api/invoices?page=${page}&q=${query}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Invoice Request Canceled')
+      }
     }
   },
-  findByClient: async function (page, clientId) {
+  findByClient: async function (page, clientId, cancelToken) {
     try {
-      const resp = await axios.get(`/api/invoices?page=${page}&client_id=${clientId}`)
+      const resp = await axios.get(`/api/invoices?page=${page}&client_id=${clientId}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Invoice Request Canceled')
+      }
     }
   },
-  create: async function(data){
+  create: async function(data, cancelToken){
     try {
-      const resp = await axios.post(`/api/invoices`, data)
+      const resp = await axios.post(`/api/invoices`, data, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Invoice Request Canceled')
+      }
     }
   },
-  update: async function(id, data){
+  update: async function(id, data, cancelToken){
     try {
-      const resp = await axios.put(`/api/invoices/${id}`, data)
+      const resp = await axios.put(`/api/invoices/${id}`, data, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Invoice Request Canceled')
+      }
     }
   },
-  delete: async function(id) {
+  delete: async function(id, cancelToken) {
     try {
-      const resp = await axios.delete(`/api/invoices/${id}`)
+      const resp = await axios.delete(`/api/invoices/${id}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Invoice Request Canceled')
+      }
     }
   }
 }

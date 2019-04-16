@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const GOOGLE = {
-  getUser: async function(){
+  getUser: async function(cancelToken){
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -9,7 +9,8 @@ const GOOGLE = {
         url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
         headers: {
           Authorization: `Bearer ${accessToken}`
-        }
+        },
+        cancelToken: cancelToken
       })
       return resp.data
     } catch (e) {
@@ -18,7 +19,7 @@ const GOOGLE = {
     }
   },
 
-  getCalendars: async function (){
+  getCalendars: async function (cancelToken){
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -26,7 +27,8 @@ const GOOGLE = {
         url: 'https://www.googleapis.com/calendar/v3/users/me/calendarList',
         headers: {
           Authorization: `Bearer ${accessToken}`
-        }
+        },
+        cancelToken: cancelToken
       })
       return resp.data.items
     } catch (e) {
@@ -35,7 +37,7 @@ const GOOGLE = {
     }
   },
 
-  getEvents: async function(calendar_id){
+  getEvents: async function(calendar_id, cancelToken){
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -44,6 +46,7 @@ const GOOGLE = {
         headers:{
           Authorization: `Bearer ${accessToken}`
         },
+        cancelToken: cancelToken
       })
       return resp.data.items
     } catch (e) {
@@ -52,7 +55,7 @@ const GOOGLE = {
     }
   },
 
-  getEvent: async function (calendarId, eventId) {
+  getEvent: async function (calendarId, eventId, cancelToken) {
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -61,6 +64,7 @@ const GOOGLE = {
         headers: {
           Authorization: `Bearer ${accessToken}`
         },
+        cancelToken: cancelToken
       })
       return resp.data
     } catch (e) {
@@ -68,7 +72,7 @@ const GOOGLE = {
     }
   },
 
-  createEvent: async function(calendarId, data){
+  createEvent: async function(calendarId, data, cancelToken){
     //required data properties
     // start : { dateTime }
     // end : { dateTime }
@@ -85,7 +89,8 @@ const GOOGLE = {
         headers: {
           Authorization: `Bearer ${accessToken}`
         },
-        data: data
+        data: data,
+        cancelToken: cancelToken
       })
       return resp.data;
     } catch (e) {
@@ -93,7 +98,7 @@ const GOOGLE = {
     }
   },
 
-  deleteEvent: async function(calendarId, eventId){
+  deleteEvent: async function(calendarId, eventId, cancelToken){
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -102,6 +107,7 @@ const GOOGLE = {
         headers: {
           Authorization: `Bearer ${accessToken}`
         },
+        cancelToken: cancelToken
       })
       return resp.data;
     } catch (e) {
@@ -109,7 +115,7 @@ const GOOGLE = {
     }
   },
 
-  patchEvent: async function(calendarId, eventId, data, sendUpdates){
+  patchEvent: async function(calendarId, eventId, data, sendUpdates, cancelToken){
     if (!sendUpdates) {
       sendUpdates = 'none'
     }
@@ -121,7 +127,8 @@ const GOOGLE = {
         headers: {
           Authorization: `Bearer ${accessToken}`
         },
-        data: data
+        data: data,
+        cancelToken: cancelToken
       })
       return resp.data;
     } catch (e) {
@@ -129,7 +136,7 @@ const GOOGLE = {
     }
   },
 
-  importEvents: async function(calendarId, data){
+  importEvents: async function(calendarId, data, cancelToken){
     //required data properties
     // iCalUID
     // start : { dateTime }
@@ -147,7 +154,8 @@ const GOOGLE = {
         headers: {
           Authorization: `Bearer ${accessToken}`
         },
-        data: data
+        data: data,
+        cancelToken: cancelToken
       })
       return resp.data;
     } catch (e) {

@@ -1,84 +1,104 @@
 import axios from 'axios'
 
 const event = {
-  getAll: async function(page, category){
+  getAll: async function(page, category, cancelToken){
     try {
-      const resp = await axios.get(`/api/events?page=${page}&category=${category}`)
+      const resp = await axios.get(`/api/events?page=${page}&category=${category}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
     }
   },
-  getOne: async function(id){
+  getOne: async function(id, cancelToken){
     try {
-      const resp = await axios.get(`/api/events/${id}`)
+      const resp = await axios.get(`/api/events/${id}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      return null
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
     }
   },
-  find: async function(page, query){
+  find: async function(page, query, cancelToken){
     try {
-      const resp = await axios.get(`/api/events/find?page=${page}&q=${query}`)
+      const resp = await axios.get(`/api/events/find?page=${page}&q=${query}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
     }
   },
-  findByClient: async function(page, clientId){
+  findByClient: async function(page, clientId, cancelToken){
     try {
-      const resp = await axios.get(`/api/events/find?page=${page}&client_id=${clientId}`)
+      const resp = await axios.get(`/api/events/find?page=${page}&client_id=${clientId}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
     }
   },
-  findByEmail: async function(page, email){
+  findByEmail: async function(page, email, cancelToken){
     try {
-      const resp = await axios.get(`/api/events/find?page=${page}&email=${email}`)
+      const resp = await axios.get(`/api/events/find?page=${page}&email=${email}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
     }
   },
-  findByUID: async function (iCalUID){
+  findByUID: async function (iCalUID, cancelToken){
     try {
-      const resp = await axios.get(`/api/events/find?iCalUID=${iCalUID}`)
+      const resp = await axios.get(`/api/events/find?iCalUID=${iCalUID}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
     }
   },
-  createNew: async function(data) {
+  createNew: async function(data, cancelToken) {
     try {
-      const resp = await axios.post(`/api/events`, { event: data })
+      const resp = await axios.post(`/api/events`, data, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
     }
   },
-  delete: async function (id){
+  delete: async function (id, cancelToken){
     try {
-      const resp = await axios.delete(`/api/events/${id}`)
+      const resp = await axios.delete(`/api/events/${id}`, { cancelToken: cancelToken })
       return resp
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
     }
   },
-  update: async function(id, data){
+  update: async function(id, data, cancelToken){
     try {
-      const resp = await axios.put(`/api/events/${id}`, { event: data })
+      const resp = await axios.put(`/api/events/${id}`, data, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
     }
   },
-  sync: async function(data){
+  sync: async function(data, cancelToken){
     try {
-      const resp = await axios.put('/api/events/sync', data)
+      const resp = await axios.put('/api/events/sync', data, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Request canceled', e.message)
+      }
     }
   }
 }

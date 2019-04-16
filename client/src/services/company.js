@@ -1,12 +1,14 @@
 import axios from 'axios'
 
 const company = {
-  find: async function(query){
+  find: async function(query, cancelToken){
     try {
-      const resp = await axios.get(`/api/companies/find?q=${query}`)
+      const resp = await axios.get(`/api/companies/find?q=${query}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
-      console.log(e)
+      if (axios.isCancel(e)) {
+        console.log('Company Request Canceled')
+      }
     }
   }
 }
