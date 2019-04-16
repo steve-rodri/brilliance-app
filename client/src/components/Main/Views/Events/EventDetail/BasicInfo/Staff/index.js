@@ -14,7 +14,7 @@ export default class Staff extends Component {
     if (mobile) {
       return '2x'
     } else {
-      return '3x'
+      return '2x'
     }
   }
 
