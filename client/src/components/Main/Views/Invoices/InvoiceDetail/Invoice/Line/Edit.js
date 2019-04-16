@@ -1,43 +1,19 @@
 import React, { Component } from 'react'
-import { quantity, description, contents, price, inc } from './Helpers'
+import { description, contents, inc } from './Helpers'
 import { deleteIcon } from '../../../../../../Helpers/icons'
 
 export default class Edit extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-
-    }
-  }
-
-  // ---------------------------Lifecycle---------------------------------
-
-  componentWillReceiveProps(nextProps){
-    this.setup(nextProps)
-  }
-
-  componentDidMount(){
-    this.setup(this.props)
-  }
-
-  // --------------------------Getters and Setters-------------------------
-
-  setup = (props) => {
-    const { line } = props
-    console.log(line)
-  }
-
-
-  // ----------------------------View----------------------------------------
-
   render(){
-    const { inv, line, handleLineChange, deleteLine } = this.props
+    const { line, handleLineChange, deleteLine } = this.props
     const c = contents(line.item)
     return (
       <tr key={line.id} className="Line">
         <td
           className="Invoice--cell Line--add-delete"
-          onClick={deleteLine}
+          onClick={(e) => {
+            e.stopPropagation();
+            deleteLine(line.id)
+          }}
         >
           {deleteIcon('1x')}
         </td>
@@ -48,8 +24,8 @@ export default class Edit extends Component {
               className="Line--input"
               name="quantity"
               type="number"
-              value={quantity(line)}
-              onChange={(e) => handleLineChange('quantity',line.id)}
+              value={line.quantity}
+              onChange={(e) => handleLineChange(e, line.id)}
             />
           </div>
         </td>
@@ -63,23 +39,28 @@ export default class Edit extends Component {
           className="Invoice--cell Line--inc"
           onClick={(e) => {
             e.stopPropagation()
-            handleLineChange('inc', !line.inc, line.id)
+            handleLineChange(e, line.id, 'inc')
           }}
         >
           {inc(line)}
         </td>
 
         <td className="Invoice--cell Line--price">
-          <div>
-            <p>$</p>
-            <input
-              className="Line--input"
-              name="price"
-              type="number"
-              value={price(line, inv.kind)}
-
-            />
-          </div>
+          {
+            !line.inc?
+            <div>
+              <p>$</p>
+              <input
+                className="Line--input"
+                name="price"
+                type="number"
+                value={line.price}
+                onChange={(e) => handleLineChange(e, line.id)}
+              />
+            </div>
+            :
+            null
+          }
         </td>
       </tr>
     )

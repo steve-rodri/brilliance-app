@@ -19,7 +19,7 @@ export default class Invoice extends Component {
   }
 
   render(){
-    const { editMode } = this.props
+    const { editMode, addLine } = this.props
     return (
       <div className="Invoice--container">
         <div className="Invoice">
@@ -42,7 +42,7 @@ export default class Invoice extends Component {
               {
                 editMode?
                 <tr className="Line">
-                  <td className="Invoice--cell Line--add-delete" onClick={this.props.addLine}>{addIcon('1x')}</td>
+                  <td className="Invoice--cell Line--add-delete" onClick={addLine}>{addIcon('1x')}</td>
                   <td className="Invoice--cell Line--quantity"></td>
                   <td className="Invoice--cell Line--item"></td>
                   <td className="Invoice--cell Line--inc"></td>
