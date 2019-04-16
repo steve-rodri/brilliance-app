@@ -52,14 +52,14 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
   end
 
   create_table "contents", force: :cascade do |t|
+    t.string "kind"
     t.string "description"
+    t.boolean "description_only", default: false
     t.integer "quantity", default: 1
     t.boolean "inc", default: false
-    t.float "discount_adj", default: 0.0
-    t.string "kind"
-    t.integer "hours_for_labor_only"
-    t.boolean "description_only", default: false
     t.boolean "inc_discount_in_opct", default: false
+    t.float "discount_adj", default: 0.0
+    t.integer "hours_for_labor_only"
     t.boolean "subcontracted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
   end
 
   create_table "items", force: :cascade do |t|
+    t.string "name"
     t.string "kind"
     t.string "install"
     t.string "description"
@@ -215,6 +216,8 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
     t.boolean "inc", default: false
     t.boolean "inc_in_commission", default: false
     t.float "discount_adj", default: 0.0
+    t.float "price", default: 0.0
+    t.integer "quantity", default: 0
     t.bigint "invoice_id"
     t.bigint "item_id"
     t.datetime "created_at", null: false

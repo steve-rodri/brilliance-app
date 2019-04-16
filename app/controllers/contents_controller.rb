@@ -46,6 +46,18 @@ class ContentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def content_params
-      params.require(:content).permit(:description, :quantity, :inc, :discount_adj, :kind, :hours_for_labor_only, :description_only, :inc_discount_in_opct)
+      params.require(:content)
+      .permit(
+        :kind,
+        :description,
+        :description_only,
+        :quantity,
+        :inc,
+        :inc_discount_in_opct,
+        :discount_adj,
+        :hours_for_labor_only,
+        :subcontracted,
+        :inventory_id
+      )
     end
 end
