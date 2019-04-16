@@ -37,38 +37,29 @@ const description = (item) => {
 const contents = (item) => {
   if (item) {
     const contents = [...item.contents]
-
     if (contents && contents.length > 1) {
-
       return contents.reverse().map(content => {
-
         if (content.descriptionOnly) {
 
           if (content.description) {
-
             return (
               <li key={content.id}>{content.description}</li>
             )
-
           }
 
         } else if (content.inventory) {
 
           if (content.description) {
-
             return (
               <li key={content.id}>{`${content.inventory.name} ${content.description}`}</li>
             )
-
           } else {
-
             return (
               <li key={content.id}>{content.inventory.name}</li>
             )
-
           }
-        }
 
+        }
         return null
       })
     }
@@ -91,32 +82,32 @@ const quantity = (line) => {
   if (line) {
     const { item } = line
 
-    if (item.useQuantity) {
+    if (item) {
+      if (item.useQuantity) {
 
-      const contents = [...item.contents]
-      if (contents && contents.length === 1) {
-        const content = contents[0]
-        if (content.quantity) {
-          return item.quantity * content.quantity
+        const contents = [...item.contents]
+        if (contents && contents.length === 1) {
+          const content = contents[0]
+          if (content.quantity) {
+            return item.quantity * content.quantity
+          }
+        } else {
+          return item.quantity
         }
+
       } else {
-        return item.quantity
-      }
 
-    } else {
-
-      const contents = [...item.contents]
-      if (contents && contents.length === 1) {
-        const content = contents[0]
-        if (content.quantity) {
-          return content.quantity
+        const contents = [...item.contents]
+        if (contents && contents.length === 1) {
+          const content = contents[0]
+          if (content.quantity) {
+            return content.quantity
+          }
         }
+
       }
-
     }
-
   }
-
 }
 
 const price = (line, invoiceType, format) => {
@@ -124,9 +115,7 @@ const price = (line, invoiceType, format) => {
     const { item } = line
 
     const inventoryPrice = (content) => {
-
       const { inventory } = content
-
       if (inventory) {
         if (invoiceType === 'Rental Contract') {
           return inventory.rentalPrice
@@ -136,7 +125,6 @@ const price = (line, invoiceType, format) => {
       } else {
         return 0
       }
-      
     }
 
     const sumOfContents = () => {
@@ -144,25 +132,31 @@ const price = (line, invoiceType, format) => {
 
       if (contents && contents.length === 1) {
         const content = contents[0]
-
         if (content.inc) {
           return 0
         } else {
           return inventoryPrice(content) * content.quantity - content.discountAdj
         }
+
       } else if (contents && contents.length > 1) {
-        const sum = contents.reduce((total, content) => {
-          return total + (inventoryPrice(content) * content.quantity - content.discountAdj)
+        const prices = contents.map( content => {
+          return inventoryPrice(content) * content.quantity - content.discountAdj
         })
+        const sum = prices.reduce((a, c) => a + c)
         return sum
+
+      } else {
+        return 0
       }
     }
 
     const itemPrice = () => {
-      // item useQuantity
-      return (
-        sumOfContents() * item.quantity - item.discountAdj
-      )
+      if (item) {
+        let quantity = item.quantity;
+        if (line.quantity) quantity = line.quantity;
+        const subPrice = sumOfContents() * quantity;
+        return subPrice
+      }
     }
 
     if (format) {
@@ -180,7 +174,6 @@ const price = (line, invoiceType, format) => {
         return totalPrice
       }
     }
-
   }
 }
 

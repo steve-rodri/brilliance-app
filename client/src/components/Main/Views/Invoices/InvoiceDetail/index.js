@@ -5,9 +5,11 @@ import Invoice from './Invoice'
 import Summary from './Summary'
 import Buttons from '../../../../Buttons/Buttons'
 import { invoice } from '../../../../../services/invoice'
+import { line } from '../../../../../services/line'
 import { client } from '../../../../../services/client'
-import { price } from './Invoice/Line/Helpers'
+import { quantity, price } from './Invoice/Line/Helpers'
 import { clientName } from '../../../../Helpers/clientHelpers'
+import axios from 'axios'
 import './index.css'
 
 export default class InvoiceDetail extends Component {
@@ -22,6 +24,7 @@ export default class InvoiceDetail extends Component {
     }
 
     this.container = React.createRef()
+    this.axiosRequestSource = axios.CancelToken.source()
   }
 
   scrollToTop = () => {
@@ -43,6 +46,7 @@ export default class InvoiceDetail extends Component {
 
   async componentWillUnmount(){
     window.removeEventListener('resize', this.resetView)
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
 
@@ -71,17 +75,42 @@ export default class InvoiceDetail extends Component {
   setInvoice = async(props) => {
     const { inv, invoiceId } = props
     if (inv) {
-      this.setState({ inv })
+      this.setState({ inv }, () => this.setLines())
     } else {
-      const i = await invoice.get(invoiceId)
-      this.setState({ inv: i })
+      const i = await invoice.get(invoiceId, this.axiosRequestSource.token)
+      this.setState({ inv: i }, () => this.setLines())
     }
+  }
+
+  setLines = async() => {
+    const { inv, inv: { lines } } = this.state
+
+    const updatedLines = lines.map( line => {
+      line.quantity = quantity(line)
+      line.price = price(line, inv.kind)
+      return line
+    })
+
+    this.setState(prevState => ({
+      inv: {
+        ...prevState.inv,
+        lines: updatedLines
+      },
+      fields: {
+        ...prevState.fields,
+        lines: updatedLines
+      },
+      formData: {
+        ...prevState.formData,
+        lines_attributes: updatedLines
+      }
+    }), () => { this.updateSummary() });
   }
 
   setFields = () => {
     const { inv } = this.state
     const fieldNames = ['kind', 'paymentStatus', 'paymentType', 'check', 'commission', 'commissionPaid']
-    if (!invoice) {
+    if (!inv) {
       fieldNames.forEach( field => this.setField( field, null ))
     } else {
       fieldNames.forEach( field => inv[field]? this.setField( field, inv[field] ) : null)
@@ -138,9 +167,9 @@ export default class InvoiceDetail extends Component {
   setSubTotal = (callBack) => {
     const { inv } = this.state
     if (inv) {
-      const { lines } = invoice
-      if (lines) {
-        const prices = lines.map(line => price(line, invoice.kind))
+      const { lines } = inv
+      if (lines && lines.length) {
+        const prices = lines.map(line => line.price)
         let subTotal;
         if (prices && prices.length) {
           subTotal = prices.reduce((a, b) => a + b)
@@ -260,6 +289,24 @@ export default class InvoiceDetail extends Component {
     this.setSubTotal(true)
   }
 
+  // -------------------------Lines-------------------------------
+
+  addLine = () => {
+    console.log('works')
+  }
+
+  deleteLine = async(lineId) => {
+    const state = {...this.state}
+    let { inv, fields } = state
+
+    await line.delete(lineId, this.axiosRequestSource.token)
+    const updatedLines = inv.lines.filter(line => line.id !== lineId)
+    inv.lines = updatedLines
+    fields.lines = updatedLines
+
+    this.setState({ inv, fields })
+  }
+
   // -------------------------HandleChange------------------------
 
   handleChange = (e) => {
@@ -298,46 +345,50 @@ export default class InvoiceDetail extends Component {
     }))
   }
 
-  handleLineChange = (name, value, lineId) => {
-    let inv = {...this.state.inv};
-    const { lines } = inv;
+  handleLineChange = (e, lineId, nme, val) => {
+    const { inv, fields } = this.state
+    let { name, value } = e.target
+    if (nme) name = nme
+    if (val) value = val
+    const { lines } = fields;
 
     const updatedLines = lines.map( line => {
       if (line.id === lineId) {
-        line[name] = value
+        switch (name) {
+          case 'inc':
+            line[name] = !line.inc
+            if (!line.inc) {
+              line.price = price(line, inv.kind)
+            } else {
+              line.price = 0
+            }
+            break;
+          case 'quantity':
+            line[name] = value
+            line.price = price(line, inv.kind)
+            break;
+          default:
+          line[name] = value
+            break;
+        }
       }
+
       return line
     })
 
-    inv.lines = updatedLines;
     this.setState(prevState => ({
-      inv,
+      fields: {
+        ...prevState.fields,
+        lines: updatedLines
+      },
       formData: {
         ...prevState.formData,
         lines_attributes: updatedLines
       }
-    }), () => { this.updateSummary() });
-  }
-
-  handleIncChange = (lineId, inc) => {
-    let inv = {...this.state.inv};
-    const { lines } = inv;
-
-    const updatedLines = lines.map( line => {
-      if (line.id === lineId) {
-        line.inc = !inc
-      }
-      return line
-    })
-
-    inv.lines = updatedLines;
-    this.setState(prevState => ({
-      inv,
-      formData: {
-        ...prevState.formData,
-        lines_attributes: updatedLines
-      }
-    }), () => { this.updateSummary() });
+    }),
+    async() => {
+      await this.updateSummary()
+    });
   }
 
   // -------------------------Client-Search-Field-----------------------
@@ -372,7 +423,7 @@ export default class InvoiceDetail extends Component {
   findClients = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const clients = await client.find(1, query)
+      const clients = await client.find(1, query, this.axiosRequestSource.token)
       return clients
     }
   }
@@ -385,7 +436,7 @@ export default class InvoiceDetail extends Component {
     if (fromEvent) {
       if (isNew) {
         if (formData) {
-          const newInvoice = await invoice.create(formData)
+          const newInvoice = await invoice.create(formData, this.axiosRequestSource.token)
           this.setState({ inv: newInvoice })
 
           this.setEditMode(false);
@@ -398,12 +449,13 @@ export default class InvoiceDetail extends Component {
 
         history.push(`/admin/events/${evtId}`, {view: 'Invoice'})
       } else {
-        const updatedInvoice = await invoice.update(inv.id, formData)
+        const updatedInvoice = await invoice.update(inv.id, formData, this.axiosRequestSource.token)
         await this.setState({ inv: updatedInvoice })
 
         await this.resetForm()
-        await this.setFields();
         await this.setClientName();
+        await this.setFields();
+        await this.setLines();
       }
 
     } else {
@@ -423,11 +475,7 @@ export default class InvoiceDetail extends Component {
         }
       } else {
         const updatedInvoice = await this.props.handleUpdate(inv, formData)
-        await this.setState({ inv: updatedInvoice })
-
-        await this.resetForm()
-        await this.setClientName();
-        await this.setFields();
+        await this.setState({ inv: updatedInvoice }, async() => await this.close())
       }
     }
 
@@ -440,7 +488,7 @@ export default class InvoiceDetail extends Component {
     const { inv, fromEvent } = this.state
     const { handleDelete, setView } = this.props
     if (fromEvent) {
-      await invoice.delete(inv.id)
+      await invoice.delete(inv.id, this.axiosRequestSource.token)
       if (setView) setView('Invoice')
     } else {
       await handleDelete(inv)
@@ -450,13 +498,14 @@ export default class InvoiceDetail extends Component {
 
   // -------------------------Views-------------------------
 
-  close = () => {
-    this.resetForm();
-    this.resetSearchFieldData();
-    this.setEditMode(false);
-    this.resetFields();
-    this.setFields();
-    this.setClientName();
+  close = async () => {
+    await this.resetForm();
+    await this.resetSearchFieldData();
+    await this.resetFields();
+    await this.setFields();
+    await this.setClientName();
+    await this.setLines();
+    await this.setEditMode(false);
   }
 
   resetView = () => {
@@ -476,16 +525,16 @@ export default class InvoiceDetail extends Component {
     return (
       <div className="InvoiceDetail" ref={this.container}>
         <Header
-          {...this.state}
           {...this.props}
+          {...this.state}
           edit={() => this.setEditMode(true)}
           close={this.close}
           delete={this.handleDelete}
           submit={this.handleSubmit}
         />
         <SubHeader
-          {...this.state}
           {...this.props}
+          {...this.state}
           handleChange={this.handleChange}
           handleClientChange={this.handleClientChange}
           onSelect={this.handleSelect}
@@ -494,6 +543,8 @@ export default class InvoiceDetail extends Component {
         <Invoice
           {...this.state}
           handleLineChange={this.handleLineChange}
+          addLine={this.addLine}
+          deleteLine={this.deleteLine}
           setSubTotal={this.setSubTotal}
         />
         <Summary {...this.state}/>

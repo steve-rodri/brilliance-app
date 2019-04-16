@@ -163,8 +163,8 @@ export default class Edit extends Component {
         <div className="SubHeader">
 
           <div className="SubHeader--fields">
-            {this.type(fields.kind, handleChange)}
-            {this.client(fields.client, searchFieldData)}
+            {fields.kind? this.type(fields.kind, handleChange) : null}
+            {fields.client? this.client(fields.client, searchFieldData) : null}
           </div>
 
           <div className="SubHeader--status">
