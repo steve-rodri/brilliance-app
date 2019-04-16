@@ -135,8 +135,10 @@ export default class Events extends Component {
     } else {
       evts = await event.getAll(page, category, this.axiosRequestSource.token);
     }
-    this.incrementPage()
-    await this.updateEvents(evts);
+    if (evts) {
+      await this.updateEvents(evts);
+      await this.incrementPage()
+    }
   }
 
   resetPage = () => {

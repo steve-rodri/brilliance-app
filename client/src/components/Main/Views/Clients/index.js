@@ -140,8 +140,10 @@ export default class Clients extends Component {
     } else {
       clients = await client.getAll(page, category, this.axiosRequestSource.token)
     }
-    this.incrementPage()
-    if (clients) this.updateClients(clients)
+    if (clients) {
+      await this.updateClients(clients)
+      await this.incrementPage()
+    }
   }
 
   resetPage = () => {

@@ -128,8 +128,10 @@ export default class Invoices extends Component {
     } else {
       invcs = await invoice.getAll(page, category, this.axiosRequestSource.token)
     }
-    this.incrementPage()
-    await this.updateInvoices(invcs);
+    if (invcs) {
+      await this.updateInvoices(invcs);
+      await this.incrementPage()
+    }
   }
 
   resetPage = () => {
