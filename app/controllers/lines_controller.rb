@@ -46,6 +46,6 @@ class LinesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def line_params
-      params.require(:line).permit(:inc, :inc_in_commission, :discount_adj, :invoice_id, :item_id)
+      params.require(:line).permit(:inc, :inc_in_commission, :quantity, :discount_adj, :price, :invoice_id, :item_id)
     end
 end
