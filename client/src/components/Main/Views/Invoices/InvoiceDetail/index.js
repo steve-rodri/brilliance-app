@@ -298,6 +298,27 @@ export default class InvoiceDetail extends Component {
     }))
   }
 
+  handleLineChange = (name, value, lineId) => {
+    let inv = {...this.state.inv};
+    const { lines } = inv;
+
+    const updatedLines = lines.map( line => {
+      if (line.id === lineId) {
+        line[name] = value
+      }
+      return line
+    })
+
+    inv.lines = updatedLines;
+    this.setState(prevState => ({
+      inv,
+      formData: {
+        ...prevState.formData,
+        lines_attributes: updatedLines
+      }
+    }), () => { this.updateSummary() });
+  }
+
   handleIncChange = (lineId, inc) => {
     let inv = {...this.state.inv};
     const { lines } = inv;
@@ -472,7 +493,7 @@ export default class InvoiceDetail extends Component {
         />
         <Invoice
           {...this.state}
-          handleInc={this.handleIncChange}
+          handleLineChange={this.handleLineChange}
           setSubTotal={this.setSubTotal}
         />
         <Summary {...this.state}/>
