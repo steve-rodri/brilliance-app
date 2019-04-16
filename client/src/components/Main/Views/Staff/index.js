@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { employee } from '../../../../services/employee'
 import ListPage from '../../../ListPage/index.js'
+import axios from 'axios'
 
 export default class Staff extends Component {
   constructor(props){
@@ -9,6 +10,7 @@ export default class Staff extends Component {
     this.state = {
       staff: []
     }
+    this.axiosRequestSource = axios.CancelToken.source()
   }
 
   updateColumnHeaders = (e) => {
@@ -40,6 +42,7 @@ export default class Staff extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
   setStaff = (props, mounted) => {
@@ -55,9 +58,11 @@ export default class Staff extends Component {
 
   fetchStaff = async() => {
     const { page } = this.state
-    let workers = await employee.getAll(page)
-    this.incrementPage()
-    await this.updateStaff(workers);
+    let workers = await employee.getAll(page, this.axiosRequestSource.token)
+    if (workers) {
+      await this.updateStaff(workers);
+      await this.incrementPage()
+    }
   }
 
   resetStaff = async() => {

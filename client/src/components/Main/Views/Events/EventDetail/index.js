@@ -454,81 +454,87 @@ export default class EventDetail extends Component {
     switch (name) {
       case 'client':
         const clients = await this.findClients(value)
-        if (!value || !clients || clients.length < 0) {
+        if (clients) {
+          if (!value || !clients || clients.length < 0) {
+
+            this.setState(prevState => ({
+              formData: {
+                ...prevState.formData,
+                client_id: null
+              }
+            }), () => {
+              if (value.length === 0 || value.length > 2) {
+                this.updateSummaryField()
+              }
+            })
+
+          }
 
           this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              client_id: null
+            searchFieldData: {
+              ...prevState.searchFieldData,
+              clients
             }
-          }), () => {
-            if (value.length === 0 || value.length > 2) {
-              this.updateSummaryField()
-            }
-          })
-
+          }))
         }
-
-        this.setState(prevState => ({
-          searchFieldData: {
-            ...prevState.searchFieldData,
-            clients
-          }
-        }))
 
       break;
 
       case 'location':
         const locations = await this.findPlaces(value)
 
-        if (!value || !locations || locations.length < 0) {
+        if (locations) {
+          if (!value || !locations || locations.length < 0) {
+
+            this.setState(prevState => ({
+              formData: {
+                ...prevState.formData,
+                location_id: null
+              },
+              fields: {
+                ...prevState.fields,
+                onPremise: null
+              }
+            }), () => {
+              if (value.length === 0 || value.length > 2) {
+                this.updateSummaryField()
+              }
+            })
+
+          }
 
           this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              location_id: null
-            },
-            fields: {
-              ...prevState.fields,
-              onPremise: null
+            searchFieldData: {
+              ...prevState.searchFieldData,
+              locations
             }
-          }), () => {
-            if (value.length === 0 || value.length > 2) {
-              this.updateSummaryField()
-            }
-          })
-
+          }))
         }
-
-        this.setState(prevState => ({
-          searchFieldData: {
-            ...prevState.searchFieldData,
-            locations
-          }
-        }))
 
       break;
 
       case 'callLocation':
         const callLocations = await this.findPlaces(value)
 
-        if (!value || !callLocations || callLocations.length < 0) {
+        if (callLocations) {
+          if (!value || !callLocations || callLocations.length < 0) {
+
+            this.setState(prevState => ({
+              formData: {
+                ...prevState.formData,
+                call_location_id: null
+              }
+            }))
+
+          }
 
           this.setState(prevState => ({
-            formData: {
-              ...prevState.formData,
-              call_location_id: null
+            searchFieldData: {
+              ...prevState.searchFieldData,
+              callLocations
             }
           }))
-
         }
-
-        this.setState(prevState => ({
-          searchFieldData: {
-            ...prevState.searchFieldData,
-            callLocations
-          }
-        }))
 
       break;
 
