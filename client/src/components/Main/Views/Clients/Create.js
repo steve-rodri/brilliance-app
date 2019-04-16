@@ -3,6 +3,7 @@ import SearchField from '../../../SearchField';
 import { contactName, companyName } from '../../../Helpers/clientHelpers'
 import { contact } from '../../../../services/contact'
 import { company } from '../../../../services/company'
+import axios from 'axios'
 
 export default class Create extends Component {
   constructor(props){
@@ -12,6 +13,11 @@ export default class Create extends Component {
       fields: {},
       searchFieldData: null
     }
+    this.axiosRequestSource = axios.CancelToken.source()
+  }
+
+  componentWillUnmount(){
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
   handleChange = async(name, value) => {
@@ -81,7 +87,7 @@ export default class Create extends Component {
   findContacts = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const contacts = await contact.find(query)
+      const contacts = await contact.find(query, this.axiosRequestSource.token)
       return contacts
     }
   }
@@ -89,7 +95,7 @@ export default class Create extends Component {
   findCompanies = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const companies = await company.find(query)
+      const companies = await company.find(query, this.axiosRequestSource.token)
       return companies
     }
   }

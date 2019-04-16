@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import Admin from './Admin'
 import { GOOGLE } from '../../services/google_service'
 import { event } from '../../services/event'
 import { formatFromGoogle } from '../Helpers/googleFormatters'
-import Admin from './Admin'
+import axios from 'axios'
 
 export default class Main extends Component {
   constructor(props){
@@ -11,6 +12,7 @@ export default class Main extends Component {
     this.state = {
       loggedIn: true
     }
+    this.axiosRequestSource = axios.CancelToken.source()
   }
 
   async componentDidMount(){
@@ -19,8 +21,12 @@ export default class Main extends Component {
     // await this.synchronizeAllEvents()
   }
 
+  async componentWillUnmount(){
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
+  }
+
   getUser = async() => {
-    const user = await GOOGLE.getUser()
+    const user = await GOOGLE.getUser(this.axiosRequestSource.token)
     if (user) {
       this.setState({
         user,
@@ -34,7 +40,7 @@ export default class Main extends Component {
   getGoogleCalendarId = async() => {
     const { user } = this.state
     if (user) {
-      const calendars = await GOOGLE.getCalendars();
+      const calendars = await GOOGLE.getCalendars(this.axiosRequestSource.token);
       if (calendars) {
         const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
         localStorage.setItem("google_calendar_id", jobsCalendar.id)
@@ -45,9 +51,9 @@ export default class Main extends Component {
 
   synchronizeAllEvents = async() => {
     const calendarId = await this.getGoogleCalendarId()
-    const events = await GOOGLE.getEvents(calendarId)
-    const evts = await Promise.all(events.map(async evt => {return await formatFromGoogle(evt)}))
-    await Promise.all(evts.map(async evt => await event.sync(evt)))
+    const events = await GOOGLE.getEvents(calendarId, this.axiosRequestSource.token)
+    const evts = await Promise.all(events.map(async evt => {return await formatFromGoogle(evt, this.axiosRequestSource.token)}))
+    await Promise.all(evts.map(async evt => await event.sync(evt, this.axiosRequestSource.token)))
   }
 
   render(){

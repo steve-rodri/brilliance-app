@@ -5,6 +5,7 @@ import ListPage from '../../../ListPage/index.js'
 import Modal from './Modal';
 import { client } from '../../../../services/client'
 import { clientName } from '../../../Helpers/clientHelpers'
+import axios from 'axios'
 
 export default class Clients extends Component {
   constructor(props){
@@ -26,6 +27,8 @@ export default class Clients extends Component {
 
       willRefresh: true,
     }
+
+    this.axiosRequestSource = axios.CancelToken.source();
   }
 
   updateColumnHeaders = (e) => {
@@ -53,6 +56,7 @@ export default class Clients extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
+    this.axiosRequestSource && this.axiosRequestSource.cancel();
   }
 
   componentWillUpdate(nextProps) {
@@ -123,7 +127,7 @@ export default class Clients extends Component {
       clt = clients.find(c => c.id === id)
     }
     if (!clt) {
-      clt = await client.findById(id);
+      clt = await client.findById(id, this.axiosRequestSource.token);
     }
     return clt
   }
@@ -132,12 +136,12 @@ export default class Clients extends Component {
     const { page, category, query } = this.state
     let clients;
     if (query) {
-      clients = await client.find(page, query)
+      clients = await client.find(page, query, this.axiosRequestSource.token)
     } else {
-      clients = await client.getAll(page, category)
+      clients = await client.getAll(page, category, this.axiosRequestSource.token)
     }
     this.incrementPage()
-    this.updateClients(clients)
+    if (clients) this.updateClients(clients)
   }
 
   resetPage = () => {
@@ -151,13 +155,13 @@ export default class Clients extends Component {
   }
 
   fetchClientEvents = async(page, clientId) => {
-    const events = await client.getEvents(page, clientId)
+    const events = await client.getEvents(page, clientId, this.axiosRequestSource.token)
     this.updateEvents(events)
   }
 
   refreshClients = async() => {
     this.resetClients()
-    const clients = await client.getAll(1, "All");
+    const clients = await client.getAll(1, "All", this.axiosRequestSource.token);
     this.updateClients(clients);
     this.setCategory('All');
   }
@@ -180,13 +184,13 @@ export default class Clients extends Component {
 
   createClient = async(data) => {
     console.log(data)
-    const clt = await client.create(data);
+    const clt = await client.create(data, this.axiosRequestSource.token);
     await this.addClient(clt)
     return clt;
   }
 
   deleteClient = async(id) => {
-    await client.delete(id)
+    await client.delete(id, this.axiosRequestSource.token)
     let clients = [...this.state.clients]
     clients = clients.filter(clt => clt.id !== id)
     this.setState({ clients })
@@ -194,7 +198,7 @@ export default class Clients extends Component {
   }
 
   updateClient = async(id, data) => {
-    let clt = await client.update(id, data);
+    let clt = await client.update(id, data, this.axiosRequestSource.token);
     let clients = [...this.state.clients]
     const clientId = clients.findIndex((client) => client.id === clt.id)
     clients[clientId] = clt

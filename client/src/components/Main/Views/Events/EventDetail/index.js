@@ -15,6 +15,7 @@ import { clientName } from '../../../../Helpers/clientHelpers';
 import { locationName } from '../../../../Helpers/locationName';
 import { formatFromGoogle } from '../../../../Helpers/googleFormatters';
 import moment from 'moment'
+import axios from 'axios'
 import './index.css';
 
 export default class EventDetail extends Component {
@@ -31,6 +32,7 @@ export default class EventDetail extends Component {
       showStaffModal: false,
       redirectToEvents: false,
     }
+    this.axiosRequestSource = axios.CancelToken.source()
   }
 
 // ---------------------------------LifeCycle-----------------------------------
@@ -59,6 +61,7 @@ export default class EventDetail extends Component {
 
   async componentWillUnmount(){
     window.removeEventListener('resize', this.resetView)
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
 // ----------------------------Getters-and-Setters------------------------------
@@ -74,10 +77,10 @@ export default class EventDetail extends Component {
     const calendarId = localStorage.getItem('google_calendar_id');
     if (calendarId && evt.gcId) {
       try {
-        const e = await GOOGLE.getEvent(calendarId, evt.gcId)
+        const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.axiosRequestSource.token)
         if (e) {
-          const formatted = await formatFromGoogle(e)
-          const synced = await event.sync(formatted)
+          const formatted = await formatFromGoogle(e, this.axiosRequestSource.token)
+          const synced = await event.sync(formatted, this.axiosRequestSource.token)
           return synced
         }
         else {
@@ -96,7 +99,7 @@ export default class EventDetail extends Component {
     const { e, evtId } = props
 
     if (!e) {
-      let evt = await event.getOne(evtId)
+      let evt = await event.getOne(evtId, this.axiosRequestSource.token)
       if (evt) {
         evt = await this.synchronizeWithGoogle(evt);
         this.setState({ evt, workers: evt.staff })
@@ -216,7 +219,7 @@ export default class EventDetail extends Component {
 
         //delete addedWorkers
         await Promise.all(addedWorkers.map( async worker => {
-          await eventEmployee.delete(worker.id)
+          await eventEmployee.delete(worker.id, this.axiosRequestSource.token)
         }))
 
         //set state with original workers, and reset employee ids
@@ -622,7 +625,7 @@ export default class EventDetail extends Component {
   findClients = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const clients = await client.find(1, query)
+      const clients = await client.find(1, query, this.axiosRequestSource.token)
       return clients
     }
   }
@@ -630,7 +633,7 @@ export default class EventDetail extends Component {
   findPlaces = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const locations = await place.find(query)
+      const locations = await place.find(query, this.axiosRequestSource.token)
       return locations
     }
   }
@@ -702,10 +705,13 @@ export default class EventDetail extends Component {
 
       const evt  = { ...this.state.evt }
       const workers = [...this.state.workers]
-      const newWorker = await eventEmployee.create({
-        event_id: evt.id,
-        employee_id: employee.id
-      })
+      const newWorker = await eventEmployee.create(
+        {
+          event_id: evt.id,
+          employee_id: employee.id
+        },
+        this.axiosRequestSource.token
+      )
       workers.push(newWorker)
       evt.staff = workers
       this.setState({ evt, workers })
@@ -743,7 +749,7 @@ export default class EventDetail extends Component {
     const { formData } = this.state
 
     if (!this.props.isNew) {
-      await eventEmployee.delete(worker.id)
+      await eventEmployee.delete(worker.id, this.axiosRequestSource.token)
     }
 
     const updatedWorkers = workers.filter(w => w.id !== worker.id)

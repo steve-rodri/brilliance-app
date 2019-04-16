@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { GOOGLE } from '../../services/google_service'
 import logo_t from '../../images/logo_t.GIF'
 import './Login.css'
+import axios from 'axios'
 
 export default class Login extends Component {
   constructor(props){
@@ -11,13 +12,18 @@ export default class Login extends Component {
     this.state = {
       redirectToDashboard: false
     }
+    this.axiosRequestSource = axios.CancelToken.source()
   }
 
   async componentDidMount(){
-    const user = await GOOGLE.getUser()
+    const user = await GOOGLE.getUser(this.axiosRequestSource.token)
     if (user) {
       this.setState({ redirectToDashboard: true })
     }
+  }
+
+  async componentWillUnmount(){
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
   responseGoogle = (resp) => {

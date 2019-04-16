@@ -7,6 +7,7 @@ import { invoice } from '../../../../services/invoice'
 import { client } from '../../../../services/client'
 import { clientName } from '../../../Helpers/clientHelpers'
 import { price } from './InvoiceDetail/Invoice/Line/Helpers'
+import axios from 'axios'
 
 export default class Invoices extends Component {
   constructor(props){
@@ -19,6 +20,8 @@ export default class Invoices extends Component {
       hasMore: true,
       page: 1
     }
+
+    this.axiosRequestSource = axios.CancelToken.source()
   }
 
   updateColumnHeaders = (e) => {
@@ -50,6 +53,7 @@ export default class Invoices extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateColumnHeaders);
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
   setInvoices = async(props, mounted) => {
@@ -86,7 +90,7 @@ export default class Invoices extends Component {
 
     } else if (queries.client) {
 
-      const clt = await client.findById(queries.client)
+      const clt = await client.findById(queries.client, this.axiosRequestSource.token)
       this.setState(
       {
         query: null,
@@ -118,11 +122,11 @@ export default class Invoices extends Component {
     const { page, category, query, client } = this.state
     let invcs;
     if (query) {
-      invcs = await invoice.find(page, query)
+      invcs = await invoice.find(page, query, this.axiosRequestSource.token)
     } else if (client) {
-      invcs = await invoice.findByClient(page, client)
+      invcs = await invoice.findByClient(page, client, this.axiosRequestSource.token)
     } else {
-      invcs = await invoice.getAll(page, category)
+      invcs = await invoice.getAll(page, category, this.axiosRequestSource.token)
     }
     this.incrementPage()
     await this.updateInvoices(invcs);
@@ -154,11 +158,15 @@ export default class Invoices extends Component {
             i.balance = 0
           }
 
-          await invoice.update(i.id, {
-            sub_total: subTotal,
-            total: subTotal - i.discount,
-            balance: i.paymentStatus !=='Paid In Full'? subTotal - i.discount - i.deposit : 0
-          })
+          await invoice.update(
+            i.id,
+            {
+              sub_total: subTotal,
+              total: subTotal - i.discount,
+              balance: i.paymentStatus !=='Paid In Full'? subTotal - i.discount - i.deposit : 0
+            },
+            this.axiosRequestSource.token
+          )
 
           return i
         }
@@ -214,7 +222,7 @@ export default class Invoices extends Component {
 
   addInvoice = async(data) => {
     let invoices = [...this.state.invoices]
-    const newInvoice = await invoice.create(data)
+    const newInvoice = await invoice.create(data, this.axiosRequestSource.token)
     invoices.shift(newInvoice)
     this.setState({ invoices })
     return newInvoice
@@ -222,7 +230,7 @@ export default class Invoices extends Component {
 
   updateInvoice = async(i, data) => {
     let invoices = [...this.state.invoices]
-    const updatedInvoice = await invoice.update(i.id, data)
+    const updatedInvoice = await invoice.update(i.id, data, this.axiosRequestSource.token)
     const index = invoices.findIndex((inv) => i.id === inv.id)
     invoices[index] = updatedInvoice
     this.setState({ invoices })
@@ -231,7 +239,7 @@ export default class Invoices extends Component {
 
   deleteInvoice = async(i) => {
     let invoices = [...this.state.invoices]
-    await invoice.delete(i.id)
+    await invoice.delete(i.id, this.axiosRequestSource.token)
 
     const index = invoices.findIndex((inv) => i.id === inv.id)
     invoices.splice(index, 1)
