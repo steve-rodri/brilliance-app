@@ -1,4 +1,3 @@
-
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
 
@@ -14,6 +13,7 @@ class EventsController < ApplicationController
           .where("events.start >= '#{current_date}'")
           .order(start: :desc)
           .paginate(page: params[:page], per_page: @@items_per_page)
+
       elsif params[:category] == 'Production'
         @events = Event
           .joins("JOIN places ON places.id = events.location_id")

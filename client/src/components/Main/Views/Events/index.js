@@ -333,7 +333,6 @@ export default class Events extends Component {
   handleDateChange = async(date) => {
     this.setState({ date: moment(date).startOf('day').toISOString(true) },
     () =>  this.setEvents())
-
   }
 
   synchronizeWithGoogle = async (evt) => {
