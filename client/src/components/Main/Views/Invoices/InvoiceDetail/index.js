@@ -27,11 +27,13 @@ export default class InvoiceDetail extends Component {
     this.axiosRequestSource = axios.CancelToken.source()
   }
 
+  // --------------------------------Refs---------------------------------------
+
   scrollToTop = () => {
     this.container.current.scrollTop = 0
   }
 
-  // -------------------------------Lifecycle-----------------------------------
+  // ------------------------------Lifecycle------------------------------------
 
   async componentWillReceiveProps(nextProps){
     if (nextProps.inv || nextProps.invoiceId) {
@@ -49,8 +51,7 @@ export default class InvoiceDetail extends Component {
     this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
-
-  // -------------------------------Getters-and-Setters-------------------------
+  // -------------------------Getters-and-Setters-------------------------------
 
   setup = async(props) => {
     const { isNew, evtId, evt } = props
@@ -84,11 +85,35 @@ export default class InvoiceDetail extends Component {
 
   setLines = async() => {
     const { inv, inv: { lines } } = this.state
-
     const updatedLines = lines.map( line => {
-      line.quantity = quantity(line)
-      line.price = price(line, inv.kind)
-      return line
+      if (line.quantity > 0 && line.price > 0) return line
+
+      if (!line.quantity && !line.price) {
+        return (
+          {
+            ...line,
+            quantity: quantity(line),
+            price: price(line, inv.kind)
+          }
+        )
+      } else if (!line.quantity && line.price) {
+        return (
+          {
+            ...line,
+            quantity: quantity(line)
+          }
+        )
+      } else if (line.quantity && !line.price) {
+        return (
+          {
+            ...line,
+            price: price(line, inv.kind)
+          }
+        )
+      } else {
+        return line
+      }
+
     })
 
     this.setState(prevState => ({
@@ -104,7 +129,11 @@ export default class InvoiceDetail extends Component {
         ...prevState.formData,
         lines_attributes: updatedLines
       }
-    }), () => { this.updateSummary() });
+    }), async() => {
+      await this.updateSummary();
+      await this.handleSubmit()
+
+    });
   }
 
   setFields = () => {
@@ -117,9 +146,126 @@ export default class InvoiceDetail extends Component {
     }
   }
 
-  resetFields = () => {
-    this.setState({ fields: {} })
+  // ----------Summary
+
+  setSummary = async() => {
+    await this.setSubTotal()
+    await this.setTotal()
+    await this.setBalance()
   }
+
+  setSubTotal = async(loop) => {
+    const { inv } = this.state
+    if (inv) {
+      const { lines } = inv
+      if (lines && lines.length) {
+        const prices = lines.map(line => line.price)
+        let subTotal;
+        if (prices && prices.length) {
+          subTotal = prices.reduce((a, b) => a + b)
+        } else {
+          subTotal = 0
+        }
+        this.setState(prevState => ({
+          inv: {
+            ...prevState.inv,
+            subTotal
+          },
+          formData: {
+            ...prevState.formData,
+            subTotal
+          }
+        }), () => loop? this.setTotal(loop) : null )
+      }
+    } else {
+      this.setState(prevState => ({
+        inv: {
+          ...prevState.inv,
+          subTotal: 0
+        },
+        formData: {
+          ...prevState.formData,
+          subTotal: 0
+        }
+      }))
+    }
+  }
+
+  setTotal = async(loop) => {
+    const { inv } = this.state
+    if (inv) {
+      const { subTotal } = inv
+      const total = subTotal - inv.discount
+      this.setState(prevState => ({
+        inv: {
+          ...prevState.inv,
+          total
+        },
+        formData: {
+          ...prevState.formData,
+          total
+        }
+      }), () => loop? this.setBalance() : null )
+    } else {
+      this.setState(prevState => ({
+        inv: {
+          ...prevState.inv,
+          total: 0
+        },
+        formData: {
+          ...prevState.formData,
+          total: 0
+        }
+      }))
+    }
+  }
+
+  setBalance = async(callBack) => {
+    const { inv } = this.state
+    if (inv) {
+      const { total } = inv
+      const balance = total - inv.deposit
+      this.setState(prevState => ({
+        inv: {
+          ...prevState.inv,
+          balance
+        },
+        formData: {
+          ...prevState.formData
+        }
+      }), () => callBack? callBack() : null )
+    } else {
+      this.setState(prevState => ({
+        inv: {
+          ...prevState.inv,
+          balance: 0
+        },
+        formData: {
+          ...prevState.formData,
+          balance: 0
+        }
+      }))
+    }
+  }
+
+  // ----------Client
+
+  setClientName = () => {
+    const { inv } = this.state
+    if (inv) {
+      if (inv.event) {
+        if (inv.event.client) {
+          const name = clientName(inv.event.client, true)
+          this.setField('client', name)
+          this.setFormData('client_id', inv.event.client.id)
+        } else {
+          this.setField('client', null)
+        }
+      }
+    }
+  }
+
+  // ----------Helpers
 
   setField = (name, value) => {
     this.setState(prevState => ({
@@ -143,119 +289,13 @@ export default class InvoiceDetail extends Component {
     }))
   }
 
-  setClientName = () => {
-    const { inv } = this.state
-    if (inv) {
-      if (inv.event) {
-        if (inv.event.client) {
-          const name = clientName(inv.event.client, true)
-          this.setField('client', name)
-          this.setFormData('client_id', inv.event.client.id)
-        } else {
-          this.setField('client', null)
-        }
+  setFormData = (name, value) => {
+    this.setState(prevState => ({
+      formData: {
+        ...prevState.formData,
+        [name]: value
       }
-    }
-  }
-
-  setSummary = () => {
-    this.setSubTotal()
-    this.setTotal()
-    this.setBalance()
-  }
-
-  setSubTotal = (callBack) => {
-    const { inv } = this.state
-    if (inv) {
-      const { lines } = inv
-      if (lines && lines.length) {
-        const prices = lines.map(line => line.price)
-        let subTotal;
-        if (prices && prices.length) {
-          subTotal = prices.reduce((a, b) => a + b)
-        } else {
-          subTotal = 0
-        }
-        this.setState(prevState => ({
-          inv: {
-            ...prevState.inv,
-            subTotal
-          },
-          formData: {
-            ...prevState.formData,
-            subTotal
-          }
-        }), () => { if (callBack) { this.setTotal(true) } })
-      }
-    } else {
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          subTotal: 0
-        },
-        formData: {
-          ...prevState.formData,
-          subTotal: 0
-        }
-      }))
-    }
-  }
-
-  setTotal = (callBack) => {
-    const { inv } = this.state
-    if (inv) {
-      const { subTotal } = inv
-      const total = subTotal - inv.discount
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          total
-        },
-        formData: {
-          ...prevState.formData,
-          total
-        }
-      }), () => { if (callBack) { this.setBalance() } })
-    } else {
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          total: 0
-        },
-        formData: {
-          ...prevState.formData,
-          total: 0
-        }
-      }))
-    }
-  }
-
-  setBalance = (callBack) => {
-    const { inv } = this.state
-    if (inv) {
-      const { total } = inv
-      const balance = total - inv.deposit
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          balance
-        },
-        formData: {
-          ...prevState.formData
-        }
-      }), () => { if (callBack) { callBack() } })
-    } else {
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          balance: 0
-        },
-        formData: {
-          ...prevState.formData,
-          balance: 0
-        }
-      }))
-    }
+    }))
   }
 
   setEditMode = (value) => {
@@ -264,13 +304,10 @@ export default class InvoiceDetail extends Component {
     })
   }
 
-  setFormData = (name, value) => {
-    this.setState(prevState => ({
-      formData: {
-        ...prevState.formData,
-        [name]: value
-      }
-    }))
+  // ----------Reset
+
+  resetFields = () => {
+    this.setState({ fields: {} })
   }
 
   resetForm = () => {
@@ -285,11 +322,7 @@ export default class InvoiceDetail extends Component {
     })
   }
 
-  updateSummary = () => {
-    this.setSubTotal(true)
-  }
-
-  // -------------------------Lines-------------------------------
+  // --------------------------------Lines--------------------------------------
 
   addLine = () => {
     console.log('works')
@@ -307,7 +340,7 @@ export default class InvoiceDetail extends Component {
     this.setState({ inv, fields })
   }
 
-  // -------------------------HandleChange------------------------
+  // ----------------------------Handle-Change----------------------------------
 
   handleChange = (e) => {
     const { name, value } = e.target
@@ -346,37 +379,74 @@ export default class InvoiceDetail extends Component {
   }
 
   handleLineChange = (e, lineId, nme, val) => {
-    const { inv, fields } = this.state
+    const { inv, inv: { lines }  } = this.state
     let { name, value } = e.target
     if (nme) name = nme
     if (val) value = val
-    const { lines } = fields;
 
     const updatedLines = lines.map( line => {
-      if (line.id === lineId) {
-        switch (name) {
-          case 'inc':
-            line[name] = !line.inc
-            if (!line.inc) {
-              line.price = price(line, inv.kind)
-            } else {
-              line.price = 0
+      if (line.id !== lineId) return line
+
+      switch (name) {
+
+        case 'inc':
+        if (!line.inc) {
+          return (
+            {
+              ...line,
+              inc: !line.inc,
+              price: price(line, inv.kind)
             }
-            break;
-          case 'quantity':
-            line[name] = value
-            line.price = price(line, inv.kind)
-            break;
-          default:
-          line[name] = value
-            break;
+          )
+        } else {
+          return (
+            {
+              ...line,
+              inc: !line.inc,
+              price: 0
+            }
+          )
         }
+
+        case 'quantity':
+        console.log({
+          ...line,
+          quantity: parseInt(value),
+          price: price(line, inv.kind)
+        })
+        return (
+          {
+            ...line,
+            quantity: parseInt(value),
+            price: price(line, inv.kind)
+          }
+        )
+
+        case 'price':
+        return (
+          {
+            ...line,
+            price: parseFloat(value)
+          }
+        )
+
+        default:
+        return (
+          {
+            ...line,
+            [name]: value
+          }
+        )
+
       }
 
-      return line
     })
 
     this.setState(prevState => ({
+      inv: {
+        ...prevState.inv,
+        line: updatedLines
+      },
       fields: {
         ...prevState.fields,
         lines: updatedLines
@@ -391,7 +461,7 @@ export default class InvoiceDetail extends Component {
     });
   }
 
-  // -------------------------Client-Search-Field-----------------------
+  // -------------------------Client-Search-Field-------------------------------
 
   handleSelect = (e, name, index) => {
     let item;
@@ -428,7 +498,11 @@ export default class InvoiceDetail extends Component {
     }
   }
 
-  // -------------------------Submit------------------------------
+  // -------------------------------DB-CRUD-------------------------------------
+
+  updateSummary = async() => {
+    await this.setSubTotal(true)
+  }
 
   handleSubmit = async() => {
     const { inv, formData, editMode, fromEvent } = this.state
@@ -438,24 +512,16 @@ export default class InvoiceDetail extends Component {
         if (formData) {
           const newInvoice = await invoice.create(formData, this.axiosRequestSource.token)
           this.setState({ inv: newInvoice })
-
-          this.setEditMode(false);
-          await this.resetForm();
-          await this.setFields();
-          await this.setClientName();
+          await this.close(true)
         } else {
-          this.close()
+          await this.close()
         }
-
         history.push(`/admin/events/${evtId}`, {view: 'Invoice'})
       } else {
         const updatedInvoice = await invoice.update(inv.id, formData, this.axiosRequestSource.token)
         await this.setState({ inv: updatedInvoice })
 
-        await this.resetForm()
-        await this.setClientName();
-        await this.setFields();
-        await this.setLines();
+        await this.close(true)
       }
 
     } else {
@@ -471,11 +537,11 @@ export default class InvoiceDetail extends Component {
           history.push(`${url()}/${newInvoice.id}`)
 
         } else {
-          this.close()
+          this.close(true)
         }
       } else {
         const updatedInvoice = await this.props.handleUpdate(inv, formData)
-        await this.setState({ inv: updatedInvoice }, async() => await this.close())
+        await this.setState({ inv: updatedInvoice }, async() => await this.close(true))
       }
     }
 
@@ -495,17 +561,18 @@ export default class InvoiceDetail extends Component {
     }
   }
 
+  // --------------------------------Views--------------------------------------
 
-  // -------------------------Views-------------------------
-
-  close = async () => {
+  close = async (turnOffEditMode) => {
     await this.resetForm();
     await this.resetSearchFieldData();
     await this.resetFields();
     await this.setFields();
     await this.setClientName();
     await this.setLines();
-    await this.setEditMode(false);
+    if (turnOffEditMode) {
+      await this.setEditMode(false);
+    }
   }
 
   resetView = () => {

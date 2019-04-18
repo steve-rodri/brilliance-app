@@ -47,7 +47,7 @@ export default function Header(props){
       return (
         <div
           className="Header--icon left"
-          onClick={props.close}
+          onClick={() => props.close(true)}
         >
           {closeIcon('2x')}
         </div>
