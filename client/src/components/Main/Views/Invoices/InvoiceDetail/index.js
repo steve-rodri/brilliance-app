@@ -224,7 +224,10 @@ export default class InvoiceDetail extends Component {
     const { inv } = this.state
     if (inv) {
       const { total } = inv
-      const balance = total - inv.deposit
+      let balance = total - inv.deposit
+      if (inv.paymentStatus === "Paid In Full") {
+        balance = 0
+      }
       this.setState(prevState => ({
         inv: {
           ...prevState.inv,
