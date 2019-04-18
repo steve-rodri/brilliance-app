@@ -7,23 +7,27 @@ class EventsController < ApplicationController
   # GET /events
   def index
     if params[:category]
+      current_time = Time.now()
+      current_date = Time.new(current_time.year, current_time.month, current_time.day)
       if params[:category] == 'All'
         @events = Event
-          .all
+          .where("events.start >= '#{current_date}'")
           .order(start: :desc)
           .paginate(page: params[:page], per_page: @@items_per_page)
       elsif params[:category] == 'Production'
         @events = Event
+          .joins("JOIN places ON places.id = events.location_id")
+          .where("events.start >= '#{current_date}'")
           .where("places.installation = false")
-          .joins("JOINS places ON places.id = events.location_id")
           .order(start: :desc)
           .paginate(page: params[:page], per_page: @@items_per_page)
 
       else
         short_name = params[:category]
         @events = Event
-          .where("places.short_name = #{short_name}")
-          .joins("JOINS places on places.id = events.location_id")
+          .joins("JOIN places on places.id = events.location_id")
+          .where("events.start >= '#{current_date}'")
+          .where("places.short_name = '#{short_name}'")
           .order(start: :desc)
           .paginate(page: params[:page], per_page: @@items_per_page)
       end
@@ -41,7 +45,7 @@ class EventsController < ApplicationController
         .where("events.start BETWEEN '#{startDay}' AND '#{endDay}'")
         .order(:start)
         .paginate(page: params[:page], per_page: @@items_per_page)
-        
+
     else
       @events = Event
         .all
