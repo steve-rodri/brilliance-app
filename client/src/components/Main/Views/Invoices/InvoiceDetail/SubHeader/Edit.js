@@ -4,6 +4,10 @@ import { clientName } from '../../../../../Helpers/clientHelpers'
 
 export default class Edit extends Component {
 
+  handleFocusSelect = (e) => {
+    e.target.select()
+  }
+
   type = (value, change) => {
     return (
       <Fragment>
@@ -44,6 +48,7 @@ export default class Edit extends Component {
               tabIndex: 1
             }}
             handleChange={handleClientChange}
+            onFocus={this.handleFocusSelect}
             onEnter={onEnter}
             onSelect={onSelect}
           />
@@ -102,6 +107,7 @@ export default class Edit extends Component {
           name="check"
           value={value}
           onChange={change}
+          onFocus={this.handleFocusSelect}
         />
       </Fragment>
     )
