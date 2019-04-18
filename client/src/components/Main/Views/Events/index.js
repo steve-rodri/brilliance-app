@@ -19,6 +19,7 @@ export default class Events extends Component {
       events: null,
       hasMore: true,
       category: 'All',
+      date: null,
       categories: ['Production', 'CANS', 'THC', 'CATP'],
       columnHeaders: ['title', 'client', 'location', 'confirmation', 'staff'],
       page: 1
@@ -55,7 +56,7 @@ export default class Events extends Component {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
     const calendarId = localStorage.getItem('google_calendar_id');
-    this.setState({ calendarId })
+    this.setState({ calendarId, date: moment().startOf('week').toISOString(true) })
     this.setEvents(this.props, true)
   }
 
@@ -65,44 +66,18 @@ export default class Events extends Component {
   }
 
   setEvents = async(props, mounted) => {
-    const { category } = this.state
-    const queries = queryString.parse(props.location.search)
+    const { category, date } = this.state
+    if (props) {
+      const queries = queryString.parse(props.location.search)
 
-    if (queries.category && queries.category !== category) {
+      if (queries.category && queries.category !== category) {
 
-      this.setState(
-      {
-        category: queries.category,
-        query: null,
-        client: null,
-        page: 1
-      },
-        async () => {
-        await this.resetEvents()
-        await this.fetchEvents()
-      })
-
-    } else if (queries.q) {
-
-      this.setState(
-      {
-        query: queries.q,
-        category: queries.q,
-        client: null,
-        page: 1
-      },
-        async () => {
-        await this.resetEvents()
-        await this.fetchEvents()
-      })
-
-    } else if (queries.client) {
-        const clt = await client.findById(queries.client, this.axiosRequestSource.token)
         this.setState(
         {
+          category: queries.category,
+          date: null,
           query: null,
-          category: clientName(clt),
-          client: queries.client,
+          client: null,
           page: 1
         },
           async () => {
@@ -110,12 +85,55 @@ export default class Events extends Component {
           await this.fetchEvents()
         })
 
-    } else if (mounted) {
+      } else if (queries.q) {
+
+        this.setState(
+        {
+          query: queries.q,
+          date: null,
+          category: queries.q,
+          client: null,
+          page: 1
+        },
+          async () => {
+          await this.resetEvents()
+          await this.fetchEvents()
+        })
+
+      } else if (queries.client) {
+          const clt = await client.findById(queries.client, this.axiosRequestSource.token)
+          this.setState(
+          {
+            query: null,
+            date: null,
+            category: clientName(clt),
+            client: queries.client,
+            page: 1
+          },
+            async () => {
+            await this.resetEvents()
+            await this.fetchEvents()
+          })
+
+      } else if (mounted) {
+        this.setState(
+        {
+          query: null,
+          client: null,
+          category: 'All',
+          page: 1
+        },
+          async () => {
+          await this.resetEvents()
+          await this.fetchEvents()
+        })
+      }
+    } else {
       this.setState(
       {
+        category: moment(date).format('LL'),
         query: null,
         client: null,
-        category: 'All',
         page: 1
       },
         async () => {
@@ -126,12 +144,14 @@ export default class Events extends Component {
   }
 
   fetchEvents = async() => {
-    const { page, category, query, client } = this.state
+    const { page, date, category, query, client } = this.state
     let evts;
     if (query) {
       evts = await event.find(page, query, this.axiosRequestSource.token)
     } else if (client) {
       evts = await event.findByClient(page, client, this.axiosRequestSource.token)
+    } else if (date) {
+      evts = await event.findByDate(page, date, this.axiosRequestSource.token)
     } else {
       evts = await event.getAll(page, category, this.axiosRequestSource.token);
     }
@@ -310,6 +330,12 @@ export default class Events extends Component {
     await this.updateEvent(evt, { [name]: value } )
   }
 
+  handleDateChange = async(date) => {
+    this.setState({ date: moment(date).startOf('day').toISOString(true) },
+    () =>  this.setEvents())
+
+  }
+
   synchronizeWithGoogle = async (evt) => {
     const { calendarId } = this.state
     if (calendarId && evt.gcId) {
@@ -337,6 +363,7 @@ export default class Events extends Component {
         create={this.handleCreate}
         refresh={this.setRefresh}
         handleStatusChange={this.handleStatusChange}
+        handleDateChange={this.handleDateChange}
       />
     )
   }
