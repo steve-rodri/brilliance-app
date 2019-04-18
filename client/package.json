@@ -13,8 +13,9 @@
     "i": "^0.3.6",
     "moment": "^2.23.0",
     "moment-countdown": "0.0.3",
-    "npm": "^6.5.0",
+    "npm": "^6.9.0",
     "numeral": "^2.0.6",
+    "prop-types": "^15.7.2",
     "query-string": "^6.2.0",
     "react": "^16.7.0",
     "react-datetime": "^2.16.3",
@@ -23,7 +24,8 @@
     "react-infinite-scroll-component": "^4.5.0",
     "react-modal": "^3.8.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.8"
+    "react-scripts": "^2.1.8",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
