@@ -4,8 +4,8 @@ class InvoicesController < ApplicationController
   # GET /invoices
   def index
     if params[:category]
-      if params[:category] == 'All'
 
+      if params[:category] == 'All'
         @invoices = Invoice
           .all
           .joins(:event)
@@ -15,33 +15,8 @@ class InvoicesController < ApplicationController
         render json: @invoices, include: '**'
 
       elsif params[:category] == 'Production'
-        production_queries = []
-        on_premise_locations = Place.where("installation = true")
-
-        on_premise_locations.each do |location|
-          id = location.as_json["id"]
-          if id
-            production_queries.push("location_id != #{id}")
-          end
-        end
-
-        query = production_queries.join(' AND ')
-        production_events = Event.where(query)
-
-        invoice_queries = []
-
-        production_events.each do |event|
-          id = event.as_json["id"]
-          if id
-            invoice_queries.push("event_id = #{id}")
-          end
-        end
-
-        query = invoice_queries.join(' OR ')
-
         @invoices = Invoice
-          .where("kind = 'Production'")
-          .where(query)
+          .where("invoices.kind = 'Production Invoice'")
           .joins(:event)
           .order("events.start DESC")
           .paginate(page: params[:page], per_page: @@items_per_page)
@@ -49,47 +24,19 @@ class InvoicesController < ApplicationController
         render json: @invoices, include: '**'
 
       else
+        short_name = params[:category]
+        @invoices = Invoice
+          .where("places.short_name = #{short_name}")
+          .joins(:event)
+          .joins("JOINS places ON places.id = events.location_id")
+          .order("events.start DESC")
+          .paginate(page: params[:page], per_page: @@items_per_page)
 
-        location = Place.find_by short_name: params[:category]
-        if location
-
-          id = location.as_json["id"]
-          if id
-            events = Event.where("location_id = #{id}")
-            if events.length > 0
-
-              invoice_queries = []
-
-              events.each do |event|
-                id = event.as_json["id"]
-                if id
-                  invoice_queries.push("event_id = #{id}")
-                end
-              end
-
-              query = invoice_queries.join(' OR ')
-
-              @invoices = Invoice
-                .where(query)
-                .joins(:event)
-                .order("events.start DESC")
-                .paginate(page: params[:page], per_page: @@items_per_page)
-
-              render json: @invoices, include: '**'
-            else
-              render status: 404
-            end
-          end
-
-        else
-          render status: 404
-        end
+        render json: @invoices, include: '**'
       end
 
     elsif params[:client_id]
-
       id = params[:client_id]
-
       @invoices = Invoice
         .joins(event: :client)
         .where("clients.id = #{id}")
@@ -97,7 +44,7 @@ class InvoicesController < ApplicationController
         .paginate(page: params[:page], per_page: @@items_per_page)
 
       render json: @invoices, include: '**'
-
+      
     else
       @invoices = Invoice
         .all
