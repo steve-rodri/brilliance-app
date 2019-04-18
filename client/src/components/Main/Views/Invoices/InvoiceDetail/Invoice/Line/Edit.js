@@ -3,6 +3,11 @@ import { description, contents, inc } from './Helpers'
 import { deleteIcon } from '../../../../../../Helpers/icons'
 
 export default class Edit extends Component {
+
+  handleFocusSelect = (e) => {
+    e.target.select()
+  }
+
   render(){
     const { line, handleLineChange, deleteLine } = this.props
     const c = contents(line.item)
@@ -26,6 +31,7 @@ export default class Edit extends Component {
               type="number"
               value={line.quantity}
               onChange={(e) => handleLineChange(e, line.id)}
+              onFocus={this.handleFocusSelect}
             />
           </div>
         </td>
@@ -56,6 +62,7 @@ export default class Edit extends Component {
                 type="number"
                 value={line.price}
                 onChange={(e) => handleLineChange(e, line.id)}
+                onFocus={this.handleFocusSelect}
               />
             </div>
             :

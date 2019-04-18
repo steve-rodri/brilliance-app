@@ -33,7 +33,11 @@ export default class SearchField extends Component {
     }
   }
 
-  handleViewResults = (e) => {
+  handleFocusSelect = (e) => {
+    e.target.select()
+  }
+
+  handleViewResults = () => {
     this.setState({
       fieldActive: true
     })
@@ -123,7 +127,7 @@ export default class SearchField extends Component {
       handleChange,
       formDataValue,
       onEnter,
-      onSelect
+      onSelect,
     }
     = this.props
 
@@ -131,6 +135,7 @@ export default class SearchField extends Component {
       <form
         autoComplete="off"
         className={formClassName}
+        onFocus={this.handleFocusSelect}
         onSubmit={(e) => e.preventDefault()}
         onKeyDown={(e) => {
           if ( (e.key === 'Tab' || e.key === 'Enter') && searchResults ) {
