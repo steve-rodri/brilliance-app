@@ -19,10 +19,10 @@
 /* ---------Header row-------------*/
 
 .Invoice--header-row  {
-  background: var(--turquoise);
+  background: var(--dark-gray);
   height: 50px;
   width: 100%;
-  border: 2px solid var(--turquoise);
+  border: 2px solid var(--dark-gray);
 }
 
 .Invoice--header-row > * {
@@ -32,7 +32,8 @@
 
 .Invoice--header-cell {
   padding: 15px;
-  background: var(--turquoise);
+  background: var(--dark-gray);
+  color: #eeeeee;
 }
 
 .Invoice--header-row > :first-child {
