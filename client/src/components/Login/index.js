@@ -1,25 +1,22 @@
 import React, { Component } from 'react'
 import GoogleLogin from 'react-google-login'
 import { Redirect } from 'react-router-dom'
-import { GOOGLE } from '../../services/google_service'
 import logo_t from '../../images/logo_t.GIF'
-import './Login.css'
 import axios from 'axios'
+import './Login.css'
 
 export default class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
-      redirectToDashboard: false
+      redirectToApp: false
     }
     this.axiosRequestSource = axios.CancelToken.source()
   }
 
   async componentDidMount(){
-    const user = await GOOGLE.getUser(this.axiosRequestSource.token)
-    if (user) {
-      this.setState({ redirectToDashboard: true })
-    }
+    const user = await this.props.getUser()
+    if (user) this.setState({ redirectToApp: true })
   }
 
   async componentWillUnmount(){
@@ -27,15 +24,15 @@ export default class Login extends Component {
   }
 
   responseGoogle = (resp) => {
+    const { history } = this.props
     if (resp.accessToken) {
       localStorage.setItem('google_access_token',resp.accessToken)
-      localStorage.setItem('profileObj', JSON.stringify(resp.profileObj))
-      this.setState({ redirectToDashboard: true })
+      history.push('/')
     }
   }
 
   render(){
-    if (this.state.redirectToDashboard) return (<Redirect to="/admin" />)
+    if (this.state.redirectToApp) return <Redirect to="/" />
     return (
       <div className="login-page">
         <div className="login-form">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect  } from 'react-router-dom'
 import Admin from './Admin'
 import { GOOGLE } from '../../services/google_service'
 import { event } from '../../services/event'
@@ -7,16 +7,10 @@ import { formatFromGoogle } from '../Helpers/googleFormatters'
 import axios from 'axios'
 
 export default class Main extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      loggedIn: true
-    }
-    this.axiosRequestSource = axios.CancelToken.source()
-  }
+
+  axiosRequestSource = axios.CancelToken.source()
 
   async componentDidMount(){
-    await this.getUser()
     await this.getGoogleCalendarId()
     // await this.synchronizeAllEvents()
   }
@@ -25,20 +19,9 @@ export default class Main extends Component {
     this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
-  getUser = async() => {
-    const user = await GOOGLE.getUser(this.axiosRequestSource.token)
-    if (user) {
-      this.setState({
-        user,
-        loggedIn: true
-      })
-    } else {
-      this.setState({ loggedIn: false })
-    }
-  }
-
   getGoogleCalendarId = async() => {
-    const { user } = this.state
+    const { getUser } = this.props
+    const user = await getUser()
     if (user) {
       const calendars = await GOOGLE.getCalendars(this.axiosRequestSource.token);
       if (calendars) {
@@ -52,17 +35,15 @@ export default class Main extends Component {
   synchronizeAllEvents = async() => {
     const calendarId = await this.getGoogleCalendarId()
     const events = await GOOGLE.getEvents(calendarId, this.axiosRequestSource.token)
-    const evts = await Promise.all(events.map(async evt => {return await formatFromGoogle(evt, this.axiosRequestSource.token)}))
-    await Promise.all(evts.map(async evt => await event.sync(evt, this.axiosRequestSource.token)))
+    const evts = await Promise.all( events.map( async evt => await formatFromGoogle( evt, this.axiosRequestSource.token ) ) )
+    await Promise.all( evts.map( async evt => await event.sync(evt, this.axiosRequestSource.token ) ) )
   }
 
   render(){
-    const { loggedIn } = this.state
-    if (!loggedIn) return (<Redirect to="/login"/>)
     return(
       <div className="App">
         <Switch>
-          <Route path="/admin" render={ props => <Admin {...props} user={this.state.user} /> } />
+          <Route path="/admin" render={ props => <Admin {...this.props} {...props} getGoogleCalendarId={this.getGoogleCalendarId}/> } />
           <Redirect to="/"/>
         </Switch>
       </div>

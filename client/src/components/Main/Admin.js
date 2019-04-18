@@ -9,16 +9,16 @@ import Staff from './Views/Staff'
 
 export default class Admin extends Component {
   render(){
-    const { match, user } = this.props
+    const { match } = this.props
     return (
       <Fragment>
         <Header {...this.props}/>
         <Switch>
-          <Route  exact path={match.path}  render={ props => <Dashboard {...props} user={user} /> } />
-          <Route  path={`${match.path}/events`} render={ props => <Events {...props} user={user} /> } />
-          <Route  path={`${match.path}/clients`} render={ props => <Clients {...props} user={user} /> } />
-          <Route  path={`${match.path}/invoices`} render={ props => <Invoices {...props} user={user} /> } />
-          <Route  path={`${match.path}/staff`} render={ props => <Staff {...props} user={user} /> } />
+          <Route  exact path={match.path}  render={ props => <Dashboard {...this.props } {...props} /> } />
+          <Route  path={`${match.path}/events`} render={ props => <Events {...this.props } {...props} /> } />
+          <Route  path={`${match.path}/clients`} render={ props => <Clients {...this.props } {...props} /> } />
+          <Route  path={`${match.path}/invoices`} render={ props => <Invoices {...this.props } {...props} /> } />
+          <Route  path={`${match.path}/staff`} render={ props => <Staff {...this.props } {...props} /> } />
         </Switch>
       </Fragment>
     )
