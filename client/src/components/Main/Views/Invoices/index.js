@@ -8,13 +8,14 @@ import { client } from '../../../../services/client'
 import { clientName } from '../../../Helpers/clientHelpers'
 import { price } from './InvoiceDetail/Invoice/Line/Helpers'
 import axios from 'axios'
+import moment from 'moment'
 
 export default class Invoices extends Component {
   constructor(props){
     super(props)
     this.state = {
       invoices: [],
-      category: 'All',
+      category: 'Upcoming',
       categories: ['Production', 'CANS', 'THC', 'CATP'],
       columnHeaders: ['client & date', 'type', 'status', 'balance'],
       hasMore: true,
@@ -48,6 +49,7 @@ export default class Invoices extends Component {
   async componentDidMount() {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
+    // this.setState({ date: moment().startOf('day').toISOString(true) })
     await this.setInvoices(this.props, 1);
   }
 
@@ -58,57 +60,73 @@ export default class Invoices extends Component {
 
   setInvoices = async(props, mounted) => {
     const { category } = this.state
-    const queries = queryString.parse(props.location.search)
+    if (props) {
+      const queries = queryString.parse(props.location.search)
 
-    if (queries.category && queries.category !== category) {
+      if (queries.category && queries.category !== category) {
 
+        this.setState(
+        {
+          category: queries.category,
+          date: null,
+          query: null,
+          client: null,
+          page: 1
+        },
+          async () => {
+          await this.resetInvoices()
+          await this.fetchInvoices()
+        })
+
+      } else if (queries.q) {
+
+        this.setState(
+        {
+          query: queries.q,
+          date: null,
+          category: queries.q,
+          client: null,
+          page: 1
+        },
+          async () => {
+          await this.resetInvoices()
+          await this.fetchInvoices()
+        })
+
+      } else if (queries.client) {
+
+        const clt = await client.findById(queries.client, this.axiosRequestSource.token)
+        this.setState(
+        {
+          query: null,
+          date: null,
+          category: clientName(clt),
+          client: queries.client,
+          page: 1
+        },
+          async () => {
+          await this.resetInvoices()
+          await this.fetchInvoices()
+        })
+
+      } else if (mounted) {
+        this.setState(
+        {
+          query: null,
+          client: null,
+          category: 'Upcoming',
+          page: 1
+        },
+          async () => {
+          await this.resetInvoices()
+          await this.fetchInvoices()
+        })
+      }
+    } else {
       this.setState(
       {
-        category: queries.category,
         query: null,
         client: null,
-        page: 1
-      },
-        async () => {
-        await this.resetInvoices()
-        await this.fetchInvoices()
-      })
-
-    } else if (queries.q) {
-
-      this.setState(
-      {
-        query: queries.q,
-        category: queries.q,
-        client: null,
-        page: 1
-      },
-        async () => {
-        await this.resetInvoices()
-        await this.fetchInvoices()
-      })
-
-    } else if (queries.client) {
-
-      const clt = await client.findById(queries.client, this.axiosRequestSource.token)
-      this.setState(
-      {
-        query: null,
-        category: clientName(clt),
-        client: queries.client,
-        page: 1
-      },
-        async () => {
-        await this.resetInvoices()
-        await this.fetchInvoices()
-      })
-
-    } else if (mounted) {
-      this.setState(
-      {
-        query: null,
-        client: null,
-        category: 'All',
         page: 1
       },
         async () => {
@@ -119,12 +137,14 @@ export default class Invoices extends Component {
   }
 
   fetchInvoices = async() => {
-    const { page, category, query, client } = this.state
+    const { page, date, category, query, client } = this.state
     let invcs;
     if (query) {
       invcs = await invoice.find(page, query, this.axiosRequestSource.token)
     } else if (client) {
       invcs = await invoice.findByClient(page, client, this.axiosRequestSource.token)
+    } else if (date) {
+      invcs = await invoice.findByDate(page, date, this.axiosRequestSource.token)
     } else {
       invcs = await invoice.getAll(page, category, this.axiosRequestSource.token)
     }
@@ -222,6 +242,11 @@ export default class Invoices extends Component {
     })
   }
 
+  handleDateChange = async(date) => {
+    this.setState({ date: moment(date).startOf('day').toISOString(true) },
+    () =>  this.setInvoices())
+  }
+
   addInvoice = async(data) => {
     let invoices = [...this.state.invoices]
     const newInvoice = await invoice.create(data, this.axiosRequestSource.token)
@@ -263,6 +288,7 @@ export default class Invoices extends Component {
         hasMore={hasMore}
         load={this.fetchInvoices}
         refresh={this.setRefresh}
+        handleDateChange={this.handleDateChange}
       />
     )
   }
