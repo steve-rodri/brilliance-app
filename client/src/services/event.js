@@ -108,7 +108,7 @@ const event = {
       return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {
-        console.log('Request canceled', e.message)
+        console.log('Event Request Canceled', e.message)
       }
     }
   }

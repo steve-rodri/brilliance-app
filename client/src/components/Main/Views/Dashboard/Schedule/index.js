@@ -53,7 +53,7 @@ export default class Schedule extends Component {
   }
 
   findAllUserEvents = async() => {
-    const { user ,page } = this.state
+    const { user, page } = this.state
     if (user) {
       const events = await event.findByEmail(page, user.email, this.axiosRequestSource.token)
       return events
@@ -138,7 +138,7 @@ export default class Schedule extends Component {
           :
 
           <p className="Schedule--not-currently">Not currently scheduled...</p>
-          
+
         }
       </Fragment>
     )
