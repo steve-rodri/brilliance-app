@@ -36,7 +36,7 @@ export const isDate = date => {
 	return isDate && isValidDate;
 }
 
-export const getDateISO = (date = new Date) => {
+export const getDateISO = (date = new Date()) => {
 	if (!isDate(date)) return null;
 
 	return [
