@@ -3,7 +3,6 @@ import ListItem from '../ListItem/index.js'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import './List.css'
 
-
 export default class List extends Component {
 
   render(){
@@ -63,15 +62,12 @@ export default class List extends Component {
             >
               {items && items.map((item, id) => (
                 <ListItem
-                  user={this.props.user}
                   key={id}
                   item={item}
-                  type={this.props.type}
-                  handleStatusChange={this.props.handleStatusChange}
-                  displayColumn={displayColumn}
                   numColumns={columnHeaders && columnHeaders.length}
-                  styleColumns={this.styleColumns}
-                  match={this.props.match}
+                  displayColumn={displayColumn}
+                  styleColumns={styleColumns}
+                  {...this.props}
                 />
               ))}
             </InfiniteScroll>

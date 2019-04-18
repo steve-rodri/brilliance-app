@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Redirect } from 'react-router-dom'
 import List from '../../../../List/index.js'
-import { GOOGLE } from '../../../../../services/google_service'
 import { event } from '../../../../../services/event'
 import { start, end } from '../../../../Helpers/datetime'
 import moment from 'moment'
@@ -12,10 +10,29 @@ export default class Schedule extends Component {
   constructor(props){
     super(props)
     this.state = {
-      userEvents: null,
-      redirectToLogin: false
+      userEvents: null
     }
     this.axiosRequestSource = axios.CancelToken.source()
+  }
+
+  async componentDidMount(){
+    this.updateColumnHeaders();
+    window.addEventListener("resize", this.updateColumnHeaders);
+    const user = await this.props.getUser()
+    this.setState(
+    {
+      user,
+      page: 1
+    },
+      async () => {
+      await this.resetUserEvents()
+      await this.findUpcomingUserEvents()
+    })
+  }
+
+  async componentWillUnmount(){
+    window.removeEventListener("resize", this.updateColumnHeaders);
+    this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
   updateColumnHeaders = (e) => {
@@ -35,48 +52,8 @@ export default class Schedule extends Component {
     }
   }
 
-  async componentDidMount(){
-    this.updateColumnHeaders();
-    window.addEventListener("resize", this.updateColumnHeaders);
-    this.setState(
-    {
-      page: 1
-    },
-      async () => {
-      await this.resetUserEvents()
-      await this.findUpcomingUserEvents()
-    })
-  }
-
-  async componentWillUnmount(){
-    window.removeEventListener("resize", this.updateColumnHeaders);
-    this.setState({ userEvents: null })
-    this.axiosRequestSource && this.axiosRequestSource.cancel()
-  }
-
-  findAllUserEventsFromGoogle = async() => {
-    const user = this.props.user
-    if (user) {
-      const calendars = await GOOGLE.getCalendars(this.axiosRequestSource.token);
-      if (calendars) {
-        const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
-        const events = await GOOGLE.getEvents(jobsCalendar.id, this.axiosRequestSource.token)
-        const userEvents = events.filter(
-          event =>
-          event.attendees?
-          event.attendees.find(attendee => (attendee.email === user.email))
-          : null
-        )
-        return userEvents
-      } else {
-        this.setState({ redirectToLogin:true })
-      }
-    }
-  }
-
   findAllUserEvents = async() => {
-    const { page } = this.state
-    const { user } = this.props
+    const { user ,page } = this.state
     if (user) {
       const events = await event.findByEmail(page, user.email, this.axiosRequestSource.token)
       return events
@@ -119,44 +96,51 @@ export default class Schedule extends Component {
     }))
   }
 
-  render(){
-    const { redirectToLogin, userEvents, columnHeaders } = this.state
+  dialog = (userEvents) => {
+    if (userEvents.length > 1) {
+      return (
+        <Fragment>
+          <p>{`You are currently scheduled on ${userEvents.length} events.`}</p>
+          <p>{'Please confirm if you will be able to work by clicking/tapping on the confirmation button'}</p>
+        </Fragment>
+      )
+    } else {
+      return (
+        <Fragment>
+          <p>{`You are currently scheduled on 1 event.`}</p>
+          <p>{'Please confirm if you will be able to work by clicking/tapping on the confirmation button'}</p>
+        </Fragment>
+      )
+    }
+  }
 
-    if (redirectToLogin) return (<Redirect to="/login"/>)
+  render(){
+    const { userEvents } = this.state
     return (
       <Fragment>
-        {userEvents && userEvents.length?
+        {
+          userEvents && userEvents.length?
+
           <div className="Schedule--container">
             <div className='Schedule--dialog'>
-              <p>{schedule(userEvents)}</p>
-              <p>Please confirm if you will be able to work by clicking/tapping on the confirmation button</p>
+              {this.dialog(userEvents)}
             </div>
             <List
-              user={this.props.user}
+              {...this.state}
+              {...this.props}
               type="Schedule"
               items={userEvents}
-              columnHeaders={columnHeaders}
               load={this.findUpcomingUserEvents}
               hasMore={false}
-              match={this.props.match}
             />
           </div>
+
           :
+
           <p className="Schedule--not-currently">Not currently scheduled...</p>
+          
         }
       </Fragment>
     )
   }
-}
-
-function schedule(userEvents) {
-  if (numEventsGreaterThanOne(userEvents)) {
-    return `You are currently scheduled on ${userEvents.length} events.`
-  } else {
-    return `You are currently scheduled on 1 event.`
-  }
-}
-
-function numEventsGreaterThanOne(userEvents){
-  return userEvents.length > 1
 }
