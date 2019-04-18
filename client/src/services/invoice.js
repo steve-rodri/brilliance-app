@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 
 const invoice = {
   get: async function(id, cancelToken){
@@ -34,6 +35,16 @@ const invoice = {
   findByClient: async function (page, clientId, cancelToken) {
     try {
       const resp = await axios.get(`/api/invoices?page=${page}&client_id=${clientId}`, { cancelToken: cancelToken })
+      return resp.data
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Invoice Request Canceled')
+      }
+    }
+  },
+  findByDate: async function (page, date, cancelToken) {
+    try {
+      const resp = await axios.get(`/api/invoices?page=${page}&date_start=${date}&date_end=${moment(date).add(1, 'days').toISOString(true)}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {
