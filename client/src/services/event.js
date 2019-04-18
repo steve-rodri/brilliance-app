@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 
 const event = {
   getAll: async function(page, category, cancelToken){
@@ -54,6 +55,16 @@ const event = {
   findByUID: async function (iCalUID, cancelToken){
     try {
       const resp = await axios.get(`/api/events/find?iCalUID=${iCalUID}`, { cancelToken: cancelToken })
+      return resp.data
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Event Request Canceled')
+      }
+    }
+  },
+  findByDate: async function (page, date, cancelToken){
+    try {
+      const resp = await axios.get(`/api/events?page=${page}&date_start=${date}&date_end=${moment(date).add(1, 'weeks').toISOString(true)}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {

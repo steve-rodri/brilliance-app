@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import List from '../List/index.js'
-import Search from '../Search/index.js'
+import List from '../List/'
+import Calendar from '../Calendar'
+import Search from '../Search/'
 import AddNew from '../Buttons/AddNew'
 import './ListPage.css'
 
@@ -58,7 +59,8 @@ export default class ListPage extends Component {
       categories,
       data,
       match,
-      refresh
+      refresh,
+      handleDateChange
     } = this.props
 
     return (
@@ -82,6 +84,16 @@ export default class ListPage extends Component {
             url={match.path}
             refresh={refresh}
           />
+
+          {/* Calendar */}
+          {
+            type === "Events" || type === "Invoices"?
+            <Calendar
+              onDateChanged={handleDateChange}
+            />
+            :
+            null
+          }
 
           {/* Categories */}
           <div className="ListPage--categories">
