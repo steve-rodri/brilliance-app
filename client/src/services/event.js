@@ -1,5 +1,4 @@
 import axios from 'axios'
-import moment from 'moment'
 
 const event = {
   getAll: async function(page, category, cancelToken){
@@ -62,9 +61,14 @@ const event = {
       }
     }
   },
-  findByDate: async function (page, date, cancelToken){
+  findByDate: async function (page, dateStart, dateEnd, cancelToken){
     try {
-      const resp = await axios.get(`/api/events?page=${page}&date_start=${date}&date_end=${moment(date).add(1, 'weeks').toISOString(true)}`, { cancelToken: cancelToken })
+      let resp;
+      if (dateEnd) {
+        resp = await axios.get(`/api/events?page=${page}&date_start=${dateStart}&date_end=${dateEnd}`, { cancelToken: cancelToken })
+      } else {
+        resp = await axios.get(`/api/events?page=${page}&date=${dateStart}`, { cancelToken: cancelToken })
+      }
       return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {

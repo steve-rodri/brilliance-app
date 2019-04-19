@@ -1,20 +1,17 @@
 .Schedule--container {
   margin: 20px auto;
   width: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
 }
 
 .Schedule--dialog {
   color: white;
-  margin: 2px auto;
   font-size: 18px;
   font-family: sans-serif;
-  height: 100px;
-  width: 98.5%;
-  padding: 5px 0 10px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-gap: 5px;
 }
 
 .Schedule--not-currently {

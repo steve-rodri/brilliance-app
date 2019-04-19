@@ -4,11 +4,11 @@ import { plusIcon } from '../../Helpers/icons'
 import './index.css'
 
 export default function AddNew(props){
-  const { linkPath } = props
+  const { linkPath, style } = props
   return (
     <Link
       to={linkPath}
-      style={{textDecoration: 'none', color: 'black', width: '100%'}}
+      style={{...style, textDecoration: 'none', color: 'black', width: '100%'}}
     >
 
       <div className="AddNew">
