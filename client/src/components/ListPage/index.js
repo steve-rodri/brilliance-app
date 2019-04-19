@@ -33,8 +33,7 @@ export default class ListPage extends Component {
       return (
         {
           color: 'white',
-          borderLeft: '1px solid var(--light-gray)',
-          borderRight: '1px solid var(--light-gray)'
+          borderColor: 'var(--light-gray)'
         }
       )
     } else {
@@ -62,11 +61,9 @@ export default class ListPage extends Component {
       refresh,
       handleDateChange
     } = this.props
-
     return (
-      <div className='ListPage--container'>
+      <div className='ListPage'>
         <aside>
-
           {/* Title */}
           <h2
             className="ListPage--name"
@@ -85,6 +82,26 @@ export default class ListPage extends Component {
             refresh={refresh}
           />
 
+          {/* Categories */}
+          {
+            <div className="ListPage--categories-container">
+              {/* <div className="Arrow Arrow-Left" style={{gridColumn: '1 / span 1'}}></div> */}
+              <div className="ListPage--categories">
+                {categories && categories.map((category, id) => (
+                <div
+                  style={this.styleActiveMenu(category)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    refresh(true, `${match.path}?category=${category}`);
+                  }}
+                  key={id}>{category}
+                </div>
+                ))}
+              </div>
+              {/* <div className="Arrow Arrow-Right" style={{gridColumn: '3 / span 1'}}></div> */}
+            </div>
+          }
+
           {/* Calendar */}
           {
             type === "Events" || type === "Invoices"?
@@ -95,40 +112,38 @@ export default class ListPage extends Component {
             null
           }
 
-          {/* Categories */}
-          <div className="ListPage--categories">
-            {categories && categories.map((category, id) => (
-              <div
-                style={this.styleActiveMenu(category)}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  refresh(true, `${match.path}?category=${category}`);
-                }}
-                key={id}>{category}
-              </div>
-            ))}
-          </div>
-
           {/* Add New Button */}
           {type === "Events" || type === "Clients" || type === "Staff"?
             <AddNew
               linkPath={{pathname: `${match.path}/new`, state: { modal: true } }}
+              style={{gridRow: '5 / span 1'}}
             />
             :
             null
           }
-
         </aside>
 
         <main>
+          <div
+            className="ListPage--category-title-container"
+            style={this.styleSubTitle()}
+          >
+            <h3 className="ListPage--category-title">{category}</h3>
+          </div>
 
-          <div className="ListPage--category-title-container" style={this.styleSubTitle()}><h3 className="ListPage--category-title">{category}</h3></div>
-          <List
-            {...this.props}
-            title={category}
-            items={data}
-          />
+          <div className="ListPage--list">
+            <List
+              {...this.props}
+              title={category}
+              items={data}
+            />
+          </div>
 
+          <div className="ListPage--end-message">
+
+            <h4>{`Found ${data && data.length} ${type}`}</h4>
+
+          </div>
         </main>
 
       </div>

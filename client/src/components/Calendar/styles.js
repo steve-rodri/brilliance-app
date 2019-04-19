@@ -9,22 +9,22 @@ export const Arrow = styled.button`
 	cursor: pointer;
 	padding: 0;
 	border: none;
-	border-top: .8em solid var(--dark-gray);
-	border-bottom: .8em solid var(--dark-gray);
+	border-top: 10px solid var(--dark-gray);
+	border-bottom: 10px solid var(--dark-gray);
 	transition: all 250ms ease-out;
 `;
 
 export const ArrowLeft = styled(Arrow)`
-	border-right: 1.4em solid #ccc;
-	left: 2rem;
+	border-right: 15px solid #ccc;
+	left: .5rem;
 	:hover {
 		border-right-color: var(--turquoise);
 	}
 `;
 
 export const ArrowRight = styled(Arrow)`
-	border-left: 1.4em solid #ccc;
-	right: 2rem;
+	border-left: 15px solid #ccc;
+	right: .5rem;
 	:hover {
 		border-left-color: var(--turquoise);
 	}

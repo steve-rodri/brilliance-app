@@ -47,17 +47,6 @@ export default class List extends Component {
                   </div>
                 </div>
               }
-              endMessage=
-              { items && items.length?
-                <div className="List--End-Message">
-                  <h4>{`Found ${items.length} ${type}`}</h4>
-                </div>
-                :
-                <div className="List--None-Found">
-                  <h2>Nothing Found</h2>
-                  <p>Try another search...</p>
-                </div>
-              }
               scrollableTarget="List"
             >
               {items && items.map((item, id) => (

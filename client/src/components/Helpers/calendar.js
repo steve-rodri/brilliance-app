@@ -26,7 +26,7 @@ export const CALENDAR_MONTHS = {
 	December: "Dec"
 }
 
-export const CALENDAR_WEEKS = 6;
+export const CALENDAR_WEEKS = 5;
 
 export const zeroPad = (value, length) => `${value}`.padStart(length, '0')
 

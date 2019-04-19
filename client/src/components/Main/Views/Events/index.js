@@ -56,7 +56,7 @@ export default class Events extends Component {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
     const calendarId = localStorage.getItem('google_calendar_id');
-    this.setState({ calendarId, date: moment().startOf('week').toISOString(true) })
+    this.setState({ calendarId, date: moment().startOf('day').toISOString(true) })
     this.setEvents(this.props, true)
   }
 
@@ -66,7 +66,8 @@ export default class Events extends Component {
   }
 
   setEvents = async(props, mounted) => {
-    const { category, date } = this.state
+    const { category, dateStart, dateEnd } = this.state
+
     if (props) {
       const queries = queryString.parse(props.location.search)
 
@@ -75,7 +76,8 @@ export default class Events extends Component {
         this.setState(
         {
           category: queries.category,
-          date: null,
+          dateStart: null,
+          dateEnd: null,
           query: null,
           client: null,
           page: 1
@@ -90,7 +92,8 @@ export default class Events extends Component {
         this.setState(
         {
           query: queries.q,
-          date: null,
+          dateStart: null,
+          dateEnd: null,
           category: queries.q,
           client: null,
           page: 1
@@ -105,7 +108,8 @@ export default class Events extends Component {
           this.setState(
           {
             query: null,
-            date: null,
+            dateStart: null,
+            dateEnd: null,
             category: clientName(clt),
             client: queries.client,
             page: 1
@@ -129,9 +133,17 @@ export default class Events extends Component {
         })
       }
     } else {
+      let startDate = moment(dateStart).format('LL');
+      let endDate = moment(dateEnd).format('LL')
+      let dateCategory;
+      if (dateStart && dateEnd && startDate === endDate) {
+        dateCategory = `${moment(dateStart).format('LL')} - ${moment(dateStart).format('LL')}`
+      } else {
+        dateCategory = `${moment(dateStart).format('LL')}`
+      }
       this.setState(
       {
-        category: moment(date).format('LL'),
+        category: dateCategory,
         query: null,
         client: null,
         page: 1
@@ -144,14 +156,14 @@ export default class Events extends Component {
   }
 
   fetchEvents = async() => {
-    const { page, date, category, query, client } = this.state
+    const { page, dateStart, dateEnd, category, query, client } = this.state
     let evts;
     if (query) {
       evts = await event.find(page, query, this.axiosRequestSource.token)
     } else if (client) {
       evts = await event.findByClient(page, client, this.axiosRequestSource.token)
-    } else if (date) {
-      evts = await event.findByDate(page, date, this.axiosRequestSource.token)
+    } else if (dateStart) {
+      evts = await event.findByDate(page, dateStart, dateEnd, this.axiosRequestSource.token)
     } else {
       evts = await event.getAll(page, category, this.axiosRequestSource.token);
     }
@@ -331,7 +343,10 @@ export default class Events extends Component {
   }
 
   handleDateChange = async(date) => {
-    this.setState({ date: moment(date).startOf('day').toISOString(true) },
+    this.setState({
+      dateStart: moment(date).startOf('day').toISOString(true),
+      dateEnd:  moment(date).startOf('day').add(1, 'days').toISOString(true)
+    },
     () =>  this.setEvents())
   }
 

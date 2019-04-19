@@ -4,11 +4,12 @@
 }
 
 .App {
-  text-align: center;
   height: 100vh;
   width: 100vw;
+  text-align: center;
+  display: grid;
   overflow: hidden;
-
+  grid: 75px auto / auto;
 
 /* Color Palette */
   --dark-blue: #09639B;
@@ -20,6 +21,10 @@
   --light-blue-t: rgba(212,241,255, .3);
   --light-gray: #DADBE0;
   --dark-gray: #222222;
+}
+
+@media  {
+
 }
 
 h1 {
@@ -163,4 +168,38 @@ select {
 .Edit--search-result:hover {
   cursor: pointer;
   background-color: var(--light-blue);
+}
+
+/* -------------------------Misc---------------------------------- */
+
+.Arrow {
+  appearance: none;
+	user-select: none;
+	outline: none !important;
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	padding: 0;
+	border: none;
+	border-top: 10px solid var(--dark-gray);
+	border-bottom: 10px solid var(--dark-gray);
+	transition: all 250ms ease-out;
+}
+
+.Arrow-Left {
+  border-right: 15px solid #ccc;
+  justify-self: right;
+}
+
+.Arrow-Left:hover {
+  border-right-color: var(--turquoise);
+}
+
+.Arrow-Right {
+  border-left: 15px solid #ccc;
+  justify-self: left;
+}
+
+.Arrow-Right:hover {
+  border-left-color: var(--turquoise);
 }
