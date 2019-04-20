@@ -49,8 +49,8 @@ export default class Staff extends Component {
 
   render(){
     return (
-      <div className="BasicInfo--component">
-        <h3 className="BasicInfo--component-title">Staff</h3>
+      <div className="BasicInfo--component BasicInfo--staff">
+        <div className="BasicInfo--component-title"><h3>Staff</h3></div>
           {this.view()}
       </div>
     )

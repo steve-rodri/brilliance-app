@@ -61,7 +61,7 @@ export const CalendarMonth = styled.div`
 export const CalendarCell = styled.div`
 	text-align: center;
 	align-self: center;
-	padding: 0.4em 0.4em;
+	padding: 0.2em 0.2em;
 	user-select: none;
   grid-column: ${props => (props.index % 7) + 1} / span 1;
 `;
@@ -71,7 +71,7 @@ export const CalendarDay = styled(CalendarCell)`
 	font-size: 2.25em;
 	color: var(--light-gray);
 	border-bottom: 1px solid var(--light-gray);
-	margin-bottom: 12.5px;
+	margin-bottom: 5px;
 `;
 // border-top: 2px solid var(--med-dark-blue);
 // border-bottom: 2px solid var(--med-dark-blue);

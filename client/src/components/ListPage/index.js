@@ -57,6 +57,7 @@ export default class ListPage extends Component {
       category,
       categories,
       data,
+      dateStart,
       match,
       refresh,
       handleDateChange
@@ -106,6 +107,7 @@ export default class ListPage extends Component {
           {
             type === "Events" || type === "Invoices"?
             <Calendar
+              date = {dateStart && new Date(dateStart)}
               onDateChanged={handleDateChange}
             />
             :

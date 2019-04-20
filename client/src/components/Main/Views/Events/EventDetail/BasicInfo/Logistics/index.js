@@ -27,8 +27,8 @@ export default class Logistics extends Component {
     return (
       <Fragment>
         { editMode?
-          <div className="BasicInfo--component">
-            <h3 className="BasicInfo--component-title">Logistics</h3>
+          <div className="BasicInfo--component BasicInfo--logistics">
+            <div className="BasicInfo--component-title"><h3>Logistics</h3></div>
               <div className="Logistics--container">
                 {this.view()}
               </div>

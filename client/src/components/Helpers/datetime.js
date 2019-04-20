@@ -45,21 +45,21 @@ function date(fields, short, days){
             if (short) {
               if (days) {
                 return (
-                  `${start.format('ddd MMM Do YYYY')} - ${end.subtract(1,'day').format('ddd MMM Do YYYY')}`
+                  `${start.format('ddd MMM Do')} - ${end.subtract(1,'day').format('ddd MMM Do YYYY')}`
                 )
               } else {
                 return (
-                  `${start.format('MMM Do YYYY')} - ${end.subtract(1,'day').format('MMM Do YYYY')}`
+                  `${start.format('MMM Do')} - ${end.subtract(1,'day').format('Do YYYY')}`
                 )
               }
             } else {
               if (days) {
                 return (
-                  `${start.format('ddd MMMM Do YYYY')} - ${end.subtract(1,'day').format('ddd MMMM Do YYYY')}`
+                  `${start.format('ddd MMMM Do')} - ${end.subtract(1,'day').format('ddd MMMM Do YYYY')}`
                 )
               } else {
                 return (
-                  `${start.format('MMMM Do YYYY')} - ${end.subtract(1,'day').format('MMMM Do YYYY')}`
+                  `${start.format('MMMM Do')} - ${end.subtract(1,'day').format('Do YYYY')}`
                 )
               }
             }
@@ -67,21 +67,21 @@ function date(fields, short, days){
             if (short) {
               if (days) {
                 return (
-                  `${start.format('ddd MMM Do YYYY')} - ${end.format('ddd MMM Do YYYY')}`
+                  `${start.format('ddd MMM Do')} - ${end.format('ddd MMM Do YYYY')}`
                 )
               } else {
                 return (
-                  `${start.format('MMM Do YYYY')} - ${end.format('MMM Do YYYY')}`
+                  `${start.format('MMM Do')} - ${end.format('Do YYYY')}`
                 )
               }
             } else {
               if (days) {
                 return (
-                  `${start.format('ddd MMMM Do YYYY')} - ${end.format('ddd MMMM Do YYYY')}`
+                  `${start.format('ddd MMMM Do')} - ${end.format('ddd MMMM Do YYYY')}`
                 )
               } else {
                 return (
-                  `${start.format('MMMM Do YYYY')} - ${end.format('MMMM Do YYYY')}`
+                  `${start.format('MMMM Do')} - ${end.format('Do YYYY')}`
                 )
               }
             }
@@ -123,7 +123,7 @@ function date(fields, short, days){
                 )
               } else {
                 return (
-                  `${start.format('MMM Do')} - ${end.subtract(1,'day').format('MMM Do')}`
+                  `${start.format('MMM Do')} - ${end.subtract(1,'day').format('Do')}`
                 )
               }
             } else {
@@ -133,7 +133,7 @@ function date(fields, short, days){
                 )
               } else {
                 return (
-                  `${start.format('MMMM Do')} - ${end.subtract(1,'day').format('MMMM Do')}`
+                  `${start.format('MMMM Do')} - ${end.subtract(1,'day').format('Do')}`
                 )
               }
             }
@@ -145,7 +145,7 @@ function date(fields, short, days){
                 )
               } else {
                 return (
-                  `${start.format('MMM Do')} - ${end.format('MMM Do')}`
+                  `${start.format('MMM Do')} - ${end.format('Do')}`
                 )
               }
             } else {
@@ -155,7 +155,7 @@ function date(fields, short, days){
                 )
               } else {
                 return (
-                  `${start.format('MMMM Do')} - ${end.format('MMMM Do')}`
+                  `${start.format('MMMM Do')} - ${end.format('Do')}`
                 )
               }
             }
@@ -175,9 +175,7 @@ function time(fields){
         moment(fields.start).isSame(startOfDay, 'minute') &&
         moment(fields.end).diff(moment(startOfDay), 'minutes') % 1440 === 0
       ) {
-        return (
-          'All-Day'
-        )
+        return null
       } else {
         return (
           `${moment(fields.start).format('LT')} - ${moment(fields.end).format('LT')}`

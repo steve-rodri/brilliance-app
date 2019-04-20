@@ -35,15 +35,15 @@ export default class Events extends Component {
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['title', 'staff', 'confirmation']
+        columnHeaders: ['title', 'date', 'confirmation']
       })
     } else if (width < 900) {
       this.setState({
-        columnHeaders: ['title', 'client', 'staff', 'confirmation']
+        columnHeaders: ['title', 'date', 'schedule', 'confirmation']
       })
     } else {
       this.setState({
-        columnHeaders: ['title', 'client', 'location', 'staff', 'confirmation']
+        columnHeaders: ['title', 'date', 'intel', 'schedule', 'confirmation']
       })
     }
   }
@@ -56,7 +56,7 @@ export default class Events extends Component {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
     const calendarId = localStorage.getItem('google_calendar_id');
-    this.setState({ calendarId, date: moment().startOf('day').toISOString(true) })
+    this.setState({ calendarId, dateStart: moment().startOf('day').toISOString(true) })
     this.setEvents(this.props, true)
   }
 
@@ -364,6 +364,7 @@ export default class Events extends Component {
     const { events, category, categories, columnHeaders, hasMore } = this.state
     return (
       <ListPage
+        {...this.state}
         title="Events"
         type="Events"
         category={category}
@@ -396,6 +397,8 @@ export default class Events extends Component {
 
     return (
       <EventDetail
+        {...this.props}
+        {...this.state}
         e={e}
         evtId={req_id}
         match={match}
@@ -411,6 +414,8 @@ export default class Events extends Component {
     const isNew = match.path === '/admin/events/new'
     return (
       <EventDetail
+        {...this.props}
+        {...this.state}
         isNew={isNew}
         match={match}
         history={history}

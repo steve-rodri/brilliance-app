@@ -33,18 +33,12 @@ export default class BasicInfo extends Component {
         }
 
         <div className="BasicInfo--components-container">
+
           <div className="BasicInfo--components">
 
             {
               about?
               <About {...this.props} />
-              :
-              null
-            }
-
-            {
-              about?
-              <Staff {...this.props}/>
               :
               null
             }
@@ -56,9 +50,17 @@ export default class BasicInfo extends Component {
               <Logistics {...this.props}/>
             }
 
+            {
+              about?
+              <Staff {...this.props}/>
+              :
+              null
+            }
+
             <Notes {...this.props} />
 
           </div>
+
         </div>
 
 

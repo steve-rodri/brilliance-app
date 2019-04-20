@@ -107,7 +107,7 @@ export default class Header extends Component {
 
         </header>
 
-        <div className="Header-fixed-space"></div>
+        <div className="Header--fixed-space"></div>
 
         <div className="Header--drop-down" style={this.styleNav()}>
 
