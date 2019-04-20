@@ -48,12 +48,16 @@ export default class EventDetail extends Component {
     window.addEventListener('resize', this.resetView)
     window.scrollTo(0,0);
     await this.setFields();
-    const { isNew } = this.props
+    const { isNew, dateStart } = this.props
     if (isNew) {
       this.switchEditMode()
       this.setField('summary', 'New Event')
       this.setFormData('summary', 'New Event')
-      this.handleDateChange('start', moment().startOf('hour').format())
+      if (dateStart) {
+        this.handleDateChange('start', dateStart)
+      } else {
+        this.handleDateChange('start', moment().startOf('hour').format())
+      }
     } else {
       await this.initialSetup(this.props)
     }

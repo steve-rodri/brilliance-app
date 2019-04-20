@@ -63,9 +63,8 @@ aside {
   display: grid;
   justify-items: center;
   align-items: center;
-  grid-template-rows: 70px 50px 140px 300px 75px auto;
-  overflow: auto;
-  padding-top: 10px;
+  grid-template-rows: 100px 35px 120px 240px 80px auto;
+  padding: 0 20px;
 }
 
 @media (max-width: 1000px) {
@@ -85,13 +84,13 @@ aside {
 }
 
 .ListPage--categories-container {
-  width: 80%;
+  width: 100%;
   grid-row: 3 / span 1;
   display: grid;
   grid: auto / repeat(3, auto);
   justify-items: center;
   align-items: center;
-  padding: 15px 0;
+  align-self: end;
 }
 
 .ListPage--categories {
@@ -100,6 +99,7 @@ aside {
   grid: repeat(2, 1fr) / repeat(2, 1fr);
   align-items: center;
   width: 225px;
+  padding-bottom: 5px;
 }
 
 .ListPage--categories > div {
@@ -108,7 +108,7 @@ aside {
   font-size: 18px;
   text-align: center;
   width: 100%;
-  padding: 15px;
+  padding: 10px;
   transition: all 250ms ease-out;
 }
 

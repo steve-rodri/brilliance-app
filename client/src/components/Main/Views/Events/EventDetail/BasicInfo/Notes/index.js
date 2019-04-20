@@ -6,8 +6,8 @@ export default function Notes(props){
 
   if (editMode) {
     return (
-      <div className="BasicInfo--component">
-        <h3 className="BasicInfo--component-title">Notes</h3>
+      <div className="BasicInfo--component BasicInfo--notes">
+        <div className="BasicInfo--component-title"><h3>Notes</h3></div>
         <div className="Notes--container">
           <label>Notes</label>
           <textarea
@@ -23,8 +23,8 @@ export default function Notes(props){
     )
   } else if (fields && fields.notes) {
     return (
-      <div className="BasicInfo--component">
-        <h3 className="BasicInfo--component-title">Notes</h3>
+      <div className="BasicInfo--component BasicInfo--notes">
+        <div className="BasicInfo--component-title"><h3>Notes</h3></div>
         <div className="Notes--container">
         <label>Notes</label>
           <div className="Notes--readonly">

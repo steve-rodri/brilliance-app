@@ -23,23 +23,33 @@ export default function Event(props){
       {numColumns?
         <div className="List-Item" style={styleItem(item, type, numColumns)}>
 
+          {/* Title */}
+
           <div className="List-Item--Cell" style={displayColumn('title')}>
-            <div>
-              <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
-              <p>{date(event, true)}</p>
-              <p>{time(event)}</p>
-            </div>
+            <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
           </div>
 
-          <div className="List-Item--Cell" style={displayColumn('client')}>
-            {event && clientName(event.client)}
+          {/* Date */}
+
+          <div className="List-Item--Cell" style={displayColumn('date')}>
+            <p>{date(event, true)}</p>
+            <p>{time(event)}</p>
           </div>
 
-          <div className="List-Item--Cell" style={displayColumn('location')}>{event && event.location && event.location.name}</div>
+          {/* Intel */}
 
-          <div className="List-Item--Cell" style={displayColumn('staff')}>
+          <div className="List-Item--Cell" style={displayColumn('intel')}>
+            {event && event.client && <div>{clientName(event.client)}</div>}
+            {event && event.location && <p>{event.location.name}</p>}
+          </div>
+
+          {/* Schedule */}
+
+          <div className="List-Item--Cell" style={displayColumn('schedule')}>
             {scheduled(event)}
           </div>
+
+          {/* Confirmation */}
 
           <div className="List-Item--Cell" style={displayColumn('confirmation')}>
             {
@@ -182,7 +192,7 @@ function scheduled(evt){
       }
     } else {
       return (
-        <div className="Event--scheduled" style={{ border: '2px dashed darkred' }}>
+        <div className="Event--scheduled">
           <div className="Event--scheduled-details" style={{gridRow: '1 / span 2'}}>
             <p style={{ color: 'darkred' }}>NONE</p>
           </div>

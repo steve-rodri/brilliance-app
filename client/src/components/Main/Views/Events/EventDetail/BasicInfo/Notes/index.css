@@ -3,6 +3,7 @@
   height: 100%;
   display: grid;
   align-items: center;
+  overflow: auto;
 }
 
 .Notes, .Notes--readonly {
@@ -19,7 +20,7 @@
 .Notes {
   color: black;
   background-color: #F8F8F8;
-  min-height: 100px;
+  min-height: 150px;
 }
 
 .Notes--readonly {
@@ -41,7 +42,6 @@
   }
 
   .Notes {
-    min-height: 300px;
     overflow: auto;
   }
 

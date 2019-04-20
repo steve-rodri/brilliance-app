@@ -13,7 +13,6 @@
   grid-template-rows: 22px auto;
   justify-items: center;
   align-items: start;
-  border-radius: 5px;
 }
 
 .Event--scheduled-details {

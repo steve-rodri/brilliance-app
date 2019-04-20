@@ -1,12 +1,16 @@
 import React from 'react'
 import { pencil, check, closeIcon, trash } from '../../../../../../Helpers/icons'
-import { styleConfirmation, changeConfirmation } from '../../../../../../Helpers/eventConfirmation'
+// import { styleConfirmation, changeConfirmation } from '../../../../../../Helpers/eventConfirmation'
 import './index.css'
 
 export default function Header(props){
 
   const { evt, fields, isNew, editMode, mobile } = props
   // Functions to Show Summary field based on Mode ----------------------
+
+  const handleFocusSelect = (e) => {
+    e.target.select()
+  }
 
   function displaySummary(){
     if (editMode && evt && !mobile) {
@@ -17,6 +21,7 @@ export default function Header(props){
             name="summary"
             value={fields.summary? fields.summary : ''}
             onChange={props.handleChange}
+            onFocus={handleFocusSelect}
           />
         </div>
       )
@@ -36,21 +41,25 @@ export default function Header(props){
   //----------------------------------------------------------------------
 
   //Function to display status of event (confirmation)--------------------
-  function displayConfirmation(){
-    return (
-      <div
-        className="BasicInfo--event-status"
-        name="confirmation"
-        onClick={(e) => {
-          e.stopPropagation();
-          props.handleStatusChange('confirmation', changeConfirmation(fields && fields.confirmation)
-        )}}
-        style={styleConfirmation(fields && fields.confirmation)}
-      >
-        <p>{fields && fields.confirmation}</p>
-      </div>
-    )
-  }
+  // function displayConfirmation(){
+  //   if (fields && fields.confirmation && !editMode) {
+  //     return (
+  //       <div
+  //         className="BasicInfo--event-status"
+  //         name="confirmation"
+  //         onClick={(e) => {
+  //           e.stopPropagation();
+  //           props.handleStatusChange('confirmation', changeConfirmation(fields.confirmation)
+  //         )}}
+  //         style={styleConfirmation(fields.confirmation)}
+  //       >
+  //         <p>{fields.confirmation}</p>
+  //       </div>
+  //     )
+  //   } else {
+  //     return null
+  //   }
+  // }
 
   //----------------------------------------------------------------------
 
@@ -126,7 +135,6 @@ export default function Header(props){
   return (
     <div className="BasicInfo--header">
       {displaySummary()}
-      {displayConfirmation()}
       <div className="BasicInfo--header-right">
         {displayButtons()}
       </div>

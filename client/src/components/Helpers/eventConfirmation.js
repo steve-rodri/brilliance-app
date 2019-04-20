@@ -2,11 +2,10 @@ function styleConfirmation(msg){
   switch (msg) {
     case "Unconfirmed":
       return {
-        border: '2px dashed rgba(210,210,0,1)',
-        color: 'rgba(210,180,0,1)',
-        backgroundColor: 'inherit',
+        color: 'white',
+        fontWeight: 'bold',
+        backgroundColor: 'rgba(210,210,0,1)',
         padding: '5px 15px',
-        borderRadius: '3px'
       }
     case "Confirmed":
       return {
@@ -14,7 +13,6 @@ function styleConfirmation(msg){
         fontWeight: 'bold',
         padding: '5px 15px',
         color: 'white',
-        borderRadius: '3px'
       }
     case "Cancelled":
       return {
@@ -22,7 +20,6 @@ function styleConfirmation(msg){
         fontWeight: 'bold',
         padding: '5px 15px',
         color: 'white',
-        borderRadius: '3px'
       }
     default:
       return {}

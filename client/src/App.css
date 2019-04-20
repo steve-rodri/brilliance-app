@@ -9,7 +9,7 @@
   text-align: center;
   display: grid;
   overflow: hidden;
-  grid: 75px auto / auto;
+  grid: 150px auto / auto;
 
 /* Color Palette */
   --dark-blue: #09639B;
@@ -23,8 +23,10 @@
   --dark-gray: #222222;
 }
 
-@media  {
-
+@media(min-width: 1000px){
+  .App {
+    grid: 75px auto / auto;
+  }
 }
 
 h1 {
