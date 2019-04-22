@@ -6,8 +6,8 @@ class EventsController < ApplicationController
   # GET /events
   def index
     if params[:category]
-      current_time = Time.now()
-      current_date = Time.new(current_time.year, current_time.month, current_time.day)
+      current_time = Time.zone.now()
+      current_date = Time.zone.new(current_time.year, current_time.month, current_time.day)
       if params[:category] == 'All'
         @events = Event
           .where("events.start >= '#{current_date}'")
@@ -32,15 +32,15 @@ class EventsController < ApplicationController
           .paginate(page: params[:page], per_page: @@items_per_page)
       end
     elsif params[:date]
-      start = params[:date]
+      start = Time.zone.parse(params[:date])
       @events = Event
-        .where("events.start >= '#{start}'")
+        .where("events.start >= '#{start.zone_offset('EST')}'")
         .order(:start)
         .paginate(page: params[:page], per_page: @@items_per_page)
 
     elsif params[:date_start] && params[:date_end]
-      startDay = params[:date_start]
-      endDay = params[:date_end]
+      startDay = Time.zone.parse(params[:date_start])
+      endDay = Time.zone.parse(params[:date_end])
       @events = Event
         .where("events.start BETWEEN '#{startDay}' AND '#{endDay}'")
         .order(:start)

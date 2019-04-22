@@ -6,8 +6,8 @@ class InvoicesController < ApplicationController
   # GET /invoices
   def index
     if params[:category]
-      current_time = Time.now()
-      current_date = Time.new(current_time.year, current_time.month, current_time.day)
+      current_time = Time.zone.now()
+      current_date = Time.zone.new(current_time.year, current_time.month, current_time.day)
       if params[:category] == 'Upcoming'
         @invoices = Invoice
           .joins(:event)
@@ -27,7 +27,7 @@ class InvoicesController < ApplicationController
         @invoices = Invoice
           .joins(:event)
           .joins("JOIN places ON places.id = events.location_id")
-          .where("places.short_name = #{short_name} AND events.start >= '#{current_date}'")
+          .where("places.short_name = '#{short_name}' AND events.start >= '#{current_date}'")
           .order("events.start DESC")
           .paginate(page: params[:page], per_page: @@items_per_page)
       end
@@ -40,7 +40,7 @@ class InvoicesController < ApplicationController
         .paginate(page: params[:page], per_page: @@items_per_page)
 
     elsif params[:date]
-      start = params[:date]
+      start = Time.zone.parse(params[:date])
       @invoices = Invoice
         .joins(:event)
         .where("events.start >= '#{start}'")
@@ -48,8 +48,8 @@ class InvoicesController < ApplicationController
         .paginate(page: params[:page], per_page: @@items_per_page)
 
     elsif params[:date_start] && params[:date_end]
-      startDay = params[:date_start]
-      endDay = params[:date_end]
+      startDay = Time.zone.parse(params[:date_start])
+      endDay = Time.zone.parse(params[:date_end])
       @invoices = Invoice
         .joins(:event)
         .where("events.start BETWEEN '#{startDay}' AND '#{endDay}'")
@@ -127,7 +127,9 @@ class InvoicesController < ApplicationController
           :item_id,
           :inc,
           :inc_in_commission,
-          :discount_adj
+          :discount_adj,
+          :quantity,
+          :price
         ]
       )
     end
