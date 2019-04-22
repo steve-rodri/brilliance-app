@@ -1,5 +1,5 @@
 class LineSerializer < ApplicationSerializer
-  attributes :id, :inc, :inc_in_commission, :discount_adj
+  attributes :id, :inc, :inc_in_commission, :discount_adj, :price, :quantity
   has_one :invoice
   has_one :item
 end
