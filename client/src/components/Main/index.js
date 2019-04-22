@@ -4,9 +4,20 @@ import Admin from './Admin'
 import { GOOGLE } from '../../services/google_service'
 import { event } from '../../services/event'
 import { formatFromGoogle } from '../Helpers/googleFormatters'
+import moment from 'moment'
 import axios from 'axios'
 
 export default class Main extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      date: {
+        start: moment().startOf('day').toISOString(true),
+        end: moment().startOf('day').add(1, 'days').toISOString(true)
+      }
+    }
+  }
 
   axiosRequestSource = axios.CancelToken.source()
 
@@ -43,8 +54,22 @@ export default class Main extends Component {
     return(
       <div className="App">
         <Switch>
-          <Route path="/admin" render={ props => <Admin {...this.props} {...props} getGoogleCalendarId={this.getGoogleCalendarId}/> } />
+
+          <Route
+            path="/admin"
+            render={ props =>
+              <Admin
+                {...this.state}
+                {...this.props}
+                {...props}
+                getGoogleCalendarId={this.getGoogleCalendarId}
+                syncAllEvents={this.synchronizeAllEvents}
+              />
+            }
+          />
+
           <Redirect to="/"/>
+
         </Switch>
       </div>
     )
