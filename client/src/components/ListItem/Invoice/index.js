@@ -23,7 +23,7 @@ export default function Invoice(props){
 
 
           <div className="Invoice--status" style={displayColumn('status')}>
-            <h3>{invoice.paymentStatus}</h3>
+            <h3>{invoice.kind !== 'Proposal'? invoice.paymentStatus : null}</h3>
             <h4>{invoice.paymentType !== 'Unknown'? invoice.paymentType : null}</h4>
           </div>
 

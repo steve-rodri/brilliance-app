@@ -539,7 +539,6 @@ export default class InvoiceDetail extends Component {
         }
       } else {
         const updatedInvoice = await this.props.handleUpdate(inv, formData)
-        console.log(updatedInvoice)
         await this.setState({ inv: updatedInvoice }, async() => await this.close(true))
       }
     }

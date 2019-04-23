@@ -6,7 +6,7 @@ import InvoiceDetail from './InvoiceDetail/index.js'
 import { invoice } from '../../../../services/invoice'
 import { client } from '../../../../services/client'
 import { clientName } from '../../../../helpers/clientHelpers'
-import { price } from './InvoiceDetail/Invoice/Line/Helpers'
+// import { price } from './InvoiceDetail/Invoice/Line/Helpers'
 import axios from 'axios'
 import moment from 'moment'
 
@@ -14,14 +14,12 @@ export default class Invoices extends Component {
   constructor(props){
     super(props)
     this.state = {
-      invoices: [],
+      invoices: null,
+      hasMore: false,
       category: 'Upcoming',
       categories: ['Production', 'CANS', 'THC', 'CATP'],
-      columnHeaders: ['client & date', 'type', 'status', 'balance'],
-      hasMore: false,
       page: 1
     }
-
     this.axiosRequestSource = axios.CancelToken.source()
     this.itemsPerPage = 25
   }
@@ -130,16 +128,6 @@ export default class Invoices extends Component {
     this.setState({ invoices: [] })
   }
 
-  resetPage = () => {
-    this.setState({ page: 1 })
-  }
-
-  incrementPage = () => {
-    this.setState(prevState => ({
-      page: prevState.page + 1
-    }))
-  }
-
   setColumnHeaders = () => {
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
@@ -234,65 +222,59 @@ export default class Invoices extends Component {
     return updatedInvoice
   }
 
-  updateInvoices = async(invcs, category) => {
+  updateInvoices = async(invcs) => {
     const { page } = this.state
     const invoices = [...this.state.invoices]
     if ((invoices.length + this.itemsPerPage) / page <= this.itemsPerPage) {
 
-      const updatedInvoices = invcs.map( async(i) => {
-        // const { lines } = i
-        // if (lines.length) {
-        //   const prices = lines.map(line => price(line, invoice.kind))
-        //   const subTotal = prices.reduce((a, b) => a + b)
-        //
-        //   i.subTotal = subTotal
-        //   i.total = subTotal - i.discount
-        //   if (i.paymentStatus !== 'Paid In Full') {
-        //     i.balance = i.total - i.deposit
-        //   } else {
-        //     i.balance = 0
-        //   }
-        //
-        //   const updatedInvoice = await invoice.update(
-        //     i.id,
-        //     {
-        //       sub_total: subTotal,
-        //       total: subTotal - i.discount,
-        //       balance: i.paymentStatus !=='Paid In Full'? subTotal - i.discount - i.deposit : 0
-        //     },
-        //     this.axiosRequestSource.token
-        //   )
-        //
-        //   return updatedInvoice
-        // } else {
-        //   return i
-        // }
+      // const updatedInvoices = invcs.map( async(i) => {
+      //   const { lines } = i
+      //   if (lines.length) {
+      //     const prices = lines.map(line => price(line, invoice.kind))
+      //     const subTotal = prices.reduce((a, b) => a + b)
+      //
+      //     i.subTotal = subTotal
+      //     i.total = subTotal - i.discount
+      //     if (i.paymentStatus !== 'Paid In Full') {
+      //       i.balance = i.total - i.deposit
+      //     } else {
+      //       i.balance = 0
+      //     }
+      //
+      //     const updatedInvoice = await invoice.update(
+      //       i.id,
+      //       {
+      //         sub_total: subTotal,
+      //         total: subTotal - i.discount,
+      //         balance: i.paymentStatus !=='Paid In Full'? subTotal - i.discount - i.deposit : 0
+      //       },
+      //       this.axiosRequestSource.token
+      //     )
+      //
+      //     return updatedInvoice
+      //   } else {
+      //     return i
+      //   }
+      //
+      //   return i
+      // })
+      // const loadedInvoices = await Promise.all(updatedInvoices)
 
-        return i
-      })
-      const loadedInvoices = await Promise.all(updatedInvoices)
-      loadedInvoices.forEach(i => invoices.push(i))
-
-      if (invcs.length < 25) {
-
+      invcs.forEach(i => invoices.push(i))
+      if (invcs.length < this.itemsPerPage) {
         this.setState({
           invoices,
           hasMore: false
         })
 
       } else {
-
         this.setState( prevState => ({
           invoices,
           hasMore: true,
           page: prevState.page + 1
         }))
-
       }
-    } else {
-      this.setState({
-        invoices: [],
-      })
+
     }
   }
 

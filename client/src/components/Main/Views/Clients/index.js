@@ -185,7 +185,6 @@ export default class Clients extends Component {
   }
 
   createClient = async(data) => {
-    console.log(data)
     const clt = await client.create(data, this.axiosRequestSource.token);
     await this.addClient(clt)
     return clt;

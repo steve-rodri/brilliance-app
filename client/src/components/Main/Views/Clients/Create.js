@@ -158,7 +158,6 @@ export default class Create extends Component {
   handleSubmit = async() => {
     const { create, match, history } = this.props
     const item = await create(this.state.formData)
-    console.log(item)
     const url = () => {
       let words = `${match.path}`.split('/')
       words.pop()
