@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { clientName } from '../../../helpers/clientHelpers'
+import { styleStatus } from '../../../helpers/invoiceStatus'
 import moment from 'moment'
 import numeral from 'numeral'
 import './index.css'
@@ -14,20 +15,30 @@ export default function Invoice(props){
       {numColumns?
         <div className="List-Item" style={styleItem(item, type, numColumns)}>
 
-          <div className="Invoice--title" style={displayColumn('client & date')}>
-            <h4>{event && event.client && clientName(event.client)}</h4>
-            <p>{event && event.start && moment(event.start).format('MMM Do YYYY')}</p>
+          <div className="List-Item--Cell" style={displayColumn('client & date')}>
+            <div className="Invoice--title">
+              <h4>{event && event.client && clientName(event.client)}</h4>
+              <p>{event && event.start && moment(event.start).format('MMM Do YYYY')}</p>
+            </div>
           </div>
 
-          <h4 style={displayColumn('type')}>{invoice.kind}</h4>
-
-
-          <div className="Invoice--status" style={displayColumn('status')}>
-            <h3>{invoice.kind !== 'Proposal'? invoice.paymentStatus : null}</h3>
-            <h4>{invoice.paymentType !== 'Unknown'? invoice.paymentType : null}</h4>
+          <div className="List-Item--Cell" style={displayColumn('type')}>
+            <h4>{invoice.kind}</h4>
           </div>
 
-          <div className="Invoice--balance" style={displayColumn('balance')}>{numeral(invoice.balance).format('$0,0.00')}</div>
+
+          <div className="List-Item--Cell" style={displayColumn('status')}>
+            <div className="Invoice--status" style={styleStatus(invoice.paymentStatus, invoice.kind)}>
+              <h3>{invoice.paymentStatus}</h3>
+            </div>
+          </div>
+
+          <div className="List-Item--Cell" style={displayColumn('balance')}>
+            <div className="Invoice--balance">
+              {numeral(invoice.balance).format('$0,0.00')}
+            </div>
+          </div>
+
         </div>
         :
         <div className="List-Item">
@@ -39,7 +50,7 @@ export default function Invoice(props){
 
           <div className="Invoice--status">
             <div className="Invoice--balance">{numeral(invoice.balance).format('$0,0.00')}</div>
-            <h3>{invoice.paymentStatus}</h3>
+            <h3>{invoice.kind !== 'Proposal'? invoice.paymentStatus : null}</h3>
             <h4>{invoice.paymentType !== 'Unknown'? invoice.paymentType : null}</h4>
           </div>
 
