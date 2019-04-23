@@ -5,7 +5,7 @@ import logo_t from '../../images/logo_t.GIF'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import './Header.css'
+import './index.css'
 
 library.add(faUserCircle)
 

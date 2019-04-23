@@ -6,8 +6,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   def index
     if params[:category]
-      current_time = Time.zone.now()
-      current_date = Time.zone.new(current_time.year, current_time.month, current_time.day)
+      current_date = Time.zone.today()
       if params[:category] == 'Upcoming'
         @invoices = Invoice
           .joins(:event)

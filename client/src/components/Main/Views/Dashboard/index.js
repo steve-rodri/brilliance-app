@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import Search from '../../../Search/index.js'
 import Schedule from './Schedule/index.js'
 import moment from 'moment'
-import './Dashboard.css'
+import './index.css'
 
 export default class Dashboard extends Component {
 
@@ -32,6 +32,8 @@ export default class Dashboard extends Component {
       <div className="Dashboard">
         <h1 className="Dashboard--intro" >{this.greeting()}</h1>
         <Schedule {...this.props} />
+
+        <button onClick={this.props.syncAllEvents}>Sync</button>
       </div>
     )
   }

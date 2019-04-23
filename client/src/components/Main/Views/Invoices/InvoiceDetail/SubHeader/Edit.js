@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import SearchField from '../../../../../SearchField'
-import { clientName } from '../../../../../Helpers/clientHelpers'
+import { clientName } from '../../../../../../helpers/clientHelpers'
 
 export default class Edit extends Component {
 

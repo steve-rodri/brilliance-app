@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
-import { pencil, check, closeIcon, trash } from '../../../../../Helpers/icons'
-import { clientName } from '../../../../../Helpers/clientHelpers'
+import { pencil, check, closeIcon, trash } from '../../../../../../helpers/icons'
+import { clientName } from '../../../../../../helpers/clientHelpers'
 import moment from 'moment'
 import './index.css'
 

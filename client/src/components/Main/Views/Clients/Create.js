@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchField from '../../../SearchField';
-import { contactName, companyName } from '../../../Helpers/clientHelpers'
+import { contactName, companyName } from '../../../../helpers/clientHelpers'
 import { contact } from '../../../../services/contact'
 import { company } from '../../../../services/company'
 import axios from 'axios'
@@ -177,14 +177,14 @@ export default class Create extends Component {
     = this.state
 
     return (
-      <div className="Modal--Content">
-        <h2 className="Modal--Title">Create New Client</h2>
+      <div className="Client-Modal--Content">
+        <h2 className="Client-Modal--Title">Create New Client</h2>
 
-        <div className="Modal--Fields">
+        <div className="Client-Modal--Fields">
 
           <SearchField
             searchResults={searchFieldData && searchFieldData.contacts}
-            formClassName='Modal--Field'
+            formClassName='Client-Modal--Field'
             resultClassName='search-result'
             resultsClassName='search-results'
             formDataValue={contact_id}
@@ -203,7 +203,7 @@ export default class Create extends Component {
 
           <SearchField
             searchResults={searchFieldData && searchFieldData.companies}
-            formClassName='Modal--Field'
+            formClassName='Client-Modal--Field'
             resultClassName='search-result'
             resultsClassName='search-results'
             formDataValue={company_id}
@@ -220,49 +220,49 @@ export default class Create extends Component {
             onSelect={this.handleSelect}
           />
 
-          {/* <label className="Modal--Label">First Name</label>
+          {/* <label className="Client-Modal--Label">First Name</label>
             <input
-              className="Modal--Field"
+              className="Client-Modal--Field"
               name="firstName"
               value={firstName? firstName : ''}
               onChange={this.handleChange}
               tabIndex='1'
             />
 
-          <label className="Modal--Label">Last Name</label>
+          <label className="Client-Modal--Label">Last Name</label>
             <input
-              className="Modal--Field"
+              className="Client-Modal--Field"
               name="lastName"
               value={lastName? lastName : ''}
               onChange={this.handleChange}
               tabIndex='2'
             />
 
-          <label className="Modal--Label">Phone</label>
+          <label className="Client-Modal--Label">Phone</label>
             <input
-              className="Modal--Field"
+              className="Client-Modal--Field"
               name="phone"
               value={phone? phone : ''}
               onChange={this.handleChange}
               tabIndex='3'
             />
 
-          <label className="Modal--Label">Email</label>
+          <label className="Client-Modal--Label">Email</label>
             <input
-              className="Modal--Field"
+              className="Client-Modal--Field"
               name="email"
               value={email? email : ''}
               onChange={this.handleChange}
               tabIndex='4'
             />
 
-          <div className="Modal--Buttons">
-            <button className="Modal--Button" type='submit'>Create</button>
+          <div className="Client-Modal--Buttons">
+            <button className="Client-Modal--Button" type='submit'>Create</button>
           </div> */}
 
         </div>
-        <div className="Modal--Buttons">
-          <button className="Modal--Button" onClick={this.handleSubmit}>Create</button>
+        <div className="Client-Modal--Buttons">
+          <button className="Client-Modal--Button" onClick={this.handleSubmit}>Create</button>
         </div>
       </div>
     )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { description, contents, inc } from './Helpers'
-import { deleteIcon } from '../../../../../../Helpers/icons'
+import { deleteIcon } from '../../../../../../../helpers/icons'
 
 export default class Edit extends Component {
 

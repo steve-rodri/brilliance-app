@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Line from './Line/index.js'
-import { addIcon } from '../../../../../Helpers/icons'
+import { addIcon } from '../../../../../../helpers/icons'
 import './index.css'
 
 export default class Invoice extends Component {
+
   lines = () => {
     const { inv } = this.props
     if (inv && inv.lines) {

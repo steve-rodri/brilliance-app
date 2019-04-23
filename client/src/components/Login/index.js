@@ -3,7 +3,7 @@ import GoogleLogin from 'react-google-login'
 import { Redirect } from 'react-router-dom'
 import logo_t from '../../images/logo_t.GIF'
 import axios from 'axios'
-import './Login.css'
+import './index.css'
 
 export default class Login extends Component {
   constructor(props){

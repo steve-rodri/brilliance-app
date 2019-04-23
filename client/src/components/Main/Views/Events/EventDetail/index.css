@@ -1,9 +1,5 @@
-.EventDetail--container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: var(--med-dark-blue);
+.EventDetail {
+  background-color: var(--dark-gray);
 }
 
 /* ------------------Tab-Control--------------------- */
@@ -35,6 +31,10 @@
 }
 
 @media (min-width: 750px) {
+  .EventDetail {
+    background-color: var(--med-dark-blue);
+  }
+
   .EventDetail--tab-control {
     display: none;
     min-height: 40px;

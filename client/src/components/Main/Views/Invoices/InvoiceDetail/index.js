@@ -8,7 +8,7 @@ import { invoice } from '../../../../../services/invoice'
 import { line } from '../../../../../services/line'
 import { client } from '../../../../../services/client'
 import { quantity, price } from './Invoice/Line/Helpers'
-import { clientName } from '../../../../Helpers/clientHelpers'
+import { clientName } from '../../../../../helpers/clientHelpers'
 import axios from 'axios'
 import './index.css'
 
@@ -22,7 +22,6 @@ export default class InvoiceDetail extends Component {
       fields: {},
       searchFieldData: null
     }
-
     this.container = React.createRef()
     this.axiosRequestSource = axios.CancelToken.source()
   }
@@ -36,7 +35,8 @@ export default class InvoiceDetail extends Component {
   // ------------------------------Lifecycle------------------------------------
 
   async componentWillReceiveProps(nextProps){
-    if (nextProps.inv || nextProps.invoiceId) {
+    const { inv } = this.state
+    if (!inv && (nextProps.inv || nextProps.invoiceId)) {
       await this.setup(nextProps)
     }
   }
@@ -54,13 +54,12 @@ export default class InvoiceDetail extends Component {
   // -------------------------Getters-and-Setters-------------------------------
 
   setup = async(props) => {
-    const { isNew, evtId, evt } = props
+    const { isNew, evtId, evt } = this.props
     if (isNew) {
       this.setEditMode(true)
       this.setFieldAndForm('kind', 'Proposal')
     } else {
-      await this.setInvoice(props)
-      await this.setClientName()
+      this.setInvoice(props)
     }
     if (evtId) {
       this.setFormData('event_id', evtId)
@@ -69,8 +68,6 @@ export default class InvoiceDetail extends Component {
     if (evt) {
       this.setState({ fromEvent: true })
     }
-    await this.setSummary()
-    await this.setFields()
   }
 
   setInvoice = async(props) => {
@@ -81,6 +78,9 @@ export default class InvoiceDetail extends Component {
       const i = await invoice.get(invoiceId, this.axiosRequestSource.token)
       this.setState({ inv: i }, () => this.setLines())
     }
+    await this.setClientName()
+    await this.setSummary()
+    await this.setFields()
   }
 
   setLines = async() => {
@@ -131,7 +131,7 @@ export default class InvoiceDetail extends Component {
       }
     }), async() => {
       await this.updateSummary();
-      await this.handleSubmit()
+      // await this.handleSubmit()
 
     });
   }
@@ -328,7 +328,7 @@ export default class InvoiceDetail extends Component {
   // --------------------------------Lines--------------------------------------
 
   addLine = () => {
-    console.log('works')
+
   }
 
   deleteLine = async(lineId) => {
@@ -412,11 +412,6 @@ export default class InvoiceDetail extends Component {
         }
 
         case 'quantity':
-        console.log({
-          ...line,
-          quantity: parseInt(value),
-          price: price(line, inv.kind)
-        })
         return (
           {
             ...line,
@@ -544,6 +539,7 @@ export default class InvoiceDetail extends Component {
         }
       } else {
         const updatedInvoice = await this.props.handleUpdate(inv, formData)
+        console.log(updatedInvoice)
         await this.setState({ inv: updatedInvoice }, async() => await this.close(true))
       }
     }

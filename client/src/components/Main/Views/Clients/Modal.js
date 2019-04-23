@@ -26,9 +26,9 @@ export default class Modal extends Component {
     return (
       <div
         onClick={back}
-        className="Modal--Overlay"
+        className="Client-Modal--Overlay"
       >
-        <div className="Modal" onClick={e => e.stopPropagation()}>
+        <div className="Client-Modal" onClick={e => e.stopPropagation()}>
           {type === 'Create'?
             <Create
               {...this.props}

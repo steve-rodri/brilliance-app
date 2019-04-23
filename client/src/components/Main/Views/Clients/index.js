@@ -4,7 +4,7 @@ import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import Modal from './Modal';
 import { client } from '../../../../services/client'
-import { clientName } from '../../../Helpers/clientHelpers'
+import { clientName } from '../../../../helpers/clientHelpers'
 import axios from 'axios'
 
 export default class Clients extends Component {

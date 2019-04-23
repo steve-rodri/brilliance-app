@@ -1,0 +1,43 @@
+.StaffSelector {
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-gap: 10px;
+}
+
+.StaffSelector--labor, .StaffSelector--non-labor {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: start;
+  grid-gap: 5px;
+}
+
+.StaffSelector--employee {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 0;
+  background: inherit;
+}
+
+.StaffSelector--done {
+  width: 100px;
+  height: 50px;
+  background-color: inherit;
+  color: var(--med-dark-blue);
+  font-weight: bold;
+  border: 3px solid var(--med-dark-blue);
+}
+
+.StaffSelector--done:hover {
+  background-color: var(--med-dark-blue);
+  color: #eeeeee;
+}

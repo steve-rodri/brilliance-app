@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import ListItem from '../ListItem/index.js'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import './List.css'
+import './index.css'
 
 export default class List extends Component {
 
@@ -15,7 +15,6 @@ export default class List extends Component {
         return {}
       }
     }
-
     return (
       <div className="List--container">
         <div id="List" className="List">
@@ -48,15 +47,25 @@ export default class List extends Component {
                 </div>
               }
               scrollableTarget="List"
+              endMessage={
+                <Fragment>
+                  {
+                    items && items.length?
+                    <div></div>
+                    :
+                    <div>None Found</div>
+                  }
+                </Fragment>
+              }
             >
               {items && items.map((item, id) => (
                 <ListItem
+                  {...this.props}
                   key={id}
                   item={item}
                   numColumns={columnHeaders && columnHeaders.length}
                   displayColumn={displayColumn}
                   styleColumns={styleColumns}
-                  {...this.props}
                 />
               ))}
             </InfiniteScroll>
