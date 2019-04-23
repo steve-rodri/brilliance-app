@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import BasicInfo from './BasicInfo/index.js';
-import Invoice from './Invoice/index.js';
-import CashFlow from './CashFlow/index.js';
-import StaffModal from './StaffModal.js';
+import Header from './Header'
+import Body from './Body';
+import Modal from '../../../../Modal';
+import StaffSelector from './Body/Staff/StaffSelector'
 import { GOOGLE } from '../../../../../services/google_service';
 import { event } from '../../../../../services/event';
 import { client } from '../../../../../services/client';
 import { place } from '../../../../../services/place';
 import { eventEmployee } from '../../../../../services/eventEmployee';
 import { employee } from '../../../../../services/employee'
-import { eventTitle } from '../../../../Helpers/eventTitle';
-import { clientName } from '../../../../Helpers/clientHelpers';
-import { locationName } from '../../../../Helpers/locationName';
-import { formatFromGoogle } from '../../../../Helpers/googleFormatters';
+import { eventTitle } from '../../../../../helpers/eventTitle';
+import { clientName } from '../../../../../helpers/clientHelpers';
+import { locationName } from '../../../../../helpers/locationName';
+import { formatFromGoogle } from '../../../../../helpers/googleFormatters';
 import moment from 'moment'
 import axios from 'axios'
 import './index.css';
@@ -22,7 +22,6 @@ export default class EventDetail extends Component {
   constructor(props){
     super(props)
     this.state = {
-      view: 'Basic Info',
       evt: null,
       workers: [],
       fields: null,
@@ -33,12 +32,14 @@ export default class EventDetail extends Component {
       redirectToEvents: false,
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.container = React.createRef()
   }
 
 // ---------------------------------LifeCycle-----------------------------------
 
   async componentWillReceiveProps(nextProps){
-    if (nextProps.e || nextProps.evtId) {
+    const { evt } = this.state;
+    if ( !evt && (nextProps.e || nextProps.evtId)) {
       await this.initialSetup(nextProps)
     }
   }
@@ -48,13 +49,13 @@ export default class EventDetail extends Component {
     window.addEventListener('resize', this.resetView)
     window.scrollTo(0,0);
     await this.setFields();
-    const { isNew, dateStart } = this.props
+    const { isNew, date } = this.props
     if (isNew) {
       this.switchEditMode()
       this.setField('summary', 'New Event')
       this.setFormData('summary', 'New Event')
-      if (dateStart) {
-        this.handleDateChange('start', dateStart)
+      if (date) {
+        this.handleDateChange('start', date.start)
       } else {
         this.handleDateChange('start', moment().startOf('hour').format())
       }
@@ -837,58 +838,9 @@ export default class EventDetail extends Component {
 
 // -----------------------------------Views-------------------------------------
 
-  view = () => {
-    switch (this.state.view) {
-      case 'Basic Info':
-        return (
-          <BasicInfo
-            {...this.state}
-            {...this.props}
-
-            edit={this.switchEditMode}
-            close={this.close}
-            delete={this.handleDelete}
-
-            handleChange={this.handleChange}
-            handleStatusChange={this.handleStatusChange}
-            handleDateChange={this.handleDateChange}
-            handleSearchChange={this.handleSearchChange}
-
-            handleSubmit={this.handleSubmit}
-            onSelect={this.handleSelect}
-            onEnter={this.handleFormSubmit}
-
-            chooseWorker={this.chooseWorker}
-            addWorker={this.addWorker}
-            removeWorker={this.removeWorker}
-          />
-        )
-      case 'Invoice':
-        return (
-          <Invoice
-            {...this.state}
-            {...this.props}
-            setView={this.setView}
-          />
-        )
-      case 'Cash Flow':
-        return (
-          <CashFlow
-            {...this.state}
-          />
-        )
-      default:
-    }
-  }
-
-  setView = (view) => {
-    this.setState({ view })
-  }
-
   resetView = () => {
     const width = window.innerWidth;
     if (width < 750) {
-      this.setView('Basic Info')
       this.displayMobile(true)
     } else {
       this.displayMobile(false)
@@ -911,6 +863,10 @@ export default class EventDetail extends Component {
 
   displayMobile = (value) => {
     this.setState({ mobile: value })
+  }
+
+  scrollToTop = () => {
+    this.container.current.scrollTop = 0
   }
 
 // -----------------------------------Styles------------------------------------
@@ -943,27 +899,60 @@ export default class EventDetail extends Component {
 // -----------------------------------Render------------------------------------
 
   render(){
-    if (this.state.redirectToEvents) return (<Redirect to='/admin/events'/>)
+    const { editMode, mobile } = this.state
+    const { match } = this.props
+    const accessLevel = match.url.split('/')[1]
+    if (this.state.redirectToEvents) return (<Redirect to={`/${accessLevel}/events`}/>)
     return (
-      <div className="EventDetail--container">
+      <div className="EventDetail" ref={this.container}>
+
         {
-          this.state.mobile?
+          mobile && editMode?
           null
           :
-          <div className="EventDetail--tab-control" style={this.styleTabControl()}>
-            <div className="Tab" style={this.styleTab("Basic Info")} onClick={() => this.setView("Basic Info")}><h3>MAIN</h3></div>
-            <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>INVOICE</h3></div>
-            <div className="Tab" style={this.styleTab("Cash Flow")}  onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
-          </div>
+          <Header
+            {...this.state}
+            {...this.props}
+
+            edit={this.switchEditMode}
+            close={this.close}
+            delete={this.handleDelete}
+
+            handleSubmit={this.handleSubmit}
+          />
         }
-        {this.view()}
+
+        <Body
+          {...this.state}
+          {...this.props}
+
+          handleChange={this.handleChange}
+          handleStatusChange={this.handleStatusChange}
+          handleDateChange={this.handleDateChange}
+          handleSearchChange={this.handleSearchChange}
+
+          onSelect={this.handleSelect}
+          onEnter={this.handleFormSubmit}
+
+          chooseWorker={this.chooseWorker}
+          addWorker={this.addWorker}
+          removeWorker={this.removeWorker}
+
+          scrollToTop={this.scrollToTop}
+        />
+
         {
           this.state.showStaffModal?
-          <StaffModal
+          <Modal
             close={this.closeStaffModal}
-            workers={this.state.workers}
-            employees={this.state.employees}
-            handleEmployeeSelect={this.handleEmployeeSelect}
+            content= {
+              <StaffSelector
+                close={this.closeStaffModal}
+                workers={this.state.workers}
+                employees={this.state.employees}
+                handleEmployeeSelect={this.handleEmployeeSelect}
+              />
+            }
           />
           :
           null
@@ -972,3 +961,17 @@ export default class EventDetail extends Component {
     )
   }
 }
+
+
+
+
+/* {
+  this.state.mobile?
+  null
+  :
+  <div className="EventDetail--tab-control" style={this.styleTabControl()}>
+    <div className="Tab" style={this.styleTab("Basic Info")} onClick={() => this.setView("Basic Info")}><h3>MAIN</h3></div>
+    <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>INVOICE</h3></div>
+    <div className="Tab" style={this.styleTab("Cash Flow")}  onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
+  </div>
+} */

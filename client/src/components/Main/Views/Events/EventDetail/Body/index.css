@@ -1,0 +1,60 @@
+.EventDetail-Body--components {
+  display: grid;
+  grid-gap: 2px;
+  width: 100%;
+}
+
+.EventDetail-Body--component {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: var(--dark-gray);
+}
+
+.EventDetail-Body--component-title {
+  display: none;
+}
+
+@media (min-width: 750px) {
+  .EventDetail-Body--components-container {
+    padding: 40px;
+  }
+
+  .EventDetail-Body--components {
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    align-items: flex-start;
+    justify-content: center;
+    justify-items: center;
+    grid-gap: 40px;
+  }
+
+  .EventDetail-Body--component {
+    min-width: 300px;
+    grid-template-rows: 30px auto;
+    background-color: var(--light-gray);
+  }
+
+  .EventDetail-Body--component-title {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-gray);
+    color: var(--light-gray);
+    font-size: 17px;
+  }
+
+  .EventDetail-Body--notes {
+    max-height: 400px;
+    overscroll-behavior-y: contain;
+    overflow: auto;
+    grid-row: span 2;
+  }
+}

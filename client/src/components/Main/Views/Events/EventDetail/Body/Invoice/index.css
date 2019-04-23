@@ -1,0 +1,30 @@
+.Event-Invoice--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+.Event-Invoice {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 5px;
+  width: 100%;
+  color: #eeeeee;
+}
+
+.Event-Invoice--no-invoice {
+  display: grid;
+  grid-gap: 20px;
+}
+
+@media (min-width: 750px) {
+  .Event-Invoice {
+    padding: 30px 30px 30px 30px;
+    color: inherit;
+  }
+}

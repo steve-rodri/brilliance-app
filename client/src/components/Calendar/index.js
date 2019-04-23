@@ -10,7 +10,7 @@ import calendar, {
   getPreviousMonth,
   WEEK_DAYS,
   CALENDAR_MONTHS
-} from "../Helpers/calendar";
+} from "../../helpers/calendar";
 
 class Calendar extends Component {
   state = { ...this.resolveStateFromProp(), today: new Date() };

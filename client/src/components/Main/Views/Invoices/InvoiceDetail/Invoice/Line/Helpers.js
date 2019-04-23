@@ -1,6 +1,6 @@
 import React from 'react'
 import numeral from 'numeral'
-import { square } from '../../../../../../Helpers/icons'
+import { square } from '../../../../../../../helpers/icons'
 
 const description = (item) => {
   if (item) {

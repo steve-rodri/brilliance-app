@@ -5,7 +5,7 @@ import ListPage from '../../../ListPage/index.js'
 import InvoiceDetail from './InvoiceDetail/index.js'
 import { invoice } from '../../../../services/invoice'
 import { client } from '../../../../services/client'
-import { clientName } from '../../../Helpers/clientHelpers'
+import { clientName } from '../../../../helpers/clientHelpers'
 import { price } from './InvoiceDetail/Invoice/Line/Helpers'
 import axios from 'axios'
 import moment from 'moment'
@@ -18,17 +18,18 @@ export default class Invoices extends Component {
       category: 'Upcoming',
       categories: ['Production', 'CANS', 'THC', 'CATP'],
       columnHeaders: ['client & date', 'type', 'status', 'balance'],
-      hasMore: true,
+      hasMore: false,
       page: 1
     }
 
     this.axiosRequestSource = axios.CancelToken.source()
+    this.itemsPerPage = 25
   }
 
   // ----------------------------------Lifecycle--------------------------------
 
   async componentWillReceiveProps(nextProps){
-    await this.setInvoices(nextProps, 0)
+    await this.setInvoices(nextProps)
   }
 
   async componentDidMount() {
@@ -184,20 +185,24 @@ export default class Invoices extends Component {
   // --------------------------------------CRUD---------------------------------
 
   fetchInvoices = async() => {
-    const { page, date: { start, end }, category, query, client } = this.state
-    let invcs;
-    if (query) {
-      invcs = await invoice.find(page, query, this.axiosRequestSource.token)
-    } else if (client) {
-      invcs = await invoice.findByClient(page, client, this.axiosRequestSource.token)
-    } else if (category) {
-      invcs = await invoice.getAll(page, category, this.axiosRequestSource.token)
+    const { invoices, page, date: { start, end }, category, query, client } = this.state
+    if ((invoices.length + this.itemsPerPage) / page <= this.itemsPerPage) {
+
+      let invcs = [];
+
+      if (query) {
+        invcs = await invoice.find(page, query, this.axiosRequestSource.token)
+      } else if (client) {
+        invcs = await invoice.findByClient(page, client, this.axiosRequestSource.token)
+      } else if (category) {
+        invcs = await invoice.getAll(page, category, this.axiosRequestSource.token)
+      } else {
+        invcs = await invoice.findByDate(page, start, end, this.axiosRequestSource.token)
+      }
+      if (invcs.length) await this.updateInvoices(invcs)
+
     } else {
-      invcs = await invoice.findByDate(page, start, end, this.axiosRequestSource.token)
-    }
-    if (invcs) {
-      await this.updateInvoices(invcs);
-      await this.incrementPage()
+      this.setState({ hasMore: false })
     }
   }
 
@@ -230,37 +235,44 @@ export default class Invoices extends Component {
   }
 
   updateInvoices = async(invcs, category) => {
-    if (invcs) {
+    const { page } = this.state
+    const invoices = [...this.state.invoices]
+    if ((invoices.length + this.itemsPerPage) / page <= this.itemsPerPage) {
+
       const updatedInvoices = invcs.map( async(i) => {
-        const { lines } = i
-        if (lines && lines.length) {
-          const prices = lines.map(line => price(line, invoice.kind))
-          const subTotal = prices.reduce((a, b) => a + b)
+        // const { lines } = i
+        // if (lines.length) {
+        //   const prices = lines.map(line => price(line, invoice.kind))
+        //   const subTotal = prices.reduce((a, b) => a + b)
+        //
+        //   i.subTotal = subTotal
+        //   i.total = subTotal - i.discount
+        //   if (i.paymentStatus !== 'Paid In Full') {
+        //     i.balance = i.total - i.deposit
+        //   } else {
+        //     i.balance = 0
+        //   }
+        //
+        //   const updatedInvoice = await invoice.update(
+        //     i.id,
+        //     {
+        //       sub_total: subTotal,
+        //       total: subTotal - i.discount,
+        //       balance: i.paymentStatus !=='Paid In Full'? subTotal - i.discount - i.deposit : 0
+        //     },
+        //     this.axiosRequestSource.token
+        //   )
+        //
+        //   return updatedInvoice
+        // } else {
+        //   return i
+        // }
 
-          i.subTotal = subTotal
-          i.total = subTotal - i.discount
-          if (i.paymentStatus !== 'Paid In Full') {
-            i.balance = i.total - i.deposit
-          } else {
-            i.balance = 0
-          }
-
-          await invoice.update(
-            i.id,
-            {
-              sub_total: subTotal,
-              total: subTotal - i.discount,
-              balance: i.paymentStatus !=='Paid In Full'? subTotal - i.discount - i.deposit : 0
-            },
-            this.axiosRequestSource.token
-          )
-
-          return i
-        }
+        return i
       })
       const loadedInvoices = await Promise.all(updatedInvoices)
-      const invoices = [...this.state.invoices]
       loadedInvoices.forEach(i => invoices.push(i))
+
       if (invcs.length < 25) {
 
         this.setState({
@@ -270,10 +282,11 @@ export default class Invoices extends Component {
 
       } else {
 
-        this.setState({
+        this.setState( prevState => ({
           invoices,
-          hasMore: true
-        })
+          hasMore: true,
+          page: prevState.page + 1
+        }))
 
       }
     } else {
@@ -326,7 +339,10 @@ export default class Invoices extends Component {
   Show = ({ match, location, history }) => {
     const req_id = parseInt(match.params.id)
     const invoices = this.state.invoices
-    const inv = invoices.length? invoices.find(invoice => invoice.id === req_id) : null
+    let inv;
+    if (invoice.length) {
+      inv = invoices.find(invoice => invoice.id === req_id)
+    }
     return (
       <InvoiceDetail
         {...this.props}

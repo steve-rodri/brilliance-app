@@ -1,5 +1,5 @@
 .InvoiceDetail {
-  height: calc(100vh - 150px);
+  height: 100%;
   background-color: var(--dark-gray);
   width: 100%;
   display: grid;
@@ -13,6 +13,5 @@
 @media (min-width: 750px) {
   .InvoiceDetail {
     background-color: var(--light-gray);
-    height: calc(100vh - 75px);
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { clientName } from '../../../../../Helpers/clientHelpers'
+import { clientName } from '../../../../../../helpers/clientHelpers'
 import './index.css'
 
 export default class SubHeader extends Component {

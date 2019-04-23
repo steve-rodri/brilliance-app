@@ -1,0 +1,44 @@
+.Modal {
+  min-height: 450px;
+  max-height: 650px;
+  width: 85%;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  WebkitOverflowScrolling: touch;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Modal--overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.88);
+  z-index: 10000;
+}
+
+.Modal--content {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-gap: 20px;
+}
+
+.Modal--close {
+  position: absolute;
+  top: -1%;
+  right: -1%;
+}

@@ -1,11 +1,11 @@
 import React from 'react'
-import Schedule from './Schedule'
-import Event from './Event'
-import Invoice from './Invoice'
-import Client from './Client'
-import Staff from './Staff'
+import Schedule from './Schedule/'
+import Event from './Event/'
+import Invoice from './Invoice/'
+import Client from './Client/'
+import Staff from './Staff/'
 import moment from 'moment'
-import { start, end, timeUntil } from '../Helpers/datetime'
+import { start, end, timeUntil } from '../../helpers/datetime'
 import './index.css'
 
 export default function ListItem(props){

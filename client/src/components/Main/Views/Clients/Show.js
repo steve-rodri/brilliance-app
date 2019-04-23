@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { clientName, clientInfo } from '../../../Helpers/clientHelpers'
+import { clientName, clientInfo } from '../../../../helpers/clientHelpers'
 
 export default class Show extends Component {
   constructor(props){
@@ -29,22 +29,22 @@ export default class Show extends Component {
     const contactInfo = clientInfo(client)
 
     return (
-      <div className="Modal--Content">
-        <h2 className="Modal--Title">{name}</h2>
-        <div className="Modal--Fields">
-          <label className="Modal--Label">Phone</label>
-            <div className="Modal--Field">
+      <div className="Client-Modal--Content">
+        <h2 className="Client-Modal--Title">{name}</h2>
+        <div className="Client-Modal--Fields">
+          <label className="Client-Modal--Label">Phone</label>
+            <div className="Client-Modal--Field">
               <a href={`tel:${contactInfo && contactInfo.phoneNumber}`}>{contactInfo && contactInfo.phoneNumber? contactInfo.phoneNumber : ''}</a>
             </div>
-          <label className="Modal--Label">Email</label>
-            <div className="Modal--Field">
+          <label className="Client-Modal--Label">Email</label>
+            <div className="Client-Modal--Field">
               <a href={`mailto:${contactInfo && contactInfo.emailAddresses && contactInfo.emailAddresses[0]}`}>{contactInfo && contactInfo.emailAddresses? contactInfo.emailAddresses[0] : ''}</a>
             </div>
         </div>
 
-        <div className="Modal--Buttons">
+        <div className="Client-Modal--Buttons">
           <button
-            className="Modal--Button"
+            className="Client-Modal--Button"
             onClick={(e) => {
               e.stopPropagation()
               this.handleGetClientInvoices()
@@ -53,7 +53,7 @@ export default class Show extends Component {
             Invoices
           </button>
           <button
-            className="Modal--Button"
+            className="Client-Modal--Button"
             onClick={(e) => {
               e.stopPropagation()
               this.handleGetClientEvents()

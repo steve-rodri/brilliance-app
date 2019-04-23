@@ -1,0 +1,120 @@
+.EventDetail--header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--dark-gray);
+  color: var(--light-gray);
+  z-index: 5;
+}
+
+.EventDetail--header-right {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  justify-self: end;
+}
+
+.EventDetail--event-title-container {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.EventDetail--event-title, .EventDetail--event-summary {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  justify-self: start;
+}
+
+.EventDetail--event-summary {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+input, .EventDetail--event-summary {
+  background-color: #F8F8F8;
+}
+
+.EventDetail--event-status {
+  display: none;
+  /* position: absolute;
+  top: 1%;
+  left: 0%; */
+}
+
+.EventDetail--icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: flex-end;
+}
+
+.EventDetail--icon {
+  padding: 10px;
+}
+
+.EventDetail--icon:hover {
+  cursor: pointer;
+}
+
+.left {
+  right: 8%;
+}
+
+.right {
+  right: 1.5%;
+}
+
+.EventDetail--button:hover, .EventDetail--event-status:hover {
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+  .EventDetail--event-title, .EventDetail--event-summary {
+    font-size: 35px;
+  }
+}
+
+@media (min-width: 750px) {
+  .EventDetail--header {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    height: 75px;
+    justify-items: left;
+    grid-column-gap: 5px;
+    grid: auto / 100px auto 100px;
+    border-bottom: 1px solid black;
+    padding: 5px 15px;
+  }
+
+  .EventDetail--event-title-container {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2 / span 1;
+  }
+
+  .EventDetail--event-title, .EventDetail--event-summary {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .EventDetail--header-right {
+    display: flex;
+    grid-column: 3 / span 1;
+  }
+
+  .EventDetail--buttons {
+    display: flex;
+  }
+}

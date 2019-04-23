@@ -3,7 +3,7 @@ import List from '../List/'
 import Calendar from '../Calendar'
 import Search from '../Search/'
 import AddNew from '../Buttons/AddNew'
-import './ListPage.css'
+import './index.css'
 
 export default class ListPage extends Component {
   constructor(props){
@@ -50,6 +50,15 @@ export default class ListPage extends Component {
     }
   }
 
+  styleList = () => {
+    const { data } = this.props
+    if (data && data.length) {
+      return {}
+    } else {
+      return { justifyContent: 'center'}
+    }
+  }
+
   render(){
     const {
       title,
@@ -57,7 +66,7 @@ export default class ListPage extends Component {
       category,
       categories,
       data,
-      dateStart,
+      date,
       match,
       refresh,
       handleDateChange
@@ -65,6 +74,7 @@ export default class ListPage extends Component {
     return (
       <div className='ListPage'>
         <aside>
+
           {/* Title */}
           <h2
             className="ListPage--name"
@@ -107,7 +117,7 @@ export default class ListPage extends Component {
           {
             type === "Events" || type === "Invoices"?
             <Calendar
-              date = {dateStart && new Date(dateStart)}
+              date = {date && date.start && new Date(date.start)}
               onDateChanged={handleDateChange}
             />
             :
@@ -133,7 +143,7 @@ export default class ListPage extends Component {
             <h3 className="ListPage--category-title">{category}</h3>
           </div>
 
-          <div className="ListPage--list">
+          <div className="ListPage--list" style={this.styleList()}>
             <List
               {...this.props}
               title={category}
@@ -147,7 +157,6 @@ export default class ListPage extends Component {
 
           </div>
         </main>
-
       </div>
     )
   }

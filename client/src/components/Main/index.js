@@ -3,7 +3,7 @@ import { Route, Switch, Redirect  } from 'react-router-dom'
 import Admin from './Admin'
 import { GOOGLE } from '../../services/google_service'
 import { event } from '../../services/event'
-import { formatFromGoogle } from '../Helpers/googleFormatters'
+import { formatFromGoogle } from '../../helpers/googleFormatters'
 import moment from 'moment'
 import axios from 'axios'
 
@@ -14,7 +14,7 @@ export default class Main extends Component {
     this.state = {
       date: {
         start: moment().startOf('day').toISOString(true),
-        end: moment().startOf('day').add(1, 'days').toISOString(true)
+        end: moment().endOf('day').toISOString(true)
       }
     }
   }

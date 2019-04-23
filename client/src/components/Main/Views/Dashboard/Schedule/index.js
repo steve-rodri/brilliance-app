@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import List from '../../../../List/index.js'
 import { event } from '../../../../../services/event'
-import { start, end } from '../../../../Helpers/datetime'
+import { start, end } from '../../../../../helpers/datetime'
 import moment from 'moment'
 import axios from 'axios'
 import './Schedule.css'

@@ -2,11 +2,14 @@
   display: grid;
   justify-items: center;
   align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   height: 100%;
   width: 100%;
   background-color: var(--dark-blue);
   color: var(--light-gray);
-  z-index: 5;
+  z-index: 11;
 }
 
 .Header--right {

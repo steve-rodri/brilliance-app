@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { plusIcon } from '../../Helpers/icons'
+import { plusIcon } from '../../../helpers/icons'
 import './index.css'
 
 export default function AddNew(props){

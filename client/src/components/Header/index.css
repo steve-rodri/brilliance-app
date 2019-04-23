@@ -1,0 +1,206 @@
+header {
+  height: 150px;
+  position: -webkit-sticky;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  background: #111111;
+}
+
+.Header--fixed-space {
+  height: 150px;
+}
+
+@media (min-width: 1000px) {
+  header {
+    height: 75px;
+    grid-template-columns: 250px auto auto 100px;
+  }
+  .Header--fixed-space {
+    height: 75px;
+  }
+}
+
+/*-----------------Logo---------------- */
+.logo {
+  grid-column: 1 / span 1;
+  justify-self: start;
+  width: 225px;
+  height: 55px;
+  margin: 10px;
+}
+
+@media (min-width: 1000px) {
+  .logo {
+    width: 150px;
+    height: 37px;
+  }
+}
+
+/*-----------------DropDown-Nav-Menu---------------- */
+.Header--drop-down {
+  overflow: hidden;
+  display: none;
+  grid-template-rows: 3fr 1fr;
+  align-items: center;
+  justify-items: center;
+  z-index: 10;
+  height: calc(100vh - 150px);
+  width: 100vw;
+  border-bottom: 1px solid var(--light-gray);
+  background: rgba(0, 0, 0, 0.95);
+  position: absolute;
+  transition: all 500ms ease;
+}
+
+.Header--nav-menu {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / span 2;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 90%;
+  border-bottom: 5px solid rgba(255,255,255, .2)
+}
+
+.Header--nav-menu > a {
+  height: 100%;
+  width: 80%;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-family: 'Gruppo';
+  font-weight: bold;
+}
+
+.Header__bars {
+  justify-self: end;
+  margin: .2em .4em;
+}
+
+.Header__bars:hover {
+  color: #dddddd;
+  cursor: pointer;
+}
+
+.Header--Log-Out {
+  grid-column: 1 / span 2;
+  background: darkred;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border: 2px solid darkred;
+  border-radius: 5px;
+  width: 80%;
+  height: 65px;
+  margin: 25px;
+}
+
+@media (min-width: 1000px) {
+  .Header--Bars {
+    display: none;
+  }
+}
+
+/*-----------------Traditional-Nav---------------- */
+
+nav {
+  grid-column: 3 / span 1;
+  justify-self: right;
+  height: 100%;
+  width: 400px;
+  display: none;
+  align-items: center;
+  border: 1px solid transparent;
+}
+
+nav > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 0 25px;
+  text-decoration: none;
+  transition: all 250ms ease-out;
+}
+
+nav > * > div {
+  color: white;
+  font-size: 24px;
+  font-family: 'Gruppo';
+  font-weight: bold;
+}
+
+nav > *:hover, nav > * > div:hover{
+  cursor: pointer;
+}
+
+nav > *:hover {
+  border-color: white;
+}
+
+nav > *:active {
+  background-color: lightgray;
+}
+
+.user-circle:hover, .logo:hover {
+  cursor: pointer
+}
+
+.user-circle:hover {
+  border-color: white;
+}
+
+.user-circle {
+  height: 100%;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  grid-column: 4 / span 1;
+  justify-self: center;
+  transition: all 250ms ease-out;
+  border: 1px solid transparent;
+}
+
+.user-photo {
+  height: 70px;
+  width: 70px;
+  padding: 7.5px;
+  border-radius: 100%;
+}
+
+@media (min-width: 1000px) {
+  nav {
+    display: flex;
+  }
+
+  .user-circle {
+    display: flex;
+  }
+}
+
+@media (max-width: 1200px) {
+  nav > * > div {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1000px) {
+  nav > * > div {
+    font-size: 16px;
+  }
+}

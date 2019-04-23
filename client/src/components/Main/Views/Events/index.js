@@ -3,11 +3,11 @@ import { Switch, Route } from 'react-router-dom'
 import ListPage from '../../../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
 import { GOOGLE } from '../../../../services/google_service'
-import { formatToGoogle, formatFromGoogle } from '../../../Helpers/googleFormatters'
+import { formatToGoogle, formatFromGoogle } from '../../../../helpers/googleFormatters'
 import { event } from '../../../../services/event'
 import { client } from '../../../../services/client'
-import { clientName } from '../../../Helpers/clientHelpers'
-import { eventTitle } from '../../../Helpers/eventTitle'
+import { clientName } from '../../../../helpers/clientHelpers'
+import { eventTitle } from '../../../../helpers/eventTitle'
 import queryString from 'query-string'
 import moment from 'moment'
 import axios from 'axios'
@@ -17,18 +17,19 @@ export default class Events extends Component {
     super(props)
     this.state = {
       events: null,
-      hasMore: true,
+      hasMore: false,
       category: 'Upcoming',
       categories: ['Production', 'CANS', 'THC', 'CATP'],
       page: 1
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.itemsPerPage = 25
   }
 
   // ----------------------------Lifecycle--------------------------------------
 
-  async componentWillReceiveProps(nextProps){
-    // await this.setEvents(nextProps)
+  async componentWillReceiveProps(nextProps) {
+    await this.setEvents(nextProps)
   }
 
   async componentDidMount() {
@@ -107,7 +108,7 @@ export default class Events extends Component {
 
   setByDate = async() => {
     const { date: { start, end } } = this.state
-    const isDay = moment(start).isSame(moment(end), 'day')
+    const isDay = moment(end).diff(moment(start), 'days') <= 1
     let date = `${moment(start).format('LL')} - ${moment(end).format('LL')}`
     if (isDay) date = `${moment(start).format('LL')}`
 
@@ -127,16 +128,6 @@ export default class Events extends Component {
 
   resetEvents = async() => {
     this.setState({ events: [] })
-  }
-
-  resetPage = () => {
-    this.setState({ page: 1 })
-  }
-
-  incrementPage = () => {
-    this.setState(prevState => ({
-      page: prevState.page +1
-    }))
   }
 
   setColumnHeaders = () => {
@@ -170,20 +161,23 @@ export default class Events extends Component {
   // -------------------------------CRUD----------------------------------------
 
   fetchEvents = async() => {
-    const { page, date: { start, end }, category, query, client } = this.state
-    let evts;
-    if (query) {
-      evts = await event.find(page, query, this.axiosRequestSource.token)
-    } else if (client) {
-      evts = await event.findByClient(page, client, this.axiosRequestSource.token)
-    } else if (category) {
-      evts = await event.getAll(page, category, this.axiosRequestSource.token);
-    } else {
-      evts = await event.findByDate(page, start, end, this.axiosRequestSource.token)
-    }
-    if (evts && evts.length) {
-      await this.updateEvents(evts);
-      await this.incrementPage()
+    const { events, page, date: { start, end }, category, query, client } = this.state
+    if ((events.length + this.itemsPerPage) / page <= this.itemsPerPage) {
+
+      let evts = [];
+
+      if (query) {
+        evts = await event.find(page, query, this.axiosRequestSource.token)
+      } else if (client) {
+        evts = await event.findByClient(page, client, this.axiosRequestSource.token)
+      } else if (category) {
+        evts = await event.getAll(page, category, this.axiosRequestSource.token);
+      } else {
+        evts = await event.findByDate(page, start, end, this.axiosRequestSource.token)
+      }
+
+      if (evts.length) await this.updateEvents(evts)
+
     } else {
       this.setState({ hasMore: false })
     }
@@ -282,13 +276,15 @@ export default class Events extends Component {
   }
 
   updateEvents = async(evts) => {
-    if (evts) {
+    const { page } = this.state
+    const events = [...this.state.events]
+    if ((events.length + this.itemsPerPage) / page <= this.itemsPerPage) {
+
       const updatedEvents = evts.map( async(e) => {
         if (!e.summary) {
           e.summary = eventTitle(e)
           await event.update(e.id, {summary: e.summary}, this.axiosRequestSource.token)
         }
-        console.log(e.id, e.start, "/", moment(e.start).format(), "/", moment(e.start).toISOString(true), "/", moment(e.start).toISOString())
         const evt = await this.synchronizeWithGoogle(e)
         if (evt) {
           return evt
@@ -296,28 +292,24 @@ export default class Events extends Component {
           return e
         }
       })
+
       const loadedEvents = await Promise.all(updatedEvents)
-      const events = [...this.state.events]
       loadedEvents.forEach(e => events.push(e))
 
-      if (loadedEvents.length < 25) {
+      if (evts.length < this.itemsPerPage) {
         this.setState({
           events,
           hasMore: false
         })
 
       } else {
-
-        this.setState({
+        this.setState( prevState => ({
           events,
-          hasMore: true
-        })
+          hasMore: true,
+          page: prevState.page + 1
+        }))
       }
 
-    } else {
-      this.setState({
-        events: [],
-      })
     }
   }
 
@@ -341,7 +333,7 @@ export default class Events extends Component {
     this.setState( prevState => ({
       date: {
         start: moment(date).startOf('day').toISOString(true),
-        end:  moment(date).startOf('day').add(1, 'days').toISOString(true)
+        end:  moment(date).endOf('day').toISOString(true)
       }
     }),
     () =>  this.setEvents())
