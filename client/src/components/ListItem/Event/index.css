@@ -9,14 +9,12 @@
 .Event--scheduled {
   height: 100%;
   width: 100%;
-  display: grid;
-  grid-template-rows: 22px auto;
-  justify-items: center;
-  align-items: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Event--scheduled-details {
-  grid-row: 2 / span 1;
   height: 100%;
   width: 100%;
   display: flex;

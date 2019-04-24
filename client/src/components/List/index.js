@@ -62,7 +62,9 @@ export default class List extends Component {
                 <ListItem
                   {...this.props}
                   key={id}
+                  index={id}
                   item={item}
+                  total={items.length}
                   numColumns={columnHeaders && columnHeaders.length}
                   displayColumn={displayColumn}
                   styleColumns={styleColumns}

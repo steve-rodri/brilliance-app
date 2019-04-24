@@ -11,7 +11,7 @@ export default function Header(props){
 
   function displaySummary(){
     return (
-      <div className="Header--name">
+      <div className="InvoiceDetail-header--name">
         {clientAndDate()}
       </div>
     )
@@ -46,7 +46,7 @@ export default function Header(props){
     if (!isNew && inv) {
       return (
         <div
-          className="Header--icon left"
+          className="InvoiceDetail-header--icon left"
           onClick={() => props.close(true)}
         >
           {closeIcon('2x')}
@@ -58,7 +58,7 @@ export default function Header(props){
   function edit(){
     return (
       <div
-        className="Header--icon right"
+        className="InvoiceDetail-header--icon right"
         onClick={props.edit}
       >
         {pencil('2x')}
@@ -70,7 +70,7 @@ export default function Header(props){
     if (inv) {
       return (
         <div
-          className="Header--icon right"
+          className="InvoiceDetail-header--icon right"
           onClick={props.delete}
         >
           {trash('2x')}
@@ -82,7 +82,7 @@ export default function Header(props){
   function submit(){
     return (
       <div
-        className="Header--icon right"
+        className="InvoiceDetail-header--icon right"
         onClick={props.submit}
       >
         {check('2x')}
@@ -93,14 +93,14 @@ export default function Header(props){
   function displayButtons(){
     if (editMode) {
       return (
-        <div className="Header--icons">
+        <div className="InvoiceDetail-header--icons">
           {close()}
           {submit()}
         </div>
       )
     } else {
       return (
-        <div className="Header--icons">
+        <div className="InvoiceDetail-header--icons">
           {edit()}
           {trashCan()}
         </div>
@@ -111,10 +111,12 @@ export default function Header(props){
 //----------------------------------------------------------------------
 
   return (
-    <div className="Header">
-      {displaySummary()}
-      <div className="Header--right">
-        {displayButtons()}
+    <div className="InvoiceDetail-header--container">
+      <div className="InvoiceDetail-header">
+        {displaySummary()}
+        <div className="InvoiceDetail-header--right">
+          {displayButtons()}
+        </div>
       </div>
     </div>
   )

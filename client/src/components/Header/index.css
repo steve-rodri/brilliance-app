@@ -1,7 +1,6 @@
 header {
   height: 150px;
-  position: -webkit-sticky;
-  position: fixed;
+  position: sticky;
   z-index: 10;
   top: 0;
   width: 100%;
@@ -13,6 +12,9 @@ header {
 }
 
 .Header--fixed-space {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   height: 150px;
 }
 

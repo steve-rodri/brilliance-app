@@ -3,7 +3,6 @@ import './index.css'
 
 export default function Notes(props){
   const { fields, editMode } = props
-
   const view = () => {
     if (editMode) {
       return (
@@ -11,7 +10,7 @@ export default function Notes(props){
           className="Notes"
           type="text"
           name='notes'
-          value={fields.notes? fields.notes : ''}
+          value={fields.notes}
           onChange={props.handleChange}
           tabIndex="9"
         />
@@ -19,7 +18,7 @@ export default function Notes(props){
     } else {
       return (
         <div className="Notes--readonly">
-          {fields.notes? notes(fields.notes) : null}
+          {notes(fields.notes)}
         </div>
       )
     }

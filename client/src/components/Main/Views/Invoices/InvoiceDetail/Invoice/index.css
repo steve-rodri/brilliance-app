@@ -27,7 +27,7 @@
 
 .Invoice--header-row > * {
   position: sticky;
-  top: 0%;
+  top: 108px;
 }
 
 .Invoice--header-cell {
