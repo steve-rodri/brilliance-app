@@ -29,7 +29,7 @@ export default class Edit extends Component {
               className="Line--input"
               name="quantity"
               type="number"
-              value={line.quantity}
+              value={line.quantity || ''}
               onChange={(e) => handleLineChange(e, line.id)}
               onFocus={this.handleFocusSelect}
             />
@@ -60,7 +60,7 @@ export default class Edit extends Component {
                 className="Line--input"
                 name="price"
                 type="number"
-                value={line.price}
+                value={line.price || ''}
                 onChange={(e) => handleLineChange(e, line.id)}
                 onFocus={this.handleFocusSelect}
               />
