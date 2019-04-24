@@ -919,6 +919,7 @@ export default class EventDetail extends Component {
             delete={this.handleDelete}
 
             handleSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
           />
         }
 
