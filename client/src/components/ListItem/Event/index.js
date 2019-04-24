@@ -14,9 +14,22 @@ export default function Event(props){
     displayColumn,
     numColumns,
     styleItem,
+    styleCell,
     styleSummary } = props
 
   const event = item
+
+
+  const leftCell = styleCell('left')
+  const middleCell = styleCell('middle')
+  const rightCell = styleCell('right')
+  const titleDisplay = displayColumn('title')
+  const dateDisplay = displayColumn('date')
+  const intelDisplay = displayColumn('intel')
+  const scheduleDisplay = displayColumn('schedule')
+  const confirmationDisplay = displayColumn('confirmation')
+
+
 
   return (
     <Link to={`/admin/${type.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
@@ -25,33 +38,33 @@ export default function Event(props){
 
           {/* Title */}
 
-          <div className="List-Item--Cell" style={displayColumn('title')}>
+          <div className="List-Item--Cell" style={{ ...leftCell, ...titleDisplay }}>
             <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
           </div>
 
           {/* Date */}
 
-          <div className="List-Item--Cell" style={displayColumn('date')}>
+          <div className="List-Item--Cell" style={{ ...middleCell, ...dateDisplay }}>
             <p>{date(event, true)}</p>
             <p>{time(event)}</p>
           </div>
 
           {/* Intel */}
 
-          <div className="List-Item--Cell" style={displayColumn('intel')}>
+          <div className="List-Item--Cell" style={{ ...middleCell, ...intelDisplay }}>
             {event && event.client && <div>{clientName(event.client)}</div>}
             {event && event.location && <p>{event.location.name}</p>}
           </div>
 
           {/* Schedule */}
 
-          <div className="List-Item--Cell" style={displayColumn('schedule')}>
+          <div className="List-Item--Cell" style={{ ...middleCell, ...scheduleDisplay }}>
             {scheduled(event)}
           </div>
 
           {/* Confirmation */}
 
-          <div className="List-Item--Cell" style={displayColumn('confirmation')}>
+          <div className="List-Item--Cell" style={{ ...rightCell, ...confirmationDisplay }}>
             {
               event && event.start && moment(event.start).isSameOrAfter(moment(), 'days')?
 
@@ -151,10 +164,10 @@ function scheduled(evt){
 
       if (accepted === evt.staff.length) {
         return (
-          <div className="Event--scheduled" style={{ backgroundColor: 'limegreen', color: 'white'}}>
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid white', width: '100%', height: '100%'}}>
+          <div className="Event--scheduled" style={{ color: 'limegreen'}}>
+            {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid white', width: '100%', height: '100%'}}>
               <p>{`${evt.staff.length} scheduled`}</p>
-            </div>
+            </div> */}
             <div className="Event--scheduled-details">
               <h4>ALL CONFIRMED</h4>
             </div>
@@ -162,10 +175,10 @@ function scheduled(evt){
         )
       } else if (!accepted) {
         return (
-          <div className="Event--scheduled" style={{ backgroundColor: 'red', color: 'white' }}>
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid white', width: '100%', height: '100%'}}>
+          <div className="Event--scheduled" style={{ color: 'red' }}>
+            {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid white', width: '100%', height: '100%'}}>
               <p>{`${evt.staff.length} scheduled`}</p>
-            </div>
+            </div> */}
             <div className="Event--scheduled-details">
               <div style={{textAlign: 'left'}}>
                 {tentative + needsAction? <p>{`${tentative + needsAction} unconfirmed`}</p> : null}
@@ -176,10 +189,10 @@ function scheduled(evt){
         )
       } else {
         return (
-          <div className="Event--scheduled" style={{ backgroundColor: 'gold', color: 'black' }}>
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid black', width: '100%', height: '100%'}}>
+          <div className="Event--scheduled" style={{ color: 'gold' }}>
+            {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid black', width: '100%', height: '100%'}}>
               <p>{`${evt.staff.length} scheduled`}</p>
-            </div>
+            </div> */}
             <div className="Event--scheduled-details">
               <div style={{textAlign: 'left'}}>
                 <p>{`${accepted} confirmed`}</p>
@@ -194,7 +207,7 @@ function scheduled(evt){
       return (
         <div className="Event--scheduled">
           <div className="Event--scheduled-details" style={{gridRow: '1 / span 2'}}>
-            <p style={{ color: 'darkred' }}>NONE</p>
+            <p style={{ color: 'darkred' }}>-----</p>
           </div>
         </div>
       )

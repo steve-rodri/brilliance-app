@@ -9,7 +9,7 @@ import { start, end, timeUntil } from '../../helpers/datetime'
 import './index.css'
 
 export default function ListItem(props){
-  const { item, type } = props
+  const { item, type, total, index } = props
   switch (type) {
     case 'Schedule':
       return (
@@ -19,6 +19,7 @@ export default function ListItem(props){
           end={end()}
           timeUntil={timeUntil(item)}
           styleItem={styleItem}
+          styleCell={styleCell}
         />
       )
     case 'Events':
@@ -28,6 +29,7 @@ export default function ListItem(props){
           start={start()}
           end={end()}
           styleItem={styleItem}
+          styleCell={styleCell}
           styleSummary={styleSummary}
         />
       )
@@ -36,6 +38,7 @@ export default function ListItem(props){
         <Invoice
           {...props}
           styleItem={styleItem}
+          styleCell={styleCell}
         />
       )
     case 'Clients':
@@ -43,6 +46,7 @@ export default function ListItem(props){
         <Client
           {...props}
           styleItem={styleItem}
+          styleCell={styleCell}
           styleSummary={styleSummary}
         />
       )
@@ -51,19 +55,20 @@ export default function ListItem(props){
         <Staff
           {...props}
           styleItem={styleItem}
+          styleCell={styleCell}
         />
       )
     default:
   }
 
   function styleItem(item, type, numColumns){
+    const style = {}
     switch (type) {
       case 'Events':
         const event = item;
         const past = event && event.end && moment(event.end).isBefore(moment())
         // const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
         // const iCalUID = event && event.iCalUid;
-        let style = {};
 
         if (numColumns) {
           style.gridTemplateColumns =  `repeat(${numColumns}, 1fr)`
@@ -84,17 +89,40 @@ export default function ListItem(props){
         //   style.backgroundColor = 'blue'
         // }
 
-        return style
+      break;
 
       case 'Schedule':
-        return {
-          gridTemplateColumns: `repeat(${numColumns}, 1fr)`
-        }
+        style.gridTemplateColumns =  `repeat(${numColumns}, 1fr)`
+      break;
+
       default:
-      return {
-        gridTemplateColumns: `repeat(${numColumns}, 1fr)`
-      }
+        style.gridTemplateColumns = `repeat(${numColumns}, 1fr)`
+      break;
     }
+
+    if (index + 1 === total) {
+      style.borderBottom = 'none'
+    }
+
+    return style;
+  }
+
+  function styleCell(position){
+    const style = {}
+    switch (position) {
+      case 'left':
+        style.borderRight = '1px solid var(--light-gray)'
+      break;
+      case 'middle':
+        style.borderRight = '1px solid var(--light-gray)'
+      break;
+      case 'right':
+      break;
+      default:
+      break;
+    }
+
+    return style
   }
 
   function styleSummary(summary) {
@@ -110,5 +138,4 @@ export default function ListItem(props){
       return {}
     }
   }
-
 }

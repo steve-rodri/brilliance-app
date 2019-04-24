@@ -43,7 +43,7 @@ export default class Body extends Component {
               null
             }
             {
-              about?
+              about && !isNullOrWhitespace(fields.notes)?
               <Notes {...this.props} />
               :
               null
@@ -61,4 +61,9 @@ export default class Body extends Component {
       </div>
     )
   }
+}
+
+function isNullOrWhitespace( input ) {
+  if (typeof input === 'undefined' || input == null) return true;
+  return input.replace(/\s/g, '').length < 1;
 }
