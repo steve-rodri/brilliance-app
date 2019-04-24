@@ -387,9 +387,9 @@ export default class InvoiceDetail extends Component {
     if (nme) name = nme
     if (val) value = val
 
+
     const updatedLines = lines.map( line => {
       if (line.id !== lineId) return line
-
       switch (name) {
 
         case 'inc':
@@ -416,7 +416,7 @@ export default class InvoiceDetail extends Component {
           {
             ...line,
             quantity: parseInt(value),
-            price: price(line, inv.kind)
+            price: parseFloat( price( {...line, quantity: parseInt(value) }, inv.kind))
           }
         )
 
@@ -443,7 +443,7 @@ export default class InvoiceDetail extends Component {
     this.setState(prevState => ({
       inv: {
         ...prevState.inv,
-        line: updatedLines
+        lines: updatedLines
       },
       fields: {
         ...prevState.fields,
