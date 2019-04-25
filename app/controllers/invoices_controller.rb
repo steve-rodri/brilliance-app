@@ -111,7 +111,7 @@ class InvoicesController < ApplicationController
         :payment_type,
         :commission_paid,
         :commission_actual,
-        :check_info,
+        :check,
         :deposit,
         :discount,
         :tip,

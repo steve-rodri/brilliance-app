@@ -2,21 +2,30 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
 
   @@items_per_page = 25
-
+  @@date_start = Time.zone.today()
+  @@date_end = Time.zone.today()
   # GET /events
   def index
+
+    if params[:date_start]
+      @@date_start = Time.zone.parse(params[:date_start])
+    end
+
+    if params[:date_end]
+      @@date_end = Time.zone.parse(params[:date_end])
+    end
+
     if params[:category]
-      current_date = Time.zone.today()
       if params[:category] == 'All'
         @events = Event
-          .where("events.start >= '#{current_date}'")
+          .where("events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'")
           .order(start: :desc)
           .paginate(page: params[:page], per_page: @@items_per_page)
 
       elsif params[:category] == 'Production'
         @events = Event
           .joins("JOIN places ON places.id = events.location_id")
-          .where("events.start >= '#{current_date}'")
+          .where("events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'")
           .where("places.installation = false")
           .order(start: :desc)
           .paginate(page: params[:page], per_page: @@items_per_page)
@@ -25,30 +34,16 @@ class EventsController < ApplicationController
         short_name = params[:category]
         @events = Event
           .joins("JOIN places on places.id = events.location_id")
-          .where("events.start >= '#{current_date}'")
+          .where("events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'")
           .where("places.short_name = '#{short_name}'")
           .order(start: :desc)
           .paginate(page: params[:page], per_page: @@items_per_page)
       end
-    elsif params[:date]
-      start = Time.zone.parse(params[:date])
-      @events = Event
-        .where("events.start >= '#{start.zone_offset('EST')}'")
-        .order(:start)
-        .paginate(page: params[:page], per_page: @@items_per_page)
-
-    elsif params[:date_start] && params[:date_end]
-      startDay = Time.zone.parse(params[:date_start])
-      endDay = Time.zone.parse(params[:date_end])
-      @events = Event
-        .where("events.start BETWEEN '#{startDay}' AND '#{endDay}'")
-        .order(:start)
-        .paginate(page: params[:page], per_page: @@items_per_page)
 
     else
       @events = Event
-        .all
-        .order(start: :desc)
+        .where("events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'")
+        .order(:start)
         .paginate(page: params[:page], per_page: @@items_per_page)
     end
     render json: @events, include: '**'

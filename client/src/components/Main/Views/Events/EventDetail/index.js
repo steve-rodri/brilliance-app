@@ -10,7 +10,7 @@ import { client } from '../../../../../services/client';
 import { place } from '../../../../../services/place';
 import { eventEmployee } from '../../../../../services/eventEmployee';
 import { employee } from '../../../../../services/employee'
-import { eventTitle } from '../../../../../helpers/eventTitle';
+import { eventTitle } from '../../../../../helpers/eventHelpers';
 import { clientName } from '../../../../../helpers/clientHelpers';
 import { locationName } from '../../../../../helpers/locationName';
 import { formatFromGoogle } from '../../../../../helpers/googleFormatters';

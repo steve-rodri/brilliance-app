@@ -5,7 +5,7 @@ class NestedInvoiceSerializer < ApplicationSerializer
   :payment_status,
   :payment_type,
   :commission_paid,
-  :check_info,
+  :check,
   :discount,
   :deposit,
   :tip,

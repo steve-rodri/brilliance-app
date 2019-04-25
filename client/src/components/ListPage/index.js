@@ -32,8 +32,7 @@ export default class ListPage extends Component {
     if (this.props.category === category) {
       return (
         {
-          color: 'white',
-          borderColor: 'var(--light-gray)'
+          color: 'var(--turquoise)',
         }
       )
     } else {
@@ -67,10 +66,13 @@ export default class ListPage extends Component {
       categories,
       data,
       date,
+      isDay,
       match,
       refresh,
       handleDateChange
     } = this.props
+    const singular = type? type.split('').splice(0, type.length - 1).join('') : null
+    
     return (
       <div className='ListPage'>
         <aside>
@@ -117,7 +119,7 @@ export default class ListPage extends Component {
           {
             type === "Events" || type === "Invoices"?
             <Calendar
-              date = {date && date.start && new Date(date.start)}
+              date = {isDay && date? new Date(date.start) : new Date()}
               onDateChanged={handleDateChange}
             />
             :
@@ -153,7 +155,12 @@ export default class ListPage extends Component {
 
           <div className="ListPage--end-message">
 
-            <h4>{`Found ${data && data.length} ${type}`}</h4>
+            {
+              data && data.length?
+              <h4>{`${data.length} ${data.length > 1? type : singular}`}</h4>
+              :
+              null
+            }
 
           </div>
         </main>

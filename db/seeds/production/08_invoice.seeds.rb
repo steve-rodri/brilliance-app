@@ -12,7 +12,7 @@ csv.each do |row|
     payment_type: row['payment_type'],
     commission_actual: row['commission_actual'],
     commission_paid: row['commission_paid'],
-    check_info: row['check_info'],
+    check: row['check_info'],
     discount: row['discount'],
     deposit: row['deposit'],
     tip: row['tip'],

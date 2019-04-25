@@ -1,11 +1,10 @@
-.Line > :first-child {
-  border-left: 2px solid var(--light-blue-t);
-  /* border-radius: 10px 0 0 10px; */
-}
+.Line > :first-child {}
 
-.Line > :last-child {
-  border-right: 2px solid var(--light-blue-t);
-  /* border-radius: 0 10px 10px 0; */
+.Line > :last-child {}
+
+.Line--add-delete {
+  width: 50px;
+  padding: 15px 0;
 }
 
 .Line--add-delete:hover {

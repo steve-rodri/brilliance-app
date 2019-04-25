@@ -27,7 +27,7 @@ export default class SearchField extends Component {
   displayResults = () => {
     const { fieldActive  } = this.state
     if (fieldActive) {
-      return { display: 'block' }
+      return { display: 'block', zIndex: '100' }
     } else {
       return { display: 'none' }
     }
@@ -99,15 +99,14 @@ export default class SearchField extends Component {
     }
   }
 
-  styleSelectedResult = (i) => {
+  styleResult = (i) => {
     const { hoveringResults, highlightedResult } = this.state
+    const style = { padding: '5px'}
     if (i === highlightedResult && !hoveringResults ) {
-      return {
-        backgroundColor: 'var(--light-blue)'
-      }
-    } else {
-      return {}
+      style.backgroundColor = 'var(--light-blue)'
     }
+
+    return style
   }
 
   render(){
@@ -197,7 +196,7 @@ export default class SearchField extends Component {
         >
           {searchResults && searchResults.map( (item, i) => (
             <div
-              style={this.styleSelectedResult(i)}
+              style={this.styleResult(i)}
               key={item.id}
               className={resultClassName}
               onClick={(e) => {

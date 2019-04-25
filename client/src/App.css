@@ -42,7 +42,6 @@ button:active, button:focus {
 
 
 label {
-  width: 100%;
   text-align: left;
   font-size: 16px;
   font-weight: bold;
@@ -78,8 +77,8 @@ select {
 
 .Field {
   height: 100%;
+  width: auto;
   min-height: 36px;
-  width: 100%;
   padding: 5px;
   display: flex;
   justify-content: center;
@@ -94,7 +93,6 @@ select {
 @media (min-width: 750px) {
   .Field {
     height: 36px;
-    width: 100%;
     padding: 5px;
     display: flex;
     justify-content: center;
@@ -108,8 +106,9 @@ select {
 
 .Edit--Field {
   position: relative;
+  min-width: 100px;
+  max-width: 275px;
   height: 36px;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,6 +131,8 @@ select {
   text-align: center;
   border-radius: 5px;
   border: none;
+  border-left: 1px solid #BBBBBB;
+  border-right: 1px solid #BBBBBB;
   font-size: 20px;
   background-color: #F8F8F8;
 }

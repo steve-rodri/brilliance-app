@@ -10,7 +10,7 @@ import './index.css'
 
 export default class Body extends Component {
   render(){
-    const { mobile, fields } = this.props;
+    const { mobile, editMode, fields } = this.props;
     const about = fields &&
     (fields.client || fields.location || date(fields) || time(fields));
 
@@ -43,7 +43,7 @@ export default class Body extends Component {
               null
             }
             {
-              about && !isNullOrWhitespace(fields.notes)?
+              editMode || (about && !isNullOrWhitespace(fields.notes))?
               <Notes {...this.props} />
               :
               null

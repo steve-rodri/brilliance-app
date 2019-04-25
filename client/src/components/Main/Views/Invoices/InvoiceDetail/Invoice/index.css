@@ -1,19 +1,18 @@
 .Invoice--container {
   align-self: start;
   width: 100%;
-  padding: 0 30px;
+  padding: 0 40px;
 }
 
 .Invoice {
-  /* background-color: #eeeeee; */
   border-radius: 10px;
   width: 100%;
-  /* padding: 10px; */
 }
 
 .Invoice table {
   width: 100%;
   border-collapse: collapse;
+  padding: 0;
 }
 
 /* ---------Header row-------------*/
@@ -22,12 +21,13 @@
   background: var(--dark-gray);
   height: 50px;
   width: 100%;
-  border: 2px solid var(--dark-gray);
 }
 
 .Invoice--header-row > * {
+  position: -webkit-sticky;
   position: sticky;
-  top: 108px;
+  top: 72px;
+  z-index: 10;
 }
 
 .Invoice--header-cell {
@@ -36,28 +36,16 @@
   color: #eeeeee;
 }
 
-.Invoice--header-row > :first-child {
-  /* border-radius: 10px 0 0 0; */
-}
-
-.Invoice--header-row > :last-child {
-  /* border-radius: 0 10px 0 0; */
-}
-
 .Invoice--header-item {
   text-align: left;
-}
-
-.Invoice--body {
-  border: 2px solid var(--med-dark-blue-t);
 }
 
 
 /* -------Cells---------- */
 
 .Invoice--cell {
-  border-top: 2px solid var(--med-dark-blue-t);
-  border-bottom: 2px solid var(--med-dark-blue-t);
+  border-top: 2px solid var(--light-gray);
+  border-bottom: 2px solid var(--light-gray);
   background-color: #eeeeee;
   padding: 15px;
 }

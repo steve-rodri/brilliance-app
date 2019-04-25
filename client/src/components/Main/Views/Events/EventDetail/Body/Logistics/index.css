@@ -18,9 +18,13 @@
   color: #eeeeee;
 }
 
+.Logistics > label {
+  justify-self: start;
+}
+
 @media (min-width: 750px) {
   .Logistics {
-    padding: 0 30px 30px 30px;
+    padding: 20px 30px 30px 30px;
     color: inherit;
   }
 }

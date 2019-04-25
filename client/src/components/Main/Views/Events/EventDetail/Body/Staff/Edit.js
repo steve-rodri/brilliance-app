@@ -24,10 +24,10 @@ export default class Edit extends Component {
   }
 
   render(){
-    const { workers, iconSize } = this.props
+    const { mobile, workers, iconSize } = this.props
     return (
       <div className="Staff--container Staff--Edit">
-      <label>Staff</label>
+      {mobile? <label>Staff</label> : null}
         <table className="Staff Staff--Edit">
           <tbody>
           {workers?

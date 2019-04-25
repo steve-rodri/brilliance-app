@@ -1,9 +1,10 @@
 import axios from 'axios'
 
 const event = {
-  getAll: async function(page, category, cancelToken){
+  getAll: async function(page, data, cancelToken){
+    const { category, start, end } = data
     try {
-      const resp = await axios.get(`/api/events?page=${page}&category=${category}`, { cancelToken: cancelToken })
+      const resp = await axios.get(`/api/events?page=${page}&category=${category}&date_start=${start}&date_end=${end}`, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {

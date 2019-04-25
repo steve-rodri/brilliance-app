@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { pencil, check, closeIcon, trash } from '../../../../../../helpers/icons'
+import { pencil, check, closeIcon } from '../../../../../../helpers/icons'
 import { clientName } from '../../../../../../helpers/clientHelpers'
 import moment from 'moment'
 import './index.css'
@@ -32,7 +32,7 @@ export default function Header(props){
       return (
         <Fragment>
           {c? <h2>{clientName(c, true)}</h2> : null}
-          {e? <h2 style={{fontWeight: '400'}}>{moment(e.start).format('MMMM Do YYYY')}</h2> : null}
+          {e? <h2 style={{fontWeight: '400', padding: '0 20px'}}>{moment(e.start).format('MMMM Do YYYY')}</h2> : null}
         </Fragment>
       )
     }
@@ -66,18 +66,18 @@ export default function Header(props){
     )
   }
 
-  function trashCan(){
-    if (inv) {
-      return (
-        <div
-          className="InvoiceDetail-header--icon right"
-          onClick={props.delete}
-        >
-          {trash('2x')}
-        </div>
-      )
-    }
-  }
+  // function trashCan(){
+  //   if (inv) {
+  //     return (
+  //       <div
+  //         className="InvoiceDetail-header--icon right"
+  //         onClick={props.delete}
+  //       >
+  //         {trash('2x')}
+  //       </div>
+  //     )
+  //   }
+  // }
 
   function submit(){
     return (
@@ -102,7 +102,7 @@ export default function Header(props){
       return (
         <div className="InvoiceDetail-header--icons">
           {edit()}
-          {trashCan()}
+          {/* {trashCan()} */}
         </div>
       )
     }

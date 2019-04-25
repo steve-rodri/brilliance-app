@@ -5,6 +5,9 @@ import { start, end, time } from './datetime'
 import { locationName } from './locationName'
 import moment from 'moment'
 
+
+const spacer = '****************************************';
+
 //--------------Format FROM Google----------------------
 
 async function formatFromGoogle(evt, cancelToken){
@@ -151,10 +154,10 @@ function status (evt) {
 function description(evt){
   if (evt) {
     if (evt.description) {
-      const subsection = evt.description.includes('******************************')
+      const subsection = evt.description.includes(spacer)
       if (subsection) {
-        let length = '******************************\n\n'.length
-        let i = evt.description.indexOf('******************************')
+        let length = `${spacer}\n\n`.length
+        let i = evt.description.indexOf(spacer)
         let notes = evt.description.slice(i+length)
         return notes
       } else {
@@ -245,11 +248,11 @@ function notes(evt){
 function notesTimeSection(evt){
   if (evt.callTime && evt.callLocation) {
     return (
-      `Call: ${moment(evt.callTime).format('LT')} @ ${locationName(evt.callLocation)}\nEvent: ${time(evt)}\n\n******************************\n\n`
+      `Call: ${moment(evt.callTime).format('LT')} @ ${locationName(evt.callLocation)}\nJob: ${time(evt)}\n\n${spacer}\n\n`
     )
   } else if (evt.callTime) {
     return (
-      `Call: ${moment(evt.callTime).format('LT')}\nEvent: ${time(evt)}\n\n******************************\n\n`
+      `Call: ${moment(evt.callTime).format('LT')}\nJob: ${time(evt)}\n\n${spacer}\n\n`
     )
   }
 }
