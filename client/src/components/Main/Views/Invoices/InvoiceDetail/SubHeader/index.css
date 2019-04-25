@@ -1,40 +1,101 @@
 .SubHeader {
   width: 100%;
-  min-height: 300px;
+  min-height: 200px;
   display: grid;
-  padding: 30px;
+  padding: 40px;
 }
 
-.SubHeader--fields, .SubHeader--status {
+.SubHeader--fields,
+.SubHeader--fields-container,
+.SubHeader--status,
+.SubHeader--status-container,
+.SubHeader--commission,
+.SubHeader--commission-container {
   display: grid;
-  grid-gap: 5px;
 }
 
-.SubHeader--status {
+.SubHeader--fields-container,
+.SubHeader--status-container,
+.SubHeader--commission-container {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: var(--dark-gray);
+  justify-items: center;
+  align-items: center;
+}
+
+.SubHeader--status-container {
+  justify-self: end;
+}
+
+.SubHeader--component-title {
+  display: none;
+}
+
+.SubHeader--fields,
+.SubHeader--status,
+.SubHeader--commission {
+  grid-row-gap: 10px;
+  grid-column-gap: 30px;
+}
+
+.SubHeader--Edit .SubHeader--fields > *,
+.SubHeader--Edit .SubHeader--status > *,
+.SubHeader--Edit .SubHeader--commission > * {
+  width: 100%;
+}
+
+.SubHeader--status, .SubHeader--commission {
   padding: 30px;
 }
 
 @media (min-width: 750px) {
   .SubHeader {
     height: 100%;
+    justify-content: space-between;
+    grid-auto-flow: column;
+    grid-gap: 40px;
+  }
+
+  .SubHeader--fields-container,
+  .SubHeader--status-container,
+  .SubHeader--commission-container {
+    min-width: 250px;
+    grid-template-rows: 30px auto;
+    background-color: var(--light-gray);
+
+    justify-content: center;
+  }
+
+  .SubHeader--fields,
+  .SubHeader--status,
+  .SubHeader--commission {
+    height: 100%;
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+    padding: 25px 30px 30px 30px;
+  }
+
+  .SubHeader--fields {
+    justify-items: start;
+  }
+
+  .SubHeader--component-title {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100%;
     width: 100%;
-    display: grid;
-    grid-gap: 30px;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 30px;
-  }
-
-  .SubHeader--fields, .SubHeader--status {
-   justify-items: center;
-   align-content: start;
-   align-items: center;
-   background-color: var(--light-blue-t);
-   border: 1px dashed var(--light-blue);
-   border-radius: 10px;
-   padding: 30px;
-  }
-
-  .SubHeader--Show {
-    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-gray);
+    color: var(--light-gray);
+    font-size: 17px;
   }
 }

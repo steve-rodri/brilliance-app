@@ -23,7 +23,7 @@
   }
 
   .EventDetail-Body--components {
-    grid-template-rows: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
     grid-auto-flow: column;
     align-items: flex-start;
     justify-content: center;
@@ -52,7 +52,6 @@
   }
 
   .EventDetail-Body--notes {
-    max-height: 400px;
     overscroll-behavior-y: contain;
     overflow: auto;
     grid-row: span 2;

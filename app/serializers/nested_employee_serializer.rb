@@ -1,5 +1,5 @@
 class NestedEmployeeSerializer < ApplicationSerializer
-  attributes :id, :active?, :labor?, :rates
+  attributes :id, :active, :labor, :rates
   has_one :contact
 
   def rates

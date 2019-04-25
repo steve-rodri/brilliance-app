@@ -107,19 +107,35 @@ export default function ListItem(props){
     return style;
   }
 
-  function styleCell(position){
+  function styleCell(position, event){
+    const past = event && event.end && moment(event.end).isBefore(moment())
     const style = {}
-    switch (position) {
-      case 'left':
-        style.borderRight = '1px solid var(--light-gray)'
-      break;
-      case 'middle':
-        style.borderRight = '1px solid var(--light-gray)'
-      break;
-      case 'right':
-      break;
-      default:
-      break;
+    if (past) {
+      switch (position) {
+        case 'left':
+          style.borderRight = '1px solid #999999'
+        break;
+        case 'middle':
+          style.borderRight = '1px solid #999999'
+        break;
+        case 'right':
+        break;
+        default:
+        break;
+      }
+    } else {
+      switch (position) {
+        case 'left':
+          style.borderRight = '1px solid var(--light-gray)'
+        break;
+        case 'middle':
+          style.borderRight = '1px solid var(--light-gray)'
+        break;
+        case 'right':
+        break;
+        default:
+        break;
+      }
     }
 
     return style

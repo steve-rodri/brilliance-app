@@ -8,7 +8,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--light-gray);
+  background: var(--med-dark-blue);
+  color: var(--light-gray);
 }
 
 .InvoiceDetail-header {
@@ -16,7 +17,7 @@
   justify-items: center;
   align-items: center;
   width: 100%;
-  margin: 0 32px;
+  margin: 0 40px;
 }
 
 .InvoiceDetail-header--right {
@@ -67,11 +68,12 @@
     justify-items: center;
     grid-gap: 5px;
     grid-template-columns: auto 100px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--light-gray);
     padding: 10px;
   }
 
   .InvoiceDetail-header--name {
+    display: flex;
     font-size: 25px;
     text-align: left;
     grid-column: 1 / span 1;

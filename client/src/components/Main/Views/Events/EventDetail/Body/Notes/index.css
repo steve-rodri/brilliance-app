@@ -40,8 +40,7 @@
     width: 100%;
     min-width: 350px;
     height: 100%;
-    padding: 0 30px 30px 30px;
-    grid-template-rows: 30px auto
+    padding: 30px;
   }
 
   .Notes {
@@ -51,6 +50,7 @@
   .Notes, .Notes--readonly {
     color: black;
     padding: 5px;
+    border-radius: 0;
   }
 
   .Notes--readonly {

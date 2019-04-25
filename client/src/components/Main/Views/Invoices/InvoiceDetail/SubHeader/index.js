@@ -14,5 +14,4 @@ export default function SubHeader(props){
       <Show {...props}/>
     )
   }
-
 }

@@ -7,7 +7,7 @@ import { formatToGoogle, formatFromGoogle } from '../../../../helpers/googleForm
 import { event } from '../../../../services/event'
 import { client } from '../../../../services/client'
 import { clientName } from '../../../../helpers/clientHelpers'
-import { eventTitle } from '../../../../helpers/eventTitle'
+import { eventTitle } from '../../../../helpers/eventHelpers'
 import queryString from 'query-string'
 import moment from 'moment'
 import axios from 'axios'
@@ -18,7 +18,7 @@ export default class Events extends Component {
     this.state = {
       events: null,
       hasMore: false,
-      category: 'Upcoming',
+      category: null,
       categories: ['Production', 'CANS', 'THC', 'CATP'],
       page: 1
     }
@@ -34,7 +34,7 @@ export default class Events extends Component {
 
   async componentDidMount() {
     await this.setColumnHeaders()
-    await this.setTodaysDate(this.props)
+    await this.setCurrentMonth()
     await this.setCalendarId()
     await this.setEvents(this.props)
   }
@@ -115,9 +115,6 @@ export default class Events extends Component {
     this.setState(
     {
       searchLabel: date,
-      category: null,
-      query: null,
-      client: null,
       page: 1
     },
       async () => {
@@ -149,9 +146,27 @@ export default class Events extends Component {
     this.setState({ date })
   }
 
+  setCurrentMonth = () => {
+    this.setState({
+      date: {
+        start: moment().startOf('month').toISOString(true),
+        end: moment().endOf('month').toISOString(true)
+      }
+    })
+  }
+
+  setMonth = (month, year) => {
+    this.setState({
+      date: {
+        start: moment(month, year).startOf('month').toISOString(true),
+        end: moment(month, year).endOf('month').toISOString(true)
+      }
+    })
+  }
+
   setRefresh = (value, url) => {
     const { history } = this.props
-    this.setState({ willRefresh: value }, () => {
+    this.setState({ willRefresh: value }, async() => {
       if (url) {
         history.push(url)
       }
@@ -171,12 +186,12 @@ export default class Events extends Component {
       } else if (client) {
         evts = await event.findByClient(page, client, this.axiosRequestSource.token)
       } else if (category) {
-        evts = await event.getAll(page, category, this.axiosRequestSource.token);
+        evts = await event.getAll(page, { category, start, end }, this.axiosRequestSource.token);
       } else {
         evts = await event.findByDate(page, start, end, this.axiosRequestSource.token)
       }
 
-      if (evts.length) await this.updateEvents(evts)
+      if (evts && evts.length) await this.updateEvents(evts)
 
     } else {
       this.setState({ hasMore: false })
@@ -329,11 +344,13 @@ export default class Events extends Component {
     await this.updateEvent(evt, { [name]: value } )
   }
 
-  handleDateChange = async(date) => {
+  handleDateChange = async(date, type) => {
+    let t = type;
+    if (!type) t = 'day'
     this.setState( prevState => ({
       date: {
-        start: moment(date).startOf('day').toISOString(true),
-        end:  moment(date).endOf('day').toISOString(true)
+        start: moment(date).startOf(t).toISOString(true),
+        end:  moment(date).endOf(t).toISOString(true)
       }
     }),
     () =>  this.setEvents())
@@ -368,24 +385,27 @@ export default class Events extends Component {
   }
 
   List = ({ match, history }) => {
-    const { events, searchLabel, categories, columnHeaders, hasMore } = this.state
+    const { events, searchLabel, date } = this.state
+    let isDay = true;
+    if (date && date.start && date.end) {
+      isDay = moment(date.end).diff(moment(date.start), 'days') <= 1
+    }
     return (
       <ListPage
         {...this.state}
         title="Events"
         type="Events"
         category={searchLabel}
-        categories={categories}
-        columnHeaders={columnHeaders}
         data={events}
+        isDay={isDay}
         match={match}
         history={history}
-        hasMore={hasMore}
         load={this.fetchEvents}
         create={this.handleCreate}
         refresh={this.setRefresh}
         handleStatusChange={this.handleStatusChange}
         handleDateChange={this.handleDateChange}
+        handleMonthChange={this.setMonth}
       />
     )
   }

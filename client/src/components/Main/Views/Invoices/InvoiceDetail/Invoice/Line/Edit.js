@@ -9,11 +9,12 @@ export default class Edit extends Component {
   }
 
   render(){
-    const { line, handleLineChange, deleteLine } = this.props
+    const { line, index, length, styleCell, handleLineChange, deleteLine } = this.props
     const c = contents(line.item)
     return (
       <tr key={line.id} className="Line">
         <td
+          style={styleCell(index, length)}
           className="Invoice--cell Line--add-delete"
           onClick={(e) => {
             e.stopPropagation();
@@ -23,7 +24,7 @@ export default class Edit extends Component {
           {deleteIcon('1x')}
         </td>
 
-        <td className="Invoice--cell Line--quantity">
+        <td style={styleCell(index, length)} className="Invoice--cell Line--quantity">
           <div>
             <input
               className="Line--input"
@@ -36,12 +37,13 @@ export default class Edit extends Component {
           </div>
         </td>
 
-        <td className="Invoice--cell Line--item">
+        <td style={styleCell(index, length)} className="Invoice--cell Line--item">
           <div className="Line--item-description"><p>{description(line.item)}</p></div>
           {c? <div className="Line--item-contents">{c}</div> : null}
         </td>
 
         <td
+          style={styleCell(index, length)}
           className="Invoice--cell Line--inc"
           onClick={(e) => {
             e.stopPropagation()
@@ -51,7 +53,7 @@ export default class Edit extends Component {
           {inc(line)}
         </td>
 
-        <td className="Invoice--cell Line--price">
+        <td style={styleCell(index, length)} className="Invoice--cell Line--price">
           {
             !line.inc?
             <div>

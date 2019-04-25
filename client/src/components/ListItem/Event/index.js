@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { clientName } from '../../../helpers/clientHelpers'
 import { date, time } from '../../../helpers/datetime'
-import { styleConfirmation, changeConfirmation } from '../../../helpers/eventConfirmation'
+import { styleConfirmation, changeConfirmation } from '../../../helpers/eventHelpers'
 import moment from 'moment'
 import './index.css';
 
@@ -20,9 +20,9 @@ export default function Event(props){
   const event = item
 
 
-  const leftCell = styleCell('left')
-  const middleCell = styleCell('middle')
-  const rightCell = styleCell('right')
+  const leftCell = styleCell('left', event)
+  const middleCell = styleCell('middle', event)
+  const rightCell = styleCell('right', event)
   const titleDisplay = displayColumn('title')
   const dateDisplay = displayColumn('date')
   const intelDisplay = displayColumn('intel')
@@ -39,7 +39,7 @@ export default function Event(props){
           {/* Title */}
 
           <div className="List-Item--Cell" style={{ ...leftCell, ...titleDisplay }}>
-            <h4 style={styleSummary(event && event.summary)}>{event && event.summary}</h4>
+            <div style={styleSummary(event && event.summary)}>{summary(event)}</div>
           </div>
 
           {/* Date */}
@@ -189,7 +189,7 @@ function scheduled(evt){
         )
       } else {
         return (
-          <div className="Event--scheduled" style={{ color: 'gold' }}>
+          <div className="Event--scheduled">
             {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid black', width: '100%', height: '100%'}}>
               <p>{`${evt.staff.length} scheduled`}</p>
             </div> */}

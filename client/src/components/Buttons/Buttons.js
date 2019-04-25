@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { pencil, check, trash } from '../../helpers/icons'
-import { styleConfirmation, changeConfirmation } from '../../helpers/eventConfirmation'
+import { styleConfirmation, changeConfirmation } from '../../helpers/eventHelpers'
 import './Buttons.css'
 
 export default function Buttons(props) {

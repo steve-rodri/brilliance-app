@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { date, time } from '../../../helpers/datetime'
 import { statusIcon } from '../../../helpers/icons'
-import moment from 'moment'
 import './index.css'
 
 export default function Schedule(props){
@@ -9,8 +9,6 @@ export default function Schedule(props){
     user,
     item,
     type,
-    start,
-    end,
     timeUntil,
     displayColumn,
     numColumns,
@@ -27,8 +25,8 @@ export default function Schedule(props){
 
         <div style={displayColumn('event')}>
           <h4>{item && item.summary}</h4>
-          <p>{item && item.start && moment(start).format('dddd, MMMM Do')}</p>
-          <p>{item && item.start && item.end && `${moment(start).format('LT')} - ${moment(end).format('LT')}`}</p>
+          <p>{date(item)}</p>
+          <p>{time(item)}</p>
         </div>
 
         <p style={displayColumn('notes')} className="List-Item--description">{item && item.notes}</p>

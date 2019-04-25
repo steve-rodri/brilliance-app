@@ -347,6 +347,7 @@ export default class InvoiceDetail extends Component {
 
   handleChange = (e) => {
     const { name, value } = e.target
+    console.log(name, value)
     this.setState(prevState => ({
       fields: {
         ...prevState.fields,
@@ -517,9 +518,7 @@ export default class InvoiceDetail extends Component {
         history.push(`/admin/events/${evtId}`, {view: 'Invoice'})
       } else {
         const updatedInvoice = await invoice.update(inv.id, formData, this.axiosRequestSource.token)
-        await this.setState({ inv: updatedInvoice })
-
-        await this.close(true)
+        await this.setState({ inv: updatedInvoice }, async() => await this.close(true))
       }
 
     } else {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { styleConfirmation, changeConfirmation } from '../../../../../../../helpers/eventConfirmation'
+import { styleConfirmation, changeConfirmation } from '../../../../../../../helpers/eventHelpers'
 import View from './View'
 import Edit from './Edit'
 import './index.css'
@@ -54,17 +54,17 @@ export default class About extends Component {
     return (
       <div className="EventDetail-Body--component EventDetail-Body--about">
         <div className="EventDetail-Body--component-title"><h3>About</h3></div>
-          <div className="About--container">
-            {this.view()}
+        <div className="About--container">
+          {this.view()}
+        </div>
+        {
+          !editMode?
+          <div className="About--event-status-container">
+            {this.displayConfirmation()}
           </div>
-          {
-            !editMode?
-            <div className="About--event-status-container">
-              {this.displayConfirmation()}
-            </div>
-            :
-            null
-          }
+          :
+          null
+        }
       </div>
     )
   }

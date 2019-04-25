@@ -2,7 +2,7 @@ import React from 'react'
 import './index.css'
 
 export default function Notes(props){
-  const { fields, editMode } = props
+  const { mobile, fields, editMode } = props
   const view = () => {
     if (editMode) {
       return (
@@ -10,7 +10,7 @@ export default function Notes(props){
           className="Notes"
           type="text"
           name='notes'
-          value={fields.notes}
+          value={fields.notes || ''}
           onChange={props.handleChange}
           tabIndex="9"
         />
@@ -35,7 +35,7 @@ export default function Notes(props){
     <div className="EventDetail-Body--component EventDetail-Body--notes">
       <div className="EventDetail-Body--component-title"><h3>Notes</h3></div>
       <div className="Notes--container">
-        <label>Notes</label>
+        {mobile? <label>Notes</label> : null}
         {view()}
       </div>
     </div>

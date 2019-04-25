@@ -1,5 +1,4 @@
 export function styleStatus(paymentStatus, invoiceType) {
-  console.log(paymentStatus)
   if (invoiceType === 'Proposal') {
     return { display: 'none'}
   } else {

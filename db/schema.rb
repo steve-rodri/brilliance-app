@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
     t.string "payment_type"
     t.float "commission_actual"
     t.boolean "commission_paid", default: false
-    t.string "check_info"
+    t.string "check"
     t.float "deposit", default: 0.0
     t.float "discount", default: 0.0
     t.float "tip", default: 0.0

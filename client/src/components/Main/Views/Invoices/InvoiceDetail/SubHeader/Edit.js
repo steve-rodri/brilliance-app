@@ -91,7 +91,7 @@ export default class Edit extends Component {
           <option>Check</option>
           <option>Cash & Check</option>
           <option>Deducted From Commissions</option>
-          <option>Check & Deducted From Commissions</option>
+          <option>Check & DFC</option>
         </select>
       </Fragment>
     )
@@ -100,12 +100,13 @@ export default class Edit extends Component {
   checkInfo = (value, change) => {
     return (
       <Fragment>
-        <label>Check Information</label>
+        <label style={{gridRow: '3 / span 1'}}>Check Information</label>
         <input
+          style={{textAlign: 'center', gridRow: '4 / span 1'}}
           className="Edit--Field"
           type="text"
           name="check"
-          value={value}
+          value={value || ''}
           onChange={change}
           onFocus={this.handleFocusSelect}
         />
@@ -116,7 +117,7 @@ export default class Edit extends Component {
   commission = (value, paid, change) => {
     return (
       <Fragment>
-        <label>Commission</label>
+        <label>Amount</label>
         <input
           className="Edit--Field"
           type='number'
@@ -124,6 +125,7 @@ export default class Edit extends Component {
           value={value}
           onChange={change}
         />
+        <label>Status</label>
         <select
           className="Edit--Field"
           name="commissionPaid"
@@ -149,12 +151,6 @@ export default class Edit extends Component {
             :
             null
           }
-          {
-            fields.kind === 'On Premise Contract'?
-            this.commission(fields.commission, fields.commissionPaid, change)
-            :
-            null
-          }
         </Fragment>
       )
     } else {
@@ -168,14 +164,37 @@ export default class Edit extends Component {
       return (
         <div className="SubHeader">
 
-          <div className="SubHeader--fields">
-            {fields.kind? this.type(fields.kind, handleChange) : null}
-            {fields.client? this.client(fields.client, searchFieldData) : null}
+          <div className="SubHeader--Edit SubHeader--fields-container">
+            <div className="SubHeader-Edit SubHeader--component-title"><h3>About</h3></div>
+            <div className="SubHeader--Edit SubHeader--fields">
+              {fields.kind? this.type(fields.kind, handleChange) : null}
+              {fields.client? this.client(fields.client, searchFieldData) : null}
+            </div>
           </div>
 
-          <div className="SubHeader--status">
-            {this.status(fields, handleChange)}
-          </div>
+          {
+            fields && fields.kind !== 'Proposal'?
+            <div className="SubHeader--Edit SubHeader--status-container">
+              <div className="SubHeader-Edit SubHeader--component-title"><h3>Status</h3></div>
+              <div className="SubHeader--Edit SubHeader--status">
+                {this.status(fields, handleChange)}
+              </div>
+            </div>
+            :
+            null
+          }
+
+          {
+            fields && fields.kind === 'On Premise Contract'?
+            <div className="SubHeader--Edit SubHeader--commission-container">
+              <div className="SubHeader-Edit SubHeader--component-title"><h3>Commission</h3></div>
+              <div className="SubHeader--Edit SubHeader--commission">
+                {this.commission(fields.commission, fields.commissionPaid, handleChange)}
+              </div>
+            </div>
+            :
+            null
+          }
 
         </div>
       )

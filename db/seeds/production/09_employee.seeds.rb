@@ -6,8 +6,8 @@ csv_text = File.read(Rails.root.join('lib','seeds', 'Staff.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
   Employee.create! ({
-    active?: row['active_inactive'],
-    labor?: row['labor'],
+    active: row['active_inactive'],
+    labor: row['labor'],
     rate_hand_per_job: row['rate_hand_per_job'],
     rate_full_job: row['rate_full_job'],
     rate_on_premise_one_man: row['rate_on_premise_one_man'],

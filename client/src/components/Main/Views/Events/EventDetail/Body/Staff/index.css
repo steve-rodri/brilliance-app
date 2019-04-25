@@ -158,7 +158,7 @@
 @media (min-width: 750px) {
   .Staff--container {
     align-self: center;
-    padding: 0 30px 30px 30px;
+    padding: 30px 30px 30px 30px;
     justify-content: inherit;
   }
 

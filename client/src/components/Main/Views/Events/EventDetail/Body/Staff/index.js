@@ -19,7 +19,7 @@ export default class Staff extends Component {
   }
 
   view = () => {
-    const { editMode, workers } = this.props
+    const { mobile, editMode, workers } = this.props
     if (editMode) {
       return (
         <Edit
@@ -37,7 +37,7 @@ export default class Staff extends Component {
     } else {
       return (
         <div className="Staff--container">
-          <label>Staff</label>
+          {mobile? <label>Staff</label> : null }
           <div className="Staff--none">
             <p>No one has been scheduled</p>
             <p>to work this event...</p>

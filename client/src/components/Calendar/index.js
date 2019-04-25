@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
+import moment from 'moment';
 import calendar, {
   isDate,
   isSameDay,
@@ -45,28 +46,48 @@ class Calendar extends Component {
 
     !(current && isSameDay(date, current)) &&
       this.setState(this.resolveStateFromDate(date), () => {
-        typeof onDateChanged === "function" && onDateChanged(date);
+        typeof onDateChanged === "function" && onDateChanged(date, 'day');
       });
   };
 
   gotoPreviousMonth = () => {
     const { month, year } = this.state;
-    this.setState(getPreviousMonth(month, year));
+    const { onDateChanged } = this.props;
+    this.setState(getPreviousMonth(month, year), () => {
+      const { month, year } = this.state
+      const date = moment().month(month - 1).year(year)
+      onDateChanged(date, 'month')
+    });
   };
 
   gotoNextMonth = () => {
     const { month, year } = this.state;
-    this.setState(getNextMonth(month, year));
+    const { onDateChanged } = this.props;
+    this.setState(getNextMonth(month, year), () => {
+      const { month, year } = this.state
+      const date = moment().month(month - 1).year(year)
+      onDateChanged(date, 'month')
+    });
   };
 
   gotoPreviousYear = () => {
     const { year } = this.state;
-    this.setState({ year: year - 1 });
+    const { onDateChanged } = this.props;
+    this.setState({ year: year - 1 }, () => {
+      const { month, year } = this.state
+      const date = moment().month(month - 1).year(year)
+      onDateChanged(date, 'month')
+    });
   };
 
   gotoNextYear = () => {
     const { year } = this.state;
-    this.setState({ year: year + 1 });
+    const { onDateChanged } = this.props;
+    this.setState({ year: year + 1 }, () => {
+      const { month, year } = this.state
+      const date = moment().month(month - 1).year(year)
+      onDateChanged(date, 'month')
+    });
   };
 
   handlePressure = fn => {
@@ -112,7 +133,8 @@ class Calendar extends Component {
           onMouseUp={this.clearPressureTimer}
           title="Previous Month"
         />
-        <Styled.CalendarMonth>
+        <Styled.CalendarMonth
+        >
           {monthname} {year}
         </Styled.CalendarMonth>
         <Styled.ArrowRight

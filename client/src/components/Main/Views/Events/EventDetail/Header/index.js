@@ -1,6 +1,6 @@
 import React from 'react'
 import { pencil, check, closeIcon } from '../../../../../../helpers/icons'
-// import { styleConfirmation, changeConfirmation } from '../../../../../../Helpers/eventConfirmation'
+// import { styleConfirmation, changeConfirmation } from '../../../../../../Helpers/eventHelpers'
 import './index.css'
 
 export default function Header(props){
