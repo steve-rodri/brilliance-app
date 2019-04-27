@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { searchIcon } from '../../helpers/icons'
 import './Search.css'
 
 export default class Search extends Component {
@@ -7,6 +8,10 @@ export default class Search extends Component {
     this.state = {
       query:''
     }
+  }
+
+  handleFocusSelect = (e) => {
+    e.target.select()
   }
 
   handleChange = (e) => {
@@ -22,15 +27,16 @@ export default class Search extends Component {
   }
 
   render(){
-    const { subject } = this.props
     return(
       <form className="search" autoComplete="off" onSubmit={this.handleSubmit}>
+        {searchIcon('1x', 'search--icon')}
         <input
           name="query"
           type="text"
-          placeholder={`search ${subject.toLowerCase()}...`}
+          className="search--input"
           value={this.state.query}
           onChange={this.handleChange}
+          onFocus={this.handleFocusSelect}
         />
       </form>
     )

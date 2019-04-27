@@ -89,11 +89,11 @@ export default class Header extends Component {
           <Bars changeNav={this.changeNav} open={this.state.displayNav}/>
 
           <nav>
-            <Link to='/admin/events'><div>Jobs</div></Link>
-            {/* <Link to='/admin/clients'><div>Clients</div></Link> */}
-            {/* <Link to='/admin/invoices'><div>Invoices</div></Link> */}
-            <Link to='/admin/staff'><div>Staff</div></Link>
-            <Link to='/admin/inventory'><div>Inventory</div></Link>
+            <Link to='/admin/events'><h3>Jobs</h3></Link>
+            {/* <Link to='/admin/clients'><h3>Clients</h3></Link> */}
+            {/* <Link to='/admin/invoices'><h3>Invoices</h3></Link> */}
+            <Link to='/admin/staff'><h3>Staff</h3></Link>
+            <Link to='/admin/inventory'><h3>Inventory</h3></Link>
           </nav>
 
           <div className="user-circle" onClick={this.logOut}>
@@ -107,16 +107,16 @@ export default class Header extends Component {
 
         </header>
 
-      
+
 
         <div className="Header--drop-down" style={this.styleNav()}>
 
           <div className="Header--nav-menu">
-            <Link to='/admin/events' onClick={this.changeNav}><div>Jobs</div></Link>
-            {/* <Link to='/admin/clients' onClick={this.changeNav}><div>Clients</div></Link> */}
-            {/* <Link to='/admin/invoices' onClick={this.changeNav}><div>Invoices</div></Link> */}
-            <Link to='/admin/staff' onClick={this.changeNav}><div>Staff</div></Link>
-            <Link to='/admin/inventory' onClick={this.changeNav}><div>Inventory</div></Link>
+            <Link to='/admin/events' onClick={this.changeNav}><h3>Jobs</h3></Link>
+            {/* <Link to='/admin/clients' onClick={this.changeNav}><h3>Clients</h3></Link> */}
+            {/* <Link to='/admin/invoices' onClick={this.changeNav}><h3>Invoices</h3></Link> */}
+            <Link to='/admin/staff' onClick={this.changeNav}><h3>Staff</h3></Link>
+            <Link to='/admin/inventory' onClick={this.changeNav}><h3>Inventory</h3></Link>
           </div>
 
           <button className="Header--Log-Out" onClick={this.logOut}>Log Out</button>

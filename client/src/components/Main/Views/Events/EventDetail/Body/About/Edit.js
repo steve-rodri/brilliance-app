@@ -20,7 +20,6 @@ export default class Edit extends Component {
             formatResult={clientName}
             input={{
               className:'Input',
-              placeholder:'search clients...',
               name: 'client',
               value: fields.client? fields.client : '',
               tabIndex: 1
@@ -41,7 +40,6 @@ export default class Edit extends Component {
             formatResult={locationName}
             input={{
               className:'Input',
-              placeholder:'search locations...',
               name: 'location',
               value: fields.location? fields.location : '',
               tabIndex: 2

@@ -13,7 +13,11 @@ import {
   faCheck,
   faTrash,
   faSquare as fasSquare,
-  faPlus
+  faPlus,
+  faSearch,
+  faSearchPlus,
+  faChevronRight,
+  faChevronLeft
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faSquare as farSquare
@@ -32,7 +36,11 @@ library.add(
   faTimes,
   farSquare,
   fasSquare,
-  faPlus
+  faPlus,
+  faSearch,
+  faSearchPlus,
+  faChevronRight,
+  faChevronLeft
 )
 
 export function statusIcon(str, size){
@@ -47,6 +55,22 @@ export function statusIcon(str, size){
       return <FontAwesomeIcon  className="Icon" color="red" icon="times-circle" size={size}/>
     default:
   }
+}
+
+export function chevronRightIcon(size, className){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="chevron-right" size={size}/>
+}
+
+export function chevronLeftIcon(size, className){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="chevron-left" size={size}/>
+}
+
+export function searchIcon(size, className){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="search" size={size}/>
+}
+
+export function searchPlusIcon(size, className){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="search-plus" size={size}/>
 }
 
 export function plusIcon(size, className){

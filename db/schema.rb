@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2019_03_18_143901) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.boolean "active?"
-    t.boolean "labor?"
+    t.boolean "active", default: true
+    t.boolean "labor", default: true
     t.float "rate_hand_per_job"
     t.float "rate_full_job"
     t.float "rate_on_premise_one_man"
