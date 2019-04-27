@@ -72,13 +72,13 @@ export default class ListPage extends Component {
       handleDateChange
     } = this.props
     const singular = type? type.split('').splice(0, type.length - 1).join('') : null
-    
+
     return (
       <div className='ListPage'>
         <aside>
 
           {/* Title */}
-          <h2
+          <h1
             className="ListPage--name"
             onClick={(e) => {
               e.stopPropagation()
@@ -86,7 +86,7 @@ export default class ListPage extends Component {
             }}
           >
             {title}
-          </h2>
+          </h1>
 
           {/* Search */}
           <Search
@@ -101,14 +101,14 @@ export default class ListPage extends Component {
               {/* <div className="Arrow Arrow-Left" style={{gridColumn: '1 / span 1'}}></div> */}
               <div className="ListPage--categories">
                 {categories && categories.map((category, id) => (
-                <div
+                <p
                   style={this.styleActiveMenu(category)}
                   onClick={(e) => {
                     e.stopPropagation()
                     refresh(true, `${match.path}?category=${category}`);
                   }}
                   key={id}>{category}
-                </div>
+                </p>
                 ))}
               </div>
               {/* <div className="Arrow Arrow-Right" style={{gridColumn: '3 / span 1'}}></div> */}
@@ -130,7 +130,7 @@ export default class ListPage extends Component {
           {type === "Events" || type === "Clients" || type === "Staff"?
             <AddNew
               linkPath={{pathname: `${match.path}/new`, state: { modal: true } }}
-              style={{gridRow: '5 / span 1'}}
+              style={{gridRow: '6 / span 1', alignSelf: 'end'}}
             />
             :
             null

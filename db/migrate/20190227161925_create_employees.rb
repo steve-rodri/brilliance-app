@@ -1,8 +1,8 @@
 class CreateEmployees < ActiveRecord::Migration[5.2]
   def change
     create_table :employees do |t|
-      t.boolean :active
-      t.boolean :labor
+      t.boolean :active, default: true
+      t.boolean :labor, default: true
       t.float :rate_hand_per_job
       t.float :rate_full_job
       t.float :rate_on_premise_one_man

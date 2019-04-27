@@ -15,10 +15,10 @@ export default function Staff(props){
             <h3>{employee.contactInfo.fullName}</h3>
           </div>
 
-          <h4 style={displayColumn('active')}>{employee['active?']? 'Yes': 'No'}</h4>
+          <h4 style={displayColumn('active')}>{employee.active? 'Yes': 'No'}</h4>
 
           <div className="Staff--labor" style={displayColumn('labor')}>
-            <h3>{employee['labor?']? 'Yes': 'No'}</h3>
+            <h4>{employee.labor? 'Yes': 'No'}</h4>
           </div>
         </div>
         :

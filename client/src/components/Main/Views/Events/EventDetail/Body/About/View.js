@@ -2,14 +2,14 @@ import React, { Fragment } from 'react'
 import { date, time, duration } from '../../../../../../../helpers/datetime'
 
 export default function View (props){
-  const { fields } = props
+  const { fields, mobile } = props
   return (
     <div className="About">
 
       {
         fields && fields.client?
         <Fragment>
-          <label>Client</label>
+          { mobile? <label>Client</label> : null }
           <div className="Field">
             <p>{fields.client}</p>
           </div>
@@ -21,7 +21,7 @@ export default function View (props){
       {
         fields && fields.location?
         <Fragment>
-          <label>Location</label>
+          { mobile? <label>Location</label> : null }
           <div className="Field">
             <p>{fields.location}</p>
           </div>
@@ -33,7 +33,7 @@ export default function View (props){
       {
         fields && date(fields)?
         <Fragment>
-          <label>Date</label>
+          { mobile? <label>Date</label> : null }
           <div className="Field">
             <p>{date(fields, false, true)}</p>
           </div>
@@ -45,7 +45,7 @@ export default function View (props){
       {
         fields && time(fields)?
         <Fragment>
-          <label>Time</label>
+          { mobile? <label>Time</label> : null }
           <div className="Field">
             <p>{time(fields)}</p>
           </div>
@@ -57,7 +57,7 @@ export default function View (props){
       {
         fields && duration(fields)?
         <Fragment>
-          <label>Duration</label>
+          { mobile? <label>Duration</label> : null }
           <div className="Field">
             <p>{duration(fields)}</p>
           </div>

@@ -70,7 +70,6 @@ export default class Edit extends Component {
             formatResult={locationName}
             input={{
               className:'Input',
-              placeholder:'search locations...',
               name: 'callLocation',
               value: fields.callLocation? fields.callLocation : '',
               tabIndex: 9

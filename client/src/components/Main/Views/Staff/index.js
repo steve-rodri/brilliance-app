@@ -46,14 +46,16 @@ export default class Staff extends Component {
   }
 
   setStaff = (props, mounted) => {
-    this.setState(
-    {
-      page: 1
-    },
-      async () => {
-      await this.resetStaff()
-      await this.fetchStaff()
-    })
+    if (mounted) {
+      this.setState(
+      {
+        page: 1
+      },
+        async () => {
+        await this.resetStaff()
+        await this.fetchStaff()
+      })
+    }
   }
 
   fetchStaff = async() => {

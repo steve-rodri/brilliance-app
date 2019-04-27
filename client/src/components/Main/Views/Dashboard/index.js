@@ -5,9 +5,20 @@ import moment from 'moment'
 import './index.css'
 
 export default class Dashboard extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      user: null
+    }
+  }
+
+  async componentDidMount(){
+    const user = await this.props.getUser()
+    this.setState({ user })
+  }
 
   greeting = () => {
-    const { user } = this.props
+    const { user } = this.state
     const username = user? user.given_name : ''
 
     const currentTime = moment().format();
@@ -19,11 +30,11 @@ export default class Dashboard extends Component {
     const evening = moment(eveningZ).format();
 
     if (moment(currentTime).isBetween(morning, noon)) {
-      return `Good Morning, ${username}`
+      return `Good Morning ${username},`
     } else if (moment(currentTime).isBetween(noon, evening)) {
-      return `Good Afternoon, ${username}`
+      return `Good Afternoon ${username},`
     } else if (moment(currentTime).isAfter(evening)) {
-      return `Good Evening, ${username}`
+      return `Good Evening ${username},`
     }
   }
 

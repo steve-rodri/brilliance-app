@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
+import { chevronRightIcon, chevronLeftIcon } from '../../helpers/icons'
 import moment from 'moment';
 import calendar, {
   isDate,
@@ -132,7 +133,7 @@ class Calendar extends Component {
           onMouseDown={this.handlePrevious}
           onMouseUp={this.clearPressureTimer}
           title="Previous Month"
-        />
+        >{chevronLeftIcon('1x')}</Styled.ArrowLeft>
         <Styled.CalendarMonth
         >
           {monthname} {year}
@@ -141,7 +142,7 @@ class Calendar extends Component {
           onMouseDown={this.handleNext}
           onMouseUp={this.clearPressureTimer}
           title="Next Month"
-        />
+        >{chevronRightIcon('1x')}</Styled.ArrowRight>
       </Styled.CalendarHeader>
     );
   };

@@ -21,7 +21,7 @@ header {
 @media (min-width: 1000px) {
   header {
     height: 75px;
-    grid-template-columns: 250px auto auto 100px;
+    grid-template-columns: 170px auto 75px;
   }
   .Header--fixed-space {
     height: 75px;
@@ -81,8 +81,6 @@ header {
   align-items: center;
   text-decoration: none;
   color: white;
-  font-family: 'Gruppo';
-  font-weight: bold;
 }
 
 .Header__bars {
@@ -117,11 +115,13 @@ header {
 /*-----------------Traditional-Nav---------------- */
 
 nav {
-  grid-column: 3 / span 1;
-  justify-self: right;
+  grid-column: 2 / span 1;
+  justify-self: end;
+  grid-gap: 30px;
+  padding-right: 10px;
   height: 100%;
-  width: 400px;
   display: none;
+  grid-auto-flow: column;
   align-items: center;
   border: 1px solid transparent;
 }
@@ -130,32 +130,26 @@ nav > * {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid transparent;
   width: 100%;
   height: 100%;
-  align-items: center;
-  padding: 0 25px;
   text-decoration: none;
   transition: all 250ms ease-out;
 }
 
-nav > * > div {
-  color: white;
-  font-size: 24px;
-  font-family: 'Gruppo';
-  font-weight: bold;
+nav > * > h3 {
+  color: var(--light-gray);
 }
 
-nav > *:hover, nav > * > div:hover{
+nav > * >:hover, nav > * > h3:hover{
   cursor: pointer;
 }
 
-nav > *:hover {
-  border-color: white;
+nav > *:hover, nav > * > h3:hover {
+  color: var(--turquoise);
 }
 
-nav > *:active {
-  background-color: lightgray;
+nav > *:active, nav > * > h3:active {
+  color: var(--turquoise);
 }
 
 .user-circle:hover, .logo:hover {
@@ -172,7 +166,7 @@ nav > *:active {
   display: none;
   justify-content: center;
   align-items: center;
-  grid-column: 4 / span 1;
+  grid-column: 3 / span 1;
   justify-self: center;
   transition: all 250ms ease-out;
   border: 1px solid transparent;
@@ -187,7 +181,7 @@ nav > *:active {
 
 @media (min-width: 1000px) {
   nav {
-    display: flex;
+    display: grid;
   }
 
   .user-circle {
