@@ -16,10 +16,7 @@ export default function Event(props){
     styleItem,
     styleCell,
     styleSummary } = props
-
   const event = item
-
-
   const leftCell = styleCell('left', event)
   const middleCell = styleCell('middle', event)
   const rightCell = styleCell('right', event)
@@ -29,41 +26,34 @@ export default function Event(props){
   const scheduleDisplay = displayColumn('schedule')
   const confirmationDisplay = displayColumn('confirmation')
 
-
-
   return (
     <Link to={`/admin/${type.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
       {numColumns?
-        <div className="List-Item" style={styleItem(item, type, numColumns)}>
+        <div className="List-Item" style={styleItem(item, type)}>
 
           {/* Title */}
-
           <div className="List-Item--Cell" style={{ ...leftCell, ...titleDisplay, padding: '5px' }}>
             <div style={styleSummary(event && event.summary)}>{summary(event)}</div>
           </div>
 
           {/* Date */}
-
           <div className="List-Item--Cell" style={{ ...middleCell, ...dateDisplay, padding: '5px' }}>
             <p>{date(event, true)}</p>
             <p>{time(event)}</p>
           </div>
 
           {/* Intel */}
-
           <div className="List-Item--Cell" style={{ ...middleCell, ...intelDisplay, padding: '5px' }}>
             {event && event.client && <div>{clientName(event.client)}</div>}
             {event && event.location && <p>{event.location.name}</p>}
           </div>
 
           {/* Schedule */}
-
           <div className="List-Item--Cell" style={{ ...middleCell, ...scheduleDisplay }}>
             {scheduled(event)}
           </div>
 
           {/* Confirmation */}
-
           <div className="List-Item--Cell" style={{ ...rightCell, ...confirmationDisplay }}>
             {
               event && event.start && moment(event.start).isSameOrAfter(moment(), 'days')?

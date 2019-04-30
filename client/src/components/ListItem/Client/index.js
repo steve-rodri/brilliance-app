@@ -12,7 +12,7 @@ export default function Client(props) {
     <Link to={{pathname: `/admin/${type.toLowerCase()}/${item.id}`, state: { modal: true } }} style={{textDecoration: 'none', color: 'black'}}>
       {
         numColumns?
-        <div className="List-Item" style={style()}>
+        <div className="List-Item">
 
           <div className="Client--name" style={displayColumn('name / company')}>
             <h3>{client && client.fullName}</h3>
@@ -29,7 +29,7 @@ export default function Client(props) {
 
         </div>
         :
-        <div className="List-Item" style={style()}>
+        <div className="List-Item">
 
           <div className="Client--name">
             <h3>{client && client.fullName}</h3>
@@ -44,12 +44,6 @@ export default function Client(props) {
       }
     </Link>
   )
-
-  function style(){
-    return {
-      gridTemplateColumns: '1fr 2fr 1fr'
-    }
-  }
 
   function latestEvent(){
     if (item) {

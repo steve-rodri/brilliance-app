@@ -127,7 +127,7 @@ export default class ListPage extends Component {
           }
 
           {/* Add New Button */}
-          {type === "Events" || type === "Clients" || type === "Staff"?
+          {type === "Events" || type === "Clients" || type === "Workers"?
             <AddNew
               linkPath={{pathname: `${match.path}/new`, state: { modal: true } }}
               style={{gridRow: '5 / span 1', alignSelf: 'end'}}

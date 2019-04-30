@@ -7,17 +7,10 @@ export default class List extends Component {
   render(){
     const {items, type, columnHeaders, load, hasMore } = this.props
 
-    const style = () => {
-      if (columnHeaders) {
-        return styleColumns(columnHeaders.length)
-      } else {
-        return {}
-      }
-    }
     return (
       <div id="List" className="List">
         {columnHeaders && items && items.length?
-          <div className="Titles" style={style()}>
+          <div className="Titles">
             {columnHeaders && columnHeaders.map((header, id) => (
             <h6 key={id}>{header}</h6>
             ))}
@@ -76,23 +69,15 @@ export default class List extends Component {
       if (type === 'Schedule') {
         return {
           color: 'white',
-          gridTemplateColumns: `repeat(${numColumns}, 1fr)`
-        }
-      } else if (type === "Clients") {
-        return {
-          gridTemplateColumns: `1fr 2fr 1fr`
-        }
-      } else {
-        return {
-        gridTemplateColumns: `repeat(${numColumns}, 1fr)`
         }
       }
     }
 
     function displayColumn(headerName){
       if (columnHeaders) {
-        if ( columnHeaders.find( header => header === headerName ) ) {
-          return {}
+        const index = columnHeaders.findIndex( header => header === headerName ) + 1
+        if ( index  ) {
+          return { gridColumn: index }
         } else {
           return { display: 'none' }
         }

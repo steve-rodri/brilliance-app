@@ -14,7 +14,6 @@ export default class Clients extends Component {
       clients: null,
       category: 'All',
       categories: ['CATP', 'THC', 'TANS', 'CANS'],
-      columnHeaders: ['name / company', 'contact info', 'next event', 'balance'],
 
       hasMoreClients: true,
       hasMoreEvents: true,
@@ -39,7 +38,7 @@ export default class Clients extends Component {
       })
     } else {
       this.setState({
-        columnHeaders: ['name / company', 'next event', 'balance']
+        columnHeaders: ['name / company', '', 'next event', 'balance']
       })
     }
   }
