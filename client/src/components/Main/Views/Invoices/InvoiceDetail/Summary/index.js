@@ -10,38 +10,42 @@ export default class Summary extends Component {
 
       if (editMode) {
         return (
-          <div className="Summary">
-            <div className="Summary--totals">
-              <div>
-                <h3>SubTotal:</h3>
-                <p>{numeral(inv.subTotal).format('$0,0.00')}</p>
-              </div>
-              <div>
-                <h3>Discount:</h3>
-                <p>{numeral(inv.discount).format('$0,0.00')}</p>
-              </div>
-              <div>
-                <h3>Total:</h3>
-                <p>{numeral(inv.total).format('$0,0.00')}</p>
+          <div className="Summary--container">
+            <div className="Summary">
+              <div className="Summary--totals">
+                <div>
+                  <label>SubTotal :</label>
+                  <p>{numeral(inv.subTotal).format('$0,0.00')}</p>
+                </div>
+                <div>
+                  <label>Discount :</label>
+                  <p>{numeral(inv.discount).format('$0,0.00')}</p>
+                </div>
+                <div>
+                  <label>Total :</label>
+                  <p>{numeral(inv.total).format('$0,0.00')}</p>
+                </div>
               </div>
             </div>
           </div>
         )
       } else {
         return (
-          <div className="Summary">
-            <div className="Summary--totals">
-              <div>
-                <h3>Total:</h3>
-                <p>{numeral(inv.total).format('$0,0.00')}</p>
-              </div>
-              {<div>
-                <h3>Deposit:</h3>
-                <p>{numeral(inv.deposit).format('$0,0.00')}</p>
-              </div>}
-              <div>
-                <h3>Balance:</h3>
-                <p>{numeral(inv.balance).format('$0,0.00')}</p>
+          <div className="Summary--container">
+            <div className="Summary">
+              <div className="Summary--totals">
+                <div>
+                  <label>Total :</label>
+                  <p>{numeral(inv.total).format('$0,0.00')}</p>
+                </div>
+                <div>
+                  <label>Deposit :</label>
+                  <p>{numeral(inv.deposit).format('$0,0.00')}</p>
+                </div>
+                <div>
+                  <label>Balance :</label>
+                  <p>{numeral(inv.balance).format('$0,0.00')}</p>
+                </div>
               </div>
             </div>
           </div>

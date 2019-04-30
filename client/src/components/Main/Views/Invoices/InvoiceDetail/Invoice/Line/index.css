@@ -12,10 +12,11 @@
 }
 
 .Line--input {
-  font-size: 18px;
-  width: 100%;
-  border: 2px solid var(--light-gray);
-  border-radius: 5px;
+  width: 90%;
+  padding: 20px 5px;
+  background-color: transparent;
+  text-align: center;
+  border: 2px solid transparent;
   outline: none;
 }
 
@@ -66,11 +67,12 @@
 }
 
 .Line--price, .Invoice--header-price {
-  width: 125px;
-  text-align: right;
+  width: 100px;
+  text-align: center;
 }
 
 .Line--price > div {
+  margin-right: 5px;
   display: grid;
   grid-template-columns: repeat(2, auto);
   align-items: center;
@@ -83,5 +85,5 @@
 }
 
 .Line--price > div > input {
-  text-align: right;
+  text-align: left;
 }

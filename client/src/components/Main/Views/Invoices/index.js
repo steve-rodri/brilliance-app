@@ -16,8 +16,8 @@ export default class Invoices extends Component {
     this.state = {
       invoices: null,
       hasMore: false,
-      category: 'Upcoming',
-      categories: ['Production', 'CANS', 'THC', 'CATP'],
+      category: null,
+      categories: ['CATP', 'THC', 'TANS', 'CANS'],
       page: 1
     }
     this.axiosRequestSource = axios.CancelToken.source()
@@ -32,7 +32,7 @@ export default class Invoices extends Component {
 
   async componentDidMount() {
     await this.setColumnHeaders()
-    await this.setTodaysDate(this.props)
+    await this.setCurrentMonth()
     await this.setInvoices(this.props);
   }
 
@@ -105,17 +105,19 @@ export default class Invoices extends Component {
   }
 
   setByDate = async() => {
-    const { date: { start, end } } = this.state
-    const isDay = moment(start).isSame(moment(end), 'day')
-    let date = `${moment(start).format('LL')} - ${moment(end).format('LL')}`
-    if (isDay) date = `${moment(start).format('LL')}`
+    const { date: { start: s, end: e } } = this.state
+    const start = moment(s);
+    const end = moment(e);
+    const isDay = end.diff(start, 'days') <= 1
+    const isMonth = start.month() === end.month() && end.diff(start, 'days') <= start.daysInMonth()
+    let date = `${start.format('LL')} - ${end.format('LL')}`
+
+    if (isDay) date = `${start.format('LL')}`
+    if (isMonth) date = `${start.format('MMMM YYYY')}`
 
     this.setState(
     {
       searchLabel: date,
-      category: null,
-      query: null,
-      client: null,
       page: 1
     },
       async () => {
@@ -144,6 +146,24 @@ export default class Invoices extends Component {
     this.setState({ date })
   }
 
+  setCurrentMonth = () => {
+    this.setState({
+      date: {
+        start: moment().startOf('month').toISOString(true),
+        end: moment().endOf('month').toISOString(true)
+      }
+    })
+  }
+
+  setMonth = (month, year) => {
+    this.setState({
+      date: {
+        start: moment(month, year).startOf('month').toISOString(true),
+        end: moment(month, year).endOf('month').toISOString(true)
+      }
+    })
+  }
+
   setRefresh = (value, url) => {
     const { history } = this.props
     this.setState({ willRefresh: value }, () => {
@@ -155,11 +175,13 @@ export default class Invoices extends Component {
 
   // -----------------------------------Handle-Change---------------------------
 
-  handleDateChange = async(date) => {
+  handleDateChange = async(date, type) => {
+    let t = type;
+    if (!type) t = 'day'
     this.setState( prevState => ({
       date: {
-        start: moment(date).startOf('day').toISOString(true),
-        end:  moment(date).endOf('day').toISOString(true)
+        start: moment(date).startOf(t).toISOString(true),
+        end:  moment(date).endOf(t).toISOString(true)
       }
     }),
     () =>  this.setInvoices())
@@ -314,6 +336,7 @@ export default class Invoices extends Component {
         load={this.fetchInvoices}
         refresh={this.setRefresh}
         handleDateChange={this.handleDateChange}
+        handleMonthChange={this.setMonth}
       />
     )
   }

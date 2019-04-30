@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchField from '../../../SearchField';
+import SearchField from '../../../SearchField/';
 import { contactName, companyName } from '../../../../helpers/clientHelpers'
 import { contact } from '../../../../services/contact'
 import { company } from '../../../../services/company'

@@ -27,12 +27,13 @@
   }
 }
 
-h1, h2, h3  {
+h1, h2 {
   font-family: 'Gruppo', sans-serif;
 }
 
-h4, h5, h6, {
-  font-family: 'Lato', sans-serif;
+h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 h1 {
@@ -42,6 +43,12 @@ h1 {
 p, a {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+}
+
+li {
+  width: 100%;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
 }
 
 button:hover, .Icon:hover {
@@ -72,7 +79,14 @@ label {
 }
 
 input {
+  font-size: 18px;
   font-family: 'Lato', sans-serif;
+  outline: none;
+}
+
+input:focus {
+  box-shadow: 0 0 2px 2px var(--light-blue);
+  border: 1px solid var(--light-blue);
 }
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
@@ -126,7 +140,6 @@ select {
 .Edit--Field {
   position: relative;
   min-width: 100px;
-  max-width: 275px;
   height: 36px;
   display: flex;
   justify-content: center;
@@ -159,16 +172,9 @@ select {
 /* -------------------------Search-Results------------------------ */
 
 .Edit--results {
-  display: none;
-  z-index: 1;
-  position: absolute;
-  top: 125%;
-  width: 100%;
-  height: 400%;
-  overflow: auto;
   border-radius: 5px;
   background-color: white;
-  box-shadow: 0 0 3px 2px lightgray;
+  box-shadow: 0 3px 3px 3px #999;
 }
 
 .Edit--search-result {
@@ -177,9 +183,7 @@ select {
   align-items: center;
   width: 100%;
   height: 33.3%;
-  font-size: 22px;
   color: black;
-  z-index: 2;
 }
 
 .Edit--search-result:hover {

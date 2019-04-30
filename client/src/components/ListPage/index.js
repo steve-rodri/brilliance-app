@@ -95,6 +95,17 @@ export default class ListPage extends Component {
             refresh={refresh}
           />
 
+          {/* Calendar */}
+          {
+            type === "Events" || type === "Invoices"?
+            <Calendar
+              date = {isDay && date? new Date(date.start) : new Date()}
+              onDateChanged={handleDateChange}
+            />
+            :
+            null
+          }
+
           {/* Categories */}
           {
             <div className="ListPage--categories-container">
@@ -115,22 +126,12 @@ export default class ListPage extends Component {
             </div>
           }
 
-          {/* Calendar */}
-          {
-            type === "Events" || type === "Invoices"?
-            <Calendar
-              date = {isDay && date? new Date(date.start) : new Date()}
-              onDateChanged={handleDateChange}
-            />
-            :
-            null
-          }
-
           {/* Add New Button */}
           {type === "Events" || type === "Clients" || type === "Staff"?
             <AddNew
               linkPath={{pathname: `${match.path}/new`, state: { modal: true } }}
-              style={{gridRow: '6 / span 1', alignSelf: 'end'}}
+              style={{gridRow: '5 / span 1', alignSelf: 'end'}}
+              type={singular}
             />
             :
             null

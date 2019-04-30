@@ -13,7 +13,7 @@ export default class Clients extends Component {
     this.state = {
       clients: null,
       category: 'All',
-      categories: ['Production','CANS', 'THC', 'CATP'],
+      categories: ['CATP', 'THC', 'TANS', 'CANS'],
       columnHeaders: ['name / company', 'contact info', 'next event', 'balance'],
 
       hasMoreClients: true,

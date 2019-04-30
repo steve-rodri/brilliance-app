@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { pencil, check, closeIcon } from '../../../../../../helpers/icons'
 import { clientName } from '../../../../../../helpers/clientHelpers'
 import moment from 'moment'
@@ -15,6 +16,23 @@ export default function Header(props){
         {clientAndDate()}
       </div>
     )
+  }
+
+  function displayJob(){
+    return (
+      <div className="InvoiceDetail-header--view-job">
+        {job()}
+      </div>
+    )
+  }
+
+  function job(){
+    if (inv && inv.event) {
+      const { event } = inv
+      return (
+        <Link style={{textDecoration: 'none', color: "white"}} to={`/admin/events/${event.id}`}><h2>View Job</h2></Link>
+      )
+    }
   }
 
   function clientAndDate(){
@@ -114,6 +132,7 @@ export default function Header(props){
     <div className="InvoiceDetail-header--container">
       <div className="InvoiceDetail-header">
         {displaySummary()}
+        {displayJob()}
         <div className="InvoiceDetail-header--right">
           {displayButtons()}
         </div>

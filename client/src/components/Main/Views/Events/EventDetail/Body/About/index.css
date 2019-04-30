@@ -23,12 +23,17 @@
 
 @media (min-width: 750px) {
   .About {
-    padding: 25px 30px 30px 30px;
+    padding: 30px;
     color: inherit;
   }
 
   .About--event-status-container {
     padding: 0 30px 30px 30px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
   }
 
   .About--event-status {

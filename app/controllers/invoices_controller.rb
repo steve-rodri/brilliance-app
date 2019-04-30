@@ -2,22 +2,32 @@ class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :update, :destroy]
 
   @@items_per_page = 25
+  @@date_start = Time.zone.today()
+  @@date_end = Time.zone.today()
 
   # GET /invoices
   def index
+
+    if params[:date_start]
+      @@date_start = Time.zone.parse(params[:date_start])
+    end
+
+    if params[:date_end]
+      @@date_end = Time.zone.parse(params[:date_end])
+    end
+
     if params[:category]
-      current_date = Time.zone.today()
-      if params[:category] == 'Upcoming'
+      if params[:category] == 'All'
         @invoices = Invoice
           .joins(:event)
-          .where("events.start >= '#{current_date}'")
+          .where("events.start >= '#{@@date_start}'")
           .order("events.start")
           .paginate(page: params[:page], per_page: @@items_per_page)
 
       elsif params[:category] == 'Production'
         @invoices = Invoice
           .joins(:event)
-          .where("invoices.kind = 'Production Invoice' AND events.start >= '#{current_date}'")
+          .where("invoices.kind = 'Production Invoice' AND events.start >= '#{@@date_start}'")
           .order("events.start DESC")
           .paginate(page: params[:page], per_page: @@items_per_page)
 
@@ -26,10 +36,11 @@ class InvoicesController < ApplicationController
         @invoices = Invoice
           .joins(:event)
           .joins("JOIN places ON places.id = events.location_id")
-          .where("places.short_name = '#{short_name}' AND events.start >= '#{current_date}'")
+          .where("places.short_name = '#{short_name}' AND events.start >= '#{@@date_start}'")
           .order("events.start DESC")
           .paginate(page: params[:page], per_page: @@items_per_page)
       end
+      
     elsif params[:client_id]
       id = params[:client_id]
       @invoices = Invoice
@@ -38,30 +49,12 @@ class InvoicesController < ApplicationController
         .order("events.start DESC")
         .paginate(page: params[:page], per_page: @@items_per_page)
 
-    elsif params[:date]
-      start = Time.zone.parse(params[:date])
-      @invoices = Invoice
-        .joins(:event)
-        .where("events.start >= '#{start}'")
-        .order("events.start")
-        .paginate(page: params[:page], per_page: @@items_per_page)
-
-    elsif params[:date_start] && params[:date_end]
-      startDay = Time.zone.parse(params[:date_start])
-      endDay = Time.zone.parse(params[:date_end])
-      @invoices = Invoice
-        .joins(:event)
-        .where("events.start BETWEEN '#{startDay}' AND '#{endDay}'")
-        .order("events.start")
-        .paginate(page: params[:page], per_page: @@items_per_page)
-
     else
       @invoices = Invoice
-        .all
         .joins(:event)
+        .where("events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'")
         .order("events.start DESC")
         .paginate(page: params[:page], per_page: @@items_per_page)
-
     end
     render json: @invoices, include: '**'
   end

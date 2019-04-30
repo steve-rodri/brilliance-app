@@ -3,21 +3,22 @@
   max-height: 650px;
   width: 85%;
   border: 1px solid #ccc;
-  background: #fff;
+  background: #eee;
   overflow: auto;
   WebkitOverflowScrolling: touch;
   border-radius: 5px;
   outline: none;
   padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+
+  display: grid;
 }
 
 .Modal--overlay {
   position: fixed;
   height: 100%;
   width: 100%;
+  top: 0;
   left: 0;
   right: 0;
   display: flex;
@@ -28,17 +29,11 @@
 }
 
 .Modal--content {
-  position: relative;
-  height: 100%;
-  width: 100%;
   display: grid;
-  align-items: center;
-  justify-items: center;
-  grid-gap: 20px;
 }
 
 .Modal--close {
   position: absolute;
-  top: -1%;
-  right: -1%;
+  top: 1%;
+  right: 1%;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { deleteIcon, addIcon } from '../../../../../../../helpers/icons'
+import { plusIcon, minusIcon } from '../../../../../../../helpers/icons'
 
 export default class Edit extends Component {
   constructor(props){
@@ -33,7 +33,7 @@ export default class Edit extends Component {
           {workers?
             workers.map( (worker, i) =>
               <tr className="Staff--worker Staff--Edit" key={i} style={this.styleRow()}>
-                <td className="Staff--icon Staff--Edit"><div onClick={() => this.props.removeWorker(worker)}>{deleteIcon(iconSize)}</div></td>
+                <td style={{backgroundColor: 'red', color: 'white'}} className="Staff--icon Staff--Edit" onClick={() => this.props.removeWorker(worker)}><div>{minusIcon(iconSize)}</div></td>
                 <td className="Staff--worker-name Staff--Edit">{worker.info.contact.fullName}</td>
               </tr>
             )
@@ -41,7 +41,7 @@ export default class Edit extends Component {
             null
           }
           <tr className="Staff--worker Staff--Edit" style={this.styleRow()}>
-            <td className="Staff--icon Staff--Edit"><div onClick={this.props.chooseWorker}>{addIcon(iconSize)}</div></td>
+            <td style={{backgroundColor: 'limegreen', color: 'white'}} className="Staff--icon Staff--Edit" onClick={this.props.chooseWorker}><div>{plusIcon(iconSize)}</div></td>
           </tr>
           </tbody>
         </table>

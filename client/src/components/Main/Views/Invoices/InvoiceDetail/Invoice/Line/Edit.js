@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { description, contents, inc } from './Helpers'
-import { deleteIcon } from '../../../../../../../helpers/icons'
+import { closeIcon } from '../../../../../../../helpers/icons'
 
 export default class Edit extends Component {
 
@@ -14,18 +14,17 @@ export default class Edit extends Component {
     return (
       <tr key={line.id} className="Line">
         <td
-          style={styleCell(index, length)}
+          style={styleCell(index, length, 'delete')}
           className="Invoice--cell Line--add-delete"
           onClick={(e) => {
             e.stopPropagation();
             deleteLine(line.id)
           }}
         >
-          {deleteIcon('1x')}
+          {closeIcon('2x')}
         </td>
 
-        <td style={styleCell(index, length)} className="Invoice--cell Line--quantity">
-          <div>
+        <td style={styleCell(index, length, 'quantity')} className="Invoice--cell Line--quantity">
             <input
               className="Line--input"
               name="quantity"
@@ -34,7 +33,6 @@ export default class Edit extends Component {
               onChange={(e) => handleLineChange(e, line.id)}
               onFocus={this.handleFocusSelect}
             />
-          </div>
         </td>
 
         <td style={styleCell(index, length)} className="Invoice--cell Line--item">
@@ -53,13 +51,14 @@ export default class Edit extends Component {
           {inc(line)}
         </td>
 
-        <td style={styleCell(index, length)} className="Invoice--cell Line--price">
+        <td style={styleCell(index, length, 'price')} className="Invoice--cell Line--price">
           {
             !line.inc?
             <div>
               <p>$</p>
               <input
                 className="Line--input"
+                style={{width: '100%'}}
                 name="price"
                 type="number"
                 value={line.price || ''}

@@ -33,6 +33,7 @@ export default class EventDetail extends Component {
     }
     this.axiosRequestSource = axios.CancelToken.source()
     this.container = React.createRef()
+    this.scrollPosition = 0
   }
 
 // ---------------------------------LifeCycle-----------------------------------
@@ -47,6 +48,7 @@ export default class EventDetail extends Component {
   async componentDidMount(){
     this.resetView()
     window.addEventListener('resize', this.resetView)
+    window.addEventListener('scroll', this.resetScroll)
     window.scrollTo(0,0);
     await this.setFields();
     const { isNew, date } = this.props
@@ -66,6 +68,7 @@ export default class EventDetail extends Component {
 
   async componentWillUnmount(){
     window.removeEventListener('resize', this.resetView)
+    window.removeEventListener('scroll', this.resetScroll)
     this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
@@ -794,7 +797,7 @@ export default class EventDetail extends Component {
 
   getActiveEmployees = async() => {
     const allEmployees = await employee.getAll()
-    const employees = allEmployees.filter(employee => employee['active?'])
+    const employees = allEmployees.filter(employee => employee.active)
     this.setState({ employees })
   }
 
@@ -869,6 +872,11 @@ export default class EventDetail extends Component {
     this.container.current.scrollTop = 0
   }
 
+  resetScroll = () => {
+    this.setState({ scroll: true })
+    setTimeout(() => this.setState({ scroll: false }), 1000)
+  }
+
 // -----------------------------------Styles------------------------------------
 
   styleTab = (view) => {
@@ -931,6 +939,7 @@ export default class EventDetail extends Component {
           handleStatusChange={this.handleStatusChange}
           handleDateChange={this.handleDateChange}
           handleSearchChange={this.handleSearchChange}
+          handleFocusSelect={this.handleFocusSelect}
 
           onSelect={this.handleSelect}
           onEnter={this.handleFormSubmit}

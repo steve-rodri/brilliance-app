@@ -2,7 +2,6 @@
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  height: 100%;
   width: 100%;
   background-color: var(--dark-gray);
   color: var(--light-gray);
@@ -88,7 +87,6 @@ input, .EventDetail--event-summary {
     display: grid;
     justify-items: center;
     align-items: center;
-    height: 75px;
     justify-items: left;
     grid-column-gap: 5px;
     grid: auto / 100px auto 100px;

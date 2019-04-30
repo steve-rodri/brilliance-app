@@ -19,7 +19,7 @@ export default class List extends Component {
         {columnHeaders && items && items.length?
           <div className="Titles" style={style()}>
             {columnHeaders && columnHeaders.map((header, id) => (
-            <h5 key={id}>{header}</h5>
+            <h6 key={id}>{header}</h6>
             ))}
           </div>
           :

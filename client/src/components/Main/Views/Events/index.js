@@ -19,7 +19,7 @@ export default class Events extends Component {
       events: null,
       hasMore: false,
       category: null,
-      categories: ['Production', 'CANS', 'THC', 'CATP'],
+      categories: ['CATP', 'THC', 'TANS', 'CANS'],
       page: 1
     }
     this.axiosRequestSource = axios.CancelToken.source()
@@ -107,10 +107,15 @@ export default class Events extends Component {
   }
 
   setByDate = async() => {
-    const { date: { start, end } } = this.state
-    const isDay = moment(end).diff(moment(start), 'days') <= 1
-    let date = `${moment(start).format('LL')} - ${moment(end).format('LL')}`
-    if (isDay) date = `${moment(start).format('LL')}`
+    const { date: { start: s, end: e } } = this.state
+    const start = moment(s);
+    const end = moment(e);
+    const isDay = end.diff(start, 'days') <= 1
+    const isMonth = start.month() === end.month() && end.diff(start, 'days') <= start.daysInMonth()
+    let date = `${start.format('LL')} - ${end.format('LL')}`
+
+    if (isDay) date = `${start.format('LL')}`
+    if (isMonth) date = `${start.format('MMMM YYYY')}`
 
     this.setState(
     {

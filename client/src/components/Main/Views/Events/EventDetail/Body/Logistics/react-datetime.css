@@ -7,14 +7,15 @@
 }
 .rdtPicker {
   display: none;
-  position: absolute;
-  width: 100%;
+  position: fixed;
   padding: 4px;
-  margin-top: 1px;
+  margin-top: 10px;
+  width: 275px;
   z-index: 99999 !important;
   background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  box-shadow: 0 0 2px 1px #999;
   border: 1px solid #f9f9f9;
+  border-radius: 5px;
 }
 .rdtOpen .rdtPicker {
   display: block;
@@ -35,10 +36,17 @@
 .rdtPicker td,
 .rdtPicker th {
   text-align: center;
-  height: 28px;
+  font-family: 'Roboto';
 }
 .rdtPicker td {
   cursor: pointer;
+}
+
+.rdtDay {
+  height: 35px;
+  width: 35px;
+  font-size: 17px;
+  border-radius: 100%;
 }
 .rdtPicker td.rdtDay:hover,
 .rdtPicker td.rdtHour:hover,
@@ -67,7 +75,7 @@
 }
 .rdtPicker td.rdtActive,
 .rdtPicker td.rdtActive:hover {
-  background-color: #428bca;
+  background-color: var(--dark-blue);
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
@@ -97,6 +105,8 @@
   width: 14.2857%;
   border-bottom: none;
   cursor: default;
+  font-family: 'Roboto';
+  font-size: 15px;
 }
 .rdtPicker th.rdtSwitch {
   width: 100px;
@@ -193,12 +203,9 @@ td.rdtYear:hover {
   -ms-user-select: none;       /* Internet Explorer/Edge */
   user-select: none;
 }
+
 .rdtCounter .rdtBtn:hover {
   background: #eee;
-}
-.rdtCounter .rdtCount {
-  height: 20%;
-  font-size: 1.2em;
 }
 
 .rdtMilli {
