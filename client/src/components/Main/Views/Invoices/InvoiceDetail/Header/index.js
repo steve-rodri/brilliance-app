@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { pencil, check, closeIcon } from '../../../../../../helpers/icons'
+import { pencilIcon, checkIcon, timesIcon } from '../../../../../../helpers/icons'
 import { clientName } from '../../../../../../helpers/clientHelpers'
 import moment from 'moment'
 import './index.css'
@@ -67,7 +67,7 @@ export default function Header(props){
           className="InvoiceDetail-header--icon left"
           onClick={() => props.close(true)}
         >
-          {closeIcon('2x')}
+          {timesIcon('2x')}
         </div>
       )
     }
@@ -79,7 +79,7 @@ export default function Header(props){
         className="InvoiceDetail-header--icon right"
         onClick={props.edit}
       >
-        {pencil('2x')}
+        {pencilIcon('2x')}
       </div>
     )
   }
@@ -103,7 +103,7 @@ export default function Header(props){
         className="InvoiceDetail-header--icon right"
         onClick={props.submit}
       >
-        {check('2x')}
+        {checkIcon('2x')}
       </div>
     )
   }

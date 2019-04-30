@@ -1,6 +1,6 @@
 import React from 'react'
 import numeral from 'numeral'
-import { square } from '../../../../../../../helpers/icons'
+import { squareIcon } from '../../../../../../../helpers/icons'
 
 const description = (item) => {
   if (item) {
@@ -71,9 +71,9 @@ const inc = (line) => {
     const included = line.inc
 
     if (included) {
-      return square(['fas', 'square'])
+      return squareIcon(['fas', 'square'])
     } else {
-      return square(['far', 'square'])
+      return squareIcon(['far', 'square'])
     }
   }
 }

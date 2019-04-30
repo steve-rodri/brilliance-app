@@ -18,7 +18,8 @@ import {
   faSearch,
   faSearchPlus,
   faChevronRight,
-  faChevronLeft
+  faChevronLeft,
+  faUserCircle
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faSquare as farSquare
@@ -42,7 +43,8 @@ library.add(
   faSearch,
   faSearchPlus,
   faChevronRight,
-  faChevronLeft
+  faChevronLeft,
+  faUserCircle
 )
 
 export function statusIcon(str, size){
@@ -57,6 +59,10 @@ export function statusIcon(str, size){
       return <FontAwesomeIcon  className="Icon" color="red" icon="times-circle" size={size}/>
     default:
   }
+}
+
+export function userCircleIcon(size, style){
+  return <FontAwesomeIcon className={`Icon`} icon="user-circle" size={size} style={style}/>
 }
 
 export function chevronRightIcon(size, className){
@@ -93,22 +99,22 @@ export function deleteIcon(size){
   return <FontAwesomeIcon className="Icon" icon="minus-circle" size={size}/>
 }
 
-export function closeIcon(size, color, className){
+export function timesIcon(size, color, className){
   return <FontAwesomeIcon  className={`Icon ${className}`} color={color} icon="times" size={size}/>
 }
 
-export function pencil(size, className, color){
+export function pencilIcon(size, className, color){
   return <FontAwesomeIcon  className={`Icon ${className}`} icon="pencil-alt" color={color? color : null} size={size}/>
 }
 
-export function trash(size, className, color){
+export function trashIcon(size, className, color){
   return <FontAwesomeIcon  className={`Icon ${className}`} icon="trash" color={color? color : null} size={size}/>
 }
 
-export function check(size, className, color){
+export function checkIcon(size, className, color){
   return <FontAwesomeIcon  className={`Icon ${className}`} icon="check" color={color? color : null} size={size? size : '1x'}/>
 }
 
-export function square(style, size, className, color){
+export function squareIcon(style, size, className, color){
   return <FontAwesomeIcon className={`Icon ${className}`} icon={style} color={color? color : null} size={size? size : '1x'}/>
 }

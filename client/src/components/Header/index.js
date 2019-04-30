@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom'
 import Bars from '../Buttons/Bars/index.js'
 import logo_t from '../../images/logo_t.GIF'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { userCircleIcon } from '../../helpers/icons'
 import './index.css'
-
-library.add(faUserCircle)
 
 export default class Header extends Component {
   constructor(props){
@@ -101,7 +97,7 @@ export default class Header extends Component {
               user?
               <img className="user-photo" src={user.picture} alt="You"/>
               :
-              <FontAwesomeIcon icon="user-circle" size="3x" color="var(--light-blue)"/>
+              userCircleIcon('3x', { color: "var(--light-blue)" })
             }
           </div>
 

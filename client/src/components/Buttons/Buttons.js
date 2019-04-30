@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { pencil, check, trash } from '../../helpers/icons'
+import { pencilIcon, checkIcon, trashIcon } from '../../helpers/icons'
 import { styleConfirmation, changeConfirmation } from '../../helpers/eventHelpers'
 import './Buttons.css'
 
@@ -27,7 +27,7 @@ export default function Buttons(props) {
         }}
       >
         <span className="Button-text">Edit</span>
-        {pencil('2x', 'Button-icon')}
+        {pencilIcon('2x', 'Button-icon')}
       </button>
     )
   }
@@ -39,7 +39,7 @@ export default function Buttons(props) {
           className="Button Delete"
         >
           <span className="Button-text">DELETE</span>
-          {trash('2x', 'Button-icon')}
+          {trashIcon('2x', 'Button-icon')}
         </button>
       )
     }
@@ -52,7 +52,7 @@ export default function Buttons(props) {
         onClick={handleSubmit}
       >
         <span className="Button-text">SUBMIT</span>
-        {check('2x', 'Button-icon')}
+        {checkIcon('2x', 'Button-icon')}
       </button>
     )
   }
