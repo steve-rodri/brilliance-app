@@ -1,5 +1,5 @@
 import React from 'react'
-import { pencil, check, closeIcon } from '../../../../../../helpers/icons'
+import { pencilIcon, checkIcon, timesIcon } from '../../../../../../helpers/icons'
 // import { styleConfirmation, changeConfirmation } from '../../../../../../Helpers/eventHelpers'
 import './index.css'
 
@@ -85,7 +85,7 @@ export default function Header(props){
           className="EventDetail--icon left"
           onClick={close}
         >
-          {closeIcon('2x')}
+          {timesIcon('2x')}
         </div>
       )
     }
@@ -97,7 +97,7 @@ export default function Header(props){
         className="EventDetail--icon right"
         onClick={edit}
       >
-        {pencil('2x')}
+        {pencilIcon('2x')}
       </div>
     )
   }
@@ -121,7 +121,7 @@ export default function Header(props){
         className="EventDetail--icon right"
         onClick={handleSubmit}
       >
-        {check('2x')}
+        {checkIcon('2x')}
       </div>
     )
   }

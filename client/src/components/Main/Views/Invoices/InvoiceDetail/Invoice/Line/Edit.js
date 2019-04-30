@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { description, contents, inc } from './Helpers'
-import { closeIcon } from '../../../../../../../helpers/icons'
+import { timesIcon } from '../../../../../../../helpers/icons'
 
 export default class Edit extends Component {
 
@@ -21,7 +21,7 @@ export default class Edit extends Component {
             deleteLine(line.id)
           }}
         >
-          {closeIcon('2x')}
+          {timesIcon('2x')}
         </td>
 
         <td style={styleCell(index, length, 'quantity')} className="Invoice--cell Line--quantity">
