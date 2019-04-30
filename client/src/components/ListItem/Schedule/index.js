@@ -11,7 +11,6 @@ export default function Schedule(props){
     type,
     timeUntil,
     displayColumn,
-    numColumns,
     styleItem,
     match
   }
@@ -19,7 +18,7 @@ export default function Schedule(props){
 
   return (
     <Link to={`${match.path}/events/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
-      <div className="List-Item" style={styleItem(item, type, numColumns)}>
+      <div className="List-Item" style={styleItem(item, type)}>
 
         <div style={displayColumn('time until')}>{item && timeUntil}</div>
 

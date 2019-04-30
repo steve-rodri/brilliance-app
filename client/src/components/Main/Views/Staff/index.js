@@ -8,9 +8,11 @@ export default class Staff extends Component {
   constructor(props){
     super(props)
     this.state = {
-      staff: []
+      staff: [],
+      page: 1
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.itemsPerPage = 25
   }
 
   updateColumnHeaders = (e) => {
@@ -21,23 +23,22 @@ export default class Staff extends Component {
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['name', 'active', 'labor']
+        columnHeaders: ['name','','','active', 'labor']
       })
     } else {
       this.setState({
-        columnHeaders: ['name', 'active', 'labor']
+        columnHeaders: ['name','','','active', 'labor']
       })
     }
   }
 
   componentWillReceiveProps(nextProps){
-    this.setStaff(nextProps, 0)
+    this.setStaff(nextProps)
   }
 
   async componentDidMount() {
-    this.updateColumnHeaders();
-    window.addEventListener("resize", this.updateColumnHeaders);
-    await this.setStaff(this.props, 1);
+    await this.setColumnHeaders()
+    await this.setStaff(this.props);
   }
 
   componentWillUnmount() {
@@ -45,25 +46,21 @@ export default class Staff extends Component {
     this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
-  setStaff = (props, mounted) => {
-    if (mounted) {
-      this.setState(
-      {
-        page: 1
-      },
-        async () => {
-        await this.resetStaff()
-        await this.fetchStaff()
-      })
-    }
+  setColumnHeaders = () => {
+    this.updateColumnHeaders();
+    window.addEventListener("resize", this.updateColumnHeaders);
+  }
+
+  setStaff = async(props) => {
+    await this.resetStaff()
+    await this.fetchStaff()
   }
 
   fetchStaff = async() => {
-    const { page } = this.state
-    let workers = await employee.getAll(page, this.axiosRequestSource.token)
-    if (workers) {
-      await this.updateStaff(workers);
-      await this.incrementPage()
+    const { page, staff } = this.state
+    if ((staff.length + this.itemsPerPage) / page <= this.itemsPerPage) {
+      const workers = await employee.getAll(page, this.axiosRequestSource.token)
+      if (workers && workers.length) await this.updateStaff(workers)
     }
   }
 
@@ -71,55 +68,41 @@ export default class Staff extends Component {
     this.setState({ staff: [] })
   }
 
-  incrementPage = () => {
-    this.setState(prevState => ({
-      page: prevState.page + 1
-    }))
-  }
-
   updateStaff = async(workers) => {
-    if (workers) {
-      const staff = [...this.state.staff]
+    const { page } = this.state
+    let staff = [...this.state.staff]
+    if ((staff.length + this.itemsPerPage) / page <= this.itemsPerPage) {
       workers.forEach(w => staff.push(w))
-      if (workers.length < 25) {
 
+      if (workers.length < 25) {
         this.setState({
           staff,
           hasMore: false
         })
 
       } else {
-
-        this.setState({
+        this.setState( prevState => ({
           staff,
-          hasMore: true
-        })
-
+          hasMore: true,
+          page: prevState.page + 1
+        }))
       }
-    } else {
-      this.setState({
-        staff: [],
-      })
     }
   }
 
-
-  List = ({ match, history }) => {
-    const { staff, columnHeaders, hasMore } = this.state
+  List = (props) => {
+    const { staff } = this.state
     return (
       <ListPage
+        {...this.state}
+        {...props}
         title="Staff"
-        type="Staff"
-        columnHeaders={columnHeaders}
+        type="Workers"
         data={staff}
-        match={match}
-        history={history}
-        hasMore={hasMore}
         load={this.fetchStaff}
       />
     )
   }
-
 
   render(){
     const { match } = this.props

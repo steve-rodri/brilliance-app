@@ -1,25 +1,60 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { checkIcon, timesIcon } from '../../../helpers/icons'
 import './index.css'
 
 export default function Staff(props){
-  const { item, type, displayColumn, numColumns, styleItem  } = props
+  const { item, type, displayColumn, numColumns, styleItem, styleCell  } = props
   const employee = item
+  const leftCell = styleCell('left', employee)
+  const middleCell = styleCell('middle', employee)
+  const rightCell = styleCell('right', employee)
+  const nameDisplay = displayColumn('name')
+  const activeDisplay = displayColumn('active')
+  const laborDisplay = displayColumn('labor')
+
+  const style = (bool) => {
+    if (bool) {
+      return (
+        {
+          backgroundColor: 'limegreen',
+          color: '#eee'
+        }
+      )
+    } else {
+      return (
+        {
+          backgroundColor: 'red',
+          color: '#eee'
+        }
+      )
+    }
+  }
 
   return (
     <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
       {numColumns?
         <div className="List-Item" style={styleItem(item, type, numColumns)}>
 
-          <div className="Staff--name" style={displayColumn('name')}>
+          {/* Name */}
+          <div className="Staff--name" style={{ ...leftCell, ...nameDisplay }}>
             <h3>{employee.contactInfo.fullName}</h3>
           </div>
 
-          <h4 style={displayColumn('active')}>{employee.active? 'Yes': 'No'}</h4>
-
-          <div className="Staff--labor" style={displayColumn('labor')}>
-            <h4>{employee.labor? 'Yes': 'No'}</h4>
+          {/* Active */}
+          <div className="Staff--active" style={{ ...middleCell, ...activeDisplay }}>
+            <div style={style(employee.active)}>
+              <h4>{employee.active? checkIcon() : timesIcon() }</h4>
+            </div>
           </div>
+
+          {/* Labor */}
+          <div className="Staff--labor" style={{ ...rightCell, ...laborDisplay }}>
+            <div style={style(employee.labor)}>
+              <h4>{employee.labor? checkIcon() : timesIcon() }</h4>
+            </div>
+          </div>
+
         </div>
         :
         <div className="List-Item">

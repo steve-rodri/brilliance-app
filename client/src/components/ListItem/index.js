@@ -50,7 +50,7 @@ export default function ListItem(props){
           styleSummary={styleSummary}
         />
       )
-    case 'Staff':
+    case 'Workers':
       return (
         <Staff
           {...props}
@@ -61,7 +61,7 @@ export default function ListItem(props){
     default:
   }
 
-  function styleItem(item, type, numColumns){
+  function styleItem(item, type){
     const style = {}
     switch (type) {
       case 'Events':
@@ -69,10 +69,6 @@ export default function ListItem(props){
         // const past = event && event.end && moment(event.end).isBefore(moment())
         const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
         // const iCalUID = event && event.iCalUid;
-
-        if (numColumns) {
-          style.gridTemplateColumns =  `repeat(${numColumns}, 1fr)`
-        }
 
         // if (past) {
         //   style.color = 'rgba(0,0,0,.5)'
@@ -88,15 +84,10 @@ export default function ListItem(props){
         // if (iCalUID) {
         //   style.backgroundColor = 'blue'
         // }
-
-      break;
-
-      case 'Schedule':
-        style.gridTemplateColumns =  `repeat(${numColumns}, 1fr)`
       break;
 
       default:
-        style.gridTemplateColumns = `repeat(${numColumns}, 1fr)`
+
       break;
     }
 
