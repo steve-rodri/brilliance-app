@@ -71,9 +71,9 @@ const inc = (line) => {
     const included = line.inc
 
     if (included) {
-      return squareIcon(['fas', 'square'])
+      return squareIcon(['fas', 'square'], '2x')
     } else {
-      return squareIcon(['far', 'square'])
+      return squareIcon(['far', 'square'], '2x')
     }
   }
 }

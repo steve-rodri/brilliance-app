@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 200px;
   display: grid;
+  align-items: center;
   padding: 40px;
 }
 
@@ -20,8 +21,8 @@
 .SubHeader--status-container,
 .SubHeader--commission-container,
 .SubHeader--summary-container  {
-  align-items: center;
   height: 100%;
+  align-items: center;
   background-color: var(--dark-gray);
 }
 
