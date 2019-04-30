@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import SearchField from '../../../../../SearchField'
+import SearchField from '../../../../../SearchField/'
 import { clientName } from '../../../../../../helpers/clientHelpers'
 
 export default class Edit extends Component {
@@ -34,6 +34,7 @@ export default class Edit extends Component {
       <Fragment>
         <label>Client</label>
           <SearchField
+          {...this.props}
             searchResults={searchFieldData && searchFieldData.clients}
             formClassName='Edit--Field'
             resultClassName='Edit--search-result'

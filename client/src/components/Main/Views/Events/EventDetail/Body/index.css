@@ -23,9 +23,13 @@
   }
 
   .EventDetail-Body--components {
-    grid-template-rows: repeat(2, auto);
-    grid-auto-flow: column;
-    align-items: flex-start;
+    grid-template-areas:
+      "about staff"
+      "about logistics"
+      "notes logistics"
+      "notes invoice"
+    ;
+    align-items: center;
     justify-content: center;
     justify-items: center;
     grid-gap: 40px;
@@ -48,12 +52,29 @@
     align-items: center;
     background-color: var(--dark-gray);
     color: var(--light-gray);
-    font-size: 17px;
   }
 
   .EventDetail-Body--notes {
+    grid-area: notes;
     overscroll-behavior-y: contain;
     overflow: auto;
-    grid-row: span 2;
+  }
+
+  .EventDetail-Body--about {
+    grid-area: about;
+  }
+
+  .EventDetail-Body--logistics {
+    grid-area: logistics;
+  }
+
+  .EventDetail-Body--staff {
+    grid-area: staff;
+    height: auto;
+    align-self: start;
+  }
+
+  .EventDetail-Body--invoice {
+    grid-area: invoice;
   }
 }

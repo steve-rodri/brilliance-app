@@ -25,11 +25,11 @@ export default class StaffSelector extends Component {
 
   render(){
     const { close, employees, handleEmployeeSelect } = this.props
-    const labor = employees.filter(employee => employee["labor?"])
-    const nonLabor = employees.filter(employee => !employee["labor?"])
+    const labor = employees.filter(employee => employee.labor)
+    const nonLabor = employees.filter(employee => !employee.labor)
     return (
       <div className="StaffSelector">
-        <label>Labor</label>
+        <label style={{justifySelf: 'start'}}>Labor</label>
         <div className="StaffSelector--labor">
           {employees && labor.map(employee =>
             <button
@@ -45,7 +45,7 @@ export default class StaffSelector extends Component {
             </button>
           )}
         </div>
-        <label>Non-Labor</label>
+        <label style={{justifySelf: 'start'}}>Non-Labor</label>
         <div className="StaffSelector--non-labor">
           {employees && nonLabor.map(employee =>
             <button

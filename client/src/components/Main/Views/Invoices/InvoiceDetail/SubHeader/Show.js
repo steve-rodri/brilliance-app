@@ -11,10 +11,7 @@ export default class SubHeader extends Component {
     const { inv } = this.props
     if (inv && inv.kind) {
       return (
-        <Fragment>
-          <label>Type</label>
-          <div className="Show Field">{inv.kind}</div>
-        </Fragment>
+        <div className="Show Field"><h3>{inv.kind}</h3></div>
       )
     }
   }
@@ -30,10 +27,7 @@ export default class SubHeader extends Component {
 
     if (event && event.client) {
       return (
-        <Fragment>
-          <label>Client</label>
-          <div className="Show Field">{clientName(event.client)}</div>
-        </Fragment>
+        <div className="Show Field"><h3>{clientName(event.client)}</h3></div>
       )
     }
   }
@@ -43,25 +37,21 @@ export default class SubHeader extends Component {
     if (inv && inv.event) {
       const { event } = inv
       return (
-        <Fragment>
-          <label style={{justifySelf: 'center'}}>Job</label>
-          <Link to={`/admin/events/${event.id}`}><div className="Field">View Job</div></Link>
-        </Fragment>
+        <Link to={`/admin/events/${event.id}`}><div className="Show Field">View Job</div></Link>
       )
-    }
-  }
-
-  total = () => {
-    const { inv } = this.props
-    if (inv) {
-      return <h2 style={{ textAlign: 'left'}}>{numeral(inv.total).format('$0,0.00')}</h2>
     }
   }
 
   paymentStatus = () => {
     const { inv } = this.props
     if (inv) {
-      return <p style={this.stylePaymentStatus(inv.paymentStatus)} >{inv.paymentStatus}</p>
+      return (
+        <div className="Show Field">
+          <p style={this.stylePaymentStatus(inv.paymentStatus)}>
+            {inv.paymentStatus}
+          </p>
+        </div>
+      )
     }
   }
 
@@ -70,7 +60,7 @@ export default class SubHeader extends Component {
     if (inv) {
       if (inv.paymentType && inv.paymentType !== "Unknown") {
         return (
-          <div style={{justifySelf: 'start'}}>
+          <div className="Show Field">
             <h4 style={{paddingBottom: '5px'}}>{inv.paymentType}</h4>
             {inv.check? <p>{inv.check}</p> : null}
           </div>
@@ -82,12 +72,8 @@ export default class SubHeader extends Component {
   status = () => {
     return (
       <Fragment>
-        <label>Payment Status</label>
         {this.paymentStatus()}
-        <label style={{justifySelf: 'start'}}>Type</label>
         {this.paymentType()}
-        <label>Total</label>
-        {this.total()}
       </Fragment>
     )
   }
@@ -102,6 +88,60 @@ export default class SubHeader extends Component {
     return style;
   }
 
+  summary = () => {
+    const { inv } = this.props
+    if (inv) {
+      const paid = inv.paymentStatus === 'Paid In Full'
+      return (
+        <Fragment>
+          {this.total(inv)}
+          {!paid? this.deposit(inv) : null}
+          {!paid? this.balance(inv) : null}
+        </Fragment>
+      )
+    }
+  }
+
+  total = (inv) => {
+    return (
+      <Fragment>
+        <label>Total</label>
+        <div
+          className="Show Field">
+          <h3>
+            {numeral(inv.total).format('$0,0.00')}
+          </h3>
+        </div>
+      </Fragment>
+    )
+  }
+
+  deposit = (inv) => {
+    return (
+      <Fragment>
+        <label>Deposit</label>
+        <div className="Show Field">
+          <h3>
+            {numeral(inv.total).format('$0,0.00')}
+          </h3>
+        </div>
+      </Fragment>
+    )
+  }
+
+  balance = (inv) => {
+    return (
+      <Fragment>
+        <label>Balance</label>
+        <div className="Show Field">
+          <h3>
+            {numeral(inv.balance).format('$0,0.00')}
+          </h3>
+        </div>
+      </Fragment>
+    )
+  }
+
   render(){
     const { inv } = this.props
     return (
@@ -111,8 +151,6 @@ export default class SubHeader extends Component {
           <div className="SubHeader--Show SubHeader--component-title"><h3>About</h3></div>
           <div className="SubHeader--Show SubHeader--fields">
             {this.type()}
-            {this.client()}
-            {this.event()}
           </div>
         </div>
 
@@ -127,6 +165,13 @@ export default class SubHeader extends Component {
           :
           null
         }
+
+        <div className="SubHeader--Show SubHeader--summary-container">
+          <div className="SubHeader--Show SubHeader--component-title"><h3>Summary</h3></div>
+          <div className="SubHeader--Show SubHeader--summary">
+            {this.summary()}
+          </div>
+        </div>
 
       </div>
     )

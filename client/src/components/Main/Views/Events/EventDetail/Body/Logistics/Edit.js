@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Datetime from 'react-datetime'
-import SearchField from '../../../../../../SearchField'
+import SearchField from '../../../../../../SearchField/'
 import { locationName } from '../../../../../../../helpers/locationName'
 import moment from 'moment'
 import './react-datetime.css'
@@ -15,7 +15,7 @@ export default class Edit extends Component {
           <div className="Edit--Field datetime">
             <Datetime
               className="Input--container"
-              inputProps={{ className: "Input", tabIndex: "6"}}
+              inputProps={{ className: "Input", tabIndex: "6" }}
               value={fields.start? moment(fields.start) : ''}
               viewDate={fields.start && fields.start !== ''? moment(fields.start) : moment().startOf('hour')}
               timeConstraints={{ minutes:{ step: 5 } }}
@@ -62,6 +62,7 @@ export default class Edit extends Component {
         <label>Call Location</label>
 
           <SearchField
+            {...this.props}
             searchResults={searchFieldData && searchFieldData.callLocations}
             formClassName='Edit--Field'
             resultClassName='Edit--search-result'

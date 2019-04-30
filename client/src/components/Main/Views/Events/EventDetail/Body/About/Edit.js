@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SearchField from '../../../../../../SearchField'
+import SearchField from '../../../../../../SearchField/'
 import { clientName } from '../../../../../../../helpers/clientHelpers'
 import { locationName } from '../../../../../../../helpers/locationName'
 
@@ -12,6 +12,7 @@ export default class Edit extends Component {
         <label>Client</label>
 
           <SearchField
+            {...this.props}
             searchResults={searchFieldData && searchFieldData.clients}
             formClassName='Edit--Field'
             resultClassName='Edit--search-result'
@@ -32,6 +33,7 @@ export default class Edit extends Component {
         <label>Location</label>
 
           <SearchField
+            {...this.props}
             searchResults={searchFieldData && searchFieldData.locations}
             formClassName='Edit--Field'
             resultClassName='Edit--search-result'

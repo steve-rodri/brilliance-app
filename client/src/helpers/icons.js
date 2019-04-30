@@ -14,6 +14,7 @@ import {
   faTrash,
   faSquare as fasSquare,
   faPlus,
+  faMinus,
   faSearch,
   faSearchPlus,
   faChevronRight,
@@ -37,6 +38,7 @@ library.add(
   farSquare,
   fasSquare,
   faPlus,
+  faMinus,
   faSearch,
   faSearchPlus,
   faChevronRight,
@@ -73,16 +75,22 @@ export function searchPlusIcon(size, className){
   return <FontAwesomeIcon className={`Icon ${className}`} icon="search-plus" size={size}/>
 }
 
-export function plusIcon(size, className){
-  return <FontAwesomeIcon className={`Icon ${className}`} icon="plus" size={size}/>
+export function plusIcon(size, className, style){
+  let s = {}
+  if (style) s = style;
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="plus" size={size} style={s}/>
+}
+
+export function minusIcon(size, className){
+  return <FontAwesomeIcon className={`Icon ${className}`} icon="minus" size={size}/>
 }
 
 export function addIcon(size){
-  return <FontAwesomeIcon  className="Icon" color="limegreen" icon="plus-circle" size={size}/>
+  return <FontAwesomeIcon  className="Icon" icon="plus-circle" size={size}/>
 }
 
 export function deleteIcon(size){
-  return <FontAwesomeIcon className="Icon" color="red" icon="minus-circle" size={size}/>
+  return <FontAwesomeIcon className="Icon" icon="minus-circle" size={size}/>
 }
 
 export function closeIcon(size, color, className){

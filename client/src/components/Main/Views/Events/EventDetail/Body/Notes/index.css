@@ -6,23 +6,23 @@
   overflow: auto;
 }
 
-.Notes, .Notes--readonly {
+.Notes,
+.Notes--readonly {
   border: none;
   align-self: center;
   height: 100%;
   width: 100%;
-  min-height: 300px;
-  max-width: 350px;
-  padding: 15px;
-  font-size: 1em;
-  border-radius: 5px;
   resize: none;
 }
 
 .Notes {
   color: black;
-  background-color: #F8F8F8;
   min-height: 150px;
+  background-color: #F8F8F8;
+  padding: 15px;
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 5px;
 }
 
 .Notes--readonly {
@@ -31,8 +31,10 @@
   color: var(--light-gray);
 }
 
+.Notes:focus,
 .Notes-readonly:focus {
-  outline: none
+  outline: none;
+  box-shadow: 0 0 2px 2px var(--light-blue);
 }
 
 @media (min-width: 750px) {
@@ -40,20 +42,18 @@
     width: 100%;
     min-width: 350px;
     height: 100%;
+    max-height: 500px;
     padding: 30px;
   }
 
   .Notes {
     overflow: auto;
+    min-height: 300px;
+    font-size: 16px;
   }
 
   .Notes, .Notes--readonly {
     color: black;
     padding: 5px;
-    border-radius: 0;
-  }
-
-  .Notes--readonly {
-    font-size: 20px;
   }
 }

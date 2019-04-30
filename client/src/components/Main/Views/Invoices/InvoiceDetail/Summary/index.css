@@ -1,26 +1,33 @@
-.Summary {
+.Summary--container {
   width: 100%;
-  align-self: start;
-  padding: 0 40px;
+  height: 100%;
+  padding: 40px;
   display: grid;
 }
 
-.Summary--totals {
-  display: table-cell;
-  align-self: start;
+.Summary {
+  display: grid;
+  width: 100%;
+  background-color: var(--dark-gray);
   justify-self: end;
-  margin: 30px 0;
-  padding: 12px;
-  text-align: left;
-  background-color: var(--light-blue-t);
-  border: 1px dashed var(--light-blue);
-  border-radius: 5px;
+  color: #eee;
 }
+
+.Summary--totals {
+  display: grid;
+  grid-gap: 5px;
+  padding: 15px;
+  justify-content: right;
+}
+
 
 .Summary--totals > * {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-gap: 40px;
+  justify-content: end;
   align-items: center;
   justify-items: end;
+  font-size: 25px;
 }

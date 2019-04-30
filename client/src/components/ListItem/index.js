@@ -66,24 +66,24 @@ export default function ListItem(props){
     switch (type) {
       case 'Events':
         const event = item;
-        const past = event && event.end && moment(event.end).isBefore(moment())
-        // const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
+        // const past = event && event.end && moment(event.end).isBefore(moment())
+        const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
         // const iCalUID = event && event.iCalUid;
 
         if (numColumns) {
           style.gridTemplateColumns =  `repeat(${numColumns}, 1fr)`
         }
 
-        if (past) {
-          style.color = 'rgba(0,0,0,.5)'
-          style.backgroundColor = '#999999'
-        }
-
-        // if (inProgress) {
-        //   style.color = '#eeeeee'
-        //   style.backgroundColor = 'var(--med-dark-blue)'
-        //   style.border = 'none'
+        // if (past) {
+        //   style.color = 'rgba(0,0,0,.5)'
+        //   style.backgroundColor = '#999999'
         // }
+
+        if (inProgress) {
+          style.color = '#eeeeee'
+          style.backgroundColor = 'var(--light-blue)'
+          style.border = 'none'
+        }
 
         // if (iCalUID) {
         //   style.backgroundColor = 'blue'
@@ -113,10 +113,10 @@ export default function ListItem(props){
     if (past) {
       switch (position) {
         case 'left':
-          style.borderRight = '1px solid #999999'
+          // style.borderRight = '1px solid #999999'
         break;
         case 'middle':
-          style.borderRight = '1px solid #999999'
+          // style.borderRight = '1px solid #999999'
         break;
         case 'right':
         break;

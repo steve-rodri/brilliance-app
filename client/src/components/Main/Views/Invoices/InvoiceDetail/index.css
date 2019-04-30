@@ -3,7 +3,7 @@
   background-color: var(--dark-gray);
   width: 100%;
   display: grid;
-  grid-template-rows: 73px auto auto 1fr;
+  grid-template-rows: 73px auto auto 250px;
   justify-items: center;
   align-items: center;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './index.css'
 
 export default class SearchField extends Component {
   constructor(props){
@@ -13,7 +14,7 @@ export default class SearchField extends Component {
 
   componentWillReceiveProps(nextProps){
       const { highlightedResult } = this.state;
-      const { searchResults } = nextProps;
+      const { searchResults, scroll } = nextProps;
       if (searchResults && searchResults.length) {
         if (highlightedResult > searchResults.length - 1) {
           this.setState({ highlightedResult: 0 })
@@ -22,12 +23,16 @@ export default class SearchField extends Component {
       } else {
         this.setState({ searchResults: null })
       }
+
+      if (scroll) {
+        this.setState({ fieldActive: false })
+      }
   }
 
   displayResults = () => {
     const { fieldActive  } = this.state
     if (fieldActive) {
-      return { display: 'block', zIndex: '100' }
+      return { display: 'block'}
     } else {
       return { display: 'none' }
     }
@@ -188,7 +193,7 @@ export default class SearchField extends Component {
         />
 
         <div
-          className={resultsClassName}
+          className={`${resultsClassName} SearchField--results `}
           ref={this.searchResults}
           style={this.displayResults()}
           onMouseEnter={this.choosingResult}
@@ -205,7 +210,7 @@ export default class SearchField extends Component {
               this.handleCloseResults()
               }}
             >
-              {formatResult && formatResult(item)}
+              <p>{formatResult && formatResult(item)}</p>
             </div>
           ))}
         </div>

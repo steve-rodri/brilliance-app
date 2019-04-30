@@ -1,12 +1,21 @@
+.AddNew--container {
+  background-color: var(--dark-blue);
+  border-bottom: 5px solid transparent;
+  border-radius: 5px;
+}
+
+.AddNew--container:active {
+  border: none;
+}
+
 .AddNew {
-  background-color: var(--med-dark-blue);
+  background-color: limegreen;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 45px;
   margin: 0 auto;
-  border-bottom: 5px solid var(--dark-blue);
   border-radius: 5px;
   padding: 5px;
 }
@@ -17,17 +26,18 @@
 
 .AddNew:hover {
   cursor: pointer;
+  background: rgb(50,235,75)
 }
 
 .AddNew:active {
-  border: none;
-  background-color: var(--dark-blue);
+
 }
 
 .AddNew--button-text {
-  font-family: 'Gruppo';
-  font-size: 25px;
+  font-family: 'Roboto';
+  font-size: 22px;
   font-weight: bold;
+  /* text-transform: uppercase; */
   color: white;
 }
 

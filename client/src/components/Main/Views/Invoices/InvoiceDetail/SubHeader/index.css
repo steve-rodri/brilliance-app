@@ -5,30 +5,24 @@
   padding: 40px;
 }
 
+.SubHeader--fields-container,
+.SubHeader--status-container,
+.SubHeader--commission-container,
+.SubHeader--summary-container,
 .SubHeader--fields,
-.SubHeader--fields-container,
 .SubHeader--status,
-.SubHeader--status-container,
 .SubHeader--commission,
-.SubHeader--commission-container {
+.SubHeader--summary {
   display: grid;
 }
 
 .SubHeader--fields-container,
 .SubHeader--status-container,
-.SubHeader--commission-container {
-  display: grid;
+.SubHeader--commission-container,
+.SubHeader--summary-container  {
   align-items: center;
-  justify-items: center;
   height: 100%;
-  width: 100%;
   background-color: var(--dark-gray);
-  justify-items: center;
-  align-items: center;
-}
-
-.SubHeader--status-container {
-  justify-self: end;
 }
 
 .SubHeader--component-title {
@@ -37,14 +31,16 @@
 
 .SubHeader--fields,
 .SubHeader--status,
-.SubHeader--commission {
+.SubHeader--commission,
+.SubHeader--summary {
   grid-row-gap: 10px;
   grid-column-gap: 30px;
 }
 
 .SubHeader--Edit .SubHeader--fields > *,
 .SubHeader--Edit .SubHeader--status > *,
-.SubHeader--Edit .SubHeader--commission > * {
+.SubHeader--Edit .SubHeader--commission > *,
+.SubHeader--Edit .SubHeader--summary > * {
   width: 100%;
 }
 
@@ -55,34 +51,33 @@
 @media (min-width: 750px) {
   .SubHeader {
     height: 100%;
-    justify-content: space-between;
     grid-auto-flow: column;
+    grid-auto-columns: 1fr;
     grid-gap: 40px;
   }
 
   .SubHeader--fields-container,
   .SubHeader--status-container,
-  .SubHeader--commission-container {
-    min-width: 250px;
+  .SubHeader--commission-container,
+  .SubHeader--summary-container {
     grid-template-rows: 30px auto;
     background-color: var(--light-gray);
-
-    justify-content: center;
   }
 
   .SubHeader--fields,
   .SubHeader--status,
-  .SubHeader--commission {
-    height: 100%;
-    grid-template-rows: repeat(4, auto);
-    grid-auto-flow: column;
+  .SubHeader--commission,
+  .SubHeader--summary {
     justify-items: center;
     align-items: center;
-    padding: 25px 30px 30px 30px;
+    padding: 30px;
   }
 
-  .SubHeader--fields {
-    justify-items: start;
+  .SubHeader--Edit .SubHeader--fields,
+  .SubHeader--Edit .SubHeader--status,
+  .SubHeader--Edit .SubHeader--commission,
+  .SubHeader--Edit .SubHeader--summary  {
+    align-self: start;
   }
 
   .SubHeader--component-title {
@@ -96,6 +91,5 @@
     align-items: center;
     background-color: var(--dark-gray);
     color: var(--light-gray);
-    font-size: 17px;
   }
 }

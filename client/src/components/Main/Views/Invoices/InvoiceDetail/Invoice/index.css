@@ -49,3 +49,18 @@
   background-color: #eeeeee;
   padding: 15px;
 }
+
+.Invoice--add {
+  display: grid;
+  grid: auto / 50px auto 50px;
+  justify-items: center;
+  align-items: center;
+  background-color: limegreen;
+  color: #eee;
+  width: 100%;
+  padding: 15px 0;
+}
+
+.Invoice--add:hover {
+  cursor: pointer;
+}

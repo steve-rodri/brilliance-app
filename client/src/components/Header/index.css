@@ -136,7 +136,7 @@ nav > * {
   transition: all 250ms ease-out;
 }
 
-nav > * > h3 {
+nav > * > h2 {
   color: var(--light-gray);
 }
 

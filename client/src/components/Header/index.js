@@ -89,11 +89,11 @@ export default class Header extends Component {
           <Bars changeNav={this.changeNav} open={this.state.displayNav}/>
 
           <nav>
-            <Link to='/admin/events'><h3>Jobs</h3></Link>
-            {/* <Link to='/admin/clients'><h3>Clients</h3></Link> */}
-            {/* <Link to='/admin/invoices'><h3>Invoices</h3></Link> */}
-            <Link to='/admin/staff'><h3>Staff</h3></Link>
-            <Link to='/admin/inventory'><h3>Inventory</h3></Link>
+            <Link to='/admin/events'><h2>Jobs</h2></Link>
+            {/* <Link to='/admin/clients'><h2>Clients</h2></Link> */}
+            {/* <Link to='/admin/invoices'><h2>Invoices</h2></Link> */}
+            <Link to='/admin/staff'><h2>Staff</h2></Link>
+            <Link to='/admin/inventory'><h2>Inventory</h2></Link>
           </nav>
 
           <div className="user-circle" onClick={this.logOut}>
@@ -112,11 +112,11 @@ export default class Header extends Component {
         <div className="Header--drop-down" style={this.styleNav()}>
 
           <div className="Header--nav-menu">
-            <Link to='/admin/events' onClick={this.changeNav}><h3>Jobs</h3></Link>
-            {/* <Link to='/admin/clients' onClick={this.changeNav}><h3>Clients</h3></Link> */}
-            {/* <Link to='/admin/invoices' onClick={this.changeNav}><h3>Invoices</h3></Link> */}
-            <Link to='/admin/staff' onClick={this.changeNav}><h3>Staff</h3></Link>
-            <Link to='/admin/inventory' onClick={this.changeNav}><h3>Inventory</h3></Link>
+            <Link to='/admin/events' onClick={this.changeNav}><h2>Jobs</h2></Link>
+            {/* <Link to='/admin/clients' onClick={this.changeNav}><h2>Clients</h2></Link> */}
+            {/* <Link to='/admin/invoices' onClick={this.changeNav}><h2>Invoices</h2></Link> */}
+            <Link to='/admin/staff' onClick={this.changeNav}><h2>Staff</h2></Link>
+            <Link to='/admin/inventory' onClick={this.changeNav}><h2>Inventory</h2></Link>
           </div>
 
           <button className="Header--Log-Out" onClick={this.logOut}>Log Out</button>
