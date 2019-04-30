@@ -13,16 +13,19 @@
 
 .Line--input {
   width: 90%;
-  padding: 20px 5px;
+  padding: 10px 5px;
   background-color: transparent;
   text-align: center;
-  border: 2px solid transparent;
+  border:none;
+  border: 1px solid transparent;
+  /* box-shadow: 0 0 2px 2px transparent; */
   outline: none;
+  font-size: 20px;
 }
 
 .Line--input:focus {
-  border-color: var(--turquoise-t);
-  box-shadow: 0 0 2px 2px var(--turquoise-t);
+  border-color: transparent;
+  box-shadow: 0 2px 0px 0px var(--turquoise-t);
 }
 
 /* --------------------Quantity-------------- */
@@ -47,6 +50,10 @@
 
 
 /* --------------------Item-------------- */
+
+.Line--item {
+  font-size: 20px;
+}
 
 .Line--item-contents {
   padding: 5px 0 0 10px;
@@ -77,7 +84,7 @@
   grid-template-columns: repeat(2, auto);
   align-items: center;
   justify-items: center;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .Line--price > div > p {
@@ -86,4 +93,5 @@
 
 .Line--price > div > input {
   text-align: left;
+  font-size: 20px;
 }
