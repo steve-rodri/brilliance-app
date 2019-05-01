@@ -163,8 +163,8 @@ select {
   text-align: center;
   border-radius: 5px;
   border: none;
-  border-left: 1px solid #BBBBBB;
-  border-right: 1px solid #BBBBBB;
+  /* border-left: 1px solid #BBBBBB; */
+  /* border-right: 1px solid #BBBBBB; */
   font-size: 20px;
   background-color: #F8F8F8;
 }

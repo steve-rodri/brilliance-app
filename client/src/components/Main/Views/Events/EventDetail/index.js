@@ -66,7 +66,7 @@ export default class EventDetail extends Component {
     }
   }
 
-  async componentWillUnmount(){
+  componentWillUnmount(){
     window.removeEventListener('resize', this.resetView)
     window.removeEventListener('scroll', this.resetScroll)
     this.axiosRequestSource && this.axiosRequestSource.cancel()

@@ -3,6 +3,8 @@ import Header from './Header/'
 import SubHeader from './SubHeader/'
 import Invoice from './Invoice'
 import Summary from './Summary'
+import Modal from '../../../../Modal/'
+import ItemSelector from './ItemSelector/'
 import Buttons from '../../../../Buttons/Buttons'
 import { invoice } from '../../../../../services/invoice'
 import { line } from '../../../../../services/line'
@@ -328,7 +330,7 @@ export default class InvoiceDetail extends Component {
   // --------------------------------Lines--------------------------------------
 
   addLine = () => {
-
+    this.setState({ showItemModal: true })
   }
 
   deleteLine = async(lineId) => {
@@ -572,6 +574,10 @@ export default class InvoiceDetail extends Component {
     }
   }
 
+  closeItemModal = () => {
+    this.setState({ showItemModal: false })
+  }
+
   resetView = () => {
     const width = window.innerWidth;
     if (width < 750) {
@@ -620,6 +626,19 @@ export default class InvoiceDetail extends Component {
             edit={() => this.setEditMode(!this.state.editMode)}
             handleSubmit={this.handleSubmit}
             />
+          :
+          null
+        }
+
+        {
+          this.state.showItemModal?
+          <Modal
+            close={(e) => {
+              e.stopPropagation()
+              this.closeItemModal()
+            }}
+            content={<ItemSelector/>}
+          />
           :
           null
         }

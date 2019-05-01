@@ -1,11 +1,45 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
 
+  @@items_limit = 25
+
   # GET /items
   def index
-    @items = Item.all
+    if params[:q]
 
-    render json: @items
+      query = "SELECT DISTINCT items.*
+      FROM items
+      LEFT OUTER JOIN item_contents ON item_contents.item_id = items.id
+      LEFT OUTER JOIN contents ON contents.id = item_contents.content_id
+      LEFT OUTER JOIN inventories ON inventories.id = contents.inventory_id
+      WHERE "
+
+      terms = params[:q].split
+      terms.each do |term|
+
+        query += "(items.name LIKE '%#{term}%'
+        OR items.kind LIKE '%#{term}%'
+        OR items.install LIKE '%#{term}%'
+        OR items.description LIKE '%#{term}%'
+        OR contents.kind LIKE '%#{term}%'
+        OR contents.description LIKE '%#{term}%'
+        OR inventories.category LIKE '%#{term}%'
+        OR inventories.name LIKE '%#{term}%'
+        OR inventories.manufacturer LIKE '%#{term}')"
+
+        if terms.index(term) + 1 < terms.length
+          query += " AND "
+        end
+        
+      end
+
+      query += " LIMIT #{@@items_limit}"
+
+      @items = Item.find_by_sql(query)
+    else
+      @items = Item.all
+    end
+    render json: @items, include: '**'
   end
 
   # GET /items/1

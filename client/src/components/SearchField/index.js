@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import './index.css'
 
 export default class SearchField extends Component {
@@ -13,20 +13,20 @@ export default class SearchField extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-      const { highlightedResult } = this.state;
-      const { searchResults, scroll } = nextProps;
-      if (searchResults && searchResults.length) {
-        if (highlightedResult > searchResults.length - 1) {
-          this.setState({ highlightedResult: 0 })
-        }
-        this.setState({ searchResults })
-      } else {
-        this.setState({ searchResults: null })
+    const { highlightedResult } = this.state;
+    const { searchResults, scroll } = nextProps;
+    if (searchResults && searchResults.length) {
+      if (highlightedResult > searchResults.length - 1) {
+        this.setState({ highlightedResult: 0 })
       }
+      this.setState({ searchResults })
+    } else {
+      this.setState({ searchResults: null })
+    }
 
-      if (scroll) {
-        this.setState({ fieldActive: false })
-      }
+    if (scroll) {
+      this.setState({ fieldActive: false })
+    }
   }
 
   displayResults = () => {
@@ -42,16 +42,22 @@ export default class SearchField extends Component {
     e.target.select()
   }
 
-  handleViewResults = () => {
-    this.setState({
-      fieldActive: true
-    })
+  handleViewResults = (value) => {
+    if (value.length > 2) {
+      this.setState({
+        fieldActive: true
+      })
+    // } else {
+    //   this.setState({
+    //     fieldActive: false
+    //   })
+    }
   }
 
   handleCloseResults = (e) => {
-    this.setState({
-      fieldActive: false
-    })
+    // this.setState({
+    //   fieldActive: false
+    // })
   }
 
   choosingResult = (e) => {
@@ -121,6 +127,7 @@ export default class SearchField extends Component {
       resultClassName,
       resultsClassName,
       formatResult,
+      styleForm,
       input:{
         className,
         placeholder,
@@ -147,7 +154,10 @@ export default class SearchField extends Component {
             this.handleCloseResults()
           }
         }}
+        style={styleForm}
       >
+
+        {/* Search */}
         <input
           name={name}
           placeholder={placeholder}
@@ -156,7 +166,7 @@ export default class SearchField extends Component {
           tabIndex={tabIndex}
           onChange={(e) => {
             handleChange(e.target.name, e.target.value)
-            this.handleViewResults()
+            this.handleViewResults(e.target.value)
           }}
           onFocus={this.handleViewResults}
           onBlur={(e) => {
@@ -192,6 +202,7 @@ export default class SearchField extends Component {
           }}
         />
 
+        {/* Results */}
         <div
           className={`${resultsClassName} SearchField--results `}
           ref={this.searchResults}
@@ -199,21 +210,24 @@ export default class SearchField extends Component {
           onMouseEnter={this.choosingResult}
           onMouseLeave={this.leavingResults}
         >
-          {searchResults && searchResults.map( (item, i) => (
-            <div
-              style={this.styleResult(i)}
-              key={item.id}
-              className={resultClassName}
-              onClick={(e) => {
-              e.stopPropagation();
-              onSelect(e, name, i)
-              this.handleCloseResults()
-              }}
-            >
-              <p>{formatResult && formatResult(item)}</p>
-            </div>
-          ))}
+          {
+            searchResults && searchResults.map( (item, i) => (
+              <div
+                style={this.styleResult(i)}
+                key={item.id}
+                className={resultClassName}
+                onClick={(e) => {
+                e.stopPropagation();
+                onSelect(e, name, i)
+                this.handleCloseResults()
+                }}
+              >
+                <Fragment>{formatResult && formatResult(item)}</Fragment>
+              </div>
+            ))
+          }
         </div>
+
       </form>
     )
   }
