@@ -8,9 +8,7 @@
   WebkitOverflowScrolling: touch;
   border-radius: 5px;
   outline: none;
-  padding: 10px;
   position: relative;
-
   display: grid;
 }
 
