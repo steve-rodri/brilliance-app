@@ -15,6 +15,7 @@
     "moment-countdown": "0.0.3",
     "npm": "^6.9.0",
     "numeral": "^2.0.6",
+    "pluralize": "^7.0.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.2.0",
     "react": "^16.7.0",
@@ -24,7 +25,7 @@
     "react-infinite-scroll-component": "^4.5.0",
     "react-modal": "^3.8.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^3.0.0",
     "styled-components": "^4.2.0"
   },
   "scripts": {
