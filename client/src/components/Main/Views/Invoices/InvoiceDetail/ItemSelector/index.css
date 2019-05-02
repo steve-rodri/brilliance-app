@@ -59,6 +59,11 @@
   text-align: left; */
 }
 
+.SearchResult--image > img {
+  width: 70px;
+  height: 70px;
+}
+
 .SearchResult--quantity,
 .SearchResult--price {
   justify-self: stretch;

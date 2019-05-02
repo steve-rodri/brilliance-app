@@ -1,6 +1,6 @@
 import pluralize from 'pluralize'
 
-function itemName(item) {
+export function itemName(item) {
   if(!item.quantity){
   	if(!item.contents.length){
   		if(item.useDescription){
@@ -163,6 +163,11 @@ function inventoryName(inventory){
   }
 }
 
-export function name (item){
-  return itemName(item)
+export function itemPhoto(item){
+  if (item.contents && item.contents.length === 1) {
+    if (item.contents[0].inventory) {
+      console.log(item.contents[0].inventory.photo)
+      return item.contents[0].inventory.photo
+    }
+  }
 }

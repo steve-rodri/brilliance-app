@@ -1,136 +1,136 @@
-id,category,name,manufacturer,total_owned,sell_price,rental_price,net_cost_per_invoice,purchase_price,created_at
-1,Special Effects,Snow Machine,,,350.00,0.00,0.00,0.00,2018-01-28T15:25:08.000Z
-2,"Lighting,Moving Head",Vizi Beam 5rx,ADJ,12,250.00,0.00,0.00,0.00,2018-01-28T15:25:08.000Z
-3,Staging,Adjustable Stage Leg,Wenger,179,0.00,0.00,0.00,0.00,2018-01-28T15:25:08.000Z
-4,Photography,Rebel T4i,Canon,1,100.00,0.00,0.00,0.00,2018-01-28T22:42:29.000Z
-5,"COTG,Installed,Lighting",LED Walls,,,1200.00,0.00,0.00,0.00,2018-01-28T22:42:29.000Z
-6,"CATP,Installed,Lighting",LED Walls and Columns,,,1200.00,0.00,0.00,0.00,2018-01-28T22:42:29.000Z
-7,Special Effects,Dry Ice Machine,,,300.00,0.00,0.00,0.00,2018-01-28T22:42:29.000Z
-8,"Video,Cameras",Live Simulcast Camera,,,0.00,0.00,0.00,0.00,2018-01-28T22:42:29.000Z
-9,"Video,Cameras",Skype Camera,,2,0.00,0.00,0.00,0.00,2018-01-28T22:42:29.000Z
-10,Labor,Zapshot Technician,,,300.00,0.00,200.00,0.00,2018-01-28T22:42:29.000Z
-11,Labor,Lighting Operator,,,300.00,0.00,200.00,0.00,2018-01-28T22:42:29.000Z
-12,"CATP,Installed,Video",Video Screens,,,500.00,0.00,0.00,0.00,2018-01-28T22:42:29.000Z
-13,"Staging,Lighting",4' x 4' Pixel Panel,Staging Dimensions,4,200.00,0.00,0.00,0.00,2018-01-28T22:42:29.000Z
-14,"Lighting,Moving Head",Mac 700,Martin,8,300.00,0.00,0.00,1000.00,2018-01-28T22:42:29.000Z
-15,"Lighting,CATP,COTG,CANS",Custom Gobo,,,300.00,0.00,70.00,0.00,2018-01-28T23:06:48.000Z
-16,"COTG,Installed,Lighting",Dance Floor Lighting,,,500.00,0.00,0.00,0.00,2018-01-28T23:26:50.000Z
-17,Labor,Video Operator,,,300.00,0.00,200.00,0.00,2018-01-28T23:27:06.000Z
-18,"CATP,Installed,Lighting",Dance Floor Lighting,,,500.00,0.00,0.00,0.00,2018-01-28T23:27:19.000Z
-19,"Lighting,Moving Head",Mac Aura,Martin,12,200.00,0.00,0.00,0.00,2018-01-30T02:57:18.000Z
-20,Staging,4' x 8' Black Stage,Wenger,40,100.00,50.00,0.00,0.00,2018-01-30T15:11:32.000Z
-21,"Sound,Microphones",Airline Micro Headset,Samson,3,50.00,0.00,0.00,0.00,2018-02-04T03:25:47.000Z
-22,"Lighting,Conventional",36 deg. Ellipsoidal (LEKO),ETC,8,75.00,25.00,0.00,0.00,2018-02-06T17:44:08.000Z
-23,"Lighting,Conventional",PAR 38 can,,,37.50,0.00,0.00,0.00,2018-02-06T17:53:33.000Z
-24,"Sound,Microphones",Wireless Lavalier Microphone,Shure,5,50.00,0.00,0.00,0.00,2018-02-06T21:27:11.000Z
-25,"Sound,Microphones",ULX4 Wireless Handheld Microphone,Shure,4,50.00,0.00,0.00,0.00,2018-02-06T21:29:44.000Z
-26,"Sound,Microphones",Podium Microphone,,1,50.00,0.00,0.00,0.00,2018-02-06T22:01:06.000Z
-27,Labor,Sound Engineer,,,300.00,0.00,200.00,0.00,2018-02-06T22:04:09.000Z
-28,"Lighting,LED",Wireless LED light,Lumin,20,40.00,25.00,0.00,0.00,2018-02-20T18:12:24.000Z
-29,Labor,LV Operator,,,300.00,0.00,200.00,0.00,2018-02-21T20:31:10.000Z
-30,"Lighting,Conventional",50 deg. Ellipsoidal (LEKO),ETC,8,75.00,25.00,0.00,0.00,2018-02-26T20:56:32.000Z
-31,"Lighting,Conventional",26 deg. Ellipsoidal (LEKO),ETC,8,75.00,25.00,0.00,0.00,2018-02-26T20:57:30.000Z
-32,"Lighting,Conventional",19 deg. Ellipsoidal (LEKO),ETC,8,75.00,25.00,0.00,0.00,2018-02-26T20:57:44.000Z
-33,Infrastructure,50 lb. Base,,10,25.00,10.00,0.00,0.00,2018-02-26T20:58:12.000Z
-34,"Sound,Boards",1604 - VLZ PRO,Mackie,1,75.00,0.00,0.00,0.00,2018-02-27T21:26:19.000Z
-35,"Sound,Speakers",Eon (self powered),JBL,2,50.00,0.00,0.00,0.00,2018-02-28T19:17:11.000Z
-36,"Sound,Boards",CFX-20,Mackie,1,100.00,0.00,0.00,0.00,2018-02-28T19:21:27.000Z
-37,"Sound,Microphones",SM-58,Shure,8,25.00,0.00,0.00,0.00,2018-03-05T15:49:26.000Z
-38,Sound,Desk Mount Microphone Stand,,,0.00,0.00,0.00,0.00,2018-03-05T15:52:08.000Z
-39,"Lighting,Conventional",Pin spot,,,25.00,0.00,0.00,0.00,2018-03-05T20:04:00.000Z
-40,"Video,TV","70"" LED screen",Samsung,,600.00,0.00,0.00,0.00,2018-03-05T20:50:32.000Z
-41,"Video,TV",60 in. Plasma TV,LG,2,500.00,0.00,0.00,0.00,2018-03-05T20:52:22.000Z
-42,Labor,Video Technician,,,300.00,0.00,200.00,0.00,2018-04-02T14:49:53.000Z
-43,Infrastructure,10' Black Pipe,,10,25.00,10.00,0.00,0.00,2018-04-09T17:09:28.000Z
-44,"Lighting,Moving Head",Mac 250 Krypton,Martin,0,200.00,0.00,0.00,0.00,2018-04-09T17:20:10.000Z
-45,Labor,Stage Hand,,,25.00,0.00,0.00,0.00,2018-04-09T17:49:21.000Z
-46,"Video,TV",50in Plasma Monitor,Panasonic,2,100.00,0.00,0.00,0.00,2018-04-12T16:01:43.000Z
-47,"Lighting,Conventional",PAR 56 can,,,15.00,0.00,0.00,0.00,2018-04-12T16:15:12.000Z
-48,"Lighting,Conventional",Source Four PAR,ETC,26,75.00,0.00,0.00,0.00,2018-04-12T16:45:24.000Z
-49,"Sound,Speakers",12-30 Full Range Speaker,Smith Audio,4,50.00,0.00,0.00,0.00,2018-04-18T14:51:58.000Z
-50,"Sound,Speakers",Sub,Smith Audio,4,50.00,0.00,0.00,0.00,2018-04-18T14:54:13.000Z
-51,"Sound,Speakers",Sx100 speaker,EV,4,50.00,0.00,0.00,0.00,2018-04-18T14:55:02.000Z
-52,"Trussing,Infrastructure",8' Truss ( 12 in. x 12 in. | 1 1/4 in. OD ),Applied,,50.00,0.00,0.00,0.00,2018-04-18T19:07:05.000Z
-53,"Trussing,Infrastructure",Base Plate,Applied,,35.00,0.00,0.00,0.00,2018-04-18T19:11:18.000Z
-54,"CAL,Installed,Lighting",LED Walls and Soffit,,,1000.00,0.00,0.00,0.00,2018-04-18T19:33:55.000Z
-55,"Ultimate Gaga/575,Installed,Lighting",LED Walls,,,1500.00,0.00,0.00,0.00,2018-04-23T14:04:01.000Z
-56,"Ultimate Gaga/575,Installed,Lighting",Moving Lights,,,700.00,0.00,0.00,0.00,2018-04-23T14:08:21.000Z
-57,"Ultimate Gaga/575,Installed,Video",Video Screens,,,700.00,0.00,0.00,0.00,2018-04-23T14:10:56.000Z
-58,Staging,White Dance Floor ( 4' x 4' ),,,40.00,0.00,0.00,0.00,2018-04-23T15:45:18.000Z
-59,"Power,Cabling",3 Phase PD Box (16 - 20amp circuits),,1,250.00,0.00,0.00,0.00,2018-04-23T18:33:32.000Z
-60,"Video,Projector",M300s Video Projector,NEC,2,200.00,0.00,0.00,0.00,2018-04-23T18:37:07.000Z
-61,"Video,Screens",6' x 8' Video Screen,,2,300.00,0.00,0.00,0.00,2018-04-23T18:42:54.000Z
-62,Labor,Laborer,,,250.00,0.00,250.00,0.00,2018-04-23T18:51:02.000Z
-63,Lighting,48 Channel Dimmer Rack,LMI,1,250.00,0.00,0.00,0.00,2018-04-23T20:45:25.000Z
-64,"Lighting,Console",Express 24/48 Lighting Console,ETC,,250.00,0.00,0.00,0.00,2018-04-23T20:47:48.000Z
-65,Labor,Laborer @ $200,,,200.00,0.00,200.00,0.00,2018-04-23T21:05:39.000Z
-66,Video,DVD Player,,,25.00,0.00,0.00,0.00,2018-04-24T14:31:53.000Z
-67,Trussing,Scrim,,,0.00,0.00,0.00,0.00,2018-04-24T14:34:43.000Z
-68,"Lighting,LED",Color Blast 12,Philips,,50.00,0.00,0.00,0.00,2018-04-24T14:36:24.000Z
-69,"Lighting,Infrastructure",Acrylic DJ Facade,,,75.00,0.00,0.00,0.00,2018-04-24T21:11:17.000Z
-70,Infrastructure,L - 16 Ground Support,,4,0.00,0.00,0.00,0.00,2018-04-25T16:12:14.000Z
-71,"Lighting,Conventional",PAR 16 can,,,25.00,0.00,0.00,0.00,2018-04-25T16:18:50.000Z
-72,Lighting,Mirror Ball,,,100.00,0.00,0.00,0.00,2018-04-25T16:27:00.000Z
-73,"Video,Cabling",50' VGA cable,,,0.00,0.00,0.00,0.00,2018-04-25T16:41:51.000Z
-74,"Video,Cabling",1 x 4 VGA Distribution Amplifer,Kramer,1,0.00,0.00,0.00,0.00,2018-04-25T16:42:53.000Z
-75,"Video,Screens",4' x 6' Video Screen,,2,200.00,0.00,0.00,0.00,2018-04-25T19:35:59.000Z
-76,"Lighting,Followspot",Comet,Altman,1,100.00,0.00,0.00,0.00,2018-04-30T15:24:37.000Z
-77,Labor,Followspot Operator,,,0.00,0.00,150.00,0.00,2018-04-30T15:28:48.000Z
-78,Staging,4' x 4' Black Stage,Staging Dimensions,2,0.00,0.00,0.00,0.00,2018-04-30T15:32:07.000Z
-79,"Sound,Cabling",175' audio snake,,1,0.00,0.00,0.00,0.00,2018-04-30T15:47:00.000Z
-80,"Video,Computers",Macbook Pro (13 in.) (2010),Apple,,0.00,0.00,0.00,0.00,2018-04-30T15:49:43.000Z
-81,Sound,Amplifier,QSC,1,100.00,0.00,0.00,0.00,2018-05-01T19:34:13.000Z
-82,Infrastructure,8' Black Pipe,,,5.00,0.00,0.00,0.00,2018-05-02T21:54:20.000Z
-83,"CANS,Installed,Lighting",Static LED Walls,,,1200.00,0.00,0.00,0.00,2018-05-03T18:01:53.000Z
-84,"CANS,Installed,Lighting","LED Walls, Coffers, Dome, & Cocktail Soffit",,,1200.00,0.00,0.00,0.00,2018-05-03T18:03:26.000Z
-85,"CANS,Installed,Lighting",Dance Floor Lighting,,,500.00,0.00,0.00,0.00,2018-05-03T18:03:29.000Z
-86,"CANS,Installed,Video",Video Screens,,,500.00,0.00,0.00,0.00,2018-05-03T18:03:33.000Z
-87,Infrastructure,25lb. Sandbag,,,0.00,0.00,0.00,0.00,2018-05-25T16:27:40.000Z
-88,Infrastructure,Cheeseborough (90 deg),,,0.00,0.00,0.00,0.00,2018-06-05T16:42:16.000Z
-89,Infrastructure,1 Ton Manual Chain Hoist,,,0.00,25.00,0.00,0.00,2018-06-05T20:22:58.000Z
-90,Labor,Motor Technician,,,300.00,0.00,0.00,0.00,2018-06-12T17:32:54.000Z
-91,Labor,Lighting Technician,,,300.00,0.00,0.00,0.00,2018-06-12T17:37:16.000Z
-92,Labor,Master Electrician,,,300.00,0.00,0.00,0.00,2018-06-12T17:47:57.000Z
-93,"Lighting,Boards",Pearl Tiger 2010,Avolites,1,0.00,0.00,0.00,0.00,2018-06-12T18:22:00.000Z
-94,Cabling,SDI to HDMI Converter,Black Magic,,0.00,0.00,0.00,0.00,2018-06-18T14:58:08.000Z
-95,Video,ATEM Video Switcher,Black Magic,,0.00,0.00,0.00,0.00,2018-06-18T15:01:10.000Z
-96,"Computers,Video",MacBook Pro (15 in.) (2009),Apple,,0.00,0.00,0.00,0.00,2018-06-18T15:12:59.000Z
-97,"Infrastructure,Trussing",10' Truss ( 12 in. x 12 in. | 2 in. OD ),Tomcat,,25.00,25.00,0.00,0.00,2018-06-18T15:22:05.000Z
-98,Staging,40' Black Theatrical Curtain,,1,0.00,0.00,0.00,0.00,2018-06-20T17:50:44.000Z
-99,"Trussing,Infrastructure",8' Truss ( 12 in. x 12 in. | 2 in. OD ),Tomcat,,25.00,0.00,0.00,0.00,2018-06-27T15:12:47.000Z
-100,Infrastructure,5' Black Pipe,,,0.00,0.00,0.00,0.00,2018-06-27T15:33:27.000Z
-101,"Video,Screens",7' x 9' Video Screen (10ft.),,,600.00,0.00,0.00,0.00,2018-06-27T15:39:37.000Z
-102,"Video,Projector",PT-EZ570u,Panasonic,,400.00,0.00,0.00,0.00,2018-06-27T15:45:22.000Z
-103,Labor,Technician,,,0.00,0.00,0.00,0.00,2018-06-27T15:54:21.000Z
-104,Staging,1' Stage Leg,Wenger,,0.00,0.00,0.00,0.00,2018-06-27T16:54:09.000Z
-105,Staging,3' x 16' Black Stage Skirt,,,0.00,0.00,0.00,0.00,2018-06-27T16:56:37.000Z
-106,"Lighting,Special Effects",24/7 Hazer,Martin,2,100.00,0.00,0.00,0.00,2018-06-27T17:11:12.000Z
-107,Lighting,Atomic 3000,Martin,6,150.00,0.00,0.00,0.00,2018-06-27T17:16:12.000Z
-108,Infrastructure,L-16 Ground Support,,,0.00,0.00,0.00,0.00,2018-06-27T17:33:23.000Z
-109,"LED,Lighting",LED Sixpar 300IP,Elation,,100.00,0.00,0.00,0.00,2018-07-02T18:58:55.000Z
-110,"Trussing,Infrastructure",10' 12in x 12in 1 3/8in OD Truss,Applied,,25.00,0.00,0.00,0.00,2018-07-05T19:29:35.000Z
-111,"Trussing,Infrastructure",6' Truss ( 12in x 12 in | 1 3/8in OD ),Applied,,25.00,0.00,0.00,0.00,2018-07-05T19:49:08.000Z
-112,"Chain Motors,Infrastructure",Lodestar 1 Ton Chain Motor ( Single Phase ),CM,,0.00,0.00,0.00,0.00,2018-07-05T19:55:53.000Z
-113,"Lighting,Conventional",24 channel Sensor Rack,ETC,,100.00,100.00,0.00,0.00,2018-07-05T20:00:22.000Z
-114,"Lighting,Conventional",16 Channel Dimmer Console,NSI / Leviton,,0.00,100.00,0.00,0.00,2018-07-05T20:04:03.000Z
-115,"Staging,Infrastructure",Stage Stair Case,,,0.00,0.00,0.00,0.00,2018-07-05T20:07:31.000Z
-116,"Power,Cabling",3 Phase Cam Tails,,,0.00,0.00,0.00,0.00,2018-07-05T20:09:45.000Z
-117,"Power,Cabling",50' 3 Phase Camlok Cable,,,0.00,0.00,0.00,0.00,2018-07-05T20:11:30.000Z
-118,"Trussing,Infrastructure",7' Truss ( 12in x 12in | 1 3/8in OD ),Applied,,25.00,0.00,0.00,0.00,2018-07-06T14:30:12.000Z
-119,"Lighting,Conventional",12 Channel Dimmer Box,Custom,,100.00,100.00,0.00,0.00,2018-07-06T14:59:45.000Z
-120,"Sound,Boards",Mixing Desk,Yamaha,,100.00,0.00,0.00,0.00,2018-07-23T19:54:37.000Z
-121,"Lighting,Followspot",Long Throw Follow Spot,Altman,,150.00,0.00,0.00,0.00,2018-07-23T21:03:41.000Z
-122,"Lighting,Conventional",Mole (PAR 36 - 4 bulb),,,0.00,0.00,0.00,0.00,2018-07-23T21:05:45.000Z
-123,"Power,Cabling",25' 3 Phase Camlok Cable,,,0.00,0.00,0.00,0.00,2018-07-23T22:01:29.000Z
-124,Chain Motors,Lodestar 1-Ton Chain Motor,CM,,0.00,100.00,0.00,0.00,2018-08-07T16:42:43.000Z
-125,Chain Motors,8 way Controller,Motion Labs,,0.00,100.00,0.00,0.00,2018-08-07T16:46:29.000Z
-126,Chain Motors,Hand Remote,Motion Labs,,0.00,50.00,0.00,0.00,2018-08-07T16:49:07.000Z
-127,"Chain Motors,Cabling",100' Motor Cable,,,0.00,0.00,0.00,0.00,2018-08-07T16:50:26.000Z
-128,"Power,Cabling",50 Amp Power Cable,,,0.00,0.00,0.00,0.00,2018-08-07T16:53:05.000Z
-129,"Lighting,Conventional",4 channel Dimmer Pack,NSI,,25.00,25.00,0.00,0.00,2018-08-07T18:24:15.000Z
-130,"LED,Lighting",PDS-500,Philips,,0.00,0.00,0.00,0.00,2018-08-07T18:27:25.000Z
-131,"Lighting,Boards",Stage Desk - 16 lighting controller,ADJ,3,0.00,0.00,0.00,0.00,2018-08-07T18:33:34.000Z
-132,"Power,Cabling",50' Socopex Cable,,,0.00,0.00,0.00,0.00,2018-08-07T18:39:45.000Z
-133,"Power,Cabling",100' Socapex Cable,,,0.00,0.00,0.00,0.00,2018-08-07T18:41:33.000Z
-134,"Power,Cabling",Socapex to Edison Breakout,,,0.00,0.00,0.00,0.00,2018-08-07T18:51:30.000Z
-135,"Power,Cabling",Socapex to Edison Break In,,,0.00,0.00,0.00,0.00,2018-08-07T18:55:07.000Z
+id,name,category,manufacturer,total_owned,sell_price,rental_price,net_cost_per_invoice,purchase_price,photo_file_name,photo_file_type,photo_file_path,path_to_folder,created_at
+1,Snow Machine,Special Effects,,,350,0,0,0,arcticsnowmachine1553.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/arcticsnowmachine1553.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T15:25:08.000Z
+2,Vizi Beam 5rx,"Lighting,Moving Head",ADJ,12,250,0,0,0,ADJ_Vizi_Beam.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/ADJ_Vizi_Beam.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T15:25:08.000Z
+3,Adjustable Stage Leg,Staging,Wenger,179,0,0,0,0,Wenger_Stage_Leg.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Wenger_Stage_Leg.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T15:25:08.000Z
+4,Rebel T4i,Photography,Canon,1,100,0,0,0,Canon_T4i.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Canon_T4i.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+5,LED Walls,"COTG,Installed,Lighting",,,1200,0,0,0,COTG_2.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/COTG_2.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+6,LED Walls and Columns,"CATP,Installed,Lighting",,,1200,0,0,0,CATP.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/CATP.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+7,Dry Ice Machine,Special Effects,,,300,0,0,0,dry_ice.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/dry_ice.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+8,Live Simulcast Camera,"Video,Cameras",,,0,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+9,Skype Camera,"Video,Cameras",,2,0,0,0,0,skype.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/skype.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+10,Zapshot Technician,Labor,,,300,0,200,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+11,Lighting Operator,Labor,,,300,0,200,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+12,Video Screens,"CATP,Installed,Video",,,500,0,0,0,CATP_screens.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/CATP_screens.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+13,4' x 4' Pixel Panel,"Staging,Lighting",Staging Dimensions,4,200,0,0,0,pixelpanel.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/pixelpanel.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+14,Mac 700,"Lighting,Moving Head",Martin,8,300,0,0,1000,Mac_700.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Mac_700.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T22:42:29.000Z
+15,Custom Gobo,"Lighting,CATP,COTG,CANS",,,300,0,70,0,custom_gobo.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/custom_gobo.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T23:06:48.000Z
+16,Dance Floor Lighting,"COTG,Installed,Lighting",,,500,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T23:26:50.000Z
+17,Video Operator,Labor,,,300,0,200,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T23:27:06.000Z
+18,Dance Floor Lighting,"CATP,Installed,Lighting",,,500,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-28T23:27:19.000Z
+19,Mac Aura,"Lighting,Moving Head",Martin,12,200,0,0,0,Mac_Aura.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Mac_Aura.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-30T02:57:18.000Z
+20,4' x 8' Black Stage,Staging,Wenger,40,100,50,0,0,Wenger_Black_Stage.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Wenger_Black_Stage.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-01-30T15:11:32.000Z
+21,Airline Micro Headset,"Sound,Microphones",Samson,3,50,0,0,0,Samson_Airline_Micro.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Samson_Airline_Micro.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-04T03:25:47.000Z
+22,36 deg. Ellipsoidal (LEKO),"Lighting,Conventional",ETC,8,75,25,0,0,ETC_SOURCE_FOUR_LEKO.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/ETC_SOURCE_FOUR_LEKO.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-06T17:44:08.000Z
+23,PAR 38 can,"Lighting,Conventional",,,37.5,0,0,0,par_38_can.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/par_38_can.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-06T17:53:33.000Z
+24,Wireless Lavalier Microphone,"Sound,Microphones",Shure,5,50,0,0,0,shure_wireless_lav.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/shure_wireless_lav.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-06T21:27:11.000Z
+25,ULX4 Wireless Handheld Microphone,"Sound,Microphones",Shure,4,50,0,0,0,shure_ulx4_wireless_handheld.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/shure_ulx4_wireless_handheld.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-06T21:29:44.000Z
+26,Podium Microphone,"Sound,Microphones",,1,50,0,0,0,podium_microphone.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/podium_microphone.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-06T22:01:06.000Z
+27,Sound Engineer,Labor,,,300,0,200,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-06T22:04:09.000Z
+28,Wireless LED light,"Lighting,LED",Lumin,20,40,25,0,0,lumin_white_wireless_LED.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/lumin_white_wireless_LED.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-20T18:12:24.000Z
+29,LV Operator,Labor,,,300,0,200,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-21T20:31:10.000Z
+30,50 deg. Ellipsoidal (LEKO),"Lighting,Conventional",ETC,8,75,25,0,0,ETC_SOURCE_FOUR_LEKO.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/ETC_SOURCE_FOUR_LEKO.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-26T20:56:32.000Z
+31,26 deg. Ellipsoidal (LEKO),"Lighting,Conventional",ETC,8,75,25,0,0,ETC_SOURCE_FOUR_LEKO.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/ETC_SOURCE_FOUR_LEKO.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-26T20:57:30.000Z
+32,19 deg. Ellipsoidal (LEKO),"Lighting,Conventional",ETC,8,75,25,0,0,ETC_SOURCE_FOUR_LEKO.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/ETC_SOURCE_FOUR_LEKO.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-26T20:57:44.000Z
+33,50 lb. Base,Infrastructure,,10,25,10,0,0,50_lb_base.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/50_lb_base.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-26T20:58:12.000Z
+34,1604 - VLZ PRO,"Sound,Boards",Mackie,1,75,0,0,0,1604-VLZ-PRO.png,png,/Users/Steve/Drive/Developer/Brilliance/inventory_images/1604-VLZ-PRO.png,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-27T21:26:19.000Z
+35,Eon (self powered),"Sound,Speakers",JBL,2,50,0,0,0,JBL_EON-15.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/JBL_EON-15.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-28T19:17:11.000Z
+36,CFX-20,"Sound,Boards",Mackie,1,100,0,0,0,Mackie_CFX20.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Mackie_CFX20.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-02-28T19:21:27.000Z
+37,SM-58,"Sound,Microphones",Shure,8,25,0,0,0,shure_sm-58.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/shure_sm-58.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-03-05T15:49:26.000Z
+38,Desk Mount Microphone Stand,Sound,,,0,0,0,0,desk_mount_microphone-stand.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/desk_mount_microphone-stand.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-03-05T15:52:08.000Z
+39,Pin spot,"Lighting,Conventional",,,25,0,0,0,pinspot.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/pinspot.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-03-05T20:04:00.000Z
+40,"70"" LED screen","Video,TV",Samsung,,600,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-03-05T20:50:32.000Z
+41,60 in. Plasma TV,"Video,TV",LG,2,500,0,0,0,LG_60-Inch_1080p_Plasma.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/LG_60-Inch_1080p_Plasma.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-03-05T20:52:22.000Z
+42,Video Technician,Labor,,,300,0,200,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-02T14:49:53.000Z
+43,10' Black Pipe,Infrastructure,,10,25,10,0,0,10_black_pipe.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/10_black_pipe.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-09T17:09:28.000Z
+44,Mac 250 Krypton,"Lighting,Moving Head",Martin,0,200,0,0,0,mac250krypton.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/mac250krypton.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-09T17:20:10.000Z
+45,Stage Hand,Labor,,,25,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-09T17:49:21.000Z
+46,50in Plasma Monitor,"Video,TV",Panasonic,2,100,0,0,0,panasonic_50_plasma.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/panasonic_50_plasma.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-12T16:01:43.000Z
+47,PAR 56 can,"Lighting,Conventional",,,15,0,0,0,par_56_can.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/par_56_can.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-12T16:15:12.000Z
+48,Source Four PAR,"Lighting,Conventional",ETC,26,75,0,0,0,ETC_Source_Four_PAR.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/ETC_Source_Four_PAR.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-12T16:45:24.000Z
+49,12-30 Full Range Speaker,"Sound,Speakers",Smith Audio,4,50,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-18T14:51:58.000Z
+50,Sub,"Sound,Speakers",Smith Audio,4,50,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-18T14:54:13.000Z
+51,Sx100 speaker,"Sound,Speakers",EV,4,50,0,0,0,ev_sx100_speaker.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/ev_sx100_speaker.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-18T14:55:02.000Z
+52,8' Truss ( 12 in. x 12 in. | 1 1/4 in. OD ),"Trussing,Infrastructure",Applied,,50,0,0,0,applied_light_duty_truss_8.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/applied_light_duty_truss_8.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-18T19:07:05.000Z
+53,Base Plate,"Trussing,Infrastructure",Applied,,35,0,0,0,Trussing_base_plate.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Trussing_base_plate.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-18T19:11:18.000Z
+54,LED Walls and Soffit,"CAL,Installed,Lighting",,,1000,0,0,0,CAL.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/CAL.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-18T19:33:55.000Z
+55,LED Walls,"Ultimate Gaga/575,Installed,Lighting",,,1500,0,0,0,UltimateGaGa.JPG,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/UltimateGaGa.JPG,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T14:04:01.000Z
+56,Moving Lights,"Ultimate Gaga/575,Installed,Lighting",,,700,0,0,0,575_Dance_Floor.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/575_Dance_Floor.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T14:08:21.000Z
+57,Video Screens,"Ultimate Gaga/575,Installed,Video",,,700,0,0,0,575_screens.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/575_screens.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T14:10:56.000Z
+58,White Dance Floor ( 4' x 4' ),Staging,,,40,0,0,0,4_x_4_white_dance_floor.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/4_x_4_white_dance_floor.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T15:45:18.000Z
+59,3 Phase PD Box (16 - 20amp circuits),"Power,Cabling",,1,250,0,0,0,3_phase_edison_distribution_box.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/3_phase_edison_distribution_box.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T18:33:32.000Z
+60,M300s Video Projector,"Video,Projector",NEC,2,200,0,0,0,nec_m300s_projector.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/nec_m300s_projector.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T18:37:07.000Z
+61,6' x 8' Video Screen,"Video,Screens",,2,300,0,0,0,6_x_8_Video_screen.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/6_x_8_Video_screen.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T18:42:54.000Z
+62,Laborer,Labor,,,250,0,250,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T18:51:02.000Z
+63,48 Channel Dimmer Rack,Lighting,LMI,1,250,0,0,0,lmi_48_channel_dimmer_rack.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/lmi_48_channel_dimmer_rack.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T20:45:25.000Z
+64,Express 24/48 Lighting Console,"Lighting,Console",ETC,,250,0,0,0,48_lighting_console.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/48_lighting_console.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T20:47:48.000Z
+65,Laborer @ $200,Labor,,,200,0,200,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-23T21:05:39.000Z
+66,DVD Player,Video,,,25,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-24T14:31:53.000Z
+67,Scrim,Trussing,,,0,0,0,0,truss_scrim.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/truss_scrim.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-24T14:34:43.000Z
+68,Color Blast 12,"Lighting,LED",Philips,,50,0,0,0,Color_Blast_12.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Color_Blast_12.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-24T14:36:24.000Z
+69,Acrylic DJ Facade,"Lighting,Infrastructure",,,75,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-24T21:11:17.000Z
+70,L - 16 Ground Support,Infrastructure,,4,0,0,0,0,L-16_ground_support.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/L-16_ground_support.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-25T16:12:14.000Z
+71,PAR 16 can,"Lighting,Conventional",,,25,0,0,0,PAR_16_can.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/PAR_16_can.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-25T16:18:50.000Z
+72,Mirror Ball,Lighting,,,100,0,0,0,Mirror_ball.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Mirror_ball.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-25T16:27:00.000Z
+73,50' VGA cable,"Video,Cabling",,,0,0,0,0,50_vga_cable.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/50_vga_cable.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-25T16:41:51.000Z
+74,1 x 4 VGA Distribution Amplifer,"Video,Cabling",Kramer,1,0,0,0,0,kramer_vga_distribution_amplifier.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/kramer_vga_distribution_amplifier.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-25T16:42:53.000Z
+75,4' x 6' Video Screen,"Video,Screens",,2,200,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-25T19:35:59.000Z
+76,Comet,"Lighting,Followspot",Altman,1,100,0,0,0,Comet_Followspot.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Comet_Followspot.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-30T15:24:37.000Z
+77,Followspot Operator,Labor,,,0,0,150,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-30T15:28:48.000Z
+78,4' x 4' Black Stage,Staging,Staging Dimensions,2,0,0,0,0,staging_dimensions_4_x_4.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/staging_dimensions_4_x_4.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-30T15:32:07.000Z
+79,175' audio snake,"Sound,Cabling",,1,0,0,0,0,175_audio_snake.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/175_audio_snake.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-30T15:47:00.000Z
+80,Macbook Pro (13 in.) (2010),"Video,Computers",Apple,,0,0,0,0,apple_macbook_pro_2012.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/apple_macbook_pro_2012.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-04-30T15:49:43.000Z
+81,Amplifier,Sound,QSC,1,100,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-05-01T19:34:13.000Z
+82,8' Black Pipe,Infrastructure,,,5,0,0,0,10_black_pipe.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/10_black_pipe.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-05-02T21:54:20.000Z
+83,Static LED Walls,"CANS,Installed,Lighting",,,1200,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-05-03T18:01:53.000Z
+84,"LED Walls, Coffers, Dome, & Cocktail Soffit","CANS,Installed,Lighting",,,1200,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-05-03T18:03:26.000Z
+85,Dance Floor Lighting,"CANS,Installed,Lighting",,,500,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-05-03T18:03:29.000Z
+86,Video Screens,"CANS,Installed,Video",,,500,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-05-03T18:03:33.000Z
+87,25lb. Sandbag,Infrastructure,,,0,0,0,0,25_lb_sand_bag.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/25_lb_sand_bag.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-05-25T16:27:40.000Z
+88,Cheeseborough (90 deg),Infrastructure,,,0,0,0,0,cheeseborough.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/cheeseborough.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-05T16:42:16.000Z
+89,1 Ton Manual Chain Hoist,Infrastructure,,,0,25,0,0,1_ton_manual_chain_fall.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/1_ton_manual_chain_fall.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-05T20:22:58.000Z
+90,Motor Technician,Labor,,,300,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-12T17:32:54.000Z
+91,Lighting Technician,Labor,,,300,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-12T17:37:16.000Z
+92,Master Electrician,Labor,,,300,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-12T17:47:57.000Z
+93,Pearl Tiger 2010,"Lighting,Boards",Avolites,1,0,0,0,0,avolites_pearl_2010_tiger.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/avolites_pearl_2010_tiger.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-12T18:22:00.000Z
+94,SDI to HDMI Converter,Cabling,Black Magic,,0,0,0,0,black_magic_sdi_to_hdmi_converter.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/black_magic_sdi_to_hdmi_converter.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-18T14:58:08.000Z
+95,ATEM Video Switcher,Video,Black Magic,,0,0,0,0,ATEM_switcher.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/ATEM_switcher.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-18T15:01:10.000Z
+96,MacBook Pro (15 in.) (2009),"Computers,Video",Apple,,0,0,0,0,apple_macbook_pro_15_2009.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/apple_macbook_pro_15_2009.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-18T15:12:59.000Z
+97,10' Truss ( 12 in. x 12 in. | 2 in. OD ),"Infrastructure,Trussing",Tomcat,,25,25,0,0,tomcat_10_truss.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/tomcat_10_truss.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-18T15:22:05.000Z
+98,40' Black Theatrical Curtain,Staging,,1,0,0,0,0,black_curtain.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/black_curtain.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-20T17:50:44.000Z
+99,8' Truss ( 12 in. x 12 in. | 2 in. OD ),"Trussing,Infrastructure",Tomcat,,25,0,0,0,tomcat_10_truss.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/tomcat_10_truss.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T15:12:47.000Z
+100,5' Black Pipe,Infrastructure,,,0,0,0,0,schedule_40_black_pipe.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/schedule_40_black_pipe.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T15:33:27.000Z
+101,7' x 9' Video Screen (10ft.),"Video,Screens",,,600,0,0,0,7_x_9_Video_screen.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/7_x_9_Video_screen.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T15:39:37.000Z
+102,PT-EZ570u,"Video,Projector",Panasonic,,400,0,0,0,panasonic_ez570u.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/panasonic_ez570u.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T15:45:22.000Z
+103,Technician,Labor,,,0,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T15:54:21.000Z
+104,1' Stage Leg,Staging,Wenger,,0,0,0,0,1_stage_leg.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/1_stage_leg.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T16:54:09.000Z
+105,3' x 16' Black Stage Skirt,Staging,,,0,0,0,0,Black_Stage_skirt.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/Black_Stage_skirt.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T16:56:37.000Z
+106,24/7 Hazer,"Lighting,Special Effects",Martin,2,100,0,0,0,_hazer.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/_hazer.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T17:11:12.000Z
+107,Atomic 3000,Lighting,Martin,6,150,0,0,0,martin_atomic_3000.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/martin_atomic_3000.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T17:16:12.000Z
+108,L-16 Ground Support,Infrastructure,,,0,0,0,0,L_16.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/L_16.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-06-27T17:33:23.000Z
+109,LED Sixpar 300IP,"LED,Lighting",Elation,,100,0,0,0,elation_LED_sixpar_300ip.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/elation_LED_sixpar_300ip.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-02T18:58:55.000Z
+110,10' 12in x 12in 1 3/8in OD Truss,"Trussing,Infrastructure",Applied,,25,0,0,0,applied_10_light_duty_truss.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/applied_10_light_duty_truss.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-05T19:29:35.000Z
+111,6' Truss ( 12in x 12 in | 1 3/8in OD ),"Trussing,Infrastructure",Applied,,25,0,0,0,6_applied_light_duty_truss.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/6_applied_light_duty_truss.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-05T19:49:08.000Z
+112,Lodestar 1 Ton Chain Motor ( Single Phase ),"Chain Motors,Infrastructure",CM,,0,0,0,0,CM_Lodestar_1_ton_chain.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/CM_Lodestar_1_ton_chain.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-05T19:55:53.000Z
+113,24 channel Sensor Rack,"Lighting,Conventional",ETC,,100,100,0,0,etc_24_channel_sensor_rack.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/etc_24_channel_sensor_rack.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-05T20:00:22.000Z
+114,16 Channel Dimmer Console,"Lighting,Conventional",NSI / Leviton,,0,100,0,0,nsi_16_channel_dimmer_board.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/nsi_16_channel_dimmer_board.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-05T20:04:03.000Z
+115,Stage Stair Case,"Staging,Infrastructure",,,0,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-05T20:07:31.000Z
+116,3 Phase Cam Tails,"Power,Cabling",,,0,0,0,0,3_Phase_Cam_Tails.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/3_Phase_Cam_Tails.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-05T20:09:45.000Z
+117,50' 3 Phase Camlok Cable,"Power,Cabling",,,0,0,0,0,50_3_Phase_Camlok_Cable.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/50_3_Phase_Camlok_Cable.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-05T20:11:30.000Z
+118,7' Truss ( 12in x 12in | 1 3/8in OD ),"Trussing,Infrastructure",Applied,,25,0,0,0,applied_light_duty_truss_7.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/applied_light_duty_truss_7.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-06T14:30:12.000Z
+119,12 Channel Dimmer Box,"Lighting,Conventional",Custom,,100,100,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-06T14:59:45.000Z
+120,Mixing Desk,"Sound,Boards",Yamaha,,100,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-23T19:54:37.000Z
+121,Long Throw Follow Spot,"Lighting,Followspot",Altman,,150,0,0,0,,,/Users/Steve/Drive/Developer/Brilliance/inventory_images/,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-23T21:03:41.000Z
+122,Mole (PAR 36 - 4 bulb),"Lighting,Conventional",,,0,0,0,0,4_bulb_molefay.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/4_bulb_molefay.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-23T21:05:45.000Z
+123,25' 3 Phase Camlok Cable,"Power,Cabling",,,0,0,0,0,25_3_Phase_cam_lok_cable.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/25_3_Phase_cam_lok_cable.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-07-23T22:01:29.000Z
+124,Lodestar 1-Ton Chain Motor,Chain Motors,CM,,0,100,0,0,CM-ET-Lodestar-WP-web-highres.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/CM-ET-Lodestar-WP-web-highres.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T16:42:43.000Z
+125,8 way Controller,Chain Motors,Motion Labs,,0,100,0,0,motion_labs_8_way_controller.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/motion_labs_8_way_controller.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T16:46:29.000Z
+126,Hand Remote,Chain Motors,Motion Labs,,0,50,0,0,motion_labs_hand_controller.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/motion_labs_hand_controller.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T16:49:07.000Z
+127,100' Motor Cable,"Chain Motors,Cabling",,,0,0,0,0,100_chain_motor_cable.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/100_chain_motor_cable.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T16:50:26.000Z
+128,50 Amp Power Cable,"Power,Cabling",,,0,0,0,0,50_amp_power_cable.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/50_amp_power_cable.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T16:53:05.000Z
+129,4 channel Dimmer Pack,"Lighting,Conventional",NSI,,25,25,0,0,nsi_dimmer_pack.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/nsi_dimmer_pack.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T18:24:15.000Z
+130,PDS-500,"LED,Lighting",Philips,,0,0,0,0,color_kinetics_PDS_500.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/color_kinetics_PDS_500.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T18:27:25.000Z
+131,Stage Desk - 16 lighting controller,"Lighting,Boards",ADJ,3,0,0,0,0,stage_desk_16_lighting_controller.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/stage_desk_16_lighting_controller.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T18:33:34.000Z
+132,50' Socopex Cable,"Power,Cabling",,,0,0,0,0,50_socopex_cable.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/50_socopex_cable.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T18:39:45.000Z
+133,100' Socapex Cable,"Power,Cabling",,,0,0,0,0,100_socapex_cable.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/100_socapex_cable.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T18:41:33.000Z
+134,Socapex to Edison Breakout,"Power,Cabling",,,0,0,0,0,10_socapex_female_edison.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/10_socapex_female_edison.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T18:51:30.000Z
+135,Socapex to Edison Break In,"Power,Cabling",,,0,0,0,0,socapex_to_edison_break_in.jpg,jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images/socapex_to_edison_break_in.jpg,/Users/Steve/Drive/Developer/Brilliance/inventory_images,2018-08-07T18:55:07.000Z
