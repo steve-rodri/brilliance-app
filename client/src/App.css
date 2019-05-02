@@ -8,7 +8,6 @@
   text-align: center;
   display: grid;
   grid: 150px auto / auto;
-  overscroll-behavior-y: none;
 
 /* Color Palette */
   --dark-blue: #09639B;
