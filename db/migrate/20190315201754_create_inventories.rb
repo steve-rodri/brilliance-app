@@ -4,7 +4,6 @@ class CreateInventories < ActiveRecord::Migration[5.2]
       t.string :category
       t.string :name
       t.string :manufacturer
-      t.string :picture
       t.integer :total_owned
       t.float :sell_price, default: 0.00
       t.float :rental_price, default: 0.00

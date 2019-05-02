@@ -9,7 +9,6 @@ csv.each do |row|
     category: row['category'],
     name: row['name'],
     manufacturer: row['manufacturer'],
-    picture: row['picture'],
     total_owned: row['total_owned'],
     sell_price: row['sell_price'],
     rental_price: row['rental_price'],
@@ -17,6 +16,16 @@ csv.each do |row|
     purchase_price: row['purchase_price'],
 
     created_at: row['created_at']
-  })
+  }) do |i|
+    if row['photo_file_name']
+      puts row['photo_file_name']
+      i.photo.attach(
+        io: File.open(row['photo_file_path']),
+        filename: row['photo_file_name'],
+        content_type: "application/#{row['photo_file_type']}"
+      )
+    end
+  end
+
 end
 puts "There are now #{Inventory.count} rows in the Inventory table"
