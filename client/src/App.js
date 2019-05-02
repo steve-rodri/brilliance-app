@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import Main from './components/Main/index.js'
 import Login from './components/Login/index.js'
 import { GOOGLE } from './services/google_service'
+import preventPullToRefresh from './helpers/preventPullToRefresh'
 import axios from 'axios'
 import './App.css';
 
@@ -16,6 +17,7 @@ class App extends Component {
   }
 
   async componentDidMount(){
+    preventPullToRefresh()
     await this.getUser(this.axiosRequestSource.token)
   }
   async componentWillUnmount(){
