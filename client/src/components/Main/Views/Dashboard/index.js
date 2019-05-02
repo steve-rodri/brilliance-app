@@ -44,7 +44,7 @@ export default class Dashboard extends Component {
         <h1 className="Dashboard--intro" >{this.greeting()}</h1>
         <Schedule {...this.props} />
 
-        <button onClick={this.props.syncAllEvents}>Sync</button>
+        {/* <button onClick={this.props.syncAllEvents}>Sync</button> */}
       </div>
     )
   }
