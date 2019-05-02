@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
-
   @@items_per_page = 25
   @@date_start = Time.zone.today()
   @@date_end = Time.zone.today()
+
   # GET /events
   def index
 
@@ -48,8 +48,6 @@ class EventsController < ApplicationController
     end
     render json: @events, include: '**'
   end
-
-  # where(created_at: (Time.now.midnight - 1.day)..Time.now.midnight)
 
   # GET /events/1
   def show

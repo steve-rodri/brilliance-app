@@ -5,7 +5,7 @@
   grid-template-rows: repeat(2, auto);
   grid-gap: 20px;
   width: 100%;
-  padding: 30px;
+  padding: 28px 20px 20px 20px;
   background-color: var(--dark-gray);
 }
 

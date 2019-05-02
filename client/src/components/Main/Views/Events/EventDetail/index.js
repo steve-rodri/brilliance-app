@@ -935,6 +935,10 @@ export default class EventDetail extends Component {
           {...this.state}
           {...this.props}
 
+          edit={this.switchEditMode}
+          close={this.close}
+          delete={this.handleDelete}
+
           handleChange={this.handleChange}
           handleStatusChange={this.handleStatusChange}
           handleDateChange={this.handleDateChange}

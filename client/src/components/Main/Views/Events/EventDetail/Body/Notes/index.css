@@ -4,6 +4,7 @@
   display: grid;
   align-items: center;
   overflow: auto;
+  padding: 0 20px 10px 20px;
 }
 
 .Notes,
@@ -13,6 +14,7 @@
   height: 100%;
   width: 100%;
   resize: none;
+  font-size: 16px;
 }
 
 .Notes {
@@ -29,6 +31,7 @@
   text-align: left;
   background-color: rgba(0, 0, 0, 0);
   color: var(--light-gray);
+  padding: 10px;
 }
 
 .Notes:focus,
@@ -49,7 +52,6 @@
   .Notes {
     overflow: auto;
     min-height: 300px;
-    font-size: 16px;
   }
 
   .Notes, .Notes--readonly {

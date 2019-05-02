@@ -3,9 +3,9 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: var(--dark-gray);
-  color: var(--light-gray);
   z-index: 5;
+  background-color: var(--med-dark-blue);
+  color: var(--light-gray);
 }
 
 .EventDetail--header-right {
@@ -92,6 +92,8 @@ input, .EventDetail--event-summary {
     grid: auto / 100px auto 100px;
     border-bottom: 1px solid black;
     padding: 5px 15px;
+    background-color: var(--dark-gray);
+    color: var(--light-gray);
   }
 
   .EventDetail--event-title-container {

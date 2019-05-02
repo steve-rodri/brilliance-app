@@ -81,7 +81,7 @@ export default function Buttons(props) {
     if (editMode) {
       return (
         <Fragment>
-          {trashCan()}
+          {/* {trashCan()} */}
           {submit()}
         </Fragment>
       )
