@@ -31,7 +31,7 @@ export default class Body extends Component {
               <Logistics {...this.props}/>
             }
             {
-              about?
+              !mobile && about?
               <Invoice {...this.props}/>
               :
               null

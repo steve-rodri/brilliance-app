@@ -139,14 +139,22 @@ select {
 
 .Edit--Field {
   position: relative;
+  width: 100%;
   min-width: 100px;
-  height: 36px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #F8F8F8;
   border: 1px solid #BBBBBB;
   border-radius: 5px;
+}
+
+@media (min-width: 750px) {
+  .Edit--Field {
+    width: auto;
+    height: 36px;
+  }
 }
 
 /* -----------Inputs------------- */

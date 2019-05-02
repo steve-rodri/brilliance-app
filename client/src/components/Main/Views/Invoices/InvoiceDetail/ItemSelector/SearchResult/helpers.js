@@ -166,7 +166,6 @@ function inventoryName(inventory){
 export function itemPhoto(item){
   if (item.contents && item.contents.length === 1) {
     if (item.contents[0].inventory) {
-      console.log(item.contents[0].inventory.photo)
       return item.contents[0].inventory.photo
     }
   }

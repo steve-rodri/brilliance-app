@@ -1,20 +1,37 @@
 .Staff--container {
   align-self: flex-start;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
   align-items: center;
+  justify-items: start;
   overflow: auto;
+  padding: 0 20px 10px 20px;
 }
 
 .Staff--none {
   color: red;
+  justify-self: center;
+  padding: 5px;
 }
 
 .Staff--worker-name {
   font-size: 20px;
   grid-column: 2 / span 1;
+}
+
+@media (min-width: 750px) {
+  .Staff--container {
+    align-self: center;
+    padding: 30px;
+  }
+
+  .Staff--worker {
+    background-color: inherit;
+  }
+
+  .Staff--worker-name {
+    font-size: 25px;
+  }
 }
 
 /*------------------------Edit------------------- */
@@ -152,23 +169,5 @@
   .Staff--View .Staff--worker-status {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
-  }
-}
-
-/* ------------Media Queries--------------- */
-
-@media (min-width: 750px) {
-  .Staff--container {
-    align-self: center;
-    padding: 30px 30px 30px 30px;
-    justify-content: inherit;
-  }
-
-  .Staff--worker {
-    background-color: inherit;
-  }
-
-  .Staff--worker-name {
-    font-size: 25px;
   }
 }

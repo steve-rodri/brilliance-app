@@ -50,7 +50,7 @@ export default class About extends Component {
   }
 
   render(){
-    const { editMode } = this.props
+    const { editMode, mobile } = this.props
     return (
       <div className="EventDetail-Body--component EventDetail-Body--about">
         <div className="EventDetail-Body--component-title"><h3>About</h3></div>
@@ -58,7 +58,7 @@ export default class About extends Component {
           {this.view()}
         </div>
         {
-          !editMode?
+          !editMode && !mobile?
           <div className="About--event-status-container">
             {this.displayConfirmation()}
           </div>
