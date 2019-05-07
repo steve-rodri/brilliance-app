@@ -14,12 +14,12 @@ export default class Show extends Component {
   }
 
   handleGetClientEvents = () => {
-    const { match, history, accessLevel } = this.props
+    const { match, history, user: { accessLevel } } = this.props
     history.push(`/${accessLevel}/events?client=${match.params.id}`)
   }
 
   handleGetClientInvoices = () => {
-    const { match, history, accessLevel } = this.props
+    const { match, history, user: { accessLevel } } = this.props
     history.push(`/${accessLevel}/invoices?client=${match.params.id}`)
   }
 

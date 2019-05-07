@@ -12,7 +12,7 @@ export default function Schedule(props){
     timeUntil,
     displayColumn,
     styleItem,
-    accessLevel
+    user: { accessLevel }
   }
   = props
 

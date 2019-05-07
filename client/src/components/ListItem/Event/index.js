@@ -8,7 +8,7 @@ import './index.css';
 
 export default function Event(props){
   const {
-    accessLevel,
+    user: { accessLevel },
     item,
     view,
     handleStatusChange,

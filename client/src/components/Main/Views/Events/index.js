@@ -4,8 +4,7 @@ import ListPage from '../../../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
 import { GOOGLE } from '../../../../services/google_service'
 import { formatToGoogle, formatFromGoogle } from '../../../../helpers/googleFormatters'
-import { event } from '../../../../services/event'
-import { client } from '../../../../services/client'
+import { event, client } from '../../../../services/BEP_APIcalls.js'
 import { clientName } from '../../../../helpers/clientHelpers'
 import { eventTitle } from '../../../../helpers/eventHelpers'
 import queryString from 'query-string'
@@ -16,19 +15,31 @@ export default class Events extends Component {
   constructor(props){
     super(props)
     this.state = {
-      events: null,
+      events: [],
       hasMore: false,
       category: null,
       page: 1
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.props.signout,
+      sendCount: true
+    }
     this.itemsPerPage = 25
   }
 
   // ----------------------------Lifecycle--------------------------------------
 
-  async componentDidUpdate(prevProps) {
-    await this.setEvents(prevProps)
+  async componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.isExact) await this.setEvents(prevProps)
+    if (prevState.count !== this.state.count) {
+      if (this.state.count) {
+        this.ajaxOptions.sendCount = false
+      } else {
+        this.ajaxOptions.sendCount = true
+      }
+    }
   }
 
   async componentDidMount() {
@@ -39,7 +50,7 @@ export default class Events extends Component {
     await this.setColumnHeaders()
     await this.setCurrentMonth()
     await this.setCalendarId()
-    // await this.setEvents(this.props, 1)
+    await this.setEvents()
   }
 
   componentWillUnmount() {
@@ -50,7 +61,11 @@ export default class Events extends Component {
   // -----------------------Getters-and-Setters---------------------------------
 
   setEvents = async(prevProps) => {
-    let options = {}
+    let options = {
+      query: null,
+      category: null,
+      client: null
+    }
     if (prevProps) {
 
       // check for queries from url
@@ -64,12 +79,13 @@ export default class Events extends Component {
 
       if (nextQueries) {
         const queries = queryString.parse(nextQueries);
-
-        if (!queries.q) options.query = null;
-        if (!queries.category) options.category = null;
-        if (!queries.client) options.client = null;
-        if (nextQueries !== prevQueries) await this.setByQuery()
+        if (queries.q) options.query = queries.q;
+        if (queries.category) options.category = queries.category;
+        if (queries.client) options.client = queries.client;
       }
+
+      if (prevQueries !== nextQueries) await this.setByQuery()
+      if (prevQueries && !nextQueries) await this.setByDate(options)
 
       // check for date change
       const { date: prevDate } = prevProps
@@ -85,15 +101,28 @@ export default class Events extends Component {
         const endChange = !( prevEnd.isSame(nextEnd) )
         if ( startChange || endChange ) await this.setByDate(options)
       }
+    } else {
+      const { location } = this.props
+      let query = null
+      if (location && location.search) query = location.search
+      if (query) {
+        const queries = queryString.parse(query);
+        if (queries.q) options.query = queries.q;
+        if (queries.category) options.category = queries.category;
+        if (queries.client) options.client = queries.client;
+      }
+      if (query) await this.setByQuery()
+      if (!query) await this.setByDate(options)
     }
+
   }
 
   setByQuery = async() => {
     const { category, query } = this.state
     const queries = queryString.parse(this.props.location.search);
-
     // Category-Query-----------
     if (queries.category && queries.category !== category) {
+      this.ajaxOptions.sendCount = true
       this.setState({
         events: [],
         searchLabel: queries.category,
@@ -106,7 +135,8 @@ export default class Events extends Component {
       async() => this.fetchEvents())
 
     // Search-Query-----------
-    } else if (queries.q && queries.q !== query) {
+    } else if (queries.q && (queries.q !== query)) {
+      this.ajaxOptions.sendCount = true
       this.setState({
         events: [],
         searchLabel: queries.q,
@@ -120,7 +150,8 @@ export default class Events extends Component {
 
     // Client-Query-----------
     } else if (queries.client && queries.client !== this.state.client) {
-      const clt = await client.findById(queries.client, this.axiosRequestSource.token)
+      const clt = await client.findById(queries.client, this.ajaxOptions)
+      this.ajaxOptions.sendCount = true
       this.setState({
         events: [],
         searchLabel: clientName(clt),
@@ -135,7 +166,6 @@ export default class Events extends Component {
   }
 
   setByDate = async(options) => {
-    const { category, client, query } = this.state
     const { date: { start: s, end: e }, isDay, isMonth } = this.props
     const start = moment(s);
     const end = moment(e);
@@ -144,10 +174,11 @@ export default class Events extends Component {
     if (isMonth()) date = `${start.format('MMMM YYYY')}`
     let searchLabel = date
 
-    if (options && options.category !== null && category) searchLabel = `${category} - ${date}`
-    if (options && options.client !== null && client) searchLabel = `${client} - ${date}`
-    if (options && options.query !== null && query) searchLabel = `${query} - ${date}`
+    if (options && options.category) searchLabel = `${options.category} - ${date}`
+    if (options && options.client) searchLabel = `${options.client} - ${date}`
+    if (options && options.query) searchLabel = `${options.query} - ${date}`
 
+    this.ajaxOptions.sendCount = true
     this.setState(
     {
       events: [],
@@ -194,6 +225,7 @@ export default class Events extends Component {
 
   refresh = async(value, url) => {
     const { history } = this.props
+
     if (value) {
       this.resetState()
       this.setCurrentMonth()
@@ -217,23 +249,22 @@ export default class Events extends Component {
   fetchEvents = async() => {
     const { events, page, category, query: q, client, type } = this.state
     const { date: { start: date_start, end: date_end } } = this.props
-    let searchData = { page, category, q, client, date_start, date_end }
+    let params = { page, category, q, client, date_start, date_end }
     if ((events.length + this.itemsPerPage) / page <= this.itemsPerPage) {
       switch (type) {
         case 'query':
-          searchData = { page, q }
+          params = { page, q }
           break;
         case 'category':
-          searchData = { page, category }
+          params = { page, category }
           break;
         case 'client':
-          searchData = { page, client }
+          params = { page, client }
           break;
         default:
           break;
       }
-
-      const data = await event.fetch(searchData, this.axiosRequestSource.token)
+      const data = await event.batch(params, this.ajaxOptions)
       if (data && data.events && data.events.length) await this.updateEvents(data)
 
     } else {
@@ -243,10 +274,11 @@ export default class Events extends Component {
 
   addEvent = async(formData) => {
     const { calendarId } = this.state
+    const { signout } = this.props
     let events = [...this.state.events]
-    const newEvent = await event.createNew(formData, this.axiosRequestSource.token)
-    const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(newEvent))
-    let formatted = await formatFromGoogle(newGoogleEvent, this.axiosRequestSource.token)
+    const newEvent = await event.create(formData, this.ajaxOptions)
+    const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(newEvent), signout)
+    let formatted = await formatFromGoogle(newGoogleEvent, this.axiosRequestSource.token, signout)
 
     if (formatted.event_employees_attributes) {
 
@@ -268,7 +300,7 @@ export default class Events extends Component {
 
     }
 
-    const evt = await event.update(newEvent.id, formatted, this.axiosRequestSource.token)
+    const evt = await event.update(newEvent.id, formatted, this.ajaxOptions)
     events.push(evt)
     events = events.sort((evtOne, evtTwo) => {
       return moment(evtOne.start).isBefore(moment(evtTwo.start))
@@ -279,10 +311,11 @@ export default class Events extends Component {
 
   deleteEvent = async(evt) => {
     const { calendarId } = this.state
+    const { signout } = this.props
     let events = [...this.state.events]
-    await event.delete(evt.id, this.axiosRequestSource.token)
+    await event.delete(evt.id, this.ajaxOptions)
     if (evt.gcId) {
-      await GOOGLE.deleteEvent(calendarId, evt.gcId, this.axiosRequestSource.token)
+      await GOOGLE.deleteEvent(calendarId, evt.gcId, this.axiosRequestSource.token, signout)
     }
     events = events.filter( e => e.id !== evt.id)
     this.setState({ events })
@@ -290,19 +323,20 @@ export default class Events extends Component {
 
   updateEvent = async(e, data) => {
     const { calendarId } = this.state
+    const { signout } = this.props
     if (e) {
       let events = [...this.state.events]
       let updatedEvent;
       if (data) {
-        updatedEvent = await event.update(e.id, data, this.axiosRequestSource.token)
+        updatedEvent = await event.update(e.id, data, this.ajaxOptions)
       } else {
         updatedEvent = e
       }
       if (e.gcId) {
-        await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent), null, this.axiosRequestSource.token)
+        await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent), null, this.axiosRequestSource.token, signout)
       } else if (this.state.calendarId) {
-        const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.axiosRequestSource.token)
-        let formatted = await formatFromGoogle(newGoogleEvent, this.axiosRequestSource.token)
+        const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.axiosRequestSource.token, signout)
+        let formatted = await formatFromGoogle(newGoogleEvent, this.axiosRequestSource.token, signout)
 
         formatted = {
           ...data,
@@ -323,7 +357,7 @@ export default class Events extends Component {
 
           formatted.event_employees_attributes = update
         }
-        updatedEvent = await event.update(e.id, formatted, this.axiosRequestSource.token)
+        updatedEvent = await event.update(e.id, formatted, this.ajaxOptions)
       }
 
       const index = events.findIndex((event) => event.id === e.id)
@@ -342,7 +376,7 @@ export default class Events extends Component {
       const updatedEvents = evts.map( async(e) => {
         if (!e.summary) {
           e.summary = eventTitle(e)
-          await event.update(e.id, {summary: e.summary}, this.axiosRequestSource.token)
+          await event.update(e.id, {summary: e.summary}, this.ajaxOptions)
         }
         const evt = await this.synchronizeWithGoogle(e)
         if (evt) {
@@ -358,17 +392,15 @@ export default class Events extends Component {
       if (evts.length < this.itemsPerPage) {
         this.setState({
           events,
-          count,
           hasMore: false,
-        })
+        }, () => count? this.setState({ count }): null)
 
       } else {
         this.setState( prevState => ({
           events,
-          count,
           hasMore: true,
           page: prevState.page + 1
-        }))
+        }), () => count? this.setState({ count }): null)
       }
 
     }
@@ -377,9 +409,9 @@ export default class Events extends Component {
   synchronizeWithGoogle = async (evt) => {
     const { calendarId } = this.state
     if (calendarId && evt.gcId) {
-      const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.axiosRequestSource.token)
-      const formatted = await formatFromGoogle(e, this.axiosRequestSource.token)
-      const synced = await event.sync(formatted, this.axiosRequestSource.token)
+      const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.ajaxOptions)
+      const formatted = await formatFromGoogle(e, this.ajaxOptions)
+      const synced = await event.sync(formatted, this.ajaxOptions)
       return synced
     }
   }
@@ -475,7 +507,7 @@ export default class Events extends Component {
   }
 
   Create = ({ match, history }) => {
-    const { accessLevel } = this.props
+    const { user: { accessLevel } } = this.props
     const isNew = match.path === `/${accessLevel}/events/new`
     return (
       <EventDetail

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Main from './components/Main/index.js'
 import Login from './components/Login/index.js'
 import { GOOGLE } from './services/google_service'
@@ -35,15 +35,15 @@ class App extends Component {
   }
 
   signout = async(cb) => {
-    this.setState({ user: { isAuthenticated: false }}, async() => await cb())
+    this.setState({ user: { isAuthenticated: false }}, async() => cb? await cb() : null)
   }
 
   setAccessLevel = async() => {
     const user = JSON.parse(localStorage.getItem('user'))
     if (user) this.setState({ user })
     else {
-      const profile = await GOOGLE.getUser(this.axiosRequestSource.token)
-      
+      const profile = await GOOGLE.getUser(this.axiosRequestSource.token, this.signout)
+
       if (profile) {
         const calendar = await this.fetchAdminCalendar(profile)
         let user = {
@@ -66,12 +66,12 @@ class App extends Component {
   }
 
   getGoogleProfile = async() => {
-    const profileObj = await GOOGLE.getUser(this.axiosRequestSource.token)
+    const profileObj = await GOOGLE.getUser(this.axiosRequestSource.token, this.signout)
     if (profileObj) return profileObj
   }
 
   findAdminCalendar = async() => {
-    const calendars = await GOOGLE.getCalendars(this.axiosRequestSource.token);
+    const calendars = await GOOGLE.getCalendars(this.axiosRequestSource.token, this.signout);
     if (calendars) {
       const jobsCalendar = calendars.find( calendar => {
         return (

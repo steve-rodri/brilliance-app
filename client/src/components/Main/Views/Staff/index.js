@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { employee } from '../../../../services/employee'
+import { employee } from '../../../../services/BEP_APIcalls.js'
 import ListPage from '../../../ListPage/index.js'
 import axios from 'axios'
 
@@ -12,6 +12,11 @@ export default class Staff extends Component {
       page: 1
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.props.signout,
+      sendCount: true
+    }
     this.itemsPerPage = 25
   }
 
@@ -32,16 +37,12 @@ export default class Staff extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    this.setStaff(nextProps)
-  }
-
   async componentDidMount() {
     const { setView, location, changeNav } = this.props
     if (location && location.state && !location.state.nav) changeNav(false)
     await setView('Workers')
     await this.setColumnHeaders()
-    await this.setStaff(this.props);
+    await this.setStaff();
   }
 
   componentWillUnmount() {
@@ -54,7 +55,7 @@ export default class Staff extends Component {
     window.addEventListener("resize", this.updateColumnHeaders);
   }
 
-  setStaff = async(props) => {
+  setStaff = async() => {
     await this.resetStaff()
     await this.fetchStaff()
   }
@@ -62,7 +63,7 @@ export default class Staff extends Component {
   fetchStaff = async() => {
     const { page, staff } = this.state
     if ((staff.length + this.itemsPerPage) / page <= this.itemsPerPage) {
-      const workers = await employee.getAll(page, this.axiosRequestSource.token)
+      const workers = await employee.getAll(page, this.ajaxOptions)
       if (workers && workers.length) await this.updateStaff(workers)
     }
   }

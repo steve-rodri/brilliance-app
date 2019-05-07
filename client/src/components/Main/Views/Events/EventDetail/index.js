@@ -5,11 +5,7 @@ import Body from './Body';
 import Modal from '../../../../Modal';
 import StaffSelector from './Body/Staff/StaffSelector'
 import { GOOGLE } from '../../../../../services/google_service';
-import { event } from '../../../../../services/event';
-import { client } from '../../../../../services/client';
-import { place } from '../../../../../services/place';
-import { eventEmployee } from '../../../../../services/eventEmployee';
-import { employee } from '../../../../../services/employee'
+import { event, client, place, eventEmployee, employee } from '../../../../../services/BEP_APIcalls.js';
 import { eventTitle } from '../../../../../helpers/eventHelpers';
 import { clientName } from '../../../../../helpers/clientHelpers';
 import { locationName } from '../../../../../helpers/locationName';
@@ -32,17 +28,21 @@ export default class EventDetail extends Component {
       redirectToEvents: false,
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.props.signout,
+      sendCount: false
+    }
     this.container = React.createRef()
     this.scrollPosition = 0
   }
 
 // ---------------------------------LifeCycle-----------------------------------
 
-  async componentWillReceiveProps(nextProps){
-    const { evt } = this.state;
-    if ( !evt && (nextProps.e || nextProps.evtId)) {
-      await this.initialSetup(nextProps)
-    }
+  async componentDidUpdate(prevProps, prevState){
+    const differentId = prevProps.evtId !== this.props.evtId
+    const differentE = prevProps.e !== this.props.e
+    if ( differentId || differentE ) await this.initialSetup()
   }
 
   async componentDidMount(){
@@ -71,21 +71,20 @@ export default class EventDetail extends Component {
 
 // ----------------------------Getters-and-Setters------------------------------
 
-  initialSetup = async(props) => {
-    await this.setEvent(props);
+  initialSetup = async() => {
+    await this.setEvent();
     await this.setClientName();
     await this.setLocationName();
-    // if (props.view) this.setView(props.view)
   }
 
   synchronizeWithGoogle = async (evt) => {
     const calendarId = localStorage.getItem('google_calendar_id');
     if (calendarId && evt.gcId) {
       try {
-        const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.axiosRequestSource.token)
+        const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.ajaxOptions)
         if (e) {
-          const formatted = await formatFromGoogle(e, this.axiosRequestSource.token)
-          const synced = await event.sync(formatted, this.axiosRequestSource.token)
+          const formatted = await formatFromGoogle(e, this.ajaxOptions)
+          const synced = await event.sync(formatted, this.ajaxOptions)
           return synced
         } else {
           return evt
@@ -99,22 +98,22 @@ export default class EventDetail extends Component {
     }
   }
 
-  setEvent = async(props) => {
-    const { e, evtId } = props
+  setEvent = async() => {
+    const { e, evtId } = this.props
     if (!e) {
-      let evt = await event.getOne(evtId, this.axiosRequestSource.token)
+      let evt = await event.get(evtId, this.ajaxOptions)
       if (evt) {
         evt = await this.synchronizeWithGoogle(evt);
         this.setState({ evt, workers: evt.staff })
+        await this.setFields();
       } else {
         this.setState({ redirectToEvents: true })
       }
     } else {
       const evt = await this.synchronizeWithGoogle(e);
       this.setState({ evt, workers: e.staff })
+      await this.setFields();
     }
-
-    await this.setFields();
   }
 
   setFields = () => {
@@ -220,7 +219,7 @@ export default class EventDetail extends Component {
 
         //delete addedWorkers
         await Promise.all(addedWorkers.map( async worker => {
-          await eventEmployee.delete(worker.id, this.axiosRequestSource.token)
+          await eventEmployee.delete(worker.id, this.ajaxOptions)
         }))
 
         //set state with original workers, and reset employee ids
@@ -632,7 +631,7 @@ export default class EventDetail extends Component {
   findClients = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const clients = await client.find(1, query, this.axiosRequestSource.token)
+      const clients = await client.find(1, query, this.ajaxOptions)
       return clients
     }
   }
@@ -640,7 +639,7 @@ export default class EventDetail extends Component {
   findPlaces = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const locations = await place.find(query, this.axiosRequestSource.token)
+      const locations = await place.find(query, this.ajaxOptions)
       return locations
     }
   }
@@ -712,12 +711,14 @@ export default class EventDetail extends Component {
 
       const evt  = { ...this.state.evt }
       const workers = [...this.state.workers]
+      const { signout } = this.props
       const newWorker = await eventEmployee.create(
         {
           event_id: evt.id,
           employee_id: employee.id
         },
-        this.axiosRequestSource.token
+        this.axiosRequestSource.token,
+        signout
       )
       workers.push(newWorker)
       evt.staff = workers
@@ -756,7 +757,7 @@ export default class EventDetail extends Component {
     const { formData } = this.state
 
     if (!this.props.isNew) {
-      await eventEmployee.delete(worker.id, this.axiosRequestSource.token)
+      await eventEmployee.delete(worker.id, this.ajaxOptions)
     }
 
     const updatedWorkers = workers.filter(w => w.id !== worker.id)
@@ -789,7 +790,7 @@ export default class EventDetail extends Component {
   }
 
   getActiveEmployees = async() => {
-    const allEmployees = await employee.getAll()
+    const allEmployees = await employee.getAll(1, this.ajaxOptions)
     const employees = allEmployees.filter(employee => employee.active)
     this.setState({ employees })
   }
@@ -892,8 +893,7 @@ export default class EventDetail extends Component {
 
   render(){
     const { editMode, mobile } = this.state
-    const { match } = this.props
-    const accessLevel = match.url.split('/')[1]
+    const { user: { accessLevel } } = this.props
     if (this.state.redirectToEvents) return (<Redirect to={`/${accessLevel}/events`}/>)
     return (
       <div className="EventDetail" ref={this.container}>

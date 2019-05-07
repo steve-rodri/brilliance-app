@@ -4,6 +4,7 @@ import Logistics from './Logistics'
 import Notes from './Notes'
 import Staff from './Staff'
 import Invoice from './Invoice'
+import Loader from '../../../../../Loader'
 import Buttons from '../../../../../Buttons/Buttons'
 import { date, time } from '../../../../../../helpers/datetime'
 import './index.css'
@@ -17,38 +18,35 @@ export default class Body extends Component {
     return (
       <div className="EventDetail-Body--container">
         <div className="EventDetail-Body--components-container">
-          <div className="EventDetail-Body--components">
-            {
-              about?
-              <About {...this.props} />
-              :
-              null
-            }
-            {
-              mobile?
-              null
-              :
-              <Logistics {...this.props}/>
-            }
-            {
-              !mobile && about?
-              <Invoice {...this.props}/>
-              :
-              null
-            }
-            {
-              about?
-              <Staff {...this.props}/>
-              :
-              null
-            }
-            {
-              editMode || (about && !isNullOrWhitespace(fields.notes))?
-              <Notes {...this.props} />
-              :
-              null
-            }
-          </div>
+          {
+            about?
+            <div className="EventDetail-Body--components">
+                <About {...this.props} />
+              {
+                mobile?
+                null
+                :
+                <Logistics {...this.props}/>
+              }
+              {
+                !mobile?
+                <Invoice {...this.props}/>
+                :
+                null
+              }
+                <Staff {...this.props}/>
+              {
+                editMode || !isNullOrWhitespace(fields.notes)?
+                <Notes {...this.props} />
+                :
+                null
+              }
+            </div>
+            :
+            <div className="EventDetail-Body--loader">
+              <Loader />
+            </div>
+          }
         </div>
 
         {

@@ -7,7 +7,7 @@ import './index.css'
 
 export default function Header(props){
 
-  const { inv, evt, isNew, editMode, accessLevel } = props
+  const { inv, evt, isNew, editMode, user: { accessLevel } } = props
   // Functions to Show Summary field based on Mode ----------------------
 
   function displaySummary(){

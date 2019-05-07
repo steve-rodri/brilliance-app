@@ -5,14 +5,12 @@ import logo_t from '../../images/logo_t.GIF'
 import axios from 'axios'
 import './index.css'
 
-
-
 export default class Login extends Component {
   state = { redirectToApp: false }
   axiosRequestSource = axios.CancelToken.source()
 
-  componentDidUpdate(prevProps){
-    this.checkLogin(prevProps)
+  componentDidMount(){
+    this.checkLogin()
   }
 
   checkLogin = (prevProps) => {

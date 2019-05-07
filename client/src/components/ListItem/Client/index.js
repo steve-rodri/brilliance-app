@@ -4,21 +4,21 @@ import moment from 'moment'
 import './index.css'
 
 export default function Client(props) {
-  const { accessLevel, item, view, numColumns, displayColumn } = props
-  const client = item.contactInfo
-  const company = item.company
+  const { user: { accessLevel }, item: client, view, numColumns, displayColumn } = props
+  const contact = client.contactInfo
+  const company = client.company
 
   return (
-    <Link to={{pathname: `/${accessLevel}/${view.toLowerCase()}/${item.id}`, state: { modal: true } }} style={{textDecoration: 'none', color: 'black'}}>
+    <Link to={{pathname: `/${accessLevel}/${view.toLowerCase()}/${client.id}`, state: { modal: true } }} style={{textDecoration: 'none', color: 'black'}}>
       {
         numColumns?
         <div className="List-Item">
 
           <div className="Client--name" style={displayColumn('name / company')}>
-            <h3>{client && client.fullName}</h3>
+            <h3>{contact && contact.fullName}</h3>
             <h4>{company && company.name}</h4>
-            {client && <p>{client.phoneNumber && `${client.phoneNumber}`}</p>}
-            {client && client.emailAddresses && client.emailAddresses.length > 0 && <a href={`mailto:${client.emailAddresses[0].address}`}>{client.emailAddresses[0].address}</a>}
+            {contact && <p>{contact.phoneNumber && `${contact.phoneNumber}`}</p>}
+            {contact && contact.emailAddresses && contact.emailAddresses.length > 0 && <a href={`mailto:${contact.emailAddresses[0].address}`}>{contact.emailAddresses[0].address}</a>}
           </div>
 
           <div className="Client--event" style={displayColumn('next event')}>
@@ -32,10 +32,10 @@ export default function Client(props) {
         <div className="List-Item">
 
           <div className="Client--name">
-            <h3>{client && client.fullName}</h3>
+            <h3>{contact && contact.fullName}</h3>
             <h4>{company && company.name}</h4>
-            {client && <p>{client.phoneNumber && `${client.phoneNumber}`}</p>}
-            {client && client.emailAddresses && client.emailAddresses.length > 0 && <a href={`mailto:${client.emailAddresses[0].address}`}>{client.emailAddresses[0].address}</a>}
+            {contact && <p>{contact.phoneNumber && `${contact.phoneNumber}`}</p>}
+            {contact && contact.emailAddresses && contact.emailAddresses.length > 0 && <a href={`mailto:${contact.emailAddresses[0].address}`}>{contact.emailAddresses[0].address}</a>}
           </div>
 
           <div className="Client--balance">$0.00</div>
@@ -46,10 +46,10 @@ export default function Client(props) {
   )
 
   function latestEvent(){
-    if (item) {
-      if (item.events) {
-        item.events.sort(event => event.start)
-        const event = item.events[0]
+    if (client) {
+      if (client.events) {
+        client.events.sort(event => event.start)
+        const event = client.events[0]
         if (event) {
           if (moment(event.start).isSameOrAfter(moment(), 'days')) {
             return (

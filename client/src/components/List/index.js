@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import ListItem from '../ListItem/index.js'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import Loader from '../Loader'
 import './index.css'
 
 export default class List extends Component {
@@ -21,21 +22,12 @@ export default class List extends Component {
           <InfiniteScroll
             dataLength={items && items.length}
             next={() => page >= 1? load() : null}
-            children={false}
+            children={true}
             hasMore={hasMore}
             loader=
             {
               <div className="List--Loader">
-                <div className="lds-ellipsis">
-                  <div>
-                  </div>
-                  <div>
-                  </div>
-                  <div>
-                  </div>
-                  <div>
-                  </div>
-                </div>
+                <Loader />
               </div>
             }
             scrollableTarget="List"

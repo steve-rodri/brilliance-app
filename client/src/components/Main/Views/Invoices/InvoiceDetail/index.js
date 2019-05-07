@@ -6,9 +6,7 @@ import Summary from './Summary'
 import Modal from '../../../../Modal/'
 import ItemSelector from './ItemSelector/'
 import Buttons from '../../../../Buttons/Buttons'
-import { invoice } from '../../../../../services/invoice'
-import { line } from '../../../../../services/line'
-import { client } from '../../../../../services/client'
+import { invoice, line, client } from '../../../../../services/BEP_APIcalls.js'
 import { quantity, price } from './Invoice/Line/Helpers'
 import { clientName } from '../../../../../helpers/clientHelpers'
 import axios from 'axios'
@@ -26,6 +24,11 @@ export default class InvoiceDetail extends Component {
     }
     this.container = React.createRef()
     this.axiosRequestSource = axios.CancelToken.source()
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.props.signout,
+      sendCount: false
+    }
   }
 
   // --------------------------------Refs---------------------------------------
@@ -36,15 +39,16 @@ export default class InvoiceDetail extends Component {
 
   // ------------------------------Lifecycle------------------------------------
 
-  async componentWillReceiveProps(nextProps){
-    const { inv } = this.state
-    if (!inv && (nextProps.inv || nextProps.invoiceId)) {
-      await this.setup(nextProps)
+  async componentDidUpdate(prevProps, prevState){
+    const { inv: prevInv, invoiceId: prevInvoiceId } = prevProps
+    const { inv, invoiceId } = this.props
+    if (prevInv !== inv || prevInvoiceId !== invoiceId) {
+      await this.setup()
     }
   }
 
   async componentDidMount(){
-    await this.setup(this.props)
+    await this.setup()
   }
 
   async componentWillUnmount(){
@@ -53,13 +57,13 @@ export default class InvoiceDetail extends Component {
 
   // -------------------------Getters-and-Setters-------------------------------
 
-  setup = async(props) => {
+  setup = async() => {
     const { isNew, evtId, evt } = this.props
     if (isNew) {
       this.setEditMode(true)
       this.setFieldAndForm('kind', 'Proposal')
     } else {
-      this.setInvoice(props)
+      this.setInvoice()
     }
     if (evtId) {
       this.setFormData('event_id', evtId)
@@ -70,13 +74,13 @@ export default class InvoiceDetail extends Component {
     }
   }
 
-  setInvoice = async(props) => {
-    const { inv, invoiceId } = props
+  setInvoice = async() => {
+    const { inv, invoiceId } = this.props
     if (inv) {
       this.setState({ inv }, () => this.setLines())
     } else {
-      const i = await invoice.get(invoiceId, this.axiosRequestSource.token)
-      this.setState({ inv: i }, () => this.setLines())
+      const inv = await invoice.get(invoiceId, this.ajaxOptions)
+      this.setState({ inv }, () => this.setLines())
     }
     await this.setClientName()
     await this.setSummary()
@@ -335,7 +339,7 @@ export default class InvoiceDetail extends Component {
     const state = {...this.state}
     let { inv, fields } = state
 
-    await line.delete(lineId, this.axiosRequestSource.token)
+    await line.delete(lineId, this.ajaxOptions)
     const updatedLines = inv.lines.filter(line => line.id !== lineId)
     inv.lines = updatedLines
     fields.lines = updatedLines
@@ -490,9 +494,10 @@ export default class InvoiceDetail extends Component {
   }
 
   findClients = async(query) => {
+    const { signout } = this.props
     const q = query.split('')
     if (q.length > 2) {
-      const clients = await client.find(1, query, this.axiosRequestSource.token)
+      const clients = await client.find(1, query, this.axiosRequestSource.token, signout)
       return clients
     }
   }
@@ -505,11 +510,11 @@ export default class InvoiceDetail extends Component {
 
   handleSubmit = async() => {
     const { inv, formData, editMode, fromEvent } = this.state
-    const { isNew, match, history, evtId, accessLevel } = this.props
+    const { isNew, match, history, evtId, user: { accessLevel }} = this.props
     if (fromEvent) {
       if (isNew) {
         if (formData) {
-          const newInvoice = await invoice.create(formData, this.axiosRequestSource.token)
+          const newInvoice = await invoice.create(formData, this.ajaxOptions)
           this.setState({ inv: newInvoice })
           await this.close(true)
         } else {
@@ -517,7 +522,7 @@ export default class InvoiceDetail extends Component {
         }
         history.push(`/${accessLevel}/events/${evtId}`, {view: 'Invoice'})
       } else {
-        const updatedInvoice = await invoice.update(inv.id, formData, this.axiosRequestSource.token)
+        const updatedInvoice = await invoice.update(inv.id, formData, this.ajaxOptions)
         await this.setState({ inv: updatedInvoice }, async() => await this.close(true))
       }
 
@@ -551,7 +556,7 @@ export default class InvoiceDetail extends Component {
     const { inv, fromEvent } = this.state
     const { handleDelete, setView } = this.props
     if (fromEvent) {
-      await invoice.delete(inv.id, this.axiosRequestSource.token)
+      await invoice.delete(inv.id, this.ajaxOptions)
       if (setView) setView('Invoice')
     } else {
       await handleDelete(inv)
@@ -622,7 +627,7 @@ export default class InvoiceDetail extends Component {
               e.stopPropagation()
               this.closeItemModal()
             }}
-            content={<ItemSelector/>}
+            content={<ItemSelector {...this.props}/>}
           />
           :
           null

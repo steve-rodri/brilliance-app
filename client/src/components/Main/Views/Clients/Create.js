@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import SearchField from '../../../SearchField/';
 import { contactName, companyName } from '../../../../helpers/clientHelpers'
-import { contact } from '../../../../services/contact'
-import { company } from '../../../../services/company'
+import { contact, company } from '../../../../services/BEP_APIcalls.js'
 import axios from 'axios'
 
 export default class Create extends Component {
@@ -14,6 +13,11 @@ export default class Create extends Component {
       searchFieldData: null
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.props.signout,
+      sendCount: false
+    }
   }
 
   componentWillUnmount(){
@@ -87,7 +91,7 @@ export default class Create extends Component {
   findContacts = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const contacts = await contact.find(query, this.axiosRequestSource.token)
+      const contacts = await contact.find(query, this.ajaxOptions)
       return contacts
     }
   }
@@ -95,7 +99,7 @@ export default class Create extends Component {
   findCompanies = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const companies = await company.find(query, this.axiosRequestSource.token)
+      const companies = await company.find(query, this.ajaxOptions)
       return companies
     }
   }
