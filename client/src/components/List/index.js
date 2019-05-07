@@ -5,7 +5,7 @@ import './index.css'
 
 export default class List extends Component {
   render(){
-    const {items, type, columnHeaders, load, hasMore } = this.props
+    const {page, items, view, columnHeaders, load, hasMore } = this.props
 
     return (
       <div id="List" className="List">
@@ -20,7 +20,8 @@ export default class List extends Component {
         }
           <InfiniteScroll
             dataLength={items && items.length}
-            next={load}
+            next={() => page >= 1? load() : null}
+            children={false}
             hasMore={hasMore}
             loader=
             {
@@ -66,7 +67,7 @@ export default class List extends Component {
     )
 
     function styleColumns(numColumns){
-      if (type === 'Schedule') {
+      if (view === 'Dashboard') {
         return {
           color: 'white',
         }

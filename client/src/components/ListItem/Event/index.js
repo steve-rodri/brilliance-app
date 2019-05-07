@@ -8,8 +8,9 @@ import './index.css';
 
 export default function Event(props){
   const {
+    accessLevel,
     item,
-    type,
+    view,
     handleStatusChange,
     displayColumn,
     numColumns,
@@ -27,9 +28,9 @@ export default function Event(props){
   const confirmationDisplay = displayColumn('confirmation')
 
   return (
-    <Link to={`/admin/${type.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
+    <Link to={`/${accessLevel}/${view.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
       {numColumns?
-        <div className="List-Item" style={styleItem(item, type)}>
+        <div className="List-Item" style={styleItem(item, view)}>
 
           {/* Title */}
           <div className="List-Item--Cell" style={{ ...leftCell, ...titleDisplay, padding: '5px' }}>

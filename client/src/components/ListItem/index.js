@@ -9,9 +9,9 @@ import { start, end, timeUntil } from '../../helpers/datetime'
 import './index.css'
 
 export default function ListItem(props){
-  const { item, type, total, index } = props
-  switch (type) {
-    case 'Schedule':
+  const { item, view, total, index } = props
+  switch (view) {
+    case 'Dashboard':
       return (
         <Schedule
           {...props}
@@ -61,9 +61,9 @@ export default function ListItem(props){
     default:
   }
 
-  function styleItem(item, type){
+  function styleItem(item, view){
     const style = {}
-    switch (type) {
+    switch (view) {
       case 'Events':
         const event = item;
         // const past = event && event.end && moment(event.end).isBefore(moment())

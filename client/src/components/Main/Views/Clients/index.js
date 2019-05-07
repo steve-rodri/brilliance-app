@@ -12,8 +12,7 @@ export default class Clients extends Component {
     super(props)
     this.state = {
       clients: null,
-      category: 'All',
-      categories: ['CATP', 'THC', 'TANS', 'CANS'],
+      category: null,
 
       hasMoreClients: true,
       hasMoreEvents: true,
@@ -49,6 +48,10 @@ export default class Clients extends Component {
 
   async componentDidMount() {
     this.updateColumnHeaders();
+    const { setView, setCategories, location, changeNav } = this.props
+    if (location && location.state && !location.state.nav) changeNav(false)
+    await setView('Clients')
+    await setCategories(['CATP', 'THC', 'TANS', 'CANS'])
     window.addEventListener("resize", this.updateColumnHeaders);
     await this.setClients(this.props, 1)
   }
@@ -295,19 +298,20 @@ export default class Clients extends Component {
   }
 
   List = ({ match, history }) => {
-    const { clients, category, categories, columnHeaders, hasMoreClients } = this.state
+    const { clients, hasMoreClients } = this.state
     return (
       <ListPage
-        title="Clients"
-        type="Clients"
-        category={category}
-        categories={categories}
-        columnHeaders={columnHeaders}
+        {...this.props}
+        {...this.state}
+
         data={clients}
+
         match={match}
         history={history}
+
         load={this.fetchClients}
         hasMore={hasMoreClients}
+
         deleteClient={this.deleteClient}
         showModal={() => this.handleModal(true)}
         refresh={this.setRefresh}

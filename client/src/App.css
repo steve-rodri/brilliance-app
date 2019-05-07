@@ -7,9 +7,9 @@
   height: 100vh;
   text-align: center;
   display: grid;
-  grid: 150px auto / auto;
+  grid: 75px auto / auto;
 
-/* Color Palette */
+  /* Color Palette */
   --dark-blue: #09639B;
   --med-dark-blue: #0071B5;
   --med-dark-blue-t: rgba(0, 113, 181, .4);
@@ -19,12 +19,6 @@
   --light-blue-t: rgba(212,241,255, .3);
   --light-gray: #DADBE0;
   --dark-gray: #222222;
-}
-
-@media(min-width: 1000px){
-  .App {
-    grid: 75px auto / auto;
-  }
 }
 
 h1, h2 {

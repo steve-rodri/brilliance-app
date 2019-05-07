@@ -5,8 +5,8 @@ export default function Bars(props){
   function styleFirst(){
     if (props.open) {
       return {
-        transform: 'translateY(17px) rotate(45deg)',
-        transition: 'all 0.5s ease',
+        transform: 'translateY(15px) rotate(45deg)',
+        transition: 'all 200ms ease',
       }
     } else {
       return {}
@@ -17,7 +17,7 @@ export default function Bars(props){
     if (props.open) {
       return {
         opacity: '0',
-        transition: 'all 0.2s ease',
+        transition: 'all 200ms ease',
       }
     } else {
       return {}
@@ -27,8 +27,8 @@ export default function Bars(props){
   function styleThird(){
     if (props.open) {
       return {
-        transform: 'translateY(-17px) rotate(-45deg)',
-        transition: 'all 0.5s ease',
+        transform: 'translateY(-15px) rotate(-45deg)',
+        transition: 'all 200ms ease',
       }
     } else {
       return {}
@@ -36,7 +36,7 @@ export default function Bars(props){
   }
 
   return (
-    <div className="Header--Bars wrapper" onClick={props.changeNav}>
+    <div className="Header--Bars wrapper" onClick={() => props.changeNav(!props.open)}>
       <div className="bars">
         <div className="first" style={styleFirst()}></div>
         <div className="second" style={styleSecond()}></div>

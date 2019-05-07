@@ -74,7 +74,7 @@ async function attendees(evt, cancelToken){
   if (evt) {
     if (evt.attendees) {
       //for each attendee, find corresponding worker/staff member by contact email
-      let e = await event.findByUID(evt.iCalUID, cancelToken)
+      let e = await event.find({iCalUID: evt.iCalUID}, cancelToken)
 
       if (e) {
         //if event has staff update staff with google attendee info

@@ -1,6 +1,5 @@
 .Dashboard {
-  height: calc(100vh - 150px);
-  width: 100vw;
+  height: 100%;
   display: grid;
   justify-items: center;
   align-items: start;
@@ -23,10 +22,6 @@
 }
 
 @media (min-width: 1000px) {
-  .Dashboard {
-    height: calc(100vh - 75px)
-  }
-
   .Dashboard--intro {
     font-size: 60px;
   }

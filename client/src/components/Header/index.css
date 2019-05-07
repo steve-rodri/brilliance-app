@@ -1,91 +1,65 @@
 header {
-  height: 150px;
-  position: sticky;
-  z-index: 10;
-  top: 0;
+  height: 100%;
   width: 100%;
+  position: sticky;
+  top: 0;
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: column;
   background: #111111;
-}
-
-.Header--fixed-space {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  height: 150px;
+  z-index: 10;
 }
 
 @media (min-width: 1000px) {
   header {
-    height: 75px;
     grid-template-columns: 170px auto 75px;
-  }
-  .Header--fixed-space {
-    height: 75px;
   }
 }
 
 /*-----------------Logo---------------- */
 .logo {
-  grid-column: 1 / span 1;
   justify-self: start;
-  width: 225px;
-  height: 55px;
-  margin: 10px;
-}
-
-@media (min-width: 1000px) {
-  .logo {
-    width: 150px;
-    height: 37px;
-  }
+  width: 150px;
+  height: 37px;
+  margin-left: 15px;
 }
 
 /*-----------------DropDown-Nav-Menu---------------- */
 .Header--drop-down {
-  overflow: hidden;
-  display: none;
-  grid-template-rows: 3fr 1fr;
+  position: fixed;
+  top: 75px;
+  height: calc(100vh - 75px);
+  display: grid;
+  grid-gap: 20px;
   align-items: center;
   justify-items: center;
-  z-index: 10;
-  height: calc(100vh - 150px);
   width: 100vw;
-  border-bottom: 1px solid var(--light-gray);
-  background: rgba(0, 0, 0, 0.95);
-  position: absolute;
+  background: #111111;
+  padding: 20px 10px;
+  overflow: hidden;
   transition: all 500ms ease;
 }
 
 .Header--nav-menu {
-  display: flex;
-  flex-direction: column;
-  grid-column: 1 / span 2;
-  justify-content: center;
+  display: grid;
+  width: 100%;
+  grid-auto-flow: column;
+  grid-gap: 15px;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 90%;
-  border-bottom: 5px solid rgba(255,255,255, .2)
+  justify-items: center;
+  justify-content: space-around;
 }
 
 .Header--nav-menu > a {
   height: 100%;
-  width: 80%;
-  font-size: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 22px;
   text-decoration: none;
   color: white;
 }
 
 .Header__bars {
   justify-self: end;
-  margin: .2em .4em;
 }
 
 .Header__bars:hover {
@@ -94,7 +68,9 @@ header {
 }
 
 .Header--Log-Out {
+  display: none;
   grid-column: 1 / span 2;
+  align-self: end;
   background: darkred;
   color: white;
   font-weight: bold;

@@ -3,50 +3,157 @@ class EventsController < ApplicationController
   @@items_per_page = 25
   @@date_start = Time.zone.today()
   @@date_end = Time.zone.today()
+  @@date_where = ''
 
   # GET /events
   def index
-
-    if params[:date_start]
+    @@date_where = ''
+    if params[:date_start] && params[:date_end]
       @@date_start = Time.zone.parse(params[:date_start])
-    end
-
-    if params[:date_end]
       @@date_end = Time.zone.parse(params[:date_end])
+      @@date_where = "events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'"
     end
 
-    if params[:category]
-      if params[:category] == 'All'
-        @events = Event
-          .where("events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'")
-          .order(start: :desc)
-          .paginate(page: params[:page], per_page: @@items_per_page)
+    if (
+        params[:category]  ||
+        params[:q]         ||
+        params[:client_id] ||
+        params[:email]     ||
+        params[:iCalUID]
+      )
 
-      elsif params[:category] == 'Production'
-        @events = Event
-          .joins("JOIN places ON places.id = events.location_id")
-          .where("events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'")
-          .where("places.installation = false")
-          .order(start: :desc)
-          .paginate(page: params[:page], per_page: @@items_per_page)
+      if params[:category]
 
-      else
-        short_name = params[:category]
-        @events = Event
-          .joins("JOIN places on places.id = events.location_id")
-          .where("events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'")
-          .where("places.short_name = '#{short_name}'")
-          .order(start: :desc)
-          .paginate(page: params[:page], per_page: @@items_per_page)
+        if params[:category] == 'Production'
+          count = Event
+            .joins("JOIN places ON places.id = events.location_id")
+            .where(@@date_where)
+            .where("places.installation = false")
+            .size
+          @events = Event
+            .joins("JOIN places ON places.id = events.location_id")
+            .where(@@date_where)
+            .where("places.installation = false")
+            .order(:start)
+            .paginate(page: params[:page], per_page: @@items_per_page)
+          render json: @events, meta: { count: count }, include: '**'
+        else
+          short_name = params[:category]
+          count = Event
+            .joins("JOIN places on places.id = events.location_id")
+            .where(@@date_where)
+            .where("places.short_name = '#{short_name}'")
+            .size
+          @events = Event
+            .joins("JOIN places on places.id = events.location_id")
+            .where(@@date_where)
+            .where("places.short_name = '#{short_name}'")
+            .order(:start)
+            .paginate(page: params[:page], per_page: @@items_per_page)
+          render json: @events, meta: { count: count }, include: '**'
+        end
+
       end
 
+      if params[:q]
+        page_num = params[:page].to_i
+        offset = ( page_num - 1 ) * @@items_per_page
+        query = "SELECT DISTINCT events.*
+        FROM events
+        LEFT OUTER JOIN clients ON clients.id = events.client_id
+        LEFT OUTER JOIN companies ON companies.id = clients.company_id
+        LEFT OUTER JOIN event_employees ON event_employees.event_id = events.id
+        LEFT OUTER JOIN employees ON employees.id = event_employees.employee_id
+        LEFT OUTER JOIN contacts clients_contacts ON clients_contacts.id = clients.contact_id
+        LEFT OUTER JOIN contacts employees_contacts ON  employees_contacts.id = employees.contact_id
+        LEFT OUTER JOIN email_addresses clients_email_addresses ON clients_email_addresses.contact_id = clients_contacts.id
+        LEFT OUTER JOIN email_addresses employees_email_addresses ON employees_email_addresses.contact_id = employees_contacts.id
+        LEFT OUTER JOIN places places_location ON places_location.id = events.location_id
+        LEFT OUTER JOIN places places_call_location ON places_call_location.id = events.call_location_id
+        WHERE "
+        terms = params[:q].split
+        terms.each do |term|
+          query += "(clients_contacts.first_name LIKE '%#{term.capitalize}%'
+          OR clients_contacts.last_name LIKE '%#{term.capitalize}%'
+          OR employees_contacts.first_name LIKE '%#{term.capitalize}%'
+          OR employees_contacts.last_name LIKE '%#{term.capitalize}%'
+          OR companies.name LIKE '%#{term.capitalize}%'
+          OR events.action LIKE '%#{term.capitalize}%'
+          OR events.kind LIKE '%#{term.capitalize}%'
+          OR events.description LIKE '%#{term.capitalize}%'
+          OR events.tags LIKE '%#{term.capitalize}%'
+          OR events.summary LIKE '%#{term.capitalize}%'
+          OR events.summary LIKE '%#{term}%'
+          OR places_location.name LIKE '%#{term.capitalize}%'
+          OR places_location.short_name LIKE '%#{term}%'
+          OR places_location.short_name LIKE '%#{term.upcase}%'
+          OR places_call_location.name LIKE '%#{term.capitalize}%'
+          OR places_call_location.short_name LIKE '%#{term}%'
+          OR places_call_location.short_name LIKE '%#{term.upcase}%'
+          OR clients_email_addresses.email_address LIKE '%#{term.downcase}%'
+          OR clients_email_addresses.email_address LIKE '%#{term}%'
+          OR employees_email_addresses.email_address LIKE '%#{term.downcase}%'
+          OR employees_email_addresses.email_address LIKE '%#{term}%')"
+
+          if terms.index(term) + 1 < terms.length
+            query += " AND "
+          end
+        end
+
+        if params[:date_start] && params[:date_end]
+          query += " AND events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'"
+        end
+        query += " ORDER BY events.start"
+        query += " OFFSET #{offset} ROWS"
+        query += " FETCH NEXT #{@@items_per_page} ROWS ONLY"
+
+        @events = Event.find_by_sql(query)
+
+        render json: @events, meta: { count: @events.size }, include: '**'
+      end
+
+      if params[:email]
+
+        email = params[:email]
+
+        count = Event
+        .joins(event_employees: [{employee: [{contact: :email_address }]}])
+        .where("email_addresses.email_address LIKE '%#{email}%'")
+        .size
+
+        @events = Event
+        .joins(event_employees: [{employee: [{contact: :email_address }]}])
+        .where("email_addresses.email_address LIKE '%#{email}%'")
+        .order(start: :desc)
+        .paginate(page: params[:page], per_page: @@items_per_page)
+
+        render json: @events, meta: {count: count }, include: '**'
+      end
+
+      if params[:iCalUID]
+        id = params[:iCalUID]
+        @event = Event.where( i_cal_UID: "#{id}").first
+        render json: @events, include: '**'
+      end
+
+      if params[:client_id]
+        id = params[:client_id]
+        @events = Event
+          .where( client_id: "#{id}" )
+          .where(@@date_where)
+          .order(:start)
+          .paginate(page: params[:page], per_page: @@items_per_page)
+
+        render json: @events, meta: {count: @events.size }, include: '**'
+      end
     else
       @events = Event
-        .where("events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'")
+        .where(@@date_where)
         .order(:start)
         .paginate(page: params[:page], per_page: @@items_per_page)
+
+      render json: @events, meta: {count: @events.size }, include: '**'
     end
-    render json: @events, include: '**'
   end
 
   # GET /events/1
@@ -108,89 +215,6 @@ class EventsController < ApplicationController
   # DELETE /events/1
   def destroy
     @event.destroy
-  end
-
-  # GET /events/find
-  def find
-
-    if params[:q]
-      page_num = params[:page].to_i
-      offset = ( page_num - 1 ) * @@items_per_page
-      query = "SELECT DISTINCT events.*
-      FROM events
-      LEFT OUTER JOIN clients ON clients.id = events.client_id
-      LEFT OUTER JOIN companies ON companies.id = clients.company_id
-      LEFT OUTER JOIN event_employees ON event_employees.event_id = events.id
-      LEFT OUTER JOIN employees ON employees.id = event_employees.employee_id
-      LEFT OUTER JOIN contacts clients_contacts ON clients_contacts.id = clients.contact_id
-      LEFT OUTER JOIN contacts employees_contacts ON  employees_contacts.id = employees.contact_id
-      LEFT OUTER JOIN email_addresses clients_email_addresses ON clients_email_addresses.contact_id = clients_contacts.id
-      LEFT OUTER JOIN email_addresses employees_email_addresses ON employees_email_addresses.contact_id = employees_contacts.id
-      LEFT OUTER JOIN places places_location ON places_location.id = events.location_id
-      LEFT OUTER JOIN places places_call_location ON places_call_location.id = events.call_location_id
-      WHERE "
-      terms = params[:q].split
-      terms.each do |term|
-        query += "(clients_contacts.first_name LIKE '%#{term.capitalize}%'
-        OR clients_contacts.last_name LIKE '%#{term.capitalize}%'
-        OR employees_contacts.first_name LIKE '%#{term.capitalize}%'
-        OR employees_contacts.last_name LIKE '%#{term.capitalize}%'
-        OR companies.name LIKE '%#{term.capitalize}%'
-        OR events.action LIKE '%#{term.capitalize}%'
-        OR events.kind LIKE '%#{term.capitalize}%'
-        OR events.description LIKE '%#{term.capitalize}%'
-        OR events.tags LIKE '%#{term.capitalize}%'
-        OR events.summary LIKE '%#{term.capitalize}%'
-        OR events.summary LIKE '%#{term}%'
-        OR places_location.name LIKE '%#{term.capitalize}%'
-        OR places_location.short_name LIKE '%#{term}%'
-        OR places_location.short_name LIKE '%#{term.upcase}%'
-        OR places_call_location.name LIKE '%#{term.capitalize}%'
-        OR places_call_location.short_name LIKE '%#{term}%'
-        OR places_call_location.short_name LIKE '%#{term.upcase}%'
-        OR clients_email_addresses.email_address LIKE '%#{term.downcase}%'
-        OR clients_email_addresses.email_address LIKE '%#{term}%'
-        OR employees_email_addresses.email_address LIKE '%#{term.downcase}%'
-        OR employees_email_addresses.email_address LIKE '%#{term}%')"
-
-        if terms.index(term) + 1 < terms.length
-          query += " AND "
-        end
-      end
-
-      query += " ORDER BY events.start DESC"
-      query += " OFFSET #{offset} ROWS"
-      query += " FETCH NEXT #{@@items_per_page} ROWS ONLY"
-
-      @events = Event.find_by_sql(query)
-
-      render json: @events, include: '**'
-    end
-
-    if params[:email]
-
-      email = params[:email]
-
-      @events = Event
-      .joins(event_employees: [{employee: [{contact: :email_address }]}])
-      .where("email_addresses.email_address LIKE '%#{email}%'")
-      .order(start: :desc)
-      .paginate(page: params[:page], per_page: @@items_per_page)
-
-      render json: @events, include: '**'
-    end
-
-    if params[:iCalUID]
-      id = params[:iCalUID]
-      @event = Event.where( i_cal_UID: "#{id}").first
-      render json: @event, include: '**'
-    end
-
-    if params[:client_id]
-      id = params[:client_id]
-      @events = Event.where( client_id: "#{id}" )
-      render json: @events, include: '**'
-    end
   end
 
   private

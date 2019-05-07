@@ -13,13 +13,13 @@ export default class Dashboard extends Component {
   }
 
   async componentDidMount(){
-    const user = await this.props.getUser()
-    this.setState({ user })
+    const { setView } = this.props
+    setView('Dashboard')
   }
 
   greeting = () => {
-    const { user } = this.state
-    const username = user? user.given_name : ''
+    const { user } = this.props
+    const username = user? user.profile.given_name : ''
 
     const currentTime = moment().format();
     const morningZ = moment().startOf('day').add(6, "hours");
@@ -42,7 +42,7 @@ export default class Dashboard extends Component {
     return (
       <div className="Dashboard">
         <h1 className="Dashboard--intro" >{this.greeting()}</h1>
-        <Schedule {...this.props} />
+        <Schedule {...this.state} {...this.props} />
 
         {/* <button onClick={this.props.syncAllEvents}>Sync</button> */}
       </div>
