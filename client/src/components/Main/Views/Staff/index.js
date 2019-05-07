@@ -37,6 +37,9 @@ export default class Staff extends Component {
   }
 
   async componentDidMount() {
+    const { setView, location, changeNav } = this.props
+    if (location && location.state && !location.state.nav) changeNav(false)
+    await setView('Workers')
     await this.setColumnHeaders()
     await this.setStaff(this.props);
   }
@@ -94,10 +97,10 @@ export default class Staff extends Component {
     const { staff } = this.state
     return (
       <ListPage
+        {...this.props}
         {...this.state}
         {...props}
         title="Staff"
-        type="Workers"
         data={staff}
         load={this.fetchStaff}
       />

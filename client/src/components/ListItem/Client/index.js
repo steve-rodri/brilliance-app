@@ -4,12 +4,12 @@ import moment from 'moment'
 import './index.css'
 
 export default function Client(props) {
-  const { item, type, numColumns, displayColumn } = props
+  const { accessLevel, item, view, numColumns, displayColumn } = props
   const client = item.contactInfo
   const company = item.company
 
   return (
-    <Link to={{pathname: `/admin/${type.toLowerCase()}/${item.id}`, state: { modal: true } }} style={{textDecoration: 'none', color: 'black'}}>
+    <Link to={{pathname: `/${accessLevel}/${view.toLowerCase()}/${item.id}`, state: { modal: true } }} style={{textDecoration: 'none', color: 'black'}}>
       {
         numColumns?
         <div className="List-Item">

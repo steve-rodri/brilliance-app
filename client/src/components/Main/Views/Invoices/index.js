@@ -17,7 +17,6 @@ export default class Invoices extends Component {
       invoices: null,
       hasMore: false,
       category: null,
-      categories: ['CATP', 'THC', 'TANS', 'CANS'],
       page: 1
     }
     this.axiosRequestSource = axios.CancelToken.source()
@@ -26,14 +25,17 @@ export default class Invoices extends Component {
 
   // ----------------------------------Lifecycle--------------------------------
 
-  async componentWillReceiveProps(nextProps){
-    await this.setInvoices(nextProps)
+  async componentDidUpdate(prevProps){
+    await this.setInvoices(prevProps)
   }
 
   async componentDidMount() {
+    const { location, changeNav } = this.props
+    if (location && location.state && !location.state.nav) changeNav(false)
+    await this.props.setView('Invoices')
+    await this.props.setCategories(['CATP', 'THC', 'TANS', 'CANS'])
     await this.setColumnHeaders()
     await this.setCurrentMonth()
-    await this.setInvoices(this.props);
   }
 
   componentWillUnmount() {
@@ -43,87 +45,114 @@ export default class Invoices extends Component {
 
   // ----------------------------------Getters-and-Setters----------------------
 
-  setInvoices = async(props) => {
-    if (props && props.location && props.location.search) {
-      await this.setByQuery(props)
-    } else {
-      await this.setByDate()
+  setInvoices = async(prevProps) => {
+    let options = {}
+    if (prevProps) {
+
+      // check for queries from url
+      const { location: prevLocation } = prevProps
+      const { location: nextLocation } = this.props
+
+      let prevQueries, nextQueries = null
+
+      if (prevLocation && prevLocation.search) prevQueries = prevLocation.search
+      if (nextLocation && nextLocation.search) nextQueries = nextLocation.search
+
+      if (nextQueries) {
+        const queries = queryString.parse(nextQueries);
+
+        if (!queries.q) options.query = null;
+        if (!queries.category) options.category = null;
+        if (!queries.client) options.client = null;
+        if (nextQueries !== prevQueries) await this.setByQuery()
+      }
+
+      // check for date change
+      const { date: prevDate } = prevProps
+      const { date: nextDate } = this.props
+      if (prevDate && nextDate) {
+        const { start: pStart, end: pEnd } = prevDate
+        const { start: nStart, end: nEnd } = nextDate
+        const prevStart = moment(pStart);
+        const prevEnd = moment(pEnd);
+        const nextStart = moment(nStart);
+        const nextEnd = moment(nEnd);
+        const startChange = !( prevStart.isSame(nextStart) )
+        const endChange = !( prevEnd.isSame(nextEnd) )
+        if ( startChange || endChange ) await this.setByDate(options)
+      }
     }
   }
 
   setByQuery = async(props) => {
-    const { category } = this.state
-    const queries = queryString.parse(props.location.search)
+    const { category, query } = this.state
+    const queries = queryString.parse(this.props.location.search);
 
     // Category-Query-----------
     if (queries.category && queries.category !== category) {
-      this.setState(
-      {
+      this.setState({
+        events: [],
         searchLabel: queries.category,
+        type: 'category',
         category: queries.category,
         query: null,
         client: null,
         page: 1
       },
-        async () => {
-        await this.resetInvoices()
-        await this.fetchInvoices()
-      })
+      async() => this.fetchInvoices())
 
     // Search-Query-----------
-    } else if (queries.q) {
-
-      this.setState(
-      {
+    } else if (queries.q && queries.q !== query) {
+      this.setState({
+        events: [],
         searchLabel: queries.q,
+        type: 'query',
         category: null,
         query: queries.q,
         client: null,
         page: 1
       },
-        async () => {
-        await this.resetInvoices()
-        await this.fetchInvoices()
-      })
+      async() => this.fetchInvoices())
 
     // Client-Query-----------
-    } else if (queries.client) {
+    } else if (queries.client && queries.client !== this.state.client) {
       const clt = await client.findById(queries.client, this.axiosRequestSource.token)
-      this.setState(
-      {
+      this.setState({
+        events: [],
         searchLabel: clientName(clt),
+        type: 'client',
         category: null,
         query: null,
         client: queries.client,
         page: 1
       },
-        async () => {
-        await this.resetInvoices()
-        await this.fetchInvoices()
-      })
+      async() => this.fetchInvoices())
     }
   }
 
-  setByDate = async() => {
-    const { date: { start: s, end: e } } = this.state
+  setByDate = async(options) => {
+    const { category, client, query } = this.state
+    const { date: { start: s, end: e }, isDay, isMonth } = this.props
     const start = moment(s);
     const end = moment(e);
-    const isDay = end.diff(start, 'days') <= 1
-    const isMonth = start.month() === end.month() && end.diff(start, 'days') <= start.daysInMonth()
     let date = `${start.format('LL')} - ${end.format('LL')}`
+    if (isDay()) date = `${start.format('LL')}`
+    if (isMonth()) date = `${start.format('MMMM YYYY')}`
+    let searchLabel = date
 
-    if (isDay) date = `${start.format('LL')}`
-    if (isMonth) date = `${start.format('MMMM YYYY')}`
+    if (options && options.category !== null && category) searchLabel = `${category} - ${date}`
+    if (options && options.client !== null && client) searchLabel = `${client} - ${date}`
+    if (options && options.query !== null && query) searchLabel = `${query} - ${date}`
 
     this.setState(
     {
-      searchLabel: date,
-      page: 1
+      events: [],
+      ...options,
+      searchLabel,
+      page: 1,
+      type: null
     },
-      async () => {
-      await this.resetInvoices()
-      await this.fetchInvoices()
-    })
+    async() => this.fetchInvoices())
   }
 
   resetInvoices = () => {
@@ -142,49 +171,45 @@ export default class Invoices extends Component {
   }
 
   setTodaysDate = (props) => {
-    const { date } = props
-    this.setState({ date })
+    const { handleDateChange } = this.props
+    handleDateChange(moment(), 'day')
   }
 
   setCurrentMonth = () => {
-    this.setState({
-      date: {
-        start: moment().startOf('month').toISOString(true),
-        end: moment().endOf('month').toISOString(true)
-      }
-    })
+    const { handleDateChange } = this.props
+    handleDateChange(moment(), 'month')
   }
 
   setMonth = (month, year) => {
-    this.setState({
-      date: {
-        start: moment(month, year).startOf('month').toISOString(true),
-        end: moment(month, year).endOf('month').toISOString(true)
-      }
-    })
+    const { handleDateChange } = this.props
+    handleDateChange(moment(month, year), 'month')
   }
 
-  setRefresh = (value, url) => {
+  refresh = (value, url) => {
     const { history } = this.props
-    this.setState({ willRefresh: value }, () => {
-      if (url) {
-        history.push(url)
-      }
+    if (value) {
+      this.resetState()
+      this.setCurrentMonth()
+      this.setByDate()
+    }
+    history.push(url)
+  }
+
+  resetState = () => {
+    this.setState({
+      searchLabel: null,
+      query: null,
+      client: null,
+      category: null,
+      type: null,
     })
   }
 
   // -----------------------------------Handle-Change---------------------------
 
-  handleDateChange = async(date, type) => {
-    let t = type;
-    if (!type) t = 'day'
-    this.setState( prevState => ({
-      date: {
-        start: moment(date).startOf(t).toISOString(true),
-        end:  moment(date).endOf(t).toISOString(true)
-      }
-    }),
-    () =>  this.setInvoices())
+  onDateChange = async(date, type) => {
+    const { handleDateChange } = this.props
+    handleDateChange(date, type, this.setInvoices)
   }
 
   changeCategory = (category) => {
@@ -195,21 +220,26 @@ export default class Invoices extends Component {
   // --------------------------------------CRUD---------------------------------
 
   fetchInvoices = async() => {
-    const { invoices, page, date: { start, end }, category, query, client } = this.state
+    const { invoices, page, category, query: q, client, type } = this.state
+    const { date: { start: date_start, end: date_end } } = this.props
+    let searchData = { page, category, q, client, date_start, date_end }
     if ((invoices.length + this.itemsPerPage) / page <= this.itemsPerPage) {
-
-      let invcs = [];
-
-      if (query) {
-        invcs = await invoice.find(page, query, this.axiosRequestSource.token)
-      } else if (client) {
-        invcs = await invoice.findByClient(page, client, this.axiosRequestSource.token)
-      } else if (category) {
-        invcs = await invoice.getAll(page, category, this.axiosRequestSource.token)
-      } else {
-        invcs = await invoice.findByDate(page, start, end, this.axiosRequestSource.token)
+      switch (type) {
+        case 'query':
+          searchData = { page, q }
+          break;
+        case 'category':
+          searchData = { page, category }
+          break;
+        case 'client':
+          searchData = { page, client }
+          break;
+        default:
+          break;
       }
-      if (invcs.length) await this.updateInvoices(invcs)
+
+      const data = await invoices.fetch(searchData, this.axiosRequestSource.token)
+      if (data && data.invoices && data.invoices.length) await this.updateInvoices(data)
 
     } else {
       this.setState({ hasMore: false })
@@ -244,7 +274,8 @@ export default class Invoices extends Component {
     return updatedInvoice
   }
 
-  updateInvoices = async(invcs) => {
+  updateInvoices = async(data) => {
+    const { invoices: invcs, meta: { count } } = data
     const { page } = this.state
     const invoices = [...this.state.invoices]
     if ((invoices.length + this.itemsPerPage) / page <= this.itemsPerPage) {
@@ -283,15 +314,18 @@ export default class Invoices extends Component {
       // const loadedInvoices = await Promise.all(updatedInvoices)
 
       invcs.forEach(i => invoices.push(i))
+
       if (invcs.length < this.itemsPerPage) {
         this.setState({
           invoices,
+          count,
           hasMore: false
         })
 
       } else {
         this.setState( prevState => ({
           invoices,
+          count,
           hasMore: true,
           page: prevState.page + 1
         }))
@@ -320,22 +354,22 @@ export default class Invoices extends Component {
   }
 
   List = ({ match, history }) => {
-    const { invoices, categories, searchLabel, columnHeaders, hasMore } = this.state
+    const { invoices, searchLabel } = this.state
     return (
       <ListPage
+        {...this.props}
         {...this.state}
-        title="Invoices"
-        type="Invoices"
-        category={searchLabel}
-        categories={categories}
-        columnHeaders={columnHeaders}
+
+        mainHeader={searchLabel}
         data={invoices}
+
         match={match}
         history={history}
-        hasMore={hasMore}
+
         load={this.fetchInvoices}
         refresh={this.setRefresh}
-        handleDateChange={this.handleDateChange}
+
+        onDateChange={this.onDateChange}
         handleMonthChange={this.setMonth}
       />
     )
@@ -343,9 +377,9 @@ export default class Invoices extends Component {
 
   Show = ({ match, location, history }) => {
     const req_id = parseInt(match.params.id)
-    const invoices = this.state.invoices
+    const { invoices } = this.state
     let inv;
-    if (invoice.length) {
+    if (invoices.length) {
       inv = invoices.find(invoice => invoice.id === req_id)
     }
     return (

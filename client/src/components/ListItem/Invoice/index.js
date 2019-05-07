@@ -7,7 +7,15 @@ import numeral from 'numeral'
 import './index.css'
 
 export default function Invoice(props){
-  const { item, type, displayColumn, numColumns, styleItem, styleCell  } = props
+  const {
+    accessLevel,
+    item,
+    view,
+    displayColumn,
+    numColumns,
+    styleItem,
+    styleCell
+  } = props
   const invoice = item;
   const { event } = invoice
 
@@ -20,9 +28,9 @@ export default function Invoice(props){
   const statusDisplay = displayColumn('status')
 
   return (
-    <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
+    <Link to={`/${accessLevel}/${view.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
       {numColumns?
-        <div className="List-Item" style={styleItem(item, type, numColumns)}>
+        <div className="List-Item" style={styleItem(item, view, numColumns)}>
 
           <div className="List-Item--Cell" style={{ ...leftCell, ...clientDateDisplay }}>
             <div className="Invoice--title">

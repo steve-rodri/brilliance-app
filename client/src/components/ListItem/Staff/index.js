@@ -4,7 +4,7 @@ import { checkIcon, timesIcon } from '../../../helpers/icons'
 import './index.css'
 
 export default function Staff(props){
-  const { item, type, displayColumn, numColumns, styleItem, styleCell  } = props
+  const { accessLevel, item, view, displayColumn, numColumns, styleItem, styleCell  } = props
   const employee = item
   const leftCell = styleCell('left', employee)
   const middleCell = styleCell('middle', employee)
@@ -32,9 +32,9 @@ export default function Staff(props){
   }
 
   return (
-    <Link to={`/admin/${type.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
+    <Link to={`/${accessLevel}/${view.toLowerCase()}/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
       {numColumns?
-        <div className="List-Item" style={styleItem(item, type, numColumns)}>
+        <div className="List-Item" style={styleItem(item, view, numColumns)}>
 
           {/* Name */}
           <div className="Staff--name" style={{ ...leftCell, ...nameDisplay }}>

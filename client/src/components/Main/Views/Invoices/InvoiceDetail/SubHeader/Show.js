@@ -33,11 +33,11 @@ export default class SubHeader extends Component {
   }
 
   event = () => {
-    const { inv } = this.props
+    const { inv, accessLevel } = this.props
     if (inv && inv.event) {
       const { event } = inv
       return (
-        <Link to={`/admin/events/${event.id}`}><div className="Show Field">View Job</div></Link>
+        <Link to={`/${accessLevel}/events/${event.id}`}><div className="Show Field">View Job</div></Link>
       )
     }
   }

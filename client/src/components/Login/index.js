@@ -5,18 +5,21 @@ import logo_t from '../../images/logo_t.GIF'
 import axios from 'axios'
 import './index.css'
 
+
+
 export default class Login extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      redirectToApp: false
-    }
-    this.axiosRequestSource = axios.CancelToken.source()
+  state = { redirectToApp: false }
+  axiosRequestSource = axios.CancelToken.source()
+
+  componentDidUpdate(prevProps){
+    this.checkLogin(prevProps)
   }
 
-  async componentDidMount(){
-    const user = await this.props.getUser()
-    if (user) this.setState({ redirectToApp: true })
+  checkLogin = (prevProps) => {
+    const { user } = this.props
+    if (user.isAuthenticated) {
+      this.setState({ redirectToApp : true });
+    }
   }
 
   async componentWillUnmount(){
@@ -24,15 +27,20 @@ export default class Login extends Component {
   }
 
   responseGoogle = (resp) => {
-    const { history } = this.props
+    const { authenticate } = this.props
     if (resp.accessToken) {
       localStorage.setItem('google_access_token',resp.accessToken)
-      history.push('/')
+      authenticate(async() => {
+        await this.setState({ redirectToApp : true });
+      });
     }
   }
 
   render(){
-    if (this.state.redirectToApp) return <Redirect to="/" />
+    let { from } = this.props.location.state || { from: { pathname: "/" } };
+    const { redirectToApp } = this.state;
+    if ( redirectToApp ) return <Redirect to={from}/>;
+
     return (
       <div className="login-page">
         <div className="login-form">

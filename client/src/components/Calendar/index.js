@@ -123,6 +123,7 @@ class Calendar extends Component {
 
   renderMonthAndYear = () => {
     const { month, year } = this.state;
+    const { changeNav, onDateChanged } = this.props;
     const monthname = Object.keys(CALENDAR_MONTHS)[
       Math.max(0, Math.min(month - 1, 11))
     ];
@@ -135,6 +136,11 @@ class Calendar extends Component {
           title="Previous Month"
         >{chevronLeftIcon('1x')}</Styled.ArrowLeft>
         <Styled.CalendarMonth
+          onClick={() => {
+            const date = moment().month(month - 1).year(year)
+            onDateChanged(date, 'month')
+            changeNav(false)
+          }}
         >
           {monthname} {year}
         </Styled.CalendarMonth>
@@ -162,9 +168,11 @@ class Calendar extends Component {
 
     const isToday = isSameDay(_date, today);
     const isCurrent = current && isSameDay(_date, current);
-    const inMonth =
-      month && year && isSameMonth(_date, new Date([year, month, 1].join("-")));
-
+    const inMonth = (
+      month &&
+      year &&
+      isSameMonth(_date, new Date([year, month, 1].join("-")))
+    );
     const onClick = this.gotoDate(_date);
 
     const props = { index, inMonth, onClick, title: _date.toDateString() };

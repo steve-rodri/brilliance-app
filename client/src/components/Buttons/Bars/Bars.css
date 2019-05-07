@@ -8,20 +8,20 @@
 .bars {
   width: 100%;
   height: 100%;
-  padding: 7px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 250ms ease;
 }
 
 .bars div {
-  height: 7px;
-  width: 90%;
+  height: 5px;
+  width: 100%;
   background-color: #eeeeee;
-  transition: all 0.5s ease;
+  transition: all 250ms ease;
 }
 
 .bars .first {

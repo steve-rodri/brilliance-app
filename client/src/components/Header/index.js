@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link, Redirect } from 'react-router-dom'
+import NavSection from '../NavSection'
 import Bars from '../Buttons/Bars/index.js'
 import logo_t from '../../images/logo_t.GIF'
 import { userCircleIcon } from '../../helpers/icons'
@@ -11,45 +12,26 @@ export default class Header extends Component {
     this.state = {
       redirectToLogin: false,
       redirectToDashboard: false,
-      displayNav: false
     }
   }
 
-  componentWillReceiveProps(nextProps){
-    const { location } = nextProps
-    this.setState({ location })
+  componentDidUpdate(prevProps){
+    const { location } = this.props
+    const { location: stateLocation } = this.state
+    if (location !== stateLocation) this.setState({ location })
   }
 
-  async componentDidMount() {
-    this.updateNav();
-    window.addEventListener("resize", this.updateNav);
-    const user = await this.props.getUser();
-    if (user) {
-      this.setState({ user })
-    }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateNav);
-  }
-
-  updateNav = (e) => {
-    if (window.innerWidth > 1000) {
-      this.setState({ displayNav: false })
-    }
-  }
-
-  logOut = () => {
+  logOut = async() => {
+    const { signout } = this.props
     localStorage.clear()
-    this.setState({
-      redirectToLogin: true
-    })
+    signout()
   }
 
   toDashboard = () => {
     const { location } = this.state
+    const { user: { accessLevel } } = this.props
     if (location) {
-      if (location.pathname !== '/admin') {
+      if (location.pathname !== `/${accessLevel}`) {
         this.setState({
           redirectToDashboard: true
         })
@@ -57,69 +39,75 @@ export default class Header extends Component {
     }
   }
 
-  changeNav = () => {
-    this.setState({
-      displayNav: !this.state.displayNav
-    })
-  }
-
-  styleNav(){
-    if (this.state.displayNav) {
-      return { display: 'grid'}
-    } else {
-      return { display: 'none'}
-    }
-  }
-
   render(){
-    const { user, redirectToLogin, redirectToDashboard } = this.state
+    const { redirectToLogin, redirectToDashboard } = this.state
+    const { user, user: { accessLevel }, mobile, view, displayNav, changeNav } = this.props
     if (redirectToLogin) return (<Redirect to="/login"/>)
     if (redirectToDashboard) return (<Redirect to="/"/>)
 
     return(
-      <div>
-        <header>
+      <header>
+        <img onClick={this.toDashboard} className="logo" src={logo_t} alt='logo'/>
+        {
+          mobile?
+          <Bars changeNav={changeNav} open={displayNav}/>
+          :
+          user?
+          <Fragment>
 
-          <img onClick={this.toDashboard} className="logo" src={logo_t} alt='logo'/>
+            {/* Nav */}
+            <nav>
+              <Link to={{pathname: `/${accessLevel}/events`, state: { nav: false }}}><h2>Jobs</h2></Link>
+              {/* <Link to={{pathname: `/${accessLevel}/clients`, state: { nav: false }}}><h2>Clients</h2></Link> */}
+              {/* <Link to={{pathname: `/${accessLevel}/invoices`, state: { nav: false }}}><h2>Invoices</h2></Link> */}
+              <Link to={{pathname: `/${accessLevel}/staff`, state: { nav: false }}}><h2>Staff</h2></Link>
+              <Link to={{pathname: `/${accessLevel}/inventory`, state: { nav: false }}}><h2>Inventory</h2></Link>
+            </nav>
 
-          <Bars changeNav={this.changeNav} open={this.state.displayNav}/>
+            {/* User Circle */}
+            <div className="user-circle" onClick={this.logOut}>
+              {
+                user?
+                <img className="user-photo" src={user.profile.picture} alt="You"/>
+                :
+                userCircleIcon('3x', { color: "var(--light-blue)" })
+              }
+            </div>
 
-          <nav>
-            <Link to='/admin/events'><h2>Jobs</h2></Link>
-            {/* <Link to='/admin/clients'><h2>Clients</h2></Link> */}
-            {/* <Link to='/admin/invoices'><h2>Invoices</h2></Link> */}
-            <Link to='/admin/staff'><h2>Staff</h2></Link>
-            <Link to='/admin/inventory'><h2>Inventory</h2></Link>
-          </nav>
+          </Fragment>
+          :
+          null
+        }
 
-          <div className="user-circle" onClick={this.logOut}>
+        {/* Hamburger Drop Down */}
+
+        {
+          displayNav?
+          <div className="Header--drop-down">
+
+            <div className="Header--nav-menu">
+              <Link to={{pathname: `/${accessLevel}/events`, state: { nav: false }}} onClick={this.changeNav}><h3>Jobs</h3></Link>
+              {/* <Link to={{pathname: `/${accessLevel}/clients`, state: { nav: false }}} onClick={this.changeNav}><h3>Clients</h3></Link> */}
+              {/* <Link to={{pathname: `/${accessLevel}/invoices`, state: { nav: false }}} onClick={this.changeNav}><h3>Invoices</h3></Link> */}
+              <Link to={{pathname: `/${accessLevel}/staff`, state: { nav: false }}} onClick={this.changeNav}><h3>Staff</h3></Link>
+              <Link to={{pathname: `/${accessLevel}/inventory`, state: { nav: false }}} onClick={this.changeNav}><h3>Inventory</h3></Link>
+            </div>
+
             {
-              user?
-              <img className="user-photo" src={user.picture} alt="You"/>
+              view !== "Dashboard"?
+              <NavSection {...this.props}/>
               :
-              userCircleIcon('3x', { color: "var(--light-blue)" })
+              null
             }
+
+            {/* <button className="Header--Log-Out" onClick={this.logOut}>Log Out</button> */}
+
           </div>
+          :
+          null
+        }
 
-        </header>
-
-
-
-        <div className="Header--drop-down" style={this.styleNav()}>
-
-          <div className="Header--nav-menu">
-            <Link to='/admin/events' onClick={this.changeNav}><h2>Jobs</h2></Link>
-            {/* <Link to='/admin/clients' onClick={this.changeNav}><h2>Clients</h2></Link> */}
-            {/* <Link to='/admin/invoices' onClick={this.changeNav}><h2>Invoices</h2></Link> */}
-            <Link to='/admin/staff' onClick={this.changeNav}><h2>Staff</h2></Link>
-            <Link to='/admin/inventory' onClick={this.changeNav}><h2>Inventory</h2></Link>
-          </div>
-
-          <button className="Header--Log-Out" onClick={this.logOut}>Log Out</button>
-
-        </div>
-
-      </div>
+      </header>
     )
   }
 }

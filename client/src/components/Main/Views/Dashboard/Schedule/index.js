@@ -18,10 +18,8 @@ export default class Schedule extends Component {
   async componentDidMount(){
     this.updateColumnHeaders();
     window.addEventListener("resize", this.updateColumnHeaders);
-    const user = await this.props.getUser()
     this.setState(
     {
-      user,
       page: 1
     },
       async () => {
@@ -53,10 +51,11 @@ export default class Schedule extends Component {
   }
 
   findAllUserEvents = async() => {
-    const { user, page } = this.state
+    const { page } = this.state
+    const { user } = this.props
     if (user) {
-      const events = await event.findByEmail(page, user.email, this.axiosRequestSource.token)
-      return events
+      const data = await event.fetch({page, email: user.profile.email}, this.axiosRequestSource.token)
+      return data.events
     }
   }
 
@@ -128,7 +127,6 @@ export default class Schedule extends Component {
             <List
               {...this.state}
               {...this.props}
-              type="Schedule"
               items={userEvents}
               load={this.findUpcomingUserEvents}
               hasMore={false}

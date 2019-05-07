@@ -7,7 +7,7 @@ import './index.css'
 
 export default function Header(props){
 
-  const { inv, evt, isNew, editMode  } = props
+  const { inv, evt, isNew, editMode, accessLevel } = props
   // Functions to Show Summary field based on Mode ----------------------
 
   function displaySummary(){
@@ -30,7 +30,12 @@ export default function Header(props){
     if (inv && inv.event) {
       const { event } = inv
       return (
-        <Link style={{textDecoration: 'none', color: "white"}} to={`/admin/events/${event.id}`}><h2>View Job</h2></Link>
+        <Link
+          style={{textDecoration: 'none', color: "white"}}
+          to={`/${accessLevel}/events/${event.id}`}
+        >
+          <h2>View Job</h2>
+        </Link>
       )
     }
   }

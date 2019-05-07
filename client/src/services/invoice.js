@@ -21,9 +21,19 @@ const invoice = {
       }
     }
   },
-  find: async function (page, query, cancelToken){
+  fetch: async function (searchData, cancelToken){
+    let url = "/api/invoices?"
+    for (const prop in searchData) {
+      if (searchData[prop]) {
+        url += `${prop}=${searchData[prop]}&`
+      }
+    }
+    const arr = url.split('')
+    arr.pop()
+    const url2 = arr.join('')
+
     try {
-      const resp = await axios.get(`/api/invoices?page=${page}&q=${query}`, { cancelToken: cancelToken })
+      const resp = await axios.get(url2, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {

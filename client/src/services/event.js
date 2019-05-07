@@ -15,61 +15,26 @@ const event = {
   getOne: async function(id, cancelToken){
     try {
       const resp = await axios.get(`/api/events/${id}`, { cancelToken: cancelToken })
-      return resp.data
+      return resp.data.event
     } catch (e) {
       if (axios.isCancel(e)) {
         console.log('Event Request Canceled')
       }
     }
   },
-  find: async function(page, query, cancelToken){
-    try {
-      const resp = await axios.get(`/api/events/find?page=${page}&q=${query}`, { cancelToken: cancelToken })
-      return resp.data
-    } catch (e) {
-      if (axios.isCancel(e)) {
-        console.log('Event Request Canceled')
+  fetch: async function(searchData, cancelToken){
+    let url = "/api/events?"
+    for (const prop in searchData) {
+      if (searchData[prop]) {
+        url += `${prop}=${searchData[prop]}&`
       }
     }
-  },
-  findByClient: async function(page, clientId, cancelToken){
+    const arr = url.split('')
+    arr.pop()
+    const url2 = arr.join('')
+
     try {
-      const resp = await axios.get(`/api/events/find?page=${page}&client_id=${clientId}`, { cancelToken: cancelToken })
-      return resp.data
-    } catch (e) {
-      if (axios.isCancel(e)) {
-        console.log('Event Request Canceled')
-      }
-    }
-  },
-  findByEmail: async function(page, email, cancelToken){
-    try {
-      const resp = await axios.get(`/api/events/find?page=${page}&email=${email}`, { cancelToken: cancelToken })
-      return resp.data
-    } catch (e) {
-      if (axios.isCancel(e)) {
-        console.log('Event Request Canceled')
-      }
-    }
-  },
-  findByUID: async function (iCalUID, cancelToken){
-    try {
-      const resp = await axios.get(`/api/events/find?iCalUID=${iCalUID}`, { cancelToken: cancelToken })
-      return resp.data
-    } catch (e) {
-      if (axios.isCancel(e)) {
-        console.log('Event Request Canceled')
-      }
-    }
-  },
-  findByDate: async function (page, dateStart, dateEnd, cancelToken){
-    try {
-      let resp;
-      if (dateEnd) {
-        resp = await axios.get(`/api/events?page=${page}&date_start=${dateStart}&date_end=${dateEnd}`, { cancelToken: cancelToken })
-      } else {
-        resp = await axios.get(`/api/events?page=${page}&date=${dateStart}`, { cancelToken: cancelToken })
-      }
+      const resp = await axios.get(url2, { cancelToken: cancelToken })
       return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {
@@ -80,7 +45,7 @@ const event = {
   createNew: async function(data, cancelToken) {
     try {
       const resp = await axios.post(`/api/events`, data, { cancelToken: cancelToken })
-      return resp.data
+      return resp.data.event
     } catch (e) {
       if (axios.isCancel(e)) {
         console.log('Event Request Canceled')
@@ -100,7 +65,7 @@ const event = {
   update: async function(id, data, cancelToken){
     try {
       const resp = await axios.put(`/api/events/${id}`, data, { cancelToken: cancelToken })
-      return resp.data
+      return resp.data.event
     } catch (e) {
       if (axios.isCancel(e)) {
         console.log('Event Request Canceled')
@@ -110,7 +75,7 @@ const event = {
   sync: async function(data, cancelToken){
     try {
       const resp = await axios.put('/api/events/sync', data, { cancelToken: cancelToken })
-      return resp.data
+      return resp.data.event
     } catch (e) {
       if (axios.isCancel(e)) {
         console.log('Event Request Canceled', e.message)

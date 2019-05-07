@@ -44,12 +44,10 @@ export default class InvoiceDetail extends Component {
   }
 
   async componentDidMount(){
-    window.addEventListener('resize', this.resetView)
     await this.setup(this.props)
   }
 
   async componentWillUnmount(){
-    window.removeEventListener('resize', this.resetView)
     this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
@@ -507,7 +505,7 @@ export default class InvoiceDetail extends Component {
 
   handleSubmit = async() => {
     const { inv, formData, editMode, fromEvent } = this.state
-    const { isNew, match, history, evtId } = this.props
+    const { isNew, match, history, evtId, accessLevel } = this.props
     if (fromEvent) {
       if (isNew) {
         if (formData) {
@@ -517,7 +515,7 @@ export default class InvoiceDetail extends Component {
         } else {
           await this.close()
         }
-        history.push(`/admin/events/${evtId}`, {view: 'Invoice'})
+        history.push(`/${accessLevel}/events/${evtId}`, {view: 'Invoice'})
       } else {
         const updatedInvoice = await invoice.update(inv.id, formData, this.axiosRequestSource.token)
         await this.setState({ inv: updatedInvoice }, async() => await this.close(true))
@@ -576,19 +574,6 @@ export default class InvoiceDetail extends Component {
 
   closeItemModal = () => {
     this.setState({ showItemModal: false })
-  }
-
-  resetView = () => {
-    const width = window.innerWidth;
-    if (width < 750) {
-      this.displayMobile(true)
-    } else {
-      this.displayMobile(false)
-    }
-  }
-
-  displayMobile = (value) => {
-    this.setState({ mobile: value })
   }
 
   render(){

@@ -8,17 +8,17 @@ export default function Schedule(props){
   const {
     user,
     item,
-    type,
+    view,
     timeUntil,
     displayColumn,
     styleItem,
-    match
+    accessLevel
   }
   = props
 
   return (
-    <Link to={`${match.path}/events/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
-      <div className="List-Item" style={styleItem(item, type)}>
+    <Link to={`${accessLevel}/events/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
+      <div className="List-Item" style={styleItem(item, view)}>
 
         <div style={displayColumn('time until')}>{item && timeUntil}</div>
 

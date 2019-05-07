@@ -21,15 +21,17 @@ export default class Search extends Component {
   }
 
   handleSubmit = (e) => {
-    const { url, refresh } = this.props
+    const { url, history } = this.props
     e.preventDefault();
-    refresh(true, `${url}?q=${this.state.query}`)
+    history.push(`${url}?q=${this.state.query}`)
+    this.setState({query: ''})
   }
 
   render(){
+    const { className } = this.props
     return(
-      <form className="search" autoComplete="off" onSubmit={this.handleSubmit}>
-        {searchIcon('1x', 'search--icon')}
+      <form className={`search ${className}`} onSubmit={this.handleSubmit}>
+        <div className="search--icon">{searchIcon('1x')}</div>
         <input
           name="query"
           type="text"

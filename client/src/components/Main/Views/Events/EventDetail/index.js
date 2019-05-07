@@ -46,8 +46,6 @@ export default class EventDetail extends Component {
   }
 
   async componentDidMount(){
-    this.resetView()
-    window.addEventListener('resize', this.resetView)
     window.addEventListener('scroll', this.resetScroll)
     window.scrollTo(0,0);
     await this.setFields();
@@ -67,7 +65,6 @@ export default class EventDetail extends Component {
   }
 
   componentWillUnmount(){
-    window.removeEventListener('resize', this.resetView)
     window.removeEventListener('scroll', this.resetScroll)
     this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
@@ -78,7 +75,7 @@ export default class EventDetail extends Component {
     await this.setEvent(props);
     await this.setClientName();
     await this.setLocationName();
-    if (props.view) this.setView(props.view)
+    // if (props.view) this.setView(props.view)
   }
 
   synchronizeWithGoogle = async (evt) => {
@@ -90,8 +87,7 @@ export default class EventDetail extends Component {
           const formatted = await formatFromGoogle(e, this.axiosRequestSource.token)
           const synced = await event.sync(formatted, this.axiosRequestSource.token)
           return synced
-        }
-        else {
+        } else {
           return evt
         }
 
@@ -105,7 +101,6 @@ export default class EventDetail extends Component {
 
   setEvent = async(props) => {
     const { e, evtId } = props
-
     if (!e) {
       let evt = await event.getOne(evtId, this.axiosRequestSource.token)
       if (evt) {
@@ -125,11 +120,9 @@ export default class EventDetail extends Component {
   setFields = () => {
     const { evt } = this.state
     const fieldNames = ['summary', 'confirmation','start', 'end', 'callTime', 'action', 'kind', 'description', 'notes', 'package']
-    if (!evt) {
-      fieldNames.forEach( field => this.setField( field, null ))
-    } else {
-      fieldNames.forEach( field => this.setField( field, evt[field] ))
-    }
+    let fields = {}
+    fieldNames.forEach( field => fields[field] = evt? evt[field] : null )
+    this.setState({ fields })
   }
 
   setField = (name, value) => {
@@ -841,15 +834,6 @@ export default class EventDetail extends Component {
 
 // -----------------------------------Views-------------------------------------
 
-  resetView = () => {
-    const width = window.innerWidth;
-    if (width < 750) {
-      this.displayMobile(true)
-    } else {
-      this.displayMobile(false)
-    }
-  }
-
   close = () => {
     this.resetForm();
     this.resetSearchFieldData();
@@ -975,17 +959,3 @@ export default class EventDetail extends Component {
     )
   }
 }
-
-
-
-
-/* {
-  this.state.mobile?
-  null
-  :
-  <div className="EventDetail--tab-control" style={this.styleTabControl()}>
-    <div className="Tab" style={this.styleTab("Basic Info")} onClick={() => this.setView("Basic Info")}><h3>MAIN</h3></div>
-    <div className="Tab" style={this.styleTab("Invoice")}    onClick={() => this.setView("Invoice")}><h3>INVOICE</h3></div>
-    <div className="Tab" style={this.styleTab("Cash Flow")}  onClick={() => this.setView("Cash Flow")}><h3>CASH FLOW</h3></div>
-  </div>
-} */

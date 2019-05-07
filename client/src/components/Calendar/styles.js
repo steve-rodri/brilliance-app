@@ -9,8 +9,8 @@ export const Arrow = styled.button`
 	cursor: pointer;
 	padding: 0;
 	border: none;
-	height: 45px;
-	width: 45px;
+	height: 50px;
+	width: 50px;
 	background: transparent;
 	color: var(--light-gray);
 	transition: all 200ms ease-out;
@@ -33,18 +33,22 @@ export const CalendarContainer = styled.div`
 	border-radius: 5px;
 	overflow: hidden;
 	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 50px auto;
 `;
 
 export const CalendarHeader = styled.div`
 	display: grid;
 	grid-auto-flow: column;
 	align-items: center;
+	height: 50px;
 	justify-content: space-evenly;
 `;
 
 export const CalendarGrid = styled.div`
   display: grid;
-  grid-template: repeat(7, auto) / repeat(7, auto);
+  grid-template: .5fr repeat(6, 1fr) / repeat(7, auto);
 `;
 
 export const CalendarMonth = styled.div`
@@ -55,12 +59,19 @@ export const CalendarMonth = styled.div`
 	text-align: center;
 	word-spacing: 5px;
 	user-select: none;
+	:hover {
+		cursor: pointer;
+	}
 `;
 
 export const CalendarCell = styled.div`
 	text-align: center;
 	align-self: center;
-	padding: 0.2em 0.2em;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	user-select: none;
   grid-column: ${props => (props.index % 7) + 1} / span 1;
 `;
@@ -70,7 +81,6 @@ export const CalendarDay = styled(CalendarCell)`
 	font-size: 2.25em;
 	font-family: 'Roboto', sans-serif;
 	color: var(--light-gray);
-	margin-bottom: 5px;
 `;
 // border-top: 2px solid var(--med-dark-blue);
 // border-bottom: 2px solid var(--med-dark-blue);

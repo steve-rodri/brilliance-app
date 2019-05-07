@@ -18,42 +18,44 @@ export default function Buttons(props) {
    } = props
 
   function editButton(){
-    return (
-      <button
-        className="Button"
-        onClick={() => {
-          edit()
-          scrollToTop()
-        }}
-      >
-        <span className="Button-text">Edit</span>
-        {pencilIcon('2x', 'Button-icon')}
-      </button>
-    )
+    if (fields && fields.summary) {
+      return (
+        <div
+          className="Button"
+          onClick={() => {
+            edit()
+            scrollToTop()
+          }}
+        >
+          <div className="Button--text"><p>Edit</p></div>
+          <div className="Button--icon">{pencilIcon()}</div>
+        </div>
+      )
+    } else return null
   }
 
   function trashCan(){
     if (evt) {
       return (
-        <button
+        <div
           className="Button Delete"
         >
-          <span className="Button-text">DELETE</span>
-          {trashIcon('2x', 'Button-icon')}
-        </button>
+          <div className="Button--text"><p>DELETE</p></div>
+          <div className="Button--icon">{trashIcon()}</div>
+        </div>
       )
     }
   }
 
   function submit(){
     return (
-      <button
+      <div
         className="Button Submit"
         onClick={handleSubmit}
       >
-        <span className="Button-text">SUBMIT</span>
-        {checkIcon('2x', 'Button-icon')}
-      </button>
+        <div className="Button--text"><p>SUBMIT</p></div>
+        <div className="Button--icon">{checkIcon()}</div>
+      </div>
     )
   }
 
@@ -69,7 +71,7 @@ export default function Buttons(props) {
           )}}
           style={styleConfirmation(fields && fields.confirmation)}
         >
-          <p>{fields && fields.confirmation}</p>
+          <div className="Button--text"><p>{fields && fields.confirmation}</p></div>
         </div>
       )
     } else {

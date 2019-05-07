@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect  } from 'react-router-dom'
+import { PrivateRoute } from '../../helpers/customRouters.js'
 import Admin from './Admin'
 import { GOOGLE } from '../../services/google_service'
 import { event } from '../../services/event'
@@ -8,7 +9,6 @@ import moment from 'moment'
 import axios from 'axios'
 
 export default class Main extends Component {
-
   constructor(props){
     super(props)
     this.state = {
@@ -17,31 +17,60 @@ export default class Main extends Component {
         end: moment().endOf('day').toISOString(true)
       }
     }
+    this.axiosRequestSource = axios.CancelToken.source()
   }
 
-  axiosRequestSource = axios.CancelToken.source()
+  // -----------------------------LifeCycle-------------------------------------
 
   async componentDidMount(){
-    await this.getGoogleCalendarId()
+    this.resetView()
+    window.addEventListener('resize', this.resize)
     // await this.synchronizeAllEvents()
   }
 
   async componentWillUnmount(){
+    window.removeEventListener('resize', this.resize)
     this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
-  getGoogleCalendarId = async() => {
-    const { getUser } = this.props
-    const user = await getUser()
-    if (user) {
-      const calendars = await GOOGLE.getCalendars(this.axiosRequestSource.token);
-      if (calendars) {
-        const jobsCalendar = calendars.find(calendar => calendar.summary = 'Jobs' && calendar.id.includes('bob@brilliancepro.com'))
-        localStorage.setItem("google_calendar_id", jobsCalendar.id)
-        return jobsCalendar.id
-      }
+  // ------------------------Getters-And-Setters--------------------------------
+
+  setCategories = (categories) => {
+    this.setState({ categories })
+  }
+
+  isDay = () => {
+    const { date } = this.state
+    const isDay = moment(date.end).diff(moment(date.start), 'days') <= 1
+    return isDay
+  }
+
+  isMonth = () => {
+    const { date: { start: s, end: e } } = this.state
+    const start = moment(s);
+    const end = moment(e);
+    const isMonth = (
+      start.month() === end.month() &&
+      start.date() === 1 &&
+      end.date() === start.daysInMonth()
+    )
+    return isMonth
+  }
+
+  handleDateChange = (date, type) => {
+    if (type) {
+      this.setState( prevState => ({
+        date: {
+          start: moment(date).startOf(type).toISOString(true),
+          end:  moment(date).endOf(type).toISOString(true)
+        }
+      }))
+      if (type === 'day') this.changeNav(false)
     }
   }
+
+
+  // -------------------------------Google--------------------------------------
 
   synchronizeAllEvents = async() => {
     const calendarId = await this.getGoogleCalendarId()
@@ -50,26 +79,57 @@ export default class Main extends Component {
     await Promise.all( evts.map( async evt => await event.sync(evt, this.axiosRequestSource.token ) ) )
   }
 
+  // ------------------------------View-----------------------------------------
+
+  displayMobile = (value) => this.setState({ mobile: value })
+
+  setView= (view) => this.setState({ view })
+
+  resetView = () => {
+    const width = window.innerWidth;
+    if (width < 750) {
+      this.displayMobile(true)
+    } else {
+      this.displayMobile(false)
+    }
+  }
+
+  updateNav = (e) => {
+    if (window.innerWidth > 1000) {
+      this.setState({ displayNav: false })
+    }
+  }
+
+  changeNav = (value) => {
+    const { mobile } = this.state
+    if (mobile) this.setState({ displayNav: value })
+  }
+
+  resize = () => {
+    this.resetView()
+    this.updateNav()
+  }
+
   render(){
     return(
       <div className="App">
         <Switch>
-
-          <Route
+          <PrivateRoute
             path="/admin"
-            render={ props =>
-              <Admin
-                {...this.state}
-                {...this.props}
-                {...props}
-                getGoogleCalendarId={this.getGoogleCalendarId}
-                syncAllEvents={this.synchronizeAllEvents}
-              />
-            }
+            component={Admin}
+            {...this.props}
+            {...this.state}
+
+            setView={this.setView}
+            setCategories={this.setCategories}
+            changeNav={this.changeNav}
+
+            handleDateChange={this.handleDateChange}
+            isMonth={this.isMonth}
+            isDay={this.isDay}
+
+            syncAllEvents={this.synchronizeAllEvents}
           />
-
-          <Redirect to="/"/>
-
         </Switch>
       </div>
     )
