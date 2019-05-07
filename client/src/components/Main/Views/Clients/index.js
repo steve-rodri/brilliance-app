@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import Modal from './Modal';
-import { client } from '../../../../services/client'
+import { client } from '../../../../services/BEP_APIcalls.js'
 import { clientName } from '../../../../helpers/clientHelpers'
 import axios from 'axios'
 
@@ -13,20 +13,17 @@ export default class Clients extends Component {
     this.state = {
       clients: null,
       category: null,
-
-      hasMoreClients: true,
-      hasMoreEvents: true,
-      events: null,
-      hasMoreInvoices: true,
-      invoices: null,
-
+      hasMore: true,
       searchFieldData: null,
       page: 1,
-
       willRefresh: true,
     }
-
     this.axiosRequestSource = axios.CancelToken.source();
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.props.signout,
+      sendCount: true
+    }
   }
 
   updateColumnHeaders = (e) => {
@@ -129,7 +126,7 @@ export default class Clients extends Component {
       clt = clients.find(c => c.id === id)
     }
     if (!clt) {
-      clt = await client.findById(id, this.axiosRequestSource.token);
+      clt = await client.findById(id, this.ajaxOptions);
     }
     return clt
   }
@@ -138,9 +135,9 @@ export default class Clients extends Component {
     const { page, category, query } = this.state
     let clients;
     if (query) {
-      clients = await client.find(page, query, this.axiosRequestSource.token)
+      clients = await client.find(page, query, this.ajaxOptions)
     } else {
-      clients = await client.getAll(page, category, this.axiosRequestSource.token)
+      clients = await client.getAll(page, category, this.ajaxOptions)
     }
     if (clients) {
       await this.updateClients(clients)
@@ -158,16 +155,10 @@ export default class Clients extends Component {
     }))
   }
 
-  fetchClientEvents = async(page, clientId) => {
-    const events = await client.getEvents(page, clientId, this.axiosRequestSource.token)
-    this.updateEvents(events)
-  }
-
   refreshClients = async() => {
     this.resetClients()
-    const clients = await client.getAll(1, "All", this.axiosRequestSource.token);
+    const clients = await client.batch(this.ajaxOptions);
     this.updateClients(clients);
-    this.setCategory('All');
   }
 
   addClient =  async(newClient) => {
@@ -187,13 +178,13 @@ export default class Clients extends Component {
   }
 
   createClient = async(data) => {
-    const clt = await client.create(data, this.axiosRequestSource.token);
+    const clt = await client.create(data, this.ajaxOptions);
     await this.addClient(clt)
     return clt;
   }
 
   deleteClient = async(id) => {
-    await client.delete(id, this.axiosRequestSource.token)
+    await client.delete(id, this.ajaxOptions)
     let clients = [...this.state.clients]
     clients = clients.filter(clt => clt.id !== id)
     this.setState({ clients })
@@ -201,7 +192,7 @@ export default class Clients extends Component {
   }
 
   updateClient = async(id, data) => {
-    let clt = await client.update(id, data, this.axiosRequestSource.token);
+    let clt = await client.update(id, data, this.ajaxOptions);
     let clients = [...this.state.clients]
     const clientId = clients.findIndex((client) => client.id === clt.id)
     clients[clientId] = clt
@@ -348,29 +339,6 @@ export default class Clients extends Component {
         prevLocation={previousLocation}
         doNotRefresh={() => this.setRefresh(false)}
         closeModal={() => this.handleModal(false)}
-      />
-    )
-  }
-
-  ListEvents = async({ match, history }) => {
-    const { clients, events, hasMoreEvents } = this.state
-    let client;
-    if (match.params.id) {
-      const req_id = parseInt(match.params.id)
-      client = clients.find(clt => clt.id === req_id)
-    }
-    return (
-      <ListPage
-        title={clientName(client)}
-        type="Events"
-        category="All"
-        columnHeaders={['title', 'location', 'confirmation', 'scheduled']}
-        data={events}
-        match={match}
-        history={history}
-        refresh={() => this.setRefresh(true)}
-        load={(page) => this.fetchClientEvents(page, client.id)}
-        hasMore={hasMoreEvents}
       />
     )
   }

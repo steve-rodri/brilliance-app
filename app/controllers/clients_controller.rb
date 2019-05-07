@@ -1,6 +1,5 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :update, :destroy]
-
   @@items_per_page = 25
   @@clients_select_query = "clients.*,
   contacts.photo,
@@ -129,110 +128,126 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
+    @@send_count = false
+    if params[:send_count]
+      @@send_count = true
+    end
+
     if params[:category]
-      if params[:category] == 'All'
+      count = 0
+      if params[:category] == 'Production'
+        if @@send_count
+          count = Client
+            .select(@@clients_select_query).distinct
+            .left_outer_joins(:contact, :company, event: :invoice)
+            .joins("JOIN places ON places.id = events.location_id")
+            .where("invoices.kind = Production Invoice OR places.installation = false")
+            .size
+        end
         @clients = Client
-          .select(@@clients_select_query)
-          .left_outer_joins(:contact, :company)
+          .select(@@clients_select_query).distinct
+          .left_outer_joins(:contact, :company, event: :invoice)
+          .joins("JOIN places ON places.id = events.location_id")
+          .where("invoices.kind = Production Invoice OR places.installation = false")
           .order('sorting_name')
           .paginate(page: params[:page], per_page: @@items_per_page)
-
-        render json: @clients, include: '**'
-
-      elsif params[:category] == 'Production'
-        production_queries = []
-        on_premise_locations = Place.where("installation = true")
-
-        on_premise_locations.each do |location|
-          id = location.as_json["id"]
-          if id
-            production_queries.push("location_id != #{id}")
-          end
-        end
-
-        query = production_queries.join(' AND ')
-        production_events = Event.where(query)
-
-        client_queries = []
-
-        production_events.each do |event|
-          id = event.as_json["client_id"]
-          if id
-            client_queries.push("clients.id = #{id}")
-          end
-        end
-
-        query = client_queries.join(' OR ')
-
-        @clients = Client
-          .select(@@clients_select_query)
-          .left_outer_joins(:contact, :company)
-          .order('sorting_name')
-          .where(query)
-          .paginate(page: params[:page], per_page: @@items_per_page)
-
-        render json: @clients, include: '**'
       else
+        short_name = params[:category]
+        if @@send_count
+          count = Client
+            .select(@@clients_select_query).distinct
+            .left_outer_joins(:contact, :company, :event)
+            .joins("JOINS places ON places.id = events.location_id")
+            .size
+        end
+        @clients = Client
+          .select(@@clients_select_query).distinct
+          .left_outer_joins(:contact, :company, :event)
+          .joins("JOINS places ON places.id = events.location_id")
+          .order('sorting_name')
+          .where("places.short_name = #{short_name}")
+          .paginate(page: params[:page], per_page: @@items_per_page)
 
-        location = Place.find_by short_name: params[:category]
-        if location
-
-          location_id = location.as_json["id"]
-
-          events = Event.where("location_id = #{location_id}")
-          puts events
-          if events.length > 0
-
-            client_queries = []
-
-            events.each do |event|
-              id = event.as_json["client_id"]
-              if id
-                client_queries.push("clients.id = #{id}")
-              end
-            end
-
-            query = client_queries.join(' OR ')
-
-            @clients = Client
-              .select(@@clients_select_query)
-              .left_outer_joins(:contact, :company)
-              .order('sorting_name')
-              .where(query)
-              .paginate(page: params[:page], per_page: @@items_per_page)
-
-            render json: @clients, include: '**'
-          else
-            render status: 404
-          end
-
+        if count
+          render json: @clients, meta:{ count: count }, include: '**'
         else
-          render status: 404
+          render json: @clients, include: '**'
+        end
+
+      end
+
+    elsif params[:q]
+      count = 0
+      page_num = params[:page].to_i
+      offset = ( page_num - 1 ) * @@items_per_page
+
+      query = "SELECT DISTINCT clients.*
+      FROM clients
+      LEFT OUTER JOIN companies ON companies.id = clients.company_id
+      LEFT OUTER JOIN contacts ON contacts.id = clients.contact_id
+      LEFT OUTER JOIN email_addresses ON email_addresses.contact_id = contacts.id
+      WHERE "
+
+      terms = params[:q].split
+      terms.each do |term|
+        query += "(contacts.first_name LIKE '%#{term.capitalize}%'
+        contacts.first_name LIKE '%#{term}%'
+        OR contacts.last_name LIKE '%#{term.capitalize}%'
+        OR contacts.last_name LIKE '%#{term}%'
+        OR companies.name LIKE '%#{term.capitalize}%'
+        OR companies.name LIKE '%#{term}%'
+        OR email_addresses.email_address LIKE '%#{term.downcase}%'
+        OR email_addresses.email_address LIKE '%#{term}%')"
+
+        if terms.index(term) + 1 < terms.length
+          query += " AND "
         end
       end
+
+      query += " #{@@date_where}"
+
+      if @@send_count
+        count = Client.find_by_sql(query).size
+      end
+
+      query += " OFFSET #{offset} ROWS"
+      query += " FETCH NEXT #{@@items_per_page} ROWS ONLY"
+
+      @clients = Client.find_by_sql(query)
+
+      if count
+        render json: @clients, meta: { count: count }, include: '**'
+      else
+        render json: @clients, include: '**'
+      end
+
     else
+      count = 0
+
+      if @@send_count
+        count = Client
+          .select(@@clients_select_query).distinct
+          .left_outer_joins(:contact, :company)
+          .size
+      end
       @clients = Client
-        .select(@@clients_select_query)
+        .select(@@clients_select_query).distinct
         .left_outer_joins(:contact, :company)
         .order('sorting_name')
         .paginate(page: params[:page], per_page: @@items_per_page)
 
-      render json: @clients, include: '**'
+      if count
+        render json: @invoices, meta: { count: count }, include: '**'
+      else
+        render json: @invoices, include: '**'
+      end
+
     end
   end
 
   # GET /clients/1
   def show
     render json: @client, include: '**'
-  end
-
-  #GET /clients/1/events
-  def events
-    @events = Event
-      .where("client_id = #{params[:id]}")
-      .paginate(page: params[:page], per_page: @@items_per_page)
-
-    render json: @events, include: '**'
   end
 
   # POST /clients
@@ -258,27 +273,6 @@ class ClientsController < ApplicationController
   # DELETE /clients/1
   def destroy
     @client.destroy
-  end
-
-  # GET /clients/find
-  def find
-    terms = params[:q].split
-
-    terms.each do |term|
-      @clients = Client
-      .select(@@clients_select_query)
-      .left_outer_joins(:contact, :company)
-      .order('sorting_name')
-      .where(
-        "contacts.first_name LIKE '%#{term.capitalize}%'
-         OR contacts.last_name LIKE '%#{term.capitalize}%'
-         OR companies.name LIKE '%#{term}%'
-         OR companies.name LIKE '%#{term.upcase}%'"
-      )
-      .paginate(page: params[:page], per_page: @@items_per_page)
-    end
-
-    render json: @clients, include: '**'
   end
 
   private

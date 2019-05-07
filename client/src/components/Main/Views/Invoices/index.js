@@ -3,8 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import InvoiceDetail from './InvoiceDetail/index.js'
-import { invoice } from '../../../../services/invoice'
-import { client } from '../../../../services/client'
+import { invoice, client } from '../../../../services/BEP_APIcalls.js'
 import { clientName } from '../../../../helpers/clientHelpers'
 // import { price } from './InvoiceDetail/Invoice/Line/Helpers'
 import axios from 'axios'
@@ -14,19 +13,31 @@ export default class Invoices extends Component {
   constructor(props){
     super(props)
     this.state = {
-      invoices: null,
+      invoices: [],
       hasMore: false,
       category: null,
       page: 1
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.props.signout,
+      sendCount: true
+    }
     this.itemsPerPage = 25
   }
 
   // ----------------------------------Lifecycle--------------------------------
 
-  async componentDidUpdate(prevProps){
+  async componentDidUpdate(prevProps, prevState){
     await this.setInvoices(prevProps)
+    if (prevState.count !== this.state.count) {
+      if (this.state.count) {
+        this.ajaxOptions.sendCount = false
+      } else {
+        this.ajaxOptions.sendCount = true
+      }
+    }
   }
 
   async componentDidMount() {
@@ -116,7 +127,7 @@ export default class Invoices extends Component {
 
     // Client-Query-----------
     } else if (queries.client && queries.client !== this.state.client) {
-      const clt = await client.findById(queries.client, this.axiosRequestSource.token)
+      const clt = await client.findById(queries.client, this.ajaxOptions)
       this.setState({
         events: [],
         searchLabel: clientName(clt),
@@ -238,7 +249,7 @@ export default class Invoices extends Component {
           break;
       }
 
-      const data = await invoices.fetch(searchData, this.axiosRequestSource.token)
+      const data = await invoice.batch(searchData, this.ajaxOptions)
       if (data && data.invoices && data.invoices.length) await this.updateInvoices(data)
 
     } else {
@@ -248,7 +259,7 @@ export default class Invoices extends Component {
 
   addInvoice = async(data) => {
     let invoices = [...this.state.invoices]
-    const newInvoice = await invoice.create(data, this.axiosRequestSource.token)
+    const newInvoice = await invoice.create(data, this.ajaxOptions)
     invoices.shift(newInvoice)
     this.setState({ invoices })
     return newInvoice
@@ -256,7 +267,7 @@ export default class Invoices extends Component {
 
   deleteInvoice = async(i) => {
     let invoices = [...this.state.invoices]
-    await invoice.delete(i.id, this.axiosRequestSource.token)
+    await invoice.delete(i.id, this.ajaxOptions)
 
     const index = invoices.findIndex((inv) => i.id === inv.id)
     invoices.splice(index, 1)
@@ -264,7 +275,7 @@ export default class Invoices extends Component {
   }
 
   updateInvoice = async(i, data) => {
-    const updatedInvoice = await invoice.update(i.id, data, this.axiosRequestSource.token)
+    const updatedInvoice = await invoice.update(i.id, data, this.ajaxOptions)
     let invoices = [...this.state.invoices]
     if (invoices.length) {
       const index = invoices.findIndex((inv) => i.id === inv.id)
@@ -277,6 +288,7 @@ export default class Invoices extends Component {
   updateInvoices = async(data) => {
     const { invoices: invcs, meta: { count } } = data
     const { page } = this.state
+    // const { signout } = this.props
     const invoices = [...this.state.invoices]
     if ((invoices.length + this.itemsPerPage) / page <= this.itemsPerPage) {
 
@@ -301,7 +313,7 @@ export default class Invoices extends Component {
       //         total: subTotal - i.discount,
       //         balance: i.paymentStatus !=='Paid In Full'? subTotal - i.discount - i.deposit : 0
       //       },
-      //       this.axiosRequestSource.token
+      //       this.ajaxOptions
       //     )
       //
       //     return updatedInvoice
@@ -344,11 +356,11 @@ export default class Invoices extends Component {
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['client & date', 'balance', 'status']
+        columnHeaders: ['type', 'client & date', 'status']
       })
     } else {
       this.setState({
-        columnHeaders: ['client & date', 'type', 'balance', 'status']
+        columnHeaders: ['type', 'client & date','', 'balance', 'status']
       })
     }
   }
@@ -367,7 +379,7 @@ export default class Invoices extends Component {
         history={history}
 
         load={this.fetchInvoices}
-        refresh={this.setRefresh}
+        refresh={this.refresh}
 
         onDateChange={this.onDateChange}
         handleMonthChange={this.setMonth}

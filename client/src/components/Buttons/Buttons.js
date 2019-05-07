@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { pencilIcon, checkIcon, trashIcon } from '../../helpers/icons'
+import { pencilIcon, checkIcon } from '../../helpers/icons'
 import { styleConfirmation, changeConfirmation } from '../../helpers/eventHelpers'
 import './Buttons.css'
 
@@ -7,7 +7,7 @@ export default function Buttons(props) {
   // Functions to Dynamically change buttons based on Mode ---------------
 
   const {
-    evt,
+    // evt,
     editMode,
     fields,
     edit,
@@ -34,18 +34,18 @@ export default function Buttons(props) {
     } else return null
   }
 
-  function trashCan(){
-    if (evt) {
-      return (
-        <div
-          className="Button Delete"
-        >
-          <div className="Button--text"><p>DELETE</p></div>
-          <div className="Button--icon">{trashIcon()}</div>
-        </div>
-      )
-    }
-  }
+  // function trashCan(){
+  //   if (evt) {
+  //     return (
+  //       <div
+  //         className="Button Delete"
+  //       >
+  //         <div className="Button--text"><p>DELETE</p></div>
+  //         <div className="Button--icon">{trashIcon()}</div>
+  //       </div>
+  //     )
+  //   }
+  // }
 
   function submit(){
     return (

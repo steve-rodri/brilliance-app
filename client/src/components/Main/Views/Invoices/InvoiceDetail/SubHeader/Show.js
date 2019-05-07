@@ -33,7 +33,7 @@ export default class SubHeader extends Component {
   }
 
   event = () => {
-    const { inv, accessLevel } = this.props
+    const { inv, user: { accessLevel } } = this.props
     if (inv && inv.event) {
       const { event } = inv
       return (

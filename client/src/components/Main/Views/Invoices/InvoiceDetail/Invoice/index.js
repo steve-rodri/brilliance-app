@@ -79,13 +79,7 @@ export default class Invoice extends Component {
   }
 
   render(){
-    const { inv, editMode, addLine } = this.props
-    let index = 0;
-    let length = 0;
-    if (inv && inv.lines) {
-      index = inv.lines.length
-      length = inv.lines.length
-    }
+    const { editMode, addLine } = this.props
     return (
       <div className="Invoice--container">
         <div className="Invoice">

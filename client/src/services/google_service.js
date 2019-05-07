@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const GOOGLE = {
-  getUser: async function(cancelToken){
+  getUser: async function(options){
+    const { cancelToken, unauthorizedCB } = options
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -14,12 +15,16 @@ const GOOGLE = {
       })
       return resp.data
     } catch (e) {
-      localStorage.clear()
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
       return null
     }
   },
 
-  getCalendars: async function (cancelToken){
+  getCalendars: async function (options){
+    const { cancelToken, unauthorizedCB } = options
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -32,12 +37,16 @@ const GOOGLE = {
       })
       return resp.data.items
     } catch (e) {
-      localStorage.clear()
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
       return null
     }
   },
 
-  getEvents: async function(calendar_id, cancelToken){
+  getEvents: async function(calendar_id, options){
+    const { cancelToken, unauthorizedCB } = options
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -50,12 +59,16 @@ const GOOGLE = {
       })
       return resp.data.items
     } catch (e) {
-      localStorage.clear()
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
       return null
     }
   },
 
-  getEvent: async function (calendarId, eventId, cancelToken) {
+  getEvent: async function (calendarId, eventId, options) {
+    const { cancelToken, unauthorizedCB } = options
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -68,19 +81,16 @@ const GOOGLE = {
       })
       return resp.data
     } catch (e) {
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
       return null
     }
   },
 
-  createEvent: async function(calendarId, data, cancelToken){
-    //required data properties
-    // start : { dateTime }
-    // end : { dateTime }
-    //optional data properties
-    // description
-    // location
-    // summary
-    // transparency
+  createEvent: async function(calendarId, data, options){
+    const { cancelToken, unauthorizedCB } = options
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -94,11 +104,16 @@ const GOOGLE = {
       })
       return resp.data;
     } catch (e) {
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
       console.log(e)
     }
   },
 
-  deleteEvent: async function(calendarId, eventId, cancelToken){
+  deleteEvent: async function(calendarId, eventId, options){
+    const { cancelToken, unauthorizedCB } = options
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -111,15 +126,19 @@ const GOOGLE = {
       })
       return resp.data;
     } catch (e) {
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
       return null
     }
   },
 
-  patchEvent: async function(calendarId, eventId, data, sendUpdates, cancelToken){
-    if (!sendUpdates) {
-      sendUpdates = 'none'
-    }
+  patchEvent: async function(calendarId, eventId, data, options){
+    let { sendUpdates, cancelToken, unauthorizedCB } = options
+    if (!sendUpdates) sendUpdates = 'none'
     const accessToken = localStorage.getItem('google_access_token');
+
     try {
       const resp = await axios({
         method: 'patch',
@@ -132,20 +151,16 @@ const GOOGLE = {
       })
       return resp.data;
     } catch (e) {
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
       console.log(e)
     }
   },
 
-  importEvents: async function(calendarId, data, cancelToken){
-    //required data properties
-    // iCalUID
-    // start : { dateTime }
-    // end : { dateTime }
-    //optional data properties
-    // description
-    // location
-    // summary
-    // transparency
+  importEvents: async function(calendarId, data, options){
+    const { cancelToken, unauthorizedCB } = options
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
@@ -159,6 +174,10 @@ const GOOGLE = {
       })
       return resp.data;
     } catch (e) {
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
       console.log(e)
     }
   }

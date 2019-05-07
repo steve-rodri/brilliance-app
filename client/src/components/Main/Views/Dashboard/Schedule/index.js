@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import List from '../../../../List/index.js'
-import { event } from '../../../../../services/event'
+import { event } from '../../../../../services/BEP_APIcalls.js'
 import { start, end } from '../../../../../helpers/datetime'
 import moment from 'moment'
 import axios from 'axios'
@@ -13,6 +13,11 @@ export default class Schedule extends Component {
       userEvents: null
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.props.signout,
+      sendCount: true
+    }
   }
 
   async componentDidMount(){
@@ -54,7 +59,7 @@ export default class Schedule extends Component {
     const { page } = this.state
     const { user } = this.props
     if (user) {
-      const data = await event.fetch({page, email: user.profile.email}, this.axiosRequestSource.token)
+      const data = await event.batch({page, email: user.profile.email}, this.ajaxOptions)
       return data.events
     }
   }

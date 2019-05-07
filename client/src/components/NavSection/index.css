@@ -104,6 +104,7 @@
 }
 
 .NavSection--button {
+  align-self: start;
   grid-area: button;
   width: 95%;
 }

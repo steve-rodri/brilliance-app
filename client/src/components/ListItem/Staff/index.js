@@ -4,7 +4,7 @@ import { checkIcon, timesIcon } from '../../../helpers/icons'
 import './index.css'
 
 export default function Staff(props){
-  const { accessLevel, item, view, displayColumn, numColumns, styleItem, styleCell  } = props
+  const { user: { accessLevel }, item, view, displayColumn, numColumns, styleItem, styleCell  } = props
   const employee = item
   const leftCell = styleCell('left', employee)
   const middleCell = styleCell('middle', employee)

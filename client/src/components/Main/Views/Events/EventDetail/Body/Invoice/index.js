@@ -4,8 +4,7 @@ import './index.css'
 
 export default class Invoice extends Component {
   view = () => {
-    const { evt, match } = this.props
-    const accessLevel = match.url.split('/')[1]
+    const { evt, match, user: { accessLevel } } = this.props
     const addNewPath = () => {
       if (match) {
         return {

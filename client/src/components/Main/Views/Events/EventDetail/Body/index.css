@@ -17,7 +17,16 @@
   display: none;
 }
 
+.EventDetail-Body--loader {
+  align-self: center;
+}
+
 @media (min-width: 750px) {
+  .EventDetail-Body--container {
+    height: 100%;
+    display: grid;
+    align-items: start;
+  }
   .EventDetail-Body--components-container {
     padding: 40px;
   }

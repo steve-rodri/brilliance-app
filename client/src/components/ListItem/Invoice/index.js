@@ -8,7 +8,7 @@ import './index.css'
 
 export default function Invoice(props){
   const {
-    accessLevel,
+    user: { accessLevel },
     item,
     view,
     displayColumn,

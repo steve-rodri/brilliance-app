@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SearchField from '../../../../../SearchField/'
 import SearchResult from './SearchResult/'
-import { item } from '../../../../../../services/item'
+import { item } from '../../../../../../services/BEP_APIcalls.js'
 import axios from 'axios'
 import './index.css'
 
@@ -13,6 +13,11 @@ export default class ItemSelector extends Component {
       items: []
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.props.signout,
+      sendCount: false
+    }
   }
 
   componentWillUnmount(){
@@ -30,7 +35,7 @@ export default class ItemSelector extends Component {
   findItems = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const items = await item.find(query, this.axiosRequestSource.token)
+      const items = await item.find(query, this.ajaxOptions)
       return items
     }
   }

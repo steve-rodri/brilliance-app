@@ -1,19 +1,16 @@
-import { contact } from '../services/contact'
-import { employee } from '../services/employee'
-import { event } from '../services/event'
+import { contact, employee, event } from '../services/BEP_APIcalls.js'
 import { start, end, time } from './datetime'
 import { locationName } from './locationName'
 import moment from 'moment'
-
 
 const spacer = '****************************************';
 
 //--------------Format FROM Google----------------------
 
-async function formatFromGoogle(evt, cancelToken){
+async function formatFromGoogle(evt, options){
   if (evt) {
-    const workers = await attendees(evt, cancelToken);
-    const eCreator = await creator(evt, cancelToken);
+    const workers = await attendees(evt, options);
+    const eCreator = await creator(evt, options);
     const confirmation = status(evt);
     const notes = description(evt)
 
@@ -59,9 +56,9 @@ async function formatFromGoogle(evt, cancelToken){
   }
 }
 
-async function creator(e, cancelToken){
+async function creator(e, options){
   if (e) {
-    const ct = await contact.findByEmail(e.creator.email, cancelToken)
+    const ct = await contact.findByEmail(e.creator.email, options)
     if (ct) {
       return ct.id
     } else {
@@ -70,11 +67,11 @@ async function creator(e, cancelToken){
   }
 }
 
-async function attendees(evt, cancelToken){
+async function attendees(evt, options){
   if (evt) {
     if (evt.attendees) {
       //for each attendee, find corresponding worker/staff member by contact email
-      let e = await event.find({iCalUID: evt.iCalUID}, cancelToken)
+      let e = await event.get(null, { ...options, iCalUID: evt.iCalUID})
 
       if (e) {
         //if event has staff update staff with google attendee info
@@ -98,7 +95,7 @@ async function attendees(evt, cancelToken){
           // else create new staff with google attendee info
         } else {
           const staff = await Promise.all(evt.attendees.map(async attendee => {
-            const worker = await employee.findByEmail(attendee.email, cancelToken)
+            const worker = await employee.findByEmail(attendee.email, options)
             if (worker) {
               worker.confirmation = attendee.responseStatus
               return worker
@@ -116,7 +113,7 @@ async function attendees(evt, cancelToken){
         }
       } else {
         const staff = await Promise.all(evt.attendees.map(async attendee => {
-          const worker = await employee.findByEmail(attendee.email, cancelToken)
+          const worker = await employee.findByEmail(attendee.email, options)
           if (worker) {
             worker.confirmation = attendee.responseStatus
             return worker
@@ -274,8 +271,6 @@ function staff(eventEmployees){
     return []
   }
 }
-
-
 
 export {
   formatToGoogle,
