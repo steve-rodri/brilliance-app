@@ -7,10 +7,10 @@
 }
 .rdtPicker {
   display: none;
-  position: fixed;
-  padding: 4px;
-  margin-top: 10px;
+  position: absolute;
+  left: 18%;
   width: 275px;
+  margin: 5px auto;
   z-index: 99999 !important;
   background: #fff;
   box-shadow: 0 0 2px 1px #999;
@@ -35,16 +35,15 @@
 }
 .rdtPicker td,
 .rdtPicker th {
+  height: 35px;
+  width: 35px;
   text-align: center;
-  font-family: 'Roboto';
 }
 .rdtPicker td {
   cursor: pointer;
 }
 
 .rdtDay {
-  height: 35px;
-  width: 35px;
   font-size: 17px;
   border-radius: 100%;
 }
@@ -128,6 +127,10 @@
   user-select: none;
 }
 
+.rdtPicker thead {
+  width: 100%;
+}
+
 .rdtPicker th.rdtDisabled,
 .rdtPicker th.rdtDisabled:hover {
   background: none;
@@ -171,15 +174,14 @@ td.rdtYear:hover {
 }
 
 .rdtCounters {
-  display: inline-block;
-}
-
-.rdtCounters > div {
-  float: left;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
 }
 
 .rdtCounter {
-  height: 100px;
+  display: grid;
+  grid-gap: 2px;
 }
 
 .rdtCounter {
@@ -191,10 +193,7 @@ td.rdtYear:hover {
 }
 
 .rdtCounter .rdtBtn {
-  height: 40%;
-  line-height: 40px;
   cursor: pointer;
-  display: block;
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -206,6 +205,10 @@ td.rdtYear:hover {
 
 .rdtCounter .rdtBtn:hover {
   background: #eee;
+}
+
+.rdtBtn {
+  padding: 5px;
 }
 
 .rdtMilli {
@@ -222,4 +225,9 @@ td.rdtYear:hover {
 
 .rdtTime td {
   cursor: default;
+}
+
+.rdtPicker > div {
+  display: grid;
+  justify-content: center;
 }
