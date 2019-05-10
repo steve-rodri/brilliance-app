@@ -2,7 +2,7 @@ import React from 'react'
 import './index.css'
 
 export default function Notes(props){
-  const { mobile, fields, editMode } = props
+  const { mobile, fields, editMode, styleComp } = props
   const view = () => {
     if (editMode) {
       return (
@@ -32,7 +32,7 @@ export default function Notes(props){
   }
 
   return (
-    <div className="EventDetail-Body--component EventDetail-Body--notes">
+    <div style={styleComp('Notes')} className="EventDetail-Body--component EventDetail-Body--notes">
       <div className="EventDetail-Body--component-title"><h3>Notes</h3></div>
       <div className="Notes--container">
         {mobile? <label>Notes</label> : null}

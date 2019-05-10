@@ -1,9 +1,9 @@
 .StaffSelector {
   width: 100%;
   display: grid;
-  align-items: center;
   justify-items: center;
-  grid-gap: 10px;
+  grid-gap: 20px;
+  padding: 20px;
 }
 
 .StaffSelector--labor, .StaffSelector--non-labor {

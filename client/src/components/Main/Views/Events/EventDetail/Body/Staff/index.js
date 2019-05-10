@@ -48,8 +48,9 @@ export default class Staff extends Component {
   }
 
   render(){
+    const { styleComp } = this.props
     return (
-      <div className="EventDetail-Body--component EventDetail-Body--staff">
+      <div style={styleComp('Staff')}className="EventDetail-Body--component EventDetail-Body--staff">
         <div className="EventDetail-Body--component-title"><h3>Staff</h3></div>
           {this.view()}
       </div>
