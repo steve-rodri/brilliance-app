@@ -1,5 +1,7 @@
 .EventDetail {
   background-color: var(--dark-gray);
+  display: grid;
+  grid: 75px auto / auto;
 }
 
 /* ------------------Tab-Control--------------------- */
@@ -33,8 +35,6 @@
 @media (min-width: 750px) {
   .EventDetail {
     background-color: var(--med-dark-blue);
-    display: grid;
-    grid: 75px auto / auto;
   }
 
   .EventDetail--tab-control {
