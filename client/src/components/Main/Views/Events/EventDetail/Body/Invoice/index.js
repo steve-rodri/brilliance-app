@@ -34,8 +34,9 @@ export default class Invoice extends Component {
   }
 
   render(){
+    const { styleComp } = this.props
     return (
-      <div className="EventDetail-Body--component EventDetail-Body--invoice">
+      <div style={styleComp('Invoice')} className="EventDetail-Body--component EventDetail-Body--invoice">
         <div className="EventDetail-Body--component-title"><h3>Invoice</h3></div>
           <div className="Event-Invoice--container">
             <div className="Event-Invoice">
