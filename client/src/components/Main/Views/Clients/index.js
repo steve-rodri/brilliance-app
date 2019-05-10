@@ -126,21 +126,21 @@ export default class Clients extends Component {
       clt = clients.find(c => c.id === id)
     }
     if (!clt) {
-      clt = await client.findById(id, this.ajaxOptions);
+      clt = await client.get(id, this.ajaxOptions);
     }
     return clt
   }
 
   fetchClients = async() => {
     const { page, category, query } = this.state
-    let clients;
+    let data;
     if (query) {
-      clients = await client.find(page, query, this.ajaxOptions)
+      data = await client.batch({ page, q:query }, this.ajaxOptions)
     } else {
-      clients = await client.getAll(page, category, this.ajaxOptions)
+      data = await client.batch({ page, category }, this.ajaxOptions)
     }
-    if (clients) {
-      await this.updateClients(clients)
+    if (data) {
+      await this.updateClients(data)
       await this.incrementPage()
     }
   }
@@ -157,8 +157,8 @@ export default class Clients extends Component {
 
   refreshClients = async() => {
     this.resetClients()
-    const clients = await client.batch(this.ajaxOptions);
-    this.updateClients(clients);
+    const data = await client.batch(null ,this.ajaxOptions);
+    this.updateClients(data);
   }
 
   addClient =  async(newClient) => {
@@ -200,8 +200,9 @@ export default class Clients extends Component {
     this.refreshClients()
   }
 
-  updateClients = (clts) => {
+  updateClients = (data) => {
     const { match } = this.props
+    const { clients: clts, meta: { count }} = data
 
     if (clts && clts.length) {
 
@@ -213,7 +214,8 @@ export default class Clients extends Component {
         if (clts.length === 1) {
           this.setState({
             clients,
-            hasMoreClients: false
+            hasMore: false,
+            count
           },() => {
             this.setRefresh(false, `${match.url}/${clients[0].id}` )
             this.handleModal(true)
@@ -221,14 +223,16 @@ export default class Clients extends Component {
         } else {
           this.setState({
             clients,
-            hasMoreClients: false
+            hasMore: false,
+            count
           })
         }
 
       } else {
         this.setState({
           clients,
-          hasMoreClients: true
+          count,
+          hasMore: true
         })
       }
 

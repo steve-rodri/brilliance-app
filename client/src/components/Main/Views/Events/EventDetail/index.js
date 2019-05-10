@@ -60,7 +60,7 @@ export default class EventDetail extends Component {
         this.handleDateChange('start', moment().startOf('hour').format())
       }
     } else {
-      await this.initialSetup(this.props)
+      await this.initialSetup()
     }
   }
 
@@ -631,16 +631,16 @@ export default class EventDetail extends Component {
   findClients = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const clients = await client.find(1, query, this.ajaxOptions)
-      return clients
+      const data = await client.batch({page: 1, q:query }, this.ajaxOptions)
+      return data.clients
     }
   }
 
   findPlaces = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const locations = await place.find(query, this.ajaxOptions)
-      return locations
+      const places = await place.find(query, this.ajaxOptions)
+      return places
     }
   }
 
@@ -798,18 +798,12 @@ export default class EventDetail extends Component {
 // ----------------------------------DB-CRUD------------------------------------
 
   handleSubmit = async() => {
-    const { evt, formData, editMode } = this.state
-    const { isNew, match, history } = this.props
+    const { evt, formData } = this.state
+    const { isNew, history, user: { accessLevel } } = this.props
     if (isNew) {
       if (formData) {
         const newEvt = await this.props.handleCreate(formData);
-        const url = () => {
-          let words = `${match.path}`.split('/')
-          words.pop()
-          const link = words.join('/')
-          return link
-        }
-        history.push(`${url()}/${newEvt.id}`)
+        history.push(`${accessLevel}/events/${newEvt.id}`)
       } else {
         this.close()
       }
@@ -817,13 +811,7 @@ export default class EventDetail extends Component {
       const updatedEvent = await this.props.handleUpdate(evt, formData)
       await this.setState({ evt: updatedEvent })
 
-      await this.resetForm()
-      await this.setClientName();
-      await this.setFields();
-    }
-
-    if (editMode) {
-      this.switchEditMode()
+      await this.close()
     }
   }
 
@@ -835,14 +823,12 @@ export default class EventDetail extends Component {
 
 // -----------------------------------Views-------------------------------------
 
-  close = () => {
+  close = async() => {
     this.resetForm();
     this.resetSearchFieldData();
     this.resetStaff();
     this.switchEditMode();
-    this.setFields();
-    this.setClientName();
-    this.setLocationName();
+    await this.initialSetup()
   }
 
   switchEditMode = () => {

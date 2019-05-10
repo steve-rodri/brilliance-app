@@ -150,7 +150,7 @@ export default class Events extends Component {
 
     // Client-Query-----------
     } else if (queries.client && queries.client !== this.state.client) {
-      const clt = await client.findById(queries.client, this.ajaxOptions)
+      const clt = await client.get(queries.client, this.ajaxOptions)
       this.ajaxOptions.sendCount = true
       this.setState({
         events: [],
@@ -274,11 +274,10 @@ export default class Events extends Component {
 
   addEvent = async(formData) => {
     const { calendarId } = this.state
-    const { signout } = this.props
     let events = [...this.state.events]
     const newEvent = await event.create(formData, this.ajaxOptions)
-    const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(newEvent), signout)
-    let formatted = await formatFromGoogle(newGoogleEvent, this.axiosRequestSource.token, signout)
+    const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(newEvent), this.ajaxOptions)
+    let formatted = await formatFromGoogle(newGoogleEvent, this.ajaxOptions)
 
     if (formatted.event_employees_attributes) {
 
@@ -311,11 +310,10 @@ export default class Events extends Component {
 
   deleteEvent = async(evt) => {
     const { calendarId } = this.state
-    const { signout } = this.props
     let events = [...this.state.events]
     await event.delete(evt.id, this.ajaxOptions)
     if (evt.gcId) {
-      await GOOGLE.deleteEvent(calendarId, evt.gcId, this.axiosRequestSource.token, signout)
+      await GOOGLE.deleteEvent(calendarId, evt.gcId, this.ajaxOptions)
     }
     events = events.filter( e => e.id !== evt.id)
     this.setState({ events })
@@ -333,9 +331,9 @@ export default class Events extends Component {
         updatedEvent = e
       }
       if (e.gcId) {
-        await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent), null, this.axiosRequestSource.token, signout)
+        await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent), this.ajaxOptions)
       } else if (this.state.calendarId) {
-        const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.axiosRequestSource.token, signout)
+        const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.ajaxOptions)
         let formatted = await formatFromGoogle(newGoogleEvent, this.axiosRequestSource.token, signout)
 
         formatted = {
