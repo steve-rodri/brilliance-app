@@ -128,6 +128,12 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
+    @@date_where = nil
+    if params[:date_start] && params[:date_end]
+      @@date_start = Time.zone.parse(params[:date_start])
+      @@date_end = Time.zone.parse(params[:date_end])
+      @@date_where = "events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'"
+    end
     @@send_count = false
     if params[:send_count]
       @@send_count = true
@@ -191,7 +197,7 @@ class ClientsController < ApplicationController
       terms = params[:q].split
       terms.each do |term|
         query += "(contacts.first_name LIKE '%#{term.capitalize}%'
-        contacts.first_name LIKE '%#{term}%'
+        OR contacts.first_name LIKE '%#{term}%'
         OR contacts.last_name LIKE '%#{term.capitalize}%'
         OR contacts.last_name LIKE '%#{term}%'
         OR companies.name LIKE '%#{term.capitalize}%'
@@ -216,9 +222,9 @@ class ClientsController < ApplicationController
       @clients = Client.find_by_sql(query)
 
       if count
-        render json: @clients, meta: { count: count }, include: '**'
+        render json: @clients, root:"clients", meta: { count: count }, include: '**'
       else
-        render json: @clients, include: '**'
+        render json: @clients, root: "clients", include: '**'
       end
 
     else
