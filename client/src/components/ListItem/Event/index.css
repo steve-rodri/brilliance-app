@@ -41,3 +41,14 @@
   grid-column: 2 / span 1;
   grid-row: 2 / span 1;
 }
+
+
+.Event--next-event-triangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: 5px solid transparent;
+  border-top-color: red;
+  border-left-color: red;
+}
