@@ -10,8 +10,36 @@ import { date, time } from '../../../../../../helpers/datetime'
 import './index.css'
 
 export default class Body extends Component {
+
+  styleComp = (name) => {
+    const { editMode } = this.props
+    let style = {}
+    if (editMode) {
+      switch (name) {
+        case 'About':
+          style.gridRow = 'span 2'
+          break;
+        case 'Logistics':
+          style.gridRow = 'span 2'
+          break;
+        case 'Notes':
+          style.gridRow = 'span 2'
+          break;
+        case 'Staff':
+
+          break;
+        case 'Invoice':
+
+          break;
+        default:
+          break;
+      }
+    }
+    return style;
+  }
+
   render(){
-    const { mobile, editMode, fields } = this.props;
+    const { mobile, editMode, fields, isNew } = this.props;
     const about = fields &&
     (fields.client || fields.location || date(fields) || time(fields));
 
@@ -21,23 +49,23 @@ export default class Body extends Component {
           {
             about?
             <div className="EventDetail-Body--components">
-                <About {...this.props} />
+                <About {...this.props} styleComp={this.styleComp}/>
               {
                 mobile?
                 null
                 :
-                <Logistics {...this.props}/>
+                <Logistics {...this.props} styleComp={this.styleComp}/>
               }
               {
-                !mobile?
-                <Invoice {...this.props}/>
+                !mobile && !isNew?
+                <Invoice {...this.props} styleComp={this.styleComp}/>
                 :
                 null
               }
-                <Staff {...this.props}/>
+                <Staff {...this.props} styleComp={this.styleComp}/>
               {
                 editMode || !isNullOrWhitespace(fields.notes)?
-                <Notes {...this.props} />
+                <Notes {...this.props} styleComp={this.styleComp}/>
                 :
                 null
               }
