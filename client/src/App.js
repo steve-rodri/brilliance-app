@@ -18,6 +18,10 @@ class App extends Component {
         }
     }
     this.axiosRequestSource = axios.CancelToken.source()
+    this.ajaxOptions = {
+      cancelToken: this.axiosRequestSource.token,
+      unauthorizedCB: this.signout
+    }
   }
 
   async componentDidMount(){
@@ -42,7 +46,7 @@ class App extends Component {
     const user = JSON.parse(localStorage.getItem('user'))
     if (user) this.setState({ user })
     else {
-      const profile = await GOOGLE.getUser(this.axiosRequestSource.token, this.signout)
+      const profile = await GOOGLE.getUser(this.ajaxOptions)
 
       if (profile) {
         const calendar = await this.fetchAdminCalendar(profile)
@@ -66,12 +70,12 @@ class App extends Component {
   }
 
   getGoogleProfile = async() => {
-    const profileObj = await GOOGLE.getUser(this.axiosRequestSource.token, this.signout)
+    const profileObj = await GOOGLE.getUser(this.ajaxOptions)
     if (profileObj) return profileObj
   }
 
   findAdminCalendar = async() => {
-    const calendars = await GOOGLE.getCalendars(this.axiosRequestSource.token, this.signout);
+    const calendars = await GOOGLE.getCalendars(this.ajaxOptions);
     if (calendars) {
       const jobsCalendar = calendars.find( calendar => {
         return (

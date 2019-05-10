@@ -127,7 +127,7 @@ export default class Invoices extends Component {
 
     // Client-Query-----------
     } else if (queries.client && queries.client !== this.state.client) {
-      const clt = await client.findById(queries.client, this.ajaxOptions)
+      const clt = await client.get(queries.client, this.ajaxOptions)
       this.setState({
         events: [],
         searchLabel: clientName(clt),

@@ -494,11 +494,10 @@ export default class InvoiceDetail extends Component {
   }
 
   findClients = async(query) => {
-    const { signout } = this.props
     const q = query.split('')
     if (q.length > 2) {
-      const clients = await client.find(1, query, this.axiosRequestSource.token, signout)
-      return clients
+      const data = await client.batch({ page: 1, q: query }, this.ajaxOptions)
+      return data.clients
     }
   }
 
