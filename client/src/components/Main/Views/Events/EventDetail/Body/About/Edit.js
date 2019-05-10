@@ -15,8 +15,8 @@ export default class Edit extends Component {
             {...this.props}
             searchResults={searchFieldData && searchFieldData.clients}
             formClassName='Edit--Field'
-            resultClassName='Edit--search-result'
             resultsClassName='Edit--results'
+            resultClassName='Edit--result'
             formDataValue={this.props.formData && this.props.formData.client_id}
             formatResult={clientName}
             input={{
@@ -36,8 +36,8 @@ export default class Edit extends Component {
             {...this.props}
             searchResults={searchFieldData && searchFieldData.locations}
             formClassName='Edit--Field'
-            resultClassName='Edit--search-result'
             resultsClassName='Edit--results'
+            resultClassName='Edit--result'
             formDataValue={this.props.formData && this.props.formData.location_id}
             formatResult={locationName}
             input={{
@@ -50,19 +50,6 @@ export default class Edit extends Component {
             onEnter={this.props.onEnter}
             onSelect={this.props.onSelect}
           />
-
-        <label>Action</label>
-
-          <div className="Edit--Field">
-            <input
-              className="Input"
-              type="text"
-              name='action'
-              value={fields.action? fields.action : ''}
-              onChange={this.props.handleChange}
-              tabIndex="5"
-            />
-          </div>
 
         <label>Kind</label>
 
@@ -89,6 +76,31 @@ export default class Edit extends Component {
               tabIndex="8"
             />
           </div>
+
+        <label>Action</label>
+
+          <select
+            className="Edit--Field"
+            name="action"
+            value={fields.action? fields.action : ''}
+            onChange={this.props.handleChange}
+            tabIndex="5"
+          >
+            <option></option>
+            <option>Dial in Color</option>
+            <option>Drive</option>
+            <option>Drop Off</option>
+            <option>Load In</option>
+            <option>Load Out</option>
+            <option>Load Truck</option>
+            <option>Pick Up</option>
+            <option>Rent Truck</option>
+            <option>Return</option>
+            <option>Run Montage</option>
+            <option>Setup</option>
+            <option>Site Check</option>
+            <option>Strike</option>
+          </select>
 
       </div>
     )
