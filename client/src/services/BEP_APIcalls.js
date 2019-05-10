@@ -26,17 +26,22 @@ export const event = {
 
     const url = () => {
       let base = "/api/events?"
-      for (const prop in params) {
-        if (params[prop]) {
-          base += `${prop}=${params[prop]}&`
+      if (params) {
+        for (const prop in params) {
+          if (params[prop]) {
+            base += `${prop}=${params[prop]}&`
+          }
         }
-      }
-      const arr = base.split('')
-      arr.pop()
-      let url = arr.join('')
+        const arr = base.split('')
+        arr.pop()
+        let url = arr.join('')
 
-      if (sendCount) url += `&send_count=true`
-      return url
+        if (sendCount) url += `&send_count=true`
+        return url
+      } else {
+        if (sendCount) base += `send_count=true`
+        return base
+      }
     }
 
     try {
@@ -130,22 +135,27 @@ export const client = {
       }
     }
   },
-  batch: async function(options){
-    const { searchData, sendCount, cancelToken, unauthorizedCB } = options
+  batch: async function(params, options){
+    const { sendCount, cancelToken, unauthorizedCB } = options
 
     const url = () => {
-      let base = "/api/events?"
-      for (const prop in searchData) {
-        if (searchData[prop]) {
-          base += `${prop}=${searchData[prop]}&`
+      let base = "/api/clients?"
+      if (params) {
+        for (const prop in params) {
+          if (params[prop]) {
+            base += `${prop}=${params[prop]}&`
+          }
         }
-      }
-      const arr = base.split('')
-      arr.pop()
-      let url = arr.join('')
+        const arr = base.split('')
+        arr.pop()
+        let url = arr.join('')
 
-      if (sendCount) url += `&send_count=true`
-      return url
+        if (sendCount) url += `&send_count=true`
+        return url
+      } else {
+        if (sendCount) base += `send_count=true`
+        return base
+      }
     }
 
     try {
@@ -224,22 +234,27 @@ export const invoice = {
       }
     }
   },
-  batch: async function(options){
-    const { searchData, sendCount, cancelToken, unauthorizedCB } = options
+  batch: async function(params, options){
+    const { sendCount, cancelToken, unauthorizedCB } = options
 
     const url = () => {
       let base = "/api/invoices?"
-      for (const prop in searchData) {
-        if (searchData[prop]) {
-          base += `${prop}=${searchData[prop]}&`
+      if (params) {
+        for (const prop in params) {
+          if (params[prop]) {
+            base += `${prop}=${params[prop]}&`
+          }
         }
-      }
-      const arr = base.split('')
-      arr.pop()
-      let url = arr.join('')
+        const arr = base.split('')
+        arr.pop()
+        let url = arr.join('')
 
-      if (sendCount) url += `&send_count=true`
-      return url
+        if (sendCount) url += `&send_count=true`
+        return url
+      } else {
+        if (sendCount) base += `send_count=true`
+        return base
+      }
     }
 
     try {
