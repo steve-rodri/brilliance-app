@@ -65,8 +65,8 @@ export default class Edit extends Component {
             {...this.props}
             searchResults={searchFieldData && searchFieldData.callLocations}
             formClassName='Edit--Field'
-            resultClassName='Edit--search-result'
             resultsClassName='Edit--results'
+            resultClassName='Edit--result'
             formDataValue={this.props.formData && this.props.formData.call_location_id}
             formatResult={locationName}
             input={{
