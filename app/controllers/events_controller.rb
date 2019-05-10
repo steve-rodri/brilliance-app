@@ -8,6 +8,9 @@ class EventsController < ApplicationController
   def index
     @@date_where = nil
     @@send_count = false
+
+    @@next_event = Event.where("events.start > '#{Time.zone.now()}'").order(:start).first
+    
     if params[:date_start] && params[:date_end]
       @@date_start = Time.zone.parse(params[:date_start])
       @@date_end = Time.zone.parse(params[:date_end])
@@ -50,11 +53,7 @@ class EventsController < ApplicationController
           .paginate(page: params[:page], per_page: @@items_per_page)
       end
 
-      if count
-        render json: @events, meta: { count: count }, include: '**'
-      else
-        render json: @events, include: '**'
-      end
+        render json: @events, meta: { count: count, next: @@next_event }, include: '**'
 
     elsif params[:q]
       count = 0
@@ -118,11 +117,8 @@ class EventsController < ApplicationController
 
       @events = Event.find_by_sql(query)
 
-      if count
-        render json: @events, root: "events", meta: { count: count }, include: '**'
-      else
-        render json: @events, root: "events", include: '**'
-      end
+
+      render json: @events, root: "events", meta: { count: count, next: @@next_event }, include: '**'
 
     elsif params[:email]
       count = 0
@@ -141,11 +137,7 @@ class EventsController < ApplicationController
       .order(start: :desc)
       .paginate(page: params[:page], per_page: @@items_per_page)
 
-      if count
-        render json: @events, meta: { count: count }, include: '**'
-      else
-        render json: @events, include: '**'
-      end
+      render json: @events, meta: { count: count, next: @@next_event }, include: '**'
 
     elsif params[:client_id]
       count = 0
@@ -161,11 +153,8 @@ class EventsController < ApplicationController
         .order(:start)
         .paginate(page: params[:page], per_page: @@items_per_page)
 
-      if count
-        render json: @events, meta: {count: count }, include: '**'
-      else
-        render json: @events, include: '**'
-      end
+
+        render json: @events, meta: { count: count, next: @@next_event }, include: '**'
 
     elsif params[:iCalUID]
       @event = Event.where( i_cal_UID: "#{params[:iCalUID]}").first
@@ -184,12 +173,8 @@ class EventsController < ApplicationController
         .order(:start)
         .paginate(page: params[:page], per_page: @@items_per_page)
 
-      if count
-        render json: @events, meta: { count: count }, include: '**'
-      else
-        render json: @events, include: '**'
-      end
 
+      render json: @events, meta: { count: count, next: @@next_event }, include: '**'
     end
   end
 

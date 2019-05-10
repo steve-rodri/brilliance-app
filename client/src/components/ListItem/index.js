@@ -69,6 +69,7 @@ export default function ListItem(props){
         // const past = event && event.end && moment(event.end).isBefore(moment())
         const hasInvoice = event && event.invoice
         const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
+        const nextEvent = event && event.isNextEvent
         // const iCalUID = event && event.iCalUid;
 
         // if (past) {
@@ -86,9 +87,15 @@ export default function ListItem(props){
           style.border = 'none'
         }
 
+        if (nextEvent) {
+          style.borderTop = '2px solid red'
+        }
+
         // if (iCalUID) {
         //   style.backgroundColor = 'blue'
         // }
+
+        style.padding = '5px'
       break;
 
       default:

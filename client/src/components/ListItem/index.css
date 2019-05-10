@@ -1,4 +1,5 @@
 .List-Item {
+  position: relative;
   width: 100%;
   height: 85px;
   display: grid;

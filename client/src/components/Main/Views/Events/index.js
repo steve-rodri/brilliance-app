@@ -366,7 +366,7 @@ export default class Events extends Component {
   }
 
   updateEvents = async(data) => {
-    const { events: evts, meta: { count } } = data
+    const { events: evts, meta: { count, next } } = data
     const { page } = this.state
     const events = [...this.state.events]
     if ((events.length + this.itemsPerPage) / page <= this.itemsPerPage) {
@@ -378,8 +378,14 @@ export default class Events extends Component {
         }
         const evt = await this.synchronizeWithGoogle(e)
         if (evt) {
+          if (next.id === evt.id) {
+            evt.isNextEvent = true
+          }
           return evt
         } else {
+          if (next.id === e.id) {
+            e.isNextEvent = true
+          }
           return e
         }
       })

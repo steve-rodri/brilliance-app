@@ -77,7 +77,8 @@ export default function Event(props){
 
         </div>
         :
-        <div className="List-Item">
+        <div className="List-Item" style={styleItem(item, view)}>
+          {event.isNextEvent? <div className="Event--next-event-triangle"></div> : null}
           <div className="Event--summary" style={styleMobileSummary(event)}
           >
             {summary(event)}
