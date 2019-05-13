@@ -8,10 +8,13 @@ import './index.css'
 export default class SubHeader extends Component {
 
   type = () => {
-    const { inv } = this.props
+    const { inv, mobile } = this.props
     if (inv && inv.kind) {
       return (
-        <div className="Show Field"><h3>{inv.kind}</h3></div>
+        <Fragment>
+          { mobile? <label>Type</label> : null }
+          <div className="SubHeader Field"><h4>{inv.kind}</h4></div>
+        </Fragment>
       )
     }
   }
@@ -27,7 +30,7 @@ export default class SubHeader extends Component {
 
     if (event && event.client) {
       return (
-        <div className="Show Field"><h3>{clientName(event.client)}</h3></div>
+        <div className="SubHeader Field"><h3>{clientName(event.client)}</h3></div>
       )
     }
   }
@@ -37,7 +40,7 @@ export default class SubHeader extends Component {
     if (inv && inv.event) {
       const { event } = inv
       return (
-        <Link to={`/${accessLevel}/events/${event.id}`}><div className="Show Field">View Job</div></Link>
+        <Link to={`/${accessLevel}/events/${event.id}`}><div className="SubHeader Field">View Job</div></Link>
       )
     }
   }
@@ -46,7 +49,7 @@ export default class SubHeader extends Component {
     const { inv } = this.props
     if (inv) {
       return (
-        <div className="Show Field">
+        <div className="SubHeader Field">
           <p style={this.stylePaymentStatus(inv.paymentStatus)}>
             {inv.paymentStatus}
           </p>
@@ -60,7 +63,7 @@ export default class SubHeader extends Component {
     if (inv) {
       if (inv.paymentType && inv.paymentType !== "Unknown") {
         return (
-          <div className="Show Field">
+          <div className="SubHeader Field">
             <h4 style={{paddingBottom: '5px'}}>{inv.paymentType}</h4>
             {inv.check? <p>{inv.check}</p> : null}
           </div>
@@ -107,7 +110,7 @@ export default class SubHeader extends Component {
       <Fragment>
         <label>Total</label>
         <div
-          className="Show Field">
+          className="SubHeader Field">
           <h3>
             {numeral(inv.total).format('$0,0.00')}
           </h3>
@@ -120,7 +123,7 @@ export default class SubHeader extends Component {
     return (
       <Fragment>
         <label>Deposit</label>
-        <div className="Show Field">
+        <div className="SubHeader Field">
           <h3>
             {numeral(inv.total).format('$0,0.00')}
           </h3>
@@ -133,7 +136,7 @@ export default class SubHeader extends Component {
     return (
       <Fragment>
         <label>Balance</label>
-        <div className="Show Field">
+        <div className="SubHeader Field">
           <h3>
             {numeral(inv.balance).format('$0,0.00')}
           </h3>
@@ -143,7 +146,7 @@ export default class SubHeader extends Component {
   }
 
   render(){
-    const { inv } = this.props
+    const { inv, mobile } = this.props
     return (
       <div className="SubHeader">
 
@@ -155,7 +158,7 @@ export default class SubHeader extends Component {
         </div>
 
         {
-          inv && inv.kind !== 'Proposal'?
+          !mobile && inv && inv.kind !== 'Proposal'?
           <div className="SubHeader--Show SubHeader--status-container">
             <div className="SubHeader--Show SubHeader--component-title"><h3>Status</h3></div>
             <div className="SubHeader--Show SubHeader--status">
@@ -166,12 +169,17 @@ export default class SubHeader extends Component {
           null
         }
 
-        <div className="SubHeader--Show SubHeader--summary-container">
-          <div className="SubHeader--Show SubHeader--component-title"><h3>Summary</h3></div>
-          <div className="SubHeader--Show SubHeader--summary">
-            {this.summary()}
+        {/* {
+          !mobile?
+          <div className="SubHeader--Show SubHeader--summary-container">
+            <div className="SubHeader--Show SubHeader--component-title"><h3>Summary</h3></div>
+            <div className="SubHeader--Show SubHeader--summary">
+              {this.summary()}
+            </div>
           </div>
-        </div>
+          :
+          null
+        } */}
 
       </div>
     )

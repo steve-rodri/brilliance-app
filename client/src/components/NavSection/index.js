@@ -77,7 +77,7 @@ export default class NavSection extends Component {
 
         {/* Categories */}
         {
-          !mobile?
+          !mobile && view !== 'Workers'?
           <div className="NavSection--categories-container">
             {/* <div className="Arrow Arrow-Left" style={{gridColumn: '1 / span 1'}}></div> */}
             <div className="NavSection--categories">
@@ -88,8 +88,8 @@ export default class NavSection extends Component {
                   e.stopPropagation()
                   if (this.props.category === category) {
                     history.push(`${match.path}`)
-                  } else {;
-                    history.push(`${match.path}?category=${category}`)  
+                  } else {
+                    history.push(`${match.path}?category=${category}`)
                   }
                 }}
                 key={id}>{category}

@@ -4,7 +4,7 @@ import Logistics from './Logistics'
 import Notes from './Notes'
 import Staff from './Staff'
 import Invoice from './Invoice'
-import Loader from '../../../../../Loader'
+// import Loader from '../../../../../Loader'
 import Buttons from '../../../../../Buttons/Buttons'
 import { date, time } from '../../../../../../helpers/datetime'
 import './index.css'
@@ -71,9 +71,10 @@ export default class Body extends Component {
               }
             </div>
             :
-            <div className="EventDetail-Body--loader">
-              <Loader />
-            </div>
+            // <div className="EventDetail-Body--loader">
+            //   <Loader />
+            // </div>
+            null
           }
         </div>
 

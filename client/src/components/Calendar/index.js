@@ -43,12 +43,13 @@ class Calendar extends Component {
   gotoDate = date => evt => {
     evt && evt.preventDefault();
     const { current } = this.state;
-    const { onDateChanged } = this.props;
+    const { onDateChanged, changeNav } = this.props;
 
     !(current && isSameDay(date, current)) &&
       this.setState(this.resolveStateFromDate(date), () => {
         typeof onDateChanged === "function" && onDateChanged(date, 'day');
       });
+    changeNav(false)
   };
 
   gotoPreviousMonth = () => {
@@ -57,7 +58,7 @@ class Calendar extends Component {
     this.setState(getPreviousMonth(month, year), () => {
       const { month, year } = this.state
       const date = moment().month(month - 1).year(year)
-      onDateChanged(date, 'month')
+      if (onDateChanged) onDateChanged(date, 'month')
     });
   };
 
@@ -67,7 +68,7 @@ class Calendar extends Component {
     this.setState(getNextMonth(month, year), () => {
       const { month, year } = this.state
       const date = moment().month(month - 1).year(year)
-      onDateChanged(date, 'month')
+      if (onDateChanged) onDateChanged(date, 'month')
     });
   };
 
@@ -77,7 +78,7 @@ class Calendar extends Component {
     this.setState({ year: year - 1 }, () => {
       const { month, year } = this.state
       const date = moment().month(month - 1).year(year)
-      onDateChanged(date, 'month')
+      if (onDateChanged) onDateChanged(date, 'month')
     });
   };
 
@@ -87,7 +88,7 @@ class Calendar extends Component {
     this.setState({ year: year + 1 }, () => {
       const { month, year } = this.state
       const date = moment().month(month - 1).year(year)
-      onDateChanged(date, 'month')
+      if (onDateChanged) onDateChanged(date, 'month')
     });
   };
 

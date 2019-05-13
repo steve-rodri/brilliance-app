@@ -115,20 +115,23 @@ export default class Edit extends Component {
     )
   }
 
-  commission = (value, paid, change) => {
+  commission = (value, paid, change, mobile) => {
     return (
       <Fragment>
-        <label>Amount</label>
+        {mobile? <label>Commission</label> : <label>Amount</label>}
         <input
           className="Edit--Field"
+          style={{textAlign: 'center'}}
           type='number'
           name="commissionValue"
           value={value}
           onChange={change}
+          onFocus={this.handleFocusSelect}
         />
-        <label>Status</label>
+        {mobile? <label>Commission Status</label> : <label>Status</label>}
         <select
           className="Edit--Field"
+          style={{textAlign: 'center'}}
           name="commissionPaid"
           value={paid}
           onChange={change}
@@ -160,7 +163,7 @@ export default class Edit extends Component {
   }
 
   render(){
-    const { fields, handleChange, searchFieldData } = this.props
+    const { fields, handleChange, searchFieldData, mobile } = this.props
     if (fields) {
       return (
         <div className="SubHeader">
@@ -190,7 +193,7 @@ export default class Edit extends Component {
             <div className="SubHeader--Edit SubHeader--commission-container">
               <div className="SubHeader-Edit SubHeader--component-title"><h3>Commission</h3></div>
               <div className="SubHeader--Edit SubHeader--commission">
-                {this.commission(fields.commission, fields.commissionPaid, handleChange)}
+                {this.commission(fields.commission, fields.commissionPaid, handleChange, mobile)}
               </div>
             </div>
             :
