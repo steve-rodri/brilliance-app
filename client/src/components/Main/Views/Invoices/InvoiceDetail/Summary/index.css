@@ -1,33 +1,66 @@
 .Summary--container {
   width: 100%;
   height: 100%;
-  padding: 40px;
   display: grid;
+}
+
+@media (min-width: 750px) {
+  .Summary--container {
+    padding: 40px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Summary--container {
+    grid-area: summary;
+    padding: 40px 40px 40px 25px;
+  }
 }
 
 .Summary {
   display: grid;
   width: 100%;
-  background-color: var(--dark-gray);
   justify-self: end;
-  color: #eee;
+}
+
+@media (min-width: 750px) {
+  .Summary {
+    display: grid;
+    width: 100%;
+    background-color: var(--dark-gray);
+    justify-self: end;
+    color: #eee;
+  }
 }
 
 .Summary--totals {
   display: grid;
-  grid-gap: 5px;
+  grid-gap: 10px;
   padding: 15px;
-  justify-content: right;
 }
 
+@media (min-width: 750px) {
+  .Summary--totals {
+    display: grid;
+    grid-gap: 5px;
+    padding: 15px;
+    justify-content: right;
+  }
+}
 
 .Summary--totals > * {
-  width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 40px;
-  justify-content: end;
   align-items: center;
-  justify-items: end;
-  font-size: 25px;
+  justify-items: center;
+  width: 100%;
+  font-size: 20px;
+}
+
+@media (min-width: 750px) {
+  .Summary--totals > * {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-gap: 40px;
+    font-size: 25px;
+  }
 }

@@ -34,7 +34,7 @@ export default function Event(props){
 
           {/* Title */}
           <div className="List-Item--Cell" style={{ ...leftCell, ...titleDisplay, padding: '5px' }}>
-            <div style={styleSummary(event && event.summary)}>{summary(event)}</div>
+            <div className="Event--summary">{summary(event)}</div>
           </div>
 
           {/* Date */}

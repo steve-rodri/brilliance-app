@@ -6,23 +6,27 @@
 .App {
   height: 100vh;
   text-align: center;
-  display: grid;
-  grid: 75px auto / auto;
+  background-color: var(--dark-blue);
 
   /* Color Palette */
-  --dark-blue: #09639B;
+  --darker-blue: #143154;
+  --dark-blue: #1D4678;
   --med-dark-blue: #0071B5;
-  --med-dark-blue-t: rgba(0, 113, 181, .4);
+
   --turquoise: #01B0DF;
-  --turquoise-t: rgba(1, 176, 223, .6);
   --light-blue: #D4F1FF;
+  --dark-gray: #222222;
+
+
+  --med-dark-blue-t: rgba(0, 113, 181, .4);
+  --turquoise-t: rgba(1, 176, 223, .6);
   --light-blue-t: rgba(212,241,255, .3);
   --light-gray: #DADBE0;
-  --dark-gray: #222222;
 }
 
 h1, h2 {
-  font-family: 'Gruppo', sans-serif;
+  font-family: 'Calibri', sans-serif;
+  font-weight: 300;
 }
 
 h3, h4, h5, h6, p, a, label, td, th {
@@ -69,12 +73,12 @@ label {
 input {
   font-size: 18px;
   font-family: 'Lato', sans-serif;
-  outline: none;
 }
 
-input:focus {
+input:focus, select:focus {
   box-shadow: 0 0 2px 2px var(--light-blue);
   border: 1px solid var(--light-blue);
+  outline: none;
 }
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
@@ -101,8 +105,8 @@ select {
   width: auto;
   min-height: 36px;
   padding: 5px;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
   align-items: center;
   border-radius: 5px;
 }

@@ -1,5 +1,5 @@
 .Invoice--title {
-grid-row: 2 / span 1;
+  grid-row: 2 / span 1;
 }
 
 .Invoice--status {
@@ -12,11 +12,11 @@ grid-row: 2 / span 1;
   grid-row: 2 / span 1;
 }
 
-@media (min-width: 500px) {
-  .Invoice--title {
-  grid-row: auto;
-  }
+.Invoice--client-date {
+  color: black;
+}
 
+@media (min-width: 500px) {
   .Invoice--status {
     grid-column: auto;
     grid-row: auto;

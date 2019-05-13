@@ -37,9 +37,10 @@ aside {
 main {
   height: 100%;
   width: 100%;
-  background-color: var(--med-dark-blue);
+  background-color: var(--dark-blue);
   display: grid;
   grid-template-rows: 40px auto 40px;
+  align-content: start;
 }
 
 @media (min-width: 1000px) {
@@ -52,16 +53,16 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--med-dark-blue);
+  background-color: var(--dark-blue);
   color: var(--light-gray);
   grid-row: 1 / span 1;
 }
 
 .ListPage--category-title {
   font-size: 20px;
-  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   padding: 5px 0;
+  text-shadow: 0 4px 10px black;
 }
 
 .ListPage--list {

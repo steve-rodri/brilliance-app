@@ -356,11 +356,11 @@ export default class Invoices extends Component {
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['type', 'client & date', 'status']
+        columnHeaders: ['type', 'clientDate', 'status']
       })
     } else {
       this.setState({
-        columnHeaders: ['type', 'client & date','', 'balance', 'status']
+        columnHeaders: ['type', 'clientDate','', 'balance', 'status']
       })
     }
   }

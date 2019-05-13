@@ -1,6 +1,14 @@
 import React from 'react'
 
-function clientName(client, oneLine){
+function clientName(client, options){
+  let className = ''
+  let oneLine = false
+  if (options) {
+    let { oneLine: oL, className: cN } = options
+    oneLine = oL
+    className = cN
+  }
+
   if (client) {
     if (!client.contactInfo) {
       if (!client.company) {
@@ -14,9 +22,11 @@ function clientName(client, oneLine){
       } else if (oneLine) {
         return `${client.contactInfo.fullName} : ${client.company.name}`
       } else {
+          console.log(client.contactInfo.fullName)
+          console.log(client.company.name)
         return (
-          <div className="client">
-            <p>{client.contactInfo.fullName}</p>
+          <div className={`${className} client`} >
+            <h4>{client.contactInfo.fullName}</h4>
             <h6>c: {client.company.name}</h6>
           </div>
         )

@@ -452,9 +452,13 @@ export default class Events extends Component {
       this.setState({
         columnHeaders: ['title', 'date', 'schedule', 'confirmation']
       })
-    } else {
+    } else if (width < 1300){
       this.setState({
         columnHeaders: ['title', 'date', 'intel', 'schedule', 'confirmation']
+      })
+    } else {
+      this.setState({
+        columnHeaders: ['title', 'date', 'intel','','schedule', 'confirmation']
       })
     }
   }

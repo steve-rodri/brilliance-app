@@ -90,9 +90,8 @@ input, .EventDetail--event-summary {
     justify-items: left;
     grid-column-gap: 5px;
     grid: auto / 100px auto 100px;
-    border-bottom: 1px solid black;
     padding: 5px 15px;
-    background-color: var(--dark-gray);
+    background-color: var(--darker-blue);
     color: var(--light-gray);
   }
 

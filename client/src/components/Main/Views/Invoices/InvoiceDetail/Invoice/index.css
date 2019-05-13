@@ -1,7 +1,6 @@
 .Invoice--container {
   align-self: start;
   width: 100%;
-  padding: 0 40px;
 }
 
 .Invoice {
@@ -12,7 +11,22 @@
 .Invoice table {
   width: 100%;
   border-collapse: collapse;
+  border-spacing: 0;
   padding: 0;
+}
+
+@media (min-width: 750px) {
+  .Invoice--container {
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Invoice--container {
+    grid-area: invoice;
+    padding: 40px 40px 0 25px ;
+    height: 100%;
+  }
 }
 
 /* ---------Header row-------------*/
@@ -26,8 +40,13 @@
 .Invoice--header-row > * {
   position: -webkit-sticky;
   position: sticky;
-  top: 72px;
-  z-index: 10;
+  top: 71px;
+}
+
+@media (min-width: 1000px) {
+  .Invoice--header-row > * {
+    top: 71px;
+  }
 }
 
 .Invoice--header-cell {
@@ -44,15 +63,15 @@
 /* -------Cells---------- */
 
 .Invoice--cell {
-  border-top: 2px solid var(--light-gray);
-  border-bottom: 2px solid var(--light-gray);
+  border-top: 1px solid var(--dark-gray);
+  border-bottom: 1px solid #cccccc;
   background-color: #eeeeee;
   padding: 15px;
 }
 
 .Invoice--add {
   display: grid;
-  grid: auto / 50px auto 50px;
+  grid: auto / 60px auto 60px;
   justify-items: center;
   align-items: center;
   background-color: limegreen;

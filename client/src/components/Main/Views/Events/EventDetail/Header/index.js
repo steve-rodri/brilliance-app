@@ -42,11 +42,11 @@ export default function Header(props){
     } else {
       return (
         <div className="EventDetail--event-title-container">
-          <h1
+          <h3
             className="EventDetail--event-title"
           >
             {fields && fields.summary}
-          </h1>
+          </h3>
         </div>
       )
     }

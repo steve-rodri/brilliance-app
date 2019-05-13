@@ -23,7 +23,7 @@ export default class SearchField extends Component {
       this.setState({ highlightedResult: 0 })
     }
     if (scroll && scroll !== prevProps.scroll) {
-      this.setState({ fieldActive: true })
+      this.setState({ fieldActive: false })
     }
   }
 

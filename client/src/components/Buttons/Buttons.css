@@ -6,7 +6,7 @@
   grid-gap: 20px;
   width: 100%;
   padding: 28px 20px 20px 20px;
-  background-color: var(--dark-gray);
+  background-color: transparent;
 }
 
 .Button {
@@ -29,14 +29,17 @@
   grid-area: name;
 }
 
+.Button--text > p {
+  font-weight: 700;
+}
+
 .Button--icon {
   grid-area: icon;
 }
 
 .Submit {
-  border: 2px solid limegreen;
-  color: limegreen;
-  background-color: inherit;
+  color: white;
+  background-color: limegreen;
 }
 
 .Submit:active, .Submit:hover {

@@ -1,16 +1,30 @@
 .InvoiceDetail {
-  height: 100%;
-  background-color: var(--dark-gray);
-  width: 100%;
+  background-color: var(--light-gray);
   display: grid;
   align-content: start;
-  grid-template-rows: 73px auto auto 250px;
-  justify-items: center;
-  align-items: center;
 }
 
 @media (min-width: 750px) {
   .InvoiceDetail {
-    background-color: var(--med-dark-blue);
+    height: 100%;
+    background-color: var(--dark-blue);
+    width: 100%;
+    align-content: start;
+    grid-template-rows: 73px auto auto 250px;
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1000px) {
+  .InvoiceDetail {
+    height: auto;
+    grid-template-rows: 73px auto auto auto;
+    grid-template-columns: 416px repeat(3, auto);
+    grid-template-areas:
+    "header header header header"
+    "subheader invoice invoice invoice"
+    "subheader summary summary summary"
+    "subheader . . ."
   }
 }

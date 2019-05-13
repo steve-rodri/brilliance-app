@@ -29,12 +29,14 @@
 }
 
 .StaffSelector--done {
-  width: 100px;
-  height: 50px;
+  width: 125px;
+  height: 40px;
   background-color: inherit;
   color: var(--med-dark-blue);
   font-weight: bold;
   border: 3px solid var(--med-dark-blue);
+  border-radius: 5px;
+  margin-top: 20px
 }
 
 .StaffSelector--done:hover {

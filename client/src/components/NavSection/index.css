@@ -43,7 +43,7 @@
     display: block;
     color: var(--turquoise);
     font-size: 60px;
-    font-weight: bold;
+    font-weight: 300;
     align-self: start;
   }
 }
