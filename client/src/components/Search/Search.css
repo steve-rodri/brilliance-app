@@ -16,7 +16,7 @@
   width: 40px;
   font-size: 22px;
   padding: 1px 2px;
-  color: #333333;
+  color: var(--light-gray);
 }
 
 .search--input {
@@ -28,7 +28,7 @@
   width: 100%;
   border: none;
   border-radius: 5px;
-  border: 1px solid #333333;
+  border: 1px solid var(--light-gray);
 }
 
 .search--input:focus{

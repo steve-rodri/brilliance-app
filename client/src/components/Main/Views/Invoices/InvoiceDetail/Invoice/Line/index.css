@@ -2,9 +2,13 @@
 
 .Line > :last-child {}
 
+.Line > td {
+  background: var(--light-gray);
+}
+
 .Line--add-delete {
   width: 50px;
-  padding: 15px 0;
+  padding: 0 25px;
 }
 
 .Line--add-delete:hover {
@@ -14,10 +18,11 @@
 .Line--input {
   width: 90%;
   padding: 10px 5px;
-  background-color: transparent;
+  background-color: white;
   text-align: center;
   border:none;
-  border: 1px solid transparent;
+  border: 1px solid #BBBBBB;
+  border-radius: 5px;
   /* box-shadow: 0 0 2px 2px transparent; */
   outline: none;
   font-size: 20px;
@@ -69,29 +74,25 @@
 
 /* --------------------Price-------------- */
 
-.Invoice--header-price > p {
-  padding-right: 5px;
-}
-
 .Line--price, .Invoice--header-price {
   width: 100px;
   text-align: center;
 }
 
-.Line--price > div {
-  margin-right: 5px;
+.Line--price > form {
+  margin-right: 17px;
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(3, auto);
   align-items: center;
   justify-items: center;
   font-size: 20px;
 }
 
-.Line--price > div > p {
+.Line--price > form > p {
   padding: 3px;
 }
 
-.Line--price > div > input {
-  text-align: left;
+.Line--price > form > input {
+  text-align: center;
   font-size: 20px;
 }

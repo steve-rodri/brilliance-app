@@ -9,7 +9,7 @@ import { start, end, timeUntil } from '../../helpers/datetime'
 import './index.css'
 
 export default function ListItem(props){
-  const { item, view, total, index } = props
+  const { item, view, total, index, mobile } = props
   switch (view) {
     case 'Dashboard':
       return (
@@ -95,7 +95,9 @@ export default function ListItem(props){
         //   style.backgroundColor = 'blue'
         // }
 
-        style.padding = '5px'
+        if (mobile) {
+          style.padding = '5px'
+        }
       break;
 
       default:

@@ -1,7 +1,8 @@
 .EventDetail {
-  background-color: var(--dark-gray);
+  background-color: var(--light-gray);
   display: grid;
   grid: 75px auto / auto;
+  height: 100%;
 }
 
 /* ------------------Tab-Control--------------------- */
@@ -25,7 +26,6 @@
 
 .EventDetail--tab-control > div > h3 {
   font-size: 1.5em;
-  font-family: 'Gruppo';
 }
 
 .EventDetail--tab-control > div:hover {
@@ -34,7 +34,7 @@
 
 @media (min-width: 750px) {
   .EventDetail {
-    background-color: var(--med-dark-blue);
+    background-color: var(--dark-blue);
   }
 
   .EventDetail--tab-control {

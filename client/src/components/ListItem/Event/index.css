@@ -1,3 +1,4 @@
+/* Mobile Styles */
 .Event--confirmation {
   height: 100%;
   width: 100%;
@@ -24,24 +25,34 @@
 }
 
 .Event--summary {
-  align-self: start;
   justify-self: start;
   grid-column: 1 / span 2;
-  font-size: 20px;
   padding: 2px;
 }
 
-.Event--time {
-  padding-right: 10px;
-  justify-self: end;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  grid-column: 2 / span 1;
-  grid-row: 2 / span 1;
+.Event--summary > h4 {
+  font-size: 15px;
+  font-weight: 700;
 }
 
+@media (min-width: 750px) {
+  .Event--summary > h4 {
+    font-size: 15px;
+  }
+}
+
+.Event--time {
+  justify-self: end;
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+  padding-right: 10px;
+  display: grid;
+  align-items: center;
+}
+
+.Event--time > p {
+  text-align: right;
+}
 
 .Event--next-event-triangle {
   position: absolute;
@@ -52,3 +63,6 @@
   border-top-color: red;
   border-left-color: red;
 }
+
+
+/* ------------------------------------------------------------------------- */

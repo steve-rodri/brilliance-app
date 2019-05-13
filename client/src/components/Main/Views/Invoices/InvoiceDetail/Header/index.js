@@ -7,23 +7,25 @@ import './index.css'
 
 export default function Header(props){
 
-  const { inv, evt, isNew, editMode, user: { accessLevel } } = props
+  const { inv, evt, isNew, editMode, user: { accessLevel }, mobile } = props
   // Functions to Show Summary field based on Mode ----------------------
 
   function displaySummary(){
     return (
-      <div className="InvoiceDetail-header--name">
+      <div className="InvoiceDetail-header--title">
         {clientAndDate()}
       </div>
     )
   }
 
   function displayJob(){
-    return (
-      <div className="InvoiceDetail-header--view-job">
-        {job()}
-      </div>
-    )
+    if (!mobile) {
+      return (
+        <div className="InvoiceDetail-header--view-job">
+          {job()}
+        </div>
+      )
+    }
   }
 
   function job(){
@@ -31,7 +33,7 @@ export default function Header(props){
       const { event } = inv
       return (
         <Link
-          style={{textDecoration: 'none', color: "white"}}
+          style={{textDecoration: 'none', color: "var(--light-gray)"}}
           to={`/${accessLevel}/events/${event.id}`}
         >
           <h2>View Job</h2>
@@ -54,8 +56,9 @@ export default function Header(props){
 
       return (
         <Fragment>
-          {c? <h2>{clientName(c, true)}</h2> : null}
-          {e? <h2 style={{fontWeight: '400', padding: '0 20px'}}>{moment(e.start).format('MMMM Do YYYY')}</h2> : null}
+          {c? <h3 className="InvoiceDetail-header--client">{clientName(c, {oneLine: true})}</h3> : null}
+              <div className="InvoiceDetail-header--client-date-seperator"></div>
+          {e? <h3 className="InvoiceDetail-header--date">{moment(e.start).format('MMMM Do YYYY')}</h3> : null}
         </Fragment>
       )
     }
@@ -134,13 +137,11 @@ export default function Header(props){
 //----------------------------------------------------------------------
 
   return (
-    <div className="InvoiceDetail-header--container">
-      <div className="InvoiceDetail-header">
-        {displaySummary()}
+    <div className="InvoiceDetail-header">
+      {displaySummary()}
+      <div className="InvoiceDetail-header--right">
         {displayJob()}
-        <div className="InvoiceDetail-header--right">
-          {displayButtons()}
-        </div>
+        {displayButtons()}
       </div>
     </div>
   )

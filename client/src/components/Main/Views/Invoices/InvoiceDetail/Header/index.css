@@ -1,36 +1,85 @@
-.InvoiceDetail-header--container {
+.InvoiceDetail-header {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  height: 100%;
-  width: 100%;
   z-index: 5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--med-dark-blue);
-  color: var(--light-gray);
-}
-
-.InvoiceDetail-header {
   display: grid;
   justify-items: center;
   align-items: center;
+  height: 75px;
   width: 100%;
-  margin: 0 40px;
+  background: var(--darker-blue);
+  color: var(--light-gray);
+}
+
+@media (min-width: 750px) {
+  .InvoiceDetail-header {
+    grid-area: header;
+    height: auto;
+    grid-gap: 5px;
+    grid-auto-flow: column;
+    grid-template-columns: 250px auto 250px;
+    padding: 10px;
+    margin: 0 40px;
+  }
+}
+
+.InvoiceDetail-header--title {
+  text-align: center;
+  font-size: 18px;
+  display: grid;
+  text-shadow: 0 2px 10px black;
+}
+
+.InvoiceDetail-header--client {
+  font-weight: 400;
+}
+
+.InvoiceDetail-header--client-date-seperator {
+  border-left: 1px solid var(--light-gray);
+  margin: 0 15px;
+}
+
+.InvoiceDetail-header--date {
+  font-weight: 400;
+}
+
+@media (min-width: 750px) {
+  .InvoiceDetail-header--title {
+    display: flex;
+    font-size: 25px;
+    text-align: left;
+    grid-column: 2 / span 1;
+  }
+
+  .InvoiceDetail-header--date {
+    font-weight: 300;
+  }
+}
+
+.InvoiceDetail-header--view-job {
+  text-shadow: 0 2px 10px black;
+}
+
+.InvoiceDetail-header--view-job > a > h2:hover {
+  color: white;
 }
 
 .InvoiceDetail-header--right {
   display: none;
 }
 
-.InvoiceDetail-header--name {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  justify-self: start;
-  width: 100%;
-  grid-column: 1 / span 2;
+@media (min-width: 750px) {
+  .InvoiceDetail-header--right {
+    grid-column: 3 / span 1;
+    justify-self: end;
+    display: grid;
+    grid-gap: 10px;
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+  }
 }
 
 .InvoiceDetail-header--icons {
@@ -61,34 +110,6 @@
 }
 
 @media (min-width: 750px) {
-  .InvoiceDetail-header {
-    height: auto;
-    background-color: inherit;
-    color: inherit;
-    justify-items: center;
-    grid-gap: 5px;
-    grid-auto-flow: column;
-    grid-template-columns: auto 100px 100px;
-    border-bottom: 1px solid var(--light-gray);
-    padding: 10px;
-  }
-
-  .InvoiceDetail-header--name {
-    display: flex;
-    font-size: 25px;
-    text-align: left;
-    grid-column: 1 / span 1;
-  }
-
-  .InvoiceDetail-header--right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    justify-self: end;
-    grid-column: 3 / span 1;
-  }
-
   .InvoiceDetail-header--buttons {
     display: flex;
   }

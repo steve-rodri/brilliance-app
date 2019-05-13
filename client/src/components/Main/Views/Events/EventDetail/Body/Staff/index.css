@@ -2,6 +2,7 @@
   align-self: flex-start;
   width: 100%;
   display: grid;
+  grid-gap: 10px;
   align-items: center;
   justify-items: start;
   overflow: auto;
@@ -21,7 +22,7 @@
 
 @media (min-width: 750px) {
   .Staff--container {
-    align-self: center;
+    align-self: start;
     padding: 30px;
   }
 
@@ -39,10 +40,9 @@
 .Staff--Edit .Staff {
   height: 80%;
   width: 100%;
-  padding: 5px;
-  border-spacing: 5px;
-  background-color: #F8F8F8;
-  border-radius: 5px;
+  border-color: transparent;
+  border-collapse: separate;
+  border-spacing: 0 5px;
 }
 
 .Staff--Edit .Staff--worker {
@@ -52,19 +52,47 @@
 
 .Staff--Edit .Staff--worker > * {
   border-radius: 5px;
-  border: 3px solid var(--light-gray);
-}
-
-.Staff--Edit .Staff--worker * {
-  max-height: 22px;
+  padding: 16px;
 }
 
 .Staff--Edit .Staff--icon-head {
   width: 5px;
 }
 
-.Staff--Edit .Staff--icon {
-  width: 5px;
+.Staff--Edit .Staff--edit-workers,
+.Staff--Edit .Staff--add-worker {
+  position: relative;
+}
+
+.Staff--Edit .Staff--add-worker {
+  background: limegreen;
+  color: #eeeeee;
+}
+
+.Staff--Edit .Staff--add-worker:hover {
+  cursor: pointer;
+}
+
+.Staff--Edit .Staff--edit-workers {
+  background: var(--dark-gray);
+  color: white;
+}
+
+.Staff--Edit .Staff--plus-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.Staff--Edit .Staff--pencil-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 12.5px;
+  margin-right: 12.5px;
+  font-size: 12.5px;
 }
 
 .Staff--Edit .Staff--search {

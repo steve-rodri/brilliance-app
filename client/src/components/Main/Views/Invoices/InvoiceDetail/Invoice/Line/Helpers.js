@@ -1,6 +1,8 @@
 import React from 'react'
 import numeral from 'numeral'
-import { squareIcon } from '../../../../../../../helpers/icons'
+// import { squareIcon } from '../../../../../../../helpers/icons'
+import { ReactComponent as CheckSquare } from '../../../../../../../icons/check-square.svg'
+import { ReactComponent as Square } from '../../../../../../../icons/square.svg'
 
 const description = (item) => {
   if (item) {
@@ -10,7 +12,13 @@ const description = (item) => {
 
     if (useDescriptionOnly) {
       return description
-    } else if (contents && contents.length === 1) {
+    }
+
+    if (contents.length === 0 || contents.length > 1) {
+      return description
+    }
+
+    if (contents.length === 1) {
 
       const content = contents[0]
 
@@ -28,8 +36,6 @@ const description = (item) => {
         }
       }
 
-    } else if (contents && contents.length > 1) {
-      return description
     }
   }
 }
@@ -71,9 +77,9 @@ const inc = (line) => {
     const included = line.inc
 
     if (included) {
-      return squareIcon(['fas', 'square'], '2x')
+      return <CheckSquare width="25" height="25"/>
     } else {
-      return squareIcon(['far', 'square'], '2x')
+      return <Square width="25" height="25"/>
     }
   }
 }

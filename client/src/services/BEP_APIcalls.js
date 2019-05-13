@@ -355,7 +355,7 @@ export const item = {
     const { cancelToken, unauthorizedCB } = options
     try {
       const resp = await axios.get(`/api/items?q=${query}`, { cancelToken: cancelToken })
-      return resp.data.item
+      return resp.data.items
     } catch (e) {
       if (axios.isCancel(e)) {
         console.log('Item Request Canceled')
