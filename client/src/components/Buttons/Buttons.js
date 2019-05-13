@@ -11,27 +11,25 @@ export default function Buttons(props) {
     editMode,
     fields,
     edit,
+    submit: onSubmit,
     scrollToTop,
-    handleSubmit,
     handleStatusChange,
 
    } = props
 
   function editButton(){
-    if (fields && fields.summary) {
-      return (
-        <div
-          className="Button"
-          onClick={() => {
-            edit()
-            scrollToTop()
-          }}
-        >
-          <div className="Button--text"><p>Edit</p></div>
-          <div className="Button--icon">{pencilIcon()}</div>
-        </div>
-      )
-    } else return null
+    return (
+      <div
+        className="Button"
+        onClick={() => {
+          edit()
+          scrollToTop()
+        }}
+      >
+        <div className="Button--text"><p>Edit</p></div>
+        <div className="Button--icon">{pencilIcon()}</div>
+      </div>
+    )
   }
 
   // function trashCan(){
@@ -51,7 +49,7 @@ export default function Buttons(props) {
     return (
       <div
         className="Button Submit"
-        onClick={handleSubmit}
+        onClick={onSubmit}
       >
         <div className="Button--text"><p>SUBMIT</p></div>
         <div className="Button--icon">{checkIcon()}</div>

@@ -142,7 +142,7 @@ export default class InvoiceDetail extends Component {
 
   setFields = () => {
     const { inv } = this.state
-    const fieldNames = ['kind', 'paymentStatus', 'paymentType', 'check', 'commission', 'commissionPaid']
+    const fieldNames = ['kind', 'paymentStatus', 'paymentType', 'check', 'commission', 'commissionPaid', 'discount']
     if (!inv) {
       fieldNames.forEach( field => this.setField( field, null ))
     } else {
@@ -262,7 +262,7 @@ export default class InvoiceDetail extends Component {
     if (inv) {
       if (inv.event) {
         if (inv.event.client) {
-          const name = clientName(inv.event.client, true)
+          const name = clientName(inv.event.client, { oneLine: true })
           this.setField('client', name)
           this.setFormData('client_id', inv.event.client.id)
         } else {
@@ -349,9 +349,9 @@ export default class InvoiceDetail extends Component {
 
   // ----------------------------Handle-Change----------------------------------
 
-  handleChange = (e) => {
-    const { name, value } = e.target
-    console.log(name, value)
+  handleChange = (e, type) => {
+    let { name, value } = e.target
+    if (type === 'number') value = parseInt(value)
     this.setState(prevState => ({
       fields: {
         ...prevState.fields,
@@ -471,7 +471,7 @@ export default class InvoiceDetail extends Component {
     const { searchFieldData } = this.state
     if (searchFieldData) {
       item = searchFieldData.clients[index]
-      const client = clientName(item, true);
+      const client = clientName(item, {oneLine: true});
       if (item) {
         this.setState(prevState => ({
           formData: {
@@ -581,6 +581,7 @@ export default class InvoiceDetail extends Component {
   }
 
   render(){
+    const { mobile } = this.props
     return (
       <div className="InvoiceDetail" ref={this.container}>
         <Header
@@ -600,16 +601,22 @@ export default class InvoiceDetail extends Component {
           onEnter={this.handleFormSubmit}
         />
         <Invoice
+          {...this.props}
           {...this.state}
           handleLineChange={this.handleLineChange}
           addLine={this.addLine}
           deleteLine={this.deleteLine}
           setSubTotal={this.setSubTotal}
         />
-        <Summary {...this.state}/>
+        <Summary
+          {...this.props}
+          {...this.state}
+          handleChange={this.handleChange}
+        />
 
-        {this.state.mobile?
+        {mobile?
           <Buttons
+            {...this.props}
             {...this.state}
             scrollToTop={this.scrollToTop}
             edit={() => this.setEditMode(!this.state.editMode)}

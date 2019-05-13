@@ -146,7 +146,7 @@ export default class EventDetail extends Component {
     const { evt } = this.state
     if (evt) {
       if (evt.client) {
-        const name = clientName(evt.client, true)
+        const name = clientName(evt.client, {oneLine: true})
         this.setField('client', name)
         this.setFormData('client_id', evt.client.id)
       } else {
@@ -554,7 +554,7 @@ export default class EventDetail extends Component {
 
         case 'client':
           item = searchFieldData.clients[index]
-          const client = clientName(item, true);
+          const client = clientName(item, {oneLine: true});
           if (item) {
             this.setState(prevState => ({
               formData: {
@@ -908,6 +908,7 @@ export default class EventDetail extends Component {
           edit={this.switchEditMode}
           close={this.close}
           delete={this.handleDelete}
+          submit={this.handleSubmit}
 
           handleChange={this.handleChange}
           handleStatusChange={this.handleStatusChange}

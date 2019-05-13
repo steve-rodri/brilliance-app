@@ -10,7 +10,6 @@ export default class Invoice extends Component {
 
     switch (type) {
       case 'delete':
-        style.color = 'var(--light-gray)'
         break;
       case 'quantity':
         style.padding = 0
@@ -48,17 +47,30 @@ export default class Invoice extends Component {
     }
   }
 
+  quantities = () => {
+    const { inv } = this.props
+    let bool = false;
+    if (inv && inv.lines && inv.lines.length) {
+      inv.lines.forEach(line => {
+        if (line.quantity > 1) {
+          bool = true
+        }
+      })
+    }
+    return bool;
+  }
+
   header = () => {
-    const { inv, editMode } = this.props
+    const { inv, editMode, mobile } = this.props
     if (inv) {
       if (editMode || (inv.lines && inv.lines.length)) {
         return (
           <thead className="Invoice--header">
             <tr className= "Invoice--header-row">
               {editMode? <th className="Invoice--header-cell Invoice--header-edit"></th> : null}
-              <th className="Invoice--header-cell Invoice--header-quantity"><h3>Quantity</h3></th>
+              {!mobile? <th className="Invoice--header-cell Invoice--header-quantity"><h3>Quantity</h3></th> : null}
               <th className="Invoice--header-cell Invoice--header-item"><h3>Item</h3></th>
-              {editMode? <th className="Invoice--header-cell Invoice--header-inc"><h3>Inc</h3></th> : null}
+              {editMode && !mobile? <th className="Invoice--header-cell Invoice--header-inc"><h3>Inc</h3></th> : null}
               <th className="Invoice--header-cell Invoice--header-price"><h3>Price</h3></th>
             </tr>
           </thead>

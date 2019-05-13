@@ -4,7 +4,7 @@ import './index.css'
 
 export default class Summary extends Component {
   render(){
-    const { editMode, inv } = this.props
+    const { editMode, inv, fields, handleChange } = this.props
 
     if (inv) {
 
@@ -19,7 +19,15 @@ export default class Summary extends Component {
                 </div>
                 <div>
                   <label>Discount :</label>
-                  <p>{numeral(inv.discount).format('$0,0.00')}</p>
+                  <div className="Edit--Field">
+                    <input
+                      className="Input"
+                      type="number"
+                      name="discount"
+                      value={fields && fields.discount? fields.discount : ''}
+                      onChange={(e) => handleChange(e, 'number')}
+                    />
+                  </div>
                 </div>
                 <div>
                   <label>Total :</label>
