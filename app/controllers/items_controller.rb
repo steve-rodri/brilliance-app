@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
         if terms.index(term) + 1 < terms.length
           query += " AND "
         end
-        
+
       end
 
       query += " LIMIT #{@@items_limit}"
@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
     else
       @items = Item.all
     end
-    render json: @items, include: '**'
+    render json: @items, root:'items', include: '**'
   end
 
   # GET /items/1
