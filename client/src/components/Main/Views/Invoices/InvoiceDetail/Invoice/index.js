@@ -12,7 +12,6 @@ export default class Invoice extends Component {
       case 'delete':
         break;
       case 'quantity':
-        style.padding = 0
         break;
       case 'price':
         style.padding = 0
@@ -42,6 +41,7 @@ export default class Invoice extends Component {
           length={lines.length}
           line={line}
           styleCell={this.styleCell}
+          showQty={this.quantities()}
         />
       )
     }
@@ -52,7 +52,7 @@ export default class Invoice extends Component {
     let bool = false;
     if (inv && inv.lines && inv.lines.length) {
       inv.lines.forEach(line => {
-        if (line.quantity > 1) {
+        if (line.quantity) {
           bool = true
         }
       })
@@ -68,10 +68,10 @@ export default class Invoice extends Component {
           <thead className="Invoice--header">
             <tr className= "Invoice--header-row">
               {editMode? <th className="Invoice--header-cell Invoice--header-edit"></th> : null}
-              {!mobile? <th className="Invoice--header-cell Invoice--header-quantity"><h3>Quantity</h3></th> : null}
+              {(editMode && !mobile) || (!editMode && this.quantities())? <th className="Invoice--header-cell Invoice--header-quantity"><h3>Qty</h3></th> : null}
               <th className="Invoice--header-cell Invoice--header-item"><h3>Item</h3></th>
               {editMode && !mobile? <th className="Invoice--header-cell Invoice--header-inc"><h3>Inc</h3></th> : null}
-              <th className="Invoice--header-cell Invoice--header-price"><h3>Price</h3></th>
+              {!mobile? <th className="Invoice--header-cell Invoice--header-price"><h3>Price</h3></th> : null}
             </tr>
           </thead>
         )

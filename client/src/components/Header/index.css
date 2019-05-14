@@ -11,7 +11,7 @@ header {
   z-index: 10;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 750px) {
   header {
     grid-template-columns: 170px auto 75px;
     position: static;
@@ -156,7 +156,7 @@ nav > *:active, nav > * > h3:active {
   border-radius: 100%;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 750px) {
   nav {
     display: grid;
   }
@@ -172,7 +172,7 @@ nav > *:active, nav > * > h3:active {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 750px) {
   nav > * > div {
     font-size: 16px;
   }

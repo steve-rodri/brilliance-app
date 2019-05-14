@@ -57,7 +57,7 @@ export default function Header(props){
       return (
         <Fragment>
           {c? <h3 className="InvoiceDetail-header--client">{clientName(c, {oneLine: true})}</h3> : null}
-              <div className="InvoiceDetail-header--client-date-seperator"></div>
+          {c && e? <div className="InvoiceDetail-header--client-date-seperator"></div> : null}
           {e? <h3 className="InvoiceDetail-header--date">{moment(e.start).format('MMMM Do YYYY')}</h3> : null}
         </Fragment>
       )

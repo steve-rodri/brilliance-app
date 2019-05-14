@@ -1,30 +1,40 @@
 .InvoiceDetail {
   background-color: var(--light-gray);
   display: grid;
-  align-content: start;
 }
 
 @media (min-width: 750px) {
   .InvoiceDetail {
-    height: 100%;
     background-color: var(--dark-blue);
     width: 100%;
+  }
+
+  .InvoiceDetail > main {
+    display: grid;
+    grid-gap: 40px;
+    grid-template-areas:
+    ". ."
+    ". ."
+    "invoice invoice"
+    ;
+    grid-auto-flow: dense;
+    padding: 40px;
+  }
+  .InvoiceDetail > main > section {
+    grid-area: invoice;
+    display: grid;
     align-content: start;
-    grid-template-rows: 73px auto auto 250px;
-    justify-items: center;
-    align-items: center;
+    grid-gap: 40px;
   }
 }
 
-@media (min-width: 1000px) {
-  .InvoiceDetail {
-    height: auto;
-    grid-template-rows: 73px auto auto auto;
-    grid-template-columns: 416px repeat(3, auto);
+@media (min-width: 1200px) {
+  .InvoiceDetail > main {
     grid-template-areas:
-    "header header header header"
-    "subheader invoice invoice invoice"
-    "subheader summary summary summary"
-    "subheader . . ."
+    ". invoice"
+    ". invoice"
+    ". invoice"
+    ;
+    grid-auto-flow: dense;
   }
 }

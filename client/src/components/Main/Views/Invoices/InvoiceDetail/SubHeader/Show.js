@@ -148,7 +148,7 @@ export default class SubHeader extends Component {
   render(){
     const { inv, mobile } = this.props
     return (
-      <div className="SubHeader">
+      <Fragment>
 
         <div className="SubHeader--Show SubHeader--fields-container">
           <div className="SubHeader--Show SubHeader--component-title"><h3>About</h3></div>
@@ -181,7 +181,7 @@ export default class SubHeader extends Component {
           null
         } */}
 
-      </div>
+      </Fragment>
     )
   }
 }

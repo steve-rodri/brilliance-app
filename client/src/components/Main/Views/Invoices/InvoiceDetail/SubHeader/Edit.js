@@ -166,7 +166,7 @@ export default class Edit extends Component {
     const { fields, handleChange, searchFieldData, mobile } = this.props
     if (fields) {
       return (
-        <div className="SubHeader">
+        <Fragment>
 
           <div className="SubHeader--Edit SubHeader--fields-container">
             <div className="SubHeader-Edit SubHeader--component-title"><h3>About</h3></div>
@@ -200,7 +200,7 @@ export default class Edit extends Component {
             null
           }
 
-        </div>
+        </Fragment>
       )
     } else return null
   }

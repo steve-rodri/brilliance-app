@@ -28,14 +28,9 @@
   background: rgb(50,235,75)
 }
 
-.AddNew:active {
-
-}
-
 .AddNew--button-text {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  /* text-transform: uppercase; */
   color: white;
 }
 
