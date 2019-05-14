@@ -34,7 +34,7 @@ aside {
 
 /* -----------------Main---------------- */
 
-main {
+.ListPage > main {
   height: 100%;
   width: 100%;
   background-color: var(--dark-blue);
@@ -44,7 +44,7 @@ main {
 }
 
 @media (min-width: 1000px) {
-  main {
+  .ListPage > main {
     grid-column: 2 / span 1;
   }
 }

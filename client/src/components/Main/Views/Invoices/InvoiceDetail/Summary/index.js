@@ -14,24 +14,44 @@ export default class Summary extends Component {
             <div className="Summary">
               <div className="Summary--totals">
                 <div>
-                  <label>SubTotal :</label>
+                  <label>SubTotal</label>
                   <p>{numeral(inv.subTotal).format('$0,0.00')}</p>
                 </div>
                 <div>
-                  <label>Discount :</label>
-                  <div className="Edit--Field">
+                  <label>Discount</label>
+                  <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
+                    <p>$</p>
                     <input
-                      className="Input"
+                      className="Summary--input"
                       type="number"
                       name="discount"
                       value={fields && fields.discount? fields.discount : ''}
-                      onChange={(e) => handleChange(e, 'number')}
+                      onChange={(e) => handleChange(e)}
+                      onFocus={this.props.handleFocusSelect}
                     />
-                  </div>
+                  </form>
                 </div>
                 <div>
-                  <label>Total :</label>
+                  <label>Total</label>
                   <p>{numeral(inv.total).format('$0,0.00')}</p>
+                </div>
+                <div>
+                  <label>Deposit</label>
+                  <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
+                    <p>$</p>
+                    <input
+                      className="Summary--input"
+                      type="number"
+                      name="deposit"
+                      value={fields && fields.deposit? fields.deposit : ''}
+                      onChange={(e) => handleChange(e)}
+                      onFocus={this.props.handleFocusSelect}
+                    />
+                  </form>
+                </div>
+                <div>
+                  <label>Balance</label>
+                  <p>{numeral(inv.balance).format('$0,0.00')}</p>
                 </div>
               </div>
             </div>
@@ -43,15 +63,15 @@ export default class Summary extends Component {
             <div className="Summary">
               <div className="Summary--totals">
                 <div>
-                  <label>Total :</label>
+                  <label>Total</label>
                   <p>{numeral(inv.total).format('$0,0.00')}</p>
                 </div>
                 <div>
-                  <label>Deposit :</label>
+                  <label>Deposit</label>
                   <p>{numeral(inv.deposit).format('$0,0.00')}</p>
                 </div>
                 <div>
-                  <label>Balance :</label>
+                  <label>Balance</label>
                   <p>{numeral(inv.balance).format('$0,0.00')}</p>
                 </div>
               </div>

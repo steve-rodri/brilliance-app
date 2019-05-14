@@ -71,25 +71,30 @@ export default class Edit extends Component {
         }
 
         {/* Price */}
-        <td style={styleCell(index, length, 'price')} className="Invoice--cell Line--price">
-          {
-            !line.inc?
-            <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
-              <p>$</p>
-              <input
-                className="Line--input"
-                style={{width: '100%'}}
-                name="price"
-                type="number"
-                value={line.price || ''}
-                onChange={(e) => handleLineChange(e, line.id)}
-                onFocus={this.handleFocusSelect}
-              />
-            </form>
-            :
-            null
-          }
-        </td>
+        {
+          !mobile?
+          <td style={styleCell(index, length, 'price')} className="Invoice--cell Line--price">
+            {
+              !line.inc?
+              <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
+                <p>$</p>
+                <input
+                  className="Line--input"
+                  style={{width: '100%'}}
+                  name="price"
+                  type="number"
+                  value={line.price || ''}
+                  onChange={(e) => handleLineChange(e, line.id)}
+                  onFocus={this.handleFocusSelect}
+                />
+              </form>
+              :
+              null
+            }
+          </td>
+          :
+          null
+        }
       </tr>
     )
   }

@@ -663,7 +663,11 @@ export default class EventDetail extends Component {
     const { workers, formData } = this.state
     if (formData) {
       const { employee_ids } = formData
-      const scheduled = workers.find(worker => worker.info.id === employee.id) || (employee_ids && employee_ids.find(id => id === employee.id))
+
+      const scheduled =
+        workers.find(worker => worker.info.id === employee.id) ||
+        (employee_ids && employee_ids.find(id => id === employee.id))
+
       if (scheduled) {
         this.removeWorker(scheduled)
       } else {

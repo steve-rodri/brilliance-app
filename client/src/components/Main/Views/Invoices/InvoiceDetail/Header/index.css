@@ -1,7 +1,7 @@
 .InvoiceDetail-header {
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 75px;
   z-index: 5;
   display: grid;
   justify-items: center;
@@ -14,13 +14,12 @@
 
 @media (min-width: 750px) {
   .InvoiceDetail-header {
-    grid-area: header;
     height: auto;
+    top: 0;
     grid-gap: 5px;
     grid-auto-flow: column;
     grid-template-columns: 250px auto 250px;
     padding: 10px;
-    margin: 0 40px;
   }
 }
 
@@ -33,6 +32,7 @@
 
 .InvoiceDetail-header--client {
   font-weight: 400;
+  text-align: center;
 }
 
 .InvoiceDetail-header--client-date-seperator {
@@ -42,18 +42,25 @@
 
 .InvoiceDetail-header--date {
   font-weight: 400;
+  text-align: center;
 }
 
 @media (min-width: 750px) {
   .InvoiceDetail-header--title {
     display: flex;
-    font-size: 25px;
+    font-size: 20px;
     text-align: left;
     grid-column: 2 / span 1;
   }
 
   .InvoiceDetail-header--date {
     font-weight: 300;
+  }
+}
+
+@media (min-width: 1200px) {
+  .InvoiceDetail-header--title {
+    font-size: 25px;
   }
 }
 

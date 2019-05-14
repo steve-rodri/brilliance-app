@@ -4,47 +4,36 @@
   display: grid;
 }
 
-@media (min-width: 750px) {
-  .Summary--container {
-    padding: 40px;
-  }
-}
-
-@media (min-width: 1000px) {
-  .Summary--container {
-    grid-area: summary;
-    padding: 40px 40px 40px 25px;
-  }
-}
-
 .Summary {
   display: grid;
   width: 100%;
-  justify-self: end;
 }
 
 @media (min-width: 750px) {
   .Summary {
-    display: grid;
-    width: 100%;
     background-color: var(--dark-gray);
-    justify-self: end;
     color: #eee;
+    justify-content: end;
   }
 }
 
 .Summary--totals {
   display: grid;
-  grid-gap: 10px;
-  padding: 15px;
+  grid-row-gap: 30px;
+  grid-column-gap: 10px;
+  padding: 20px;
+  --auto-grid-min-size: 125px;
+  grid: repeat(2, 1fr) / auto;
+  grid-auto-flow: column;
+  justify-content: space-evenly;
+  border-top: 1px solid #BBBBBB;
 }
 
 @media (min-width: 750px) {
   .Summary--totals {
-    display: grid;
-    grid-gap: 5px;
-    padding: 15px;
-    justify-content: right;
+    justify-content: end;
+    grid: auto / auto;
+    border: none;
   }
 }
 
@@ -52,15 +41,43 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  width: 100%;
   font-size: 20px;
 }
 
 @media (min-width: 750px) {
   .Summary--totals > * {
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
     grid-gap: 40px;
     font-size: 25px;
+    justify-items: end;
+  }
+
+  .Summary--totals > * > label {
+    justify-self: start;
+  }
+}
+
+.Summary--totals > div > form {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  grid-gap: 3px;
+}
+
+.Summary--input {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #BBBBBB;
+  font-size: 20px;
+  font-family: 'Roboto';
+  background-color: #F8F8F8;
+  width: 107px;
+  padding: 10px 5px;
+}
+
+@media (min-width: 750px) {
+  .Summary--input {
+    font-size: 25px;
+    text-align: right;
   }
 }

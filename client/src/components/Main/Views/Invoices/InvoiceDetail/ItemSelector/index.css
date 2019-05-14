@@ -1,15 +1,15 @@
 .ItemSelector {
-  background-color: var(--med-dark-blue);
+  background-color: var(--light-gray);
   display: grid;
   justify-items: center;
   align-items: center;
-  grid: 68px auto 55px / auto;
-  padding: 10px;
+  grid: 46px auto 75px / auto;
   height: 630px;
 }
 
-.ItemSelector > h1 {
-  border-bottom: 1px solid #eee;
+.ItemSelector > h3 {
+  background-color: var(--darker-blue);
+  font-size: 30px;
   color: #eee;
   padding: 5px;
   align-self: start;
@@ -24,6 +24,7 @@
 
 .ItemSelector--search > input {
   width: 80%;
+  border: 1px solid #BBBBBB;
 }
 
 .ItemSelector--search-results {
@@ -52,6 +53,22 @@
 .ItemSelector--search-result:hover {
   cursor: pointer;
   background-color: var(--light-blue);
+}
+
+.ItemSelector--create-group-button {
+  border: 3px solid var(--dark-gray);
+  border-radius: 5px;
+  padding: 15px;
+  color: var(--dark-gray);
+  font-size: 12px;
+}
+
+.ItemSelector--create-group-button:hover {
+  cursor: pointer;
+}
+
+.ItemSelector--button-text {
+  font-weight: 700;
 }
 
 .SearchResult--name {
