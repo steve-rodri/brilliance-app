@@ -5,12 +5,12 @@ class LinesController < ApplicationController
   def index
     @lines = Line.all
 
-    render json: @lines
+    render json: @lines, include: '**'
   end
 
   # GET /lines/1
   def show
-    render json: @line
+    render json: @line, include: '**', serializer: NestedLineSerializer
   end
 
   # POST /lines
@@ -18,7 +18,7 @@ class LinesController < ApplicationController
     @line = Line.new(line_params)
 
     if @line.save
-      render json: @line, status: :created, location: @line
+      render json: @line, status: :created, location: @line, include: '**', serializer: NestedLineSerializer
     else
       render json: @line.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class LinesController < ApplicationController
   # PATCH/PUT /lines/1
   def update
     if @line.update(line_params)
-      render json: @line
+      render json: @line, include: '**', serializer: NestedLineSerializer
     else
       render json: @line.errors, status: :unprocessable_entity
     end
