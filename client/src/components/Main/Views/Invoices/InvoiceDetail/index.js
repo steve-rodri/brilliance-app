@@ -7,7 +7,7 @@ import Modal from '../../../../Modal/'
 import ItemSelector from './ItemSelector/'
 import Buttons from '../../../../Buttons/Buttons'
 import { invoice, line, client } from '../../../../../services/BEP_APIcalls.js'
-import { quantity, price } from './Invoice/Line/Helpers'
+import { quantity, price, itemQty, itemPrice } from './Invoice/Line/Helpers'
 import { clientName } from '../../../../../helpers/clientHelpers'
 import axios from 'axios'
 import './index.css'
@@ -58,16 +58,12 @@ export default class InvoiceDetail extends Component {
   // -------------------------Getters-and-Setters-------------------------------
 
   setup = async() => {
-    const { isNew, evtId, evt } = this.props
-    if (isNew) {
-      this.setEditMode(true)
-      this.setFieldAndForm('kind', 'Proposal')
+    const { isNew, evtId, evt, history, user: { accessLevel } } = this.props
+    if (isNew && evtId) {
+      const inv = invoice.create({ kind: 'Proposal', event_id: evtId })
+      history.push(`${accessLevel}/invoices/${inv.id}`)
     } else {
       this.setInvoice()
-    }
-    if (evtId) {
-      this.setFormData('event_id', evtId)
-      this.setState({ fromEvent: true })
     }
     if (evt) {
       this.setState({ fromEvent: true })
@@ -142,7 +138,11 @@ export default class InvoiceDetail extends Component {
 
   setFields = () => {
     const { inv } = this.state
-    const fieldNames = ['kind', 'paymentStatus', 'paymentType', 'check', 'commission', 'commissionPaid', 'discount']
+    const fieldNames = [
+      'kind', 'paymentStatus', 'paymentType', 'check',
+      'commission', 'commissionPaid', 'subTotal', 'discount',
+      'total', 'deposit', 'balance', 'refund', 'tip'
+    ]
     if (!inv) {
       fieldNames.forEach( field => this.setField( field, null ))
     } else {
@@ -347,6 +347,49 @@ export default class InvoiceDetail extends Component {
     this.setState({ inv, fields })
   }
 
+  // --------------------------------Items--------------------------------------
+
+  addItem = async(item) => {
+    const state = {...this.state}
+    let { inv } = state
+    let invoiceType = "Proposal"
+    if (inv) invoiceType = inv.kind
+
+    const lineData = {
+      invoice_id: inv.id,
+      item_id: item.id,
+      quantity: itemQty(item),
+      price: itemPrice(item, invoiceType)
+    }
+
+    const newLine = await line.create(lineData, this.ajaxOptions)
+
+    this.setState(prevState => ({
+      inv: {
+        ...prevState.inv,
+        lines: [
+          ...prevState.inv.lines,
+          newLine
+        ]
+      },
+      fields: {
+        ...prevState.fields,
+        lines: [
+          ...prevState.fields.lines,
+          newLine
+        ]
+      },
+      formData: {
+        ...prevState.formData,
+        lines_attributes: [
+          ...prevState.lines_attributes,
+          newLine
+        ]
+      },
+      showItemModal: false
+    }))
+  }
+
   // ----------------------------Handle-Change----------------------------------
 
   handleChange = (e, type) => {
@@ -462,6 +505,56 @@ export default class InvoiceDetail extends Component {
     async() => {
       await this.updateSummary()
     });
+  }
+
+  handleSummaryChange = (e) => {
+    let { name, value } = e.target
+    let val = value;
+    if (value === '') val = 0;
+    if (val < 999999) {
+      switch (name) {
+        case 'discount':
+          this.setState(prevState => ({
+            inv: {
+              ...prevState.inv,
+              [name]: value,
+              total: prevState.inv.subTotal - parseInt(val)
+            },
+            fields: {
+              ...prevState.fields,
+              [name]: value,
+              total: prevState.fields.subTotal - parseInt(val)
+            },
+            formData: {
+              ...prevState.formData,
+              [name]: value,
+              total: prevState.formData.subTotal - parseInt(val)
+            }
+          }))
+          break;
+        case 'deposit':
+          this.setState(prevState => ({
+            inv: {
+              ...prevState.inv,
+              [name]: value,
+              balance: prevState.inv.total - parseInt(value)
+            },
+            fields: {
+              ...prevState.fields,
+              [name]: value,
+              balance: prevState.fields.total - parseInt(value)
+            },
+            formData: {
+              ...prevState.formData,
+              [name]: value,
+              balance: prevState.formData.total - parseInt(value)
+            }
+          }))
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   // -------------------------Client-Search-Field-------------------------------
@@ -592,27 +685,35 @@ export default class InvoiceDetail extends Component {
           delete={this.handleDelete}
           submit={this.handleSubmit}
         />
-        <SubHeader
-          {...this.props}
-          {...this.state}
-          handleChange={this.handleChange}
-          handleClientChange={this.handleClientChange}
-          onSelect={this.handleSelect}
-          onEnter={this.handleFormSubmit}
-        />
-        <Invoice
-          {...this.props}
-          {...this.state}
-          handleLineChange={this.handleLineChange}
-          addLine={this.addLine}
-          deleteLine={this.deleteLine}
-          setSubTotal={this.setSubTotal}
-        />
-        <Summary
-          {...this.props}
-          {...this.state}
-          handleChange={this.handleChange}
-        />
+        <main>
+          <SubHeader
+            {...this.props}
+            {...this.state}
+            handleChange={this.handleChange}
+            handleClientChange={this.handleClientChange}
+            onSelect={this.handleSelect}
+            onEnter={this.handleFormSubmit}
+          />
+          <section>
+            <Invoice
+              {...this.props}
+              {...this.state}
+              handleLineChange={this.handleLineChange}
+              addLine={this.addLine}
+              deleteLine={this.deleteLine}
+              setSubTotal={this.setSubTotal}
+            />
+            <Summary
+              {...this.props}
+              {...this.state}
+              handleChange={this.handleSummaryChange}
+            />
+          </section>
+        </main>
+
+        <div className="InvoiceDetail--delete">
+          <h3>Delete</h3>
+        </div>
 
         {mobile?
           <Buttons
@@ -633,7 +734,8 @@ export default class InvoiceDetail extends Component {
               e.stopPropagation()
               this.closeItemModal()
             }}
-            content={<ItemSelector {...this.props}/>}
+            content={<ItemSelector {...this.props} addItem={this.addItem}/>}
+            closeIconColor='var(--light-gray)'
           />
           :
           null

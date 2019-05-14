@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import SearchField from '../../../../../SearchField/'
 import SearchResult from './SearchResult/'
 import { item } from '../../../../../../services/BEP_APIcalls.js'
@@ -40,13 +40,20 @@ export default class ItemSelector extends Component {
     }
   }
 
+  selectItem = (e, name, i) => {
+    e.stopPropagation()
+    const { items } = this.state
+    const item = items[i]
+    this.props.addItem(item)
+  }
+
   styleSearch = () => {
-    // const { search } = this.state
-    // if (search.length > 2) {
+    const { search } = this.state
+    if (search.length > 2) {
       return { alignSelf: 'start'}
-  //   } else {
-  //     return {}
-  //   }
+    } else {
+      return {}
+    }
   }
 
   formatResult = (item) => {
@@ -59,32 +66,43 @@ export default class ItemSelector extends Component {
     )
   }
 
+  view = () => {
+    const { view } = this.state;
+    switch (view) {
+      default:
+      return (
+        <Fragment>
+          <h3>Add Item</h3>
+          <SearchField
+            formClassName="ItemSelector--search"
+            resultsClassName="ItemSelector--search-results"
+            resultClassName="ItemSelector--search-result"
+            formatResult={this.formatResult}
+            styleForm={this.styleSearch()}
+            input={{
+              className: 'Input',
+              name: 'search',
+              placeholder:'search...',
+              value: this.state.search
+            }}
+            handleChange={this.handleChange}
+            searchResults={this.state.items}
+            onEnter={this.selectItem}
+            onSelect={this.selectItem}
+          />
+
+          <div className="ItemSelector--create-group-button">
+            <h2 className="ItemSelector--button-text">Create Group/Package</h2>
+          </div>
+        </Fragment>
+      )
+    }
+  }
+
   render(){
     return (
       <div className="ItemSelector">
-        <h1>Add Item</h1>
-        <SearchField
-          formClassName="ItemSelector--search"
-          resultsClassName="ItemSelector--search-results"
-          resultClassName="ItemSelector--search-result"
-          formatResult={this.formatResult}
-          styleForm={this.styleSearch()}
-          input={{
-            className: 'Input',
-            name: 'search',
-            placeholder:'search',
-            value: this.state.search
-          }}
-          handleChange={this.handleChange}
-          searchResults={this.state.items}
-          onEnter
-          onSelect
-        />
-
-        <div className="AddNew">
-          <span className="AddNew--button-text">Create Group/Package</span>
-        </div>
-
+        {this.view()}
       </div>
     )
   }
