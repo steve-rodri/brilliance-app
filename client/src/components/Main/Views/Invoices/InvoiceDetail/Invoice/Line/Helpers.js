@@ -81,12 +81,13 @@ export const price = (line, invoiceType, format) => {
 
   //prc factors in lineQty
   const prc = () => {
-    if (!line.item) return false;
-    let quantity = itemQty(line.item);
+    let quantity = 0
+    if (line.item) quantity = itemQty(line.item);
     if (line.quantity) quantity = line.quantity;
     return sumOfContents(line.item, invoiceType) * quantity;
   }
-  const totalPrice = prc() - line.discountAdj
+  let totalPrice = prc() - line.discountAdj
+  if (line.price) totalPrice = line.price
 
   if (format && line.inc) return numeral(0).format('$0,0.00')
   if (line.inc) return 0
@@ -112,8 +113,8 @@ export const itemPrice = (item, invoiceType, format) => {
 
 export const itemQty = (item) => {
   if (!item) return;
-
-  const contents = [...item.contents]
+  let contents = []
+  if (item.contents) contents = [...item.contents]
   let content = {}
   const oneObj = contents && contents.length === 1
   if (oneObj) content = contents[0]
@@ -136,14 +137,24 @@ const sumOfContents = (item, invoiceType) => {
       const content = contents[0]
 
       if (content.inc) return 0
-      return inventoryPrice(content, invoiceType) * content.quantity - content.discountAdj
+      const { inventory } = content
+      if (inventory) {
+        return inventoryPrice(inventory, invoiceType) * content.quantity - content.discountAdj
+      } else {
+        return content.discountAdj
+      }
 
     }
 
     //if more than 1 piece of content
     if (contents && contents.length > 1) {
       const prices = contents.map( content => {
-        return inventoryPrice(content, invoiceType) * content.quantity - content.discountAdj
+        const { inventory } = content
+        if (inventory) {
+          return inventoryPrice(inventory, invoiceType) * content.quantity - content.discountAdj
+        } else {
+          return content.discountAdj
+        }
       })
 
       return prices.reduce((a, c) => a + c)
@@ -154,13 +165,13 @@ const sumOfContents = (item, invoiceType) => {
 
 // ------------Inventory----------
 
-const inventoryPrice = (content, invoiceType) => {
-  const { inventory } = content
+export const inventoryPrice = (inventory, invoiceType, format) => {
   if (!inventory) return 0
+  let price = 0
 
-  if (invoiceType === 'Rental Contract') {
-    return inventory.rentalPrice
-  }
-
-  return inventory.sellPrice
+  if (invoiceType === 'Rental Contract') price = inventory.rentalPrice
+  else price = inventory.sellPrice
+  
+  if (format) return numeral(price).format('$0,0.00')
+  return price
 }

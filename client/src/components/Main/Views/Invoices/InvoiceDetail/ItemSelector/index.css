@@ -52,7 +52,6 @@
 
 .ItemSelector--search-result:hover {
   cursor: pointer;
-  background-color: var(--light-blue);
 }
 
 .ItemSelector--create-group-button {
@@ -89,4 +88,8 @@
   grid: 25px auto / auto;
   justify-items: center;
   align-items: center;
+}
+
+.SearchResult--price {
+  grid-column: 5;
 }

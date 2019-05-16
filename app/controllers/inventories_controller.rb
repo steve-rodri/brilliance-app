@@ -3,8 +3,31 @@ class InventoriesController < ApplicationController
 
   # GET /inventories
   def index
-    @inventories = Inventory.all.with_attached_photo
+    if params[:q]
+      query = ""
 
+      terms = params[:q].split
+      terms.each do |term|
+        query += "(inventories.category LIKE '%#{term}%'
+        OR inventories.category LIKE '%#{term.capitalize}%'
+        OR inventories.name LIKE '%#{term}%'
+        OR inventories.name LIKE '%#{term.capitalize}%'
+        OR inventories.manufacturer LIKE '%#{term}'
+        OR inventories.manufacturer LIKE '%#{term.capitalize}')"
+
+        if terms.index(term) + 1 < terms.length
+          query += " AND "
+        end
+      end
+
+      @inventories = Inventory
+        .distinct
+        .where(query)
+        .with_attached_photo
+        .limit(5)
+    else
+      @inventories = Inventory.all.with_attached_photo
+    end
     render json: @inventories, include: '**'
   end
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { pencilIcon, plusIcon, minusIcon } from '../../../../../../../helpers/icons'
+import { pencilIcon, plusIcon } from '../../../../../../../helpers/icons'
 
 export default class Edit extends Component {
   constructor(props){

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import SearchField from '../../../../../SearchField/'
 import SearchResult from './SearchResult/'
-import { item } from '../../../../../../services/BEP_APIcalls.js'
+import { line, inventory } from '../../../../../../services/BEP_APIcalls.js'
 import axios from 'axios'
 import './index.css'
 
@@ -9,14 +9,13 @@ export default class ItemSelector extends Component {
   constructor(props){
     super(props)
     this.state = {
-      search: '',
-      items: []
+      search: ''
     }
     this.axiosRequestSource = axios.CancelToken.source()
     this.ajaxOptions = {
       cancelToken: this.axiosRequestSource.token,
       unauthorizedCB: this.props.signout,
-      sendCount: false
+      sendCount: false,
     }
   }
 
@@ -24,27 +23,82 @@ export default class ItemSelector extends Component {
     this.axiosRequestSource && this.axiosRequestSource.cancel()
   }
 
+  componentDidMount(){
+    this.setClient()
+  }
+
+  setClient = () => {
+    const { inv } = this.props
+    if (inv && inv.event && inv.event.client) {
+      this.ajaxOptions.clientId = inv.event.client.id
+    }
+  }
+
   handleChange = async(name, value) => {
     this.setState({ [name]: value })
-    const items = await this.findItems(value)
-    if (items) {
-      this.setState({ items })
-    }
+    const lines = await this.findLines(value)
+    const inventory = await this.findInventories(value)
+
+    this.setState(prevState => {
+      if (prevState.searchResults) {
+        const prevLines = prevState.searchResults["past invoices"]
+        const prevStock = prevState.searchResults.inventories
+        if (lines !== prevLines && inventory !== prevStock) {
+          return {
+            searchResults: {
+              ...prevState.searchResults,
+              "past invoices": lines,
+              inventory
+            }
+          }
+        }
+        if (lines !== prevLines) {
+          return {
+            searchResults: {
+              ...prevState.searchResults,
+              "past invoices": lines
+            }
+          }
+        }
+        if (inventory !== prevStock) {
+          return {
+            searchResults: {
+              ...prevState.searchResults,
+              inventory
+            }
+          }
+        }
+      }
+      return {
+        searchResults: {
+          "past invoices": lines,
+          inventory
+        }
+      }
+    })
   }
 
-  findItems = async(query) => {
+  findLines = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const items = await item.find(query, this.ajaxOptions)
-      return items
+      const lines = await line.find(query, this.ajaxOptions)
+      return lines
     }
   }
 
-  selectItem = (e, name, i) => {
+  findInventories = async(query) => {
+    const q = query.split('')
+    if (q.length > 2) {
+      const inventories = await inventory.find(query, this.ajaxOptions)
+      return inventories
+    }
+  }
+
+  handleSelect = (e, name, i, key) => {
     e.stopPropagation()
-    const { items } = this.state
-    const item = items[i]
-    this.props.addItem(item)
+    const { searchResults } = this.state
+    const item = searchResults[key][i]
+    this.props.addItem(item, key)
   }
 
   styleSearch = () => {
@@ -56,12 +110,13 @@ export default class ItemSelector extends Component {
     }
   }
 
-  formatResult = (item) => {
+  formatResult = (item, type) => {
     return (
       <SearchResult
         {...this.props}
         key={item.id}
         item={item}
+        type={type}
       />
     )
   }
@@ -86,9 +141,9 @@ export default class ItemSelector extends Component {
               value: this.state.search
             }}
             handleChange={this.handleChange}
-            searchResults={this.state.items}
-            onEnter={this.selectItem}
-            onSelect={this.selectItem}
+            searchResults={this.state.searchResults}
+            onEnter={this.handleSelect}
+            onSelect={this.handleSelect}
           />
 
           <div className="ItemSelector--create-group-button">

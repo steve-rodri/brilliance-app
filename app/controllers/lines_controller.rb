@@ -1,11 +1,59 @@
 class LinesController < ApplicationController
   before_action :set_line, only: [:show, :update, :destroy]
-
+  @@lines_limit = 25
   # GET /lines
   def index
-    @lines = Line.all
+    if params[:q]
+      query = "SELECT DISTINCT lines.*
+      FROM lines
+      LEFT OUTER JOIN invoices ON lines.invoice_id = invoices.id
+      LEFT OUTER JOIN events ON invoices.event_id = events.id
+      LEFT OUTER JOIN clients ON clients.id = events.client_id
+      LEFT OUTER JOIN items ON lines.item_id = items.id
+      LEFT OUTER JOIN item_contents ON item_contents.item_id = items.id
+      LEFT OUTER JOIN contents ON contents.id = item_contents.content_id
+      LEFT OUTER JOIN inventories ON inventories.id = contents.inventory_id
+      WHERE "
 
-    render json: @lines, include: '**'
+      terms = params[:q].split
+      terms.each do |term|
+        query += "(items.name LIKE '%#{term}%'
+        OR items.name LIKE '%#{term.capitalize}%'
+        OR items.kind LIKE '%#{term}%'
+        OR items.kind LIKE '%#{term.capitalize}%'
+        OR items.install LIKE '%#{term}%'
+        OR items.install LIKE '%#{term.capitalize}%'
+        OR items.description LIKE '%#{term}%'
+        OR items.description LIKE '%#{term.capitalize}%'
+        OR contents.kind LIKE '%#{term}%'
+        OR contents.kind LIKE '%#{term.capitalize}%'
+        OR contents.description LIKE '%#{term}%'
+        OR contents.description LIKE '%#{term.capitalize}%'
+        OR inventories.category LIKE '%#{term}%'
+        OR inventories.category LIKE '%#{term.capitalize}%'
+        OR inventories.name LIKE '%#{term}%'
+        OR inventories.name LIKE '%#{term.capitalize}%'
+        OR inventories.manufacturer LIKE '%#{term}'
+        OR inventories.manufacturer LIKE '%#{term.capitalize}')"
+
+        if terms.index(term) + 1 < terms.length
+          query += " AND "
+        end
+      end
+
+      query += " AND lines.price > 0"
+
+      if params[:client_id]
+        query += " AND clients.id = '#{params[:client_id]}'"
+      end
+
+      query += " LIMIT #{@@lines_limit}"
+
+      @lines = Line.find_by_sql(query)
+    else
+      @lines = Line.all
+    end
+    render json: @lines, root: 'lines', include: '**'
   end
 
   # GET /lines/1

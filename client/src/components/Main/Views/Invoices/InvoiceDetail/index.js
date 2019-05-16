@@ -6,7 +6,7 @@ import Summary from './Summary'
 import Modal from '../../../../Modal/'
 import ItemSelector from './ItemSelector/'
 import Buttons from '../../../../Buttons/Buttons'
-import { invoice, line, client } from '../../../../../services/BEP_APIcalls.js'
+import { invoice, line, item, client } from '../../../../../services/BEP_APIcalls.js'
 import { quantity, price, itemQty, itemPrice } from './Invoice/Line/Helpers'
 import { clientName } from '../../../../../helpers/clientHelpers'
 import axios from 'axios'
@@ -349,17 +349,45 @@ export default class InvoiceDetail extends Component {
 
   // --------------------------------Items--------------------------------------
 
-  addItem = async(item) => {
+  addItem = async(data, category) => {
     const state = {...this.state}
     let { inv } = state
     let invoiceType = "Proposal"
     if (inv) invoiceType = inv.kind
 
-    const lineData = {
-      invoice_id: inv.id,
-      item_id: item.id,
-      quantity: itemQty(item),
-      price: itemPrice(item, invoiceType)
+    let lineData = {}
+
+    switch (category) {
+
+      case 'past invoices':
+        const line = data
+        lineData = {
+          invoice_id: inv.id,
+          item_id: line.item.id,
+          quantity: quantity(data),
+          price: price(data, invoiceType)
+        }
+      break;
+
+      case 'inventory':
+        const inventory = data
+        const newItem = await item.create({
+          contents_attributes: {
+            inventory_id: parseInt(inventory.id)
+          }
+        }, this.ajaxOptions)
+        if (newItem) {
+          lineData = {
+            invoice_id: inv.id,
+            item_id: newItem.id,
+            quantity: itemQty(newItem),
+            price: itemPrice(newItem, invoiceType)
+          }
+        }
+      break;
+
+      default:
+      break;
     }
 
     const newLine = await line.create(lineData, this.ajaxOptions)
@@ -376,13 +404,6 @@ export default class InvoiceDetail extends Component {
         ...prevState.fields,
         lines: [
           ...prevState.fields.lines,
-          newLine
-        ]
-      },
-      formData: {
-        ...prevState.formData,
-        lines_attributes: [
-          ...prevState.lines_attributes,
           newLine
         ]
       },
@@ -560,16 +581,16 @@ export default class InvoiceDetail extends Component {
   // -------------------------Client-Search-Field-------------------------------
 
   handleSelect = (e, name, index) => {
-    let item;
+    let data;
     const { searchFieldData } = this.state
     if (searchFieldData) {
-      item = searchFieldData.clients[index]
-      const client = clientName(item, {oneLine: true});
-      if (item) {
+      data = searchFieldData.clients[index]
+      const client = clientName(data, {oneLine: true});
+      if (data) {
         this.setState(prevState => ({
           formData: {
             ...prevState.formData,
-            client_id: item.id
+            client_id: data.id
           },
           fields: {
             ...prevState.fields,
@@ -734,7 +755,7 @@ export default class InvoiceDetail extends Component {
               e.stopPropagation()
               this.closeItemModal()
             }}
-            content={<ItemSelector {...this.props} addItem={this.addItem}/>}
+            content={<ItemSelector {...this.props} {...this.state} addItem={this.addItem}/>}
             closeIconColor='var(--light-gray)'
           />
           :
