@@ -8,3 +8,19 @@
   overflow: auto;
   overscroll-behavior-y: contain;
 }
+
+.SearchField--subtitle {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: var(--dark-gray);
+  color: var(--light-gray);
+  padding: 5px;
+}
+
+.SearchField--subtitle > h6 {
+  font-size: 20px;
+}

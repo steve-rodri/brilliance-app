@@ -7,32 +7,154 @@ export default class SearchField extends Component {
     this.state = {
       highlightedResult: 0,
       hoveringResults: false,
-      fieldActive: false
+      fieldActive: false,
     }
     this.searchResults = React.createRef();
   }
 
   componentDidUpdate(prevProps){
     const { searchResults, scroll, input: { value } } = this.props;
-    if (searchResults && searchResults.length) {
-      if (searchResults !== prevProps.searchResults) {
-        this.scrollToTop()
-      }
-    }
+    const searchResultMatch = searchResults === prevProps.searchResults;
+
+    if (!searchResultMatch) this.scrollToTop()
+
     if (prevProps.input.value !== value) {
-      this.setState({ highlightedResult: 0 })
+      this.setState( prevState => ({
+        highlightedResult: {
+          ...prevState.highlightedResult,
+          section: {
+            ...prevState.highlightedResult.section,
+            index: 0
+          },
+          index: 0
+        }
+      }))
     }
+
     if (scroll && scroll !== prevProps.scroll) {
       this.setState({ fieldActive: false })
     }
   }
 
-  changeHighlightedResult = (e, i) => {
+  changeHighlightedResult = (e, i, section) => {
+    const { clientHeight: height } = e.target
     e.preventDefault()
     e.stopPropagation()
     const { highlightedResult } = this.state
-    if (i !== highlightedResult) {
-      this.setState({ highlightedResult: i })
+    if (i !== highlightedResult.index) {
+      this.setState( prevState => {
+        const sectionMatch = prevState.highlightedResult.section === section
+        if (!sectionMatch ) {
+          return {
+            highlightedResult: {
+              section,
+              index: i,
+              height
+            }
+          }
+        }
+        return {
+          highlightedResult: {
+            ...prevState.highlightedResult,
+            index: i,
+            height
+        }}
+      })
+    }
+  }
+
+  updateHighlightedResult = (direction) => {
+    const { highlightedResult: { section, index } } = this.state;
+    const { searchResults } = this.props
+    const isArray = Array.isArray(searchResults)
+    const isObj = () => searchResults === Object(searchResults) && !isArray;
+    if (isObj()) {
+      const sections = Object.entries(searchResults)
+      switch (direction) {
+
+        case 'up':
+          if (index > 0) {
+            this.setState( prevState => ({
+              highlightedResult: {
+                ...prevState.highlightedResult,
+                index: prevState.highlightedResult.index -= 1,
+              }
+            }))
+
+          } else if (section.index > 0){
+            this.setState( prevState => {
+              const prevSection = prevState.highlightedResult.section
+              if (prevSection.index > 0) {
+                const index = sections[prevSection.index - 1][1].length - 1
+                return {
+                  highlightedResult: {
+                    ...prevState.highlightedResult,
+                    section: {
+                      ...prevSection,
+                      index: prevSection.index -= 1,
+                    },
+                    index
+                  }
+                }
+              } else return null
+            })
+          }
+        break;
+
+        case 'down':
+          if (index < sections[section.index][1].length - 1) {
+            this.setState( prevState => ({
+              highlightedResult: {
+                ...prevState.highlightedResult,
+                index: prevState.highlightedResult.index += 1
+              }
+            }))
+
+          } else if (section.index + 1 < sections.length) {
+            this.setState( prevState => {
+              const prevSection = prevState.highlightedResult.section
+              return {
+                highlightedResult: {
+                  ...prevState.highlightedResult,
+                  section: {
+                    ...prevSection,
+                    index: prevSection.index += 1
+                  },
+                  index: 0
+                }
+              }
+            })
+          }
+        break;
+
+        default:
+        break;
+      }
+    } else if (isArray) {
+      switch (direction) {
+        case 'up':
+          if (index > 0) {
+            this.setState( prevState => ({
+              highlightedResult: {
+                ...prevState.highlightedResult,
+                index: prevState.highlightedResult.index -= 1,
+              }
+            }))
+          }
+        break;
+        case 'down':
+          if (index < searchResults.length - 1) {
+            this.setState( prevState => ({
+              highlightedResult: {
+                ...prevState.highlightedResult,
+                index: prevState.highlightedResult.index += 1
+              }
+            }))
+          }
+        break;
+        default:
+        break;
+      }
     }
   }
 
@@ -70,8 +192,7 @@ export default class SearchField extends Component {
   choosingResult = (e) => {
     e.stopPropagation()
     this.setState({
-      hoveringResults: true,
-      highlightedResult: 0
+      hoveringResults: true
     })
   }
 
@@ -83,136 +204,114 @@ export default class SearchField extends Component {
   }
 
   scrollResults = (direction) => {
+    const { highlightedResult: { section, index, height } } = this.state
     const scrollPosition = this.searchResults.current.scrollTop
-    const nextUpPosition = Math.floor( scrollPosition / 50 ) * 50
-    const nextDownPosition = Math.ceil( scrollPosition / 50 ) * 50
 
     switch (direction) {
+
       case 'up':
-      if (scrollPosition === 0) break;
-      if (scrollPosition !== nextUpPosition) {
-        this.searchResults.current.scrollTop = nextUpPosition
-      } else {
-        this.searchResults.current.scrollTop -= 150
-      }
+        if (scrollPosition === 0) break;
+        if (section) {
+          this.searchResults.current.scrollTop = (section.index + 1) * index * height
+        } else {
+          this.searchResults.current.scrollTop = index * height
+        }
       break;
+
       case 'down':
-      if (scrollPosition === 0) {
-        this.searchResults.current.scrollTop += 150
-        break;
-      }
-      if (scrollPosition !== nextDownPosition) {
-        this.searchResults.current.scrollTop = nextDownPosition
-      } else {
-        this.searchResults.current.scrollTop += 150
-      }
+        if (section) {
+          this.searchResults.current.scrollTop = (section.index + 1) * index * height
+        } else {
+          this.searchResults.current.scrollTop = index * height
+        }
       break;
+
       default:
       break;
     }
-
   }
 
   scrollToTop = () => {
     this.searchResults.current.scrollTop = 0
   }
 
-  updateHighlightedResult = (direction) => {
-    const { highlightedResult } = this.state;
-    const { searchResults: list } = this.props
-    switch (direction) {
-      case 'up':
-        if (highlightedResult > 0) {
-          this.setState((prevState) => ({
-            highlightedResult: prevState.highlightedResult -= 1
-          }))
-        }
-      break;
-      case 'down':
-        if (highlightedResult + 1 < list.length) {
-          this.setState((prevState) => ({
-            highlightedResult: prevState.highlightedResult += 1
-          }))
-        }
-      break;
-      default:
-      break;
-    }
-  }
-
-  styleResult = (i) => {
-    const { highlightedResult } = this.state
+  styleResult = (i, key) => {
+    const { highlightedResult: { section , index } } = this.state
     const style = { }
-    if (i === highlightedResult) {
-      style.backgroundColor = 'var(--light-blue)'
+    if (key) {
+      if (key.index === section.index && i === index) style.backgroundColor = 'var(--light-blue)'
+    } else {
+      if (i === index) style.backgroundColor = 'var(--light-blue)'
     }
-
     return style
   }
 
-  shouldScrollUp = () => {
-    const { highlightedResult } = this.state
-    const { searchResults } = this.props
-    const scrollPosition = this.searchResults.current.scrollTop
-    const offset = scrollPosition % 150
-    const validOffset = (
-      offset === 0  ||
-      offset === 49 ||
-      offset === 50 ||
-      offset === 99 ||
-      offset === 100
-    )
-    const rem0 = searchResults.length % 3 === 0
-    const rem1 = searchResults.length % 3 === 1
-    const rem2 = searchResults.length % 3 === 2
+  results = () => {
+    const {
+      searchResults,
+      subTitleClassName,
+      resultClassName,
+      formatResult,
+      input: { name },
+      onSelect
+    } = this.props
 
-    const isFirstItem = highlightedResult % 3 === 0
-    const isSecondItem = highlightedResult % 3 === 1
-    const isThirdItem = highlightedResult % 3 === 2
-
-    if (highlightedResult === 0) return false
-
-    if (rem0) {
-      if (isThirdItem) return true
+    if (Array.isArray(searchResults)) {
+      return searchResults && searchResults.map( (item, i) => (
+        <div
+          style={this.styleResult(i)}
+          key={i}
+          className={`${resultClassName} SearchField--result`}
+          onClick={(e) => {
+          e.stopPropagation();
+          onSelect(e, name, i)
+          this.handleCloseResults()
+          }}
+          onMouseEnter={(e) => this.changeHighlightedResult(e, i)}
+        >
+          <Fragment>{formatResult && formatResult(item)}</Fragment>
+        </div>
+      ))
     }
-    if (rem1) {
-      if (isFirstItem && offset === 0) return true
-      if (isSecondItem && (offset === 50 || offset === 49)) return true
+    if (searchResults) {
+      const results = Object.entries(searchResults)
+      return results.map((obj, index) => {
+        const key = obj[0]
+        const value = obj[1]
+        const section = { name: key, index }
+        return (
+          <Fragment key={index}>
+            <div className={`${subTitleClassName} SearchField--subtitle`} style={this.styleSectionTitle(section)}><h6>{key}</h6></div>
+            {
+              value && value.map( (val, i) =>
+                <div
+                  style={this.styleResult(i, section)}
+                  key={i}
+                  className={`${resultClassName} SearchField--result`}
+                  onClick={(e) => {
+                  e.stopPropagation();
+                  onSelect(e, name, i, key)
+                  this.handleCloseResults()
+                  }}
+                  onMouseEnter={(e) => this.changeHighlightedResult(e, i, section)}
+                >
+                  <Fragment>{formatResult && formatResult(val, key)}</Fragment>
+                </div>
+              )
+            }
+          </Fragment>
+        )
+      })
     }
-    if (rem2) {
-      if (isFirstItem && offset === 0) return true
-      if (isThirdItem && (offset === 100 || offset === 99)) return true
-    }
-
-    if (!validOffset) this.scrollToTop()
   }
 
-  shouldScrollDown = () => {
-    const { highlightedResult } = this.state
-    const { searchResults } = this.props
-    const scrollPosition = this.searchResults.current.scrollTop
-    const offset = scrollPosition % 150
-
-    const rem0 = searchResults.length % 3 === 0
-    const rem1 = searchResults.length % 3 === 1
-    const rem2 = searchResults.length % 3 === 2
-
-    const isFirstItem = highlightedResult % 3 === 0
-    const isSecondItem = highlightedResult % 3 === 1
-    const isThirdItem = highlightedResult % 3 === 2
-
-    if (highlightedResult === 0) return false
-    if (rem0) {
-      if (isThirdItem) return true
+  styleSectionTitle = (section) => {
+    let style = {};
+    if (section.index > 0) {
+      style.top = `${section.index * 34}px`
+      style.borderTop = "1px solid var(--light-gray)"
     }
-    if (rem1) {
-      if (isThirdItem && offset === 0) return true
-      if (isFirstItem && (offset === 50 || offset === 49)) return true
-    }
-    if (rem2) {
-      if (isThirdItem && offset === 0) return true
-      if (isSecondItem && (offset === 100 || offset === 99)) return true
-    }
+    return style;
   }
 
   render(){
@@ -221,9 +320,7 @@ export default class SearchField extends Component {
       searchResults,
 
       formClassName,
-      resultClassName,
       resultsClassName,
-      formatResult,
       styleForm,
 
       input:{
@@ -237,7 +334,6 @@ export default class SearchField extends Component {
       handleChange,
       formDataValue,
       onEnter,
-      onSelect,
     }
     = this.props
 
@@ -249,7 +345,7 @@ export default class SearchField extends Component {
         onSubmit={(e) => e.preventDefault()}
         onKeyDown={(e) => {
           if ( e.key === 'Enter' && searchResults ) {
-            onEnter(e, name, highlightedResult)
+            onEnter(e, name, highlightedResult.index, highlightedResult.section.name)
             this.handleCloseResults()
           }
         }}
@@ -273,7 +369,7 @@ export default class SearchField extends Component {
               handleChange(name, '')
             }
             if (!hoveringResults) {
-            this.handleCloseResults()
+              this.handleCloseResults()
             }
           }}
           onKeyDown={(e) => {
@@ -283,18 +379,14 @@ export default class SearchField extends Component {
               e.preventDefault()
               this.updateHighlightedResult('down')
 
-              if (this.shouldScrollDown()) {
-                this.scrollResults('down')
-              }
+              this.scrollResults('down')
 
             } else if (e.key === 'ArrowUp') {
 
               e.preventDefault()
               this.updateHighlightedResult('up')
 
-              if (this.shouldScrollUp()) {
-                this.scrollResults('up')
-              }
+              this.scrollResults('up')
 
             }
 
@@ -309,23 +401,7 @@ export default class SearchField extends Component {
           onMouseEnter={this.choosingResult}
           onMouseLeave={this.leavingResults}
         >
-          {
-            searchResults && searchResults.map( (item, i) => (
-              <div
-                style={this.styleResult(i)}
-                key={item.id}
-                className={`${resultClassName} SearchField--result`}
-                onClick={(e) => {
-                e.stopPropagation();
-                onSelect(e, name, i)
-                this.handleCloseResults()
-                }}
-                onMouseEnter={(e) => this.changeHighlightedResult(e, i)}
-              >
-                <Fragment>{formatResult && formatResult(item)}</Fragment>
-              </div>
-            ))
-          }
+          {this.results()}
         </div>
 
       </form>
