@@ -9,6 +9,10 @@ class ItemsController < ApplicationController
 
       query = "SELECT DISTINCT items.*
       FROM items
+      LEFT OUTER JOIN lines ON lines.item_id = items.id
+      LEFT OUTER JOIN invoices ON lines.invoice_id = invoices.id
+      LEFT OUTER JOIN events ON invoices.event_id = events.id
+      LEFT OUTER JOIN clients ON clients.id = events.client_id
       LEFT OUTER JOIN item_contents ON item_contents.item_id = items.id
       LEFT OUTER JOIN contents ON contents.id = item_contents.content_id
       LEFT OUTER JOIN inventories ON inventories.id = contents.inventory_id
@@ -31,6 +35,10 @@ class ItemsController < ApplicationController
           query += " AND "
         end
 
+      end
+
+      if params[:client_id]
+        query += " AND clients.id = '#{params[:client_id]}'"
       end
 
       query += " LIMIT #{@@items_limit}"

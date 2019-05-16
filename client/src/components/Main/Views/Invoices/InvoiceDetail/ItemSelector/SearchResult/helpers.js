@@ -1,6 +1,8 @@
 import pluralize from 'pluralize'
 
-export function itemName(item) {
+export function lineName(line) {
+  const { item } = line
+  if (!item) return;
   if(!item.quantity){
   	if(!item.contents.length){
   		if(item.useDescription){
@@ -153,7 +155,7 @@ function contentName(content) {
   }
 }
 
-function inventoryName(inventory){
+export function inventoryName(inventory){
   if (inventory.name) {
     if (inventory.manufacturer) {
       return `${inventory.manufacturer} ${inventory.name}`
@@ -163,7 +165,9 @@ function inventoryName(inventory){
   }
 }
 
-export function itemPhoto(item){
+export function linePhoto(line){
+  const { item } = line;
+  if (!item) return;
   if (item.contents && item.contents.length === 1) {
     if (item.contents[0].inventory) {
       return item.contents[0].inventory.photo

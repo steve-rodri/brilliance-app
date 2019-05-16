@@ -16,7 +16,7 @@ export default function Event(props){
     numColumns,
     styleItem,
     styleCell,
-    styleSummary } = props
+  } = props
   const event = item
   const leftCell = styleCell('left', event)
   const middleCell = styleCell('middle', event)

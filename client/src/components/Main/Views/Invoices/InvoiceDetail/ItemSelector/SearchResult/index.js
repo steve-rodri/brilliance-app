@@ -1,26 +1,42 @@
 import React, { Fragment } from 'react'
-// import moment from 'moment'
-// import numeral from 'numeral'
-import { itemName, itemPhoto } from './helpers'
-import { itemQty, itemPrice } from '../../Invoice/Line/Helpers'
+import { lineName, linePhoto, inventoryName } from './helpers'
+import { quantity, price, inventoryPrice } from '../../Invoice/Line/Helpers'
 
 export default function SearchResult(props){
-  const { item } = props
-  const photo = itemPhoto(item)
-  const name = itemName(item)
-  return (
-    <Fragment>
-      <div className="SearchResult--image">{photo? <img src={photo} alt={name}/> : null}</div>
-      <div className="SearchResult--kind"><p>{item.kind}</p></div>
-      <div className="SearchResult--name"><p>{name}</p></div>
-      <div className="SearchResult--quantity">
-        <h5>Qty:</h5>
-        <div>{itemQty(item)}</div>
-      </div>
-      <div className="SearchResult--price">
-        <h5>Price:</h5>
-        <div>{itemPrice(item, null, true)}</div>
-      </div>
-    </Fragment>
-  )
+  const { inv, item, type } = props
+  switch (type) {
+    case 'past invoices':
+      const lPhoto = linePhoto(item)
+      const lName = lineName(item)
+      return (
+        <Fragment>
+          <div className="SearchResult--image">{lPhoto? <img src={lPhoto} alt={lName}/> : null}</div>
+          <div className="SearchResult--kind"><p>{item.kind}</p></div>
+          <div className="SearchResult--name"><p>{lName}</p></div>
+          <div className="SearchResult--quantity">
+            <h5>Qty:</h5>
+            <div>{quantity(item)}</div>
+          </div>
+          <div className="SearchResult--price">
+            <h5>Price:</h5>
+            <div>{price(item, inv.kind, true)}</div>
+          </div>
+        </Fragment>
+      )
+    case 'inventory':
+      const iName = inventoryName(item)
+      return (
+        <Fragment>
+          <div className="SearchResult--image">{item.photo? <img src={item.photo} alt={iName}/> : null}</div>
+          <div className="SearchResult--kind"><p>{item.kind}</p></div>
+          <div className="SearchResult--name"><p>{iName}</p></div>
+          <div className="SearchResult--price">
+            <h5>Price:</h5>
+            <div>{inventoryPrice(item, inv.kind, true)}</div>
+          </div>
+        </Fragment>
+      )
+    default:
+    return null
+  }
 }

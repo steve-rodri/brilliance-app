@@ -318,6 +318,28 @@ export const invoice = {
 }
 
 export const line = {
+  find: async function (query, options) {
+    const { cancelToken, unauthorizedCB, clientId } = options
+    const url = () => {
+      let base = "/api/lines?"
+      base += `q=${query}`
+      if (clientId) base += `&client_id=${clientId}`
+      return base
+    }
+
+    try {
+      const resp = await axios.get( url(), { cancelToken: cancelToken })
+      return resp.data.lines
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Item Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
+  },
   create: async function (data, options) {
     const { cancelToken, unauthorizedCB } = options
     try {
@@ -352,10 +374,56 @@ export const line = {
 
 export const item = {
   find: async function (query, options){
+    const { cancelToken, unauthorizedCB, clientId } = options
+    const url = () => {
+      let base = "/api/items?"
+      base += `q=${query}`
+      if (clientId) base += `&client_id=${clientId}`
+      return base
+    }
+
+    try {
+      const resp = await axios.get( url(), { cancelToken: cancelToken })
+      return resp.data.items
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Item Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
+  },
+  create: async function (data, options){
     const { cancelToken, unauthorizedCB } = options
     try {
-      const resp = await axios.get(`/api/items?q=${query}`, { cancelToken: cancelToken })
-      return resp.data.items
+      const resp = await axios.post(`/api/items`, data, { cancelToken: cancelToken })
+      return resp.data.item
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Line Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
+  }
+}
+
+export const inventory = {
+  find: async function (query, options){
+    const { cancelToken, unauthorizedCB } = options
+    const url = () => {
+      let base = "/api/inventories?"
+      base += `q=${query}`
+      return base
+    }
+
+    try {
+      const resp = await axios.get( url(), { cancelToken: cancelToken })
+      return resp.data.inventories
     } catch (e) {
       if (axios.isCancel(e)) {
         console.log('Item Request Canceled')
