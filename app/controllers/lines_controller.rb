@@ -17,24 +17,25 @@ class LinesController < ApplicationController
 
       terms = params[:q].split
       terms.each do |term|
-        query += "(items.name LIKE '%#{term}%'
-        OR items.name LIKE '%#{term.capitalize}%'
-        OR items.kind LIKE '%#{term}%'
-        OR items.kind LIKE '%#{term.capitalize}%'
-        OR items.install LIKE '%#{term}%'
-        OR items.install LIKE '%#{term.capitalize}%'
-        OR items.description LIKE '%#{term}%'
-        OR items.description LIKE '%#{term.capitalize}%'
-        OR contents.kind LIKE '%#{term}%'
-        OR contents.kind LIKE '%#{term.capitalize}%'
-        OR contents.description LIKE '%#{term}%'
-        OR contents.description LIKE '%#{term.capitalize}%'
-        OR inventories.category LIKE '%#{term}%'
-        OR inventories.category LIKE '%#{term.capitalize}%'
-        OR inventories.name LIKE '%#{term}%'
-        OR inventories.name LIKE '%#{term.capitalize}%'
-        OR inventories.manufacturer LIKE '%#{term}'
-        OR inventories.manufacturer LIKE '%#{term.capitalize}')"
+        a_term = term.gsub("'", %q(\\\''))
+        query += "(items.name LIKE '%#{a_term}%'
+        OR items.name LIKE '%#{a_term.capitalize}%'
+        OR items.kind LIKE '%#{a_term}%'
+        OR items.kind LIKE '%#{a_term.capitalize}%'
+        OR items.install LIKE '%#{a_term}%'
+        OR items.install LIKE '%#{a_term.capitalize}%'
+        OR items.description LIKE '%#{a_term}%'
+        OR items.description LIKE '%#{a_term.capitalize}%'
+        OR contents.kind LIKE '%#{a_term}%'
+        OR contents.kind LIKE '%#{a_term.capitalize}%'
+        OR contents.description LIKE '%#{a_term}%'
+        OR contents.description LIKE '%#{a_term.capitalize}%'
+        OR inventories.category LIKE '%#{a_term}%'
+        OR inventories.category LIKE '%#{a_term.capitalize}%'
+        OR inventories.name LIKE '%#{a_term}%'
+        OR inventories.name LIKE '%#{a_term.capitalize}%'
+        OR inventories.manufacturer LIKE '%#{a_term}%'
+        OR inventories.manufacturer LIKE '%#{a_term.capitalize}%')"
 
         if terms.index(term) + 1 < terms.length
           query += " AND "

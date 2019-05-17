@@ -8,12 +8,18 @@ class InventoriesController < ApplicationController
 
       terms = params[:q].split
       terms.each do |term|
-        query += "(inventories.category LIKE '%#{term}%'
-        OR inventories.category LIKE '%#{term.capitalize}%'
-        OR inventories.name LIKE '%#{term}%'
-        OR inventories.name LIKE '%#{term.capitalize}%'
-        OR inventories.manufacturer LIKE '%#{term}'
-        OR inventories.manufacturer LIKE '%#{term.capitalize}')"
+        a_term = term.gsub("'", %q(\\\''))
+
+        query += "(inventories.category LIKE '%#{a_term}%'
+        OR inventories.category LIKE '%#{a_term.capitalize}%'
+        OR inventories.name LIKE '%#{a_term}%'
+        OR inventories.name LIKE '%#{a_term.capitalize}%'
+        OR inventories.name LIKE '%#{a_term.upcase}%'
+        OR inventories.name LIKE '%#{a_term.downcase}%'
+        OR inventories.manufacturer LIKE '%#{a_term}%'
+        OR inventories.manufacturer LIKE '%#{a_term.capitalize}%'
+        OR inventories.manufacturer LIKE '%#{a_term.upcase}%'
+        OR inventories.manufacturer LIKE '%#{a_term.downcase}%')"
 
         if terms.index(term) + 1 < terms.length
           query += " AND "
