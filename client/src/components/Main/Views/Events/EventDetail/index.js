@@ -54,8 +54,9 @@ export default class EventDetail extends Component {
       this.switchEditMode()
       this.setField('summary', 'New Event')
       this.setFormData('summary', 'New Event')
-      if (date) {
-        this.handleDateChange('start', date.start)
+      if (date && !this.props.isMonth()) {
+        const hours = moment().hours()
+        this.handleDateChange('start', moment(date.start).add(hours, 'hours').format())
       } else {
         this.handleDateChange('start', moment().startOf('hour').format())
       }
@@ -146,7 +147,7 @@ export default class EventDetail extends Component {
     const { evt } = this.state
     if (evt) {
       if (evt.client) {
-        const name = clientName(evt.client, {oneLine: true})
+        const name = clientName(evt.client, { oneLine: true })
         this.setField('client', name)
         this.setFormData('client_id', evt.client.id)
       } else {
@@ -157,24 +158,22 @@ export default class EventDetail extends Component {
 
   setLocationName = () => {
     const { evt } = this.state
-    if (evt) {
-      if (evt.location) {
-        const location = locationName(evt.location)
-        if (evt.location.installation) {
-          this.setState(prevState => ({
-            fields: {
-              ...prevState.fields,
-              location,
-              onPremise: evt.location.installation
-            },
-            formData: {
-              location_id: evt.location.id
-            }
-          }))
-        } else {
-          this.setField('location', location)
-          this.setFormData('location_id', evt.location.id)
-        }
+    if (evt && evt.location) {
+      const location = locationName(evt.location)
+      if (evt.location.installation) {
+        this.setState(prevState => ({
+          fields: {
+            ...prevState.fields,
+            location,
+            onPremise: evt.location.installation
+          },
+          formData: {
+            location_id: evt.location.id
+          }
+        }))
+      } else {
+        this.setField('location', location)
+        this.setFormData('location_id', evt.location.id)
       }
     }
   }
@@ -807,7 +806,7 @@ export default class EventDetail extends Component {
     if (isNew) {
       if (formData) {
         const newEvt = await this.props.handleCreate(formData);
-        history.push(`${accessLevel}/events/${newEvt.id}`)
+        if (newEvt) history.push(`${accessLevel}/events/${newEvt.id}`)
       } else {
         this.close()
       }
