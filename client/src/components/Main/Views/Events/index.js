@@ -46,11 +46,12 @@ export default class Events extends Component {
     const { location, changeNav } = this.props
     if (location && location.state && !location.state.nav) changeNav(false)
     await this.props.setView('Events')
-    await this.props.setCategories(['CATP', 'THC', 'TANS', 'CANS'])
-    await this.setColumnHeaders()
-    await this.setCurrentMonth()
-    await this.setCalendarId()
-    await this.setEvents()
+    if (this.props.match.isExact) {
+      await this.props.setCategories(['CATP', 'THC', 'TANS', 'CANS'])
+      await this.setColumnHeaders()
+      await this.setCurrentMonth()
+      await this.setEvents()
+    }
   }
 
   componentWillUnmount() {
@@ -203,11 +204,6 @@ export default class Events extends Component {
     if (category) this.setState({ category })
   }
 
-  setCalendarId = () => {
-    const calendarId = localStorage.getItem('google_calendar_id');
-    this.setState({ calendarId })
-  }
-
   setTodaysDate = (props) => {
     const { handleDateChange } = this.props
     handleDateChange(moment(), 'day')
@@ -273,7 +269,7 @@ export default class Events extends Component {
   }
 
   addEvent = async(formData) => {
-    const { calendarId } = this.state
+    const calendarId = localStorage.getItem('google_calendar_id')
     let events = [...this.state.events]
     const newEvent = await event.create(formData, this.ajaxOptions)
     const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(newEvent), this.ajaxOptions)
@@ -411,7 +407,7 @@ export default class Events extends Component {
   }
 
   synchronizeWithGoogle = async (evt) => {
-    const { calendarId } = this.state
+    const calendarId = localStorage.getItem('google_calendar_id')
     if (calendarId && evt.gcId) {
       const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.ajaxOptions)
       const formatted = await formatFromGoogle(e, this.ajaxOptions)
@@ -477,7 +473,7 @@ export default class Events extends Component {
         history={history}
 
         load={this.fetchEvents}
-        create={this.handleCreate}
+        create={this.addEvent}
         refresh={this.refresh}
 
         handleStatusChange={this.handleStatusChange}

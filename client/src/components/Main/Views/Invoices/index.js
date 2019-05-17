@@ -30,7 +30,7 @@ export default class Invoices extends Component {
   // ----------------------------------Lifecycle--------------------------------
 
   async componentDidUpdate(prevProps, prevState){
-    await this.setInvoices(prevProps)
+    if (this.props.match.isExact) await this.setInvoices(prevProps)
     if (prevState.count !== this.state.count) {
       if (this.state.count) {
         this.ajaxOptions.sendCount = false
@@ -43,10 +43,13 @@ export default class Invoices extends Component {
   async componentDidMount() {
     const { location, changeNav } = this.props
     if (location && location.state && !location.state.nav) changeNav(false)
-    await this.props.setView('Invoices')
-    await this.props.setCategories(['CATP', 'THC', 'TANS', 'CANS'])
-    await this.setColumnHeaders()
-    await this.setCurrentMonth()
+    if (this.props.match.isExact) {
+      await this.props.setView('Invoices')
+      await this.props.setCategories(['CATP', 'THC', 'TANS', 'CANS'])
+      await this.setColumnHeaders()
+      await this.setCurrentMonth()
+      await this.setInvoices()
+    }
   }
 
   componentWillUnmount() {
