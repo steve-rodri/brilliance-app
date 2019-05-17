@@ -78,10 +78,12 @@ export default class Main extends Component {
   // -------------------------------Google--------------------------------------
 
   synchronizeAllEvents = async() => {
-    const calendarId = await this.getGoogleCalendarId()
+    const calendarId = localStorage.getItem('google_calendar_id')
     const events = await GOOGLE.getEvents(calendarId, this.ajaxOptions)
-    const evts = await Promise.all( events.map( async evt => await formatFromGoogle( evt, this.ajaxOptions ) ) )
-    await Promise.all( evts.map( async evt => await event.sync(evt, this.ajaxOptions ) ) )
+    if (events) {
+      const evts = await Promise.all( events.map( async evt => await formatFromGoogle( evt, this.ajaxOptions ) ) )
+      await Promise.all( evts.map( async evt => await event.sync(evt, this.ajaxOptions ) ) )
+    }
   }
 
   // ------------------------------View-----------------------------------------
