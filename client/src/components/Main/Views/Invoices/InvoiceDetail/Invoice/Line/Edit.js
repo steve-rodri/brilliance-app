@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { description, contents, inc } from './Helpers'
+import { itemDescription, itemContents, inc } from './Helpers'
 // import { timesIcon } from '../../../../../../../helpers/icons'
 import { ReactComponent as TimesIcon } from '../../../../../../../icons/Close.svg'
 
@@ -11,7 +11,7 @@ export default class Edit extends Component {
 
   render(){
     const { mobile, line, index, length, styleCell, handleLineChange, deleteLine } = this.props
-    const c = contents(line.item)
+    const c = itemContents(line.item)
     return (
       <tr key={line.id} className="Line">
 
@@ -49,7 +49,7 @@ export default class Edit extends Component {
 
         {/* Item */}
         <td style={styleCell(index, length)} className="Invoice--cell Line--item">
-          <div className="Line--item-description"><p>{description(line.item)}</p></div>
+          <div className="Line--item-description"><p>{itemDescription(line.item)}</p></div>
           {c? <div className="Line--item-contents">{c}</div> : null}
         </td>
 
