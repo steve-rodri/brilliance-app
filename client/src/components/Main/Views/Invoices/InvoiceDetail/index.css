@@ -35,6 +35,12 @@
     ". invoice"
     ". invoice"
     ;
+    grid-template-columns: 25% 75%;
     grid-auto-flow: dense;
+    padding: 40px;
+  }
+
+  .InvoiceDetail > main > section {
+    padding-right: 40px;
   }
 }
