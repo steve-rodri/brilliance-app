@@ -57,10 +57,18 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = Item.new(item_params)
+    item_only_params = item_params.except(:item_contents_attributes)
+    item_contents_params = item_params.slice(:item_contents_attributes)[:item_contents_attributes]
+    contents_params = item_contents_params.slice(:contents_attributes)[:contents_attributes]
+
+    @item = Item.new(item_only_params)
+
+    if contents_params
+      @item.item_contents.build.build_content(contents_params)
+    end
 
     if @item.save
-      render json: @item, status: :created, location: @item
+      render json: @item, status: :created, location: @item, include: '**'
     else
       render json: @item.errors, status: :unprocessable_entity
     end
@@ -108,20 +116,20 @@ class ItemsController < ApplicationController
         item_contents_attributes: [
           :id,
           :item_id,
-          :content_id
-        ],
-        contents_attributes: [
-          :id,
-          :kind,
-          :description,
-          :description_only,
-          :quantity,
-          :inc,
-          :inc_discount_in_opct,
-          :discount_adj,
-          :hours_for_labor_only,
-          :subcontracted,
-          :inventory_id
+          :content_id,
+          contents_attributes: [
+            :id,
+            :kind,
+            :description,
+            :description_only,
+            :quantity,
+            :inc,
+            :inc_discount_in_opct,
+            :discount_adj,
+            :hours_for_labor_only,
+            :subcontracted,
+            :inventory_id
+          ]
         ]
       )
     end
