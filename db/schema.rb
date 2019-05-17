@@ -225,7 +225,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_163920) do
     t.string "additional_notes"
     t.integer "quantity", default: 1
     t.float "discount_adj", default: 0.0
-    t.boolean "use_description", default: true
+    t.boolean "use_description", default: false
     t.boolean "use_description_only", default: false
     t.boolean "use_quantity", default: true
     t.datetime "created_at", null: false

@@ -8,7 +8,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.string :additional_notes
       t.integer :quantity, default: 1
       t.float :discount_adj, default: 0.00
-      t.boolean :use_description, default: true
+      t.boolean :use_description, default: false
       t.boolean :use_description_only, default: false
       t.boolean :use_quantity, default: true
 
