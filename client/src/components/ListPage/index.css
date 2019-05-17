@@ -1,5 +1,4 @@
 .ListPage {
-  height: 100%;
   display: grid;
   overflow: hidden;
 }
