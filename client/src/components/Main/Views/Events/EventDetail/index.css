@@ -2,7 +2,6 @@
   background-color: var(--light-gray);
   display: grid;
   grid: 75px auto / auto;
-  height: 100%;
 }
 
 /* ------------------Tab-Control--------------------- */
