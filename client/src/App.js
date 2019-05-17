@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import Main from './components/Main/index.js'
 import Login from './components/Login/index.js'
 import { GOOGLE } from './services/google_service'
@@ -113,8 +113,10 @@ class App extends Component {
               <Redirect to="/login"/>
             }
           />
-          <Route path="/login" render={props => <Login {...props} {...this.state} authenticate={this.authenticate}/>}/>
-          <Route render={props => <Main {...props} {...this.state} signout={this.signout} getGoogleProfile={this.getGoogleProfile}/>} />
+          <Switch>
+            <Route path="/login" render={props => <Login {...props} {...this.state} authenticate={this.authenticate}/>}/>
+            <Route render={props => <Main {...props} {...this.state} signout={this.signout} getGoogleProfile={this.getGoogleProfile}/>} />
+          </Switch>
         </Fragment>
       </Router>
     );
