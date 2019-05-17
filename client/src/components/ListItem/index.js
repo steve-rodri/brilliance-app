@@ -68,7 +68,7 @@ export default function ListItem(props){
         const event = item;
         // const past = event && event.end && moment(event.end).isBefore(moment())
         const hasInvoice = event && event.invoice
-        const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
+        // const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
         const nextEvent = event && event.isNextEvent
         // const iCalUID = event && event.iCalUid;
 
@@ -81,11 +81,10 @@ export default function ListItem(props){
           style.borderLeft = '10px solid limegreen'
         }
 
-        if (inProgress) {
-          style.color = '#eeeeee'
-          style.backgroundColor = 'var(--light-blue)'
-          style.border = 'none'
-        }
+        // if (inProgress) {
+        //   style.color = '#eeeeee'
+        //   style.backgroundColor = 'var(--light-blue)'
+        // }
 
         if (nextEvent) {
           style.borderTop = '2px solid red'
