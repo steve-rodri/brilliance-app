@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom';
 import Header from './Header/'
 import SubHeader from './SubHeader/'
 import Invoice from './Invoice'
@@ -7,7 +8,7 @@ import Modal from '../../../../Modal/'
 import ItemSelector from './ItemSelector/'
 import Buttons from '../../../../Buttons/Buttons'
 import { invoice, line, item, client } from '../../../../../services/BEP_APIcalls.js'
-import { quantity, price, itemQty, itemPrice } from './Invoice/Line/Helpers'
+import { lineQty, linePrice, itemQty, itemPrice } from './Invoice/Line/Helpers'
 import { clientName } from '../../../../../helpers/clientHelpers'
 import axios from 'axios'
 import './index.css'
@@ -20,7 +21,8 @@ export default class InvoiceDetail extends Component {
       editMode: false,
       formData: {},
       fields: {},
-      searchFieldData: null
+      searchFieldData: null,
+      redirectToInvoices: false,
     }
     this.container = React.createRef()
     this.axiosRequestSource = axios.CancelToken.source()
@@ -60,8 +62,9 @@ export default class InvoiceDetail extends Component {
   setup = async() => {
     const { isNew, evtId, evt, history, user: { accessLevel } } = this.props
     if (isNew && evtId) {
-      const inv = invoice.create({ kind: 'Proposal', event_id: evtId })
-      history.push(`${accessLevel}/invoices/${inv.id}`)
+      const inv = await invoice.create({ kind: 'Proposal', event_id: evtId }, this.ajaxOptions)
+      console.log(inv)
+      if (inv) history.push(`/${accessLevel}/invoices/${inv.id}`)
     } else {
       this.setInvoice()
     }
@@ -76,7 +79,11 @@ export default class InvoiceDetail extends Component {
       this.setState({ inv }, () => this.setLines())
     } else {
       const inv = await invoice.get(invoiceId, this.ajaxOptions)
-      this.setState({ inv }, () => this.setLines())
+      if (inv) {
+        this.setState({ inv }, () => this.setLines())
+      } else {
+        this.setState({ redirectToInvoices: true })
+      }
     }
     await this.setClientName()
     await this.setSummary()
@@ -92,22 +99,22 @@ export default class InvoiceDetail extends Component {
         return (
           {
             ...line,
-            quantity: quantity(line),
-            price: price(line, inv.kind)
+            quantity: lineQty(line),
+            price: linePrice(line, inv.kind)
           }
         )
       } else if (!line.quantity && line.price) {
         return (
           {
             ...line,
-            quantity: quantity(line)
+            quantity: lineQty(line)
           }
         )
       } else if (line.quantity && !line.price) {
         return (
           {
             ...line,
-            price: price(line, inv.kind)
+            price: linePrice(line, inv.kind)
           }
         )
       } else {
@@ -131,8 +138,6 @@ export default class InvoiceDetail extends Component {
       }
     }), async() => {
       await this.updateSummary();
-      // await this.handleSubmit()
-
     });
   }
 
@@ -364,16 +369,18 @@ export default class InvoiceDetail extends Component {
         lineData = {
           invoice_id: inv.id,
           item_id: line.item.id,
-          quantity: quantity(data),
-          price: price(data, invoiceType)
+          quantity: lineQty(data),
+          price: linePrice(data, invoiceType)
         }
       break;
 
       case 'inventory':
         const inventory = data
         const newItem = await item.create({
-          contents_attributes: {
-            inventory_id: parseInt(inventory.id)
+          item_contents_attributes: {
+            contents_attributes: {
+              inventory_id: inventory.id
+            }
           }
         }, this.ajaxOptions)
         if (newItem) {
@@ -462,19 +469,23 @@ export default class InvoiceDetail extends Component {
       switch (name) {
 
         case 'inc':
-        if (!line.inc) {
+        if (line.inc) {
+          const alteredLine = {
+            ...line,
+            inc: false
+          }
           return (
             {
               ...line,
-              inc: !line.inc,
-              price: price(line, inv.kind)
+              inc: false,
+              price: linePrice(alteredLine, inv.kind)
             }
           )
         } else {
           return (
             {
               ...line,
-              inc: !line.inc,
+              inc: true,
               price: 0
             }
           )
@@ -485,7 +496,13 @@ export default class InvoiceDetail extends Component {
           {
             ...line,
             quantity: parseInt(value),
-            price: parseFloat( price( {...line, quantity: parseInt(value) }, inv.kind))
+            price: parseFloat(
+              linePrice(
+                {...line, quantity: parseInt(value) },
+                inv.kind,
+                { override: true }
+              )
+            )
           }
         )
 
@@ -695,7 +712,9 @@ export default class InvoiceDetail extends Component {
   }
 
   render(){
-    const { mobile } = this.props
+    const { mobile, user: { accessLevel} } = this.props
+    const { redirectToInvoices } = this.state
+    if (redirectToInvoices) return <Redirect to={`/${accessLevel}/invoices`}/>
     return (
       <div className="InvoiceDetail" ref={this.container}>
         <Header
@@ -732,9 +751,9 @@ export default class InvoiceDetail extends Component {
           </section>
         </main>
 
-        <div className="InvoiceDetail--delete">
+        {/* <div className="InvoiceDetail--delete">
           <h3>Delete</h3>
-        </div>
+        </div> */}
 
         {mobile?
           <Buttons

@@ -22,8 +22,6 @@ function clientName(client, options){
       } else if (oneLine) {
         return `${client.contactInfo.fullName} : ${client.company.name}`
       } else {
-          console.log(client.contactInfo.fullName)
-          console.log(client.company.name)
         return (
           <div className={`${className} client`} >
             <h4>{client.contactInfo.fullName}</h4>
