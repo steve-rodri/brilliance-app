@@ -75,7 +75,7 @@ export default class Schedule extends Component {
           (
             moment(start(evt)).isSameOrAfter(now)
             ||
-            moment(now).isSameOrBefore(end(evt))
+            now.isSameOrBefore(end(evt))
           )
         )
       })
@@ -100,7 +100,8 @@ export default class Schedule extends Component {
     }))
   }
 
-  dialog = (userEvents) => {
+  dialog = () => {
+    const { userEvents } = this.state
     if (userEvents.length > 1) {
       return (
         <Fragment>
@@ -126,9 +127,7 @@ export default class Schedule extends Component {
           userEvents && userEvents.length?
 
           <div className="Schedule--container">
-            <div className='Schedule--dialog'>
-              {this.dialog(userEvents)}
-            </div>
+            <div className='Schedule--dialog'>{this.dialog()}</div>
             <List
               {...this.state}
               {...this.props}
