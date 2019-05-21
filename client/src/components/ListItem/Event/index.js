@@ -9,15 +9,16 @@ import './index.css';
 export default function Event(props){
   const {
     user: { accessLevel },
-    item,
+    item: event,
     view,
     handleStatusChange,
     displayColumn,
     numColumns,
     styleItem,
     styleCell,
+    isMonth,
+    changeScrollPosition,
   } = props
-  const event = item
   const leftCell = styleCell('left', event)
   const middleCell = styleCell('middle', event)
   const rightCell = styleCell('right', event)
@@ -27,10 +28,12 @@ export default function Event(props){
   const scheduleDisplay = displayColumn('schedule')
   const confirmationDisplay = displayColumn('confirmation')
 
+  if (event.isNextEvent) changeScrollPosition()
+
   return (
     <Link to={`/${accessLevel}/${view.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
       {numColumns?
-        <div className="List-Item" style={styleItem(item, view)}>
+        <div className="List-Item" style={styleItem(event, view)}>
 
           {/* Title */}
           <div className="List-Item--Cell" style={{ ...leftCell, ...titleDisplay, padding: '5px' }}>
@@ -77,8 +80,8 @@ export default function Event(props){
 
         </div>
         :
-        <div className="List-Item" style={styleItem(item, view)}>
-          {event.isNextEvent? <div className="Event--next-event-triangle"></div> : null}
+        <div className="List-Item" style={styleItem(event, view)}>
+          {event.isNextEvent && isMonth()? <div className="Event--next-event-triangle"></div> : null}
           <div className="Event--summary" style={styleMobileSummary(event)}
           >
             {summary(event)}
