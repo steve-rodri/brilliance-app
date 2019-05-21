@@ -48,8 +48,8 @@ class Calendar extends Component {
     !(current && isSameDay(date, current)) &&
       this.setState(this.resolveStateFromDate(date), () => {
         typeof onDateChanged === "function" && onDateChanged(date, 'day');
+        changeNav(false)
       });
-    changeNav(false)
   };
 
   gotoPreviousMonth = () => {
@@ -58,7 +58,7 @@ class Calendar extends Component {
     this.setState(getPreviousMonth(month, year), () => {
       const { month, year } = this.state
       const date = moment().month(month - 1).year(year)
-      if (onDateChanged) onDateChanged(date, 'month')
+      typeof onDateChanged === "function" && onDateChanged(date, 'month')
     });
   };
 
@@ -68,7 +68,7 @@ class Calendar extends Component {
     this.setState(getNextMonth(month, year), () => {
       const { month, year } = this.state
       const date = moment().month(month - 1).year(year)
-      if (onDateChanged) onDateChanged(date, 'month')
+      typeof onDateChanged === "function" && onDateChanged(date, 'month')
     });
   };
 
@@ -78,7 +78,7 @@ class Calendar extends Component {
     this.setState({ year: year - 1 }, () => {
       const { month, year } = this.state
       const date = moment().month(month - 1).year(year)
-      if (onDateChanged) onDateChanged(date, 'month')
+      typeof onDateChanged === "function" &&  onDateChanged(date, 'month')
     });
   };
 
@@ -88,7 +88,7 @@ class Calendar extends Component {
     this.setState({ year: year + 1 }, () => {
       const { month, year } = this.state
       const date = moment().month(month - 1).year(year)
-      if (onDateChanged) onDateChanged(date, 'month')
+      typeof onDateChanged === "function" && onDateChanged(date, 'month')
     });
   };
 
@@ -139,8 +139,8 @@ class Calendar extends Component {
         <Styled.CalendarMonth
           onClick={() => {
             const date = moment().month(month - 1).year(year)
-            onDateChanged(date, 'month')
-            changeNav(false)
+            typeof onDateChanged === "function" && onDateChanged(date, 'month')
+            typeof changeNav === "function" && changeNav(false)
           }}
         >
           {monthname} {year}
@@ -165,6 +165,7 @@ class Calendar extends Component {
 
   renderCalendarDate = (date, index) => {
     const { current, month, year, today } = this.state;
+    const { isMonth } = this.props
     const _date = new Date(date.join("-"));
 
     const isToday = isSameDay(_date, today);
@@ -178,11 +179,13 @@ class Calendar extends Component {
 
     const props = { index, inMonth, onClick, title: _date.toDateString() };
 
-    const DateComponent = isCurrent
-      ? Styled.HighlightedCalendarDate
-      : isToday
-        ? Styled.TodayCalendarDate
-        : Styled.CalendarDate;
+    const DateComponent = isCurrent && !isMonth()?
+      Styled.HighlightedCalendarDate
+      :
+      isToday?
+        Styled.TodayCalendarDate
+        :
+        Styled.CalendarDate;
 
     return (
       <DateComponent key={getDateISO(_date)} {...props}>
