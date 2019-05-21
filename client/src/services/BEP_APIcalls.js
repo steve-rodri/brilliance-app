@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Qs from 'qs';
 
 export const event = {
   get: async function(id, options){
@@ -22,31 +23,27 @@ export const event = {
     }
   },
   batch: async function(params, options){
-    const { sendCount, cancelToken, unauthorizedCB } = options
-
-    const url = () => {
-      let base = "/api/events?"
-      if (params) {
-        for (const prop in params) {
-          if (params[prop]) {
-            base += `${prop}=${params[prop]}&`
-          }
-        }
-        const arr = base.split('')
-        arr.pop()
-        let url = arr.join('')
-
-        if (sendCount) url += `&send_count=true`
-        return url
-      } else {
-        if (sendCount) base += `send_count=true`
-        return base
-      }
-    }
+    const { sendCount: send_count, cancelToken, unauthorizedCB } = options
 
     try {
-      const resp = await axios.get(url(), { cancelToken: cancelToken })
+      const resp = await axios.get('/api/events', {
+        params: {
+          ...params,
+          send_count
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
+        cancelToken: cancelToken,
+        onDownloadProgress: function (pe) {
+          if (pe.lengthComputable) {
+            console.log(pe.loaded, pe.total)
+          }
+        }
+      })
+
       return resp.data
+
     } catch (e) {
       if (axios.isCancel(e)) {
         console.log('Event Request Canceled')
@@ -105,7 +102,14 @@ export const event = {
   sync: async function(data, options){
     const { cancelToken, unauthorizedCB } = options
     try {
-      const resp = await axios.put('/api/events/sync', data, { cancelToken: cancelToken })
+      const resp = await axios.put('/api/events/sync', data, {
+        cancelToken: cancelToken,
+        onDownloadProgress: function (pe) {
+          if (pe.lengthComputable) {
+            console.log(pe.loaded, pe.total)
+          }
+        }
+      })
       return resp.data.event
     } catch (e) {
       if (axios.isCancel(e)) {
@@ -136,30 +140,18 @@ export const client = {
     }
   },
   batch: async function(params, options){
-    const { sendCount, cancelToken, unauthorizedCB } = options
-
-    const url = () => {
-      let base = "/api/clients?"
-      if (params) {
-        for (const prop in params) {
-          if (params[prop]) {
-            base += `${prop}=${params[prop]}&`
-          }
-        }
-        const arr = base.split('')
-        arr.pop()
-        let url = arr.join('')
-
-        if (sendCount) url += `&send_count=true`
-        return url
-      } else {
-        if (sendCount) base += `send_count=true`
-        return base
-      }
-    }
-
+    const { sendCount: send_count, cancelToken, unauthorizedCB } = options
     try {
-      const resp = await axios.get(url(), { cancelToken: cancelToken })
+      const resp = await axios.get('api/clients', {
+        params: {
+          ...params,
+          send_count
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
+        cancelToken: cancelToken
+      })
       return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {
@@ -235,30 +227,19 @@ export const invoice = {
     }
   },
   batch: async function(params, options){
-    const { sendCount, cancelToken, unauthorizedCB } = options
-
-    const url = () => {
-      let base = "/api/invoices?"
-      if (params) {
-        for (const prop in params) {
-          if (params[prop]) {
-            base += `${prop}=${params[prop]}&`
-          }
-        }
-        const arr = base.split('')
-        arr.pop()
-        let url = arr.join('')
-
-        if (sendCount) url += `&send_count=true`
-        return url
-      } else {
-        if (sendCount) base += `send_count=true`
-        return base
-      }
-    }
+    const { sendCount: send_count, cancelToken, unauthorizedCB } = options
 
     try {
-      const resp = await axios.get(url(), { cancelToken: cancelToken })
+      const resp = await axios.get('api/invoices', {
+        params: {
+          ...params,
+          send_count
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
+        cancelToken: cancelToken
+      })
       return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {
