@@ -23,7 +23,6 @@ export default class Header extends Component {
 
   logOut = async() => {
     const { signout } = this.props
-    localStorage.clear()
     signout()
   }
 

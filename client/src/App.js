@@ -39,6 +39,7 @@ class App extends Component {
   }
 
   signout = async(cb) => {
+    localStorage.clear()
     this.setState({ user: { isAuthenticated: false }}, async() => cb? await cb() : null)
   }
 
