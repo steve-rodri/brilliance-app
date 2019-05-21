@@ -11,8 +11,6 @@ export default class ListPage extends Component {
 
   componentDidMount(){
     this.showModal(this.props)
-    const { location, changeNav } = this.props
-    if (location && location.state && !location.state.nav) changeNav(false)
   }
 
   showModal = (props) => {

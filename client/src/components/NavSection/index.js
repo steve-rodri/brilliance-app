@@ -59,13 +59,13 @@ export default class NavSection extends Component {
           {...this.props}
           className="NavSection--search"
           subject={title? title : view}
-          url={match.path}
         />
 
         {/* Calendar */}
         {
           view === "Events" || view === "Invoices"?
           <Calendar
+            {...this.props}
             className="NavSection--calendar"
             date={isDay && date? new Date(date.start) : new Date()}
             onDateChanged={onDateChange}

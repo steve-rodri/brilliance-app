@@ -21,9 +21,10 @@ export default class Search extends Component {
   }
 
   handleSubmit = (e) => {
-    const { url, history } = this.props
+    const { history, location, mobile, changeNav } = this.props
     e.preventDefault();
-    history.push(`${url}?q=${this.state.query}`)
+    if (mobile) changeNav(false);
+    history.push(`${location.pathname}?q=${this.state.query}`)
     this.setState({query: ''})
   }
 

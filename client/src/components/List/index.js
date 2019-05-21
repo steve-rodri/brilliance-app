@@ -6,7 +6,7 @@ import './index.css'
 
 export default class List extends Component {
   render(){
-    const {page, items, view, columnHeaders, load, hasMore } = this.props
+    const {page, items, view, columnHeaders, load, hasMore, loading } = this.props
 
     return (
       <div id="List" className="List">
@@ -22,7 +22,6 @@ export default class List extends Component {
           <InfiniteScroll
             dataLength={items && items.length}
             next={() => page >= 1? load() : null}
-            children={true}
             hasMore={hasMore}
             loader=
             {
@@ -37,7 +36,10 @@ export default class List extends Component {
                   items && items.length?
                   null
                   :
-                  <div className="List--None-Found"><p>None Found</p></div>
+                  !loading?
+                    <div className="List--None-Found"><p>None Found</p></div>
+                    :
+                    <Loader />
                 }
               </Fragment>
             }

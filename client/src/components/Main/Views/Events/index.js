@@ -43,8 +43,6 @@ export default class Events extends Component {
   }
 
   async componentDidMount() {
-    const { location, changeNav } = this.props
-    if (location && location.state && !location.state.nav) changeNav(false)
     await this.props.setView('Events')
     if (this.props.match.isExact) {
       await this.props.setCategories(['CATP', 'THC', 'TANS', 'CANS'])
@@ -205,18 +203,18 @@ export default class Events extends Component {
   }
 
   setTodaysDate = (props) => {
-    const { handleDateChange } = this.props
-    handleDateChange(moment(), 'day')
+    const { onDateChange } = this.props
+    onDateChange(moment(), 'day')
   }
 
   setCurrentMonth = () => {
-    const { handleDateChange } = this.props
-    handleDateChange(moment(), 'month')
+    const { onDateChange } = this.props
+    onDateChange(moment(), 'month')
   }
 
   setMonth = (month, year) => {
-    const { handleDateChange } = this.props
-    handleDateChange(moment(month, year), 'month')
+    const { onDateChange } = this.props
+    onDateChange(moment(month, year), 'month')
   }
 
   refresh = async(value, url) => {
@@ -243,6 +241,7 @@ export default class Events extends Component {
   // -------------------------------CRUD----------------------------------------
 
   fetchEvents = async() => {
+    this.props.setLoadingState(true)
     const { events, page, category, query: q, client, type } = this.state
     const { date: { start: date_start, end: date_end } } = this.props
     let params = { page, category, q, client, date_start, date_end }
@@ -265,6 +264,7 @@ export default class Events extends Component {
 
     } else {
       this.setState({ hasMore: false })
+      this.props.setLoadingState(false)
     }
   }
 
@@ -388,21 +388,22 @@ export default class Events extends Component {
 
       const loadedEvents = await Promise.all(updatedEvents)
       loadedEvents.forEach(e => events.push(e))
-
-      if (evts.length < this.itemsPerPage) {
+      if (events.length === count) {
         this.setState({
           events,
           hasMore: false,
-        }, () => count? this.setState({ count }): null)
+          count
+        })
 
       } else {
         this.setState( prevState => ({
           events,
           hasMore: true,
-          page: prevState.page + 1
-        }), () => count? this.setState({ count }): null)
+          page: prevState.page + 1,
+          count
+        }))
       }
-
+      this.props.setLoadingState(false)
     }
   }
 
@@ -420,11 +421,6 @@ export default class Events extends Component {
 
   handleStatusChange = async (evt, name, value) => {
     await this.updateEvent(evt, { [name]: value } )
-  }
-
-  onDateChange = async(date, type) => {
-    const { handleDateChange } = this.props
-    handleDateChange(date, type)
   }
 
   changeCategory = (category) => {
@@ -459,25 +455,22 @@ export default class Events extends Component {
     }
   }
 
-  List = ({ match, history }) => {
+  List = (props) => {
     const { events, searchLabel } = this.state
     return (
       <ListPage
         {...this.props}
+        {...props}
         {...this.state}
 
         mainHeader={searchLabel}
         data={events}
-
-        match={match}
-        history={history}
 
         load={this.fetchEvents}
         create={this.addEvent}
         refresh={this.refresh}
 
         handleStatusChange={this.handleStatusChange}
-        onDateChange={this.onDateChange}
         handleMonthChange={this.setMonth}
       />
     )
