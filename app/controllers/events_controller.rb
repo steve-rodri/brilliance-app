@@ -8,18 +8,22 @@ class EventsController < ApplicationController
   def index
     @@date_where = nil
     @@send_count = false
+    @@next_event = Event
+      .where("events.start > '#{Time.zone.now()}'")
+      .order(:start)
+      .first
 
-    @@next_event = Event.where("events.start > '#{Time.zone.now()}'").order(:start).first
-    
     if params[:date_start] && params[:date_end]
       @@date_start = Time.zone.parse(params[:date_start])
       @@date_end = Time.zone.parse(params[:date_end])
       @@date_where = "events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'"
     end
+
     if params[:send_count]
       @@send_count = true
     end
 
+    # By Category---------------------------------------------------------------
     if params[:category]
       count = 0
       if params[:category] == 'Production'
@@ -53,8 +57,11 @@ class EventsController < ApplicationController
           .paginate(page: params[:page], per_page: @@items_per_page)
       end
 
-        render json: @events, meta: { count: count, next: @@next_event }, include: '**'
+        render json: @events,
+        meta: { count: count, next: @@next_event },
+        include: '**'
 
+    # By Query------------------------------------------------------------------
     elsif params[:q]
       count = 0
       page_num = params[:page].to_i
@@ -120,6 +127,7 @@ class EventsController < ApplicationController
 
       render json: @events, root: "events", meta: { count: count, next: @@next_event }, include: '**'
 
+    # By Worker Email-----------------------------------------------------------
     elsif params[:email]
       count = 0
       email = params[:email]
@@ -134,11 +142,14 @@ class EventsController < ApplicationController
       @events = Event
       .joins(event_employees: [{employee: [{contact: :email_address }]}])
       .where("email_addresses.email_address LIKE '%#{email}%'")
-      .order(start: :desc)
+      .order(:start)
       .paginate(page: params[:page], per_page: @@items_per_page)
 
-      render json: @events, meta: { count: count, next: @@next_event }, include: '**'
+      render json: @events,
+      meta: { count: count, next: @@next_event },
+      include: '**'
 
+    # By client_id--------------------------------------------------------------
     elsif params[:client_id]
       count = 0
       if @@send_count
@@ -154,11 +165,16 @@ class EventsController < ApplicationController
         .paginate(page: params[:page], per_page: @@items_per_page)
 
 
-        render json: @events, meta: { count: count, next: @@next_event }, include: '**'
+        render json: @events,
+        meta: { count: count, next: @@next_event },
+        include: '**'
 
+    # By iCalUID----------------------------------------------------------------
     elsif params[:iCalUID]
       @event = Event.where( i_cal_UID: "#{params[:iCalUID]}").first
       render json: @event, include: '**'
+
+    # --------------------------------------------------------------------------
     else
       count = 0
 
