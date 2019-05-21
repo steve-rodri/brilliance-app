@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Schedule from './Schedule/'
 import Event from './Event/'
 import Invoice from './Invoice/'
@@ -8,60 +8,20 @@ import moment from 'moment'
 import { start, end, timeUntil } from '../../helpers/datetime'
 import './index.css'
 
-export default function ListItem(props){
-  const { item, view, total, index, mobile } = props
-  switch (view) {
-    case 'Dashboard':
-      return (
-        <Schedule
-          {...props}
-          start={start()}
-          end={end()}
-          timeUntil={timeUntil(item)}
-          styleItem={styleItem}
-          styleCell={styleCell}
-        />
-      )
-    case 'Events':
-      return (
-        <Event
-          {...props}
-          start={start()}
-          end={end()}
-          styleItem={styleItem}
-          styleCell={styleCell}
-          styleSummary={styleSummary}
-        />
-      )
-    case 'Invoices':
-      return (
-        <Invoice
-          {...props}
-          styleItem={styleItem}
-          styleCell={styleCell}
-        />
-      )
-    case 'Clients':
-      return (
-        <Client
-          {...props}
-          styleItem={styleItem}
-          styleCell={styleCell}
-          styleSummary={styleSummary}
-        />
-      )
-    case 'Workers':
-      return (
-        <Staff
-          {...props}
-          styleItem={styleItem}
-          styleCell={styleCell}
-        />
-      )
-    default:
+export default class ListItem extends Component {
+  constructor(props){
+    super(props)
+    this.container = React.createRef()
   }
 
-  function styleItem(item, view){
+  changeScrollPosition = () => {
+    if (this.container.current) {
+      this.container.current.scrollIntoView()
+    }
+  }
+
+  styleItem = (item) => {
+    const { view, total, index, mobile, isMonth } = this.props
     const style = {}
     switch (view) {
       case 'Events':
@@ -86,7 +46,7 @@ export default function ListItem(props){
         //   style.backgroundColor = 'var(--light-blue)'
         // }
 
-        if (nextEvent) {
+        if (nextEvent && isMonth()) {
           style.borderTop = '2px solid red'
         }
 
@@ -111,7 +71,7 @@ export default function ListItem(props){
     return style;
   }
 
-  function styleCell(position, event){
+  styleCell = (position, event) => {
     const past = event && event.end && moment(event.end).isBefore(moment())
     const style = {}
     if (past) {
@@ -145,7 +105,7 @@ export default function ListItem(props){
     return style
   }
 
-  function styleSummary(summary) {
+  styleSummary = (summary) => {
     if (summary) {
       if (summary.length > 30) {
         return {
@@ -157,5 +117,69 @@ export default function ListItem(props){
     } else {
       return {}
     }
+  }
+
+  view = () => {
+    const { item, view } = this.props
+    switch (view) {
+      case 'Dashboard':
+        return (
+          <Schedule
+            {...this.props}
+            start={start()}
+            end={end()}
+            timeUntil={timeUntil(item)}
+            styleItem={this.styleItem}
+            styleCell={this.styleCell}
+          />
+        )
+      case 'Events':
+        return (
+          <Event
+            {...this.props}
+            start={start()}
+            end={end()}
+            styleItem={this.styleItem}
+            styleCell={this.styleCell}
+            styleSummary={this.styleSummary}
+            changeScrollPosition={this.changeScrollPosition}
+          />
+        )
+      case 'Invoices':
+        return (
+          <Invoice
+            {...this.props}
+            styleItem={this.styleItem}
+            styleCell={this.styleCell}
+          />
+        )
+      case 'Clients':
+        return (
+          <Client
+            {...this.props}
+            styleItem={this.styleItem}
+            styleCell={this.styleCell}
+            styleSummary={this.styleSummary}
+          />
+        )
+      case 'Workers':
+        return (
+          <Staff
+            {...this.props}
+            styleItem={this.styleItem}
+            styleCell={this.styleCell}
+          />
+        )
+      default:
+      return null
+    }
+  }
+
+  render(){
+    return (
+      <div ref={this.container}>
+        {this.view()}
+      </div>
+    )
   }
 }
