@@ -32,7 +32,10 @@ class InventoriesController < ApplicationController
         .with_attached_photo
         .limit(5)
     else
-      @inventories = Inventory.all.with_attached_photo
+      @inventories = Inventory
+        .all
+        .order(:name)
+        .with_attached_photo
     end
     render json: @inventories, include: '**'
   end
