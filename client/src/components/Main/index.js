@@ -15,7 +15,8 @@ export default class Main extends Component {
       date: {
         start: moment().startOf('day').toISOString(true),
         end: moment().endOf('day').toISOString(true)
-      }
+      },
+      isLoading: false
     }
     this.axiosRequestSource = axios.CancelToken.source()
     this.ajaxOptions = {
@@ -36,6 +37,24 @@ export default class Main extends Component {
   async componentWillUnmount(){
     window.removeEventListener('resize', this.resize)
     this.axiosRequestSource && this.axiosRequestSource.cancel()
+  }
+
+  componentDidUpdate(prevProps){
+    const { location } = this.props;
+    const { mobile } = this.state;
+    if (mobile) {
+      if (location && location.state) {
+        this.setState( prevState => {
+          const { displayNav } = prevState
+          const { nav } = location.state
+          if (displayNav !== nav) {
+            return {
+              displayNav: nav
+            }
+          }
+        })
+      }
+    }
   }
 
   // ------------------------Getters-And-Setters--------------------------------
@@ -108,13 +127,17 @@ export default class Main extends Component {
   }
 
   changeNav = (value) => {
-    const { mobile } = this.state
-    if (mobile) this.setState({ displayNav: value })
+    const { history, location } = this.props
+    history.push({pathname: `${location.pathname}`, state: { nav: value }})
   }
 
   resize = () => {
     this.resetView()
     this.updateNav()
+  }
+
+  setLoadingState = (value) => {
+    this.setState({ loading: value })
   }
 
   render(){
@@ -129,9 +152,10 @@ export default class Main extends Component {
 
             setView={this.setView}
             setCategories={this.setCategories}
+            setLoadingState={this.setLoadingState}
             changeNav={this.changeNav}
 
-            handleDateChange={this.handleDateChange}
+            onDateChange={this.handleDateChange}
             isMonth={this.isMonth}
             isDay={this.isDay}
 

@@ -185,18 +185,18 @@ export default class Invoices extends Component {
   }
 
   setTodaysDate = (props) => {
-    const { handleDateChange } = this.props
-    handleDateChange(moment(), 'day')
+    const { onDateChange } = this.props
+    onDateChange(moment(), 'day')
   }
 
   setCurrentMonth = () => {
-    const { handleDateChange } = this.props
-    handleDateChange(moment(), 'month')
+    const { onDateChange } = this.props
+    onDateChange(moment(), 'month')
   }
 
   setMonth = (month, year) => {
-    const { handleDateChange } = this.props
-    handleDateChange(moment(month, year), 'month')
+    const { onDateChange } = this.props
+    onDateChange(moment(month, year), 'month')
   }
 
   refresh = (value, url) => {
@@ -221,11 +221,6 @@ export default class Invoices extends Component {
 
   // -----------------------------------Handle-Change---------------------------
 
-  onDateChange = async(date, type) => {
-    const { handleDateChange } = this.props
-    handleDateChange(date, type, this.setInvoices)
-  }
-
   changeCategory = (category) => {
     this.setCategory(category);
     this.resetInvoices();
@@ -234,6 +229,7 @@ export default class Invoices extends Component {
   // --------------------------------------CRUD---------------------------------
 
   fetchInvoices = async() => {
+    this.props.setLoadingState(true)
     const { invoices, page, category, query: q, client, type } = this.state
     const { date: { start: date_start, end: date_end } } = this.props
     let searchData = { page, category, q, client, date_start, date_end }
@@ -257,6 +253,7 @@ export default class Invoices extends Component {
 
     } else {
       this.setState({ hasMore: false })
+      this.props.setLoadingState(false)
     }
   }
 
@@ -345,7 +342,7 @@ export default class Invoices extends Component {
           page: prevState.page + 1
         }))
       }
-
+      this.props.setLoadingState(false)
     }
   }
 
