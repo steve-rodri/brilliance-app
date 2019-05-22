@@ -38,13 +38,19 @@ export default function Event(props){
           {/* Title */}
           <div className="List-Item--Cell" style={{ ...leftCell, ...titleDisplay, padding: '5px' }}>
             <div className="Event--summary">{summary(event)}</div>
+            <div className="Event--time">
+              <p>{date(event, true)}</p>
+              <p>{time(event)}</p>
+            </div>
           </div>
 
           {/* Date */}
-          <div className="List-Item--Cell" style={{ ...middleCell, ...dateDisplay, padding: '5px' }}>
-            <p>{date(event, true)}</p>
-            <p>{time(event)}</p>
-          </div>
+          {/* <div className="List-Item--Cell" style={{ ...middleCell, ...dateDisplay, padding: '5px' }}>
+            <div className="Event--time">
+              <p>{date(event, true)}</p>
+              <p>{time(event)}</p>
+            </div>
+          </div> */}
 
           {/* Intel */}
           <div className="List-Item--Cell" style={{ ...middleCell, ...intelDisplay, padding: '5px' }}>
