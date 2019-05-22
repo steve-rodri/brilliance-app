@@ -60,7 +60,7 @@ export default class Schedule extends Component {
     const { user } = this.props
     if (user) {
       const data = await event.batch({page, email: user.profile.email}, this.ajaxOptions)
-      return data.events
+      if (data) return data.events
     }
   }
 

@@ -21,7 +21,6 @@
   border-radius: 5px;
   /* box-shadow: 0 0 2px 2px transparent; */
   outline: none;
-  font-size: 20px;
 }
 
 .Line--input:focus {
@@ -52,10 +51,6 @@
 
 /* --------------------Item-------------- */
 
-.Line--item {
-  font-size: 20px;
-}
-
 .Line--item-contents {
   padding: 5px 0 0 10px;
   display: flex;
@@ -81,7 +76,6 @@
   grid-template-columns: repeat(3, auto);
   align-items: center;
   justify-items: center;
-  font-size: 20px;
 }
 
 .Line--price > form > p {
@@ -90,5 +84,4 @@
 
 .Line--price > form > input {
   text-align: center;
-  font-size: 20px;
 }

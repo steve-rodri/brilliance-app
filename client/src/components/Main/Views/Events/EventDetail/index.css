@@ -1,54 +1,10 @@
 .EventDetail {
-  background-color: var(--light-gray);
   display: grid;
-  grid: 75px auto / auto;
-}
-
-/* ------------------Tab-Control--------------------- */
-.EventDetail--tab-control {
-  display: none;
-  min-height: 50px;
-  max-height: 50px;
-  width: 100%;
-  background-color: var(--dark-gray);
-  color: var(--light-gray);
-  align-items: center;
-}
-
-.EventDetail--tab-control > div {
-  min-height: 50px;
-  max-height: 60px;
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-}
-
-.EventDetail--tab-control > div > h3 {
-  font-size: 1.5em;
-}
-
-.EventDetail--tab-control > div:hover {
-  cursor: pointer
+  background-color: var(--light-gray);
 }
 
 @media (min-width: 750px) {
   .EventDetail {
     background-color: var(--dark-blue);
-  }
-
-  .EventDetail--tab-control {
-    display: none;
-    min-height: 40px;
-    max-height: 40px;
-  }
-
-  .EventDetail--tab-control > div {
-    min-height: 40px;
-    max-height: 40px;
-
-  }
-
-  .EventDetail--tab-control > div > h3 {
-    font-size: 1.5em;
   }
 }

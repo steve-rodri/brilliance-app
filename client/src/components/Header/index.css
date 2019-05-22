@@ -54,7 +54,6 @@ header {
 
 .Header--nav-menu > a {
   height: 100%;
-  font-size: 22px;
   text-decoration: none;
   color: white;
 }
@@ -75,7 +74,6 @@ header {
   background: darkred;
   color: white;
   font-weight: bold;
-  font-size: 20px;
   border: 2px solid darkred;
   border-radius: 5px;
   width: 80%;
@@ -163,17 +161,5 @@ nav > *:active, nav > * > h3:active {
 
   .user-circle {
     display: flex;
-  }
-}
-
-@media (max-width: 1200px) {
-  nav > * > div {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 750px) {
-  nav > * > div {
-    font-size: 16px;
   }
 }

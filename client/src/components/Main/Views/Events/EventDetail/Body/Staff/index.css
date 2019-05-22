@@ -16,7 +16,6 @@
 }
 
 .Staff--worker-name {
-  font-size: 20px;
   grid-column: 2 / span 1;
 }
 
@@ -28,10 +27,6 @@
 
   .Staff--worker {
     background-color: inherit;
-  }
-
-  .Staff--worker-name {
-    font-size: 25px;
   }
 }
 
@@ -108,10 +103,6 @@
     height: auto;
     padding: 0;
     background-color: inherit;
-  }
-
-  .Staff--Edit .Staff--worker-name {
-    font-size: 20px;
   }
 
   .Staff--Edit .Staff--icon-head {

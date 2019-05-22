@@ -13,7 +13,7 @@ export default function AddNew(props){
     >
 
       <div className="AddNew">
-        <span className="AddNew--button-text">{`New ${type}`}</span>
+        <h3 className="AddNew--button-text">{`New ${type}`}</h3>
         {plusIcon('2x', 'AddNew--button-icon')}
       </div>
 

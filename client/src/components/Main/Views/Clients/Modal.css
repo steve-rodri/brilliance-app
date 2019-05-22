@@ -54,7 +54,6 @@
 
 .Client-Modal--Field {
   position: relative;
-  font-size: 18px;
   align-self: center;
   height: 40px;
   display: flex;
@@ -77,6 +76,5 @@
   width: 120px;
   margin: 5px;
   border-radius: 5px;
-  font-size: 20px;
   outline: none;
 }
