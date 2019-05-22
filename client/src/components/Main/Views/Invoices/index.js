@@ -16,7 +16,8 @@ export default class Invoices extends Component {
       invoices: [],
       hasMore: false,
       category: null,
-      page: 1
+      page: 1,
+      listScrollPosition: 0
     }
     this.axiosRequestSource = axios.CancelToken.source()
     this.ajaxOptions = {
@@ -365,24 +366,27 @@ export default class Invoices extends Component {
     }
   }
 
-  List = ({ match, history }) => {
+  setListScrollPosition = (value) => {
+    this.setState({ listScrollPosition: value })
+  }
+
+  List = (props) => {
     const { invoices, searchLabel } = this.state
     return (
       <ListPage
         {...this.props}
+        {...props}
         {...this.state}
 
         mainHeader={searchLabel}
         data={invoices}
-
-        match={match}
-        history={history}
 
         load={this.fetchInvoices}
         refresh={this.refresh}
 
         onDateChange={this.onDateChange}
         handleMonthChange={this.setMonth}
+        setScrollPosition={this.setListScrollPosition}
       />
     )
   }

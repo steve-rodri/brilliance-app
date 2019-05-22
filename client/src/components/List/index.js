@@ -5,20 +5,34 @@ import Loader from '../Loader'
 import './index.css'
 
 export default class List extends Component {
+  constructor(props){
+    super(props)
+    this.container = React.createRef()
+  }
+
+  componentWillUnmount(){
+    const { setScrollPosition } = this.props
+    setScrollPosition(this.container.current.scrollTop)
+  }
+
+  componentDidMount(){
+    const { listScrollPosition } = this.props
+    this.container.current.scrollTop = listScrollPosition
+  }
 
   render(){
     const {page, items, view, columnHeaders, load, hasMore, loading } = this.props
 
     return (
-      <div id="List" className="List">
+      <div id="List" className="List" ref={this.container}>
         {columnHeaders && items && items.length?
           <div className="Titles">
             {columnHeaders && columnHeaders.map((header, i) => {
-              const indices = findIndices(columnHeaders, header)
+              // const indices = findIndices(columnHeaders, header)
               if (columnHeaders[i] === columnHeaders[i - 1]) {
-                return <h6 key={i}>{}</h6>
+                return <h5 key={i}>{}</h5>
               } else {
-                return <h6 key={i}>{header}</h6>
+                return <h5 key={i}>{header}</h5>
               }
             })}
           </div>

@@ -17,6 +17,7 @@ export default class Clients extends Component {
       searchFieldData: null,
       page: 1,
       willRefresh: true,
+      listScrollPosition: 0
     }
     this.axiosRequestSource = axios.CancelToken.source();
     this.ajaxOptions = {
@@ -292,6 +293,10 @@ export default class Clients extends Component {
     this.setState({ showModal: value })
   }
 
+  setListScrollPosition = (value) => {
+    this.setState({ listScrollPosition: value })
+  }
+
   List = ({ match, history }) => {
     const { clients, hasMoreClients } = this.state
     return (
@@ -310,6 +315,8 @@ export default class Clients extends Component {
         deleteClient={this.deleteClient}
         showModal={() => this.handleModal(true)}
         refresh={this.setRefresh}
+
+        setScrollPosition={this.setListScrollPosition}
       />
     )
   }

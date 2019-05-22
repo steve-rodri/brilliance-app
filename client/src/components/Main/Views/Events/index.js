@@ -18,7 +18,8 @@ export default class Events extends Component {
       events: [],
       hasMore: false,
       category: null,
-      page: 1
+      page: 1,
+      listScrollPosition: 0
     }
     this.axiosRequestSource = axios.CancelToken.source()
     this.ajaxOptions = {
@@ -446,13 +447,17 @@ export default class Events extends Component {
       })
     } else if (width < 1300){
       this.setState({
-        columnHeaders: ['title', 'title', 'intel', 'schedule', 'confirmation']
+        columnHeaders: ['title', 'title', 'title', 'schedule', 'confirmation']
       })
     } else {
       this.setState({
-        columnHeaders: ['title', 'title', 'intel','','schedule', 'confirmation']
+        columnHeaders: ['title', 'title', 'title','','schedule', 'confirmation']
       })
     }
+  }
+
+  setListScrollPosition = (value) => {
+    this.setState({ listScrollPosition: value })
   }
 
   List = (props) => {
@@ -472,6 +477,7 @@ export default class Events extends Component {
 
         handleStatusChange={this.handleStatusChange}
         handleMonthChange={this.setMonth}
+        setScrollPosition={this.setListScrollPosition}
       />
     )
   }
