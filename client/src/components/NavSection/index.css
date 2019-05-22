@@ -108,3 +108,9 @@
   grid-area: button;
   width: 95%;
 }
+
+@media (max-height: 900px) {
+  .NavSection--button {
+    align-self: end;
+  }
+}
