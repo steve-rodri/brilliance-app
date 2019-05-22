@@ -20,7 +20,3 @@
   color: var(--light-gray);
   padding: 5px;
 }
-
-.SearchField--subtitle > h6 {
-  font-size: 20px;
-}

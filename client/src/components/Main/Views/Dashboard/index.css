@@ -1,28 +1,14 @@
 .Dashboard {
-  height: 100%;
+  height: calc(100vh - 75px);
   display: grid;
   justify-items: center;
   align-items: start;
-  background-color: #222222;
-}
-
-.Dashboard--intro {
-  font-size: 35px;
-  font-family: 'Lato', sans-serif;
-  min-width: 50%;
-  justify-self: center;
-  align-self: center;
+  background-color: var(--dark-gray);
   color: white;
 }
 
-@media (min-width: 700px) {
-  .Dashboard--intro {
-    font-size: 50px;
-  }
-}
-
-@media (min-width: 1000px) {
-  .Dashboard--intro {
-    font-size: 60px;
-  }
+.Dashboard--intro {
+  min-width: 50%;
+  justify-self: center;
+  align-self: center;
 }

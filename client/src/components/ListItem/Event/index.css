@@ -20,7 +20,6 @@
 }
 
 .Event--summary > h4 {
-  font-size: 15px;
   font-weight: 700;
 }
 
@@ -29,10 +28,6 @@
     justify-self: start;
     align-self: start;
     grid-column: 1 / auto;
-  }
-
-  .Event--summary > h4 {
-    font-size: 15px;
   }
 }
 

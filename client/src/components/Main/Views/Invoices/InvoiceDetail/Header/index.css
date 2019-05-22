@@ -25,7 +25,6 @@
 
 .InvoiceDetail-header--title {
   text-align: center;
-  font-size: 18px;
   display: grid;
   text-shadow: 0 2px 10px black;
 }
@@ -48,19 +47,12 @@
 @media (min-width: 750px) {
   .InvoiceDetail-header--title {
     display: flex;
-    font-size: 20px;
     text-align: left;
     grid-column: 2 / span 1;
   }
 
   .InvoiceDetail-header--date {
     font-weight: 300;
-  }
-}
-
-@media (min-width: 1200px) {
-  .InvoiceDetail-header--title {
-    font-size: 25px;
   }
 }
 

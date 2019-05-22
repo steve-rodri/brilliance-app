@@ -12,15 +12,16 @@
   --darker-blue: #143154;
   --dark-blue: #1D4678;
   --med-dark-blue: #0071B5;
+  --dark-gray: #222222;
 
   --turquoise: #01B0DF;
   --light-blue: #D4F1FF;
-  --dark-gray: #222222;
 
 
   --med-dark-blue-t: rgba(0, 113, 181, .4);
   --turquoise-t: rgba(1, 176, 223, .6);
   --light-blue-t: rgba(212,241,255, .3);
+
   --light-gray: #DADBE0;
 }
 
@@ -35,8 +36,28 @@ h3, h4, h5, h6, p, a, label, td, th {
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 3.5em;
   font-weight: 400;
+}
+
+h2, input, textarea {
+  font-size: 1.4em;
+}
+
+h3, p {
+  font-size: 1.2em;
+}
+
+h4, label {
+  font-size: 1em;
+}
+
+h5 {
+  font-size: .8em;
+}
+
+h6 {
+  font-size: .6em;
 }
 
 li, select {
@@ -55,7 +76,6 @@ button:active, button:focus {
 
 label {
   text-align: left;
-  font-size: 15px;
   font-weight: 900;
   font-style: italic;
   text-transform: uppercase;
@@ -71,7 +91,6 @@ label {
 }
 
 input {
-  font-size: 18px;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -95,10 +114,6 @@ select {
 }
 
 /* -----------Fields------------ */
-
-.Field, .Edit--Field {
-  font-size: 20px;
-}
 
 .Field {
   height: 100%;
@@ -164,7 +179,6 @@ select {
   border: none;
   /* border-left: 1px solid #BBBBBB; */
   /* border-right: 1px solid #BBBBBB; */
-  font-size: 20px;
   background-color: #F8F8F8;
 }
 
@@ -195,7 +209,6 @@ select {
   border: 1px solid white;
   height: 100%;
   width: 100%;
-  font-size: 1em;
 }
 
 /* -------------------------Misc---------------------------------- */
