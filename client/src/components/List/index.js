@@ -5,6 +5,7 @@ import Loader from '../Loader'
 import './index.css'
 
 export default class List extends Component {
+
   render(){
     const {page, items, view, columnHeaders, load, hasMore, loading } = this.props
 
@@ -12,9 +13,14 @@ export default class List extends Component {
       <div id="List" className="List">
         {columnHeaders && items && items.length?
           <div className="Titles">
-            {columnHeaders && columnHeaders.map((header, id) => (
-            <h6 key={id}>{header}</h6>
-            ))}
+            {columnHeaders && columnHeaders.map((header, i) => {
+              const indices = findIndices(columnHeaders, header)
+              if (columnHeaders[i] === columnHeaders[i - 1]) {
+                return <h6 key={i}>{}</h6>
+              } else {
+                return <h6 key={i}>{header}</h6>
+              }
+            })}
           </div>
           :
           null
@@ -69,16 +75,38 @@ export default class List extends Component {
     }
 
     function displayColumn(headerName){
+      let style = { display: 'none'};
+
       if (columnHeaders) {
-        const index = columnHeaders.findIndex( header => header === headerName ) + 1
-        if ( index  ) {
-          return { gridColumn: index }
-        } else {
-          return { display: 'none' }
+        const indices = columnHeaders.flatMap( (header, i) => {
+          if (header === headerName ) return i
+          return []
+        })
+
+        if (indices.length === 1) {
+          style.display = 'grid'
+          style.gridColumn = indices[0] + 1
         }
-      } else {
-        return { display: 'none' }
+
+        if (indices.length > 1) {
+          style.display = 'grid'
+          style.gridColumn = `${indices[0] + 1} / span ${indices.length}`
+        }
+
       }
+
+      return style;
+    }
+
+    function findIndices(arr, val){
+      let indexes = []
+      let i = -1;
+
+      while ((i = arr.indexOf(val, i+1)) !== -1){
+        indexes.push(i);
+      }
+
+      return indexes;
     }
   }
 }

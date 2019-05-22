@@ -1,27 +1,16 @@
 /* Mobile Styles */
-.Event--confirmation {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.Event--scheduled {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+.Event--confirmation,
+.Event--scheduled,
 .Event--scheduled-details {
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
   align-items: center;
+  justify-items: center;
+}
+
+.Event--scheduled-details {
+  flex-direction: column;
 }
 
 .Event--summary {
@@ -36,6 +25,12 @@
 }
 
 @media (min-width: 750px) {
+  .Event--summary {
+    justify-self: start;
+    align-self: start;
+    grid-column: 1 / auto;
+  }
+
   .Event--summary > h4 {
     font-size: 15px;
   }
@@ -43,6 +38,7 @@
 
 .Event--time {
   justify-self: end;
+  align-self: start;
   grid-column: 2 / span 1;
   grid-row: 2 / span 1;
   padding-right: 10px;
@@ -52,6 +48,20 @@
 
 .Event--time > p {
   text-align: right;
+}
+
+@media (min-width: 750px) {
+  .Event--time {
+    justify-self: start;
+    grid-column: auto;
+    grid-row: auto;
+    padding: 0;
+    align-content: center;
+  }
+
+  .Event--time > p {
+    text-align: left;
+  }
 }
 
 .Event--next-event-triangle {

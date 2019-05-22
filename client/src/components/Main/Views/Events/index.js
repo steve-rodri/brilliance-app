@@ -438,19 +438,19 @@ export default class Events extends Component {
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['title', 'date', 'confirmation']
+        columnHeaders: ['title', 'title', 'confirmation']
       })
     } else if (width < 900) {
       this.setState({
-        columnHeaders: ['title', 'date', 'schedule', 'confirmation']
+        columnHeaders: ['title', 'title', 'schedule', 'confirmation']
       })
     } else if (width < 1300){
       this.setState({
-        columnHeaders: ['title', 'date', 'intel', 'schedule', 'confirmation']
+        columnHeaders: ['title', 'title', 'intel', 'schedule', 'confirmation']
       })
     } else {
       this.setState({
-        columnHeaders: ['title', 'date', 'intel','','schedule', 'confirmation']
+        columnHeaders: ['title', 'title', 'intel','','schedule', 'confirmation']
       })
     }
   }
