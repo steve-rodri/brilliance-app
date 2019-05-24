@@ -149,7 +149,9 @@ export const GOOGLE = {
         localStorage.clear()
         if (unauthorizedCB) unauthorizedCB()
       }
-      console.log(e)
+      if (e.response && e.response.status === 404) {
+        return null
+      }
     }
   },
   importEvents: async function(calendarId, data, options){

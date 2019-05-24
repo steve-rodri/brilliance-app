@@ -33,7 +33,6 @@ export default class NavSection extends Component {
       onDateChange
     } = this.props
     const singular = view? view.split('').splice(0, view.length - 1).join('') : null
-
     return (
       <div className="NavSection">
         {/* Title */}
