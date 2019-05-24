@@ -14,40 +14,42 @@
 
 @media (min-width: 750px) {
   .InvoiceDetail-header {
-    height: auto;
     top: 0;
     grid-gap: 5px;
     grid-auto-flow: column;
-    grid-template-columns: 250px auto 250px;
+    grid-template-columns: 155px auto 155px;
     padding: 10px;
   }
 }
 
 .InvoiceDetail-header--title {
-  text-align: center;
+  width: 100%;
   display: grid;
+  align-items: center;
+  justify-items: center;
   text-shadow: 0 2px 10px black;
-}
-
-.InvoiceDetail-header--client {
-  font-weight: 400;
-  text-align: center;
-}
-
-.InvoiceDetail-header--client-date-seperator {
-  border-left: 1px solid var(--light-gray);
-  margin: 0 15px;
-}
-
-.InvoiceDetail-header--date {
-  font-weight: 400;
-  text-align: center;
 }
 
 @media (min-width: 750px) {
   .InvoiceDetail-header--title {
-    display: flex;
-    text-align: left;
+    grid-gap: 15px;
+  }
+}
+
+.InvoiceDetail-header--client {
+  font-weight: 400;
+}
+
+.InvoiceDetail-header--client-date-seperator {
+  border-left: 1px solid var(--light-gray);
+  align-self: stretch;
+  justify-self: stretch;
+}
+
+@media (min-width: 750px) {
+  .InvoiceDetail-header--title {
+    display: grid;
+    grid-auto-flow: column;
     grid-column: 2 / span 1;
   }
 

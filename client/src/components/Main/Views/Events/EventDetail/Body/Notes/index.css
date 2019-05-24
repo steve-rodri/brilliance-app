@@ -18,18 +18,17 @@
 
 .Notes {
   color: black;
-  min-height: 150px;
+  min-height: 250px;
   background-color: #F8F8F8;
   padding: 15px;
   font-weight: 300;
   font-family: 'Roboto', sans-serif;
   border-radius: 5px;
+  border: 1px solid #BBBBBB;
 }
 
 .Notes--readonly {
   text-align: left;
-  background-color: rgba(0, 0, 0, 0);
-  color: var(--light-gray);
   padding: 10px;
 }
 

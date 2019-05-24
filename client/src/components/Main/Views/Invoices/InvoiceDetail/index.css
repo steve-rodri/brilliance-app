@@ -12,35 +12,26 @@
   .InvoiceDetail > main {
     display: grid;
     grid-gap: 40px;
-    grid-template-areas:
-    ". ."
-    ". ."
-    "invoice invoice"
-    ;
-    grid-auto-flow: dense;
     padding: 40px;
+    justify-content: center;
   }
+
   .InvoiceDetail > main > section {
-    grid-area: invoice;
     display: grid;
     align-content: start;
     grid-gap: 40px;
+    max-width: 900px;
+  }
+
+  .InvoiceDetail--Invoice-Section {
+    justify-self: center;
   }
 }
 
 @media (min-width: 1200px) {
   .InvoiceDetail > main {
-    grid-template-areas:
-    ". invoice"
-    ". invoice"
-    ". invoice"
-    ;
-    grid-template-columns: 25% 75%;
-    grid-auto-flow: dense;
+    justify-content: center;
+    grid-auto-flow: column;
     padding: 40px;
-  }
-
-  .InvoiceDetail > main > section {
-    padding-right: 40px;
   }
 }

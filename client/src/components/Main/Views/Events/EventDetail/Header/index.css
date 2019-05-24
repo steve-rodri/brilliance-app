@@ -1,7 +1,8 @@
 .EventDetail--header {
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 75px;
+  height: 75px;
   width: 100%;
   z-index: 5;
   background-color: var(--darker-blue);
@@ -36,15 +37,12 @@
   padding: 5px;
 }
 
-input, .EventDetail--event-summary {
+input .EventDetail--event-summary {
   background-color: #F8F8F8;
 }
 
 .EventDetail--event-status {
   display: none;
-  /* position: absolute;
-  top: 1%;
-  left: 0%; */
 }
 
 .EventDetail--icons {
@@ -76,13 +74,15 @@ input, .EventDetail--event-summary {
 
 @media (min-width: 750px) {
   .EventDetail--header {
+    top: 0;
     display: grid;
     justify-items: center;
     align-items: center;
     justify-items: left;
     grid-column-gap: 5px;
     grid: auto / 100px auto 100px;
-    padding: 5px 15px;
+    padding: 10px;
+    height: auto;
     background-color: var(--darker-blue);
     color: var(--light-gray);
   }
@@ -95,8 +95,14 @@ input, .EventDetail--event-summary {
     grid-column: 2 / span 1;
   }
 
+  .EventDetail--event-title {
+    text-shadow: 0 2px 10px black;
+  }
+
   .EventDetail--event-title, .EventDetail--event-summary {
     text-align: center;
+    justify-self: center;
+    width: 75%;
   }
 
   .EventDetail--header-right {

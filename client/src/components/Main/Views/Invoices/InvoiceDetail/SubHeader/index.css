@@ -1,3 +1,9 @@
+@media (min-width: 750px) {
+  .SubHeader {
+    justify-content: center;
+  }
+}
+
 .SubHeader--fields-container,
 .SubHeader--status-container,
 .SubHeader--commission-container,
@@ -24,7 +30,7 @@
   display: grid;
   grid-row-gap: 10px;
   grid-column-gap: 30px;
-  padding: 30px;
+  padding: 10px 20px 15px;
 }
 
 @media (min-width: 750px) {
@@ -48,7 +54,7 @@
 .SubHeader--Edit .SubHeader--status,
 .SubHeader--Edit .SubHeader--commission,
 .SubHeader--Edit .SubHeader--summary {
-  padding: 30px;
+  padding: 10px 20px 20px;
 }
 
 @media (min-width: 750px) {

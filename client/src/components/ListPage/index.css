@@ -36,10 +36,10 @@ aside {
 .ListPage > main {
   height: 100%;
   width: 100%;
-  background-color: var(--dark-blue);
   display: grid;
   grid-template-rows: 40px auto 40px;
   align-content: start;
+  background-color: var(--dark-blue);
 }
 
 @media (min-width: 1000px) {
@@ -76,12 +76,6 @@ aside {
 @media (min-width: 500px) {
   .ListPage--list {
     padding: 0 40px;
-  }
-}
-
-@media (min-width: 1000px) {
-  .ListPage--list {
-    height: calc(100vh - 155px);
   }
 }
 

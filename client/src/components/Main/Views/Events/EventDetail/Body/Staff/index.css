@@ -28,29 +28,47 @@
   .Staff--worker {
     background-color: inherit;
   }
+
+  .Staff--worker-name {
+    border: none;
+  }
 }
 
 /*------------------------Edit------------------- */
 
-.Staff--Edit .Staff {
+.Staff--Edit
+.Staff {
   height: 80%;
   width: 100%;
   border-color: transparent;
   border-collapse: separate;
-  border-spacing: 0 5px;
+  border-spacing: 0 15px;
 }
 
-.Staff--Edit .Staff--worker {
+.Staff--Edit
+.Staff:hover {
+  cursor: pointer;
+}
+
+.Staff--Edit
+.Staff--worker {
   width: 100%;
   background-color: var(--light-gray);
 }
 
-.Staff--Edit .Staff--worker > * {
+.Staff--Edit
+.Staff--worker > * {
   border-radius: 5px;
-  padding: 16px;
+  padding: 13.5px;
 }
 
-.Staff--Edit .Staff--icon-head {
+.Staff--Edit
+.Staff--worker-name {
+  border: 1px solid #BBBBBB;
+}
+
+.Staff--Edit
+.Staff--icon-head {
   width: 5px;
 }
 
@@ -59,29 +77,35 @@
   position: relative;
 }
 
-.Staff--Edit .Staff--add-worker {
+.Staff--Edit
+.Staff--add-worker {
   background: limegreen;
   color: #eeeeee;
 }
 
-.Staff--Edit .Staff--add-worker:hover {
+.Staff--Edit .Staff--add-worker:hover,
+.Staff--Edit .Staff--edit-workers:hover {
   cursor: pointer;
 }
 
-.Staff--Edit .Staff--edit-workers {
+.Staff--Edit
+.Staff--edit-workers {
   background: var(--dark-gray);
   color: white;
 }
 
-.Staff--Edit .Staff--plus-icon {
+.Staff--Edit
+.Staff--plus-icon {
   position: absolute;
   top: 0;
   left: 0;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 12px;
+  margin-left: 12px;
+  font-size: 12px;
 }
 
-.Staff--Edit .Staff--pencil-icon {
+.Staff--Edit
+.Staff--pencil-icon {
   position: absolute;
   top: 0;
   right: 0;
@@ -90,7 +114,8 @@
   font-size: 12.5px;
 }
 
-.Staff--Edit .Staff--search {
+.Staff--Edit
+.Staff--search {
   padding: 0;
 }
 
@@ -99,35 +124,47 @@
 }
 
 @media (min-width: 750px) {
-  .Staff--Edit .Staff {
+  .Staff--Edit
+  .Staff {
     height: auto;
     padding: 0;
     background-color: inherit;
   }
 
-  .Staff--Edit .Staff--icon-head {
+  .Staff--Edit
+  .Staff--icon-head {
     width: 5px;
     padding: 5px;
   }
 
-  .Staff--Edit .Staff--icon {
+  .Staff--Edit
+  .Staff--icon {
     width: 5px;
     padding: 7.5px 5px;
   }
 
-  .Staff--Edit .Staff--icon:hover {
+  .Staff--Edit
+  .Staff--icon:hover {
     cursor: pointer;
   }
 
-  .Staff--Edit .Staff--worker > * {
+  .Staff--Edit
+  .Staff--worker > * {
     border-radius: 5px;
+    padding: 6.5px;
     border: .5px solid #bbbbbb;
+  }
+
+  .Staff--Edit .Staff--edit-workers,
+  .Staff--Edit .Staff--add-worker {
+    padding: 13px;
   }
 }
 
 /*----------------View-------------------- */
 
-.Staff--View .Staff--worker {
+.Staff--View
+.Staff--worker {
   font-size: 20px;
   display: grid;
   grid-template-columns: 1fr 5fr;
@@ -135,57 +172,72 @@
   grid-gap: 5px;
 }
 
-.Staff--View .Staff--worker > * {
-  color: #F8F8F8;
-}
-
-.Staff--View .Staff {
+.Staff--View
+.Staff {
   height: 100%;
   width: 100%;
   display: grid;
   grid-gap: 10px;
+  justify-items: start;
+  align-items: center;
+  padding: 0 10px;
 }
 
-.Staff--View .Staff--worker {
+.Staff--View
+.Staff--worker {
   font-size: 20px;
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 30px auto;
   align-items: center;
-  grid-gap: 5px;
+  grid-gap: 10px;
 }
 
-.Staff--View .Staff--worker-name {
+.Staff--View
+.Staff--worker-name {
   text-align: left;
 }
 
-.Staff--View .Staff--worker-status {
+.Staff--View
+.Staff--worker-status {
   grid-column: 1 / span 1;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
 }
 
 @media (min-width: 750px) {
-  .Staff--View .Staff--container {
+  .Staff--View
+  .Staff--container {
     height: 100%;
   }
 
-  .Staff--View .Staff {
+  .Staff--View
+  .Staff {
     height: auto;
+    grid-gap: 10px;
+    justify-items: center;
   }
 
-  .Staff--View .Staff--worker {
+  .Staff--View
+  .Staff--worker {
     height: 100%;
-    grid-template-columns: 1fr 5fr;
     align-items: center;
-    grid-gap: 5px;
+    justify-self: start;
   }
 
-  .Staff--View .Staff--worker-name {
+  .Staff--View
+  .Staff--worker-name {
     color: black;
     font-size: 20px;
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
   }
 
-  .Staff--View .Staff--worker-status {
+  .Staff--View
+  .Staff--worker-status {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
   }

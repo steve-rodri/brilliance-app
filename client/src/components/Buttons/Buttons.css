@@ -1,11 +1,12 @@
 .Buttons {
   /* grid-row: 3 / span 1; */
+  /* position: sticky;
+  bottom: 0%; */
   align-self: end;
   display: grid;
-  grid-template-rows: repeat(2, auto);
   grid-gap: 20px;
   width: 100%;
-  padding: 28px 20px 20px 20px;
+  padding: 5px 20px 20px 20px;
   background-color: transparent;
 }
 

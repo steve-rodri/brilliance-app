@@ -67,13 +67,16 @@
 
 .Line--price, .Invoice--header-price {
   width: 140px;
-  text-align: center;
+}
+
+.Line--price > p {
+  text-align: right;
 }
 
 .Line--price > form {
-  margin-right: 20px;
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-gap: 3px;
+  grid-template-columns: repeat(2, auto) 12px;
   align-items: center;
   justify-items: center;
 }

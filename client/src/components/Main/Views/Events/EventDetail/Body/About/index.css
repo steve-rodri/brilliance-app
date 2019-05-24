@@ -1,8 +1,7 @@
 .About--container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  display: grid;
   align-items: center;
+  justify-items: center;
   height: 100%;
   width: 100%;
   overflow: visible;
@@ -11,7 +10,7 @@
 
 .About {
   display: grid;
-  justify-items: center;
+  justify-items: start;
   align-items: center;
   grid-gap: 10px;
   width: 100%;
@@ -19,6 +18,10 @@
 
 .About > label {
   justify-self: start;
+}
+
+.About > h3 {
+  padding: 0 10px;
 }
 
 @media (min-width: 750px) {
@@ -30,6 +33,8 @@
     padding: 30px;
     grid-gap: 5px;
     color: inherit;
+    justify-items: center;
+
   }
 
   .About--event-status-container {
@@ -45,8 +50,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 32px;
-    width: 130px;
+  }
+
+  .About--event-status > p {
+    font-weight: 400;
   }
 
   .About--event-status:hover {

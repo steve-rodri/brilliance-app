@@ -1,0 +1,15 @@
+.Schedule--event-summary {
+  align-self: end;
+}
+
+.Schedule--event-time {
+  align-self: start;
+}
+
+.Schedule--event-summary > h4 {
+  font-weight: 700;
+}
+
+.Schedule--notes {
+  font-size: .8em;
+}
