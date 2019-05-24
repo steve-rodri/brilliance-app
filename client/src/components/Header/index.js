@@ -39,11 +39,10 @@ export default class Header extends Component {
   }
 
   render(){
-    const { redirectToLogin, redirectToDashboard } = this.state
+    const { redirectToLogin, redirectToDashboard, location } = this.state
     const { user, user: { accessLevel }, mobile, view, displayNav, changeNav } = this.props
     if (redirectToLogin) return (<Redirect to="/login"/>)
     if (redirectToDashboard) return (<Redirect to="/"/>)
-
     return(
       <header>
         <img onClick={this.toDashboard} className="logo" src={logo_t} alt='logo'/>
@@ -84,7 +83,7 @@ export default class Header extends Component {
           displayNav?
           <div className="Header--drop-down">
 
-            <div className="Header--nav-menu">
+            <div className="Header--nav-menu" style={location && location.pathname === `/${accessLevel}`? {gridAutoFlow: 'row', height: '50%', fontSize: '2em'} : {}}>
               <Link to={{pathname: `/${accessLevel}/events`, state: { nav: false }}} onClick={this.changeNav}><h3>Jobs</h3></Link>
               {/* <Link to={{pathname: `/${accessLevel}/clients`, state: { nav: false }}} onClick={this.changeNav}><h3>Clients</h3></Link> */}
               {/* <Link to={{pathname: `/${accessLevel}/invoices`, state: { nav: false }}} onClick={this.changeNav}><h3>Invoices</h3></Link> */}
