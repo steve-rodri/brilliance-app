@@ -106,14 +106,14 @@ export default class Schedule extends Component {
       return (
         <Fragment>
           <p>{`You are currently scheduled on ${userEvents.length} events.`}</p>
-          <p>{'Please confirm if you will be able to work by clicking/tapping on the confirmation button'}</p>
+          {/* <p>{'Please confirm if you will be able to work by clicking/tapping on the confirmation button'}</p> */}
         </Fragment>
       )
     } else {
       return (
         <Fragment>
           <p>{`You are currently scheduled on 1 event.`}</p>
-          <p>{'Please confirm if you will be able to work by clicking/tapping on the confirmation button'}</p>
+          {/* <p>{'Please confirm if you will be able to work by clicking/tapping on the confirmation button'}</p> */}
         </Fragment>
       )
     }
