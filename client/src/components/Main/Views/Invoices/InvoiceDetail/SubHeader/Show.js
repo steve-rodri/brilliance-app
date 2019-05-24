@@ -146,12 +146,12 @@ export default class SubHeader extends Component {
   }
 
   render(){
-    const { inv, mobile } = this.props
+    const { inv, mobile, styleComp } = this.props
     return (
       <Fragment>
 
-        <div className="SubHeader--Show SubHeader--fields-container">
-          <div className="SubHeader--Show SubHeader--component-title"><h3>About</h3></div>
+        <div className="SubHeader--Show SubHeader--fields-container" style={styleComp()}>
+          <div className="SubHeader--Show SubHeader--component-title"><h4>About</h4></div>
           <div className="SubHeader--Show SubHeader--fields">
             {this.type()}
           </div>
@@ -159,8 +159,8 @@ export default class SubHeader extends Component {
 
         {
           !mobile && inv && inv.kind !== 'Proposal'?
-          <div className="SubHeader--Show SubHeader--status-container">
-            <div className="SubHeader--Show SubHeader--component-title"><h3>Status</h3></div>
+          <div className="SubHeader--Show SubHeader--status-container" style={styleComp()}>
+            <div className="SubHeader--Show SubHeader--component-title"><h4>Status</h4></div>
             <div className="SubHeader--Show SubHeader--status">
               {this.status()}
             </div>

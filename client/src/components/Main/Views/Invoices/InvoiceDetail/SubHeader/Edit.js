@@ -163,13 +163,13 @@ export default class Edit extends Component {
   }
 
   render(){
-    const { fields, handleChange, searchFieldData, mobile } = this.props
+    const { fields, handleChange, searchFieldData, mobile, styleComp } = this.props
     if (fields) {
       return (
         <Fragment>
 
-          <div className="SubHeader--Edit SubHeader--fields-container">
-            <div className="SubHeader-Edit SubHeader--component-title"><h3>About</h3></div>
+          <div className="SubHeader--Edit SubHeader--fields-container" style={styleComp()}>
+            {!mobile? <div className="SubHeader-Edit SubHeader--component-title"><h4>About</h4></div> : null}
             <div className="SubHeader--Edit SubHeader--fields">
               {fields.kind? this.type(fields.kind, handleChange) : null}
               {fields.client? this.client(fields.client, searchFieldData) : null}
@@ -178,8 +178,8 @@ export default class Edit extends Component {
 
           {
             fields && fields.kind !== 'Proposal'?
-            <div className="SubHeader--Edit SubHeader--status-container">
-              <div className="SubHeader-Edit SubHeader--component-title"><h3>Status</h3></div>
+            <div className="SubHeader--Edit SubHeader--status-container" style={styleComp()}>
+              {!mobile? <div className="SubHeader-Edit SubHeader--component-title"><h4>Status</h4></div> : null}
               <div className="SubHeader--Edit SubHeader--status">
                 {this.status(fields, handleChange)}
               </div>
@@ -190,8 +190,8 @@ export default class Edit extends Component {
 
           {
             fields && fields.kind === 'On Premise Contract'?
-            <div className="SubHeader--Edit SubHeader--commission-container">
-              <div className="SubHeader-Edit SubHeader--component-title"><h3>Commission</h3></div>
+            <div className="SubHeader--Edit SubHeader--commission-container" style={styleComp()}>
+              {!mobile? <div className="SubHeader-Edit SubHeader--component-title"><h4>Commission</h4></div> : null}
               <div className="SubHeader--Edit SubHeader--commission">
                 {this.commission(fields.commission, fields.commissionPaid, handleChange, mobile)}
               </div>
