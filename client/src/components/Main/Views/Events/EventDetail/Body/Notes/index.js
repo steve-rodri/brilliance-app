@@ -33,7 +33,7 @@ export default function Notes(props){
 
   return (
     <div style={styleComp('Notes')} className="EventDetail-Body--component EventDetail-Body--notes">
-      <div className="EventDetail-Body--component-title"><h3>Notes</h3></div>
+      <div className="EventDetail-Body--component-title"><h4>Notes</h4></div>
       <div className="Notes--container">
         {mobile? <label>Notes</label> : null}
         {view()}

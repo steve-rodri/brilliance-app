@@ -53,7 +53,7 @@ export default class About extends Component {
     const { editMode, mobile, styleComp } = this.props
     return (
       <div style={styleComp('About')}className="EventDetail-Body--component EventDetail-Body--about">
-        <div className="EventDetail-Body--component-title"><h3>About</h3></div>
+        <div className="EventDetail-Body--component-title"><h4>About</h4></div>
         <div className="About--container">
           {this.view()}
         </div>
