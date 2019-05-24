@@ -1,8 +1,62 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { styleStatus } from '../../../../../../../helpers/invoiceStatus'
+import numeral from 'numeral'
 import './index.css'
 
 export default class Invoice extends Component {
+
+  paymentStatus = (inv) => {
+    if (inv) {
+      return (
+        <div className="Event-Invoice--status" style={this.stylePaymentStatus(inv.paymentStatus)}>
+          <p>{inv.paymentStatus}</p>
+        </div>
+      )
+    }
+  }
+
+  paymentType = (inv) => {
+    if (inv) {
+      if (inv.paymentType && inv.paymentType !== "Unknown") {
+        return (
+          <div className="SubHeader Field">
+            <h4 style={{paddingBottom: '5px'}}>{inv.paymentType}</h4>
+            {inv.check? <p>{inv.check}</p> : null}
+          </div>
+        )
+      }
+    }
+  }
+
+  status = (inv) => {
+    return (
+      <Fragment>
+        {this.paymentStatus(inv)}
+      </Fragment>
+    )
+  }
+
+
+  stylePaymentStatus = (status) => {
+    let style = styleStatus(status);
+    style.padding = '5px 15px'
+    return style;
+  }
+
+  total = (inv) => {
+    return (
+      <Fragment>
+        <div
+          className="SubHeader Field">
+          <h2>
+            {numeral(inv.total).format('$0,0.00')}
+          </h2>
+        </div>
+      </Fragment>
+    )
+  }
+
   view = () => {
     const { evt, match, user: { accessLevel } } = this.props
     const addNewPath = () => {
@@ -16,8 +70,15 @@ export default class Invoice extends Component {
 
     if (evt) {
       if (evt.invoice) {
+        const inv = evt.invoice
         return (
-          <Link to={`/${accessLevel}/invoices/${evt.invoice.id}`}>View Invoice</Link>
+          <Fragment>
+            <div className="Event-Invoice--summary">
+              <div className="Event-Invoice--total">{this.total(inv)}</div>
+              <Link to={`/${accessLevel}/invoices/${evt.invoice.id}`}>View Invoice</Link>
+            </div>
+            {inv.kind !== 'Proposal'? this.status(inv) : null}
+          </Fragment>
         )
       } else {
         return(
@@ -34,11 +95,12 @@ export default class Invoice extends Component {
   }
 
   render(){
-    const { styleComp } = this.props
+    const { styleComp, mobile } = this.props
     return (
       <div style={styleComp('Invoice')} className="EventDetail-Body--component EventDetail-Body--invoice">
-        <div className="EventDetail-Body--component-title"><h3>Invoice</h3></div>
+        {!mobile? <div className="EventDetail-Body--component-title"><h4>Invoice</h4></div>: null}
           <div className="Event-Invoice--container">
+          {mobile? <label>Invoice</label> : null}
             <div className="Event-Invoice">
               {this.view()}
             </div>
