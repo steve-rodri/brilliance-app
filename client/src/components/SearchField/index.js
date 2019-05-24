@@ -281,7 +281,7 @@ export default class SearchField extends Component {
         const section = { name: key, index }
         return (
           <Fragment key={index}>
-            <div className={`${subTitleClassName} SearchField--subtitle`} style={this.styleSectionTitle(section)}><h6>{key}</h6></div>
+            <div className={`${subTitleClassName} SearchField--subtitle`} style={this.styleSectionTitle(section)}><h4>{key}</h4></div>
             {
               value && value.map( (val, i) =>
                 <div
@@ -308,7 +308,7 @@ export default class SearchField extends Component {
   styleSectionTitle = (section) => {
     let style = {};
     if (section.index > 0) {
-      style.top = `${section.index * 34}px`
+      style.top = `${section.index * 28}px`
       style.borderTop = "1px solid var(--light-gray)"
     }
     return style;
