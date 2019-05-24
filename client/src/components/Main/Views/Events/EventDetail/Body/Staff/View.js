@@ -3,29 +3,28 @@ import { statusIcon } from '../../../../../../../helpers/icons'
 import { call } from '../../../../../../../helpers/eventHelpers'
 
 export default function View(props){
-  const { fields, mobile, workers } = props
+  const { fields, mobile, workers, status } = props
   return (
     <div className="Staff--container Staff--View">
-      <div className="Staff Staff--View">
       {mobile? <label>Staff</label> : null}
-        {workers?
-          workers.map( (worker, i) => (
-            <div className="Staff--worker Staff--View" key={i}>
-              <p className="Staff--worker-status Staff--View">{statusIcon(worker.confirmation, '2x')}</p>
-              <p className="Staff--worker-name Staff--View">{worker.info.contact.fullName}</p>
-            </div>
-          ))
-          :
-          null
-        }
+      <div className="Staff Staff--View">
         {
           call(fields)?
           <Fragment>
-            <label>Call</label>
             <div className="Staff--view">
-              {call()}
+              <h3>{`Call: ${call(fields)}`}</h3>
             </div>
           </Fragment>
+          :
+          null
+        }
+        {workers?
+          workers.map( (worker, i) => (
+            <div className="Staff--worker Staff--View" key={i}>
+              <div className="Staff--worker-status Staff--View" style={status(worker.confirmation)}>{statusIcon(worker.confirmation, '1x')}</div>
+              <p className="Staff--worker-name Staff--View" >{worker.info.contact.fullName}</p>
+            </div>
+          ))
           :
           null
         }
