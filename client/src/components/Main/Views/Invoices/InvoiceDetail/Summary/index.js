@@ -15,12 +15,12 @@ export default class Summary extends Component {
               <div className="Summary--totals">
                 <div>
                   <label>SubTotal</label>
-                  <p>{numeral(inv.subTotal).format('$0,0.00')}</p>
+                  <h2>{numeral(inv.subTotal).format('$0,0.00')}</h2>
                 </div>
                 <div>
                   <label>Discount</label>
                   <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
-                    <p>$</p>
+                    <h2>$</h2>
                     <input
                       className="Summary--input"
                       type="number"
@@ -33,7 +33,7 @@ export default class Summary extends Component {
                 </div>
                 <div>
                   <label>Total</label>
-                  <p>{numeral(inv.total).format('$0,0.00')}</p>
+                  <h2>{numeral(inv.total).format('$0,0.00')}</h2>
                 </div>
                 {
                   inv.kind !== 'Proposal'?
@@ -41,7 +41,7 @@ export default class Summary extends Component {
                     <div>
                       <label>Deposit</label>
                       <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
-                        <p>$</p>
+                        <h2>$</h2>
                         <input
                           className="Summary--input"
                           type="number"
@@ -54,7 +54,7 @@ export default class Summary extends Component {
                     </div>
                     <div>
                       <label>Balance</label>
-                      <p>{numeral(inv.balance).format('$0,0.00')}</p>
+                      <h2>{numeral(inv.balance).format('$0,0.00')}</h2>
                     </div>
                   </Fragment>
                   :
@@ -71,16 +71,23 @@ export default class Summary extends Component {
               <div className="Summary--totals">
                 <div>
                   <label>Total</label>
-                  <p>{numeral(inv.total).format('$0,0.00')}</p>
+                  <h2>{numeral(inv.total).format('$0,0.00')}</h2>
                 </div>
-                <div>
-                  <label>Deposit</label>
-                  <p>{numeral(inv.deposit).format('$0,0.00')}</p>
-                </div>
-                <div>
-                  <label>Balance</label>
-                  <p>{numeral(inv.balance).format('$0,0.00')}</p>
-                </div>
+                {
+                  inv.kind !== 'Proposal'?
+                  <Fragment>
+                    <div>
+                      <label>Deposit</label>
+                      <h2>{numeral(inv.deposit).format('$0,0.00')}</h2>
+                    </div>
+                    <div>
+                      <label>Balance</label>
+                      <h2>{numeral(inv.balance).format('$0,0.00')}</h2>
+                    </div>
+                  </Fragment>
+                  :
+                  null
+                }
               </div>
             </div>
           </div>
