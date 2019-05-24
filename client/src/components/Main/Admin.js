@@ -13,6 +13,7 @@ export default class Admin extends Component {
     return (
       <Fragment>
         <Header {...this.props}/>
+        <div className="Header--fixed-space"></div>
         <Switch>
           <Route  exact path={match.path}  render={ props => <Dashboard {...this.props } {...props} /> } />
           <Route  path={`${match.path}/events`} render={ props => <Events {...this.props } {...props} /> } />
