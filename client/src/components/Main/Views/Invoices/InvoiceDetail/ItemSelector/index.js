@@ -87,11 +87,11 @@ export default class ItemSelector extends Component {
   }
 
   findInventories = async(query) => {
-    const q = query.split('')
-    if (q.length > 2) {
+    // const q = query.split('')
+    // if (q.length > 2) {
       const inventories = await inventory.find(query, this.ajaxOptions)
       return inventories
-    }
+    // }
   }
 
   handleSelect = (e, name, i, key) => {
@@ -110,12 +110,12 @@ export default class ItemSelector extends Component {
     }
   }
 
-  formatResult = (item, type) => {
+  formatResult = (result, type) => {
     return (
       <SearchResult
         {...this.props}
-        key={item.id}
-        item={item}
+        key={result.id}
+        result={result}
         type={type}
       />
     )
@@ -127,7 +127,7 @@ export default class ItemSelector extends Component {
       default:
       return (
         <Fragment>
-          <h3>Add Item</h3>
+          <div className="ItemSelector--title"><h2>Add Item</h2></div>
           <SearchField
             formClassName="ItemSelector--search"
             resultsClassName="ItemSelector--search-results"
@@ -146,8 +146,14 @@ export default class ItemSelector extends Component {
             onSelect={this.handleSelect}
           />
 
-          <div className="ItemSelector--create-group-button">
-            <h2 className="ItemSelector--button-text">Create Group/Package</h2>
+          <div className="ItemSelector--buttons">
+            <div className="ItemSelector--button">
+              <h2 className="ItemSelector--button-text">Create Group/Package</h2>
+            </div>
+
+            {/* <div className="ItemSelector--button">
+              <h2 className="ItemSelector--button-text">Create New Item</h2>
+            </div> */}
           </div>
         </Fragment>
       )
