@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { pencilIcon, checkIcon, timesIcon } from '../../../../../../helpers/icons'
 import { clientName } from '../../../../../../helpers/clientHelpers'
@@ -11,15 +11,11 @@ export default function Header(props){
   // Functions to Show Summary field based on Mode ----------------------
 
   function displaySummary(){
-    return (
-      <div className="InvoiceDetail-header--title">
-        {clientAndDate()}
-      </div>
-    )
+    return clientAndDate()
   }
 
   function displayJob(){
-    if (!mobile) {
+    if (!mobile && !editMode) {
       return (
         <div className="InvoiceDetail-header--view-job">
           {job()}
@@ -55,11 +51,11 @@ export default function Header(props){
       }
 
       return (
-        <Fragment>
-          {c? <h3 className="InvoiceDetail-header--client">{clientName(c, {oneLine: true})}</h3> : null}
-          {c && e? <div className="InvoiceDetail-header--client-date-seperator"></div> : null}
-          {e? <h3 className="InvoiceDetail-header--date">{moment(e.start).format('MMMM Do YYYY')}</h3> : null}
-        </Fragment>
+        <div className="InvoiceDetail-header--title" style={!mobile && c && e? {gridTemplateColumns: "1fr auto 1fr"} : {gridTemplateColumns: "auto"}}>
+          {c? <h2 className="InvoiceDetail-header--client" style={!mobile && c && e? {justifySelf: "right"} : {justifySelf: "center"}}>{clientName(c, {oneLine: true})}</h2> : null}
+          {!mobile && c && e? <div className="InvoiceDetail-header--client-date-seperator"></div> : null}
+          {e? <h2 className="InvoiceDetail-header--date" style={!mobile && c && e? {justifySelf: "left"} : {justifySelf: "center"}}>{moment(e.start).format('MMMM Do YYYY')}</h2> : null}
+        </div>
       )
     }
   }
