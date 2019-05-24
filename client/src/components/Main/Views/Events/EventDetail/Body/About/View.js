@@ -10,9 +10,7 @@ export default function View (props){
         fields && fields.client?
         <Fragment>
           { mobile? <label>Client</label> : null }
-          <div className="Field">
-            <p>{fields.client}</p>
-          </div>
+          <h3>{fields.client}</h3>
         </Fragment>
           :
           null
@@ -22,9 +20,7 @@ export default function View (props){
         fields && fields.location?
         <Fragment>
           { mobile? <label>Location</label> : null }
-          <div className="Field">
-            <p>{fields.location}</p>
-          </div>
+          <h3>{fields.location}</h3>
         </Fragment>
           :
           null
@@ -34,9 +30,7 @@ export default function View (props){
         fields && date(fields)?
         <Fragment>
           { mobile? <label>Date</label> : null }
-          <div className="Field">
-            <p>{date(fields, false, true)}</p>
-          </div>
+          <h3>{date(fields, false, true)}</h3>
         </Fragment>
           :
           null
@@ -46,9 +40,7 @@ export default function View (props){
         fields && time(fields)?
         <Fragment>
           { mobile? <label>Time</label> : null }
-          <div className="Field">
-            <p>{time(fields)}</p>
-          </div>
+          <h3>{time(fields)}</h3>
         </Fragment>
           :
           null
@@ -58,9 +50,7 @@ export default function View (props){
         fields && duration(fields)?
         <Fragment>
           { mobile? <label>Duration</label> : null }
-          <div className="Field">
-            <p>{duration(fields)}</p>
-          </div>
+          <h3>{duration(fields)}</h3>
         </Fragment>
           :
           null
