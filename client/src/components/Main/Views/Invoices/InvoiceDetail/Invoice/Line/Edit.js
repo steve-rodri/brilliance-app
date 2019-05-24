@@ -77,7 +77,7 @@ export default class Edit extends Component {
             {
               !line.inc?
               <form onSubmit={(e) => e.preventDefault()} autoComplete="off">
-                <p>$</p>
+                <h2>$</h2>
                 <input
                   className="Line--input"
                   style={{width: '100%'}}
