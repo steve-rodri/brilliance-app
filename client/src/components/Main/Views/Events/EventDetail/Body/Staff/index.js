@@ -18,6 +18,35 @@ export default class Staff extends Component {
     }
   }
 
+  status = (confirmation) => {
+    let style = {}
+    switch (confirmation) {
+      case 'needsAction':
+        style.color = "var(--dark-gray)"
+      break;
+      case 'Unconfirmed':
+      case 'accepted':
+        style.backgroundColor = "limegreen"
+        style.color = "white"
+      break;
+      case 'Confirmed':
+        style.backgroundColor = "limegreen"
+        style.color = "white"
+      break;
+      case 'tentative':
+        style.backgroundColor = "gold"
+        style.color = "var(--light-gray)"
+      break;
+      case 'declined':
+        style.backgroundColor = "red"
+        style.color = "white"
+      break;
+      default:
+      break;
+    }
+    return style;
+  }
+
   view = () => {
     const { mobile, editMode, workers } = this.props
     if (editMode) {
@@ -25,6 +54,7 @@ export default class Staff extends Component {
         <Edit
           {...this.props}
           iconSize={this.iconSize()}
+          status={this.status}
         />
       )
     } else if (workers && workers.length) {
@@ -32,6 +62,7 @@ export default class Staff extends Component {
         <View
           {...this.props}
           iconSize={this.iconSize()}
+          status={this.status}
         />
       )
     } else {
@@ -51,7 +82,7 @@ export default class Staff extends Component {
     const { styleComp } = this.props
     return (
       <div style={styleComp('Staff')}className="EventDetail-Body--component EventDetail-Body--staff">
-        <div className="EventDetail-Body--component-title"><h3>Staff</h3></div>
+        <div className="EventDetail-Body--component-title"><h4>Staff</h4></div>
           {this.view()}
       </div>
     )
