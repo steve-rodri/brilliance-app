@@ -72,7 +72,6 @@ async function attendees(evt, options){
     if (evt.attendees) {
       //for each attendee, find corresponding worker/staff member by contact email
       let e = await event.get(null, { ...options, iCalUID: evt.iCalUID})
-
       if (e) {
         //if event has staff update staff with google attendee info
         if (e.staff && e.staff.length) {
@@ -113,8 +112,8 @@ async function attendees(evt, options){
         }
       } else {
         const staff = await Promise.all(evt.attendees.map(async attendee => {
-          const worker = await employee.findByEmail(attendee.email, options)
-          if (worker) {
+          let worker = await employee.findByEmail(attendee.email, options)
+          if (worker && !attendee.organizer) {
             worker.confirmation = attendee.responseStatus
             return worker
           } else {
