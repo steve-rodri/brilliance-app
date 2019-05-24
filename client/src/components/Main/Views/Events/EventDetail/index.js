@@ -445,7 +445,7 @@ export default class EventDetail extends Component {
         ...prevState.formData,
         [name]: value
       }
-    }), async() => await this.handleSubmit())
+    }), async() => await this.handleSubmit(true))
   }
 
   handleSearchChange = async(name, value) => {
@@ -631,7 +631,7 @@ export default class EventDetail extends Component {
     const q = query.split('')
     if (q.length > 2) {
       const data = await client.batch({page: 1, q:query }, this.ajaxOptions)
-      return data.clients
+      if (data) return data.clients
     }
   }
 
@@ -800,7 +800,7 @@ export default class EventDetail extends Component {
 
 // ----------------------------------DB-CRUD------------------------------------
 
-  handleSubmit = async() => {
+  handleSubmit = async(stayOpen) => {
     const { evt, formData } = this.state
     const { isNew, history, user: { accessLevel } } = this.props
     if (isNew) {
@@ -814,7 +814,7 @@ export default class EventDetail extends Component {
       const updatedEvent = await this.props.handleUpdate(evt, formData)
       await this.setState({ evt: updatedEvent })
 
-      await this.close()
+      if (!stayOpen) await this.close()
     }
   }
 
