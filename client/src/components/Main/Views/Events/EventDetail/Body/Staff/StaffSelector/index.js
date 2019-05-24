@@ -32,7 +32,7 @@ export default class StaffSelector extends Component {
         <label style={{justifySelf: 'start'}}>Labor</label>
         <div className="StaffSelector--labor">
           {employees && labor.map(employee =>
-            <button
+            <div
               className="StaffSelector--employee"
               key={employee.id}
               style={this.style(employee)}
@@ -42,13 +42,13 @@ export default class StaffSelector extends Component {
               }}
             >
               <p>{employee.contactInfo.fullName}</p>
-            </button>
+            </div>
           )}
         </div>
         <label style={{justifySelf: 'start'}}>Non-Labor</label>
         <div className="StaffSelector--non-labor">
           {employees && nonLabor.map(employee =>
-            <button
+            <div
               className="StaffSelector--employee"
               key={employee.id}
               style={this.style(employee)}
@@ -58,7 +58,7 @@ export default class StaffSelector extends Component {
               }}
             >
               <p>{employee.contactInfo.fullName}</p>
-            </button>
+            </div>
           )}
         </div>
         <button
