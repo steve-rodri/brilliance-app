@@ -306,7 +306,7 @@ export default class Events extends Component {
   }
 
   deleteEvent = async(evt) => {
-    const { calendarId } = this.state
+    const calendarId  = localStorage.getItem('google_calendar_id')
     let events = [...this.state.events]
     await event.delete(evt.id, this.ajaxOptions)
     if (evt.gcId) {
@@ -317,7 +317,7 @@ export default class Events extends Component {
   }
 
   updateEvent = async(e, data) => {
-    const { calendarId } = this.state
+    const calendarId = localStorage.getItem('google_calendar_id')
     const { signout } = this.props
     if (e) {
       let events = [...this.state.events]
