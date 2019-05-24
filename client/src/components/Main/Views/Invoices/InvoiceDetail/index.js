@@ -761,7 +761,7 @@ export default class InvoiceDetail extends Component {
             {...this.state}
             scrollToTop={this.scrollToTop}
             edit={() => this.setEditMode(!this.state.editMode)}
-            handleSubmit={this.handleSubmit}
+            submit={this.handleSubmit}
             />
           :
           null
