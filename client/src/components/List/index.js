@@ -12,7 +12,9 @@ export default class List extends Component {
 
   componentWillUnmount(){
     const { setScrollPosition } = this.props
-    setScrollPosition(this.container.current.scrollTop)
+    if (typeof setScrollPosition === 'function') {
+      setScrollPosition(this.container.current.scrollTop)
+    }
   }
 
   componentDidMount(){
@@ -22,7 +24,6 @@ export default class List extends Component {
 
   render(){
     const {page, items, view, columnHeaders, load, hasMore, loading } = this.props
-
     return (
       <div id="List" className="List" ref={this.container}>
         {columnHeaders && items && items.length?
@@ -112,15 +113,15 @@ export default class List extends Component {
       return style;
     }
 
-    function findIndices(arr, val){
-      let indexes = []
-      let i = -1;
-
-      while ((i = arr.indexOf(val, i+1)) !== -1){
-        indexes.push(i);
-      }
-
-      return indexes;
-    }
+    // function findIndices(arr, val){
+    //   let indexes = []
+    //   let i = -1;
+    //
+    //   while ((i = arr.indexOf(val, i+1)) !== -1){
+    //     indexes.push(i);
+    //   }
+    //
+    //   return indexes;
+    // }
   }
 }
