@@ -3,7 +3,6 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   def index
-
     if params[:email]
       @employees = Employee
         .joins(contact: :email_address)

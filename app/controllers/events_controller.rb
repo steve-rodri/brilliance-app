@@ -4,12 +4,16 @@ class EventsController < ApplicationController
   @@date_start = Time.zone.today()
   @@date_end = Time.zone.today()
 
+  #time.now is between event.start and event.end
+  #OR
+  #events.start is after now
+
   # GET /events
   def index
     @@date_where = nil
     @@send_count = false
     @@next_event = Event
-      .where("events.start > '#{Time.zone.now()}'")
+      .where("events.start > '#{Time.zone.now()}' OR '#{Time.zone.now()}' BETWEEN events.start AND events.end")
       .order(:start)
       .first
 
@@ -142,7 +146,7 @@ class EventsController < ApplicationController
       @events = Event
       .joins(event_employees: [{employee: [{contact: :email_address }]}])
       .where("email_addresses.email_address LIKE '%#{email}%'")
-      .order(:start)
+      .order(start: :DESC)
       .paginate(page: params[:page], per_page: @@items_per_page)
 
       render json: @events,
@@ -222,27 +226,20 @@ class EventsController < ApplicationController
   # PATCH/PUT /events
   def sync
     event_only_params = event_params.except(:event_employees_attributes)
-    event_employees_params = event_params.slice(:event_employees_attributes)
-    employee_params = [ event_employees_params[:event_employees_attributes] ]
+    e_e_params = event_params.slice(:event_employees_attributes)[:event_employees_attributes]
 
     @event = Event.where(:i_cal_UID => params[:i_cal_UID]).first_or_create(event_params)
-    if @event
-      @event.update(event_only_params)
-      if @event.event_employees
-        employee_params.each do |p|
-          if p
-            if p[0]
-              worker = @event
-                .event_employees
-                .where( employee_id: p[0][:employee_id] )
-                .first_or_create
-              if worker
-                worker.update(p[0])
-              end
-            end
-          end
-        end
-      end
+
+    @event.update(event_only_params)
+    if e_e_params
+      e_e_params.each do |p|
+        worker = @event
+          .event_employees
+          .where( employee_id: p[:employee_id] )
+          .first_or_create
+
+        worker.update(p.except(:employee_id))
+    end
     end
 
     render json: @event, include: '**'
