@@ -9,7 +9,7 @@ import {
 } from '../../Invoice/Line/Helpers'
 
 export default function SearchResult(props){
-  const { result, inv, type } = props
+  const { result, inv, type, mobile } = props
   switch (type) {
     case 'past invoices':
       const line = result
@@ -18,7 +18,7 @@ export default function SearchResult(props){
       return (
         <Fragment>
           <div className="SearchResult--image">{photo? <img src={photo} alt={description}/> : null}</div>
-          <div className="SearchResult--kind"><p>{line.item.kind}</p></div>
+          { !mobile? <div className="SearchResult--kind"><p>{line.item.kind}</p></div> : null}
           <div className="SearchResult--name"><p>{description}</p></div>
           <div className="SearchResult--quantity">
             <h5>Qty:</h5>
@@ -36,7 +36,7 @@ export default function SearchResult(props){
       return (
         <Fragment>
           <div className="SearchResult--image">{inventory.photo? <img src={inventory.photo} alt={name}/> : null}</div>
-          <div className="SearchResult--kind"><p>{inventory.kind}</p></div>
+          {!mobile? <div className="SearchResult--kind"><p>{inventory.kind}</p></div> : null}
           <div className="SearchResult--name"><p>{name}</p></div>
           <div className="SearchResult--price">
             <h5>Price:</h5>
