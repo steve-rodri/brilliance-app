@@ -68,10 +68,10 @@ export default class Invoice extends Component {
           <thead className="Invoice--header">
             <tr className= "Invoice--header-row">
               {editMode? <th className="Invoice--header-cell Invoice--header-edit"></th> : null}
-              {(editMode && !mobile) || (!editMode && this.quantities())? <th className="Invoice--header-cell Invoice--header-quantity"><h3>Qty</h3></th> : null}
-              <th className="Invoice--header-cell Invoice--header-item"><h3>Item</h3></th>
-              {editMode && !mobile? <th className="Invoice--header-cell Invoice--header-inc"><h3>Inc</h3></th> : null}
-              {!mobile? <th className="Invoice--header-cell Invoice--header-price"><h3>Price</h3></th> : null}
+              {(editMode && !mobile) || (!editMode && this.quantities())? <th className="Invoice--header-cell Invoice--header-quantity"><h4>Qty</h4></th> : null}
+              <th className="Invoice--header-cell Invoice--header-item"><h4>Item</h4></th>
+              {editMode && !mobile? <th className="Invoice--header-cell Invoice--header-inc"><h4>Inc</h4></th> : null}
+              {!mobile? <th className="Invoice--header-cell Invoice--header-price"><h4 style={editMode? {textAlign: 'center'} : {textAlign: 'right'}}>Price</h4></th> : null}
             </tr>
           </thead>
         )

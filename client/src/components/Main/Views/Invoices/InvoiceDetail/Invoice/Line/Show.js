@@ -12,7 +12,7 @@ export default function Show(props){
         <div className="Line--item-description"><p>{itemDescription(line.item)}</p></div>
         {c? <div className="Line--item-contents">{c}</div> : null}
       </td>
-      {!mobile? <td style={styleCell(index, length)} className="Invoice--cell Line--price">{line.price > 0? numeral(line.price).format('$0,0.00') : null }</td> : null}
+      {!mobile? <td style={styleCell(index, length)} className="Invoice--cell Line--price"><p>{line.price > 0? numeral(line.price).format('$0,0.00') : null }</p></td> : null}
     </tr>
   )
 }
