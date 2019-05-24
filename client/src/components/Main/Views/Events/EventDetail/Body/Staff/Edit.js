@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { pencilIcon, plusIcon } from '../../../../../../../helpers/icons'
+import { plusIcon } from '../../../../../../../helpers/icons'
 
 export default class Edit extends Component {
   constructor(props){
@@ -39,14 +39,14 @@ export default class Edit extends Component {
   render(){
     const { mobile, workers, iconSize } = this.props
     return (
-      <div className="Staff--container Staff--Edit" style={this.styleContainer()}>
+      <div className="Staff--container Staff--Edit" style={this.styleContainer()} onClick={this.props.chooseWorker}>
       {mobile? <label>Staff</label> : null}
         <table className="Staff Staff--Edit">
           <tbody>
           {workers?
             workers.map( (worker, i) =>
               <tr className="Staff--worker Staff--Edit" key={i} style={this.styleRow()}>
-                <td className="Staff--worker-name Staff--Edit">{worker.info.contact.fullName}</td>
+                <td className="Staff--worker-name Staff--Edit"><h3>{worker.info.contact.fullName}</h3></td>
               </tr>
             )
             :
@@ -54,20 +54,12 @@ export default class Edit extends Component {
           }
           {
             workers && workers.length?
-            <tr className="Staff--worker Staff--Edit" style={this.styleRow()}>
-              <td
-                className="Staff--edit-workers Staff--Edit"
-                onClick={this.props.chooseWorker}
-              >
-                <div className="Staff--pencil-icon">{pencilIcon(iconSize)}</div>
-                <h3 style={{fontWeight: 700}}>Edit</h3>
-              </td>
-            </tr>
+            null
             :
             <tr className="Staff--worker Staff--Edit" style={this.styleRow()}>
               <td className="Staff--add-worker Staff--Edit" onClick={this.props.chooseWorker}>
                 <div className="Staff--plus-icon">{plusIcon(iconSize)}</div>
-                <h3 style={{fontWeight: 700}}>NEW WORKER</h3>
+                <h3 style={{fontWeight: 700}}>New Worker</h3>
               </td>
             </tr>
           }
