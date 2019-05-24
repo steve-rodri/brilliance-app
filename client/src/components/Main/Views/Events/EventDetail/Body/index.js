@@ -26,7 +26,6 @@ export default class Body extends Component {
           style.gridRow = 'span 2'
           break;
         case 'Staff':
-
           break;
         case 'Invoice':
 
@@ -38,17 +37,41 @@ export default class Body extends Component {
     return style;
   }
 
+  styleComponents = () => {
+    const { editMode, mobile } = this.props
+    if (!mobile) {
+      let style = {
+        gridAutoColumns: "minmax(16.25rem, 1fr)",
+        gridAutoRows: "minmax(14.5rem, 1fr)",
+        gridTemplateColumns: "repeat(auto-fit, minmax(17.25rem, auto))",
+      };
+
+      if (editMode) {
+        style.gridAutoColumns = "auto";
+        style.gridAutoRows = "auto";
+        style.gridTemplateColumns = "repeat(auto-fit, minmax(21rem, auto))";
+      }
+
+      return style;
+    } else {
+      return {}
+    }
+  }
+
   render(){
-    const { mobile, editMode, fields, isNew } = this.props;
+    const { evt, mobile, editMode, fields, isNew } = this.props;
     const about = fields &&
     (fields.client || fields.location || date(fields) || time(fields));
 
+    const showInvoice = !isNew && evt && !editMode
+    const showStaff = editMode || ( evt && evt.staff && evt.staff.length )
+
     return (
-      <div className="EventDetail-Body--container">
+      <div className="EventDetail-Body">
         <div className="EventDetail-Body--components-container">
           {
             about?
-            <div className="EventDetail-Body--components">
+            <div className="EventDetail-Body--components" style={this.styleComponents()}>
                 <About {...this.props} styleComp={this.styleComp}/>
               {
                 mobile?
@@ -57,15 +80,20 @@ export default class Body extends Component {
                 <Logistics {...this.props} styleComp={this.styleComp}/>
               }
               {
-                !mobile && !isNew?
-                <Invoice {...this.props} styleComp={this.styleComp}/>
+                showStaff?
+                <Staff {...this.props} styleComp={this.styleComp}/>
                 :
                 null
               }
-                <Staff {...this.props} styleComp={this.styleComp}/>
               {
                 editMode || !isNullOrWhitespace(fields.notes)?
                 <Notes {...this.props} styleComp={this.styleComp}/>
+                :
+                null
+              }
+              {
+                showInvoice?
+                <Invoice {...this.props} styleComp={this.styleComp}/>
                 :
                 null
               }
