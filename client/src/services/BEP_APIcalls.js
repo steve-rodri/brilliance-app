@@ -142,7 +142,7 @@ export const client = {
   batch: async function(params, options){
     const { sendCount: send_count, cancelToken, unauthorizedCB } = options
     try {
-      const resp = await axios.get('api/clients', {
+      const resp = await axios.get('/api/clients', {
         params: {
           ...params,
           send_count
@@ -230,7 +230,7 @@ export const invoice = {
     const { sendCount: send_count, cancelToken, unauthorizedCB } = options
 
     try {
-      const resp = await axios.get('api/invoices', {
+      const resp = await axios.get('/api/invoices', {
         params: {
           ...params,
           send_count
