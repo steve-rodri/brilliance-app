@@ -23,7 +23,6 @@ export default function Event(props){
   const middleCell = styleCell('middle', event)
   const rightCell = styleCell('right', event)
   const titleDisplay = displayColumn('title')
-  const dateDisplay = displayColumn('date')
   const intelDisplay = displayColumn('intel')
   const scheduleDisplay = displayColumn('schedule')
   const confirmationDisplay = displayColumn('confirmation')

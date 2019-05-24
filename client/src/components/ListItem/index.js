@@ -20,6 +20,41 @@ export default class ListItem extends Component {
     }
   }
 
+  eventSummary = () => {
+    const { item: e } = this.props
+    if (e && e.summary) {
+
+      let summary = e.summary;
+      let slashWords = [];
+      let hyphenWords = [];
+
+      if (summary.search('/')) {
+        slashWords = summary.split('/')
+      }
+
+      if (summary.search('-')) {
+        hyphenWords = summary.split('-')
+      }
+
+      const words = slashWords.length > 1? slashWords : hyphenWords
+      if (words.length > 1) {
+        summary = words.join(' ')
+        return <h4>{summary}</h4>
+      } else {
+        return <h4>{summary}</h4>
+      }
+    }
+  }
+
+  styleMobileEventSummary = () => {
+    const { item: e } = this.props
+    if (e && e.summary && e.summary.length > 30) {
+      return { fontSize: '15px'}
+    } else {
+      return {}
+    }
+  }
+
   styleItem = (item) => {
     const { view, total, index, mobile, isMonth } = this.props
     const style = {}
@@ -129,8 +164,12 @@ export default class ListItem extends Component {
             start={start()}
             end={end()}
             timeUntil={timeUntil(item)}
+
             styleItem={this.styleItem}
             styleCell={this.styleCell}
+            styleMobileEventSummary={this.styleMobileEventSummary}
+            
+            eventSummary={this.eventSummary}
           />
         )
       case 'Events':
@@ -142,6 +181,8 @@ export default class ListItem extends Component {
             styleItem={this.styleItem}
             styleCell={this.styleCell}
             styleSummary={this.styleSummary}
+            styleMobileEventSummary={this.styleMobileEventSummary}
+            eventSummary={this.eventSummary}
             changeScrollPosition={this.changeScrollPosition}
           />
         )
