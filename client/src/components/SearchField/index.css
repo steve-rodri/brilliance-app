@@ -20,3 +20,11 @@
   color: var(--light-gray);
   padding: 5px;
 }
+
+@media (min-width: 750px) {
+  .SearchField--subtitle {
+    height: auto;
+    font-size: inherit;
+    padding: 5px;
+  }
+}

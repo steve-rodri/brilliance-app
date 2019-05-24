@@ -1,14 +1,13 @@
 .Dashboard {
   height: calc(100vh - 75px);
-  display: grid;
-  justify-items: center;
-  align-items: start;
   background-color: var(--dark-gray);
+  display: grid;
+  grid-gap: 30px;
+  align-content: start;
+  padding-top: 37.5px;
   color: white;
 }
 
 .Dashboard--intro {
-  min-width: 50%;
-  justify-self: center;
-  align-self: center;
+  font-size: 40px;
 }

@@ -1,20 +1,30 @@
 .Event-Invoice--container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  justify-items: start;
   align-items: center;
   height: 100%;
   width: 100%;
   overflow: auto;
+  padding: 0 20px 10px;
+}
+
+.Event-Invoice--container > label {
+  justify-self: start;
 }
 
 .Event-Invoice {
   display: grid;
-  justify-items: center;
+  justify-items: start;
   align-items: center;
+  grid-auto-flow: column;
   grid-gap: 5px;
-  width: 100%;
-  color: #eeeeee;
+  padding-left: 10px;
+}
+
+.Event-Invoice--summary {
+}
+
+.Event-Invoice--status {
 }
 
 .Event-Invoice--no-invoice {
@@ -23,8 +33,36 @@
 }
 
 @media (min-width: 750px) {
+  .Event-Invoice--container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+  }
+
   .Event-Invoice {
+    height: 100%;
     padding: 30px 30px 30px 30px;
-    color: inherit;
+    color: #eeeeee;
+    grid-template-rows: repeat(3, auto)
+  }
+  .Event-Invoice--summary {
+    grid-row: 2;
+  }
+
+  .Event-Invoice--status {
+    grid-row: 3;
+    align-self: end;
+  }
+
+  .Event-Invoice--status:hover {
+    cursor: pointer;
+  }
+
+  .Event-Invoice--status > p {
+    font-weight: 400;
   }
 }

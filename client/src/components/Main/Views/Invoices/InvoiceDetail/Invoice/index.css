@@ -1,6 +1,8 @@
 .Invoice--container {
+  position: relative;
   align-self: start;
   width: 100%;
+  max-width: 900px;
 }
 
 .Invoice {
@@ -19,7 +21,7 @@
 
 .Invoice--header-row  {
   background: var(--dark-gray);
-  height: 50px;
+  height: 40px;
   width: 100%;
 }
 
@@ -27,6 +29,10 @@
   position: -webkit-sticky;
   position: sticky;
   top: 150px;
+}
+
+.Invoice--header-row > th {
+  padding: 10px 15px;
 }
 
 @media (min-width: 750px) {
@@ -39,6 +45,10 @@
   padding: 15px;
   background: var(--dark-gray);
   color: #eeeeee;
+}
+
+.Invoice--header-price > h4 {
+  text-align: right;
 }
 
 .Invoice--header-item {
@@ -57,13 +67,17 @@
 
 .Invoice--add {
   display: grid;
-  grid: auto / 60px auto 60px;
+  grid: auto / 58px auto 58px;
   justify-items: center;
   align-items: center;
   background-color: limegreen;
   color: #eee;
   width: 100%;
-  padding: 15px 0;
+  padding: 18px 0;
+}
+
+.Invoice--add > div {
+  font-size: .6em;
 }
 
 .Invoice--add:hover {

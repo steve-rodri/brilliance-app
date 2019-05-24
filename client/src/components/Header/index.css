@@ -1,20 +1,28 @@
 header {
   height: 75px;
   width: 100%;
-  position: sticky;
+  position: fixed;
   top: 0;
   display: grid;
   align-items: center;
   justify-items: center;
   grid-auto-flow: column;
   background: #111111;
-  z-index: 10;
+  z-index: 10000;
+}
+
+.Header--fixed-space {
+  height: 75px;
 }
 
 @media (min-width: 750px) {
   header {
     grid-template-columns: 170px auto 75px;
     position: static;
+  }
+
+  .Header--fixed-space {
+    display: none;
   }
 }
 
@@ -32,28 +40,29 @@ header {
   top: 75px;
   height: calc(100vh - 75px);
   display: grid;
-  grid-gap: 20px;
   align-items: center;
   justify-items: center;
   width: 100vw;
   background: #111111;
-  padding: 20px 10px;
-  overflow: hidden;
+  padding: 10px 10px 20px 10px;
+  overflow: auto;
   transition: all 500ms ease;
 }
 
 .Header--nav-menu {
+  position: sticky;
+  top: -20px;
   display: grid;
   width: 100%;
   grid-auto-flow: column;
-  grid-gap: 15px;
   align-items: center;
   justify-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  background: #111111;
+  height: 50px;
 }
 
 .Header--nav-menu > a {
-  height: 100%;
   text-decoration: none;
   color: white;
 }

@@ -5,8 +5,9 @@
 
 .App {
   height: 100vh;
+  overflow: auto;
   text-align: center;
-  background-color: var(--dark-blue);
+  background-color: var(--light-gray);
 
   /* Color Palette */
   --darker-blue: #143154;
@@ -25,12 +26,18 @@
   --light-gray: #DADBE0;
 }
 
+@media (min-width: 750px) {
+  .App {
+    background-color: var(--dark-blue)
+  }
+}
+
 h1, h2 {
   font-family: 'Calibri', sans-serif;
   font-weight: 300;
 }
 
-h3, h4, h5, h6, p, a, label, td, th {
+h3, h4, h5, h6, p, a, label, td, th, input {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
@@ -40,20 +47,20 @@ h1 {
   font-weight: 400;
 }
 
-h2, input, textarea {
+h2 {
   font-size: 1.4em;
 }
 
-h3, p {
+h3, input, textarea {
   font-size: 1.2em;
 }
 
-h4, label {
+h4, p {
   font-size: 1em;
 }
 
-h5 {
-  font-size: .8em;
+h5, label {
+  font-size: .9em;
 }
 
 h6 {
