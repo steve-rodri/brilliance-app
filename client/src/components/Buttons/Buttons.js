@@ -16,7 +16,6 @@ export default function Buttons(props) {
     handleStatusChange,
 
    } = props
-
   function editButton(){
     return (
       <div

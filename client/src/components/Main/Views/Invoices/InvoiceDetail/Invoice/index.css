@@ -32,7 +32,7 @@
 }
 
 .Invoice--header-row > th {
-  padding: 10px 15px;
+  padding: 10px;
 }
 
 @media (min-width: 750px) {
@@ -55,6 +55,22 @@
   text-align: left;
 }
 
+.Invoice--header-edit {
+  width: 40px;
+}
+.Invoice--header-quantity,
+.Invoice--header-inc {
+  width: 75px;
+}
+
+.Invoice--header-item {
+
+}
+
+.Invoice--header-price {
+  width: 150px;
+}
+
 
 /* -------Cells---------- */
 
@@ -62,22 +78,22 @@
   border-top: 1px solid var(--dark-gray);
   border-bottom: 1px solid #cccccc;
   background-color: #eeeeee;
-  padding: 15px;
+  padding: 15px 10px;
 }
 
 .Invoice--add {
   display: grid;
-  grid: auto / 58px auto 58px;
+  grid: auto / 45px auto 45px;
   justify-items: center;
   align-items: center;
   background-color: limegreen;
   color: #eee;
   width: 100%;
-  padding: 18px 0;
+  padding: 1px 0;
 }
 
-.Invoice--add > div {
-  font-size: .6em;
+.Invoice--add > div  {
+  padding: 15px 10px;
 }
 
 .Invoice--add:hover {

@@ -2,9 +2,8 @@
   background: var(--light-gray);
 }
 
-.Line--add-delete {
-  width: 50px;
-  padding: 0 25px;
+.Line--add-delete > div {
+  display: grid;
 }
 
 .Line--add-delete:hover {
@@ -29,10 +28,6 @@
 }
 
 /* --------------------Quantity-------------- */
-
-.Line--quantity {
-  width: 75px;
-}
 
 .Line--quantity > div {
   display: flex;
@@ -63,11 +58,13 @@
   text-align: left;
 }
 
-/* --------------------Price-------------- */
+/* --------------------Inc-------------- */
 
-.Line--price, .Invoice--header-price {
-  width: 140px;
+.Line--inc {
+
 }
+
+/* --------------------Price-------------- */
 
 .Line--price > p {
   text-align: right;

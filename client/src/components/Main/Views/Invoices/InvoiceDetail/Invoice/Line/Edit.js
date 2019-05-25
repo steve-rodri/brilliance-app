@@ -24,7 +24,7 @@ export default class Edit extends Component {
             deleteLine(line.id)
           }}
         >
-          {<TimesIcon width="25" height="25"/>}
+          <div>{<TimesIcon width="25" height="25"/>}</div>
         </td>
 
         {/* Quantity */}

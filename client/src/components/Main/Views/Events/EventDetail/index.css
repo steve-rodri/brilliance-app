@@ -1,1 +1,13 @@
+.EventDetail {
+  min-height: calc(100% - 75px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
 
+.EventDetail > main {
+  grid-row: 2;
+}
+
+.EventDetail > .Buttons {
+  grid-row: 3;
+}

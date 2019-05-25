@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from './Header'
 import Body from './Body';
+import Buttons from '../../../../Buttons/Buttons'
 import Modal from '../../../../Modal';
 import StaffSelector from './Body/Staff/StaffSelector'
 import { GOOGLE } from '../../../../../services/google_service';
@@ -881,8 +882,8 @@ export default class EventDetail extends Component {
 // -----------------------------------Render------------------------------------
 
   render(){
-    const { editMode, mobile } = this.state
-    const { user: { accessLevel } } = this.props
+    const { editMode} = this.state
+    const { user: { accessLevel }, mobile } = this.props
     if (this.state.redirectToEvents) return (<Redirect to={`/${accessLevel}/events`}/>)
     return (
       <div className="EventDetail" ref={this.container}>
@@ -928,6 +929,20 @@ export default class EventDetail extends Component {
 
           scrollToTop={this.scrollToTop}
         />
+
+        {
+          mobile?
+          <Buttons
+            {...this.props}
+            {...this.state}
+            edit={this.switchEditMode}
+            submit={() => this.handleSubmit()}
+            scrollToTop={this.scrollToTop}
+            handleStatusChange={this.handleStatusChange}
+          />
+          :
+          null
+        }
 
         {
           this.state.showStaffModal?

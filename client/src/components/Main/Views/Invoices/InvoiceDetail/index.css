@@ -1,6 +1,12 @@
 .InvoiceDetail {
+  min-height: calc(100% - 75px);
   background-color: var(--light-gray);
   display: grid;
+  grid-template-rows: 75px auto 80px;
+}
+
+.InvoiceDetail > .Buttons {
+  align-self: end;
 }
 
 @media (min-width: 750px) {
@@ -13,11 +19,12 @@
     display: grid;
     grid-gap: 40px;
     padding: 40px;
-    justify-content: center;
+    justify-items: center;
   }
 
   .InvoiceDetail > main > section {
     display: grid;
+    width: 100%;
     align-content: start;
     grid-gap: 40px;
     max-width: 900px;

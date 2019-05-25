@@ -5,7 +5,6 @@ import Notes from './Notes'
 import Staff from './Staff'
 import Invoice from './Invoice'
 // import Loader from '../../../../../Loader'
-import Buttons from '../../../../../Buttons/Buttons'
 import { date, time } from '../../../../../../helpers/datetime'
 import './index.css'
 
@@ -67,7 +66,7 @@ export default class Body extends Component {
     const showStaff = editMode || ( evt && evt.staff && evt.staff.length )
 
     return (
-      <div className="EventDetail-Body">
+      <main>
         <div className="EventDetail-Body--components-container">
           {
             about?
@@ -105,15 +104,7 @@ export default class Body extends Component {
             null
           }
         </div>
-
-        {
-          mobile?
-          <Buttons {...this.props}/>
-          :
-          null
-        }
-
-      </div>
+      </main>
     )
   }
 }
