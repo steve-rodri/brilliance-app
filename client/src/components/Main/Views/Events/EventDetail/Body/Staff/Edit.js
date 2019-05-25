@@ -37,11 +37,13 @@ export default class Edit extends Component {
   }
 
   render(){
-    const { mobile, workers, iconSize } = this.props
+    const { mobile, workers } = this.props
     return (
-      <div className="Staff--container Staff--Edit" style={this.styleContainer()} onClick={this.props.chooseWorker}>
+      <div className="Staff--container Staff--Edit" style={this.styleContainer()}>
       {mobile? <label>Staff</label> : null}
-        <table className="Staff Staff--Edit">
+      {
+        workers && workers.length?
+        <table className="Staff Staff--Edit" onClick={this.props.chooseWorker}>
           <tbody>
           {workers?
             workers.map( (worker, i) =>
@@ -52,19 +54,14 @@ export default class Edit extends Component {
             :
             null
           }
-          {
-            workers && workers.length?
-            null
-            :
-            <tr className="Staff--worker Staff--Edit" style={this.styleRow()}>
-              <td className="Staff--add-worker Staff--Edit" onClick={this.props.chooseWorker}>
-                <div className="Staff--plus-icon">{plusIcon(iconSize)}</div>
-                <h3 style={{fontWeight: 700}}>New Worker</h3>
-              </td>
-            </tr>
-          }
           </tbody>
         </table>
+        :
+        <div className="Staff--add-worker Staff--Edit" onClick={this.props.chooseWorker}>
+          <div className="Staff--plus-icon">{plusIcon()}</div>
+          <p style={{fontWeight: 700}}>ADD</p>
+        </div>
+      }
       </div>
     )
   }

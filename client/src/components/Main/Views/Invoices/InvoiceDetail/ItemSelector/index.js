@@ -148,7 +148,7 @@ export default class ItemSelector extends Component {
 
           <div className="ItemSelector--buttons">
             <div className="ItemSelector--button">
-              <h2 className="ItemSelector--button-text">Create Group/Package</h2>
+              <p className="ItemSelector--button-text">Create Group/Package</p>
             </div>
 
             {/* <div className="ItemSelector--button">

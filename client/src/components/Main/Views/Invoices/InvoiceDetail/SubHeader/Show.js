@@ -13,7 +13,7 @@ export default class SubHeader extends Component {
       return (
         <Fragment>
           { mobile? <label>Type</label> : null }
-          <div className="SubHeader Field"><h4>{inv.kind}</h4></div>
+          <h4>{inv.kind}</h4>
         </Fragment>
       )
     }
@@ -30,7 +30,7 @@ export default class SubHeader extends Component {
 
     if (event && event.client) {
       return (
-        <div className="SubHeader Field"><h3>{clientName(event.client)}</h3></div>
+        <div><h3>{clientName(event.client)}</h3></div>
       )
     }
   }
@@ -49,11 +49,9 @@ export default class SubHeader extends Component {
     const { inv } = this.props
     if (inv) {
       return (
-        <div className="SubHeader Field">
-          <p style={this.stylePaymentStatus(inv.paymentStatus)}>
-            {inv.paymentStatus}
-          </p>
-        </div>
+        <p style={this.stylePaymentStatus(inv.paymentStatus)}>
+          {inv.paymentStatus}
+        </p>
       )
     }
   }
@@ -63,7 +61,7 @@ export default class SubHeader extends Component {
     if (inv) {
       if (inv.paymentType && inv.paymentType !== "Unknown") {
         return (
-          <div className="SubHeader Field">
+          <div>
             <h4 style={{paddingBottom: '5px'}}>{inv.paymentType}</h4>
             {inv.check? <p>{inv.check}</p> : null}
           </div>
@@ -109,12 +107,9 @@ export default class SubHeader extends Component {
     return (
       <Fragment>
         <label>Total</label>
-        <div
-          className="SubHeader Field">
           <h3>
             {numeral(inv.total).format('$0,0.00')}
           </h3>
-        </div>
       </Fragment>
     )
   }
@@ -123,11 +118,9 @@ export default class SubHeader extends Component {
     return (
       <Fragment>
         <label>Deposit</label>
-        <div className="SubHeader Field">
-          <h3>
-            {numeral(inv.total).format('$0,0.00')}
-          </h3>
-        </div>
+        <h3>
+          {numeral(inv.total).format('$0,0.00')}
+        </h3>
       </Fragment>
     )
   }
@@ -136,11 +129,9 @@ export default class SubHeader extends Component {
     return (
       <Fragment>
         <label>Balance</label>
-        <div className="SubHeader Field">
-          <h3>
-            {numeral(inv.balance).format('$0,0.00')}
-          </h3>
-        </div>
+        <h3>
+          {numeral(inv.balance).format('$0,0.00')}
+        </h3>
       </Fragment>
     )
   }

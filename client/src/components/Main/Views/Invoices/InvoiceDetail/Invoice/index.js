@@ -109,8 +109,8 @@ export default class Invoice extends Component {
           {
             editMode?
             <div className="Invoice--add" onClick={addLine}>
-                <div>{plusIcon('2x')}</div>
-                <h3 style={{fontWeight: 'bold'}}>New Line</h3>
+                <div>{plusIcon('1x')}</div>
+                <p style={{fontWeight: 'bold'}}>ADD ITEM</p>
             </div>
             :
             null

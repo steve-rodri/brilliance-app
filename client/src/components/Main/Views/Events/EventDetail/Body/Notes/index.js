@@ -33,8 +33,8 @@ export default function Notes(props){
 
   return (
     <div style={styleComp('Notes')} className="EventDetail-Body--component EventDetail-Body--notes">
-      <div className="EventDetail-Body--component-title"><h4>Notes</h4></div>
-      <div className="Notes--container">
+      {!mobile? <div className="EventDetail-Body--component-title"><h4>Notes</h4></div> : null}
+      <div className="Notes--container" style={mobile? {padding: '0 20px 20px'} : {} }>
         {mobile? <label>Notes</label> : null}
         {view()}
       </div>
