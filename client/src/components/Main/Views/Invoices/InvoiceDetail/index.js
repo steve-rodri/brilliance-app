@@ -63,7 +63,6 @@ export default class InvoiceDetail extends Component {
     const { isNew, evtId, evt, history, user: { accessLevel } } = this.props
     if (isNew && evtId) {
       const inv = await invoice.create({ kind: 'Proposal', event_id: evtId }, this.ajaxOptions)
-      console.log(inv)
       if (inv) history.push(`/${accessLevel}/invoices/${inv.id}`)
     } else {
       this.setInvoice()
@@ -117,10 +116,9 @@ export default class InvoiceDetail extends Component {
             price: linePrice(line, inv.kind)
           }
         )
-      } else {
-        return line
       }
-
+      
+      return line
     })
 
     this.setState(prevState => ({
@@ -158,107 +156,39 @@ export default class InvoiceDetail extends Component {
   // ----------Summary
 
   setSummary = async() => {
-    await this.setSubTotal()
-    await this.setTotal()
-    await this.setBalance()
-  }
-
-  setSubTotal = async(loop) => {
     const { inv } = this.state
-    if (inv) {
-      const { lines } = inv
-      if (lines && lines.length) {
-        const prices = lines.map(line => line.price)
-        let subTotal;
-        if (prices && prices.length) {
-          subTotal = prices.reduce((a, b) => a + b)
-        } else {
-          subTotal = 0
-        }
-        this.setState(prevState => ({
-          inv: {
-            ...prevState.inv,
-            subTotal
-          },
-          formData: {
-            ...prevState.formData,
-            subTotal
-          }
-        }), () => loop? this.setTotal(loop) : null )
+    if (!inv) return;
+    const { lines, discount, deposit } = inv
+    let subTotal = 0;
+    let total = 0;
+    let balance = 0;
+
+    const prices = lines.map(line => line.price)
+    if (prices.length) {
+      subTotal = prices.reduce((a, b) => a + b)
+    }
+
+    if (subTotal - discount > 0) total = subTotal - discount
+
+    balance = total - deposit
+
+    this.setState(prevState => ({
+      inv: {
+        ...prevState.inv,
+        subTotal,
+        total,
+        balance
+      },
+      formData: {
+        ...prevState.formData,
+        subTotal,
+        total,
+        balance
       }
-    } else {
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          subTotal: 0
-        },
-        formData: {
-          ...prevState.formData,
-          subTotal: 0
-        }
-      }))
-    }
+    }))
   }
 
-  setTotal = async(loop) => {
-    const { inv } = this.state
-    if (inv) {
-      const { subTotal } = inv
-      const total = subTotal - inv.discount
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          total
-        },
-        formData: {
-          ...prevState.formData,
-          total
-        }
-      }), () => loop? this.setBalance() : null )
-    } else {
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          total: 0
-        },
-        formData: {
-          ...prevState.formData,
-          total: 0
-        }
-      }))
-    }
-  }
-
-  setBalance = async(callBack) => {
-    const { inv } = this.state
-    if (inv) {
-      const { total } = inv
-      let balance = total - inv.deposit
-      if (inv.paymentStatus === "Paid In Full") {
-        balance = 0
-      }
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          balance
-        },
-        formData: {
-          ...prevState.formData
-        }
-      }), () => callBack? callBack() : null )
-    } else {
-      this.setState(prevState => ({
-        inv: {
-          ...prevState.inv,
-          balance: 0
-        },
-        formData: {
-          ...prevState.formData,
-          balance: 0
-        }
-      }))
-    }
-  }
+  updateSummary = async() => await this.setSummary()
 
   // ----------Client
 
@@ -341,15 +271,21 @@ export default class InvoiceDetail extends Component {
   }
 
   deleteLine = async(lineId) => {
-    const state = {...this.state}
-    let { inv, fields } = state
+    let { inv } = this.state
 
     await line.delete(lineId, this.ajaxOptions)
     const updatedLines = inv.lines.filter(line => line.id !== lineId)
-    inv.lines = updatedLines
-    fields.lines = updatedLines
 
-    this.setState({ inv, fields })
+    this.setState(prevState => ({
+      inv: {
+        ...prevState.inv,
+        lines: updatedLines
+      },
+      fields: {
+        ...prevState.fields,
+        lines: updatedLines
+      }
+    }), async() => await this.updateSummary())
   }
 
   // --------------------------------Items--------------------------------------
@@ -415,7 +351,7 @@ export default class InvoiceDetail extends Component {
         ]
       },
       showItemModal: false
-    }))
+    }), async() => await this.updateSummary())
   }
 
   // ----------------------------Handle-Change----------------------------------
@@ -633,10 +569,6 @@ export default class InvoiceDetail extends Component {
   }
 
   // -------------------------------DB-CRUD-------------------------------------
-
-  updateSummary = async() => {
-    await this.setSubTotal(true)
-  }
 
   handleSubmit = async() => {
     const { inv, formData, editMode, fromEvent } = this.state
