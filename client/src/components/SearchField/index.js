@@ -36,6 +36,127 @@ export default class SearchField extends Component {
     }
   }
 
+  displayResults = () => {
+    const { fieldActive  } = this.state
+    if (fieldActive) {
+      return { display: 'block'}
+    } else {
+      return { display: 'none' }
+    }
+  }
+
+  handleViewResults = (value) => {
+    if (value.length > 2) {
+      this.setState({
+        fieldActive: true
+      })
+    } else {
+      this.setState({
+        fieldActive: false
+      })
+    }
+  }
+
+  handleCloseResults = (e) => {
+    this.setState({
+      fieldActive: false
+    })
+  }
+
+  leavingResults = (e) => {
+    e.stopPropagation()
+    this.setState({
+      hoveringResults: false
+    })
+  }
+
+  scrollResults = (direction) => {
+    const { highlightedResult: { section, index, height } } = this.state
+    const scrollPosition = this.searchResults.current.scrollTop
+
+    switch (direction) {
+
+      case 'up':
+        if (scrollPosition === 0) break;
+        if (section) {
+          this.searchResults.current.scrollTop = (section.index + 1) * index * height
+        } else {
+          this.searchResults.current.scrollTop = index * height
+        }
+      break;
+
+      case 'down':
+        if (section) {
+          this.searchResults.current.scrollTop = (section.index + 1) * index * height
+        } else {
+          this.searchResults.current.scrollTop = index * height
+        }
+      break;
+
+      default:
+      break;
+    }
+  }
+
+  viewResults = () => {
+    const {
+      searchResults,
+      subTitleClassName,
+      resultClassName,
+      formatResult,
+      input: { name },
+      onSelect
+    } = this.props
+
+    if (Array.isArray(searchResults)) {
+      return searchResults && searchResults.map( (item, i) => (
+        <div
+          style={this.styleResult(i)}
+          key={i}
+          className={`${resultClassName} SearchField--result`}
+          onClick={(e) => {
+          e.stopPropagation();
+          onSelect(e, name, i)
+          this.handleCloseResults()
+          }}
+          onMouseEnter={(e) => this.changeHighlightedResult(e, i)}
+        >
+          <Fragment>{formatResult && formatResult(item)}</Fragment>
+        </div>
+      ))
+    }
+    if (searchResults) {
+      const results = Object.entries(searchResults)
+      return results.map((obj, index) => {
+        const key = obj[0]
+        const value = obj[1]
+        const section = { name: key, index }
+        return (
+          <Fragment key={index}>
+            <div className={`${subTitleClassName} SearchField--subtitle`} style={this.styleSectionTitle(section)}><h4>{key}</h4></div>
+            {
+              value && value.map( (val, i) =>
+                <div
+                  style={this.styleResult(i, section)}
+                  key={i}
+                  className={`${resultClassName} SearchField--result`}
+                  onClick={(e) => {
+                  e.stopPropagation();
+                  onSelect(e, name, i, key)
+                  this.handleCloseResults()
+                  }}
+                  onMouseEnter={(e) => this.changeHighlightedResult(e, i, section)}
+                >
+                  <Fragment>{formatResult && formatResult(val, key)}</Fragment>
+                </div>
+              )
+            }
+          </Fragment>
+        )
+      })
+    }
+  }
+
   changeHighlightedResult = (e, i, section) => {
     const { clientHeight: height } = e.target
     e.preventDefault()
@@ -158,81 +279,11 @@ export default class SearchField extends Component {
     }
   }
 
-  displayResults = () => {
-    const { fieldActive  } = this.state
-    if (fieldActive) {
-      return { display: 'block'}
-    } else {
-      return { display: 'none' }
-    }
-  }
-
-  handleFocusSelect = (e) => {
-    e.target.select()
-  }
-
-  handleViewResults = (value) => {
-    if (value.length > 2) {
-      this.setState({
-        fieldActive: true
-      })
-    } else {
-      this.setState({
-        fieldActive: false
-      })
-    }
-  }
-
-  handleCloseResults = (e) => {
-    this.setState({
-      fieldActive: false
-    })
-  }
-
   choosingResult = (e) => {
     e.stopPropagation()
     this.setState({
       hoveringResults: true
     })
-  }
-
-  leavingResults = (e) => {
-    e.stopPropagation()
-    this.setState({
-      hoveringResults: false
-    })
-  }
-
-  scrollResults = (direction) => {
-    const { highlightedResult: { section, index, height } } = this.state
-    const scrollPosition = this.searchResults.current.scrollTop
-
-    switch (direction) {
-
-      case 'up':
-        if (scrollPosition === 0) break;
-        if (section) {
-          this.searchResults.current.scrollTop = (section.index + 1) * index * height
-        } else {
-          this.searchResults.current.scrollTop = index * height
-        }
-      break;
-
-      case 'down':
-        if (section) {
-          this.searchResults.current.scrollTop = (section.index + 1) * index * height
-        } else {
-          this.searchResults.current.scrollTop = index * height
-        }
-      break;
-
-      default:
-      break;
-    }
-  }
-
-  scrollToTop = () => {
-    this.searchResults.current.scrollTop = 0
   }
 
   styleResult = (i, key) => {
@@ -246,65 +297,6 @@ export default class SearchField extends Component {
     return style
   }
 
-  results = () => {
-    const {
-      searchResults,
-      subTitleClassName,
-      resultClassName,
-      formatResult,
-      input: { name },
-      onSelect
-    } = this.props
-
-    if (Array.isArray(searchResults)) {
-      return searchResults && searchResults.map( (item, i) => (
-        <div
-          style={this.styleResult(i)}
-          key={i}
-          className={`${resultClassName} SearchField--result`}
-          onClick={(e) => {
-          e.stopPropagation();
-          onSelect(e, name, i)
-          this.handleCloseResults()
-          }}
-          onMouseEnter={(e) => this.changeHighlightedResult(e, i)}
-        >
-          <Fragment>{formatResult && formatResult(item)}</Fragment>
-        </div>
-      ))
-    }
-    if (searchResults) {
-      const results = Object.entries(searchResults)
-      return results.map((obj, index) => {
-        const key = obj[0]
-        const value = obj[1]
-        const section = { name: key, index }
-        return (
-          <Fragment key={index}>
-            <div className={`${subTitleClassName} SearchField--subtitle`} style={this.styleSectionTitle(section)}><h4>{key}</h4></div>
-            {
-              value && value.map( (val, i) =>
-                <div
-                  style={this.styleResult(i, section)}
-                  key={i}
-                  className={`${resultClassName} SearchField--result`}
-                  onClick={(e) => {
-                  e.stopPropagation();
-                  onSelect(e, name, i, key)
-                  this.handleCloseResults()
-                  }}
-                  onMouseEnter={(e) => this.changeHighlightedResult(e, i, section)}
-                >
-                  <Fragment>{formatResult && formatResult(val, key)}</Fragment>
-                </div>
-              )
-            }
-          </Fragment>
-        )
-      })
-    }
-  }
-
   styleSectionTitle = (section) => {
     let style = {};
     if (section.index > 0) {
@@ -312,6 +304,14 @@ export default class SearchField extends Component {
       style.borderTop = "1px solid var(--light-gray)"
     }
     return style;
+  }
+
+  handleFocusSelect = (e) => {
+    e.target.select()
+  }
+
+  scrollToTop = () => {
+    this.searchResults.current.scrollTop = 0
   }
 
   render(){
@@ -401,7 +401,7 @@ export default class SearchField extends Component {
           onMouseEnter={this.choosingResult}
           onMouseLeave={this.leavingResults}
         >
-          {this.results()}
+          {this.viewResults()}
         </div>
 
       </form>
