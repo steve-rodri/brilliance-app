@@ -1,6 +1,11 @@
+.SubHeader {
+  display: grid;
+  align-items: start;
+}
+
 @media (min-width: 750px) {
   .SubHeader {
-    justify-content: center;
+    justify-content: start;
   }
 }
 
@@ -10,7 +15,6 @@
 .SubHeader--summary-container  {
   display: grid;
   align-items: center;
-  height: 100%;
 }
 
 @media (min-width: 750px) {
@@ -35,12 +39,19 @@
   align-items: center;
 }
 
+.SubHeader--status > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 750px) {
   .SubHeader--fields,
   .SubHeader--status,
   .SubHeader--commission,
   .SubHeader--summary {
     justify-items: center;
+    padding: 15px;
   }
 }
 

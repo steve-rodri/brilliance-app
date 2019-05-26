@@ -1,18 +1,21 @@
 .InvoiceDetail {
   min-height: calc(100% - 75px);
-  background-color: var(--light-gray);
   display: grid;
-  grid-template-rows: 75px auto 80px;
+  grid-template-rows: auto 1fr auto;
+}
+
+.InvoiceDetail > main {
+  grid-row: 2;
 }
 
 .InvoiceDetail > .Buttons {
-  align-self: end;
+  grid-row: 3;
 }
 
 @media (min-width: 750px) {
   .InvoiceDetail {
-    background-color: var(--dark-blue);
-    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .InvoiceDetail > main {
@@ -24,10 +27,7 @@
 
   .InvoiceDetail > main > section {
     display: grid;
-    width: 100%;
-    align-content: start;
     grid-gap: 40px;
-    max-width: 900px;
   }
 
   .InvoiceDetail--Invoice-Section {

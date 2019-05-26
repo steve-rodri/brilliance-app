@@ -71,21 +71,21 @@ export default class SubHeader extends Component {
   }
 
   status = () => {
+    const { mobile } = this.props
     return (
-      <Fragment>
+      <div>
         {this.paymentStatus()}
-        {this.paymentType()}
-      </Fragment>
+        {!mobile? this.paymentType() : null}
+      </div>
     )
   }
 
 
   stylePaymentStatus = (status) => {
     let style = styleStatus(status);
-    style.width = 'auto'
     style.padding = '5px 10px'
-    style.fontSize = '18px'
     style.fontWeight = 'bold'
+    style.textTransform = 'uppercase'
     return style;
   }
 
@@ -142,17 +142,18 @@ export default class SubHeader extends Component {
       <Fragment>
 
         <div className="SubHeader--Show SubHeader--fields-container" style={styleComp()}>
-          <div className="SubHeader--Show SubHeader--component-title"><h4>About</h4></div>
+          {!mobile? <div className="SubHeader--Show SubHeader--component-title"><h4>About</h4></div> : null}
           <div className="SubHeader--Show SubHeader--fields">
             {this.type()}
           </div>
         </div>
 
         {
-          !mobile && inv && inv.kind !== 'Proposal'?
+          inv && inv.kind !== 'Proposal'?
           <div className="SubHeader--Show SubHeader--status-container" style={styleComp()}>
-            <div className="SubHeader--Show SubHeader--component-title"><h4>Status</h4></div>
+            {!mobile? <div className="SubHeader--Show SubHeader--component-title"><h4>Status</h4></div> : null}
             <div className="SubHeader--Show SubHeader--status">
+            {mobile? <label>Status</label> : null}
               {this.status()}
             </div>
           </div>

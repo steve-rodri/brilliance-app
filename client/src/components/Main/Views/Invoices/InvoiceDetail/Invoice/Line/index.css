@@ -60,8 +60,10 @@
 
 /* --------------------Inc-------------- */
 
-.Line--inc {
-
+.Line--inc > div {
+  display: grid;
+  align-items: center;
+  justify-items: center;
 }
 
 /* --------------------Price-------------- */

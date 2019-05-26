@@ -82,13 +82,11 @@ input .EventDetail--event-summary {
     grid-column-gap: 5px;
     grid: auto / 100px auto 100px;
     padding: 10px;
-    height: auto;
     background-color: var(--darker-blue);
     color: var(--light-gray);
   }
 
   .EventDetail--event-title-container {
-    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,7 +100,6 @@ input .EventDetail--event-summary {
   .EventDetail--event-title, .EventDetail--event-summary {
     text-align: center;
     justify-self: center;
-    width: 75%;
   }
 
   .EventDetail--header-right {

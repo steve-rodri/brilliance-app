@@ -52,10 +52,6 @@
     grid-auto-flow: column;
     grid-column: 2 / span 1;
   }
-
-  .InvoiceDetail-header--date {
-    font-weight: 300;
-  }
 }
 
 .InvoiceDetail-header--view-job {

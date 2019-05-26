@@ -67,6 +67,12 @@ header {
   color: white;
 }
 
+@media (max-width: 750px) {
+  .Header--nav-menu > a > h3 {
+    font-size: 1.6em;
+  }
+}
+
 .Header__bars {
   justify-self: end;
 }
