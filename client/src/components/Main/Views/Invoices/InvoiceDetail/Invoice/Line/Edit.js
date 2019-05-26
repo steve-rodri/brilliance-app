@@ -64,7 +64,7 @@ export default class Edit extends Component {
               handleLineChange(e, line.id, 'inc')
             }}
           >
-            {inc(line)}
+            <div>{inc(line)}</div>
           </td>
           :
           null

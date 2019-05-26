@@ -24,18 +24,27 @@ export default function SubHeader(props){
   }
 
   const styleComponents = () => {
-    const { editMode } = props
-    let style = {
-      gridAutoColumns: "minmax(15.25rem, 1fr)",
-      gridTemplateColumns: "repeat(auto-fit, minmax(15.25rem, auto))",
-    };
+    const { editMode, mobile } = props
+    let style = {};
+    if (mobile) {
+      style.gridTemplateColumns = "repeat(auto-fit, minmax(2rem, auto))"
 
-    if (editMode) {
-      style.gridAutoColumns = "auto";
-      style.gridAutoRows = "auto";
-      style.gridTemplateColumns = "repeat(auto-fit, minmax(19.75rem, auto))";
+      if (editMode) {
+        style.gridAutoColumns = "auto";
+        style.gridAutoRows = "auto";
+        style.gridTemplateColumns = "repeat(auto-fit, minmax(19.75rem, auto))";
+      }
+
+    } else {
+      style.gridAutoColumns = "minmax(15.25rem, 1fr)"
+      style.gridTemplateColumns = "repeat(auto-fit, minmax(15.25rem, auto))"
+
+      if (editMode) {
+        style.gridAutoColumns = "auto";
+        style.gridAutoRows = "auto";
+        style.gridTemplateColumns = "repeat(auto-fit, minmax(19.75rem, auto))";
+      }
     }
-
     return style;
   }
   return (

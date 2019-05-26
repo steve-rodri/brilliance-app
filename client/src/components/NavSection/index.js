@@ -63,13 +63,14 @@ export default class NavSection extends Component {
         {/* Calendar */}
         {
           view === "Events" || view === "Invoices"?
-          <Calendar
-            {...this.props}
-            className="NavSection--calendar"
-            date={isDay && date? new Date(date.start) : new Date()}
-            onDateChanged={onDateChange}
-            changeNav={changeNav}
-          />
+          <div className="NavSection--calendar">
+            <Calendar
+              {...this.props}
+              date={isDay && date? new Date(date.start) : new Date()}
+              onDateChanged={onDateChange}
+              changeNav={changeNav}
+            />
+          </div>
           :
           null
         }

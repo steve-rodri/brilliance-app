@@ -37,7 +37,7 @@ h1, h2 {
   font-weight: 300;
 }
 
-h3, h4, h5, h6, p, a, label, td, th, input {
+h3, h4, h5, h6, p, a, label, td, th, input, select {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
@@ -51,7 +51,7 @@ h2 {
   font-size: 1.4em;
 }
 
-h3, input, textarea {
+h3, input, textarea, select {
   font-size: 1.2em;
 }
 
@@ -69,8 +69,6 @@ h6 {
 
 li, select {
   width: 100%;
-  font-family: 'Lato', sans-serif;
-  font-size: 18px;
 }
 
 button:hover, .Icon:hover {

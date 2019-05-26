@@ -33,6 +33,7 @@
     grid-column-gap: 10px;
     justify-content: end;
     border: none;
+    padding: 20px 10px;
   }
 }
 
