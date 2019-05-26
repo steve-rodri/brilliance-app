@@ -141,6 +141,8 @@ export default class Main extends Component {
     this.setState({ loading: value })
   }
 
+  camelToSnakeCase = str => str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+
   render(){
     return(
       <div className="App">
@@ -161,6 +163,8 @@ export default class Main extends Component {
             isDay={this.isDay}
 
             syncAllEvents={this.synchronizeAllEvents}
+
+            camelToSnake={this.camelToSnakeCase}
           />
         </Switch>
       </div>
