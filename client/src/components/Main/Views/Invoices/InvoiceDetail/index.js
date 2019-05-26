@@ -117,7 +117,7 @@ export default class InvoiceDetail extends Component {
           }
         )
       }
-      
+
       return line
     })
 
@@ -181,7 +181,7 @@ export default class InvoiceDetail extends Component {
       },
       formData: {
         ...prevState.formData,
-        subTotal,
+        sub_total: subTotal,
         total,
         balance
       }
@@ -358,7 +358,9 @@ export default class InvoiceDetail extends Component {
 
   handleChange = (e, type) => {
     let { name, value } = e.target
+    const { camelToSnake } = this.props
     if (type === 'number') value = parseInt(value)
+
     this.setState(prevState => ({
       fields: {
         ...prevState.fields,
@@ -366,7 +368,7 @@ export default class InvoiceDetail extends Component {
       },
       formData: {
         ...prevState.formData,
-        [name]: value
+        [camelToSnake(name)]: value
       }
     }))
   }
@@ -502,7 +504,7 @@ export default class InvoiceDetail extends Component {
             formData: {
               ...prevState.formData,
               [name]: value,
-              total: prevState.formData.subTotal - parseInt(val)
+              total: prevState.formData.sub_total - parseInt(val)
             }
           }))
           break;
@@ -563,7 +565,7 @@ export default class InvoiceDetail extends Component {
   findClients = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const data = await client.batch({ page: 1, q: query }, this.ajaxOptions)
+      const data = await client.batch({ page: 1, q: query }, this.ajaxOptions )
       return data.clients
     }
   }
