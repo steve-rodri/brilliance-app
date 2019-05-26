@@ -13,7 +13,7 @@
 .Line--input {
   width: 90%;
   padding: 10px 5px;
-  background-color: white;
+  background-color: #eee;
   text-align: center;
   border:none;
   border: 1px solid #BBBBBB;
@@ -23,6 +23,7 @@
 }
 
 .Line--input:focus {
+  background-color: #fff;
   border-color: transparent;
   box-shadow: 0 0 2px 2px var(--turquoise-t);
 }
@@ -37,6 +38,11 @@
 
 .Line--quantity > div > input {
   text-align: center;
+  background-color: #eee;
+}
+
+.Line--quantity > div > input:focus {
+  background-color: #fff;
 }
 
 .Line--quantity > p {
@@ -74,7 +80,7 @@
 
 .Line--price > form {
   display: grid;
-  grid-gap: 3px;
+  grid-gap: 10px;
   grid-template-columns: repeat(2, auto) 12px;
   align-items: center;
   justify-items: center;
@@ -86,4 +92,9 @@
 
 .Line--price > form > input {
   text-align: center;
+  background-color: #eee;
+}
+
+.Line--price > form > input:focus {
+  background-color: #fff;
 }

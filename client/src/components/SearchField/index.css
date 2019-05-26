@@ -21,6 +21,18 @@
   padding: 5px;
 }
 
+.SearchField--create {
+  background-color: limegreen;
+  color: #eee;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.SearchField--create > p {
+  font-weight: bold;
+}
+
 @media (min-width: 750px) {
   .SearchField--subtitle {
     height: auto;

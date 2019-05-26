@@ -59,6 +59,7 @@
 
   .Event-Invoice--summary {
     grid-row: 2;
+    justify-self: center;
   }
 
   .Event-Invoice--status {
