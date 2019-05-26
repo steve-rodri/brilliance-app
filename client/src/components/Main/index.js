@@ -128,6 +128,7 @@ export default class Main extends Component {
 
   changeNav = (value) => {
     const { history, location } = this.props
+    this.setState({ displayNav: value })
     history.push({pathname: `${location.pathname}`, state: { nav: value }})
   }
 
