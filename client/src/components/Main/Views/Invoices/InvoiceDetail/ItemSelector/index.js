@@ -38,44 +38,13 @@ export default class ItemSelector extends Component {
     this.setState({ [name]: value })
     const lines = await this.findLines(value)
     const inventory = await this.findInventories(value)
-
-    this.setState(prevState => {
-      if (prevState.searchResults) {
-        const prevLines = prevState.searchResults["past invoices"]
-        const prevStock = prevState.searchResults.inventories
-        if (lines !== prevLines && inventory !== prevStock) {
-          return {
-            searchResults: {
-              ...prevState.searchResults,
-              "past invoices": lines,
-              inventory
-            }
-          }
-        }
-        if (lines !== prevLines) {
-          return {
-            searchResults: {
-              ...prevState.searchResults,
-              "past invoices": lines
-            }
-          }
-        }
-        if (inventory !== prevStock) {
-          return {
-            searchResults: {
-              ...prevState.searchResults,
-              inventory
-            }
-          }
-        }
+    this.setState(prevState => ({
+      ...prevState.searchResults,
+      searchResults: {
+        "past invoices": lines,
+        inventory
       }
-      return {
-        searchResults: {
-          "past invoices": lines,
-          inventory
-        }
-      }
-    })
+    }))
   }
 
   findLines = async(query) => {
@@ -87,11 +56,11 @@ export default class ItemSelector extends Component {
   }
 
   findInventories = async(query) => {
-    // const q = query.split('')
-    // if (q.length > 2) {
+    const q = query.split('')
+    if (q.length > 2) {
       const inventories = await inventory.find(query, this.ajaxOptions)
       return inventories
-    // }
+    }
   }
 
   handleSelect = (e, name, i, key) => {
