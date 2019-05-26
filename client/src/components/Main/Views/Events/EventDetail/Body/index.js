@@ -38,23 +38,14 @@ export default class Body extends Component {
 
   styleComponents = () => {
     const { editMode, mobile } = this.props
+    let style = {};
     if (!mobile) {
-      let style = {
-        gridAutoColumns: "minmax(16.25rem, 1fr)",
-        gridAutoRows: "minmax(14.5rem, 1fr)",
-        gridTemplateColumns: "repeat(auto-fit, minmax(17.25rem, auto))",
-      };
-
+      style.gridTemplateColumns = "repeat(auto-fit, minmax(17.25rem, auto))"
       if (editMode) {
-        style.gridAutoColumns = "auto";
-        style.gridAutoRows = "auto";
         style.gridTemplateColumns = "repeat(auto-fit, minmax(21rem, auto))";
       }
-
-      return style;
-    } else {
-      return {}
     }
+    return style;
   }
 
   render(){
