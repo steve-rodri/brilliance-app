@@ -29,44 +29,51 @@ export default class StaffSelector extends Component {
     const nonLabor = employees.filter(employee => !employee.labor)
     return (
       <div className="StaffSelector">
-        <label style={{justifySelf: 'start'}}>Labor</label>
-        <div className="StaffSelector--labor">
-          {employees && labor.map(employee =>
-            <div
-              className="StaffSelector--employee"
-              key={employee.id}
-              style={this.style(employee)}
-              onClick={(e) => {
-                e.stopPropagation()
-                handleEmployeeSelect(employee)
-              }}
-            >
-              <p>{employee.contactInfo.fullName}</p>
-            </div>
-          )}
+        <div className="StaffSelector--header">
+          <h2>Choose Workers</h2>
         </div>
-        <label style={{justifySelf: 'start'}}>Non-Labor</label>
-        <div className="StaffSelector--non-labor">
-          {employees && nonLabor.map(employee =>
-            <div
-              className="StaffSelector--employee"
-              key={employee.id}
-              style={this.style(employee)}
-              onClick={(e) => {
-                e.stopPropagation()
-                handleEmployeeSelect(employee)
-              }}
-            >
-              <p>{employee.contactInfo.fullName}</p>
-            </div>
-          )}
-        </div>
-        <button
-          className="StaffSelector--done EventDetail-Body--button"
-          onClick={close}
-        >
-          DONE
-        </button>
+        <main>
+          <label style={{justifySelf: 'start'}}>Labor</label>
+          <div className="StaffSelector--labor">
+            {employees && labor.map(employee =>
+              <div
+                className="StaffSelector--employee"
+                key={employee.id}
+                style={this.style(employee)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleEmployeeSelect(employee)
+                }}
+              >
+                <p>{employee.contactInfo.fullName}</p>
+              </div>
+            )}
+          </div>
+          <label style={{justifySelf: 'start'}}>Non-Labor</label>
+          <div className="StaffSelector--non-labor">
+            {employees && nonLabor.map(employee =>
+              <div
+                className="StaffSelector--employee"
+                key={employee.id}
+                style={this.style(employee)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleEmployeeSelect(employee)
+                }}
+              >
+                <p>{employee.contactInfo.fullName}</p>
+              </div>
+            )}
+          </div>
+        </main>
+        <footer>
+          <button
+            className="StaffSelector--done EventDetail-Body--button"
+            onClick={close}
+          >
+            DONE
+          </button>
+        </footer>
       </div>
     )
   }
