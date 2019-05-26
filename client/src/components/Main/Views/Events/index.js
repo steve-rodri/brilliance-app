@@ -262,7 +262,7 @@ export default class Events extends Component {
       }
       const data = await event.batch(params, this.ajaxOptions)
       if (data && data.events && data.events.length) await this.updateEvents(data)
-
+      else this.props.setLoadingState(false)
     } else {
       this.setState({ hasMore: false })
       this.props.setLoadingState(false)
