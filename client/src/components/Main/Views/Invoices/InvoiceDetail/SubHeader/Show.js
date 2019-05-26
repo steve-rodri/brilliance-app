@@ -60,10 +60,21 @@ export default class SubHeader extends Component {
     const { inv } = this.props
     if (inv) {
       if (inv.paymentType && inv.paymentType !== "Unknown") {
+        const style = {
+          display: 'flex',
+          alignItems: "center",
+          justifyContent: 'center'
+        }
         return (
-          <div>
-            <h4 style={{paddingBottom: '5px'}}>{inv.paymentType}</h4>
-            {inv.check? <p>{inv.check}</p> : null}
+          <div style={style}>
+            {
+              inv.check?
+              <Fragment>
+                <p>{`${inv.paymentType} - ${inv.check}`}</p>
+              </Fragment>
+              :
+              <p>{inv.paymentType}</p>
+            }
           </div>
         )
       }
