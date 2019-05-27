@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { plusIcon } from '../../helpers/icons'
 import './index.css'
 
 export default class SearchField extends Component {
@@ -38,11 +39,27 @@ export default class SearchField extends Component {
 
   displayResults = () => {
     const { fieldActive  } = this.state
-    if (fieldActive) {
-      return { display: 'block'}
-    } else {
-      return { display: 'none' }
+    const { searchResults } = this.props
+    let style = { display: 'none'}
+
+    if (fieldActive) style.display = 'block'
+
+    if (Array.isArray(searchResults)) {
+      if (!searchResults.length) {
+        style.height = '50px'
+        style.marginTop = "45px"
+      }
+    } else if (searchResults){
+      let resultCount = 0
+      const results = Object.entries(searchResults)
+      results.forEach( obj => { if (obj[1] && obj[1].length) resultCount += obj[1].length })
+
+      if (!resultCount) {
+        style.height = '70px'
+      }
     }
+
+    return style;
   }
 
   handleViewResults = (value) => {
@@ -109,25 +126,30 @@ export default class SearchField extends Component {
     } = this.props
 
     if (Array.isArray(searchResults)) {
-      return searchResults && searchResults.map( (item, i) => (
-        <div
-          style={this.styleResult(i)}
-          key={i}
-          className={`${resultClassName} SearchField--result`}
-          onClick={(e) => {
-          e.stopPropagation();
-          onSelect(e, name, i)
-          this.handleCloseResults()
-          }}
-          onMouseEnter={(e) => this.changeHighlightedResult(e, i)}
-        >
-          <Fragment>{formatResult && formatResult(item)}</Fragment>
-        </div>
-      ))
+      if (searchResults.length) {
+        return searchResults.map( (item, i) => (
+          <div
+            style={this.styleResult(i)}
+            key={i}
+            className={`${resultClassName} SearchField--result`}
+            onClick={(e) => {
+            e.stopPropagation();
+            onSelect(e, name, i)
+            this.handleCloseResults()
+            }}
+            onMouseEnter={(e) => this.changeHighlightedResult(e, i)}
+          >
+            <Fragment>{formatResult && formatResult(item)}</Fragment>
+          </div>
+        ))
+      } else {
+        this.create()
+      }
     }
-    if (searchResults) {
-      const results = Object.entries(searchResults)
-      return results.map((obj, index) => {
+    const results = Object.entries(searchResults)
+    let resultCount = 0
+    results.forEach( obj => { if (obj[1] && obj[1].length) resultCount += obj[1].length })
+    const view = () => results.map((obj, index) => {
         const key = obj[0]
         const value = obj[1]
         const section = { name: key, index }
@@ -154,7 +176,8 @@ export default class SearchField extends Component {
           </Fragment>
         )
       })
-    }
+    if (resultCount) return view()
+    return this.create()
   }
 
   changeHighlightedResult = (e, i, section) => {
@@ -314,6 +337,45 @@ export default class SearchField extends Component {
     this.searchResults.current.scrollTop = 0
   }
 
+  resultCount = () => {
+    const { searchResults } = this.props
+    if (!searchResults) return 0
+    let resultCount = 0
+
+    if (Array.isArray(searchResults)) {
+      resultCount = searchResults.length
+      return resultCount
+    }
+
+    const results = Object.entries(searchResults)
+    results.forEach( obj => { if (obj[1] && obj[1].length) resultCount += obj[1].length })
+    return resultCount
+  }
+
+  create = () => {
+    const { create, input: { value }, resultClassName } = this.props
+    if (typeof create === 'function') {
+      const styleOverride = {
+        color: "#eee",
+        backgroundColor: "limegreen",
+        display: "grid" ,
+        height: "100%",
+        grid: 'auto / 40px auto 40px',
+        justifyContent: 'stretch'
+      }
+      return (
+        <div
+          className={`SearchField--create ${resultClassName} `}
+          style={styleOverride}
+          onClick={(e) => create()}
+        >
+          {plusIcon('1x')}
+          <p>{`CREATE "${value}"`}</p>
+        </div>
+      )
+    }
+  }
+
   render(){
     const { highlightedResult, hoveringResults } = this.state
     const {
@@ -334,6 +396,7 @@ export default class SearchField extends Component {
       handleChange,
       formDataValue,
       onEnter,
+      create
     }
     = this.props
 
@@ -344,9 +407,13 @@ export default class SearchField extends Component {
         onFocus={this.handleFocusSelect}
         onSubmit={(e) => e.preventDefault()}
         onKeyDown={(e) => {
-          if ( e.key === 'Enter' && searchResults ) {
-            onEnter(e, name, highlightedResult.index, highlightedResult.section.name)
-            this.handleCloseResults()
+          if ( e.key === 'Enter') {
+            if (this.resultCount()) {
+              onEnter(e, name, highlightedResult.index, highlightedResult.section.name)
+              this.handleCloseResults()
+            } else if (value > 2 && typeof create === 'function') {
+              create()
+            }
           }
         }}
         style={styleForm}
@@ -401,7 +468,7 @@ export default class SearchField extends Component {
           onMouseEnter={this.choosingResult}
           onMouseLeave={this.leavingResults}
         >
-          {this.viewResults()}
+          { searchResults && this.viewResults()}
         </div>
 
       </form>
