@@ -21,7 +21,7 @@
 
 .Modal--overlay {
   position: fixed;
-  height: calc(100vh - 75px);
+  height: calc(100vh - 75px - 44px);
   width: 100%;
   top: 75px;
   left: 0;
