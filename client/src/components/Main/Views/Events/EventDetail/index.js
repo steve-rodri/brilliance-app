@@ -965,6 +965,7 @@ export default class EventDetail extends Component {
             close={this.closeStaffModal}
             content={
               <StaffSelector
+                {...this.props}
                 close={this.closeStaffModal}
                 workers={this.state.workers}
                 employees={this.state.employees}

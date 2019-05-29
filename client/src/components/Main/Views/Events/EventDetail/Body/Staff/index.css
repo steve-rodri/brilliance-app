@@ -34,6 +34,22 @@
   }
 }
 
+.Staff--choose-workers {
+  border: 1px solid #bbb;
+  background-color: var(--darker-blue);
+  color: white;
+  border-radius: 5px;
+  height: 50px;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.Staff--choose-workers:hover {
+  cursor: pointer;
+}
+
 /*----------------View-------------------- */
 
 .Staff--View
