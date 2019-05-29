@@ -4,7 +4,7 @@
 }
 
 .App {
-  height: 100vh;
+  height: calc(100vh - 44px);
   overflow: auto;
   text-align: center;
   background-color: var(--light-gray);
@@ -28,6 +28,7 @@
 
 @media (min-width: 750px) {
   .App {
+    height: calc(100vh);
     background-color: var(--dark-blue)
   }
 }
