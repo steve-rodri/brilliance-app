@@ -4,10 +4,6 @@ class EventsController < ApplicationController
   @@date_start = Time.zone.today()
   @@date_end = Time.zone.today()
 
-  #time.now is between event.start and event.end
-  #OR
-  #events.start is after now
-
   # GET /events
   def index
     @@date_where = nil

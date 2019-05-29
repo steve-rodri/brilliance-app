@@ -24,8 +24,8 @@ function clientName(client, options){
       } else {
         return (
           <div className={`${className} client`} >
-            <h4>{client.contactInfo.fullName}</h4>
-            <h6>c: {client.company.name}</h6>
+            <h3>{client.contactInfo.fullName}</h3>
+            <h5>c: {client.company.name}</h5>
           </div>
         )
       }
