@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { locationName } from './locationName'
 
-function eventTitle (evt){
+export function eventTitle (evt){
   if (!evt.action) {
     return title(evt)
   } else if (title(evt)) {
@@ -11,7 +11,7 @@ function eventTitle (evt){
   }
 }
 
-function title(evt) {
+export function title(evt) {
 
   function location(){
     if (evt.location) {
@@ -128,7 +128,7 @@ function title(evt) {
   }
 }
 
-function styleConfirmation(msg){
+export function styleConfirmation(msg){
   switch (msg) {
     case "Unconfirmed":
       return {
@@ -156,7 +156,7 @@ function styleConfirmation(msg){
   }
 }
 
-function changeConfirmation(msg){
+export function changeConfirmation(msg){
   switch (msg) {
     case "Unconfirmed":
       return "Confirmed"
@@ -169,25 +169,53 @@ function changeConfirmation(msg){
   }
 }
 
-function call(evt) {
-  if (evt) {
-    if (evt.callTime && evt.callLocation) {
-      return (
-        `${moment(evt.callTime).format('LT')} @ ${locationName(evt.callLocation)}`
-      )
-    } else if (evt.callTime) {
-      return (
-        moment(evt.callTime).format('LT')
-      )
-    } else {
-      return null
-    }
+export function call(evt) {
+  if (!evt) return;
+
+  if (evt.callTime && evt.callLocation) {
+    let callLocation = locationName(evt.callLocation)
+    if (typeof evt.callLocation === 'string') callLocation = evt.callLocation
+    return (
+      `${moment(evt.callTime).format('LT')} @ ${callLocation}`
+    )
+  } else if (evt.callTime) {
+    return (
+      moment(evt.callTime).format('LT')
+    )
+  } else {
+    return null
   }
 }
 
-export {
-  eventTitle,
-  call,
-  styleConfirmation,
-  changeConfirmation,
+export function styleWorkerStatus(confirmation){
+  let style = {}
+  switch (confirmation) {
+    case 'needsAction':
+      style.backgroundColor = "gold"
+      style.color = "white"
+    break;
+    case 'Unconfirmed':
+      style.backgroundColor = "gold"
+      style.color = "white"
+    break;
+    case 'accepted':
+      style.backgroundColor = "limegreen"
+      style.color = "white"
+    break;
+    case 'Confirmed':
+      style.backgroundColor = "limegreen"
+      style.color = "white"
+    break;
+    case 'tentative':
+      style.backgroundColor = "gold"
+      style.color = "white"
+    break;
+    case 'declined':
+      style.backgroundColor = "red"
+      style.color = "white"
+    break;
+    default:
+    break;
+  }
+  return style;
 }

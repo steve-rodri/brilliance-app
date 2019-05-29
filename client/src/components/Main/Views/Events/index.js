@@ -490,7 +490,7 @@ export default class Events extends Component {
     const req_id = parseInt(match.params.id)
     const events = this.state.events
     let e;
-    if (events) {
+    if (events && events.length) {
       e = events.find(event => event.id === req_id)
     }
 

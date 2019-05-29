@@ -3,7 +3,7 @@ import { start, end, time } from './datetime'
 import { locationName } from './locationName'
 import moment from 'moment'
 
-const spacer = '****************************************';
+const spacer = '***************************************';
 
 //--------------Format FROM Google----------------------
 
@@ -58,7 +58,7 @@ async function formatFromGoogle(evt, options){
 
 async function creator(e, options){
   if (e) {
-    const ct = await contact.findByEmail(e.creator.email, options)
+    const ct = await contact.find({ email: e.creator.email }, options)
     if (ct) {
       return ct.id
     } else {
