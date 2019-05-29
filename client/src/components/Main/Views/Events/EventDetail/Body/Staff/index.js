@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Edit from './Edit'
 import View from './View'
+import { styleWorkerStatus } from '../../../../../../../helpers/eventHelpers'
 import './index.css'
 
 export default class Staff extends Component {
@@ -18,35 +19,6 @@ export default class Staff extends Component {
     }
   }
 
-  status = (confirmation) => {
-    let style = {}
-    switch (confirmation) {
-      case 'needsAction':
-        style.color = "var(--dark-gray)"
-      break;
-      case 'Unconfirmed':
-      case 'accepted':
-        style.backgroundColor = "limegreen"
-        style.color = "white"
-      break;
-      case 'Confirmed':
-        style.backgroundColor = "limegreen"
-        style.color = "white"
-      break;
-      case 'tentative':
-        style.backgroundColor = "gold"
-        style.color = "var(--light-gray)"
-      break;
-      case 'declined':
-        style.backgroundColor = "red"
-        style.color = "white"
-      break;
-      default:
-      break;
-    }
-    return style;
-  }
-
   view = () => {
     const { mobile, editMode, workers } = this.props
     if (editMode) {
@@ -54,7 +26,7 @@ export default class Staff extends Component {
         <Edit
           {...this.props}
           iconSize={this.iconSize()}
-          status={this.status}
+          status={styleWorkerStatus}
         />
       )
     } else if (workers && workers.length) {
@@ -62,7 +34,7 @@ export default class Staff extends Component {
         <View
           {...this.props}
           iconSize={this.iconSize()}
-          status={this.status}
+          status={styleWorkerStatus}
         />
       )
     } else {

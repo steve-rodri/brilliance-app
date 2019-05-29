@@ -4,34 +4,46 @@ import './index.css'
 export default class StaffSelector extends Component {
 
   style = (employee) => {
-    const { workers, employee_ids } = this.props
+    const { workers, employee_ids, mobile } = this.props
+    const style = {}
     if (
         (workers && workers.find(worker => worker.info.id === employee.id))
         ||
         (employee_ids && employee_ids.find(id => id === employee.id))
       ) {
-      return {
-        backgroundColor: 'limegreen',
-        border: '2px solid limegreen',
-        color: 'white',
-        fontWeight: 'bold'
-      }
+
+      style.backgroundColor = 'limegreen'
+      style.border = '2px solid limegreen'
+      style.color = 'white'
+      style.fontWeight = 'bold'
+
     } else {
-      return {
-        border:'2px dashed var(--light-gray)'
+      style.border = '2px dashed var(--light-gray)'
+      if (!mobile) {
+        style.border = '1px solid #bbb'
+        style.backgroundColor = '#eee'
       }
     }
+    return style
   }
 
   render(){
-    const { close, employees, handleEmployeeSelect } = this.props
-    const labor = employees.filter(employee => employee.labor)
-    const nonLabor = employees.filter(employee => !employee.labor)
+    const { mobile, close, employees, handleEmployeeSelect } = this.props
+    let labor, nonLabor;
+    if (employees) {
+      labor = employees.filter(employee => employee.labor)
+      nonLabor = employees.filter(employee => !employee.labor)
+    }
     return (
       <div className="StaffSelector">
-        <div className="StaffSelector--header">
-          <h2>Choose Workers</h2>
-        </div>
+        {
+          mobile?
+          <div className="StaffSelector--header">
+            <h2>Choose Workers</h2>
+          </div>
+          :
+          null
+        }
         <main>
           <label style={{justifySelf: 'start'}}>Labor</label>
           <div className="StaffSelector--labor">
@@ -66,14 +78,19 @@ export default class StaffSelector extends Component {
             )}
           </div>
         </main>
-        <footer>
-          <button
-            className="StaffSelector--done EventDetail-Body--button"
-            onClick={close}
-          >
-            DONE
-          </button>
-        </footer>
+        {
+          mobile && typeof close === 'function'?
+          <footer>
+            <button
+              className="StaffSelector--done EventDetail-Body--button"
+              onClick={close}
+            >
+              DONE
+            </button>
+          </footer>
+          :
+          null
+        }
       </div>
     )
   }

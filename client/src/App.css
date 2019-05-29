@@ -37,7 +37,7 @@ h1, h2 {
   font-weight: 300;
 }
 
-h3, h4, h5, h6, p, a, label, td, th, input, select {
+h3, h4, h5, h6, p, a, label, td, th, input, select, textarea {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
@@ -178,6 +178,7 @@ select {
 .Input {
   height: 100%;
   width: 100%;
+  padding: 0 10px;
   min-width: 275px;
   text-align: center;
   border-radius: 5px;

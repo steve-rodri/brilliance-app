@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { plusIcon } from '../../../../../../../helpers/icons'
+import StaffSelector from './StaffSelector'
 
 export default class Edit extends Component {
   constructor(props){
@@ -37,32 +37,34 @@ export default class Edit extends Component {
   }
 
   render(){
-    const { mobile, workers } = this.props
+    const { mobile } = this.props
     return (
       <div className="Staff--container Staff--Edit" style={this.styleContainer()}>
-      {mobile? <label>Staff</label> : null}
-      {
-        workers && workers.length?
-        <table className="Staff Staff--Edit" onClick={this.props.chooseWorker}>
-          <tbody>
-          {workers?
-            workers.map( (worker, i) =>
-              <tr className="Staff--worker Staff--Edit" key={i} style={this.styleRow()}>
-                <td className="Staff--worker-name Staff--Edit"><h3>{worker.info.contact.fullName}</h3></td>
-              </tr>
-            )
-            :
-            null
-          }
-          </tbody>
-        </table>
-        :
-        <div className="Staff--add-worker Staff--Edit" onClick={this.props.chooseWorker}>
-          <div className="Staff--plus-icon">{plusIcon()}</div>
-          <p style={{fontWeight: 700}}>ADD</p>
-        </div>
-      }
+        {mobile? <label>Staff</label> : null}
+        <StaffSelector {...this.props}/>
       </div>
     )
   }
 }
+
+
+
+// {
+//   workers && workers.length?
+//   <div className="Staff Staff--Edit" onClick={this.props.chooseWorker}>
+//     {workers?
+//       workers.map( (worker, i) =>
+//         <div className="Staff--worker Staff--Edit" key={i} style={this.styleRow()}>
+//           <div className="Staff--worker-name Staff--Edit"><p>{worker.info.contact.fullName}</p></div>
+//         </div>
+//       )
+//       :
+//       null
+//     }
+//   </div>
+//   :
+//   <div className="Staff--add-worker Staff--Edit" onClick={this.props.chooseWorker}>
+//     <div className="Staff--plus-icon">{plusIcon()}</div>
+//     <p style={{fontWeight: 700}}>ADD</p>
+//   </div>
+// }

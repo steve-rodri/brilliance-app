@@ -16,13 +16,10 @@ export default class Body extends Component {
     if (editMode) {
       switch (name) {
         case 'About':
-          style.gridRow = 'span 2'
           break;
         case 'Logistics':
-          style.gridRow = 'span 2'
           break;
         case 'Notes':
-          style.gridRow = 'span 2'
           break;
         case 'Staff':
           break;
