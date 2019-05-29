@@ -119,7 +119,7 @@ export default function Header(props){
     return (
       <div
         className="EventDetail--icon right"
-        onClick={handleSubmit}
+        onClick={(e) => handleSubmit()}
       >
         {checkIcon('2x')}
       </div>

@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import { date, time, duration } from '../../../../../../../helpers/datetime'
-
+import { clientName } from '../../../../../../../helpers/clientHelpers'
 export default function View (props){
-  const { fields, mobile } = props
+  const { fields, mobile, evt } = props
   return (
     <div className="About">
 
@@ -10,7 +10,7 @@ export default function View (props){
         fields && fields.client?
         <Fragment>
           { mobile? <label>Client</label> : null }
-          <h3>{fields.client}</h3>
+          <div>{clientName(evt.client)}</div>
         </Fragment>
           :
           null

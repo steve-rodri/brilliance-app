@@ -19,7 +19,7 @@ export default class Edit extends Component {
               value={fields.start? moment(fields.start) : ''}
               viewDate={fields.start && fields.start !== ''? moment(fields.start) : moment().startOf('hour')}
               timeConstraints={{ minutes:{ step: 5 } }}
-              onChange={(datetime) => this.props.onDateChange('start', datetime)}
+              onChange={(datetime) => this.props.handleDateChange('start', datetime)}
               closeOnSelect={false}
               closeOnTab={true}
             />
@@ -36,7 +36,7 @@ export default class Edit extends Component {
               viewMode={'time'}
               timeConstraints={{ minutes:{ step: 5 } }}
               isValidDate={(current) => current.isSameOrAfter(moment(fields.start), 'day')}
-              onChange={(datetime) => this.props.onDateChange('end', datetime)}
+              onChange={(datetime) => this.props.handleDateChange('end', datetime)}
               closeOnSelect={true}
               closeOnTab={true}
             />
@@ -53,7 +53,7 @@ export default class Edit extends Component {
               viewMode={'time'}
               timeConstraints={{ minutes:{ step: 5 } }}
               isValidDate={(current) => current.isSameOrBefore(moment(fields.start), 'day')}
-              onChange={(datetime) => this.props.onDateChange('call', datetime)}
+              onChange={(datetime) => this.props.handleDateChange('call', datetime)}
               closeOnSelect={false}
               closeOnTab={true}
             />
