@@ -20,9 +20,13 @@ export default class Invoice extends Component {
     if (inv) {
       if (inv.paymentType && inv.paymentType !== "Unknown") {
         return (
-          <div className="SubHeader Field">
-            <h4 style={{paddingBottom: '5px'}}>{inv.paymentType}</h4>
-            {inv.check? <p>{inv.check}</p> : null}
+          <div>
+            {
+              inv.check?
+              <p>{inv.paymentType}</p>
+              :
+              <p>{`${inv.paymentType} - ${inv.check}`}</p>
+            }
           </div>
         )
       }
@@ -47,8 +51,7 @@ export default class Invoice extends Component {
   total = (inv) => {
     return (
       <Fragment>
-        <div
-          className="SubHeader Field">
+        <div>
           <h2>
             {numeral(inv.total).format('$0,0.00')}
           </h2>
