@@ -258,7 +258,8 @@ class ClientsController < ApplicationController
 
   # POST /clients
   def create
-    @client = Client.new(client_params)
+    @client = Client.find_or_initialize_by(client_params)
+
 
     if @client.save
       render json: @client, status: :created, location: @client
@@ -289,6 +290,6 @@ class ClientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def client_params
-      params.require(:client).permit(:contact_id, :q, :category)
+      params.require(:client).permit(:contact_id, :company_id)
     end
 end

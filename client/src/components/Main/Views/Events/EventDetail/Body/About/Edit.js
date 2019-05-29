@@ -28,6 +28,7 @@ export default class Edit extends Component {
             handleChange={this.props.handleSearchChange}
             onEnter={this.props.onEnter}
             onSelect={this.props.onSelect}
+            create={this.props.createClient}
           />
 
         <label>Location</label>
@@ -60,7 +61,7 @@ export default class Edit extends Component {
               name='kind'
               value={fields.kind? fields.kind : ''}
               onChange={this.props.handleChange}
-              tabIndex="6"
+              tabIndex="3"
             />
           </div>
 
@@ -73,7 +74,7 @@ export default class Edit extends Component {
               name='package'
               value={fields.package? fields.package : ''}
               onChange={this.props.handleChange}
-              tabIndex="8"
+              tabIndex="4"
             />
           </div>
 

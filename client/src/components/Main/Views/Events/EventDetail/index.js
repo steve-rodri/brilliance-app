@@ -5,6 +5,7 @@ import Body from './Body';
 import Buttons from '../../../../Buttons/Buttons'
 import Modal from '../../../../Modal';
 import StaffSelector from './Body/Staff/StaffSelector'
+import CreateClient from './Body/About/CreateClient/'
 import { GOOGLE } from '../../../../../services/google_service';
 import { event, client, place, eventEmployee, employee } from '../../../../../services/BEP_APIcalls.js';
 import { eventTitle } from '../../../../../helpers/eventHelpers';
@@ -26,6 +27,7 @@ export default class EventDetail extends Component {
       formData: null,
       editMode: false,
       showStaffModal: false,
+      showCreateClientModal: false,
       redirectToEvents: false,
     }
     this.axiosRequestSource = axios.CancelToken.source()
@@ -77,6 +79,8 @@ export default class EventDetail extends Component {
     await this.setEvent();
     await this.setClientName();
     await this.setLocationName();
+    await this.setCallLocationName();
+    await this.getActiveEmployees()
   }
 
   synchronizeWithGoogle = async (evt) => {
@@ -144,9 +148,14 @@ export default class EventDetail extends Component {
     }))
   }
 
-  setClientName = () => {
+  setClientName = (clt) => {
     const { evt } = this.state
-    if (evt) {
+    if (clt) {
+      const name = clientName(clt, { oneLine: true })
+      this.setField('client', name)
+      this.setFormData('client_id', clt.id)
+    }
+    if (evt && !clt) {
       if (evt.client) {
         const name = clientName(evt.client, { oneLine: true })
         this.setField('client', name)
@@ -282,8 +291,8 @@ export default class EventDetail extends Component {
           call = moment(this.state.fields.callTime)
 
           if (
-            (moment(end).isSameOrBefore(moment(start)) || !this.state.fields.end) &&
-            (moment(call).isSameOrAfter(moment(start)) || !this.state.fields.callTime)
+            (!this.state.fields.end || moment(end).isSameOrBefore(moment(start))) &&
+            (!this.state.fields.callTime || moment(call).isSameOrAfter(moment(start)))
           )
           {
             call = start
@@ -304,7 +313,7 @@ export default class EventDetail extends Component {
               }
             }))
 
-          } else if (moment(end).isSameOrBefore(moment(start)) || !this.state.fields.end) {
+          } else if (!this.state.fields.end || moment(end).isSameOrBefore(moment(start))) {
 
             end = moment(start).add(1, 'hour').format()
 
@@ -321,7 +330,7 @@ export default class EventDetail extends Component {
               }
             }))
 
-          } else if (moment(call).isSameOrAfter(moment(start)) || !this.state.fields.callTime) {
+          } else if (!this.state.fields.callTime || moment(call).isSameOrAfter(moment(start))) {
             call = start
 
             this.setState(prevState => ({
@@ -636,6 +645,11 @@ export default class EventDetail extends Component {
     }
   }
 
+  createClient = async(data) => {
+    const newClient = await client.create(data, this.ajaxOptions);
+    this.setClientName(newClient)
+  }
+
   findPlaces = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
@@ -646,16 +660,7 @@ export default class EventDetail extends Component {
 
 // --------------------------------Event-Staff----------------------------------
 
-  openStaffModal = () => {
-    this.setState({ showStaffModal: true })
-  }
-
-  closeStaffModal = () => {
-    this.setState({ showStaffModal: false })
-  }
-
   chooseWorker = async() => {
-    await this.getActiveEmployees()
     await this.openStaffModal()
   }
 
@@ -794,8 +799,9 @@ export default class EventDetail extends Component {
   }
 
   getActiveEmployees = async() => {
-    const allEmployees = await employee.getAll(1, this.ajaxOptions)
-    const employees = allEmployees.filter(employee => employee.active)
+    let employees, allEmployees
+    allEmployees = await employee.getAll(1, this.ajaxOptions)
+    if (allEmployees) employees = allEmployees.filter(employee => employee.active)
     this.setState({ employees })
   }
 
@@ -839,10 +845,6 @@ export default class EventDetail extends Component {
     this.setState({editMode: !this.state.editMode})
   }
 
-  displayMobile = (value) => {
-    this.setState({ mobile: value })
-  }
-
   scrollToTop = () => {
     this.container.current.scrollTop = 0
   }
@@ -852,20 +854,29 @@ export default class EventDetail extends Component {
     setTimeout(() => this.setState({ scroll: false }), 1000)
   }
 
+// -----------------------------------Modals------------------------------------
+
+  openStaffModal = () => {
+  this.setState({ showStaffModal: true })
+}
+
+  closeStaffModal = () => {
+  this.setState({ showStaffModal: false })
+}
+
+  openCreateClientModal = () => {
+    this.setState({ showCreateClientModal: true })
+  }
+
+  closeCreateClientModal = () => {
+    this.setState({ showCreateClientModal: false })
+  }
+
 // -----------------------------------Styles------------------------------------
 
   styleTab = (view) => {
     if (view === this.state.view) {
       return this.highlight()
-    } else {
-      return {}
-    }
-  }
-
-  styleTabControl = () => {
-    const isNew = this.props.isNew
-    if (isNew) {
-      return { display: 'none' }
     } else {
       return {}
     }
@@ -918,7 +929,9 @@ export default class EventDetail extends Component {
           handleStatusChange={this.handleStatusChange}
           handleDateChange={this.handleDateChange}
           handleSearchChange={this.handleSearchChange}
+
           handleFocusSelect={this.handleFocusSelect}
+          handleEmployeeSelect={this.handleEmployeeSelect}
 
           onSelect={this.handleSelect}
           onEnter={this.handleFormSubmit}
@@ -926,6 +939,8 @@ export default class EventDetail extends Component {
           chooseWorker={this.chooseWorker}
           addWorker={this.addWorker}
           removeWorker={this.removeWorker}
+
+          createClient={this.openCreateClientModal}
 
           scrollToTop={this.scrollToTop}
         />
@@ -948,12 +963,29 @@ export default class EventDetail extends Component {
           this.state.showStaffModal?
           <Modal
             close={this.closeStaffModal}
-            content= {
+            content={
               <StaffSelector
                 close={this.closeStaffModal}
                 workers={this.state.workers}
                 employees={this.state.employees}
                 handleEmployeeSelect={this.handleEmployeeSelect}
+              />
+            }
+          />
+          :
+          null
+        }
+
+        {
+          this.state.showCreateClientModal?
+          <Modal
+            close={this.closeCreateClientModal}
+            content={
+              <CreateClient
+                {...this.props}
+                {...this.state}
+                close={this.closeCreateClientModal}
+                createClient={this.createClient}
               />
             }
           />
