@@ -13,3 +13,11 @@
 .Schedule--notes {
   font-size: .8em;
 }
+
+.Schedule--confirmation {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}

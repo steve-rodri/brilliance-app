@@ -42,15 +42,15 @@ export default class Schedule extends Component {
     const width = window.innerWidth
     if (width < 500) {
       this.setState({
-        columnHeaders: ['event', 'confirmation']
+        columnHeaders: ['event', 'event', 'event', 'confirmation']
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['time until', 'event', 'confirmation']
+        columnHeaders: ['time until', 'event', 'event', 'confirmation']
       })
     } else {
       this.setState({
-        columnHeaders: ['time until', 'event', 'notes', 'confirmation']
+        columnHeaders: ['time until', 'event', 'event', 'notes', 'confirmation']
       })
     }
   }
@@ -80,6 +80,7 @@ export default class Schedule extends Component {
         )
       })
       if (upcomingEvents.length > 0) {
+        upcomingEvents.reverse()
         this.setState({ userEvents: upcomingEvents })
       }
       this.incrementPage()

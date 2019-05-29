@@ -26,7 +26,7 @@ export default class List extends Component {
     const {page, items, view, columnHeaders, load, hasMore, loading } = this.props
     return (
       <div id="List" className="List" ref={this.container}>
-        {columnHeaders && items && items.length?
+        {columnHeaders && items && items.length && view !== 'Dashboard'?
           <div className="Titles">
             {columnHeaders && columnHeaders.map((header, i) => {
               // const indices = findIndices(columnHeaders, header)
