@@ -2,7 +2,7 @@
   height: calc(100vh - 75px);
   background-color: var(--dark-gray);
   display: grid;
-  grid-gap: 30px;
+  grid-gap: 10px;
   align-content: start;
   padding-top: 37.5px;
   color: white;

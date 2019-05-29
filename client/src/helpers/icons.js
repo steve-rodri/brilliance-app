@@ -50,15 +50,15 @@ library.add(
 export function statusIcon(str, size){
   switch (str) {
     case 'needsAction':
-      return <FontAwesomeIcon  className="Icon" icon="circle" size={size}/>
+      return <FontAwesomeIcon  className="Icon" icon="question" size={size}/>
     case 'Unconfirmed':
-      return <FontAwesomeIcon  className="Icon" icon="circle" size={size}/>
+      return <FontAwesomeIcon  className="Icon" icon="question" size={size}/>
     case 'accepted':
       return <FontAwesomeIcon  className="Icon" icon="check" size={size}/>
     case 'Confirmed':
       return <FontAwesomeIcon  className="Icon" icon="check" size={size}/>
     case 'tentative':
-      return <FontAwesomeIcon  className="Icon" icon="question" size={size}/>
+      return <FontAwesomeIcon  className="Icon" icon="minus" size={size}/>
     case 'declined':
       return <FontAwesomeIcon  className="Icon" icon="times" size={size}/>
     default:
