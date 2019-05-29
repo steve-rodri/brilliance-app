@@ -43,8 +43,17 @@ class PlacesController < ApplicationController
     terms = params[:q].split
 
     terms.each do |term|
-      @places = Place.where("name LIKE :query OR short_name LIKE :query",
-        {query: "%#{term.capitalize}%"})
+      @places = Place
+        .distinct
+        .where("name LIKE '%#{term}%'
+        OR name LIKE '%#{term.capitalize}%'
+        OR name LIKE '%#{term.upcase}%'
+        OR name LIKE '%#{term.downcase}%'
+        OR short_name LIKE '%#{term}%'
+        OR short_name LIKE '%#{term.capitalize}%'
+        OR short_name LIKE '%#{term.upcase}%'
+        OR short_name LIKE '%#{term.downcase}%'")
+        .order(:name)
     end
 
     render json: @places
