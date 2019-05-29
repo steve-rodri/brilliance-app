@@ -1,0 +1,95 @@
+.CreateClient {
+  display: grid;
+  grid: auto 1fr auto / auto;
+}
+
+.CreateClient--header {
+  height: 75px;
+  background-color: var(--darker-blue);
+  color: #eee;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.CreateClient--content {
+  padding: 20px;
+  display: grid;
+  grid-gap: 10px;
+  justify-content: center;
+  align-content: center;
+}
+
+.CreateClient--opening {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.CreateClient--opening > div {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+}
+
+.CreateClient--opening > div > div {
+  padding: 20px 50px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.CreateClient--choose {
+  display: grid;
+  grid-gap: 60px;
+  justify-content: center;
+  align-content: center;
+}
+
+.CreateClient--choose-existing {
+  display: grid;
+  grid-gap: 30px;
+  justify-items: center;
+  align-items: center;
+}
+
+.CreateClient--choose-existing > div {
+  display: grid;
+  grid-gap: 30px;
+}
+
+.CreateClient--choose-existing-contacts {
+  display: grid;
+  grid-gap: 10px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr))
+}
+
+.CreateClient--choose-existing-contacts > div,
+.CreateClient--skip > div {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.CreateClient--choose-existing-contacts > div:hover
+.CreateClient--skip > div:hover {
+  cursor: pointer;
+}
+
+.CreateClient--divider {
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.CreateClient--divider > div {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.CreateClient--footer {
+  padding-bottom: 20px;
+}

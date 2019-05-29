@@ -75,16 +75,12 @@ export default class SearchField extends Component {
   }
 
   handleCloseResults = (e) => {
-    this.setState({
-      fieldActive: false
-    })
+    this.setState({ fieldActive: false })
   }
 
   leavingResults = (e) => {
     e.stopPropagation()
-    this.setState({
-      hoveringResults: false
-    })
+    this.setState({ hoveringResults: false })
   }
 
   scrollResults = (direction) => {
@@ -304,9 +300,7 @@ export default class SearchField extends Component {
 
   choosingResult = (e) => {
     e.stopPropagation()
-    this.setState({
-      hoveringResults: true
-    })
+    this.setState({ hoveringResults: true })
   }
 
   styleResult = (i, key) => {
@@ -353,8 +347,8 @@ export default class SearchField extends Component {
   }
 
   create = () => {
-    const { create, input: { value }, resultClassName } = this.props
-    if (typeof create === 'function') {
+    const { create: createNew, input: { value }, resultClassName } = this.props
+    if (typeof createNew === 'function') {
       const styleOverride = {
         color: "#eee",
         backgroundColor: "limegreen",
@@ -367,7 +361,11 @@ export default class SearchField extends Component {
         <div
           className={`SearchField--create ${resultClassName} `}
           style={styleOverride}
-          onClick={(e) => create()}
+          onClick={(e) => {
+            e.stopPropagation()
+            createNew()
+            this.handleCloseResults()
+          }}
         >
           {plusIcon('1x')}
           <p>{`CREATE "${value}"`}</p>
@@ -411,8 +409,9 @@ export default class SearchField extends Component {
             if (this.resultCount()) {
               onEnter(e, name, highlightedResult.index, highlightedResult.section.name)
               this.handleCloseResults()
-            } else if (value > 2 && typeof create === 'function') {
+            } else if (value.length > 2 && typeof create === 'function') {
               create()
+              this.handleCloseResults()
             }
           }
         }}

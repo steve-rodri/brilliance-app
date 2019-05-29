@@ -538,13 +538,21 @@ export const place = {
 }
 
 export const contact = {
-  find: async function(query, options){
-    const { cancelToken, unauthorizedCB, sendCount } = options
-    let url = `/api/contacts/find?q=${query}`
-    if (sendCount) url += '&send_count=true'
+  find: async function(params, options){
+    const { cancelToken, unauthorizedCB, sendCount: send_count } = options
+
     try {
-      const resp = await axios.get(url, { cancelToken: cancelToken })
-      return resp.data.contacts
+      const resp = await axios.get('/api/contacts', {
+        params: {
+          ...params,
+          send_count
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
+        cancelToken: cancelToken
+      })
+      return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {
         console.log('Contact Request Canceled')
@@ -555,10 +563,10 @@ export const contact = {
       }
     }
   },
-  findByEmail: async function(email, options){
+  create: async function(data, options){
     const { cancelToken, unauthorizedCB } = options
     try {
-      const resp = await axios.get(`/api/contacts/find?email=${email}`, { cancelToken: cancelToken })
+      const resp = await axios.post(`/api/contacts`, data, { cancelToken: cancelToken })
       return resp.data.contact
     } catch (e) {
       if (axios.isCancel(e)) {
@@ -573,12 +581,34 @@ export const contact = {
 }
 
 export const company = {
-  find: async function(query, options){
-    const { cancelToken, unauthorizedCB, sendCount } = options
-    let url = `/api/companies/find?q=${query}`
-    if (sendCount) url +='&send_count=true'
+  find: async function(params, options){
+    const { cancelToken, unauthorizedCB, sendCount: send_count } = options
     try {
-      const resp = await axios.get(url, { cancelToken: cancelToken })
+      const resp = await axios.get('/api/companies', {
+        params: {
+          ...params,
+          send_count
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
+        cancelToken: cancelToken
+      })
+      return resp.data
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Company Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
+  },
+  create: async function(data, options){
+    const { cancelToken, unauthorizedCB } = options
+    try {
+      const resp = await axios.post(`/api/companies`, data, { cancelToken: cancelToken })
       return resp.data.company
     } catch (e) {
       if (axios.isCancel(e)) {

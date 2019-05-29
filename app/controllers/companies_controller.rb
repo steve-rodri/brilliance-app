@@ -3,9 +3,34 @@ class CompaniesController < ApplicationController
 
   # GET /companies
   def index
-    @companies = Company.all
+    @@send_count = false
+    if params[:send_count]
+      @@send_count = true
+    end
 
-    render json: @companies
+    if params[:q]
+      count = 0
+      query = "clients.id IS NULL AND name LIKE '%#{params[:q]}%'
+      OR name LIKE '%#{params[:q].capitalize}%'
+      OR name LIKE '%#{params[:q].upcase}%'
+      OR name LIKE '%#{params[:q].downcase}%'"
+      if @@send_count
+        count = Company
+          .distinct
+          .left_outer_joins(:client)
+          .where(query)
+          .size
+      end
+      @companies = Company
+        .distinct
+        .left_outer_joins(:client)
+        .where(query)
+
+      render json: @companies, root: 'companies', meta: { count: count }, include: '**'
+    else
+      @companies = Company.all
+      render json: @companies
+    end
   end
 
   # GET /companies/1
@@ -18,7 +43,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      render json: @company, status: :created, location: @company
+      render json: @company, status: :created, location: @company, include: '**'
     else
       render json: @company.errors, status: :unprocessable_entity
     end
@@ -27,7 +52,7 @@ class CompaniesController < ApplicationController
   # PATCH/PUT /companies/1
   def update
     if @company.update(company_params)
-      render json: @company
+      render json: @company, include: '**'
     else
       render json: @company.errors, status: :unprocessable_entity
     end
@@ -36,15 +61,6 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   def destroy
     @company.destroy
-  end
-
-  # GET /companies/find?q=
-  def find
-    company_query = "clients.id IS NULL AND name LIKE '%#{params[:q].capitalize}%'"
-
-    @companies = Company.left_outer_joins(:client).where(company_query)
-
-    render json: @companies
   end
 
   private

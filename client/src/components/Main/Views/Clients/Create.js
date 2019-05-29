@@ -91,16 +91,16 @@ export default class Create extends Component {
   findContacts = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const contacts = await contact.find(query, this.ajaxOptions)
-      return contacts
+      const data = await contact.find({ q: query }, this.ajaxOptions)
+      return data.contacts
     }
   }
 
   findCompanies = async(query) => {
     const q = query.split('')
     if (q.length > 2) {
-      const companies = await company.find(query, this.ajaxOptions)
-      return companies
+      const data = await company.find({ q: query }, this.ajaxOptions)
+      return data.companies
     }
   }
 
