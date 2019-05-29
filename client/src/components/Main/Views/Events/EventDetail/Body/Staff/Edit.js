@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import StaffSelector from './StaffSelector'
 
 export default class Edit extends Component {
@@ -40,8 +40,17 @@ export default class Edit extends Component {
     const { mobile } = this.props
     return (
       <div className="Staff--container Staff--Edit" style={this.styleContainer()}>
-        {mobile? <label>Staff</label> : null}
-        <StaffSelector {...this.props}/>
+        {
+          mobile?
+          <Fragment>
+            <label>Staff</label>
+            <div className="Staff--choose-workers" onClick={this.props.chooseWorker}>
+              <p style={{fontWeight: 700}}>Choose Workers</p>
+            </div>
+          </Fragment>
+          :
+          <StaffSelector {...this.props}/>
+        }
       </div>
     )
   }

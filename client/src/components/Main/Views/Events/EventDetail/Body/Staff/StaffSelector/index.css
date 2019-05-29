@@ -3,7 +3,6 @@
   display: grid;
   justify-items: center;
   grid-gap: 20px;
-  justify-content: center;
   grid: auto 1fr auto / auto;
 }
 
