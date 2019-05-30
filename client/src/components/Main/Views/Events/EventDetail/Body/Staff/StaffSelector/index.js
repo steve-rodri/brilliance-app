@@ -34,7 +34,6 @@ export default class StaffSelector extends Component {
       labor = employees.filter(employee => employee.labor)
       nonLabor = employees.filter(employee => !employee.labor)
     }
-    console.log(mobile)
     return (
       <div className="StaffSelector">
         {

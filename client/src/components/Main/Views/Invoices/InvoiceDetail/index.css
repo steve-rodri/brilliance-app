@@ -22,23 +22,17 @@
     display: grid;
     grid-gap: 40px;
     padding: 40px;
-    justify-items: center;
+    justify-content: center;
+    grid-auto-flow: column;
   }
 
   .InvoiceDetail > main > section {
     display: grid;
+    align-content: start;
     grid-gap: 40px;
   }
 
   .InvoiceDetail--Invoice-Section {
     justify-self: center;
-  }
-}
-
-@media (min-width: 1200px) {
-  .InvoiceDetail > main {
-    justify-content: center;
-    grid-auto-flow: column;
-    padding: 40px;
   }
 }
