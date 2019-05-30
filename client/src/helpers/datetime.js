@@ -8,11 +8,13 @@ countdown.setLabels(
 )
 
 function date(fields, short, days){
-  if (!fields && !fields.start && !fields.end) return;
+  if (!fields) return;
 
   const startOfDay = moment(fields.start).startOf('day')
   const start = moment(fields.start)
   const end = moment(fields.end)
+
+  if (!start.isValid() || !end.isValid()) return;
 
   if (start.isBefore(moment(), 'year')) {
 

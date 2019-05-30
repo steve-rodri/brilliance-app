@@ -174,7 +174,7 @@ class EventsController < ApplicationController
         meta: { count: count, next: @@next_event },
         include: '**'
 
-    # By iCalUID----------------------------------------------------------------
+    # By i_cal_UID----------------------------------------------------------------
   elsif params[:i_cal_UID]
       @event = Event.where( i_cal_UID: "#{params[:i_cal_UID]}").first
       render json: @event, include: '**'
