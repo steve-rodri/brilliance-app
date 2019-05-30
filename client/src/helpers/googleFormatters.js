@@ -68,68 +68,56 @@ async function creator(e, options){
 }
 
 async function attendees(evt, options){
-  if (evt) {
-    if (evt.attendees) {
-      //for each attendee, find corresponding worker/staff member by contact email
-      let e = await event.get(null, { ...options, iCalUID: evt.iCalUID})
-      if (e) {
-        //if event has staff update staff with google attendee info
-        if (e.staff && e.staff.length) {
-          const staff = evt.attendees.map(attendee => {
-            let updatedWorker;
-            e.staff.forEach( worker => {
-              const ee = worker.info.contact.emailAddresses.find( email => email.emailAddress === attendee.email )
-              if (ee) {
-                updatedWorker = { id: worker.id, employee_id: worker.info.id, confirmation: attendee.responseStatus }
-              }
-            })
-            return updatedWorker
-          })
-          if (staff && staff.length) {
-            const workers = staff.filter(s => s !== null)
-            return workers
-          } else {
-            return null
-          }
-          // else create new staff with google attendee info
-        } else {
-          const staff = await Promise.all(evt.attendees.map(async attendee => {
-            const worker = await employee.findByEmail(attendee.email, options)
-            if (worker) {
-              worker.confirmation = attendee.responseStatus
-              return worker
-            } else {
-              return null
-            }
-          }))
-          if (staff && staff.length) {
-            const trimmed = staff.filter(s => s !== null)
-            const workers = trimmed.map(s => ({employee_id: s.id, confirmation: s.confirmation }))
-            return workers
-          } else {
-            return null
-          }
-        }
-      } else {
-        const staff = await Promise.all(evt.attendees.map(async attendee => {
-          let worker = await employee.findByEmail(attendee.email, options)
-          if (worker && !attendee.organizer) {
-            worker.confirmation = attendee.responseStatus
-            return worker
-          } else {
-            return null
-          }
-        }))
-        if (staff && staff.length) {
-          const trimmed = staff.filter(s => s !== null)
-          const workers = trimmed.map(s => ({employee_id: s.id, confirmation: s.confirmation }))
-          return workers
-        } else {
-          return null
-        }
-      }
-    }
+  if (!evt || !evt.attendees) return;
+  let e = await event.get(null, { ...options, iCalUID: evt.iCalUID})
+
+  // IF no Job has been found, return workers to add to new Job
+  if (!e) {
+    const staff = await Promise.all(evt.attendees.map(async attendee => {
+      let worker = await employee.get({ email: attendee.email }, options)
+      if (!worker) return null;
+      if (!attendee.organizer) worker.confirmation = attendee.responseStatus
+      return worker
+    }))
+    if (!staff && !staff.length) return;
+    const trimmed = staff.filter(s => s !== null)
+    const workers = trimmed.map(s => ({employee_id: s.id, confirmation: s.confirmation }))
+    return workers
   }
+
+  // IF job has no workers create new
+  if (!e.staff && !e.staff.length) {
+    const staff = await Promise.all(evt.attendees.map(async attendee => {
+      const worker = await employee.get({ email: attendee.email }, options)
+      if (!worker) return null;
+      worker.confirmation = attendee.responseStatus
+      return worker
+    }))
+    if (!staff && !staff.length) return;
+    const trimmed = staff.filter(s => s !== null)
+    const workers = trimmed.map(s => ({employee_id: s.id, confirmation: s.confirmation }))
+    return workers
+  }
+
+  // Update Workers
+  const staff = evt.attendees.map(attendee => {
+    let updatedWorker;
+    e.staff.forEach( worker => {
+      const email = worker.info.contact.emailAddresses.find( email =>
+        email.emailAddress.toLowerCase() === attendee.email.toLowerCase()
+      )
+      if (!email) return;
+      updatedWorker = {
+        id: worker.id,
+        employee_id: worker.info.id,
+        confirmation: attendee.responseStatus
+      }
+    })
+    return updatedWorker
+  })
+  if (!staff && !staff.length) return;
+  const workers = staff.filter(s => s !== null)
+  return workers
 }
 
 function status (evt) {

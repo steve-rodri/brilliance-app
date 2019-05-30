@@ -40,7 +40,12 @@ class EventsController < ApplicationController
           .where("places.installation = false")
           .order(:start)
           .paginate(page: params[:page], per_page: @@items_per_page)
-      else
+      elsif
+        params[:category] == 'CATP' ||
+        params[:category] == 'CANS' ||
+        params[:category] == 'TANS' ||
+        params[:category] == 'THC'
+
         short_name = params[:category]
         if @@send_count
           count = Event
@@ -170,8 +175,8 @@ class EventsController < ApplicationController
         include: '**'
 
     # By iCalUID----------------------------------------------------------------
-    elsif params[:iCalUID]
-      @event = Event.where( i_cal_UID: "#{params[:iCalUID]}").first
+  elsif params[:i_cal_UID]
+      @event = Event.where( i_cal_UID: "#{params[:i_cal_UID]}").first
       render json: @event, include: '**'
 
     # --------------------------------------------------------------------------
