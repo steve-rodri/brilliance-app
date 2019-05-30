@@ -18,6 +18,18 @@ export default class NavSection extends Component {
     }
   }
 
+
+  linkPath = () => {
+    const { user: { accessLevel }, view } = this.props
+    let path = { state: { modal: true } }
+    let updatedView = view.toLowerCase();
+
+    if (view === 'Workers') updatedView = 'staff'
+    path.pathname = `/${accessLevel}/${updatedView}/new`
+
+    return path;
+  }
+
   render (){
     const {
       mobile,
@@ -105,7 +117,7 @@ export default class NavSection extends Component {
         {/* Add New Button */}
         {view === "Events" || view === "Clients" || view === "Workers"?
           <AddNew
-            linkPath={{pathname: `${match.path}/new`, state: { modal: true } }}
+            linkPath={this.linkPath()}
             className="NavSection--button"
             type={singular}
           />
