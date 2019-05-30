@@ -1,5 +1,5 @@
 .Dashboard {
-  height: calc(100vh - 75px);
+  height: calc(100% - 75px);
   background-color: var(--dark-gray);
   display: grid;
   grid-gap: 10px;
