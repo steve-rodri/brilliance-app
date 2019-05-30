@@ -7,7 +7,7 @@ import Modal from '../../../../Modal';
 import StaffSelector from './Body/Staff/StaffSelector'
 import CreateClient from './Body/About/CreateClient/'
 import { GOOGLE } from '../../../../../services/google_service';
-import { event, client, place, eventEmployee, employee } from '../../../../../services/BEP_APIcalls.js';
+import { event, client, place, eventEmployee } from '../../../../../services/BEP_APIcalls.js';
 import { eventTitle } from '../../../../../helpers/eventHelpers';
 import { clientName } from '../../../../../helpers/clientHelpers';
 import { locationName } from '../../../../../helpers/locationName';
@@ -80,7 +80,6 @@ export default class EventDetail extends Component {
     await this.setClientName();
     await this.setLocationName();
     await this.setCallLocationName();
-    await this.getActiveEmployees()
   }
 
   synchronizeWithGoogle = async (evt) => {
@@ -796,13 +795,6 @@ export default class EventDetail extends Component {
       }))
 
     }
-  }
-
-  getActiveEmployees = async() => {
-    let employees, allEmployees
-    allEmployees = await employee.getAll(1, this.ajaxOptions)
-    if (allEmployees) employees = allEmployees.filter(employee => employee.active)
-    this.setState({ employees })
   }
 
 // ----------------------------------DB-CRUD------------------------------------

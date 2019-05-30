@@ -4,7 +4,7 @@ import ListPage from '../../../ListPage/index.js'
 import EventDetail from './EventDetail/index.js'
 import { GOOGLE } from '../../../../services/google_service'
 import { formatToGoogle, formatFromGoogle } from '../../../../helpers/googleFormatters'
-import { event, client } from '../../../../services/BEP_APIcalls.js'
+import { event, client, employee } from '../../../../services/BEP_APIcalls.js'
 import { clientName } from '../../../../helpers/clientHelpers'
 import { eventTitle } from '../../../../helpers/eventHelpers'
 import queryString from 'query-string'
@@ -45,10 +45,10 @@ export default class Events extends Component {
 
   async componentDidMount() {
     await this.props.setView('Events')
+    await this.getActiveEmployees()
     if (this.props.match.isExact) {
       await this.props.setCategories(['CATP', 'THC', 'TANS', 'CANS'])
       await this.setColumnHeaders()
-      await this.setCurrentMonth()
       await this.setEvents()
     }
   }
@@ -61,31 +61,16 @@ export default class Events extends Component {
   // -----------------------Getters-and-Setters---------------------------------
 
   setEvents = async(prevProps) => {
-    let options = {
-      query: null,
-      category: null,
-      client: null
-    }
     if (prevProps) {
 
       // check for queries from url
+      let prevQueryStr, queryStr;
       const { location: prevLocation } = prevProps
-      const { location: nextLocation } = this.props
+      const { location } = this.props
+      if (prevLocation && prevLocation.search) prevQueryStr = prevLocation.search
+      if (location && location.search) queryStr = location.search
 
-      let prevQueries, nextQueries = null
-
-      if (prevLocation && prevLocation.search) prevQueries = prevLocation.search
-      if (nextLocation && nextLocation.search) nextQueries = nextLocation.search
-
-      if (nextQueries) {
-        const queries = queryString.parse(nextQueries);
-        if (queries.q) options.query = queries.q;
-        if (queries.category) options.category = queries.category;
-        if (queries.client) options.client = queries.client;
-      }
-
-      if (prevQueries !== nextQueries) await this.setByQuery()
-      if (prevQueries && !nextQueries) await this.setByDate(options)
+      if (prevQueryStr !== queryStr) await this.setByQuery()
 
       // check for date change
       const { date: prevDate } = prevProps
@@ -99,29 +84,22 @@ export default class Events extends Component {
         const nextEnd = moment(nEnd);
         const startChange = !( prevStart.isSame(nextStart) )
         const endChange = !( prevEnd.isSame(nextEnd) )
-        if ( startChange || endChange ) await this.setByDate(options)
+        if ( startChange || endChange ) await this.setByDate()
       }
     } else {
       const { location } = this.props
-      let query = null
-      if (location && location.search) query = location.search
-      if (query) {
-        const queries = queryString.parse(query);
-        if (queries.q) options.query = queries.q;
-        if (queries.category) options.category = queries.category;
-        if (queries.client) options.client = queries.client;
-      }
-      if (query) await this.setByQuery()
-      if (!query) await this.setByDate(options)
+      let queryStr;
+      if (location && location.search) queryStr = location.search
+      if (queryStr) await this.setByQuery()
+      if (!queryStr) await this.setCurrentMonth()
     }
 
   }
 
   setByQuery = async() => {
-    const { category, query } = this.state
     const queries = queryString.parse(this.props.location.search);
     // Category-Query-----------
-    if (queries.category && queries.category !== category) {
+    if (queries.category) {
       this.ajaxOptions.sendCount = true
       this.setState({
         events: [],
@@ -135,7 +113,7 @@ export default class Events extends Component {
       async() => this.fetchEvents())
 
     // Search-Query-----------
-    } else if (queries.q && (queries.q !== query)) {
+    } else if (queries.q) {
       this.ajaxOptions.sendCount = true
       this.setState({
         events: [],
@@ -149,7 +127,7 @@ export default class Events extends Component {
       async() => this.fetchEvents())
 
     // Client-Query-----------
-    } else if (queries.client && queries.client !== this.state.client) {
+    } else if (queries.client) {
       const clt = await client.get(queries.client, this.ajaxOptions)
       this.ajaxOptions.sendCount = true
       this.setState({
@@ -165,8 +143,9 @@ export default class Events extends Component {
     }
   }
 
-  setByDate = async(options) => {
+  setByDate = async() => {
     const { date: { start: s, end: e }, isDay, isMonth } = this.props
+    const { state } = this
     const start = moment(s);
     const end = moment(e);
     let date = `${start.format('LL')} - ${end.format('LL')}`
@@ -174,15 +153,14 @@ export default class Events extends Component {
     if (isMonth()) date = `${start.format('MMMM YYYY')}`
     let searchLabel = date
 
-    if (options && options.category) searchLabel = `${options.category} - ${date}`
-    if (options && options.client) searchLabel = `${options.client} - ${date}`
-    if (options && options.query) searchLabel = `${options.query} - ${date}`
+    if (state.category) searchLabel = `${state.category} - ${date}`
+    if (state.client) searchLabel = `${state.client} - ${date}`
+    if (state.query) searchLabel = `${state.query} - ${date}`
 
     this.ajaxOptions.sendCount = true
     this.setState(
     {
       events: [],
-      ...options,
       searchLabel,
       page: 1,
       type: null
@@ -222,21 +200,20 @@ export default class Events extends Component {
     const { history } = this.props
 
     if (value) {
-      this.resetState()
+      history.push(url)
       this.setCurrentMonth()
-      this.setByDate()
+      this.resetState(this.setByDate)
     }
-    history.push(url)
   }
 
-  resetState = () => {
+  resetState = (cb) => {
     this.setState({
       searchLabel: null,
       query: null,
       client: null,
       category: null,
       type: null,
-    })
+    }, () => typeof cb === 'function'? cb() : null)
   }
 
   // -------------------------------CRUD----------------------------------------
@@ -262,7 +239,10 @@ export default class Events extends Component {
       }
       const data = await event.batch(params, this.ajaxOptions)
       if (data && data.events && data.events.length) await this.updateEvents(data)
-      else this.props.setLoadingState(false)
+      else {
+        this.setState({ hasMore: false })
+        this.props.setLoadingState(false)
+      }
     } else {
       this.setState({ hasMore: false })
       this.props.setLoadingState(false)
@@ -416,6 +396,11 @@ export default class Events extends Component {
       const synced = await event.sync(formatted, this.ajaxOptions)
       return synced
     }
+  }
+
+  getActiveEmployees = async() => {
+    const data = await employee.batch({ active: true }, this.ajaxOptions)
+    this.setState({ employees: data.employees })
   }
 
   // --------------------------Handle-Change------------------------------------

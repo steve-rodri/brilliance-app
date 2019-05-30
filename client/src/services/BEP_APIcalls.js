@@ -41,9 +41,7 @@ export const event = {
           }
         }
       })
-
       return resp.data
-
     } catch (e) {
       if (axios.isCancel(e)) {
         console.log('Event Request Canceled')
@@ -451,27 +449,16 @@ export const eventEmployee = {
 }
 
 export const employee = {
-  getAll: async function (page, options) {
-    const { cancelToken, unauthorizedCB, sendCount } = options
-    let url = `/api/employees?page=${page}`
-    if (sendCount) url += '&send_count=true'
-    try {
-      const resp = await axios.get(url, { cancelToken: cancelToken })
-      return resp.data.employees
-    } catch (e) {
-      if (axios.isCancel(e)) {
-        console.log('Employee Request Canceled')
-      }
-      if (e.response && e.response.status === 401) {
-        localStorage.clear()
-        if (unauthorizedCB) unauthorizedCB()
-      }
-    }
-  },
-  find: async function (query, options) {
+  get: async function (params, options) {
     const { cancelToken, unauthorizedCB } = options
     try {
-      const resp = await axios.get(`/api/employees?q=${query}`, { cancelToken: cancelToken })
+      const resp = await axios.get(`/api/employees?`, {
+        params: params,
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
+        cancelToken: cancelToken
+      })
       return resp.data.employee
     } catch (e) {
       if (axios.isCancel(e)) {
@@ -483,14 +470,28 @@ export const employee = {
       }
     }
   },
-  findByEmail: async function (email, options){
-    const { cancelToken, unauthorizedCB } = options
+  batch: async function(params, options){
+    const { sendCount: send_count, cancelToken, unauthorizedCB } = options
     try {
-      const resp = await axios.get(`/api/employees?email='${email}'`, { cancelToken: cancelToken })
-      return resp.data.employee
+      const resp = await axios.get('/api/employees', {
+        params: {
+          ...params,
+          send_count
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
+        cancelToken: cancelToken,
+        onDownloadProgress: function (pe) {
+          if (pe.lengthComputable) {
+            console.log(pe.loaded, pe.total)
+          }
+        }
+      })
+      return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {
-        console.log('Employee Request Canceled')
+        console.log('Event Request Canceled')
       }
       if (e.response && e.response.status === 401) {
         localStorage.clear()
