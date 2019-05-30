@@ -3,23 +3,47 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   def index
+    @@active_only = false;
+
+    if params[:active]
+      @@active_only = true;
+    end
+
     if params[:email]
       @employees = Employee
         .joins(contact: :email_address)
-        .where("email_address = #{params[:email]}")
+        .where("email_address = '#{params[:email]}'")
         .first
-    elsif params[:q]
-      query = params[:q]
-      @employees = Employee
+    elsif @@active_only
+      if params[:q]
+        query = params[:q]
+        @employees = Employee
         .joins(:contact, contact: :email_address)
+        .where(active: true)
         .where(
           "contacts.first_name LIKE '%#{query}%' OR
            contacts.last_name LIKE '%#{query}%' OR
-           email_addresses.email_address LIKE '%#{query}%'
+           email_addresses.email_address LIKE '%#{query}%)'
           "
         )
+      else
+        @employees = Employee.where(active: true)
+      end
     else
-      @employees = Employee.all
+      if params[:q]
+        query = params[:q]
+        @employees = Employee
+        .joins(:contact, contact: :email_address)
+        .where(active: true)
+        .where(
+          "contacts.first_name LIKE '%#{query}%' OR
+           contacts.last_name LIKE '%#{query}%' OR
+           email_addresses.email_address LIKE '%#{query}%)'
+          "
+        )
+      else
+        @employees = Employee.all
+      end
     end
 
     render json: @employees, include: '**'

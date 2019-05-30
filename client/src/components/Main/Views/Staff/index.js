@@ -63,7 +63,7 @@ export default class Staff extends Component {
   fetchStaff = async() => {
     const { page, staff } = this.state
     if ((staff.length + this.itemsPerPage) / page <= this.itemsPerPage) {
-      const workers = await employee.getAll(page, this.ajaxOptions)
+      const workers = await employee.batch({ page }, this.ajaxOptions)
       if (workers && workers.length) await this.updateStaff(workers)
     }
   }
