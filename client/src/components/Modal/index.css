@@ -21,7 +21,8 @@
 
 .Modal--overlay {
   position: fixed;
-  height: calc(100% - 75px - var(--mobile-adj));
+  overscroll-behavior-y: contain;
+  height: calc(100vh - 75px - var(--mobile-adj));
   width: 100%;
   top: 75px;
   left: 0;
