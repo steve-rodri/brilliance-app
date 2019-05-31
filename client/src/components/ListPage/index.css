@@ -48,6 +48,8 @@
 
 .ListPage--category-title-container {
   display: flex;
+  position: sticky;
+  top: 75px;
   justify-content: center;
   align-items: center;
   color: #eeeeee;
@@ -80,6 +82,8 @@
 
 .ListPage--end-message {
   height: 100%;
+  position: sticky;
+  bottom: 115px;
   display: flex;
   justify-content: center;
   align-items: center;
