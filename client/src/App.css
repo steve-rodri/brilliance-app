@@ -4,7 +4,7 @@
 }
 
 .App {
-  height: calc(100vh - 100px);
+  height: calc(100vh - var(--mobile-adj));
   width: 100vw;
   position: relative;
   text-align: center;
@@ -25,6 +25,9 @@
   --light-blue-t: rgba(212,241,255, .3);
 
   --light-gray: #DADBE0;
+
+  /* Mobile compensation */
+  --mobile-adj: 100px
 }
 
 @media (min-width: 750px) {
