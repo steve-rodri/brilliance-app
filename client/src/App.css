@@ -6,6 +6,8 @@
 .App {
   height: calc(100vh - var(--mobile-adj));
   width: 100vw;
+  overflow: auto;
+  overscroll-behavior-y: none;
   position: relative;
   text-align: center;
   background-color: var(--light-gray);
@@ -27,7 +29,7 @@
   --light-gray: #DADBE0;
 
   /* Mobile compensation */
-  --mobile-adj: 100px
+  --mobile-adj: 120px
 }
 
 @media (min-width: 750px) {
