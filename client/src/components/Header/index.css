@@ -38,7 +38,7 @@ header {
 .Header--drop-down {
   position: fixed;
   top: 75px;
-  height: calc(100% - 75px - 44px);
+  height: calc(100% - 75px);
   display: grid;
   align-items: center;
   justify-items: center;
@@ -47,12 +47,6 @@ header {
   padding: 10px 10px 20px 10px;
   overflow: auto;
   transition: all 250ms ease;
-}
-
-@media (min-width: 750px) {
-  .Header--drop-down {
-    height: calc(100% - 75px);
-  }
 }
 
 .Header--nav-menu {
