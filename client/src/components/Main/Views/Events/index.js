@@ -60,13 +60,11 @@ export default class Events extends Component {
 
   setEvents = async(prevProps) => {
     if (prevProps) {
-
+      const home = !prevProps.match.isExact && this.props.match.isExact
       // check for location change
       let prevQueryStr, queryStr;
       const { location: prevLocation } = prevProps
       const { location } = this.props
-
-      if (prevLocation.pathname !== location.pathname) await this.setCurrentMonth()
 
       // check for queries from url
       if (prevLocation && prevLocation.search) prevQueryStr = prevLocation.search
@@ -85,20 +83,27 @@ export default class Events extends Component {
         const nextEnd = moment(nEnd);
         const startChange = !( prevStart.isSame(nextStart) )
         const endChange = !( prevEnd.isSame(nextEnd) )
-        if ( startChange || endChange ) await this.setByDate()
+        const dateChange = startChange || endChange
+        if ( dateChange ) await this.setByDate()
       }
+
+      //check exact match change and eventlength
+      if (home && !this.state.events.length) this.setByDate()
     } else {
       const { location } = this.props
       let queryStr;
       if (location && location.search) queryStr = location.search
       if (queryStr) await this.setByQuery()
-      if (!queryStr) await this.setCurrentMonth()
+      if (!queryStr) await this.setByDate()
     }
 
   }
 
   setByQuery = async() => {
     const queries = queryString.parse(this.props.location.search);
+    if (!Object.keys(queries).length) {
+      this.resetState(this.setByDate)
+    }
     // Category-Query-----------
     if (queries.category) {
       this.ajaxOptions.sendCount = true
@@ -356,14 +361,10 @@ export default class Events extends Component {
         }
         const evt = await this.synchronizeWithGoogle(e)
         if (evt) {
-          if (next.id === evt.id) {
-            evt.isNextEvent = true
-          }
+          if (next.id === evt.id) evt.isNextEvent = true
           return evt
         } else {
-          if (next.id === e.id) {
-            e.isNextEvent = true
-          }
+          if (next.id === e.id) e.isNextEvent = true
           return e
         }
       })
