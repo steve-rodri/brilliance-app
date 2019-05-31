@@ -6,6 +6,7 @@
 .App {
   height: calc(100vh - var(--mobile-adj));
   width: 100vw;
+  overflow: auto;
   position: relative;
   text-align: center;
   background-color: var(--light-gray);
