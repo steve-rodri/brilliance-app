@@ -1,24 +1,22 @@
 .ListPage {
   height: calc(100% - 75px);
   display: grid;
-  overflow: hidden;
 }
 
 @media (min-width: 1000px) {
   .ListPage {
     grid-template-columns:  25% 75%;
-    align-items: flex-start;
   }
 }
 
 /* -----------------Aside---------------- */
 
-aside {
+.ListPage > aside {
   display: none;
 }
 
 @media (min-width: 1000px) {
-  aside {
+  .ListPage > aside {
     display: block;
     padding: 10px 10px 40px 10px;
     height: 100%;
@@ -27,7 +25,7 @@ aside {
 }
 
 @media (min-width: 1200px) {
-  aside {
+  .ListPage > aside {
     padding: 10px 40px 40px 40px;
   }
 }
@@ -36,7 +34,6 @@ aside {
 
 .ListPage > main {
   height: 100%;
-  width: 100%;
   display: grid;
   grid-template-rows: 40px auto 40px;
   align-content: start;
@@ -67,7 +64,7 @@ aside {
 .ListPage--list {
   grid-row: 2 / span 1;
   width: 100%;
-  height: calc(100vh - 155px);
+  max-height: calc(100vh - 199px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -77,6 +74,7 @@ aside {
 @media (min-width: 500px) {
   .ListPage--list {
     padding: 0 40px;
+    max-height: calc(100vh - 155px);
   }
 }
 

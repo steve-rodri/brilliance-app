@@ -28,7 +28,6 @@ export default function Event(props){
   const confirmationDisplay = displayColumn('confirmation')
 
   if (event.isNextEvent) changeScrollPosition()
-
   return (
     <Link to={`/${accessLevel}/${view.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
       {numColumns?
@@ -167,9 +166,6 @@ function scheduled(evt){
       if (accepted === evt.staff.length) {
         return (
           <div className="Event--scheduled" style={{ color: 'limegreen'}}>
-            {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid white', width: '100%', height: '100%'}}>
-              <p>{`${evt.staff.length} scheduled`}</p>
-            </div> */}
             <div className="Event--scheduled-details">
               <h4>ALL CONFIRMED</h4>
             </div>
@@ -178,9 +174,6 @@ function scheduled(evt){
       } else if (!accepted) {
         return (
           <div className="Event--scheduled" style={{ color: 'red' }}>
-            {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid white', width: '100%', height: '100%'}}>
-              <p>{`${evt.staff.length} scheduled`}</p>
-            </div> */}
             <div className="Event--scheduled-details">
               <div style={{textAlign: 'left'}}>
                 {tentative + needsAction? <p>{`${tentative + needsAction} unconfirmed`}</p> : null}
@@ -192,9 +185,6 @@ function scheduled(evt){
       } else {
         return (
           <div className="Event--scheduled">
-            {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: '1px solid black', width: '100%', height: '100%'}}>
-              <p>{`${evt.staff.length} scheduled`}</p>
-            </div> */}
             <div className="Event--scheduled-details">
               <div style={{textAlign: 'left'}}>
                 <p>{`${accepted} confirmed`}</p>

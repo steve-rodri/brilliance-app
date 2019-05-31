@@ -31,20 +31,25 @@ export default class ListPage extends Component {
     if (data && data.length) {
       return {}
     } else {
-      return { justifyContent: 'center'}
+      return { justifyContent: 'center', height: 'calc(100vh - 155px)'}
     }
   }
 
   render(){
-    const { view, mainHeader, data, count } = this.props
+    const { view, mainHeader, data, count, mobile } = this.props
     const singular = view? view.split('').splice(0, view.length - 1).join('') : null
 
     return (
       <div className='ListPage'>
 
-        <aside>
-          <NavSection {...this.props}/>
-        </aside>
+        {
+          !mobile?
+          <aside>
+            <NavSection {...this.props}/>
+          </aside>
+          :
+          null
+        }
 
         <main>
           <div

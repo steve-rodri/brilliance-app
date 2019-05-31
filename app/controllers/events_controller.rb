@@ -175,7 +175,7 @@ class EventsController < ApplicationController
         include: '**'
 
     # By i_cal_UID----------------------------------------------------------------
-  elsif params[:i_cal_UID]
+    elsif params[:i_cal_UID]
       @event = Event.where( i_cal_UID: "#{params[:i_cal_UID]}").first
       render json: @event, include: '**'
 

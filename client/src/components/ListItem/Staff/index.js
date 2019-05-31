@@ -60,7 +60,7 @@ export default function Staff(props){
         <div className="List-Item">
 
           <div className="Staff--name">
-            <h3>{employee.name}</h3>
+            <h3>{employee.contactInfo.fullName}</h3>
           </div>
 
         </div>
