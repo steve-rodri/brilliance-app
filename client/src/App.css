@@ -29,7 +29,7 @@
   --light-gray: #DADBE0;
 
   /* Mobile compensation */
-  --mobile-adj: 120px
+  --mobile-adj: 115px;
 }
 
 @media (min-width: 750px) {
