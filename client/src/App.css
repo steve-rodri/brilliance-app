@@ -4,32 +4,9 @@
 }
 
 .App {
-  height: calc(100vh - var(--mobile-adj));
   width: 100vw;
-  overflow: auto;
-  overscroll-behavior-y: none;
   position: relative;
   text-align: center;
-  background-color: var(--light-gray);
-
-  /* Color Palette */
-  --darker-blue: #143154;
-  --dark-blue: #1D4678;
-  --med-dark-blue: #0071B5;
-  --dark-gray: #222222;
-
-  --turquoise: #01B0DF;
-  --light-blue: #D4F1FF;
-
-
-  --med-dark-blue-t: rgba(0, 113, 181, .4);
-  --turquoise-t: rgba(1, 176, 223, .6);
-  --light-blue-t: rgba(212,241,255, .3);
-
-  --light-gray: #DADBE0;
-
-  /* Mobile compensation */
-  --mobile-adj: 115px;
 }
 
 @media (min-width: 750px) {
