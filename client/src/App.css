@@ -5,6 +5,7 @@
 
 .App {
   height: calc(100vh - 44px);
+  width: 100vw;
   position: relative;
   text-align: center;
   background-color: var(--light-gray);
