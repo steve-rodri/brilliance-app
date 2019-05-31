@@ -46,11 +46,9 @@ export default class Events extends Component {
   async componentDidMount() {
     await this.props.setView('Events')
     await this.getActiveEmployees()
-    if (this.props.match.isExact) {
-      await this.props.setCategories(['CATP', 'THC', 'TANS', 'CANS'])
-      await this.setColumnHeaders()
-      await this.setEvents()
-    }
+    await this.props.setCategories(['CATP', 'THC', 'TANS', 'CANS'])
+    await this.setColumnHeaders()
+    if (this.props.match.isExact) await this.setEvents()
   }
 
   componentWillUnmount() {
@@ -63,13 +61,16 @@ export default class Events extends Component {
   setEvents = async(prevProps) => {
     if (prevProps) {
 
-      // check for queries from url
+      // check for location change
       let prevQueryStr, queryStr;
       const { location: prevLocation } = prevProps
       const { location } = this.props
+
+      if (prevLocation.pathname !== location.pathname) await this.setCurrentMonth()
+
+      // check for queries from url
       if (prevLocation && prevLocation.search) prevQueryStr = prevLocation.search
       if (location && location.search) queryStr = location.search
-
       if (prevQueryStr !== queryStr) await this.setByQuery()
 
       // check for date change
