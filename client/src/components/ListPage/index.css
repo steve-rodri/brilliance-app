@@ -50,9 +50,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--dark-blue);
-  color: var(--light-gray);
+  color: #eeeeee;
   grid-row: 1 / span 1;
+  background-color: var(--dark-blue);
 }
 
 .ListPage--category-title {
@@ -83,6 +83,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--dark-blue);
   color: #eeeeee;
   grid-row: 3 / span 1;
 }

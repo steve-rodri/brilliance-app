@@ -9,7 +9,7 @@ import Staff from './Views/Staff'
 
 export default class Admin extends Component {
   render(){
-    const { match } = this.props
+    const { match, mobile } = this.props
     return (
       <Fragment>
         <Header {...this.props}/>
@@ -21,6 +21,7 @@ export default class Admin extends Component {
           <Route  path={`${match.path}/invoices`} render={ props => <Invoices {...this.props } {...props} /> } />
           <Route  path={`${match.path}/staff`} render={ props => <Staff {...this.props } {...props} /> } />
         </Switch>
+        { mobile? <div className="Mobile-Space" style={{ height: '115px'}}></div> : null}
       </Fragment>
     )
   }

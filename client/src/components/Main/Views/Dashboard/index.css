@@ -1,13 +1,21 @@
 .Dashboard {
   height: calc(100% - 75px);
-  background-color: var(--dark-gray);
+  background-color: var(--dark-blue);
   display: grid;
   grid-gap: 10px;
   align-content: start;
   padding-top: 37.5px;
-  color: white;
+  color: #eee;
+  border-bottom: 2px solid var(--dark-blue);
 }
 
 .Dashboard--intro {
   font-size: 40px;
+}
+
+@media (min-width: 750px) {
+  .Dashboard {
+    background-color: var(--dark-gray);
+    color: white;
+  }
 }

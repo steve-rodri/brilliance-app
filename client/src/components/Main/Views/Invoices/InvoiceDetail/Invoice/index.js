@@ -75,7 +75,7 @@ export default class Invoice extends Component {
             </tr>
           </thead>
         )
-      } else {
+      } else if (!mobile){
         return (
           <thead>
             <tr>

@@ -19,7 +19,7 @@ export default function Buttons(props) {
   function editButton(){
     return (
       <div
-        className="Button"
+        className="Button Edit"
         onClick={() => {
           edit()
           scrollToTop()
@@ -93,8 +93,19 @@ export default function Buttons(props) {
       )
     }
   }
+
+  function styleButtons(){
+    let style = {};
+    if (!editMode) {
+      style = {
+        position: 'sticky',
+        bottom: '115px'
+      }
+    }
+    return style
+  }
   return (
-    <div className="Buttons">
+    <div className="Buttons" style={styleButtons()}>
       {displayButtons()}
     </div>
   )
