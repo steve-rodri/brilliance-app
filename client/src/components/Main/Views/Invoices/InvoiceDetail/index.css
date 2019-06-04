@@ -17,6 +17,7 @@
   .InvoiceDetail {
     height: auto;
     display: block;
+    background-color: inherit;
   }
 
   .InvoiceDetail > main {

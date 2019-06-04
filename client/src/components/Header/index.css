@@ -1,6 +1,6 @@
 header {
   height: 75px;
-  width: 100%;
+  width: 100vw;
   position: fixed;
   top: 0;
   display: grid;
@@ -29,9 +29,9 @@ header {
 /*-----------------Logo---------------- */
 .logo {
   justify-self: start;
-  width: 150px;
-  height: 37px;
-  margin-left: 15px;
+  width: 145px;
+  height: 35px;
+  margin-left: 10px;
 }
 
 /*-----------------DropDown-Nav-Menu---------------- */
@@ -41,6 +41,7 @@ header {
   height: calc(100% - 75px);
   display: grid;
   grid-gap: 7.5px;
+  /* align-content: center; */
   align-items: center;
   justify-items: center;
   width: 100vw;
@@ -48,6 +49,7 @@ header {
   padding: 10px 10px 20px 10px;
   overflow: auto;
   transition: all 250ms ease;
+  overscroll-behavior-y: contain;
 }
 
 .Header--nav-menu {

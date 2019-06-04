@@ -9,13 +9,21 @@
   display: none;
   position: absolute;
   left: 50%;
-  width: 275px;
-  margin: 5px 0 0 -137.5px;
+  width: 333px;
+  margin: 5px 0 0 -167px;
   z-index: 99999 !important;
   background: #fff;
   box-shadow: 0 0 2px 1px #999;
   border: 1px solid #f9f9f9;
   border-radius: 5px;
+  color: black;
+}
+
+@media (min-width: 750px) {
+  .rdtPicker {
+    width: 275px;
+    margin: 5px 0 0 -137.5px;
+  }
 }
 .rdtOpen .rdtPicker {
   display: block;
@@ -35,10 +43,20 @@
 }
 .rdtPicker td,
 .rdtPicker th {
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 50px;
   text-align: center;
 }
+
+@media (min-width: 750px) {
+  .rdtPicker td,
+  .rdtPicker th {
+    height: 35px;
+    width: 35px;
+    text-align: center;
+  }
+}
+
 .rdtPicker td {
   cursor: pointer;
 }
@@ -57,7 +75,7 @@
 }
 .rdtPicker td.rdtOld,
 .rdtPicker td.rdtNew {
-  color: #999999;
+  color: #999;
 }
 .rdtPicker td.rdtToday {
   position: relative;
@@ -104,8 +122,8 @@
   width: 14.2857%;
   border-bottom: none;
   cursor: default;
-  font-family: 'Roboto';
   font-size: 15px;
+  font-weight: bold;
 }
 .rdtPicker th.rdtSwitch {
   width: 100px;
@@ -175,6 +193,7 @@ td.rdtYear:hover {
 
 .rdtCounters {
   display: grid;
+  column-gap: 20px;
   grid-auto-flow: column;
   align-items: center;
 }
@@ -207,8 +226,29 @@ td.rdtYear:hover {
   background: #eee;
 }
 
+.rdtCount {
+  font-size: 25px;
+}
+
+@media (min-width: 750px) {
+  .rdtCount {
+    font-size: auto;
+  }
+}
+
 .rdtBtn {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
   padding: 5px;
+  display: grid;
+  align-content: center;
+}
+
+@media (min-width: 750px) {
+  .rdtBtn {
+    padding: 5px;
+  }
 }
 
 .rdtMilli {
