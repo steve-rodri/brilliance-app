@@ -45,7 +45,7 @@ export default class StaffSelector extends Component {
           null
         }
         <main>
-          <label style={{justifySelf: 'start'}}>Labor</label>
+          {employees && labor? <label style={{justifySelf: 'start'}}>Labor</label> : null}
           <div className="StaffSelector--labor">
             {employees && labor.map(employee =>
               <div
@@ -61,7 +61,7 @@ export default class StaffSelector extends Component {
               </div>
             )}
           </div>
-          <label style={{justifySelf: 'start'}}>Non-Labor</label>
+          {employees && nonLabor? <label style={{justifySelf: 'start'}}>Non-Labor</label> : null}
           <div className="StaffSelector--non-labor">
             {employees && nonLabor.map(employee =>
               <div

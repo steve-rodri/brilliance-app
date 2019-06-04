@@ -22,7 +22,7 @@
 .Modal--overlay {
   position: fixed;
   overscroll-behavior-y: contain;
-  height: calc(100vh - 75px - var(--mobile-adj));
+  height: calc(100vh - 75px);
   width: 100%;
   top: 75px;
   left: 0;
@@ -43,6 +43,7 @@
 
 .Modal--content {
   display: grid;
+  grid-template-rows: 1fr auto;
 }
 
 .Modal--close {
@@ -56,4 +57,8 @@
     top: .75%;
     right: 1%;
   }
+}
+
+.Modal--mobile-space {
+  height: var(--mobile-adj);
 }

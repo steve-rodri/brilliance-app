@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { pencilIcon, checkIcon, timesIcon } from '../../../../../../helpers/icons'
 // import { styleConfirmation, changeConfirmation } from '../../../../../../Helpers/eventHelpers'
 import './index.css'
@@ -14,6 +14,7 @@ export default function Header(props){
     handleChange,
     // handleStatusChange,
 
+    back,
     close,
     edit,
     handleSubmit
@@ -146,12 +147,35 @@ export default function Header(props){
 
 //----------------------------------------------------------------------
 
+  function display(){
+    if (mobile && editMode) {
+      return (
+        <Fragment>
+          <div className="EventDetail--back-button" onClick={back}>Back</div>
+          <div className="EventDetail--event-title-container">
+            <h2
+              className="EventDetail--event-title"
+            >
+              Edit Event
+            </h2>
+          </div>
+        </Fragment>
+      )
+    } else {
+      return (
+        <Fragment>
+          {displaySummary()}
+          <div className="EventDetail--header-right">
+            {displayButtons()}
+          </div>
+        </Fragment>
+      )
+    }
+  }
+
   return (
     <div className="EventDetail--header">
-      {displaySummary()}
-      <div className="EventDetail--header-right">
-        {displayButtons()}
-      </div>
+      {display()}
     </div>
   )
 }

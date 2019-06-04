@@ -1,13 +1,34 @@
-.Schedule--event-summary {
-  align-self: end;
+.Schedule--event {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  padding: 5px 10px;
 }
 
-.Schedule--event-time {
-  align-self: start;
+.Schedule--event-summary {
+  justify-self: start;
 }
 
 .Schedule--event-summary > h4 {
   font-weight: 700;
+}
+
+@media (min-width: 750px) {
+  .Schedule--event-summary > h4 {
+    font-size: 1.2em;
+  }
+}
+
+.Schedule--event-time {
+  display: grid;
+  align-items: center;
+  justify-items: start;
+}
+
+.Schedule--event-time-until {
+  grid-column: 2;
 }
 
 .Schedule--notes {
@@ -17,6 +38,8 @@
 .Schedule--confirmation {
   height: 100%;
   width: 100%;
+  max-width: 110px;
+  justify-self: end;
   display: grid;
   align-items: center;
   justify-items: center;

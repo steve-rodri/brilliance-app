@@ -1,7 +1,6 @@
 .EventDetail {
   min-height: calc(100% - 75px);
   display: grid;
-  grid-template-rows: auto 1fr auto;
   background-color: var(--light-gray);
 }
 
@@ -17,5 +16,6 @@
   .EventDetail {
     height: auto;
     display: block;
+    background-color: var(--dark-blue);
   }
 }

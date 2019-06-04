@@ -13,10 +13,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 45px;
+  height: 60px;
   margin: 0 auto;
   border-radius: 5px;
   padding: 5px;
+}
+
+@media (min-width: 750px) {
+  .AddNew {
+    height: 45px;
+  }
 }
 
 .AddNew > * {

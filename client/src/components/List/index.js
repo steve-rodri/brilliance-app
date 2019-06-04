@@ -23,7 +23,16 @@ export default class List extends Component {
   }
 
   render(){
-    const {page, items, view, columnHeaders, load, hasMore, loading } = this.props
+    const {
+      page,
+      items,
+      view,
+      columnHeaders,
+      load,
+      hasMore,
+      loading
+    } = this.props
+
     return (
       <div id="List" className="List" ref={this.container}>
         {columnHeaders && items && items.length && view !== 'Dashboard'?
@@ -58,7 +67,9 @@ export default class List extends Component {
                   null
                   :
                   !loading?
-                    <div className="List--None-Found"><p>None Found</p></div>
+                    <div className="List--None-Found">
+                      <h3 style={{fontWeight: 'bold'}}>{`No ${view}...`}</h3>
+                    </div>
                     :
                     <Loader />
                 }

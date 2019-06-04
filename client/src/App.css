@@ -4,7 +4,6 @@
 }
 
 .App {
-  width: 100vw;
   position: relative;
   text-align: center;
 }
@@ -35,12 +34,18 @@ h2 {
   font-size: 1.4em;
 }
 
-h3, input, textarea, select {
-  font-size: 1.2em;
+h3, input, select {
+  font-size: 1.4em;
 }
 
-h4, p {
+h4, p, textarea {
   font-size: 1em;
+}
+
+@media (min-width: 750px) {
+  h3, input, textarea, select {
+    font-size: 1.2em;
+  }
 }
 
 h5, label {
@@ -137,7 +142,7 @@ select {
   position: relative;
   width: 100%;
   min-width: 100px;
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;

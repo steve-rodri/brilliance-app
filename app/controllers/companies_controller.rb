@@ -26,7 +26,7 @@ class CompaniesController < ApplicationController
         .left_outer_joins(:client)
         .where(query)
 
-      render json: @companies, root: 'companies', meta: { count: count }, include: '**'
+      render json: @companies, root: 'companies', meta: { count: count }
     else
       @companies = Company.all
       render json: @companies
@@ -43,7 +43,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      render json: @company, status: :created, location: @company, include: '**'
+      render json: @company, status: :created, location: @company
     else
       render json: @company.errors, status: :unprocessable_entity
     end
@@ -52,7 +52,7 @@ class CompaniesController < ApplicationController
   # PATCH/PUT /companies/1
   def update
     if @company.update(company_params)
-      render json: @company, include: '**'
+      render json: @company
     else
       render json: @company.errors, status: :unprocessable_entity
     end
@@ -71,6 +71,6 @@ class CompaniesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def company_params
-      params.require(:company).permit(:Name, :Logo, :Website, :Phone_Number)
+      params.require(:company).permit(:name, :logo, :website, :phone_number)
     end
 end

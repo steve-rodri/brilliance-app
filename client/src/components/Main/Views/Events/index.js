@@ -41,6 +41,14 @@ export default class Events extends Component {
         this.ajaxOptions.sendCount = true
       }
     }
+
+    if (prevState.events.length !== this.state.events.length) {
+      if (!this.state.events.length) {
+        this.setState({
+          count: 0
+        })
+      }
+    }
   }
 
   async componentDidMount() {

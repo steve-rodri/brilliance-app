@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import List from '../List/'
+import AddNew from '../Buttons/AddNew'
 import NavSection from '../NavSection'
 import './index.css'
 
@@ -27,17 +28,37 @@ export default class ListPage extends Component {
   }
 
   styleList = () => {
-    const { data } = this.props
+    const { data, mobile } = this.props
     if (data && data.length) {
       return {}
+    } else if (mobile) {
+      return { justifyContent: 'center', height: 'calc(100vh - 175px - var(--mobile-adj))'}
     } else {
       return { justifyContent: 'center', height: 'calc(100vh - 155px)'}
     }
   }
 
+  styleMain = () => {
+    const { data } = this.props
+    if (data && data.length) {
+      return {}
+    } else {
+      return {
+        gridTemplateRows: "40px 1fr auto"
+      }
+    }
+  }
+
   render(){
-    const { view, mainHeader, data, count, mobile } = this.props
-    const singular = view? view.split('').splice(0, view.length - 1).join('') : null
+    const {
+      user: { accessLevel },
+      view,
+      singularView: singular,
+      mainHeader,
+      data,
+      count,
+      mobile
+    } = this.props
 
     return (
       <div className='ListPage'>
@@ -51,7 +72,7 @@ export default class ListPage extends Component {
           null
         }
 
-        <main>
+        <main style={this.styleMain()}>
           <div
             className="ListPage--category-title-container"
           >
@@ -69,7 +90,14 @@ export default class ListPage extends Component {
           <div className="ListPage--end-message">
             {
               count?
-              <h4>{`${count} ${count > 1? view : singular}`}</h4>
+              <h4>{`${count} ${count > 1? view : singular()}`}</h4>
+              :
+              mobile?
+              <AddNew
+                style={{alignSelf: 'end'}}
+                linkPath={`${accessLevel}/${view}/new`}
+                type={singular()}
+              />
               :
               null
             }
