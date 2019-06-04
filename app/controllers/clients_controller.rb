@@ -262,7 +262,7 @@ class ClientsController < ApplicationController
 
 
     if @client.save
-      render json: @client, status: :created, location: @client
+      render json: @client, status: :created, location: @client, include: '**'
     else
       render json: @client.errors, status: :unprocessable_entity
     end
@@ -271,7 +271,7 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   def update
     if @client.update(client_params)
-      render json: @client
+      render json: @client, include: '**'
     else
       render json: @client.errors, status: :unprocessable_entity
     end

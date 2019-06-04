@@ -5,7 +5,7 @@ export default function Bars(props){
   function styleFirst(){
     if (props.open) {
       return {
-        transform: 'translateY(15px) rotate(45deg)',
+        transform: 'translateY(16.25px) rotate(45deg)',
         transition: 'all 200ms ease',
       }
     } else {
@@ -27,7 +27,18 @@ export default function Bars(props){
   function styleThird(){
     if (props.open) {
       return {
-        transform: 'translateY(-15px) rotate(-45deg)',
+        opacity: '0',
+        transition: 'all 200ms ease',
+      }
+    } else {
+      return {}
+    }
+  }
+
+  function styleFourth(){
+    if (props.open) {
+      return {
+        transform: 'translateY(-16.25px) rotate(-45deg)',
         transition: 'all 200ms ease',
       }
     } else {
@@ -41,6 +52,7 @@ export default function Bars(props){
         <div className="first" style={styleFirst()}></div>
         <div className="second" style={styleSecond()}></div>
         <div className="third" style={styleThird()}></div>
+        <div className="fourth" style={styleFourth()}></div>
       </div>
     </div>
   )

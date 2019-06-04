@@ -1,6 +1,5 @@
 .NavSection {
   display: grid;
-  grid-template-rows: auto auto 1fr;
   grid-gap: 20px;
   justify-items: center;
   align-self: start;

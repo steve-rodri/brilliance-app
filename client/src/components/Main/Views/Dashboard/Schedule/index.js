@@ -39,20 +39,9 @@ export default class Schedule extends Component {
   }
 
   updateColumnHeaders = (e) => {
-    const width = window.innerWidth
-    if (width < 500) {
-      this.setState({
-        columnHeaders: ['event', 'event', 'event', 'confirmation']
-      })
-    } else if (width < 700) {
-      this.setState({
-        columnHeaders: ['time until', 'event', 'event', 'confirmation']
-      })
-    } else {
-      this.setState({
-        columnHeaders: ['time until', 'event', 'event', 'notes', 'confirmation']
-      })
-    }
+    this.setState({
+      columnHeaders: ['event', 'event', 'event', 'confirmation']
+    })
   }
 
   findAllUserEvents = async() => {
@@ -107,14 +96,12 @@ export default class Schedule extends Component {
       return (
         <Fragment>
           <p>{`You are currently scheduled on ${userEvents.length} events.`}</p>
-          {/* <p>{'Please confirm if you will be able to work by clicking/tapping on the confirmation button'}</p> */}
         </Fragment>
       )
     } else {
       return (
         <Fragment>
           <p>{`You are currently scheduled on 1 event.`}</p>
-          {/* <p>{'Please confirm if you will be able to work by clicking/tapping on the confirmation button'}</p> */}
         </Fragment>
       )
     }
@@ -140,7 +127,7 @@ export default class Schedule extends Component {
 
           :
 
-          <p className="Schedule--not-currently">Not currently scheduled...</p>
+          <p className="Schedule--not-currently">You are not currently scheduled on any events at this time...</p>
 
         }
       </Fragment>

@@ -46,7 +46,7 @@ export default class Body extends Component {
   }
 
   render(){
-    const { evt, mobile, editMode, fields, isNew } = this.props;
+    const { evt, editMode, fields, isNew } = this.props;
     const about = fields &&
     (fields.client || fields.location || date(fields) || time(fields));
 
@@ -59,13 +59,11 @@ export default class Body extends Component {
           {
             about?
             <div className="EventDetail-Body--components" style={this.styleComponents()}>
-                <About {...this.props} styleComp={this.styleComp}/>
-              {
-                mobile?
-                null
-                :
-                <Logistics {...this.props} styleComp={this.styleComp}/>
-              }
+
+              <About {...this.props} styleComp={this.styleComp}/>
+
+              <Logistics {...this.props} styleComp={this.styleComp}/>
+
               {
                 showStaff?
                 <Staff {...this.props} styleComp={this.styleComp}/>
@@ -73,14 +71,14 @@ export default class Body extends Component {
                 null
               }
               {
-                editMode || !isNullOrWhitespace(fields.notes)?
-                <Notes {...this.props} styleComp={this.styleComp}/>
+                showInvoice?
+                <Invoice {...this.props} styleComp={this.styleComp}/>
                 :
                 null
               }
               {
-                showInvoice?
-                <Invoice {...this.props} styleComp={this.styleComp}/>
+                editMode || !isNullOrWhitespace(fields.notes)?
+                <Notes {...this.props} styleComp={this.styleComp}/>
                 :
                 null
               }
