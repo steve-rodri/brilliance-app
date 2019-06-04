@@ -172,20 +172,54 @@ export default class InvoiceDetail extends Component {
 
     balance = total - deposit
 
-    this.setState(prevState => ({
-      inv: {
-        ...prevState.inv,
-        subTotal,
-        total,
-        balance
-      },
-      formData: {
-        ...prevState.formData,
-        sub_total: subTotal,
-        total,
-        balance
+
+    this.setState(prevState => {
+      const state = {
+        inv: {
+          ...prevState.inv,
+          subTotal,
+          total,
+          balance
+        },
+        formData: {
+          ...prevState.formData,
+          sub_total: subTotal,
+          total,
+          balance
+        }
       }
-    }))
+      const paidOrRefunded = (inv.paymentStatus === 'Paid In Full' ||
+      inv.paymentStatus === 'Partially Refunded' ||
+      inv.paymentStatus === 'Fully Refunded')
+
+      if ( deposit && !paidOrRefunded ) {
+        return {
+          inv: {
+            ...prevState.inv,
+            ...state.inv,
+            paymentStatus: 'Outstanding Balance'
+          },
+          formData: {
+            ...prevState.formData,
+            ...state.formData,
+            payment_status: 'Outstanding Balance'
+          },
+        }
+      } else if ( !deposit && !paidOrRefunded ){
+        return {
+          inv: {
+            ...prevState.inv,
+            ...state.inv,
+            paymentStatus: 'Not Paid'
+          },
+          formData: {
+            ...prevState.formData,
+            ...state.formData,
+            payment_status: 'Not Paid'
+          },
+        }
+      }
+    })
   }
 
   updateSummary = async() => await this.setSummary()
@@ -513,17 +547,17 @@ export default class InvoiceDetail extends Component {
             inv: {
               ...prevState.inv,
               [name]: value,
-              balance: prevState.inv.total - parseInt(value)
+              balance: prevState.inv.total - parseInt(val)
             },
             fields: {
               ...prevState.fields,
               [name]: value,
-              balance: prevState.fields.total - parseInt(value)
+              balance: prevState.fields.total - parseInt(val)
             },
             formData: {
               ...prevState.formData,
               [name]: value,
-              balance: prevState.formData.total - parseInt(value)
+              balance: prevState.formData.total - parseInt(val)
             }
           }))
           break;
