@@ -93,11 +93,13 @@ export default class ListPage extends Component {
               <h4>{`${count} ${count > 1? view : singular()}`}</h4>
               :
               mobile?
-              <AddNew
-                style={{alignSelf: 'end'}}
-                linkPath={`${accessLevel}/${view}/new`}
-                type={singular()}
-              />
+              <div>
+                <AddNew
+                  style={{alignSelf: 'end'}}
+                  linkPath={`/${accessLevel}/${view.toLowerCase()}/new`}
+                  type={singular()}
+                />
+              </div>
               :
               null
             }
