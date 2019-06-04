@@ -4,7 +4,7 @@ import './index.css'
 
 export default class Modal extends Component {
   render(){
-    const { close, closeIconColor, content } = this.props
+    const { close, closeIconColor, content, mobile } = this.props
     const styleCloseIcon = () => {
       let style = {}
       if (closeIconColor) style.color = closeIconColor
@@ -16,6 +16,7 @@ export default class Modal extends Component {
           <div onClick={close} style={styleCloseIcon()} className="Modal--close">{timesIcon('2x')}</div>
           <div className="Modal--content" onClick={e => e.stopPropagation()}>
             {content}
+            {mobile? <div className="Modal--mobile-space"></div> : null}
           </div>
         </div>
 

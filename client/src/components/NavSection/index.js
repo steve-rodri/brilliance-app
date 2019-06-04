@@ -35,6 +35,7 @@ export default class NavSection extends Component {
       mobile,
       title,
       view,
+      singularView: singular,
       categories,
       date,
       isDay,
@@ -44,7 +45,6 @@ export default class NavSection extends Component {
       changeNav,
       onDateChange
     } = this.props
-    const singular = view? view.split('').splice(0, view.length - 1).join('') : null
     return (
       <div className="NavSection">
         {/* Title */}
@@ -119,7 +119,7 @@ export default class NavSection extends Component {
           <AddNew
             linkPath={this.linkPath()}
             className="NavSection--button"
-            type={singular}
+            type={singular()}
           />
           :
           null

@@ -143,6 +143,12 @@ export default class Main extends Component {
 
   camelToSnakeCase = str => str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
+  singularView = () => {
+    const { view } = this.state
+    if (view) return view.split('').splice(0, view.length - 1).join('')
+    return ''
+  }
+
   render(){
     return(
       <div className="App">
@@ -165,6 +171,7 @@ export default class Main extends Component {
             syncAllEvents={this.synchronizeAllEvents}
 
             camelToSnake={this.camelToSnakeCase}
+            singularView={this.singularView}
           />
         </Switch>
       </div>

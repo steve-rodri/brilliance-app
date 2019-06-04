@@ -38,9 +38,8 @@
 
 .List--None-Found {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #eeeeee;
+  /* background-color: var(--light-gray); */
+  color: #eee;
+  display: grid;
+  padding: 20px;
 }

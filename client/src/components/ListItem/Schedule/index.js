@@ -8,10 +8,8 @@ import './index.css'
 export default function Schedule(props){
   const {
     user,
-    mobile,
     item,
     view,
-    timeUntil,
     displayColumn,
     styleItem,
     styleCell,
@@ -22,11 +20,8 @@ export default function Schedule(props){
   = props
 
   const leftCell = styleCell('left', item)
-  const middleCell = styleCell('middle', item)
   const rightCell = styleCell('right', item)
-  const timeUntilDisplay = displayColumn('time until')
   const eventDisplay = displayColumn('event')
-  const notesDisplay = displayColumn('notes')
   const confirmationDisplay = displayColumn('confirmation')
 
   const currentUser = item.staff.find( worker => {
@@ -39,24 +34,18 @@ export default function Schedule(props){
     <Link to={`${accessLevel}/events/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
       <div className="List-Item" style={styleItem(item, view)}>
 
-        {/* Time Until */}
-        <div className="List-Item--Cell" style={{ ...timeUntilDisplay, ...leftCell }}>
-          <p>{item && timeUntil}</p>
-        </div>
-
         {/* Event */}
         <div className="List-Item--Cell" style={{ ...eventDisplay, ...leftCell }}>
-          <div className="Event--summary">{summary()}</div>
-          {mobile? <p>{item && timeUntil}</p> : null}
-          <div className="Event--time">
-            <p>{date(item, true, true)}</p>
-            <p>{time(item)}</p>
+          <div className="Schedule--event">
+            <div className="Schedule--event-summary">{summary()}</div>
+            {/* <div className="Schedule--event-time-until">
+              <p>{item && timeUntil}</p>
+            </div> */}
+            <div className="Schedule--event-time">
+              <p>{date(item, true, true)}</p>
+              <p>{time(item)}</p>
+            </div>
           </div>
-        </div>
-
-        {/* Notes */}
-        <div className="List-Item--Cell" style={{ ...notesDisplay, ...middleCell }}>
-          <p className="Schedule--notes">{item && item.notes}</p>
         </div>
 
         {/* Confirmation */}

@@ -86,8 +86,7 @@ export default class Invoice extends Component {
       } else {
         return(
           <div className="Event-Invoice--no-invoice">
-            <p>There is no Invoice associated with this Event.</p>
-            <p>Add one below...</p>
+            <p>There is no Invoice created for this Job.</p>
             <Link to={addNewPath()}>Create Invoice</Link>
           </div>
         )

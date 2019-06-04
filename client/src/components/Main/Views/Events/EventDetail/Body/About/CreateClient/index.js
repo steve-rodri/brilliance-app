@@ -111,10 +111,6 @@ export default class CreateClient extends Component {
       data.company_id = newCompany.id
     }
 
-    if (true) {
-
-    }
-
     if (Object.keys(data).length) await createClient(data)
     close()
   }
@@ -229,8 +225,7 @@ export default class CreateClient extends Component {
   }
 
   render (){
-    const { formData:{ contact, company }, searchResults: { contacts: contactData, companies: companyData } } = this.state
-    const searchResults = contactData.count || companyData.count
+    const { formData:{ contact, company } } = this.state
     const noFormData = !Object.keys(contact).length && !Object.keys(company).length
     return (
       <div className="CreateClient">
@@ -240,17 +235,14 @@ export default class CreateClient extends Component {
         </div>
         <div className="CreateClient--footer">
           {
-            !searchResults?
-              noFormData?
-              <div onClick={this.props.close}>
-                <p>Cancel</p>
-              </div>
-              :
-              <div onClick={this.handleSubmit}>
-                <p>CREATE</p>
-              </div>
+            noFormData?
+            <div className="CreateClient--button" onClick={this.props.close}>
+              <p>Cancel</p>
+            </div>
             :
-            null
+            <div className="CreateClient--button" onClick={this.handleSubmit}>
+              <p>CREATE</p>
+            </div>
           }
         </div>
       </div>

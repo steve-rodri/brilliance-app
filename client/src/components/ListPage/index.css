@@ -33,7 +33,6 @@
 /* -----------------Main---------------- */
 
 .ListPage > main {
-  height: 100%;
   display: grid;
   grid-template-rows: 40px auto 40px;
   align-content: start;
@@ -82,10 +81,8 @@
 
 .ListPage--end-message {
   height: 100%;
-  position: sticky;
-  bottom: 115px;
-  display: flex;
-  justify-content: center;
+  padding: 0 20px;
+  display: grid;
   align-items: center;
   background-color: var(--dark-blue);
   color: #eeeeee;

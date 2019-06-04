@@ -885,28 +885,23 @@ export default class EventDetail extends Component {
 // -----------------------------------Render------------------------------------
 
   render(){
-    const { editMode} = this.state
     const { user: { accessLevel }, mobile } = this.props
     if (this.state.redirectToEvents) return (<Redirect to={`/${accessLevel}/events`}/>)
     return (
       <div className="EventDetail" ref={this.container}>
 
-        {
-          mobile && editMode?
-          null
-          :
-          <Header
-            {...this.state}
-            {...this.props}
+        <Header
+          {...this.state}
+          {...this.props}
 
-            edit={this.switchEditMode}
-            close={this.close}
-            delete={this.handleDelete}
+          edit={this.switchEditMode}
+          close={this.close}
+          delete={this.handleDelete}
+          back={this.switchEditMode}
 
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-          />
-        }
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+        />
 
         <Body
           {...this.state}
@@ -954,13 +949,13 @@ export default class EventDetail extends Component {
         {
           this.state.showStaffModal?
           <Modal
+            mobile={this.props.mobile}
             close={this.closeStaffModal}
             content={
               <StaffSelector
                 {...this.props}
                 close={this.closeStaffModal}
                 workers={this.state.workers}
-                employees={this.state.employees}
                 handleEmployeeSelect={this.handleEmployeeSelect}
               />
             }
@@ -972,6 +967,7 @@ export default class EventDetail extends Component {
         {
           this.state.showCreateClientModal?
           <Modal
+            mobile={this.props.mobile}
             close={this.closeCreateClientModal}
             content={
               <CreateClient
