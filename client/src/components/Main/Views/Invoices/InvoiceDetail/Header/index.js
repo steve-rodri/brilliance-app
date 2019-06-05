@@ -51,7 +51,7 @@ export default function Header(props){
       }
 
       return (
-        <div className="InvoiceDetail-header--title" style={!mobile && c && e? {gridTemplateColumns: "1fr auto 1fr"} : {gridTemplateColumns: "auto"}}>
+        <div className="InvoiceDetail-header--title" style={!mobile && c && e? {gridTemplateColumns: "1fr auto .7fr"} : {gridTemplateColumns: "auto"}}>
           {c? <h2 className="InvoiceDetail-header--client" style={!mobile && c && e? {justifySelf: "right"} : {justifySelf: "center"}}>{clientName(c, {oneLine: true})}</h2> : null}
           {!mobile && c && e? <div className="InvoiceDetail-header--client-date-seperator"></div> : null}
           {e? <h2 className="InvoiceDetail-header--date" style={!mobile && c && e? {justifySelf: "left"} : {justifySelf: "center"}}>{moment(e.start).format('MMMM Do YYYY')}</h2> : null}
