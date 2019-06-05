@@ -46,8 +46,8 @@ export default class SearchField extends Component {
 
     if (Array.isArray(searchResults)) {
       if (!searchResults.length) {
-        style.height = '50px'
-        style.marginTop = "45px"
+        style.height = '60px'
+        style.marginTop = "60px"
       }
     } else if (searchResults){
       let resultCount = 0
