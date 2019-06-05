@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import List from '../../../../List/index.js'
+import List from '../../../../List/'
+import Loader from '../../../../Loader'
 import { event } from '../../../../../services/BEP_APIcalls.js'
+import { GOOGLE } from '../../../../../services/google_service'
+import { formatToGoogle, formatFromGoogle } from '../../../../../helpers/googleFormatters'
 import { start, end } from '../../../../../helpers/datetime'
+import { changeWorkerStatus } from '../../../../../helpers/eventHelpers'
 import moment from 'moment'
 import axios from 'axios'
 import './Schedule.css'
@@ -45,6 +49,7 @@ export default class Schedule extends Component {
   }
 
   findAllUserEvents = async() => {
+    this.props.setLoadingState(true)
     const { page } = this.state
     const { user } = this.props
     if (user) {
@@ -54,26 +59,31 @@ export default class Schedule extends Component {
   }
 
   findUpcomingUserEvents = async() => {
+    this.props.setLoadingState(true)
     const userEvents = await this.findAllUserEvents();
-    if (userEvents) {
-      const upcomingEvents = userEvents.filter( evt => {
-        const now = moment()
-        return (
-          start(evt)
-          &&
-          (
-            moment(start(evt)).isSameOrAfter(now)
-            ||
-            now.isSameOrBefore(end(evt))
-          )
+    if (!userEvents) {
+      this.props.setLoadingState(false);
+      return;
+    };
+    const upcomingEvents = userEvents.filter( evt => {
+      const now = moment()
+      return (
+        start(evt)
+        &&
+        (
+          moment(start(evt)).isSameOrAfter(now)
+          ||
+          now.isSameOrBefore(end(evt))
         )
-      })
-      if (upcomingEvents.length > 0) {
-        upcomingEvents.reverse()
-        this.setState({ userEvents: upcomingEvents })
-      }
-      this.incrementPage()
+      )
+    })
+    if (upcomingEvents.length > 0) {
+      upcomingEvents.reverse()
+      const uEvents = await Promise.all(upcomingEvents.map( async evt => await this.syncWithGoogle(evt)))
+      this.setState({ userEvents: uEvents })
     }
+    this.incrementPage()
+    this.props.setLoadingState(false)
   }
 
   resetUserEvents = () => {
@@ -107,29 +117,93 @@ export default class Schedule extends Component {
     }
   }
 
+  changeConfirmation = async (eventId, currentUserId) => {
+    const { userEvents } = this.state;
+    userEvents.map( async evt => {
+      if (evt.id !== eventId) return evt;
+      const updatedStaff = evt.staff.map( worker => {
+        if (worker.id !== currentUserId) return worker;
+        let updatedWorker = {
+          ...worker,
+          confirmation: changeWorkerStatus(worker.confirmation)
+        }
+        return updatedWorker
+      })
+      const updatedEvt = {
+        ...evt,
+        staff: updatedStaff
+      }
+      const test = await this.updateEvent(updatedEvt, { event_employees_attributes: updatedStaff })
+      console.log(test)
+      return updatedEvt
+    })
+  }
+
+  updateEvent = async(e, data) => {
+    if (!e) return;
+    const calendarId = localStorage.getItem('google_calendar_id')
+    const { signout } = this.props
+    let updatedEvent = e;
+    if (data) updatedEvent = await event.update(e.id, data, this.ajaxOptions)
+    if (!calendarId) return updatedEvent;
+    let googleEvent, formatted;
+    if (e.gcId) {
+      googleEvent = await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent), this.ajaxOptions)
+    }
+    if (!e.gcId) {
+      googleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.ajaxOptions)
+    }
+    formatted = await formatFromGoogle(googleEvent, this.axiosRequestSource.token, signout)
+    let newData = { ...data, ...formatted }
+    if (newData.event_employees_attributes) {
+      const updateStaff = newData.event_employees_attributes.filter(ee => {
+        if (newData.employee_ids && newData.employee_ids.length) {
+          return newData.employee_ids.find(id => ee.employee_id !== id)
+        } else {
+          return 1
+        }
+      })
+      newData.event_employees_attributes = updateStaff
+    }
+    updatedEvent = await event.update(e.id, newData, this.ajaxOptions)
+  }
+
+  syncWithGoogle = async (evt) => {
+    const calendarId = localStorage.getItem('google_calendar_id')
+    if (calendarId && evt.gcId) {
+      const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.ajaxOptions)
+      const formatted = await formatFromGoogle(e, this.ajaxOptions)
+      const synced = await event.sync(formatted, this.ajaxOptions)
+      return synced
+    }
+  }
+
   render(){
     const { userEvents } = this.state
+    const { loading } = this.props
     return (
       <Fragment>
+        <div className="Schedule--container">
         {
-          userEvents && userEvents.length?
-
-          <div className="Schedule--container">
-            <div className='Schedule--dialog'>{this.dialog()}</div>
-            <List
-              {...this.state}
-              {...this.props}
-              items={userEvents}
-              load={this.findUpcomingUserEvents}
-              hasMore={false}
-            />
-          </div>
-
+          !loading?
+            userEvents && userEvents.length?
+              <Fragment>
+                <div className='Schedule--dialog'>{this.dialog()}</div>
+                <List
+                  {...this.state}
+                  {...this.props}
+                  items={userEvents}
+                  load={this.findUpcomingUserEvents}
+                  hasMore={false}
+                  changeConfirmation={this.changeConfirmation}
+                />
+              </Fragment>
+            :
+            <p className="Schedule--not-currently">You are not currently scheduled on any events at this time...</p>
           :
-
-          <p className="Schedule--not-currently">You are not currently scheduled on any events at this time...</p>
-
+          <Loader/>
         }
+        </div>
       </Fragment>
     )
   }

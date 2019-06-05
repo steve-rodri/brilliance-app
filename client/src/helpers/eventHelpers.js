@@ -219,3 +219,28 @@ export function styleWorkerStatus(confirmation){
   }
   return style;
 }
+
+export function changeWorkerStatus(confirmation){
+  switch (confirmation) {
+    case 'needsAction':
+      return 'accepted'
+
+    case 'Unconfirmed':
+      return 'accepted'
+
+    case 'accepted':
+      return 'declined'
+
+    case 'Confirmed':
+      return 'declined'
+
+    case 'tentative':
+      return 'accepted'
+
+    case 'declined':
+      return 'tentative'
+      
+    default:
+    break;
+  }
+}
