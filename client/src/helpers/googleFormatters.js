@@ -7,7 +7,7 @@ const spacer = '***************************************';
 
 //--------------Format FROM Google----------------------
 
-async function formatFromGoogle(evt, options){
+export async function formatFromGoogle(evt, options){
   if (evt) {
     const workers = await attendees(evt, options);
     const eCreator = await creator(evt, options);
@@ -154,7 +154,7 @@ function description(evt){
 
 // ------------Format TO Google -----------------------
 
-function formatToGoogle(evt){
+export function formatToGoogle(evt){
   if (evt) {
     const status = confirmation(evt.confirmation);
     const description = notes(evt);
@@ -171,7 +171,13 @@ function formatToGoogle(evt){
       data.location = location
     }
 
-    if (evt.start) {
+    if (evt.start && evt.callTime) {
+      if (moment(evt.callTime).isBefore(moment(evt.start))) {
+        data.start = { dateTime: moment(evt.callTime).format() }
+      } else {
+        data.start = { dateTime: moment(evt.start).format() }
+      }
+    } else if (evt.start) {
       data.start = { dateTime: moment(evt.start).format() }
     }
 
@@ -257,9 +263,4 @@ function staff(eventEmployees){
   } else {
     return []
   }
-}
-
-export {
-  formatToGoogle,
-  formatFromGoogle
 }
