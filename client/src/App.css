@@ -88,6 +88,22 @@ input {
   font-family: 'Roboto', sans-serif;
 }
 
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="file"],
+input[type="image"],
+input[type="password"],
+input[type="search"],
+input[type="color"],
+textarea,
+select {
+  -webkit-appearance: none;
+}
+
 input:focus, select:focus {
   box-shadow: 0 0 2px 2px var(--light-blue);
   border: 1px solid var(--light-blue);
@@ -95,12 +111,12 @@ input:focus, select:focus {
 }
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type="number"] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 select {
