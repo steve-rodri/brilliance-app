@@ -1,0 +1,47 @@
+.SendUpdates {
+  display: grid;
+  grid: auto 1fr / auto;
+}
+
+.SendUpdates--header {
+  height: 75px;
+  background-color: var(--darker-blue);
+  color: #eee;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.SendUpdates--content {
+  display: grid;
+  align-content: center;
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.SendUpdates--dialog {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.SendUpdates--buttons {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  grid-gap: 20px;
+  align-items: center;
+}
+
+.SendUpdates--buttons > button {
+  height: 60px;
+  width: 150px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+@media (min-width: 750px) {
+  .SendUpdates--buttons > button {
+    width: 200px;
+  }
+}

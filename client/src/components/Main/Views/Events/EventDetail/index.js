@@ -6,6 +6,7 @@ import Buttons from '../../../../Buttons/Buttons'
 import Modal from '../../../../Modal';
 import StaffSelector from './Body/Staff/StaffSelector'
 import CreateClient from './Body/About/CreateClient/'
+import SendUpdates from './SendUpdates/';
 import { GOOGLE } from '../../../../../services/google_service';
 import { event, client, place, eventEmployee } from '../../../../../services/BEP_APIcalls.js';
 import { eventTitle } from '../../../../../helpers/eventHelpers';
@@ -150,13 +151,13 @@ export default class EventDetail extends Component {
   setClientName = (clt) => {
     const { evt } = this.state
     if (clt) {
-      const name = clientName(clt, { oneLine: true })
+      const name = clientName(clt)
       this.setField('client', name)
       this.setFormData('client_id', clt.id)
     }
     if (evt && !clt) {
       if (evt.client) {
-        const name = clientName(evt.client, { oneLine: true })
+        const name = clientName(evt.client)
         this.setField('client', name)
         this.setFormData('client_id', evt.client.id)
       } else {
@@ -454,7 +455,7 @@ export default class EventDetail extends Component {
         ...prevState.formData,
         [name]: value
       }
-    }), async() => await this.handleSubmit(true))
+    }), async() => await this.handleSubmit({ stayOpen: true }))
   }
 
   handleSearchChange = async(name, value) => {
@@ -562,7 +563,7 @@ export default class EventDetail extends Component {
 
         case 'client':
           item = searchFieldData.clients[index]
-          const client = clientName(item, {oneLine: true});
+          const client = clientName(item);
           if (item) {
             this.setState(prevState => ({
               formData: {
@@ -799,18 +800,19 @@ export default class EventDetail extends Component {
 
 // ----------------------------------DB-CRUD------------------------------------
 
-  handleSubmit = async(stayOpen) => {
+  handleSubmit = async(options) => {
     const { evt, formData } = this.state
+    const { stayOpen, sendUpdates } = options
     const { isNew, history, user: { accessLevel } } = this.props
     if (isNew) {
       if (formData) {
-        const newEvt = await this.props.handleCreate(formData);
+        const newEvt = await this.props.handleCreate(formData, sendUpdates);
         if (newEvt) history.push(`${accessLevel}/events/${newEvt.id}`)
       } else {
         this.close()
       }
     } else {
-      const updatedEvent = await this.props.handleUpdate(evt, formData)
+      const updatedEvent = await this.props.handleUpdate(evt, formData, sendUpdates)
       await this.setState({ evt: updatedEvent })
 
       if (!stayOpen) await this.close()
@@ -829,6 +831,7 @@ export default class EventDetail extends Component {
     this.resetForm();
     this.resetSearchFieldData();
     this.resetStaff();
+    this.closeSubmitModal();
     this.switchEditMode();
     await this.initialSetup()
   }
@@ -849,12 +852,12 @@ export default class EventDetail extends Component {
 // -----------------------------------Modals------------------------------------
 
   openStaffModal = () => {
-  this.setState({ showStaffModal: true })
-}
+    this.setState({ showStaffModal: true })
+  }
 
   closeStaffModal = () => {
-  this.setState({ showStaffModal: false })
-}
+    this.setState({ showStaffModal: false })
+  }
 
   openCreateClientModal = () => {
     this.setState({ showCreateClientModal: true })
@@ -862,6 +865,22 @@ export default class EventDetail extends Component {
 
   closeCreateClientModal = () => {
     this.setState({ showCreateClientModal: false })
+  }
+
+  openSubmitModal = () => {
+    this.setState({ showSubmitModal: true })
+  }
+
+  closeSubmitModal = () => {
+    this.setState({ showSubmitModal: false })
+  }
+
+  openDeleteModal = () => {
+    this.setState({ showDeleteModal: true })
+  }
+
+  closeDeleteModal = () => {
+    this.setState({ showDeleteModal: false })
   }
 
 // -----------------------------------Styles------------------------------------
@@ -899,7 +918,7 @@ export default class EventDetail extends Component {
           delete={this.handleDelete}
           back={this.switchEditMode}
 
-          handleSubmit={this.handleSubmit}
+          handleSubmit={this.openSubmitModal}
           handleChange={this.handleChange}
         />
 
@@ -910,7 +929,7 @@ export default class EventDetail extends Component {
           edit={this.switchEditMode}
           close={this.close}
           delete={this.handleDelete}
-          submit={this.handleSubmit}
+          submit={this.openSubmitModal}
 
           handleChange={this.handleChange}
           handleStatusChange={this.handleStatusChange}
@@ -938,7 +957,7 @@ export default class EventDetail extends Component {
             {...this.props}
             {...this.state}
             edit={this.switchEditMode}
-            submit={() => this.handleSubmit()}
+            submit={this.openSubmitModal}
             scrollToTop={this.scrollToTop}
             handleStatusChange={this.handleStatusChange}
           />
@@ -981,6 +1000,33 @@ export default class EventDetail extends Component {
           :
           null
         }
+
+        {
+          this.state.showSubmitModal?
+          <Modal
+            mobile={this.props.mobile}
+            close={this.closeSubmitModal}
+            content={
+              <SendUpdates
+                onSubmit={this.handleSubmit}
+              />
+            }
+          />
+          :
+          null
+        }
+
+        {
+          this.state.showDeleteModal?
+          <Modal
+            mobile={this.props.mobile}
+            close={this.closeDeleteModal}
+            content
+          />
+          :
+          null
+        }
+
       </div>
     )
   }
