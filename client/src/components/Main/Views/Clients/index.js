@@ -4,7 +4,6 @@ import queryString from 'query-string'
 import ListPage from '../../../ListPage/index.js'
 import Modal from './Modal';
 import { client } from '../../../../services/BEP_APIcalls.js'
-import { clientName } from '../../../../helpers/clientHelpers'
 import axios from 'axios'
 
 export default class Clients extends Component {
@@ -167,15 +166,6 @@ export default class Clients extends Component {
     clients.push(newClient)
     this.setState({ clients })
     await this.refreshClients()
-  }
-
-  sortClients = (clients) => {
-    clients.sort((cltOne, cltTwo) => {
-      if ( clientName(cltOne) < clientName(cltTwo) ) { return -1;}
-      if ( clientName(cltOne) > clientName(cltTwo) ) { return 1;}
-      return 0;
-    })
-    return clients
   }
 
   createClient = async(data) => {

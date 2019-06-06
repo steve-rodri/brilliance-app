@@ -39,15 +39,18 @@ export default class SearchField extends Component {
 
   displayResults = () => {
     const { fieldActive  } = this.state
-    const { searchResults } = this.props
+    const { searchResults, mobile } = this.props
     let style = { display: 'none'}
 
     if (fieldActive) style.display = 'block'
 
     if (Array.isArray(searchResults)) {
-      if (!searchResults.length) {
+      if (!searchResults.length && mobile) {
         style.height = '60px'
         style.marginTop = "60px"
+      } else if(!searchResults.length){
+        style.height = '50px'
+        style.marginTop = "45px"
       }
     } else if (searchResults){
       let resultCount = 0

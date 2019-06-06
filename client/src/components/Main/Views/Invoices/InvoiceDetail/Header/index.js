@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { pencilIcon, checkIcon, timesIcon } from '../../../../../../helpers/icons'
-import { clientName } from '../../../../../../helpers/clientHelpers'
+import { clientDisplay } from '../../../../../../helpers/clientHelpers'
 import moment from 'moment'
 import './index.css'
 
@@ -52,7 +52,7 @@ export default function Header(props){
 
       return (
         <div className="InvoiceDetail-header--title" style={!mobile && c && e? {gridTemplateColumns: "1fr auto .7fr"} : {gridTemplateColumns: "auto"}}>
-          {c? <h2 className="InvoiceDetail-header--client" style={!mobile && c && e? {justifySelf: "right"} : {justifySelf: "center"}}>{clientName(c, {oneLine: true})}</h2> : null}
+          {c? <h2 className="InvoiceDetail-header--client" style={!mobile && c && e? {justifySelf: "right"} : {justifySelf: "center"}}>{clientDisplay(c, {oneLine: true})}</h2> : null}
           {!mobile && c && e? <div className="InvoiceDetail-header--client-date-seperator"></div> : null}
           {e? <h2 className="InvoiceDetail-header--date" style={!mobile && c && e? {justifySelf: "left"} : {justifySelf: "center"}}>{moment(e.start).format('MMMM Do YYYY')}</h2> : null}
         </div>

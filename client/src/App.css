@@ -20,7 +20,7 @@ h1, h2 {
   font-weight: 300;
 }
 
-h3, h4, h5, h6, p, a, label, td, th, input, select, textarea {
+h3, h4, h5, h6, p, a, label, td, th, input, select, button, textarea {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
@@ -66,6 +66,21 @@ button:hover, .Icon:hover {
 
 button:active, button:focus {
   outline: none;
+}
+
+button {
+  display: inline-block;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  font-size: 1em;
+  cursor: pointer;
+  text-align: center;
+  background: transparent;
+  transition: background 250ms ease-in-out,
+              transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 label {
@@ -123,6 +138,7 @@ select {
   text-align-last: center;
 }
 
+
 /* -----------Fields------------ */
 
 .Field {
@@ -165,6 +181,10 @@ select {
   background-color: #F8F8F8;
   border: 1px solid #BBBBBB;
   border-radius: 5px;
+}
+
+.datetime:hover {
+  cursor: pointer;
 }
 
 @media (min-width: 750px) {
