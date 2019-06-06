@@ -25,7 +25,8 @@ export default class Events extends Component {
     this.ajaxOptions = {
       cancelToken: this.axiosRequestSource.token,
       unauthorizedCB: this.props.signout,
-      sendCount: true
+      sendCount: true,
+      sendUpdates: 'none'
     }
     this.itemsPerPage = 25
   }
@@ -263,40 +264,42 @@ export default class Events extends Component {
     }
   }
 
-  addEvent = async(formData) => {
-    const calendarId = localStorage.getItem('google_calendar_id')
+  addEvent = async(formData, sendUpdates) => {
     let events = [...this.state.events]
-    const newEvent = await event.create(formData, this.ajaxOptions)
-    const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(newEvent), this.ajaxOptions)
-    let formatted = await formatFromGoogle(newGoogleEvent, this.ajaxOptions)
+    let newEvent = await event.create(formData, this.ajaxOptions)
 
-    if (formatted.event_employees_attributes) {
+    const calendarId = localStorage.getItem('google_calendar_id')
+    if (calendarId) {
+      const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(newEvent), this.ajaxOptions)
+      let formatted = await formatFromGoogle(newGoogleEvent, this.ajaxOptions)
 
-      let update = formatted.event_employees_attributes.filter(ee => {
+      if ( formatted && formatted.event_employees_attributes) {
 
-        if (newEvent.staff && newEvent.staff.length) {
-          return newEvent.staff.find(worker => worker.info.id !== ee.employee_id)
+        let update = formatted.event_employees_attributes.filter(ee => {
+
+          if (newEvent.staff && newEvent.staff.length) {
+            return newEvent.staff.find(worker => worker.info.id !== ee.employee_id)
+          } else {
+            return 1
+          }
+
+        })
+
+        if (update && update.length) {
+          formatted.event_employees_attributes = update
         } else {
-          return 1
+          delete formatted.event_employees_attributes
         }
 
-      })
-
-      if (update && update.length) {
-        formatted.event_employees_attributes = update
-      } else {
-        delete formatted.event_employees_attributes
       }
-
+      newEvent = await event.update(newEvent.id, formatted, this.ajaxOptions)
     }
-
-    const evt = await event.update(newEvent.id, formatted, this.ajaxOptions)
-    events.push(evt)
+    events.push(newEvent)
     events = events.sort((evtOne, evtTwo) => {
       return moment(evtOne.start).isBefore(moment(evtTwo.start))
     })
     this.setState({ events })
-    return evt
+    return newEvent
   }
 
   deleteEvent = async(evt) => {
@@ -310,50 +313,52 @@ export default class Events extends Component {
     this.setState({ events })
   }
 
-  updateEvent = async(e, data) => {
+  updateEvent = async(e, data, sendUpdates) => {
+    if (!e) return;
     const calendarId = localStorage.getItem('google_calendar_id')
-    const { signout } = this.props
-    if (e) {
-      let events = [...this.state.events]
-      let updatedEvent;
-      if (data) {
-        updatedEvent = await event.update(e.id, data, this.ajaxOptions)
-      } else {
-        updatedEvent = e
-      }
+    let updatedEvent = e;
+
+    if (data) updatedEvent = await event.update(e.id, data, this.ajaxOptions)
+
+    if (calendarId) {
+      if (sendUpdates) this.ajaxOptions.sendUpdates = 'all'
+      if (!sendUpdates || sendUpdates === 'none') this.ajaxOptions.sendUpdates = 'none'
+
+      let googleEvent;
+
       if (e.gcId) {
-        await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent), this.ajaxOptions)
-      } else if (this.state.calendarId) {
-        const newGoogleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.ajaxOptions)
-        let formatted = await formatFromGoogle(newGoogleEvent, this.axiosRequestSource.token, signout)
-
-        formatted = {
-          ...data,
-          ...formatted,
-        }
-
-        if (formatted.event_employees_attributes) {
-
-          let update = formatted.event_employees_attributes.filter(ee => {
-
-            if (formatted.employee_ids && formatted.employee_ids.length) {
-              return formatted.employee_ids.find(id => ee.employee_id !== id)
-            } else {
-              return 1
-            }
-
-          })
-
-          formatted.event_employees_attributes = update
-        }
-        updatedEvent = await event.update(e.id, formatted, this.ajaxOptions)
+        googleEvent = await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent), this.ajaxOptions)
+      } else {
+        googleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.ajaxOptions)
       }
 
-      const index = events.findIndex((event) => event.id === e.id)
-      events[index] = updatedEvent
-      this.setState({ events })
-      return updatedEvent
+      let formatted = await formatFromGoogle(googleEvent, this.ajaxOptions)
+
+      let newData = { ...data, ...formatted }
+
+      if (newData.event_employees_attributes) {
+
+        let update = newData.event_employees_attributes.filter(ee => {
+
+          if (newData.employee_ids && newData.employee_ids.length) {
+            return newData.employee_ids.find(id => ee.employee_id !== id)
+          } else {
+            return 1
+          }
+
+        })
+
+        newData.event_employees_attributes = update
+      }
+
+      updatedEvent = await event.update(e.id, newData, this.ajaxOptions)
     }
+
+    let events = [...this.state.events]
+    const index = events.findIndex((event) => event.id === e.id)
+    events[index] = updatedEvent
+    this.setState({ events })
+    return updatedEvent
   }
 
   updateEvents = async(data) => {
