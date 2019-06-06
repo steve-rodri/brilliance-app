@@ -20,7 +20,7 @@ h1, h2 {
   font-weight: 300;
 }
 
-h3, h4, h5, h6, p, a, label, td, th, input, select, textarea {
+h3, h4, h5, h6, p, a, label, td, th, input, select, button, textarea {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
@@ -68,6 +68,21 @@ button:active, button:focus {
   outline: none;
 }
 
+button {
+  display: inline-block;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  font-size: 1em;
+  cursor: pointer;
+  text-align: center;
+  background: transparent;
+  transition: background 250ms ease-in-out,
+              transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
 label {
   text-align: left;
   font-weight: 900;
@@ -88,19 +103,7 @@ input {
   font-family: 'Roboto', sans-serif;
 }
 
-input[type="text"],
-input[type="tel"],
-input[type="date"],
-input[type="time"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="file"],
-input[type="image"],
-input[type="password"],
-input[type="search"],
-input[type="color"],
-textarea,
-select {
+input:not([type=checkbox]):not([type=radio]) {
   -webkit-appearance: none;
 }
 
@@ -122,6 +125,7 @@ input[type="number"] {
 select {
   text-align-last: center;
 }
+
 
 /* -----------Fields------------ */
 
@@ -165,6 +169,10 @@ select {
   background-color: #F8F8F8;
   border: 1px solid #BBBBBB;
   border-radius: 5px;
+}
+
+.datetime:hover {
+  cursor: pointer;
 }
 
 @media (min-width: 750px) {

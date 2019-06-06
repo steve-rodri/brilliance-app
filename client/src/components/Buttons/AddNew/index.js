@@ -12,10 +12,10 @@ export default function AddNew(props){
       style={{textDecoration: 'none', color: 'black', ...style}}
     >
 
-      <div className="AddNew">
+      <button className="AddNew">
         <h3 className="AddNew--button-text">{`New ${type}`}</h3>
         {plusIcon('2x', 'AddNew--button-icon')}
-      </div>
+      </button>
 
     </Link>
   )

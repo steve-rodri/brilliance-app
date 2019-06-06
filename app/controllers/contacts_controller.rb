@@ -26,14 +26,14 @@ class ContactsController < ApplicationController
       if @@send_count
         count = Contact
           .distinct
-          .left_outer_joins(:client)
+          .joins(:client)
           .where(query)
           .size
       end
 
       @contacts = Contact
         .distinct
-        .left_outer_joins(:client)
+        .joins(:client)
         .where(query)
 
       render json: @contacts, root: "contacts", meta: { count: count }, include: "**"

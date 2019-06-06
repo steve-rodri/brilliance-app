@@ -152,7 +152,7 @@ export default function Header(props){
     if (isNew) {
       return (
         <Fragment>
-          <div className="EventDetail--back-button" onClick={() => history.goBack()}>Back</div>
+          <button className="EventDetail--back-button" onClick={() => history.goBack()}>Back</button>
           <div className="EventDetail--event-title-container">
             <h2
               className="EventDetail--event-title"
@@ -160,12 +160,20 @@ export default function Header(props){
               New Event
             </h2>
           </div>
+          {
+            !mobile?
+            <div className="EventDetail--header-right">
+              {displayButtons()}
+            </div>
+            :
+            null
+          }
         </Fragment>
       )
     } else if (mobile && editMode) {
       return (
         <Fragment>
-          <div className="EventDetail--back-button" onClick={back}>Back</div>
+          <button className="EventDetail--back-button" onClick={back}>Back</button>
           <div className="EventDetail--event-title-container">
             <h2
               className="EventDetail--event-title"
@@ -175,22 +183,6 @@ export default function Header(props){
           </div>
         </Fragment>
       )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     } else {
       return (
         <Fragment>
