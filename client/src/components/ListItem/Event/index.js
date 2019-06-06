@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { clientName } from '../../../helpers/clientHelpers'
+import { clientDisplay } from '../../../helpers/clientHelpers'
 import { date, time } from '../../../helpers/datetime'
 import { styleConfirmation, changeConfirmation, styleWorkerStatus } from '../../../helpers/eventHelpers'
 import moment from 'moment'
@@ -52,7 +52,7 @@ export default function Event(props){
 
           {/* Intel */}
           <div className="List-Item--Cell" style={{ ...middleCell, ...intelDisplay, padding: '5px' }}>
-            {event && event.client && <div>{clientName(event.client)}</div>}
+            {event && event.client && clientDisplay(event.client)}
             {event && event.location && <p>{event.location.name}</p>}
           </div>
 
@@ -170,62 +170,3 @@ function scheduled(evt){
       )
     }
   }
-
-
-
-// let needsAction = 0;
-// let declined = 0;
-// let tentative = 0;
-// let accepted = 0;
-//
-// evt.staff.forEach(worker => {
-//   switch (worker.confirmation) {
-//     case 'needsAction':
-//       needsAction += 1
-//       break;
-//     case 'declined':
-//       declined += 1
-//       break;
-//     case 'tentative':
-//       tentative += 1
-//       break;
-//     case 'accepted':
-//       accepted += 1
-//       break;
-//     default:
-//       break;
-//   }
-// })
-//
-// if (accepted === evt.staff.length) {
-//   return (
-//     <div className="Event--scheduled" style={{ color: 'limegreen'}}>
-//       <div className="Event--scheduled-details">
-//         <h4>ALL CONFIRMED</h4>
-//       </div>
-//     </div>
-//   )
-// } else if (!accepted) {
-//   return (
-//     <div className="Event--scheduled" style={{ color: 'red' }}>
-//       <div className="Event--scheduled-details">
-//         <div style={{textAlign: 'left'}}>
-//           {tentative + needsAction? <p>{`${tentative + needsAction} unconfirmed`}</p> : null}
-//           {declined? <p>{`${declined} declined`}</p> : null}
-//         </div>
-//       </div>
-//     </div>
-//   )
-// } else {
-//   return (
-//     <div className="Event--scheduled">
-//       <div className="Event--scheduled-details">
-//         <div style={{textAlign: 'left'}}>
-//           <p>{`${accepted} confirmed`}</p>
-//           {tentative + needsAction? <p>{`${tentative + needsAction} unconfirmed`}</p> : null}
-//           {declined? <p>{`${declined} declined`}</p> : null}
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }

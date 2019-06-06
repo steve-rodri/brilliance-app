@@ -1,6 +1,6 @@
 import React from 'react'
 
-function clientName(client, options){
+export function clientDisplay(client, options){
   let className = ''
   let oneLine = false
   if (options) {
@@ -14,13 +14,13 @@ function clientName(client, options){
       if (!client.company) {
         return null
       } else {
-        return client.company.name
+        return <h3>{client.company.name}</h3>
       }
     } else {
       if (!client.company) {
-        return client.contactInfo.fullName
+        return <h3>{client.contactInfo.fullName}</h3>
       } else if (oneLine) {
-        return `${client.contactInfo.fullName} : ${client.company.name}`
+        return <h3>{`${client.contactInfo.fullName} : ${client.company.name}`}</h3>
       } else {
         return (
           <div className={`${className} client`} >
@@ -33,7 +33,19 @@ function clientName(client, options){
   }
 }
 
-function clientInfo(client){
+export function clientName(client){
+  if (!client) return;
+  if (!client.contactInfo) {
+    if (!client.company) return null
+    return client.company.name
+
+  } else {
+    if (!client.company) return client.contactInfo.fullName
+    return `${client.contactInfo.fullName} : ${client.company.name}`
+  }
+}
+
+export function clientInfo(client){
   if (client) {
     if (!client.contactInfo) {
       if (!client.company) {
@@ -68,18 +80,10 @@ function clientInfo(client){
   }
 }
 
-function contactName(contact){
+export function contactName(contact){
   return contact.fullName
 }
 
-function companyName(company){
+export function companyName(company){
   return company.name
-}
-
-
-export {
-  clientName,
-  clientInfo,
-  contactName,
-  companyName
 }

@@ -50,10 +50,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+
+  .About--event-status:active {
+    transform: scale(0.99);
   }
 
   .About--event-status > p {
-    font-weight: 400;
+    font-weight: bold;
   }
 
   .About--event-status:hover {

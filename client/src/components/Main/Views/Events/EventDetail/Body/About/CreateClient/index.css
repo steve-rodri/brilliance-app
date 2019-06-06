@@ -8,8 +8,19 @@
   background-color: var(--darker-blue);
   color: #eee;
   display: grid;
+  grid-auto-flow: column;
+  grid: auto / 1fr auto 1fr;
   justify-items: center;
   align-items: center;
+}
+
+.CreateClient--back-button {
+  justify-self: start;
+  padding: 5px 10px;
+  border: 1px solid #eee;
+  color: #eee;
+  border-radius: 2.5px;
+  margin-left: 10px;
 }
 
 .CreateClient--content {
@@ -22,7 +33,7 @@
 
 .CreateClient--opening {
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 20px;
 }
 
 .CreateClient--opening > div {
@@ -31,7 +42,7 @@
   grid-gap: 10px;
 }
 
-.CreateClient--opening > div > div {
+.CreateClient--opening > div > button {
   padding: 20px 50px;
   border: 2px solid black;
   border-radius: 5px;
@@ -40,14 +51,18 @@
 .CreateClient--choose {
   display: grid;
   grid-gap: 60px;
-  justify-content: center;
   align-content: center;
+}
+
+@media (min-width: 750px) {
+  .CreateClient--choose {
+    min-width: 700px;
+  }
 }
 
 .CreateClient--choose-existing {
   display: grid;
   grid-gap: 30px;
-  justify-items: center;
   align-items: center;
 }
 
@@ -56,25 +71,50 @@
   grid-gap: 30px;
 }
 
+.CreateClient--choose-existing-dialog {
+  display: grid;
+  grid-gap: 10px;
+}
+
 .CreateClient--choose-existing-contacts {
   display: grid;
   grid-gap: 10px;
-  justify-content: center;
+  justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr))
 }
 
-.CreateClient--choose-existing-contacts > div,
-.CreateClient--skip > div {
+.CreateClient--skip {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+@media (min-width: 750px) {
+  .CreateClient--choose-existing-contacts {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+  }
+}
+
+.CreateClient--choose-existing-contacts > button,
+.CreateClient--skip > button {
   display: grid;
   justify-items: center;
   align-items: center;
   border: 2px solid black;
   border-radius: 5px;
-  padding: 20px;
+  height: 60px;
+  width: 100%;
 }
 
-.CreateClient--choose-existing-contacts > div:hover
-.CreateClient--skip > div:hover {
+@media (min-width: 750px) {
+  .CreateClient--choose-existing-contacts > button,
+  .CreateClient--skip > button {
+    width: 200px;
+  }
+}
+
+.CreateClient--choose-existing-contacts > button:hover
+.CreateClient--skip > button:hover {
   cursor: pointer;
 }
 

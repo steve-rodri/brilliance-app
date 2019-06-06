@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { clientName } from '../../../../../../helpers/clientHelpers'
+import { clientDisplay } from '../../../../../../helpers/clientHelpers'
 import { styleStatus } from '../../../../../../helpers/invoiceStatus'
 import numeral from 'numeral'
 import './index.css'
@@ -30,7 +30,7 @@ export default class SubHeader extends Component {
 
     if (event && event.client) {
       return (
-        <div><h3>{clientName(event.client)}</h3></div>
+        <div>{clientDisplay(event.client)}</div>
       )
     }
   }

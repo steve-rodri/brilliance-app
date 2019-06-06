@@ -231,7 +231,7 @@ export default class InvoiceDetail extends Component {
     if (inv) {
       if (inv.event) {
         if (inv.event.client) {
-          const name = clientName(inv.event.client, { oneLine: true })
+          const name = clientName(inv.event.client)
           this.setField('client', name)
           this.setFormData('client_id', inv.event.client.id)
         } else {
@@ -574,7 +574,7 @@ export default class InvoiceDetail extends Component {
     const { searchFieldData } = this.state
     if (searchFieldData) {
       data = searchFieldData.clients[index]
-      const client = clientName(data, {oneLine: true});
+      const client = clientName(data);
       if (data) {
         this.setState(prevState => ({
           formData: {
