@@ -32,7 +32,7 @@ export default class ListPage extends Component {
     if (data && data.length) {
       return {}
     } else if (mobile) {
-      return { justifyContent: 'center', height: 'calc(100vh - 195px - var(--mobile-adj))'}
+      return { justifyContent: 'center', height: 'calc(100vh - 245px - var(--mobile-adj))'}
     } else {
       return { justifyContent: 'center', height: 'calc(100vh - 155px)'}
     }

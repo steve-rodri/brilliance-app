@@ -37,8 +37,12 @@ export default function Schedule(props){
 
       {/* Event */}
       <div className="List-Item--Cell" style={{ ...eventDisplay, ...leftCell }}>
-        <Link to={`${accessLevel}/events/${item.id}`} style={{textDecoration: 'none', color: 'black'}}>
-          <div className="Schedule--event">
+        <Link
+          to={`${accessLevel}/events/${item.id}`}
+          style={{textDecoration: 'none', color: 'black'}}
+          className="Schedule--event"
+        >
+          <div>
             <div className="Schedule--event-summary">{summary()}</div>
             {/* <div className="Schedule--event-time-until">
               <p>{item && timeUntil}</p>
