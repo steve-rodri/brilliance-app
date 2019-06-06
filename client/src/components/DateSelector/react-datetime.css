@@ -7,11 +7,8 @@
 }
 .rdtPicker {
   display: none;
-  position: absolute;
-  left: 50%;
+  position: relative;
   width: 333px;
-  margin: 5px 0 0 -167px;
-  z-index: 99999 !important;
   background: #fff;
   box-shadow: 0 0 2px 1px #999;
   border: 1px solid #f9f9f9;
@@ -22,14 +19,12 @@
 @media (min-width: 750px) {
   .rdtPicker {
     width: 275px;
-    margin: 5px 0 0 -137.5px;
   }
 }
 .rdtOpen .rdtPicker {
   display: block;
 }
 .rdtStatic .rdtPicker {
-  box-shadow: none;
   position: static;
 }
 
@@ -97,7 +92,7 @@
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .rdtPicker td.rdtActive.rdtToday:before {
-  border-bottom-color: #fff;
+  border-bottom-color: transparent;
 }
 .rdtPicker td.rdtDisabled,
 .rdtPicker td.rdtDisabled:hover {
@@ -131,12 +126,12 @@
 .rdtPicker th.rdtNext,
 .rdtPicker th.rdtPrev {
   font-size: 21px;
-  vertical-align: top;
 }
 
 .rdtPrev span,
 .rdtNext span {
-  display: block;
+  display: grid;
+  align-items: center;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
   -khtml-user-select: none;    /* Konqueror */
@@ -193,7 +188,7 @@ td.rdtYear:hover {
 
 .rdtCounters {
   display: grid;
-  column-gap: 20px;
+  column-gap: 5px;
   grid-auto-flow: column;
   align-items: center;
 }
@@ -201,10 +196,6 @@ td.rdtYear:hover {
 .rdtCounter {
   display: grid;
   grid-gap: 2px;
-}
-
-.rdtCounter {
-  width: 40px;
 }
 
 .rdtCounterSeparator {
