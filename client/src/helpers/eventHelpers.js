@@ -132,24 +132,18 @@ export function styleConfirmation(msg){
   switch (msg) {
     case "Unconfirmed":
       return {
-        color: 'white',
-        fontWeight: 'bold',
-        backgroundColor: 'rgba(210,210,0,1)',
-        padding: '5px 15px',
+        backgroundColor: 'gold',
+        color: 'black'
       }
     case "Confirmed":
       return {
         backgroundColor: 'limegreen',
-        fontWeight: 'bold',
-        padding: '5px 15px',
-        color: 'white',
+        color: 'white'
       }
     case "Cancelled":
       return {
         backgroundColor: 'darkred',
-        fontWeight: 'bold',
-        padding: '5px 15px',
-        color: 'white',
+        color: 'white'
       }
     default:
       return {}
@@ -192,11 +186,11 @@ export function styleWorkerStatus(confirmation){
   switch (confirmation) {
     case 'needsAction':
       style.backgroundColor = "gold"
-      style.color = "white"
+      style.color = "black"
     break;
     case 'Unconfirmed':
       style.backgroundColor = "gold"
-      style.color = "white"
+      style.color = "black"
     break;
     case 'accepted':
       style.backgroundColor = "limegreen"
@@ -208,7 +202,7 @@ export function styleWorkerStatus(confirmation){
     break;
     case 'tentative':
       style.backgroundColor = "gold"
-      style.color = "white"
+      style.color = "black"
     break;
     case 'declined':
       style.backgroundColor = "red"
@@ -239,7 +233,7 @@ export function changeWorkerStatus(confirmation){
 
     case 'declined':
       return 'tentative'
-      
+
     default:
     break;
   }

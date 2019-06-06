@@ -14,6 +14,7 @@
 
 .Schedule--not-currently {
   color: #eee;
+  padding: 0 15px; 
 }
 
 @media (min-width: 750px) {

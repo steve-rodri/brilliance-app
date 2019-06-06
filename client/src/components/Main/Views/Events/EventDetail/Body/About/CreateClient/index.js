@@ -77,6 +77,7 @@ export default class CreateClient extends Component {
 
   skip = () => {
     this.setState({
+      view: 'form',
       searchResults: {
         contacts: {},
         companies: {}
@@ -131,10 +132,11 @@ export default class CreateClient extends Component {
   }
 
   setPerson = () => {
-    const { search } = this.state
+    const { search, searchResults: { contacts } } = this.state
+    const contactData = contacts && contacts.data && contacts.data.length
     const terms = search.split(' ')
     this.setState(prevState => ({
-      view: 'contact',
+      type: 'contact',
       formData: {
         ...prevState.formData,
         contact: {
@@ -143,13 +145,17 @@ export default class CreateClient extends Component {
           last_name: terms[1]
         }
       }
-    }))
+    }), () => {
+      if (contactData) this.setView('chooseExisting')
+      else this.setView('form')
+    })
   }
 
   setCompany = () => {
-    const { search } = this.state
+    const { search, searchResults: { companies } } = this.state
+    const companyData = companies && companies.data && companies.data.length
     this.setState(prevState => ({
-      view: 'company',
+      type: 'company',
       formData: {
         ...prevState.formData,
         company: {
@@ -157,92 +163,106 @@ export default class CreateClient extends Component {
           name: search
         }
       }
-    }))
+    }), () => {
+      if (companyData) this.setView('chooseExisting')
+      else this.setView('form')
+    })
   }
 
   content = () => {
-    const { view, search, searchResults: { contacts, companies } } = this.state
-    const contactData = contacts && contacts.data && contacts.data.length
-    const companyData = companies && companies.data && companies.data.length
-
-    switch (view) {
+    const { view, type, search, searchResults: { contacts, companies } } = this.state
+    switch (type) {
       case 'contact':
-        return (
-          <Fragment>
-            {
-              contactData?
-              <ChooseContact
-                search={search}
-                contacts={contacts}
-                handleSelect={this.handleSelect}
-                skip={this.skip}
-              />
-              :
-              <Contact
-                {...this.props}
-                {...this.state}
-                handleChange={this.handleChange}
-              />
-            }
-          </Fragment>
-        )
+        switch (view) {
+          case 'chooseExisting':
+          return (
+            <ChooseContact
+              search={search}
+              contacts={contacts}
+              handleSelect={this.handleSelect}
+              skip={this.skip}
+            />
+          )
+          case 'form':
+          return (
+            <Contact
+              {...this.props}
+              {...this.state}
+              handleChange={this.handleChange}
+            />
+          )
+          default:
+          break;
+        }
+      break;
       case 'company':
-        return (
-          <Fragment>
-            {
-              companyData?
-              <ChooseCompany
-                search={search}
-                companies={companies}
-                handleSelect={this.handleSelect}
-                skip={this.skip}
-              />
-              :
-              <Company
-                {...this.props}
-                {...this.state}
-                handleChange={this.handleChange}
-              />
-            }
-          </Fragment>
-        )
-      case 'complete':
-      return (
-        <Fragment>
-        </Fragment>
-      )
+        switch (view) {
+          case 'chooseExisting':
+          return (
+            <ChooseCompany
+              search={search}
+              companies={companies}
+              handleSelect={this.handleSelect}
+              skip={this.skip}
+            />
+          )
+          case 'form':
+          return (
+            <Company
+              {...this.props}
+              {...this.state}
+              handleChange={this.handleChange}
+            />
+          )
+          default:
+          break;
+        }
+      break;
       default:
-        return (
-          <div className="CreateClient--opening">
-            <h2>Is this a Person or a Company?</h2>
-            <div>
-              <div onClick={() => this.setPerson()}><p>Person</p></div>
-              <div onClick={() => this.setCompany()}><p>Company</p></div>
-            </div>
+      return (
+        <div className="CreateClient--opening">
+          <h2>Is this a Person or a Company?</h2>
+          <div>
+            <button onClick={() => this.setPerson()}><p>Person</p></button>
+            <button onClick={() => this.setCompany()}><p>Company</p></button>
           </div>
-        )
+        </div>
+      )
     }
   }
 
   render (){
-    const { formData:{ contact, company } } = this.state
+    const { view, formData: { contact, company } } = this.state
     const noFormData = !Object.keys(contact).length && !Object.keys(company).length
     return (
       <div className="CreateClient">
-        <div className="CreateClient--header"><h2>Create Client</h2></div>
+        <div className="CreateClient--header">
+
+          <button
+            className="CreateClient--back-button"
+            onClick={this.props.close}
+          >
+            Back
+          </button>
+
+          <h2>Create Client</h2>
+        </div>
         <div className="CreateClient--content">
           {this.content()}
         </div>
         <div className="CreateClient--footer">
           {
-            noFormData?
-            <div className="CreateClient--button" onClick={this.props.close}>
-              <p>Cancel</p>
-            </div>
+            view !== 'chooseExisting'?
+              noFormData?
+              <button className="CreateClient--button" onClick={this.props.close}>
+                <p>Cancel</p>
+              </button>
+              :
+              <button className="CreateClient--button" onClick={this.handleSubmit}>
+                <p>CREATE</p>
+              </button>
             :
-            <div className="CreateClient--button" onClick={this.handleSubmit}>
-              <p>CREATE</p>
-            </div>
+            null
           }
         </div>
       </div>
@@ -257,19 +277,20 @@ function ChooseContact(props){
       <div className="CreateClient--choose-existing">
         <h2>Found Existing Information:</h2>
         <div>
-          <div>
-            <p>{`Found ${contacts.count} ${contacts.count === 1? 'contact' : 'contacts'} that match "${search}"`}</p>
-            <p>Choose One to Make New Client.</p>
+          <div className="CreateClient--choose-existing-dialog">
+            <p>{`Found ${contacts.count} ${contacts.count === 1? 'contact' : 'contacts'} that matches`}</p>
+            <p>{`"${search}"`}</p>
+            <p>Choose ONE to make a New Client.</p>
           </div>
           <div className="CreateClient--choose-existing-contacts">
             {
               contacts.data.map( contact => (
-                <div key={contact.id} onClick={(e) => {
+                <button key={contact.id} onClick={(e) => {
                   e.stopPropagation()
                   handleSelect(contact.id, 'contact')
                 }}>
                   <p>{contact.fullName}</p>
-                </div>
+                </button>
               ))
             }
           </div>
@@ -283,14 +304,14 @@ function ChooseContact(props){
       </div>
 
       <div className="CreateClient--skip">
-        <div onClick={skip}><h2>Skip</h2></div>
+        <button onClick={skip}><h2>Skip</h2></button>
       </div>
     </div>
   )
 }
 
 function ChooseCompany(props){
-  const { search, companies, handleSelect } = props
+  const { search, companies, handleSelect, skip } = props
   return (
     <div className="CreateClient--choose">
       <div className="CreateClient--choose-existing">
@@ -318,7 +339,9 @@ function ChooseCompany(props){
         <div></div>
       </div>
 
-      <button>Skip</button>
+      <div className="CreateClient--skip">
+        <button onClick={skip}><h2>Skip</h2></button>
+      </div>
     </div>
   )
 }

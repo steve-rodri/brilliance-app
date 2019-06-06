@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { clientName, clientInfo } from '../../../../helpers/clientHelpers'
+import { clientDisplay, clientInfo } from '../../../../helpers/clientHelpers'
 
 export default class Show extends Component {
   constructor(props){
@@ -25,12 +25,12 @@ export default class Show extends Component {
 
   render(){
     const { client } = this.state
-    const name = clientName(client)
+    const name = clientDisplay(client)
     const contactInfo = clientInfo(client)
 
     return (
       <div className="Client-Modal--Content">
-        <h2 className="Client-Modal--Title">{name}</h2>
+        <div className="Client-Modal--Title">{name}</div>
         <div className="Client-Modal--Fields">
           <label className="Client-Modal--Label">Phone</label>
             <div className="Client-Modal--Field">

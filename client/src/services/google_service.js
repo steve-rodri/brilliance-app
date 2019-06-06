@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Qs from 'qs';
 
 export const GOOGLE = {
   getUser: async function(options){
@@ -86,12 +87,19 @@ export const GOOGLE = {
     }
   },
   createEvent: async function(calendarId, data, options){
-    const { cancelToken, unauthorizedCB } = options
+    let { sendUpdates, cancelToken, unauthorizedCB } = options
+    if (!sendUpdates) sendUpdates = 'none'
     const accessToken = localStorage.getItem('google_access_token');
     try {
       const resp = await axios({
         method: 'post',
         url:`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`,
+        params: {
+          sendUpdates: sendUpdates
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
         headers: {
           Authorization: `Bearer ${accessToken}`
         },
@@ -136,7 +144,13 @@ export const GOOGLE = {
     try {
       const resp = await axios({
         method: 'patch',
-        url:`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events/${eventId}?sendUpdates=${sendUpdates}`,
+        url:`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events/${eventId}`,
+        params: {
+          sendUpdates: sendUpdates
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
         headers: {
           Authorization: `Bearer ${accessToken}`
         },

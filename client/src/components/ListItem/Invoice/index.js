@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { clientName } from '../../../helpers/clientHelpers'
+import { clientDisplay } from '../../../helpers/clientHelpers'
 import { styleStatus } from '../../../helpers/invoiceStatus'
 import { locationName } from '../../../helpers/locationName'
 import moment from 'moment'
@@ -35,7 +35,7 @@ export default function Invoice(props){
 
           {/* client & date */}
           <div className="List-Item--Cell" style={{ ...leftCell, ...clientDateDisplay }}>
-              <div className="Invoice--client-date">{event && event.client && clientName(event.client)}</div>
+              <div className="Invoice--client-date">{event && event.client && clientDisplay(event.client)}</div>
               <p>{event && event.start && moment(event.start).format('MMM Do YYYY')}</p>
           </div>
 
@@ -66,7 +66,7 @@ export default function Invoice(props){
         <div className="List-Item">
 
           <div className="Invoice--title">
-            <h4>{event && event.client && clientName(event.client)}</h4>
+            {event && event.client && clientDisplay(event.client)}
             <p>{event && event.start && moment(event.start).format('MMM Do YYYY')}</p>
           </div>
 
