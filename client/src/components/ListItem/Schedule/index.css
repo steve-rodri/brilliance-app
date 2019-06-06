@@ -4,7 +4,7 @@
   display: grid;
   align-items: center;
   justify-items: start;
-  padding: 5px 10px;
+  padding: 10px 20px;
 }
 
 .Schedule--event-summary {
@@ -43,4 +43,8 @@
   display: grid;
   align-items: center;
   justify-items: center;
+}
+
+.Schedule--confirmation:hover {
+  cursor: pointer;
 }
