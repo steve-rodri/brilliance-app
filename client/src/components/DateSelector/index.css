@@ -1,0 +1,13 @@
+.DateSelector {
+  width: 100%;
+  position: relative;
+}
+
+.DateSelector--container {
+  position: absolute;
+  z-index: 99999 !important;
+}
+
+.DateSelector--container:focus {
+  border: 2px solid blue;
+}

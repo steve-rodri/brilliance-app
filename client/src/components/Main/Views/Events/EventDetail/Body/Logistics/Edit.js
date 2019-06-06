@@ -1,63 +1,47 @@
 import React, { Component } from 'react'
-import Datetime from 'react-datetime'
+import DateSelector from '../../../../../../DateSelector'
 import SearchField from '../../../../../../SearchField/'
 import { locationName } from '../../../../../../../helpers/locationName'
 import moment from 'moment'
-import './react-datetime.css'
 
 export default class Edit extends Component {
   render(){
     const { fields, searchFieldData } = this.props
+    if (!fields) return null;
+
     return (
       <div className="Logistics">
         <label>Start</label>
 
-          <div className="Edit--Field datetime">
-            <Datetime
-              className="Input--container"
-              inputProps={{ className: "Input", tabIndex: "6" }}
-              value={fields.start? moment(fields.start) : ''}
-              viewDate={fields.start && fields.start !== ''? moment(fields.start) : moment().startOf('hour')}
-              timeConstraints={{ minutes:{ step: 5 } }}
-              onChange={(datetime) => this.props.handleDateChange('start', datetime)}
-              closeOnSelect={false}
-              closeOnTab={true}
-            />
-          </div>
+          <DateSelector
+            {...this.props}
+            viewMode="days"
+            name="start"
+            value={fields.start}
+            viewDate={moment(fields.start) || moment().startOf('hour')}
+          />
 
         <label>End</label>
 
-          <div className="Edit--Field datetime">
-            <Datetime
-              className="Input--container"
-              inputProps={{ className:"Input", tabIndex:"7" }}
-              value={fields.end? moment(fields.end) : ''}
-              viewDate={fields.start? moment(fields.start) : fields.end? moment(fields.end): moment().startOf('hour')}
-              viewMode={'time'}
-              timeConstraints={{ minutes:{ step: 5 } }}
-              isValidDate={(current) => current.isSameOrAfter(moment(fields.start), 'day')}
-              onChange={(datetime) => this.props.handleDateChange('end', datetime)}
-              closeOnSelect={true}
-              closeOnTab={true}
-            />
-          </div>
+          <DateSelector
+            {...this.props}
+            viewMode="time"
+            name="end"
+            value={fields.end}
+            viewDate={fields.start? moment(fields.start) : fields.end? moment(fields.end): moment().startOf('hour')}
+            isValidDate={(current) => current.isSameOrAfter(moment(fields.start), 'day')}
+          />
 
         <label>Call</label>
 
-          <div className="Edit--Field datetime">
-            <Datetime
-              className="Input--container"
-              inputProps={{ className: "Input", tabIndex: "8"}}
-              value={fields.callTime? moment(fields.callTime) : ''}
-              viewDate={fields.start? moment(fields.start): fields.callTime? moment(fields.callTime) : moment().startOf('hour')}
-              viewMode={'time'}
-              timeConstraints={{ minutes:{ step: 5 } }}
-              isValidDate={(current) => current.isSameOrBefore(moment(fields.start), 'day')}
-              onChange={(datetime) => this.props.handleDateChange('call', datetime)}
-              closeOnSelect={false}
-              closeOnTab={true}
-            />
-          </div>
+          <DateSelector
+            {...this.props}
+            viewMode="time"
+            name="call"
+            value={fields.callTime}
+            viewDate={fields.start? moment(fields.start): fields.callTime? moment(fields.callTime) : moment().startOf('hour')}
+            isValidDate={(current) => current.isSameOrBefore(moment(fields.start), 'day')}
+          />
 
         <label>Call Location</label>
 
