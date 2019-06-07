@@ -4,7 +4,7 @@ import { plusIcon } from '../../../helpers/icons'
 import './index.css'
 
 export default function AddNew(props){
-  const { linkPath, className, style, type } = props
+  const { linkPath, type, className, style } = props
   return (
     <Link
       to={linkPath}

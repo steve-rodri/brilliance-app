@@ -10,6 +10,15 @@ import './index.css'
 
 export default class Body extends Component {
 
+  styleContainer = () => {
+    const { editMode } = this.props
+    let style = {}
+    if (editMode) {
+      style.padding = "15px 20px"
+    }
+    return style;
+  }
+
   styleComp = (name) => {
     const { editMode } = this.props
     let style = {}
@@ -24,7 +33,6 @@ export default class Body extends Component {
         case 'Staff':
           break;
         case 'Invoice':
-
           break;
         default:
           break;
@@ -50,7 +58,7 @@ export default class Body extends Component {
     const about = fields &&
     (fields.client || fields.location || date(fields) || time(fields));
 
-    const showInvoice = !isNew && evt && !editMode
+    const showInvoice = !isNew && !editMode && evt && evt.client
     const showStaff = editMode || ( evt && evt.staff && evt.staff.length )
 
     return (
@@ -60,25 +68,25 @@ export default class Body extends Component {
             about?
             <div className="EventDetail-Body--components" style={this.styleComponents()}>
 
-              <About {...this.props} styleComp={this.styleComp}/>
+              <About {...this.props} styleComp={this.styleComp} styleContainer={this.styleContainer}/>
 
-              <Logistics {...this.props} styleComp={this.styleComp}/>
+              <Logistics {...this.props} styleComp={this.styleComp} styleContainer={this.styleContainer}/>
 
               {
                 showStaff?
-                <Staff {...this.props} styleComp={this.styleComp}/>
+                <Staff {...this.props} styleComp={this.styleComp} styleContainer={this.styleContainer}/>
                 :
                 null
               }
               {
                 showInvoice?
-                <Invoice {...this.props} styleComp={this.styleComp}/>
+                <Invoice {...this.props} styleComp={this.styleComp} styleContainer={this.styleContainer}/>
                 :
                 null
               }
               {
                 editMode || !isNullOrWhitespace(fields.notes)?
-                <Notes {...this.props} styleComp={this.styleComp}/>
+                <Notes {...this.props} styleComp={this.styleComp} styleContainer={this.styleContainer}/>
                 :
                 null
               }

@@ -16,7 +16,6 @@ export default function Event(props){
     numColumns,
     styleItem,
     styleCell,
-    isMonth,
     changeScrollPosition,
   } = props
   const leftCell = styleCell('left', event)
@@ -27,6 +26,15 @@ export default function Event(props){
   const scheduleDisplay = displayColumn('schedule')
   const confirmationDisplay = displayColumn('confirmation')
 
+  const hasInvoiceStyling = () => {
+    let style = {};
+    if (event && event.invoice) {
+      style.borderLeft = '10px solid limegreen'
+      style.paddingLeft = '10px'
+    }
+    return style;
+  }
+
   if (event.isNextEvent) changeScrollPosition()
   return (
     <Link to={`/${accessLevel}/${view.toLowerCase()}/${event.id}`} style={{textDecoration: 'none', color: 'black'}}>
@@ -34,10 +42,10 @@ export default function Event(props){
         <div className="List-Item" style={styleItem(event, view)}>
 
           {/* Title */}
-          <div className="List-Item--Cell" style={{ ...leftCell, ...titleDisplay, padding: '5px' }}>
+          <div className="List-Item--Cell Event--title" style={{ ...leftCell, ...titleDisplay, ...hasInvoiceStyling() }}>
             <div className="Event--summary">{summary(event)}</div>
             <div className="Event--time">
-              <p>{date(event, true)}</p>
+              <p>{date(event, true, true)}</p>
               <p>{time(event)}</p>
             </div>
           </div>
@@ -85,16 +93,14 @@ export default function Event(props){
         </div>
         :
         <div className="List-Item" style={styleItem(event, view)}>
-          {event.isNextEvent && isMonth()? <div className="Event--next-event-triangle"></div> : null}
-          <div
-            className="Event--summary"
-            style={styleMobileSummary(event)}
-          >
-            {summary(event)}
-          </div>
-          <div className="Event--time">
-            <p>{date(event, true)}</p>
-            <p>{time(event)}</p>
+          {/* {event.isNextEvent && isMonth()? <div className="Event--next-event-triangle"></div> : null} */}
+          {/* Title */}
+          <div className="List-Item--Cell Event--title" style={hasInvoiceStyling()}>
+            <div className="Event--summary" style={styleMobileSummary(event)}>{summary(event)}</div>
+            <div className="Event--time">
+              <p>{date(event, true, true)}</p>
+              <p>{time(event)}</p>
+            </div>
           </div>
         </div>
       }

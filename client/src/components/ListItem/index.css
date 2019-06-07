@@ -6,7 +6,7 @@
   grid-auto-columns: 1fr;
   justify-items: center;
   align-items: center;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid var(--white);
   background-color: var(--light-gray);
   overflow: hidden;
 }

@@ -1,3 +1,10 @@
+.List {
+  width: 100%;
+  overflow: auto;
+  overscroll-behavior-y: contain;
+  background-color: transparent;
+}
+
 .Titles {
   align-self: flex-start;
   padding: 5px 0 5px 0;
@@ -15,13 +22,6 @@
   color: var(--light-gray);
 }
 
-.List {
-  width: 100%;
-  overflow: auto;
-  overscroll-behavior-y: contain;
-  background-color: transparent;
-}
-
 .infinite-scroll-component {
   overflow: hidden !important;
   height: 100%;
@@ -33,13 +33,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  color: #eeeeee;
+  color: var(--white);
 }
 
 .List--None-Found {
   height: 100%;
   /* background-color: var(--light-gray); */
-  color: #eee;
+  color: var(--white);
   display: grid;
   padding: 20px;
 }

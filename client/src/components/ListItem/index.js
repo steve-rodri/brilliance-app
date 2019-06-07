@@ -56,13 +56,12 @@ export default class ListItem extends Component {
   }
 
   styleItem = (item) => {
-    const { view, total, index, mobile, isMonth } = this.props
+    const { view, total, index, isMonth } = this.props
     const style = {}
     switch (view) {
       case 'Events':
         const event = item;
         // const past = event && event.end && moment(event.end).isBefore(moment())
-        const hasInvoice = event && event.invoice
         // const inProgress = event && event.start && event.end && moment(event.start).isSameOrBefore(moment()) && moment(event.end).isSameOrAfter(moment())
         const nextEvent = event && event.isNextEvent
         // const iCalUID = event && event.iCalUid;
@@ -72,12 +71,8 @@ export default class ListItem extends Component {
         //   style.backgroundColor = '#999999'
         // }
 
-        if (hasInvoice) {
-          style.borderLeft = '10px solid limegreen'
-        }
-
         // if (inProgress) {
-        //   style.color = '#eeeeee'
+        //   style.color = 'var(--white)'
         //   style.backgroundColor = 'var(--light-blue)'
         // }
 
@@ -88,10 +83,6 @@ export default class ListItem extends Component {
         // if (iCalUID) {
         //   style.backgroundColor = 'blue'
         // }
-
-        if (mobile) {
-          style.padding = '5px'
-        }
       break;
 
       default:
@@ -168,7 +159,7 @@ export default class ListItem extends Component {
             styleItem={this.styleItem}
             styleCell={this.styleCell}
             styleMobileEventSummary={this.styleMobileEventSummary}
-            
+
             eventSummary={this.eventSummary}
           />
         )

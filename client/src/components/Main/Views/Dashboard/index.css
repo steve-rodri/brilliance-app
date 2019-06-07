@@ -3,7 +3,7 @@
   display: grid;
   grid-gap: 20px;
   align-content: start;
-  color: #eee;
+  color: var(--white);
 }
 
 .Dashboard--intro {

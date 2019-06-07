@@ -6,7 +6,7 @@
 .SendUpdates--header {
   height: 75px;
   background-color: var(--darker-blue);
-  color: #eee;
+  color: var(--white);
   display: grid;
   justify-items: center;
   align-items: center;

@@ -6,7 +6,7 @@
 .CreateClient--header {
   height: 75px;
   background-color: var(--darker-blue);
-  color: #eee;
+  color: var(--white);
   display: grid;
   grid-auto-flow: column;
   grid: auto / 1fr auto 1fr;
@@ -17,8 +17,8 @@
 .CreateClient--back-button {
   justify-self: start;
   padding: 5px 10px;
-  border: 1px solid #eee;
-  color: #eee;
+  border: 1px solid var(--white);
+  color: var(--white);
   border-radius: 2.5px;
   margin-left: 10px;
 }

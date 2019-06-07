@@ -2,7 +2,7 @@ import React from 'react'
 import './index.css'
 
 export default function Notes(props){
-  const { mobile, fields, editMode, styleComp } = props
+  const { mobile, fields, editMode, styleComp, styleContainer } = props
   const view = () => {
     if (editMode) {
       return (
@@ -34,7 +34,7 @@ export default function Notes(props){
   return (
     <div style={styleComp('Notes')} className="EventDetail-Body--component EventDetail-Body--notes">
       {!mobile? <div className="EventDetail-Body--component-title"><h4>Notes</h4></div> : null}
-      <div className="Notes--container" style={mobile? {padding: '0 20px 20px'} : {} }>
+      <div className="Notes--container" style={styleContainer()}>
         {mobile? <label>Notes</label> : null}
         {view()}
       </div>

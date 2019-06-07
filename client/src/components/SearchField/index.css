@@ -30,7 +30,7 @@
 
 .SearchField--create {
   background-color: limegreen;
-  color: #eee;
+  color: var(--white);
   display: grid;
   align-items: center;
   justify-items: center;

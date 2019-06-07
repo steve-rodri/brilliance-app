@@ -26,7 +26,8 @@ export default function Schedule(props){
   const eventDisplay = displayColumn('event')
   const confirmationDisplay = displayColumn('confirmation')
 
-  const currentUser = item.staff.find( worker => {
+  let currentUser = {};
+  if(item && item.staff) currentUser = item.staff.find( worker => {
     const email = worker.info.contact.emailAddresses.find( e => e.emailAddress === user.profile.email)
     if (email) return worker
     return null
@@ -39,10 +40,9 @@ export default function Schedule(props){
       <div className="List-Item--Cell" style={{ ...eventDisplay, ...leftCell }}>
         <Link
           to={`${accessLevel}/events/${item.id}`}
-          style={{textDecoration: 'none', color: 'black'}}
-          className="Schedule--event"
+          style={{textDecoration: 'none', color: 'black', height: '100%', width: '100%'}}
         >
-          <div>
+          <div className="Schedule--event">
             <div className="Schedule--event-summary">{summary()}</div>
             {/* <div className="Schedule--event-time-until">
               <p>{item && timeUntil}</p>

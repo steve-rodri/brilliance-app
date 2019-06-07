@@ -19,7 +19,9 @@ body {
   --darker-blue: #143154;
   --dark-blue: #1D4678;
   --med-dark-blue: #0071B5;
+
   --dark-gray: #222222;
+  --med-dark-gray: #666;
 
   --turquoise: #01B0DF;
   --light-blue: #D4F1FF;
@@ -29,9 +31,14 @@ body {
   --light-blue-t: rgba(212,241,255, .3);
 
   --light-gray: #DADBE0;
+  --dim-white: #bbb;
+  --white: #eee;
+  --highlight: #fff;
 
   /* Mobile compensation */
   --mobile-adj: 115px;
+
+  --box-shadow: 5px 5px 1px var(--darker-blue);
 }
 
 @media (min-width: 750px) {

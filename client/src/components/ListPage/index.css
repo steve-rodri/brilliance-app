@@ -20,7 +20,7 @@
     display: block;
     padding: 10px 10px 40px 10px;
     height: 100%;
-    background-color: #222222;
+    background-color: var(--dark-gray);
   }
 }
 
@@ -51,9 +51,9 @@
   top: 75px;
   justify-content: center;
   align-items: center;
-  color: #eeeeee;
   grid-row: 1 / span 1;
   background-color: var(--dark-blue);
+  color: var(--white);
 }
 
 .ListPage--category-title {
@@ -85,8 +85,12 @@
   display: grid;
   align-items: center;
   background-color: var(--dark-blue);
-  color: #eeeeee;
+  color: var(--white);
   grid-row: 3 / span 1;
+}
+
+.ListPage--end-message > h4 {
+  text-shadow: 0 4px 10px black;
 }
 
 .ListPage--end-message > div {

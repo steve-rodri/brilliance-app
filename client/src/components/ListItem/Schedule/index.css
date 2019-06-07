@@ -4,11 +4,8 @@
   display: grid;
   align-items: center;
   justify-items: start;
+  grid-gap: 5px;
   padding: 10px 20px;
-}
-
-.Schedule--event-summary {
-  justify-self: start;
 }
 
 .Schedule--event-summary > h4 {
@@ -23,7 +20,8 @@
 
 .Schedule--event-time {
   display: grid;
-  align-items: center;
+  grid: auto 1fr / auto;
+  align-items: stretch;
   justify-items: start;
 }
 

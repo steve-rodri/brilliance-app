@@ -1,5 +1,5 @@
 .Modal {
-  background: #eee;
+  background: var(--white);
   overflow: auto;
   WebkitOverflowScrolling: touch;
   outline: none;
@@ -15,7 +15,7 @@
     min-height: 450px;
     max-height: 650px;
     width: auto;
-    border: 1px solid #ccc;
+    border: 1px solid var(--light-gray);
     border-radius: 5px;
   }
 }
@@ -48,7 +48,7 @@
 
 .Modal--close {
   display: none;
-  color: #eee;
+  color: var(--white);
 }
 
 @media (min-width: 750px) {

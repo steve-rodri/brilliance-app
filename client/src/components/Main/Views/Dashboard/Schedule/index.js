@@ -105,23 +105,24 @@ export default class Schedule extends Component {
     if (userEvents.length > 1) {
       return (
         <Fragment>
-          <p>{`You are currently scheduled on ${userEvents.length} events.`}</p>
+          <p>{`You are scheduled on ${userEvents.length} upcoming events.`}</p>
         </Fragment>
       )
     } else {
       return (
         <Fragment>
-          <p>{`You are currently scheduled on 1 event.`}</p>
+          <p>{`You are scheduled on 1 upcoming event.`}</p>
         </Fragment>
       )
     }
   }
 
   changeConfirmation = async (eventId, currentUserId) => {
-    const { userEvents } = this.state;
-    userEvents.map( async evt => {
+    const { userEvents: userEvts } = this.state;
+    let updatedEvt, updatedStaff;
+    const userEvents = userEvts.map( evt => {
       if (evt.id !== eventId) return evt;
-      const updatedStaff = evt.staff.map( worker => {
+        updatedStaff = evt.staff.map( worker => {
         if (worker.id !== currentUserId) return worker;
         let updatedWorker = {
           ...worker,
@@ -129,23 +130,25 @@ export default class Schedule extends Component {
         }
         return updatedWorker
       })
-      const updatedEvt = {
+      updatedEvt = {
         ...evt,
         staff: updatedStaff
       }
-      const test = await this.updateEvent(updatedEvt, { event_employees_attributes: updatedStaff })
-      console.log(test)
       return updatedEvt
     })
+    this.setState({ userEvents })
+    this.updateEvent(updatedEvt, { event_employees_attributes: updatedStaff })
   }
 
   updateEvent = async(e, data) => {
     if (!e) return;
-    const calendarId = localStorage.getItem('google_calendar_id')
-    const { signout } = this.props
     let updatedEvent = e;
     if (data) updatedEvent = await event.update(e.id, data, this.ajaxOptions)
+
+    //Update Google Event
+    const calendarId = localStorage.getItem('google_calendar_id')
     if (!calendarId) return updatedEvent;
+
     let googleEvent, formatted;
     if (e.gcId) {
       googleEvent = await GOOGLE.patchEvent(calendarId, e.gcId, formatToGoogle(updatedEvent), this.ajaxOptions)
@@ -153,7 +156,7 @@ export default class Schedule extends Component {
     if (!e.gcId) {
       googleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.ajaxOptions)
     }
-    formatted = await formatFromGoogle(googleEvent, this.axiosRequestSource.token, signout)
+    formatted = await formatFromGoogle(googleEvent, this.ajaxOptions)
     let newData = { ...data, ...formatted }
     if (newData.event_employees_attributes) {
       const updateStaff = newData.event_employees_attributes.filter(ee => {
@@ -166,6 +169,7 @@ export default class Schedule extends Component {
       newData.event_employees_attributes = updateStaff
     }
     updatedEvent = await event.update(e.id, newData, this.ajaxOptions)
+    return updatedEvent;
   }
 
   syncWithGoogle = async (evt) => {
@@ -199,7 +203,7 @@ export default class Schedule extends Component {
                 />
               </Fragment>
             :
-            <p className="Schedule--not-currently">You are not currently scheduled on any events at this time...</p>
+            <p className="Schedule--not-currently">You are not scheduled on any upcoming events at this time...</p>
           :
           <Loader/>
         }

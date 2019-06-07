@@ -22,6 +22,18 @@ export default class List extends Component {
     this.container.current.scrollTop = listScrollPosition
   }
 
+  styleList = () => {
+    const { items, mobile, loading } = this.props
+    let style = {};
+    if (!mobile && !loading && items && items.length ) {
+      style = {
+        boxShadow: 'var(--box-shadow)',
+        zIndex: 2
+      }
+    }
+    return style
+  }
+
   render(){
     const {
       page,
@@ -34,7 +46,7 @@ export default class List extends Component {
     } = this.props
 
     return (
-      <div id="List" className="List" ref={this.container}>
+      <div id="List" className="List" ref={this.container} style={this.styleList()}>
         {columnHeaders && items && items.length && view !== 'Dashboard'?
           <div className="Titles">
             {columnHeaders && columnHeaders.map((header, i) => {

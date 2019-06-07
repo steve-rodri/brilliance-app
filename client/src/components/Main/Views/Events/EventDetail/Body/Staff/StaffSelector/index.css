@@ -83,5 +83,5 @@
 
 .StaffSelector--done:hover {
   background-color: var(--med-dark-blue);
-  color: #eeeeee;
+  color: var(--white);
 }

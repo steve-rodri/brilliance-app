@@ -353,7 +353,7 @@ export default class SearchField extends Component {
     const { create: createNew, input: { value }, resultClassName } = this.props
     if (typeof createNew === 'function') {
       const styleOverride = {
-        color: "#eee",
+        color: "var(--white)",
         backgroundColor: "limegreen",
         display: "grid" ,
         height: "100%",

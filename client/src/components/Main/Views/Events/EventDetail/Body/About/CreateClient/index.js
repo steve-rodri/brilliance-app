@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import Contact from './Contact'
 import Company from './Company'
 import { contact, company } from '../../../../../../../../services/BEP_APIcalls.js'

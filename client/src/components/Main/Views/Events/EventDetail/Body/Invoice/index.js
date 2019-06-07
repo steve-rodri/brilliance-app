@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import AddNew from '../../../../../../Buttons/AddNew'
 import { Link } from 'react-router-dom'
 import { styleStatus } from '../../../../../../../helpers/invoiceStatus'
 import numeral from 'numeral'
@@ -70,30 +71,42 @@ export default class Invoice extends Component {
         }
       }
     }
-
-    if (evt) {
-      if (evt.invoice) {
-        const inv = evt.invoice
-        return (
-          <Fragment>
-            <div className="Event-Invoice--summary">
-              <div className="Event-Invoice--total">{this.total(inv)}</div>
-              <Link to={`/${accessLevel}/invoices/${evt.invoice.id}`}>View Invoice</Link>
-            </div>
+    if (!evt) return null
+    if (evt.invoice) {
+      const inv = evt.invoice
+      return (
+        <Fragment>
+          <div className="Event-Invoice--summary">
+            <div className="Event-Invoice--total">{this.total(inv)}</div>
             {inv.kind !== 'Proposal'? this.status(inv) : null}
-          </Fragment>
-        )
-      } else {
-        return(
-          <div className="Event-Invoice--no-invoice">
-            <p>There is no Invoice created for this Job.</p>
-            <Link to={addNewPath()}>Create Invoice</Link>
           </div>
-        )
-      }
-    } else {
-      return null
+          <Link to={`/${accessLevel}/invoices/${evt.invoice.id}`}>
+            <button className="Event-Invoice--view-invoice-button">
+              <p>View Invoice</p>
+            </button>
+          </Link>
+        </Fragment>
+      )
+    } else if (evt.client && !evt.invoice){
+      return(
+        <div className="Event-Invoice--no-invoice">
+          <AddNew
+            linkPath={addNewPath()}
+            type="Invoice"
+          />
+        </div>
+      )
     }
+  }
+
+  styleEventInvoice = () => {
+    const { evt } = this.props
+    let style = {}
+    if (evt && evt.client && !evt.invoice) {
+      style.grid = 'auto / auto'
+      style.alignContent = 'center'
+    }
+    return style;
   }
 
   render(){
@@ -103,7 +116,7 @@ export default class Invoice extends Component {
         {!mobile? <div className="EventDetail-Body--component-title"><h4>Invoice</h4></div>: null}
           <div className="Event-Invoice--container">
           {mobile? <label>Invoice</label> : null}
-            <div className="Event-Invoice">
+            <div className="Event-Invoice" style={this.styleEventInvoice()}>
               {this.view()}
             </div>
           </div>

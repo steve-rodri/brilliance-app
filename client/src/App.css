@@ -247,7 +247,7 @@ select {
 }
 
 .Arrow-Left {
-  border-right: 15px solid #ccc;
+  border-right: 15px solid var(--light-gray);
   justify-self: right;
 }
 
@@ -256,7 +256,7 @@ select {
 }
 
 .Arrow-Right {
-  border-left: 15px solid #ccc;
+  border-left: 15px solid var(--light-gray);
   justify-self: left;
 }
 

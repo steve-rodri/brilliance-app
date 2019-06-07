@@ -20,7 +20,7 @@ export default class Staff extends Component {
   }
 
   view = () => {
-    const { mobile, editMode, workers } = this.props
+    const { editMode, workers } = this.props
     if (editMode) {
       return (
         <Edit
@@ -37,25 +37,17 @@ export default class Staff extends Component {
           status={styleWorkerStatus}
         />
       )
-    } else {
-      return (
-        <div className="Staff--container">
-          {mobile? <label>Staff</label> : null }
-          <div className="Staff--none">
-            <p>No one has been scheduled</p>
-            <p>to work this event...</p>
-          </div>
-        </div>
-      )
-    }
+    } else return null
   }
 
   render(){
-    const { styleComp } = this.props
+    const { styleComp, styleContainer } = this.props
     return (
       <div style={styleComp('Staff')}className="EventDetail-Body--component EventDetail-Body--staff">
         <div className="EventDetail-Body--component-title"><h4>Staff</h4></div>
+        <div className="Staff--container" style={styleContainer()}>
           {this.view()}
+        </div>
       </div>
     )
   }

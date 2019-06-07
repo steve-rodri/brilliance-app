@@ -13,7 +13,7 @@
 .Line--input {
   width: 90%;
   padding: 10px 5px;
-  background-color: #eee;
+  background-color: var(--white);
   text-align: center;
   border:none;
   border: 1px solid #BBBBBB;
@@ -38,7 +38,7 @@
 
 .Line--quantity > div > input {
   text-align: center;
-  background-color: #eee;
+  background-color: var(--white);
 }
 
 .Line--quantity > div > input:focus {
@@ -92,7 +92,7 @@
 
 .Line--price > form > input {
   text-align: center;
-  background-color: #eee;
+  background-color: var(--white);
 }
 
 .Line--price > form > input:focus {

@@ -13,6 +13,7 @@ export const Arrow = styled.button`
 	width: 50px;
 	background: transparent;
 	color: var(--light-gray);
+	font-size: 15px;
 	transition: all 200ms ease-out;
 `;
 
@@ -91,7 +92,7 @@ export const CalendarDate = styled(CalendarCell)`
 	font-size: 3.75em;
 	font-family: 'Roboto', sans-serif;
 	cursor: pointer;
-	color: ${props => props.inMonth ? `#ccc` : `#666`};
+	color: ${props => props.inMonth ? `var(--light-gray)` : `#666`};
   grid-row: ${props => Math.floor(props.index / 7) + 2} / span 1;
 	transition: all 500ms ease-out;
 	border: 2px solid transparent;
