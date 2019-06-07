@@ -1,11 +1,17 @@
 .Logistics--container {
-  display: flex;
-  flex-direction: column;
-  justify-items: flex-start;
+  display: grid;
+  justify-items: center;
   align-items: center;
   height: 100%;
   width: 100%;
+  padding: 0 20px;
   overflow: visible;
+}
+
+@media (min-width: 750px) {
+  .Logistics--container {
+    padding: 15px 20px 10px;
+  }
 }
 
 .Logistics {
@@ -13,18 +19,9 @@
   grid-gap: 5px;
   justify-items: center;
   align-items: center;
-  padding: 0 20px;
   width: 100%;
-  color: #eeeeee;
 }
 
 .Logistics > label {
   justify-self: start;
-}
-
-@media (min-width: 750px) {
-  .Logistics {
-    padding: 30px;
-    color: inherit;
-  }
 }

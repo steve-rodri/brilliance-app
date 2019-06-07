@@ -1,4 +1,13 @@
 /* Mobile Styles */
+
+.Event--title {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding: 10px 20px;
+  grid: auto 1fr / auto ;
+  grid-row-gap: 5px;
+}
 .Event--confirmation,
 .Event--scheduled,
 .Event--scheduled-details {
@@ -16,7 +25,6 @@
 .Event--summary {
   justify-self: start;
   grid-column: 1 / span 2;
-  padding: 2px;
 }
 
 .Event--summary > h4 {
@@ -24,40 +32,23 @@
 }
 
 @media (min-width: 750px) {
-  .Event--summary {
-    justify-self: start;
-    align-self: start;
-    grid-column: 1 / auto;
+  .Event--summary > h4 {
+    font-size: 1.2em;
   }
 }
 
 .Event--time {
-  justify-self: end;
-  align-self: start;
-  grid-column: 2 / span 1;
-  grid-row: 2 / span 1;
-  padding-right: 10px;
+  grid-column: auto;
+  grid-row: auto;
+  justify-self: start;
+  align-self: stretch;
   display: grid;
-  align-items: center;
+  align-items: start;
+  padding: 0;
 }
 
 .Event--time > p {
-  text-align: right;
-}
-
-@media (min-width: 750px) {
-  .Event--time {
-    justify-self: start;
-    align-self: end;
-    grid-column: auto;
-    grid-row: auto;
-    padding: 0;
-    align-content: center;
-  }
-
-  .Event--time > p {
-    text-align: left;
-  }
+  text-align: left;
 }
 
 .Event--next-event-triangle {

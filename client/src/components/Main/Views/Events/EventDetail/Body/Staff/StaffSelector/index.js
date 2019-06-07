@@ -21,7 +21,7 @@ export default class StaffSelector extends Component {
       style.border = '2px dashed var(--light-gray)'
       if (!mobile) {
         style.border = '1px solid #bbb'
-        style.backgroundColor = '#eee'
+        style.backgroundColor = 'var(--white)'
       }
     }
     return style

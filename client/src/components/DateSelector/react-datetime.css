@@ -65,7 +65,7 @@
 .rdtPicker td.rdtMinute:hover,
 .rdtPicker td.rdtSecond:hover,
 .rdtPicker .rdtTimeToggle:hover {
-  background: #eeeeee;
+  background: var(--white);
   cursor: pointer;
 }
 .rdtPicker td.rdtOld,
@@ -154,7 +154,7 @@
   cursor: pointer;
 }
 .rdtPicker thead tr:first-child th:hover {
-  background: #eeeeee;
+  background: var(--white);
 }
 
 .rdtPicker tfoot {
@@ -167,7 +167,7 @@
   cursor: pointer;
 }
 .rdtPicker button:hover {
-  background-color: #eee;
+  background-color: var(--white);
 }
 
 .rdtPicker thead button {
@@ -183,7 +183,7 @@ td.rdtYear {
 }
 td.rdtMonth:hover,
 td.rdtYear:hover {
-  background: #eee;
+  background: var(--white);
 }
 
 .rdtCounters {
@@ -214,7 +214,7 @@ td.rdtYear:hover {
 }
 
 .rdtCounter .rdtBtn:hover {
-  background: #eee;
+  background: var(--white);
 }
 
 .rdtCount {

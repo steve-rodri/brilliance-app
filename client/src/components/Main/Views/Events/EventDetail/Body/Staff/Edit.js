@@ -17,19 +17,6 @@ export default class Edit extends Component {
     )
   }
 
-  styleContainer = () => {
-    const { workers } = this.props
-    const style = {}
-
-    if (workers && workers.length) {
-      style.alignSelf = 'start'
-    } else {
-      style.alignSelf = 'center'
-    }
-
-    return style
-  }
-
   showInput = () => {
     this.setState({
       showInput: true
@@ -39,7 +26,7 @@ export default class Edit extends Component {
   render(){
     const { mobile } = this.props
     return (
-      <div className="Staff--container Staff--Edit" style={this.styleContainer()}>
+      <Fragment>
         {
           mobile?
           <Fragment>
@@ -51,29 +38,7 @@ export default class Edit extends Component {
           :
           <StaffSelector {...this.props}/>
         }
-      </div>
+      </Fragment>
     )
   }
 }
-
-
-
-// {
-//   workers && workers.length?
-//   <div className="Staff Staff--Edit" onClick={this.props.chooseWorker}>
-//     {workers?
-//       workers.map( (worker, i) =>
-//         <div className="Staff--worker Staff--Edit" key={i} style={this.styleRow()}>
-//           <div className="Staff--worker-name Staff--Edit"><p>{worker.info.contact.fullName}</p></div>
-//         </div>
-//       )
-//       :
-//       null
-//     }
-//   </div>
-//   :
-//   <div className="Staff--add-worker Staff--Edit" onClick={this.props.chooseWorker}>
-//     <div className="Staff--plus-icon">{plusIcon()}</div>
-//     <p style={{fontWeight: 700}}>ADD</p>
-//   </div>
-// }

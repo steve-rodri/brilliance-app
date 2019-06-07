@@ -18,14 +18,14 @@ export default function Staff(props){
       return (
         {
           backgroundColor: 'limegreen',
-          color: '#eee'
+          color: 'var(--white)'
         }
       )
     } else {
       return (
         {
           backgroundColor: 'red',
-          color: '#eee'
+          color: 'var(--white)'
         }
       )
     }

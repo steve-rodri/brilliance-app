@@ -47,7 +47,7 @@ function date(fields, short, days){
         if (short) {
           if (days) {
             return (
-              `${start.format('ddd MMM Do')} - ${end.subtract(1,'day').format('ddd MMM Do YYYY')}`
+              `${start.format('ddd, MMM Do')} - ${end.subtract(1,'day').format('ddd, MMM Do YYYY')}`
             )
           } else {
             return (
@@ -57,7 +57,7 @@ function date(fields, short, days){
         } else {
           if (days) {
             return (
-              `${start.format('ddd MMMM Do')} - ${end.subtract(1,'day').format('ddd MMMM Do YYYY')}`
+              `${start.format('ddd, MMMM Do')} - ${end.subtract(1,'day').format('ddd, MMMM Do YYYY')}`
             )
           } else {
             return (
@@ -69,7 +69,7 @@ function date(fields, short, days){
         if (short) {
           if (days) {
             return (
-              `${start.format('ddd MMM Do')} - ${end.format('ddd MMM Do YYYY')}`
+              `${start.format('ddd, MMM Do')} - ${end.format('ddd, MMM Do YYYY')}`
             )
           } else {
             return (
@@ -79,7 +79,7 @@ function date(fields, short, days){
         } else {
           if (days) {
             return (
-              `${start.format('ddd MMMM Do')} - ${end.format('ddd MMMM Do YYYY')}`
+              `${start.format('ddd, MMMM Do')} - ${end.format('ddd, MMMM Do YYYY')}`
             )
           } else {
             return (
@@ -121,7 +121,7 @@ function date(fields, short, days){
         if (short) {
           if (days) {
             return (
-              `${start.format('ddd MMM Do')} - ${end.subtract(1,'day').format('ddd MMM Do')}`
+              `${start.format('ddd, MMM Do')} - ${end.subtract(1,'day').format('ddd, MMM Do')}`
             )
           } else {
             return (
@@ -131,7 +131,7 @@ function date(fields, short, days){
         } else {
           if (days) {
             return (
-              `${start.format('ddd MMMM Do')} - ${end.subtract(1,'day').format('ddd MMMM Do')}`
+              `${start.format('ddd, MMMM Do')} - ${end.subtract(1,'day').format('ddd, MMMM Do')}`
             )
           } else {
             return (
@@ -143,7 +143,7 @@ function date(fields, short, days){
         if (short) {
           if (days) {
             return (
-              `${start.format('ddd MMM Do')} - ${end.format('ddd MMM Do')}`
+              `${start.format('ddd, MMM Do')} - ${end.format('ddd, MMM Do')}`
             )
           } else {
             return (
@@ -153,7 +153,7 @@ function date(fields, short, days){
         } else {
           if (days) {
             return (
-              `${start.format('ddd MMMM Do')} - ${end.format('ddd MMMM Do')}`
+              `${start.format('ddd, MMMM Do')} - ${end.format('ddd, MMMM Do')}`
             )
           } else {
             return (

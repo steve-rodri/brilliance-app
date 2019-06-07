@@ -6,26 +6,56 @@
   height: 100%;
   width: 100%;
   overflow: auto;
-  padding: 0 20px 20px;
+  padding: 0 20px 5px;
 }
 
 .Event-Invoice--container > label {
   justify-self: start;
 }
 
+@media (min-width: 750px) {
+  .Event-Invoice--container {
+    align-items: stretch;
+    justify-items: stretch;
+    padding: 10px 20px;
+  }
+}
+
 .Event-Invoice {
+  width: 100%;
   display: grid;
   justify-items: start;
+  align-items: start;
+  grid-gap: 10px;
+}
+
+.Event-Invoice > a {
+  justify-self: stretch;
+}
+
+@media (min-width: 750px) {
+  .Event-Invoice {
+    height: 100%;
+    padding: 0;
+    grid: 1fr auto / auto;
+    justify-items: stretch;
+  }
+}
+
+.Event-Invoice--view-invoice-button {
+  border: 1px solid var(--dim-white);
+  background-color: var(--darker-blue);
+  color: white;
+  border-radius: 5px;
+  height: 60px;
+  width: 100%;
+  display: grid;
   align-items: center;
-  grid-auto-flow: column;
-  grid-gap: 5px;
-  padding-left: 10px;
+  justify-items: center;
 }
 
-.Event-Invoice--summary {
-}
-
-.Event-Invoice--status {
+.Event-Invoice--view-invoice-button > p {
+  font-weight: 700;
 }
 
 .Event-Invoice--no-invoice {
@@ -33,35 +63,22 @@
   grid-gap: 20px;
 }
 
+.Event-Invoice--summary {
+  padding-left: 10px;
+}
+
 @media (min-width: 750px) {
-  .Event-Invoice--container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  .Event-Invoice--summary {
     height: 100%;
     width: 100%;
-    overflow: auto;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: 0;
   }
+}
 
-  .Event-Invoice {
-    height: 100%;
-    padding: 30px 30px 30px 30px;
-    color: #eeeeee;
-    grid-template-rows: repeat(3, auto)
-  }
-
-  @media (min-width: 750px) {
-    .Event-Invoice {
-      color: inherit;
-    }
-  }
-
-  .Event-Invoice--summary {
-    grid-row: 2;
-    justify-self: center;
-  }
-
+@media (min-width: 750px) {
   .Event-Invoice--status {
     grid-row: 3;
     align-self: end;

@@ -19,7 +19,7 @@
 .bars div {
   height: 4px;
   width: 100%;
-  background-color: #eeeeee;
+  background-color: var(--white);
   transition: all 250ms ease;
 }
 

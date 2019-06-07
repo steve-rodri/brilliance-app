@@ -23,13 +23,13 @@ export default class Logistics extends Component {
   }
 
   render(){
-    const { editMode, styleComp } = this.props
+    const { editMode, styleComp, styleContainer } = this.props
     return (
       <Fragment>
         { editMode?
           <div style={styleComp('Logistics')}className="EventDetail-Body--component EventDetail-Body--logistics">
             <div className="EventDetail-Body--component-title"><h4>Logistics</h4></div>
-              <div className="Logistics--container">
+              <div className="Logistics--container" style={styleContainer()}>
                 {this.view()}
               </div>
           </div>

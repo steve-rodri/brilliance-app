@@ -99,7 +99,7 @@
   }
 
   .NavSection--categories > p:hover {
-    color: var(--turquoise);
+    color: white;
     cursor: pointer;
   }
 }

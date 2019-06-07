@@ -135,24 +135,20 @@ nav > * > h2 {
   color: var(--light-gray);
 }
 
-nav > * >:hover, nav > * > h3:hover{
+nav > * >:hover, nav > * > h2:hover{
   cursor: pointer;
 }
 
-nav > *:hover, nav > * > h3:hover {
-  color: var(--turquoise);
+nav > *:hover, nav > * > h2:hover {
+  color: white;
 }
 
-nav > *:active, nav > * > h3:active {
-  color: var(--turquoise);
+nav > *:active, nav > * > h2:active {
+  color: white;
 }
 
 .user-circle:hover, .logo:hover {
   cursor: pointer
-}
-
-.user-circle:hover {
-  border-color: white;
 }
 
 .user-circle {
@@ -164,7 +160,6 @@ nav > *:active, nav > * > h3:active {
   grid-column: 3 / span 1;
   justify-self: center;
   transition: all 250ms ease-out;
-  border: 1px solid transparent;
 }
 
 .user-photo {

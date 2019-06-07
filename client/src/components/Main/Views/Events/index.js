@@ -5,6 +5,7 @@ import EventDetail from './EventDetail/index.js'
 import { GOOGLE } from '../../../../services/google_service'
 import { formatToGoogle, formatFromGoogle } from '../../../../helpers/googleFormatters'
 import { event, client, employee } from '../../../../services/BEP_APIcalls.js'
+import { date } from '../../../../helpers/datetime'
 import { clientName } from '../../../../helpers/clientHelpers'
 import { eventTitle } from '../../../../helpers/eventHelpers'
 import queryString from 'query-string'
@@ -163,14 +164,14 @@ export default class Events extends Component {
     const { state } = this
     const start = moment(s);
     const end = moment(e);
-    let date = `${start.format('LL')} - ${end.format('LL')}`
-    if (isDay()) date = `${start.format('LL')}`
-    if (isMonth()) date = `${start.format('MMMM YYYY')}`
-    let searchLabel = date
+    let d8 = `${start.format('LL')} - ${end.format('LL')}`
+    if (isDay()) d8 = `${date(start, true, true)}`
+    if (isMonth()) d8 = `${start.format('MMMM YYYY')}`
+    let searchLabel = d8
 
-    if (state.category) searchLabel = `${state.category} - ${date}`
-    if (state.client) searchLabel = `${state.client} - ${date}`
-    if (state.query) searchLabel = `${state.query} - ${date}`
+    if (state.category) searchLabel = `${state.category} - ${d8}`
+    if (state.client) searchLabel = `${state.client} - ${d8}`
+    if (state.query) searchLabel = `${state.query} - ${d8}`
 
     this.ajaxOptions.sendCount = true
     this.setState(

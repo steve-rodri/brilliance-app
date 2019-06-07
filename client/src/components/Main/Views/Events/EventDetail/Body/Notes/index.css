@@ -7,6 +7,14 @@
   padding: 0 20px;
 }
 
+@media (min-width: 750px) {
+  .Notes--container {
+    width: 100%;
+    height: 100%;
+    padding: 15px 20px 10px;
+  }
+}
+
 .Notes,
 .Notes--readonly {
   border: none;
@@ -26,31 +34,29 @@
   border: 1px solid #BBBBBB;
 }
 
+@media (min-width: 750px) {
+  .Notes {
+    color: black;
+    padding: 5px;
+    overflow: auto;
+    min-height: 300px;
+  }
+}
+
 .Notes--readonly {
   text-align: left;
   padding: 0 10px;
+}
+
+@media (min-width: 750px) {
+  .Notes--readonly {
+    color: black;
+    padding: 0;
+  }
 }
 
 .Notes:focus,
 .Notes-readonly:focus {
   outline: none;
   box-shadow: 0 0 2px 2px var(--light-blue);
-}
-
-@media (min-width: 750px) {
-  .Notes--container {
-    width: 100%;
-    height: 100%;
-    padding: 30px;
-  }
-
-  .Notes {
-    overflow: auto;
-    min-height: 300px;
-  }
-
-  .Notes, .Notes--readonly {
-    color: black;
-    padding: 5px;
-  }
 }

@@ -13,7 +13,7 @@
 }
 
 .Schedule--not-currently {
-  color: #eee;
+  color: var(--white);
   padding: 0 15px; 
 }
 

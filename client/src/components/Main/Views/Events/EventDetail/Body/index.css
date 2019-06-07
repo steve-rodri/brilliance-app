@@ -8,7 +8,7 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   background-color: transparent;
 }
@@ -38,6 +38,8 @@
     position: relative;
     grid-template-rows: 30px auto;
     background-color: var(--light-gray);
+    box-shadow: 0 5px 1px 0 var(--darker-blue);
+    border-radius: 1px;
   }
 
   .EventDetail-Body--component-title {
@@ -51,21 +53,12 @@
     align-items: center;
     background-color: var(--dark-gray);
     color: var(--light-gray);
+    border-radius: 1px 1px 0 0;
   }
 
   .EventDetail-Body--notes {
     overscroll-behavior-y: contain;
     overflow: auto;
     align-self: start;
-  }
-
-  .EventDetail-Body--about {
-  }
-
-  .EventDetail-Body--staff {
-    align-self: start;
-  }
-
-  .EventDetail-Body--invoice {
   }
 }

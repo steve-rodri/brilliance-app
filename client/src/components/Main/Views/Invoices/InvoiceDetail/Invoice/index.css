@@ -44,7 +44,7 @@
 .Invoice--header-cell {
   padding: 15px;
   background: var(--dark-gray);
-  color: #eeeeee;
+  color: var(--white);
 }
 
 .Invoice--header-price > h4 {
@@ -76,8 +76,8 @@
 
 .Invoice--cell {
   border-top: 1px solid var(--dark-gray);
-  border-bottom: 1px solid #cccccc;
-  background-color: #eeeeee;
+  border-bottom: 1px solid var(--light-gray)ccc;
+  background-color: var(--white);
   padding: 15px 10px;
 }
 
@@ -87,7 +87,7 @@
   justify-items: center;
   align-items: center;
   background-color: limegreen;
-  color: #eee;
+  color: var(--white);
   width: 100%;
   padding: 1px 0;
 }
