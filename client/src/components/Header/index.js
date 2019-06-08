@@ -83,7 +83,7 @@ export default class Header extends Component {
           displayNav?
           <div className="Header--drop-down">
 
-            <div className="Header--nav-menu" style={location && location.pathname === `/${accessLevel}`? {gridAutoFlow: 'row', fontSize: '2em'} : {}}>
+            <div className="Header--nav-menu" style={location && location.pathname === `/${accessLevel}`? {gridAutoFlow: 'row', gridRow: 'span 2', fontSize: '2em'} : {}}>
               <Link to={{pathname: `/${accessLevel}/events`, state: { nav: false }}} onClick={this.changeNav}><h3>Jobs</h3></Link>
               {/* <Link to={{pathname: `/${accessLevel}/clients`, state: { nav: false }}} onClick={this.changeNav}><h3>Clients</h3></Link> */}
               {/* <Link to={{pathname: `/${accessLevel}/invoices`, state: { nav: false }}} onClick={this.changeNav}><h3>Invoices</h3></Link> */}

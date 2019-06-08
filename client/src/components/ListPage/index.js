@@ -32,7 +32,7 @@ export default class ListPage extends Component {
     if (data && data.length) {
       return {}
     } else if (mobile) {
-      return { justifyContent: 'center', height: 'calc(100vh - 245px - var(--mobile-adj))'}
+      return { justifyContent: 'center', height: 'calc(100vh - 225px - var(--mobile-adj))'}
     } else {
       return { justifyContent: 'center', height: 'calc(100vh - 155px)'}
     }
@@ -89,8 +89,11 @@ export default class ListPage extends Component {
 
           <div className="ListPage--end-message">
             {
-              count?
-              <h4>{`${count} ${count > 1? view : singular()}`}</h4>
+              data && data.length?
+                count?
+                <h4>{`${count} ${count > 1? view : singular()}`}</h4>
+                :
+                <h4>{`${data.length} ${data.length > 1? view : singular()}`}</h4>
               :
               mobile?
               <div>

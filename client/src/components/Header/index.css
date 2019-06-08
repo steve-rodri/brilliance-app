@@ -40,6 +40,7 @@ header {
   top: 75px;
   height: calc(100% - 75px);
   display: grid;
+  grid: auto 1fr / auto;
   grid-gap: 7.5px;
   /* align-content: center; */
   align-items: center;
