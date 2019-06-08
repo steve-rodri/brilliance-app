@@ -43,7 +43,6 @@
 }
 
 .Event-Invoice--view-invoice-button {
-  border: 1px solid var(--dim-white);
   background-color: var(--darker-blue);
   color: white;
   border-radius: 5px;
@@ -56,6 +55,12 @@
 
 .Event-Invoice--view-invoice-button > p {
   font-weight: 700;
+}
+
+@media (min-width: 750px) {
+  .Event-Invoice--view-invoice-button {
+    height: 45px;
+  }
 }
 
 .Event-Invoice--no-invoice {

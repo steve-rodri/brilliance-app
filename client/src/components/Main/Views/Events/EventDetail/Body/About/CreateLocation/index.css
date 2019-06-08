@@ -1,0 +1,69 @@
+.CreateLocation {
+  display: grid;
+  grid: auto 1fr auto / auto;
+  min-width: 300px;
+}
+
+.CreateLocation--header {
+  height: 75px;
+  background-color: var(--darker-blue);
+  color: var(--white);
+  display: grid;
+  grid-auto-flow: column;
+  grid: auto / 1fr auto 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+@media (min-width: 750px) {
+  .CreateLocation--header {
+    grid: auto / auto;
+  }
+}
+
+.CreateLocation--back-button {
+  justify-self: start;
+  padding: 5px 10px;
+  border: 1px solid var(--white);
+  color: var(--white);
+  border-radius: 2.5px;
+  margin-left: 10px;
+}
+
+.CreateLocation--content {
+  padding: 20px;
+  display: grid;
+  grid-gap: 10px;
+  justify-content: center;
+  align-content: center;
+}
+
+.CreateLocation--skip {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.CreateLocation--divider {
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.CreateLocation--divider > div {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.CreateLocation--footer {
+  display: grid;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.CreateLocation--button {
+  padding: 20px 40px;
+  border-radius: 5px;
+  border: 2px solid black;
+}

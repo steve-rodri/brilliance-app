@@ -416,7 +416,7 @@ export default class Events extends Component {
 
   getActiveEmployees = async() => {
     const data = await employee.batch({ active: true }, this.ajaxOptions)
-    this.setState({ employees: data.employees })
+    if (data) this.setState({ employees: data.employees })
   }
 
   // --------------------------Handle-Change------------------------------------
@@ -440,19 +440,19 @@ export default class Events extends Component {
       })
     } else if (width < 700) {
       this.setState({
-        columnHeaders: ['title', 'title', 'confirmation']
+        columnHeaders: ['job', 'job', 'status']
       })
     } else if (width < 900) {
       this.setState({
-        columnHeaders: ['title', 'title', 'schedule', 'confirmation']
+        columnHeaders: ['job', 'job', 'staff', 'status']
       })
     } else if (width < 1300){
       this.setState({
-        columnHeaders: ['title', 'title', 'title', 'schedule', 'confirmation']
+        columnHeaders: ['job', 'job', 'job', 'staff', 'status']
       })
     } else {
       this.setState({
-        columnHeaders: ['title', 'title', 'title','','schedule', 'confirmation']
+        columnHeaders: ['job', 'job', 'job','','staff', 'status']
       })
     }
   }

@@ -14,6 +14,12 @@
   align-items: center;
 }
 
+@media (min-width: 750px) {
+  .CreateClient--header {
+    grid: auto / auto;
+  }
+}
+
 .CreateClient--back-button {
   justify-self: start;
   padding: 5px 10px;

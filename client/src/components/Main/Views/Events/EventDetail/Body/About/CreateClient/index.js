@@ -233,17 +233,23 @@ export default class CreateClient extends Component {
 
   render (){
     const { view, formData: { contact, company } } = this.state
+    const { mobile } = this.props
     const noFormData = !Object.keys(contact).length && !Object.keys(company).length
     return (
       <div className="CreateClient">
         <div className="CreateClient--header">
 
-          <button
-            className="CreateClient--back-button"
-            onClick={this.props.close}
-          >
-            Back
-          </button>
+          {
+            mobile?
+            <button
+              className="CreateClient--back-button"
+              onClick={this.props.close}
+            >
+              Back
+            </button>
+            :
+            null
+          }
 
           <h2>Create Client</h2>
         </div>

@@ -4,6 +4,13 @@
   background-color: var(--light-gray);
 }
 
+@media (min-width: 750px) {
+  .EventDetail {
+    grid: auto 1fr / auto;
+    background-color: var(--dark-blue);
+  }
+}
+
 .EventDetail > main {
   grid-row: 2;
 }
@@ -12,10 +19,21 @@
   grid-row: 3;
 }
 
-@media (min-width: 750px) {
-  .EventDetail {
-    height: auto;
-    display: block;
-    background-color: var(--dark-blue);
-  }
+.EventDetail > footer {
+  padding: 20px;
+}
+
+.EventDetail--delete-button {
+  border: 2px solid red;
+  color: red;
+  font-weight: bold;
+  padding: 10px 20px;
+  width: 200px;
+  border-radius: 5px;
+}
+
+.EventDetail--delete-button:hover {
+  border: 2px solid red;
+  background-color: red;
+  color: white;
 }

@@ -21,10 +21,10 @@ export default function Event(props){
   const leftCell = styleCell('left', event)
   const middleCell = styleCell('middle', event)
   const rightCell = styleCell('right', event)
-  const titleDisplay = displayColumn('title')
+  const titleDisplay = displayColumn('job')
   const intelDisplay = displayColumn('intel')
-  const scheduleDisplay = displayColumn('schedule')
-  const confirmationDisplay = displayColumn('confirmation')
+  const scheduleDisplay = displayColumn('staff')
+  const confirmationDisplay = displayColumn('status')
 
   const hasInvoiceStyling = () => {
     let style = {};
