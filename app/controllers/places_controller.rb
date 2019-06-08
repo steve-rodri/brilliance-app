@@ -41,21 +41,26 @@ class PlacesController < ApplicationController
   # GET /places/find
   def find
     terms = params[:q].split
-
+    query = ''
     terms.each do |term|
-      @places = Place
-        .distinct
-        .where("name LIKE '%#{term}%'
+      query += "(name LIKE '%#{term}%'
         OR name LIKE '%#{term.capitalize}%'
         OR name LIKE '%#{term.upcase}%'
         OR name LIKE '%#{term.downcase}%'
         OR short_name LIKE '%#{term}%'
         OR short_name LIKE '%#{term.capitalize}%'
         OR short_name LIKE '%#{term.upcase}%'
-        OR short_name LIKE '%#{term.downcase}%'")
-        .order(:name)
+        OR short_name LIKE '%#{term.downcase}%')"
+
+      if terms.index(term) + 1 < terms.length
+        query += " AND "
+      end
     end
 
+    @places = Place
+      .distinct
+      .where(query)
+      .order(:name)
     render json: @places
   end
 

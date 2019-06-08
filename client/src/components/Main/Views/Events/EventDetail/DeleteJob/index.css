@@ -1,0 +1,47 @@
+.DeleteJob {
+  display: grid;
+  grid: auto 1fr / auto;
+}
+
+.DeleteJob--header {
+  height: 75px;
+  background-color: var(--darker-blue);
+  color: var(--white);
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.DeleteJob--content {
+  display: grid;
+  align-content: center;
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.DeleteJob--dialog {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.DeleteJob--buttons {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  grid-gap: 20px;
+  align-items: center;
+}
+
+.DeleteJob--buttons > button {
+  height: 60px;
+  width: 150px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+@media (min-width: 750px) {
+  .DeleteJob--buttons > button {
+    width: 200px;
+  }
+}
