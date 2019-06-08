@@ -884,8 +884,9 @@ export default class EventDetail extends Component {
   }
 
   openSubmitModal = async() => {
-    const { evt: { staff }} = this.state;
-    if (staff && staff.length) {
+    const { evt, workers } = this.state;
+    console.log(evt, workers )
+    if ((evt && evt.staff && evt.staff.length) || (workers && workers.length)) {
       this.setState({ showSubmitModal: true })
     } else {
       await this.handleSubmit({ sendUpdates: false })

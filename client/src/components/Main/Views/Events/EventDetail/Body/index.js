@@ -11,9 +11,9 @@ import './index.css'
 export default class Body extends Component {
 
   styleContainer = () => {
-    const { editMode } = this.props
+    const { mobile, editMode } = this.props
     let style = {}
-    if (editMode) {
+    if (!mobile && editMode) {
       style.padding = "15px 20px"
     }
     return style;

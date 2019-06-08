@@ -2,7 +2,7 @@
   justify-self: stretch;
   align-self: stretch;
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 5px;
   align-items: center;
   justify-items: start;
   overflow: auto;
@@ -81,7 +81,6 @@
 }
 
 .Staff--choose-workers {
-  border: 1px solid #bbb;
   background-color: var(--darker-blue);
   color: white;
   border-radius: 5px;
