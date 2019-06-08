@@ -586,6 +586,39 @@ export const address = {
   }
 }
 
+export const address = {
+  batch: async function(params, options){
+    const { sendCount: send_count, cancelToken, unauthorizedCB } = options
+
+    try {
+      const resp = await axios.get('/api/addresses', {
+        params: {
+          ...params,
+          send_count
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
+        cancelToken: cancelToken,
+        onDownloadProgress: function (pe) {
+          if (pe.lengthComputable) {
+            console.log(pe.loaded, pe.total)
+          }
+        }
+      })
+      return resp.data
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Address Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
+  }
+}
+
 export const contact = {
   find: async function(params, options){
     const { cancelToken, unauthorizedCB, sendCount: send_count } = options
