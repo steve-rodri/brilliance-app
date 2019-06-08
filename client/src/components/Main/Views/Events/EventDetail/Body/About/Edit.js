@@ -50,6 +50,7 @@ export default class Edit extends Component {
             handleChange={this.props.handleSearchChange}
             onEnter={this.props.onEnter}
             onSelect={this.props.onSelect}
+            create={this.props.createLocation}
           />
 
         <label>Kind</label>

@@ -58,7 +58,7 @@ export default class Body extends Component {
     const about = fields &&
     (fields.client || fields.location || date(fields) || time(fields));
 
-    const showInvoice = !isNew && !editMode && evt && evt.client
+    const showInvoice = !isNew && !editMode && evt && ((evt.client && !evt.invoice) || (!evt.client && evt.invoice))
     const showStaff = editMode || ( evt && evt.staff && evt.staff.length )
 
     return (

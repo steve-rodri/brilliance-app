@@ -3,9 +3,28 @@ class AddressesController < ApplicationController
 
   # GET /addresses
   def index
-    @addresses = Address.all
+    if params[:q]
+      query = ""
+      terms = params[:q].split
+      terms.each do |term|
+        query += "(address LIKE '%#{term}%'
+        OR address LIKE '%#{term.capitalize}%'
+        OR address LIKE '%#{term.upcase}%'
+        OR address LIKE '%#{term.downcase}%')"
 
-    render json: @addresses
+        if terms.index(term) + 1 < terms.length
+          query += " AND "
+        end
+      end
+      @addresses = Address
+        .distinct
+        .where(query)
+        .order(:address)
+      render json: @addresses
+    else
+      @addresses = Address.all
+      render json: @addresses
+    end
   end
 
   # GET /addresses/1
