@@ -6,7 +6,9 @@ import Buttons from '../../../../Buttons/Buttons'
 import Modal from '../../../../Modal';
 import StaffSelector from './Body/Staff/StaffSelector'
 import CreateClient from './Body/About/CreateClient/'
+import CreateLocation from './Body/About/CreateLocation/'
 import SendUpdates from './SendUpdates/';
+import DeleteJob from './DeleteJob/';
 import { GOOGLE } from '../../../../../services/google_service';
 import { event, client, place, eventEmployee } from '../../../../../services/BEP_APIcalls.js';
 import { eventTitle } from '../../../../../helpers/eventHelpers';
@@ -29,6 +31,7 @@ export default class EventDetail extends Component {
       editMode: false,
       showStaffModal: false,
       showCreateClientModal: false,
+      showCreateLocationModal: false,
       redirectToEvents: false,
     }
     this.axiosRequestSource = axios.CancelToken.source()
@@ -658,6 +661,11 @@ export default class EventDetail extends Component {
     }
   }
 
+  createLocation = async(data) => {
+    const newLocation = await place.create(data, this.ajaxOptions);
+    this.setLocationName(newLocation)
+  }
+
 // --------------------------------Event-Staff----------------------------------
 
   chooseWorker = async() => {
@@ -867,8 +875,21 @@ export default class EventDetail extends Component {
     this.setState({ showCreateClientModal: false })
   }
 
-  openSubmitModal = () => {
-    this.setState({ showSubmitModal: true })
+  openCreateLocationModal = () => {
+    this.setState({ showCreateLocationModal: true })
+  }
+
+  closeCreateLocationModal = () => {
+    this.setState({ showCreateLocationModal: false })
+  }
+
+  openSubmitModal = async() => {
+    const { evt: { staff }} = this.state;
+    if (staff && staff.length) {
+      this.setState({ showSubmitModal: true })
+    } else {
+      await this.handleSubmit({ sendUpdates: false })
+    }
   }
 
   closeSubmitModal = () => {
@@ -947,9 +968,24 @@ export default class EventDetail extends Component {
           removeWorker={this.removeWorker}
 
           createClient={this.openCreateClientModal}
+          createLocation={this.openCreateLocationModal}
 
           scrollToTop={this.scrollToTop}
         />
+
+        {
+          this.state.editMode?
+          <footer>
+            <button
+              className="EventDetail--delete-button"
+              onClick={this.openDeleteModal}
+            >
+              DELETE JOB
+            </button>
+          </footer>
+          :
+          null
+        }
 
         {
           mobile?
@@ -1002,6 +1038,24 @@ export default class EventDetail extends Component {
         }
 
         {
+          this.state.showCreateLocationModal?
+          <Modal
+            mobile={this.props.mobile}
+            close={this.closeCreateLocationModal}
+            content={
+              <CreateLocation
+                {...this.props}
+                {...this.state}
+                close={this.closeCreateLocationModal}
+                createLocation={this.createLocation}
+              />
+            }
+          />
+          :
+          null
+        }
+
+        {
           this.state.showSubmitModal?
           <Modal
             mobile={this.props.mobile}
@@ -1021,7 +1075,12 @@ export default class EventDetail extends Component {
           <Modal
             mobile={this.props.mobile}
             close={this.closeDeleteModal}
-            content
+            content={
+              <DeleteJob
+                onDelete={this.handleDelete}
+                close={this.closeDeleteModal}
+              />
+            }
           />
           :
           null

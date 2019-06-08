@@ -59,6 +59,5 @@
   .EventDetail-Body--notes {
     overscroll-behavior-y: contain;
     overflow: auto;
-    align-self: start;
   }
 }

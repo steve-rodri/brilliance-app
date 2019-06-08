@@ -1,7 +1,7 @@
 .Logistics--container {
   display: grid;
   justify-items: center;
-  align-items: center;
+  align-items: start;
   height: 100%;
   width: 100%;
   padding: 0 20px;
