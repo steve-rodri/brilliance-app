@@ -3,9 +3,41 @@ class EmailAddressesController < ApplicationController
 
   # GET /email_addresses
   def index
-    @email_addresses = EmailAddress.all
+    @@send_count = false
+    if params[:send_count]
+      @@send_count = true
+    end
 
-    render json: @email_addresses
+    if params[:q]
+      count = 0
+      terms = params[:q].split
+      query = ""
+      terms.each do |term|
+        query += "
+        (email_address LIKE '%#{term}%'
+        OR email_address LIKE '%#{term.capitalize}%'
+        OR email_address LIKE '%#{term.upcase}%'
+        OR email_address LIKE '%#{term.downcase}%')"
+
+        if terms.index(term) + 1 < terms.length
+          query += " AND "
+        end
+      end
+      if @@send_count
+        count = EmailAddress
+          .distinct
+          .where(query)
+          .size
+      end
+      @email_addresses = EmailAddress
+        .distinct
+        .where(query)
+
+      render json: @email_addresses, root: 'email_addresses', meta: { count: count }
+    else
+      @email_addresses = EmailAddress.all
+      render json: @email_addresses
+    end
   end
 
   # GET /email_addresses/1
@@ -51,6 +83,6 @@ class EmailAddressesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def email_address_params
-      params.require(:email_address).permit(:address)
+      params.require(:email_address).permit(:email_address)
     end
 end
