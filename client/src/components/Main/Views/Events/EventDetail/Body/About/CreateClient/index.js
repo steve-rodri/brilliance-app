@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Contact from './Contact'
 import Company from './Company'
-import { contact, company } from '../../../../../../../../services/BEP_APIcalls.js'
+import { contact, company, emailAddress } from '../../../../../../../../services/BEP_APIcalls.js'
 import axios from 'axios'
 import './index.css'
 
@@ -13,12 +13,18 @@ export default class CreateClient extends Component {
       search: this.props.fields.client,
       searchResults: {
         contacts: {},
-        companies: {}
+        companies: {},
+        emailAddresses: {}
       },
       formData: {
-        contact: {},
-        company: {}
-      }
+        contact: {
+          email_addresses_attributes: []
+        },
+        company: {
+          email_addresses_attributes: []
+        },
+      },
+      fields: {}
     }
     this.axiosRequestSource = axios.CancelToken.source()
     this.ajaxOptions = {
@@ -37,42 +43,63 @@ export default class CreateClient extends Component {
   }
 
   searchForExisting = async() => {
-    await this.findContacts()
-    await this.findCompanies()
+    const { fields } = this.props
+    await this.findContacts(fields && fields.client)
+    await this.findCompanies(fields && fields.client)
   }
 
-  findContacts = async() => {
-    const { fields } = this.props
-    if (!fields && !fields.client) return;
-    const data = await contact.find({q: fields.client}, this.ajaxOptions)
-    this.setState(prevState => ({
-      searchResults: {
-        ...prevState.searchResults,
-        contacts: {
-          ...prevState.searchResults.contacts,
-          count: data.meta.count,
-          data: data.contacts
+  findContacts = async(query) => {
+    const q = query.split('');
+    if (q.length > 1) {
+      const data = await contact.find({q: query}, this.ajaxOptions)
+      this.setState(prevState => ({
+        searchResults: {
+          ...prevState.searchResults,
+          contacts: {
+            ...prevState.searchResults.contacts,
+            count: data.meta.count,
+            data: data.contacts
+          }
         }
-      }
-    }))
-    return data.contacts
+      }))
+      return data.contacts
+    }
   }
 
-  findCompanies = async() => {
-    const { fields } = this.props
-    if (!fields && !fields.client) return;
-    const data = await company.find({q: fields.client}, this.ajaxOptions)
-    this.setState(prevState => ({
-      searchResults: {
-        ...prevState.searchResults,
-        companies: {
-          ...prevState.searchResults.companies,
-          count: data.meta.count,
-          data: data.companies
+  findCompanies = async(query) => {
+    const q = query.split('')
+    if (q.length > 1 ) {
+      const data = await company.find({q: query}, this.ajaxOptions)
+      this.setState(prevState => ({
+        searchResults: {
+          ...prevState.searchResults,
+          companies: {
+            ...prevState.searchResults.companies,
+            count: data.meta.count,
+            data: data.companies
+          }
         }
-      }
-    }))
-    return data.companies
+      }))
+      return data.companies
+    }
+  }
+
+  findEmailAddresses = async(query) => {
+    const q = query.split('')
+    if (q.length > 1 ) {
+      const data = await emailAddress.find({q: query}, this.ajaxOptions)
+      this.setState(prevState => ({
+        searchResults: {
+          ...prevState.searchResults,
+          emailAddresses: {
+            ...prevState.searchResults.emailAddresses,
+            count: data.meta.count,
+            data: data.emailAddresses
+          }
+        }
+      }))
+      return data.emailAddresses
+    }
   }
 
   skip = () => {
@@ -98,10 +125,34 @@ export default class CreateClient extends Component {
     }))
   }
 
+  handleSearchFieldChange = async(e, type) => {
+    const { name, value } = e.target
+    this.setState(prevState => ({
+      fields: {
+        ...prevState.fields,
+        [name]: value
+      }
+    }))
+
+    switch (type) {
+      case 'company':
+        await this.findCompanies(value)
+      break;
+      case 'email':
+        await this.findEmailAddresses(value)
+      break;
+      case 'contact':
+        await this.findContacts(value)
+      break;
+      default:
+      break;
+    }
+  }
+
   handleSubmit = async() => {
-    const { formData: { contact: contactData, company: companyData }} = this.state
+    const { formData: { contact: contactData, company: companyData, ...data }} = this.state
     const { createClient, close } = this.props
-    let data = {}, newContact, newCompany;
+    let newContact, newCompany;
 
     if(Object.keys(contactData).length) {
       newContact = await contact.create(contactData, this.ajaxOptions)
@@ -125,6 +176,68 @@ export default class CreateClient extends Component {
 
     if (Object.keys(data).length) await createClient(data)
     close()
+  }
+
+  handleSearchFieldSelect = async(e, name, index) => {
+    const {
+      searchResults: {
+        companies: { data: companyData },
+        emailAddresses: { data: emailData }
+      }
+    } = this.state
+    switch (name) {
+      case 'company':
+        this.setState(prevState => ({
+          formData: {
+            ...prevState.formData,
+            company_id: companyData[index].id
+          },
+          fields: {
+            ...prevState.fields,
+            [name]: companyData[index].name
+          }
+        }))
+      break;
+
+      case 'email':
+        this.setState(prevState => {
+          const { type } = this.state
+          const applyState = {
+            fields: {
+              ...prevState.fields,
+              [name]: emailData[index].emailAddress
+            }
+          }
+
+          if (type === 'contact') {
+            applyState.formData = {
+              ...prevState.formData,
+              contact: {
+                ...prevState.formData.contact,
+                email_addresses_attributes: [
+                  { id: emailData[index].id }
+                ]
+              }
+            }
+          }
+          if (type === 'company') {
+            applyState.formData = {
+              ...prevState.formData,
+              company: {
+                ...prevState.formData.company,
+                email_addresses_attributes: [
+                  { id: emailData[index].id }
+                ]
+              }
+            }
+          }
+          return applyState
+        })
+      break;
+
+      default:
+      break;
+    }
   }
 
   setView = (view) => {
@@ -189,6 +302,8 @@ export default class CreateClient extends Component {
               {...this.props}
               {...this.state}
               handleChange={this.handleChange}
+              handleSearchFieldChange={this.handleSearchFieldChange}
+              onSearchFieldSelect={this.handleSearchFieldSelect}
             />
           )
           default:
@@ -212,6 +327,8 @@ export default class CreateClient extends Component {
               {...this.props}
               {...this.state}
               handleChange={this.handleChange}
+              handleSearchFieldChange={this.handleSearchFieldChange}
+              onSearchFieldSelect={this.handleSearchFieldSelect}
             />
           )
           default:

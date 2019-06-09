@@ -10,20 +10,27 @@ class CompaniesController < ApplicationController
 
     if params[:q]
       count = 0
-      query = "clients.id IS NULL AND name LIKE '%#{params[:q]}%'
-      OR name LIKE '%#{params[:q].capitalize}%'
-      OR name LIKE '%#{params[:q].upcase}%'
-      OR name LIKE '%#{params[:q].downcase}%'"
+      terms = params[:q].split
+      query = ""
+      terms.each do |term|
+        query += "
+        (name LIKE '%#{term}%'
+        OR name LIKE '%#{term.capitalize}%'
+        OR name LIKE '%#{term.upcase}%'
+        OR name LIKE '%#{term.downcase}%')"
+
+        if terms.index(term) + 1 < terms.length
+          query += " AND "
+        end
+      end
       if @@send_count
         count = Company
           .distinct
-          .left_outer_joins(:client)
           .where(query)
           .size
       end
       @companies = Company
         .distinct
-        .left_outer_joins(:client)
         .where(query)
 
       render json: @companies, root: 'companies', meta: { count: count }
@@ -71,6 +78,14 @@ class CompaniesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def company_params
-      params.require(:company).permit(:name, :logo, :website, :phone_number)
+      params.require(:company).permit(
+        :name,
+        :logo,
+        :website,
+        :phone_number,
+        email_addresses_attributes: [
+          :email_address
+        ]
+      )
     end
 end

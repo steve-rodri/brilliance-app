@@ -10,30 +10,28 @@ class ContactsController < ApplicationController
 
     if params[:q]
       count = 0
-      query = 'clients.id IS NULL AND '
+      query = ''
       terms = params[:q].split
       terms.each do |term|
-        query += "(contacts.first_name LIKE '%#{term}%'
-        OR contacts.first_name LIKE '%#{term.capitalize}%'
-        OR contacts.last_name LIKE '%#{term}%'
-        OR contacts.last_name LIKE '%#{term.capitalize}%')"
+        query += "(first_name LIKE '%#{term}%'
+        OR first_name LIKE '%#{term.capitalize}%'
+        OR last_name LIKE '%#{term}%'
+        OR last_name LIKE '%#{term.capitalize}%')"
 
         if terms.index(term) + 1 < terms.length
-          query += " OR "
+          query += " AND "
         end
       end
 
       if @@send_count
         count = Contact
           .distinct
-          .joins(:client)
           .where(query)
           .size
       end
 
       @contacts = Contact
         .distinct
-        .joins(:client)
         .where(query)
 
       render json: @contacts, root: "contacts", meta: { count: count }, include: "**"
@@ -90,6 +88,17 @@ class ContactsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def contact_params
-      params.require(:contact).permit(:photo, :prefix, :first_name, :last_name, :phone_number, :work_email, :ss)
+      params.require(:contact).permit(
+        :photo,
+        :prefix,
+        :first_name,
+        :last_name,
+        :phone_number,
+        :work_email,
+        :ss,
+        email_addresses_attributes: [
+          :email_address
+        ]
+      )
     end
 end

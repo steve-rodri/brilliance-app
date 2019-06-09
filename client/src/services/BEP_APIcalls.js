@@ -672,14 +672,23 @@ export const company = {
 }
 
 export const emailAddress = {
-  find: async function(query, options) {
-    const { cancelToken, unauthorizedCB } = options
+  find: async function(params, options){
+    const { cancelToken, unauthorizedCB, sendCount: send_count } = options
     try {
-      const resp = await axios.get(`/api/email_addresses/find?q=${query}`, { cancelToken: cancelToken })
-      return resp.data.emailAddress
+      const resp = await axios.get('/api/email_addresses', {
+        params: {
+          ...params,
+          send_count
+        },
+        paramsSerializer: function (params){
+          return Qs.stringify(params, {skipNulls: true} )
+        },
+        cancelToken: cancelToken
+      })
+      return resp.data
     } catch (e) {
       if (axios.isCancel(e)) {
-        console.log('Email Address Request Canceled')
+        console.log('Email Request Canceled')
       }
       if (e.response && e.response.status === 401) {
         localStorage.clear()

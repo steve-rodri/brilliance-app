@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import SearchField from '../../../../../../../SearchField'
 
 export default function Company(props){
-  const { formData: { company }, handleChange } = props
+  const {
+    view,
+    fields,
+    formData: { company, company: { email_addresses_attributes } },
+    searchResults,
+    handleChange,
+    handleSearchFieldChange,
+    onSearchFieldSelect
+  } = props
   const alignLeft = { textAlign: 'left' }
   return (
     <div className="CreateClient--content">
@@ -32,15 +41,50 @@ export default function Company(props){
         />
       </div>
 
-      {/* <label>Email</label>
-      <div className="Edit--Field">
-        <input
-          className="Input"
-          style={alignLeft}
-          name="email_address"
-          value={company.email}
-        />
-      </div> */}
+      <label>Email</label>
+      <SearchField
+        searchResults={searchResults.emailAddresses.data}
+        formClassName='Edit--Field'
+        resultsClassName='Edit--results'
+        resultClassName='Edit--result'
+        formDataValue={email_addresses_attributes && email_addresses_attributes.length}
+        formatResult={email => email.emailAddress}
+        input={{
+          className:'Input',
+          name: 'email',
+          value: fields.email? fields.email : ''
+        }}
+        handleChange={(name, value) => handleSearchFieldChange({target: { name, value }}, 'email')}
+        onEnter={onSearchFieldSelect}
+        onSelect={onSearchFieldSelect}
+        // create={this.props.createEmailAddress}
+      />
+
+      {
+        view !== 'contact'?
+        <Fragment>
+          <label>Contact</label>
+          <SearchField
+            searchResults={searchResults.contacts.data}
+            formClassName='Edit--Field'
+            resultsClassName='Edit--results'
+            resultClassName='Edit--result'
+            formDataValue={props.formData && props.formData.contact_id}
+            formatResult={(contact) => contact.fullName}
+            input={{
+              className:'Input',
+              name: 'contact',
+              value: fields.contact? fields.contact : ''
+            }}
+            handleChange={(name, value) => handleSearchFieldChange({target: { name, value }}, 'contact')}
+            onEnter={onSearchFieldSelect}
+            onSelect={onSearchFieldSelect}
+            // create={this.props.createContact}
+          />
+        </Fragment>
+        :
+        null
+      }
 
     </div>
   )
