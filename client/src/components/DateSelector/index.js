@@ -58,7 +58,7 @@ export default class DateSelector extends Component {
           <Datetime
             input={false}
             open={this.state.open}
-            value={moment(value).isValid()? moment(value) : ''}
+            value={value? moment(value) : moment().startOf('hour')}
             viewDate={viewDate}
             viewMode={viewMode}
             isValidDate={isValid}
