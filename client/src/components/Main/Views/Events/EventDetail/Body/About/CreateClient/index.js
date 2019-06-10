@@ -150,16 +150,29 @@ export default class CreateClient extends Component {
   }
 
   handleSubmit = async() => {
-    const { formData: { contact: contactData, company: companyData, ...data }} = this.state
+    const {
+      formData: {
+        contact: {
+          email_addresses_attributes: contactEmailData,
+           ...contactData
+         },
+        company: {
+          email_addresses_attributes: companyEmailData,
+          ...companyData
+        },
+        ...data
+      }
+    } = this.state
+
     const { createClient, close } = this.props
     let newContact, newCompany;
 
-    if(Object.keys(contactData).length) {
-      newContact = await contact.create(contactData, this.ajaxOptions)
+    if(Object.keys(contactData).length || contactEmailData.length) {
+      newContact = await contact.create({ ...contactData, ...contactEmailData }, this.ajaxOptions)
       data.contact_id = newContact.id
     }
-    if(Object.keys(companyData).length) {
-      newCompany = await company.create(companyData, this.ajaxOptions)
+    if(Object.keys(companyData).length || companyEmailData.length) {
+      newCompany = await company.create({ ...companyData, ...companyEmailData }, this.ajaxOptions)
       data.company_id = newCompany.id
     }
 
