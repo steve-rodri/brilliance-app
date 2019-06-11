@@ -3,7 +3,7 @@ import SearchField from '../../../../../../../SearchField'
 
 export default function Contact(props){
   const {
-    view,
+    type,
     fields,
     searchResults,
     formData: { contact, contact: { email_addresses_attributes } },
@@ -41,7 +41,7 @@ export default function Contact(props){
       </div>
 
       {
-        view !== 'company'?
+        type !== 'company'?
         <Fragment>
           <label>Company</label>
           <SearchField
@@ -59,7 +59,7 @@ export default function Contact(props){
             handleChange={(name, value) => handleSearchFieldChange({target: { name, value }}, 'company')}
             onEnter={onSearchFieldSelect}
             onSelect={onSearchFieldSelect}
-            // create={this.props.createCompany}
+            create={props.createCompany}
           />
         </Fragment>
         :
@@ -90,13 +90,13 @@ export default function Contact(props){
         formatResult={email => email.emailAddress}
         input={{
           className:'Input',
-          name: 'email',
-          value: fields.email? fields.email : ''
+          name: 'contactEmail',
+          value: fields.contactEmail? fields.contactEmail : ''
         }}
-        handleChange={(name, value) => handleSearchFieldChange({target: { name, value }}, 'email')}
+        handleChange={(name, value) => handleSearchFieldChange({target: { name, value }}, 'contactEmail')}
         onEnter={onSearchFieldSelect}
         onSelect={onSearchFieldSelect}
-        // create={this.props.createEmailAddress}
+        create={() => props.createEmailAddress('contactEmail')}
       />
     </div>
   )
