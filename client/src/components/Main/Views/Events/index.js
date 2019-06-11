@@ -333,7 +333,7 @@ export default class Events extends Component {
         googleEvent = await GOOGLE.createEvent(calendarId, formatToGoogle(updatedEvent), this.ajaxOptions)
       }
 
-      let formatted = await formatFromGoogle(googleEvent, this.ajaxOptions)
+      let formatted = await formatFromGoogle(googleEvent, this.ajaxOptions, updatedEvent)
 
       let newData = { ...data, ...formatted }
 
@@ -351,7 +351,7 @@ export default class Events extends Component {
 
         newData.event_employees_attributes = update
       }
-
+      
       updatedEvent = await event.update(e.id, newData, this.ajaxOptions)
     }
 
