@@ -7,33 +7,41 @@ const spacer = '***************************************';
 
 //--------------Format FROM Google----------------------
 
-export async function formatFromGoogle(evt, options){
-  if (evt) {
-    const workers = await attendees(evt, options);
-    const eCreator = await creator(evt, options);
-    const confirmation = status(evt);
-    const notes = description(evt)
+export async function formatFromGoogle(googleEvent, options, evt){
+  if (googleEvent) {
+    const workers = await attendees(googleEvent, options);
+    const eCreator = await creator(googleEvent, options);
+    const confirmation = status(googleEvent);
+    const notes = description(googleEvent)
 
     let data = {};
 
-    if (evt.id) {
-      data.gc_id = evt.id
+    if (googleEvent.id) {
+      data.gc_id = googleEvent.id
     }
 
-    if (evt.iCalUID) {
-      data.i_cal_UID = evt.iCalUID
+    if (googleEvent.iCalUID) {
+      data.i_cal_UID = googleEvent.iCalUID
     }
 
-    if (evt.start) {
-      data.start = moment(start(evt)).format()
+    if (googleEvent.start) {
+      data.start = data.start = moment(start(googleEvent)).format()
+      if (evt) {
+        const startMatch = moment(evt.start).isSame(moment(start(googleEvent)))
+        if (!startMatch) data.start = evt.start
+      }
     }
 
-    if (evt.end) {
-      data.end = moment(end(evt)).format()
+    if (googleEvent.end) {
+      data.end = moment(end(googleEvent)).format()
+      if (evt) {
+        const endMatch = moment(evt.end).isSame(moment(end(googleEvent)))
+        if (!endMatch) data.end = evt.end
+      }
     }
 
-    if (evt.summary) {
-      data.summary = evt.summary
+    if (googleEvent.summary) {
+      data.summary = googleEvent.summary
     }
 
     if (confirmation) {

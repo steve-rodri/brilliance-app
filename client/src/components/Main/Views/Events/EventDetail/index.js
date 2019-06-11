@@ -57,6 +57,7 @@ export default class EventDetail extends Component {
     window.scrollTo(0,0);
     await this.setFields();
     const { isNew, date } = this.props
+    if (!isNew) await this.initialSetup()
     if (isNew) {
       this.switchEditMode()
       this.setField('summary', 'New Event')
@@ -67,8 +68,6 @@ export default class EventDetail extends Component {
       } else {
         this.handleDateChange('start', moment().startOf('hour').format())
       }
-    } else {
-      await this.initialSetup()
     }
   }
 
@@ -88,41 +87,31 @@ export default class EventDetail extends Component {
 
   synchronizeWithGoogle = async (evt) => {
     const calendarId = localStorage.getItem('google_calendar_id');
-    if (calendarId && evt.gcId) {
-      try {
-        const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.ajaxOptions)
-        if (e) {
-          const formatted = await formatFromGoogle(e, this.ajaxOptions)
-          const synced = await event.sync(formatted, this.ajaxOptions)
-          return synced
-        } else {
-          return evt
-        }
-
-      } catch (e) {
-        return evt
-      }
-    } else {
+    if (!calendarId && !evt.gcId) return evt;
+    try {
+      const e = await GOOGLE.getEvent(calendarId, evt.gcId, this.ajaxOptions)
+      if (!e) return evt
+      const formatted = await formatFromGoogle(e, this.ajaxOptions, evt)
+      const synced = await event.sync(formatted, this.ajaxOptions)
+      return synced
+    } catch (e) {
       return evt
     }
   }
 
   setEvent = async() => {
     const { e, evtId } = this.props
+    let evt;
     if (!e) {
-      let evt = await event.get(evtId, this.ajaxOptions)
-      if (evt) {
-        evt = await this.synchronizeWithGoogle(evt);
-        this.setState({ evt, workers: evt.staff })
-        await this.setFields();
-      } else {
-        this.setState({ redirectToEvents: true })
-      }
+      evt = await event.get(evtId, this.ajaxOptions)
+      if (!evt) { this.setState({ redirectToEvents: true }); return; }
+      evt = await this.synchronizeWithGoogle(evt);
+      this.setState({ evt, workers: evt.staff })
     } else {
-      const evt = await this.synchronizeWithGoogle(e);
+      evt = await this.synchronizeWithGoogle(e);
       this.setState({ evt, workers: e.staff })
-      await this.setFields();
     }
+    await this.setFields()
   }
 
   setFields = () => {
@@ -810,8 +799,8 @@ export default class EventDetail extends Component {
 
   handleSubmit = async(options) => {
     const { evt, formData } = this.state
-    const { stayOpen, sendUpdates } = options
     const { isNew, history, user: { accessLevel } } = this.props
+    const { stayOpen, sendUpdates } = options
     if (isNew) {
       if (formData) {
         const newEvt = await this.props.handleCreate(formData, sendUpdates);
@@ -885,7 +874,6 @@ export default class EventDetail extends Component {
 
   openSubmitModal = async() => {
     const { evt, workers } = this.state;
-    console.log(evt, workers )
     if ((evt && evt.staff && evt.staff.length) || (workers && workers.length)) {
       this.setState({ showSubmitModal: true })
     } else {
