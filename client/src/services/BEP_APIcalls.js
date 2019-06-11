@@ -695,5 +695,20 @@ export const emailAddress = {
         if (unauthorizedCB) unauthorizedCB()
       }
     }
+  },
+  create: async function(data, options){
+    const { cancelToken, unauthorizedCB } = options
+    try {
+      const resp = await axios.post(`/api/email_addresses`, data, { cancelToken: cancelToken })
+      return resp.data.emailAddress
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Company Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
   }
 }
