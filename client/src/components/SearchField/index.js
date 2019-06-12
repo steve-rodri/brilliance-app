@@ -350,7 +350,7 @@ export default class SearchField extends Component {
   }
 
   create = () => {
-    const { create: createNew, input: { value }, resultClassName } = this.props
+    const { create: createNew, label, input: { value }, resultClassName } = this.props
     if (typeof createNew === 'function') {
       const styleOverride = {
         color: "var(--white)",
@@ -371,7 +371,7 @@ export default class SearchField extends Component {
           }}
         >
           {plusIcon('1x')}
-          <p>{`CREATE "${value}"`}</p>
+          <p>{`CREATE ${value.length < 25? `"${value}"` : `${label? label : ''}`}`}</p>
         </div>
       )
     }
