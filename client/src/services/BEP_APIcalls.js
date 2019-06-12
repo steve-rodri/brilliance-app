@@ -583,6 +583,21 @@ export const address = {
         if (unauthorizedCB) unauthorizedCB()
       }
     }
+  },
+  create: async function(data, options){
+    const { cancelToken, unauthorizedCB } = options
+    try {
+      const resp = await axios.post(`/api/addresses`, data, { cancelToken: cancelToken })
+      return resp.data.address
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Address Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
   }
 }
 

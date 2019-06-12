@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import SearchField from '../../../../../../../SearchField'
 
 export default function Location(props) {
-  const { formData: { place },searchFieldData, fields, onChange, onSearchFieldChange, onSelect } = props
+  const { formData: { place }, searchFieldData, fields, onChange, onSearchFieldChange, onSelect } = props
   const alignLeft = { textAlign: 'left' }
   return (
     <Fragment>
@@ -38,6 +38,7 @@ export default function Location(props) {
           resultClassName='Edit--result'
           formDataValue={place && place.address_id}
           formatResult={props.formatAddress}
+          label='Address'
           input={{
             className: 'Input',
             name: 'address',
@@ -47,7 +48,7 @@ export default function Location(props) {
           handleChange={(name, value) => onSearchFieldChange({target: { name, value }}, 'address')}
           onEnter={onSelect}
           onSelect={onSelect}
-          // create={this.props.createAddress}
+          create={props.createAddress}
         />
 
     </Fragment>
