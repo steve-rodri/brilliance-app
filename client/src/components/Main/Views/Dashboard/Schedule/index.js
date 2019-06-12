@@ -159,14 +159,13 @@ export default class Schedule extends Component {
     formatted = await formatFromGoogle(googleEvent, this.ajaxOptions)
     let newData = { ...data, ...formatted }
     if (newData.event_employees_attributes) {
-      const updateStaff = newData.event_employees_attributes.filter(ee => {
+      const updatedStaff = newData.event_employees_attributes.filter(ee => {
         if (newData.employee_ids && newData.employee_ids.length) {
           return newData.employee_ids.find(id => ee.employee_id !== id)
-        } else {
-          return 1
         }
+        return true;
       })
-      newData.event_employees_attributes = updateStaff
+      newData.event_employees_attributes = updatedStaff
     }
     updatedEvent = await event.update(e.id, newData, this.ajaxOptions)
     return updatedEvent;
