@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Location from './Location'
+import Address from './Address'
 import { address } from '../../../../../../../../services/BEP_APIcalls'
+import { parseAddress } from '../../../../../../../../helpers/addressHelpers'
 import axios from 'axios'
 import './index.css'
 
@@ -8,11 +10,15 @@ export default class CreateLocation extends Component {
   constructor(props){
     super(props)
     this.state = {
+      view: '',
       formData: {
         place: {
           name: this.props.fields.location
         },
         address: {}
+      },
+      fields: {
+        address: ''
       }
     }
     this.axiosRequestSource = axios.CancelToken.source()
@@ -23,24 +29,55 @@ export default class CreateLocation extends Component {
     }
   }
 
+  setView = v => this.setState({ view: v })
+
   handleSubmit = async() => {
-    const { formData } = this.state
+    const { formData: { place: placeData } } = this.state
     const { createLocation, close } = this.props
-    if (Object.keys(formData).length) await createLocation(formData)
+    if (Object.keys(placeData).length) await createLocation(placeData)
     close()
+  }
+
+  handleCreate = async() => {
+    const { formData: { address: addressData }} = this.state
+    if( Object.keys(addressData).length ) {
+      const newAddress = await address.create(addressData, this.ajaxOptions)
+      this.setState(prevState => ({
+        view: '',
+        fields: {
+          ...prevState.fields,
+          address: newAddress.address
+        },
+        formData: {
+          ...prevState.formData,
+          address: {},
+          place: {
+            ...prevState.formData.place,
+            address_id: newAddress.id
+          }
+
+        }
+      }))
+    }
   }
 
   handleChange = (e, type) => {
     const { name, value } = e.target
-    this.setState(prevState => ({
-      formData: {
-        ...prevState.formData,
-        [type]: {
-          ...prevState.formData[type],
-          [name]: value
+    this.setState(prevState => {
+      if (!value) {
+        delete prevState.formData[type][name]
+        return prevState
+      }
+      return {
+        formData: {
+          ...prevState.formData,
+          [type]: {
+            ...prevState.formData[type],
+            [name]: value
+          }
         }
       }
-    }))
+    })
   }
 
   handleSearchFieldChange = (e, type) => {
@@ -85,16 +122,9 @@ export default class CreateLocation extends Component {
   }
 
   handleSubmit = async() => {
-    const { formData: { place, address: addressData }} = this.state;
+    const { formData: { place: placeData }} = this.state;
     const { createLocation, close } = this.props
-    let data = place, newAddress
-
-    if (Object.keys(addressData).length) {
-      newAddress = await address.create(addressData, this.ajaxOptions)
-      data.address_id = newAddress.id
-    }
-
-    if (Object.keys(data).length) await createLocation(data)
+    if (Object.keys(placeData).length) await createLocation(placeData)
     close()
   }
 
@@ -115,22 +145,103 @@ export default class CreateLocation extends Component {
     return address.address
   }
 
+  createAddress = () => this.setState(prevState => {
+    let addressObj = parseAddress(prevState.fields.address)
+    return {
+      view: 'createAddress',
+      fields: {
+        ...prevState.fields,
+        address: ''
+      },
+      formData: {
+        ...prevState.formData,
+        address: {
+          ...prevState.formData.address,
+          ...addressObj
+        }
+      }
+    }
+  })
+
   content = () => {
-    return (
-      <Location
-        {...this.props}
-        {...this.state}
-        onChange={this.handleChange}
-        onSearchFieldChange={this.handleSearchFieldChange}
-        onSelect={this.handleSelect}
-        formatAddress={this.formatAddress}
-      />
+    const { view } = this.state
+    switch (view) {
+
+      case 'createAddress':
+      return (
+        <Address
+          {...this.state}
+          onChange={this.handleChange}
+          onSearchFieldChange={this.handleSearchFieldChange}
+          onSelect={this.handleSelect}
+          formatAddress={this.formatAddress}
+        />
+      )
+
+      default:
+      return (
+        <Location
+          {...this.state}
+          onChange={this.handleChange}
+          onSearchFieldChange={this.handleSearchFieldChange}
+          onSelect={this.handleSelect}
+          formatAddress={this.formatAddress}
+          createAddress={this.createAddress}
+        />
+      )
+
+    }
+  }
+
+  footer = () => {
+    const {
+      view,
+      formData: {
+        place: placeData,
+        address: addressData,
+      }
+    } = this.state
+
+    const formData = (
+      Object.keys(placeData).length ||
+      Object.keys(addressData).length
     )
+
+    if (view === 'createAddress') {
+      return (
+        <Fragment>
+          {
+            addressData?
+            <Fragment>
+              <button className="CreateClient--button" onClick={() => this.setView('')}>
+                <p>Cancel</p>
+              </button>
+              <button className="CreateClient--button" onClick={this.handleCreate}>
+                <p>Create Address</p>
+              </button>
+            </Fragment>
+            :
+            <button className="CreateClient--button" onClick={() => this.setView('')}>
+              <p>Cancel</p>
+            </button>
+          }
+        </Fragment>
+      )
+    }
+
+    if (formData) {
+      return (
+        <button className="CreateClient--button" onClick={this.handleSubmit}>
+          <p>CREATE</p>
+        </button>
+      )
+    }
+
+    return null
   }
 
   render(){
     const { mobile } = this.props
-    const noFormData = !Object.keys(this.state.formData).length
     return(
       <div className="CreateLocation">
         <div className="CreateLocation--header">
@@ -153,16 +264,7 @@ export default class CreateLocation extends Component {
           {this.content()}
         </div>
         <div className="CreateLocation--footer">
-          {
-            noFormData?
-            <button className="CreateLocation--button" onClick={this.props.close}>
-              <p>Cancel</p>
-            </button>
-            :
-            <button className="CreateLocation--button" onClick={this.handleSubmit}>
-              <p>CREATE</p>
-            </button>
-          }
+          {this.footer()}
         </div>
       </div>
     )
