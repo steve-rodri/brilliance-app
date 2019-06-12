@@ -11,29 +11,8 @@ export default class Edit extends Component {
 
     return (
       <div className="Logistics">
-        <label>Start</label>
-
-          <DateSelector
-            {...this.props}
-            viewMode="days"
-            name="start"
-            value={fields.start}
-            viewDate={moment(fields.start) || moment().startOf('hour')}
-          />
-
-        <label>End</label>
-
-          <DateSelector
-            {...this.props}
-            viewMode="time"
-            name="end"
-            value={fields.end}
-            viewDate={fields.start? moment(fields.start) : fields.end? moment(fields.end): moment().startOf('hour')}
-            isValidDate={(current) => current.isSameOrAfter(moment(fields.start), 'day')}
-          />
 
         <label>Call</label>
-
           <DateSelector
             {...this.props}
             viewMode="time"
@@ -44,7 +23,6 @@ export default class Edit extends Component {
           />
 
         <label>Call Location</label>
-
           <SearchField
             {...this.props}
             searchResults={searchFieldData && searchFieldData.callLocations}
@@ -63,6 +41,26 @@ export default class Edit extends Component {
             onEnter={this.props.onEnter}
             onSelect={this.props.onSelect}
           />
+
+        <label>Start</label>
+          <DateSelector
+            {...this.props}
+            viewMode="days"
+            name="start"
+            value={fields.start}
+            viewDate={moment(fields.start) || moment().startOf('hour')}
+          />
+
+        <label>End</label>
+          <DateSelector
+            {...this.props}
+            viewMode="time"
+            name="end"
+            value={fields.end}
+            viewDate={fields.start? moment(fields.start) : fields.end? moment(fields.end): moment().startOf('hour')}
+            isValidDate={(current) => current.isSameOrAfter(moment(fields.start), 'day')}
+          />
+          
       </div>
     )
   }
