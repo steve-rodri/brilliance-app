@@ -132,12 +132,14 @@ export default class CreateLocation extends Component {
     const query = q.split('')
     if (query.length > 1) {
       const data = await address.batch({q}, this.ajaxOptions)
-      this.setState(prevState => ({
-        searchFieldData: {
-          ...prevState.searchFieldData,
-          addresses: data.addresses
-        }
-      }))
+      if (data) {
+        this.setState(prevState => ({
+          searchFieldData: {
+            ...prevState.searchFieldData,
+            addresses: data.addresses
+          }
+        }))
+      }
     }
   }
 

@@ -7,6 +7,10 @@ csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
   Address.create! ({
     address: row['address'],
+    street: row['street'],
+    city: row['city'],
+    state: row['state'],
+    zip: row['zip'],
 
     created_at: row['created_at']
   })

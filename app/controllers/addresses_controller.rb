@@ -10,7 +10,23 @@ class AddressesController < ApplicationController
         query += "(address LIKE '%#{term}%'
         OR address LIKE '%#{term.capitalize}%'
         OR address LIKE '%#{term.upcase}%'
-        OR address LIKE '%#{term.downcase}%')"
+        OR address LIKE '%#{term.downcase}%'
+        OR street LIKE '%#{term}%'
+        OR street LIKE '%#{term.capitalize}%'
+        OR street LIKE '%#{term.upcase}%'
+        OR street LIKE '%#{term.downcase}%'
+        OR city LIKE '%#{term}%'
+        OR city LIKE '%#{term.capitalize}%'
+        OR city LIKE '%#{term.upcase}%'
+        OR city LIKE '%#{term.downcase}%'
+        OR state LIKE '%#{term}%'
+        OR state LIKE '%#{term.capitalize}%'
+        OR state LIKE '%#{term.upcase}%'
+        OR state LIKE '%#{term.downcase}%'
+        OR zip LIKE '%#{term}%'
+        OR zip LIKE '%#{term.capitalize}%'
+        OR zip LIKE '%#{term.upcase}%'
+        OR zip LIKE '%#{term.downcase}%')"
 
         if terms.index(term) + 1 < terms.length
           query += " AND "
