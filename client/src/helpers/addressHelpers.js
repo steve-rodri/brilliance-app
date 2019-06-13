@@ -8,7 +8,7 @@ export const parseAddress = (address) => {
   ${addressObj.street? addressObj.street : ''}
   ${addressObj.type? addressObj.type : ''}
   `
-  addressObj.street = addressObj.street.trim()
+  addressObj.street = addressObj.street.trim().replace(/\s\s+/g, ' ');
   delete addressObj.number
   delete addressObj.prefix
   delete addressObj.type

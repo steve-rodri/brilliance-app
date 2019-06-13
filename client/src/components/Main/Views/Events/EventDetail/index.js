@@ -80,9 +80,9 @@ export default class EventDetail extends Component {
 
   initialSetup = async() => {
     await this.setEvent();
-    await this.setClientName();
-    await this.setLocationName();
-    await this.setCallLocationName();
+    await this.setClient();
+    await this.setLocation();
+    await this.setCallLocation();
   }
 
   synchronizeWithGoogle = async (evt) => {
@@ -140,7 +140,7 @@ export default class EventDetail extends Component {
     }))
   }
 
-  setClientName = (clt) => {
+  setClient = (clt) => {
     const { evt } = this.state
     if (clt) {
       const name = clientName(clt)
@@ -158,10 +158,11 @@ export default class EventDetail extends Component {
     }
   }
 
-  setLocationName = () => {
+  setLocation = (place) => {
     const { evt } = this.state
+    let location = locationName(place);
     if (evt && evt.location) {
-      const location = locationName(evt.location)
+      location = locationName(evt.location)
       if (evt.location.installation) {
         this.setState(prevState => ({
           fields: {
@@ -173,14 +174,16 @@ export default class EventDetail extends Component {
             location_id: evt.location.id
           }
         }))
-      } else {
-        this.setField('location', location)
-        this.setFormData('location_id', evt.location.id)
       }
+      return;
+    }
+    if (location) {
+      this.setField('location', location)
+      this.setFormData('location_id', place.id)
     }
   }
 
-  setCallLocationName = () => {
+  setCallLocation = () => {
     const { evt } = this.state
     if (evt) {
       if (evt.callLocation) {
@@ -639,7 +642,7 @@ export default class EventDetail extends Component {
 
   createClient = async(data) => {
     const newClient = await client.create(data, this.ajaxOptions);
-    this.setClientName(newClient)
+    this.setClient(newClient)
   }
 
   findPlaces = async(query) => {
@@ -652,7 +655,7 @@ export default class EventDetail extends Component {
 
   createLocation = async(data) => {
     const newLocation = await place.create(data, this.ajaxOptions);
-    this.setLocationName(newLocation)
+    this.setLocation(newLocation)
   }
 
 // --------------------------------Event-Staff----------------------------------
