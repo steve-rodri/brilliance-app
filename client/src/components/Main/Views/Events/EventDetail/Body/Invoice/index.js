@@ -90,6 +90,7 @@ export default class Invoice extends Component {
     } else if (evt.client && !evt.invoice){
       return(
         <div className="Event-Invoice--no-invoice">
+          <h1>--</h1>
           <AddNew
             linkPath={addNewPath()}
             type="Invoice"
@@ -104,7 +105,6 @@ export default class Invoice extends Component {
     let style = {}
     if (evt && evt.client && !evt.invoice) {
       style.grid = 'auto / auto'
-      style.alignContent = 'center'
     }
     return style;
   }
