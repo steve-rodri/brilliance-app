@@ -160,11 +160,21 @@ export default class EventDetail extends Component {
 
   setLocation = (place) => {
     const { evt } = this.state
+    if (!evt && !place) return;
+
     let location = locationName(place);
+
+    if (place) {
+      this.setField('location', location)
+      this.setFormData('location_id', place.id)
+      return;
+    }
+
     if (evt && evt.location) {
       location = locationName(evt.location)
-      if (evt.location.installation) {
-        this.setState(prevState => ({
+      this.setState(prevState => {
+        const { installation } = evt.location
+        if (installation) return {
           fields: {
             ...prevState.fields,
             location,
@@ -173,13 +183,17 @@ export default class EventDetail extends Component {
           formData: {
             location_id: evt.location.id
           }
-        }))
-      }
-      return;
-    }
-    if (location) {
-      this.setField('location', location)
-      this.setFormData('location_id', place.id)
+        }
+        return {
+          fields: {
+            ...prevState.fields,
+            location
+          },
+          formData: {
+            location_id: evt.location.id
+          }
+        }
+      })
     }
   }
 
