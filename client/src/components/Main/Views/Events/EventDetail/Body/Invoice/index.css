@@ -65,6 +65,9 @@
 
 .Event-Invoice--no-invoice {
   display: grid;
+  height: 100%;
+  grid-template-rows: 1fr auto;
+  align-items: center;
   grid-gap: 20px;
 }
 
