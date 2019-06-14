@@ -5,8 +5,8 @@ import Body from './Body';
 import Buttons from '../../../../Buttons/Buttons'
 import Modal from '../../../../Modal';
 import StaffSelector from './Body/Staff/StaffSelector'
-import CreateClient from './Body/About/CreateClient/'
-import CreateLocation from './Body/About/CreateLocation/'
+import Client from './Body/About/Client/'
+import Location from './Body/About/Location/'
 import SendUpdates from './SendUpdates/';
 import DeleteJob from './DeleteJob/';
 import { GOOGLE } from '../../../../../services/google_service';
@@ -30,8 +30,9 @@ export default class EventDetail extends Component {
       formData: null,
       editMode: false,
       showStaffModal: false,
-      showCreateClientModal: false,
-      showCreateLocationModal: false,
+      showClientModal: false,
+      showLocationModal: false,
+      showCallLocationModal: false,
       redirectToEvents: false,
     }
     this.axiosRequestSource = axios.CancelToken.source()
@@ -197,14 +198,15 @@ export default class EventDetail extends Component {
     }
   }
 
-  setCallLocation = () => {
+  setCallLocation = (place) => {
     const { evt } = this.state
-    if (evt) {
-      if (evt.callLocation) {
-        const callLocation = locationName(evt.callLocation)
-        this.setField('callLocation', callLocation)
-        this.setFormData('call_location_id', evt.callLocation.id)
-      }
+    if (!evt && !place) return;
+    let callLocation = place;
+    if (evt.callLocation) callLocation = evt.callLocation;
+
+    if (callLocation) {
+      this.setField('callLocation', locationName(callLocation) )
+      this.setFormData('call_location_id', callLocation.id)
     }
   }
 
@@ -654,9 +656,12 @@ export default class EventDetail extends Component {
     }
   }
 
-  createClient = async(data) => {
-    const newClient = await client.create(data, this.ajaxOptions);
-    this.setClient(newClient)
+  handleClientSubmit = async(data) => {
+    if (!data) return;
+    let clt;
+    if (!data.id) clt = await client.create(data, this.ajaxOptions)
+    if (data.id) clt = await client.update(data.id, data, this.ajaxOptions)
+    this.setClient(clt);
   }
 
   findPlaces = async(query) => {
@@ -667,9 +672,20 @@ export default class EventDetail extends Component {
     }
   }
 
-  createLocation = async(data) => {
-    const newLocation = await place.create(data, this.ajaxOptions);
-    this.setLocation(newLocation)
+  handleLocationSubmit = async(data) => {
+    if (!data) return;
+    let location;
+    if (data.id) location = await place.update(data.id, data, this.ajaxOptions)
+    if (!data.id) location = await place.create(data, this.ajaxOptions)
+    this.setLocation(location);
+  }
+
+  handleCallLocationSubmit = async(data) => {
+    if (!data) return;
+    let callLocation;
+    if (data.id) callLocation = await place.update(data.id, data, this.ajaxOptions)
+    if (!data.id) callLocation = await place.create(data, this.ajaxOptions)
+    this.setCallLocation(callLocation);
   }
 
 // --------------------------------Event-Staff----------------------------------
@@ -873,20 +889,28 @@ export default class EventDetail extends Component {
     this.setState({ showStaffModal: false })
   }
 
-  openCreateClientModal = () => {
-    this.setState({ showCreateClientModal: true })
+  openClientModal = () => {
+    this.setState({ showClientModal: true })
   }
 
-  closeCreateClientModal = () => {
-    this.setState({ showCreateClientModal: false })
+  closeClientModal = () => {
+    this.setState({ showClientModal: false })
   }
 
-  openCreateLocationModal = () => {
-    this.setState({ showCreateLocationModal: true })
+  openLocationModal = () => {
+    this.setState({ showLocationModal: true })
   }
 
-  closeCreateLocationModal = () => {
-    this.setState({ showCreateLocationModal: false })
+  closeLocationModal = () => {
+    this.setState({ showLocationModal: false })
+  }
+
+  openCallLocationModal = () => {
+    this.setState({ showCallLocationModal: true })
+  }
+
+  closeCallLocationModal = () => {
+    this.setState({ showCallLocationModal: false })
   }
 
   openSubmitModal = async() => {
@@ -973,8 +997,9 @@ export default class EventDetail extends Component {
           addWorker={this.addWorker}
           removeWorker={this.removeWorker}
 
-          createClient={this.openCreateClientModal}
-          createLocation={this.openCreateLocationModal}
+          openClient={this.openClientModal}
+          openLocation={this.openLocationModal}
+          openCallLocation={this.openCallLocationModal}
 
           scrollToTop={this.scrollToTop}
         />
@@ -1026,16 +1051,16 @@ export default class EventDetail extends Component {
         }
 
         {
-          this.state.showCreateClientModal?
+          this.state.showClientModal?
           <Modal
             mobile={this.props.mobile}
-            close={this.closeCreateClientModal}
+            close={this.closeClientModal}
             content={
-              <CreateClient
+              <Client
                 {...this.props}
                 {...this.state}
-                close={this.closeCreateClientModal}
-                createClient={this.createClient}
+                close={this.closeClientModal}
+                onClientSubmit={this.handleClientSubmit}
               />
             }
           />
@@ -1044,16 +1069,32 @@ export default class EventDetail extends Component {
         }
 
         {
-          this.state.showCreateLocationModal?
+          this.state.showLocationModal?
           <Modal
             mobile={this.props.mobile}
-            close={this.closeCreateLocationModal}
+            close={this.closeLocationModal}
             content={
-              <CreateLocation
-                {...this.props}
+              <Location
                 {...this.state}
-                close={this.closeCreateLocationModal}
-                createLocation={this.createLocation}
+                close={this.closeLocationModal}
+                onLocationSubmit={this.handleLocationSubmit}
+              />
+            }
+          />
+          :
+          null
+        }
+
+        {
+          this.state.showCallLocationModal?
+          <Modal
+            mobile={this.props.mobile}
+            close={this.closeCallLocationModal}
+            content={
+              <Location
+                {...this.state}
+                close={this.closeCallLocationModal}
+                onLocationSubmit={this.handleCallLocationSubmit}
               />
             }
           />

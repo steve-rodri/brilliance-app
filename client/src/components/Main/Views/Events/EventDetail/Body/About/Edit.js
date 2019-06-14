@@ -28,7 +28,8 @@ export default class Edit extends Component {
             handleChange={this.props.handleSearchChange}
             onEnter={this.props.onEnter}
             onSelect={this.props.onSelect}
-            create={this.props.createClient}
+            create={this.props.openClient}
+            edit={this.props.openClient}
           />
 
         <label>Location</label>
@@ -50,7 +51,8 @@ export default class Edit extends Component {
             handleChange={this.props.handleSearchChange}
             onEnter={this.props.onEnter}
             onSelect={this.props.onSelect}
-            create={this.props.createLocation}
+            create={this.props.openLocation}
+            edit={this.props.openLocation}
           />
 
         <label>Kind</label>

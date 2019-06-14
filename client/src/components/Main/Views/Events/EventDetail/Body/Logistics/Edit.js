@@ -40,6 +40,8 @@ export default class Edit extends Component {
             handleChange={this.props.handleSearchChange}
             onEnter={this.props.onEnter}
             onSelect={this.props.onSelect}
+            create={this.props.openCallLocation}
+            edit={this.props.openCallLocation}
           />
 
         <label>Start</label>
@@ -60,7 +62,7 @@ export default class Edit extends Component {
             viewDate={fields.start? moment(fields.start) : fields.end? moment(fields.end): moment().startOf('hour')}
             isValidDate={(current) => current.isSameOrAfter(moment(fields.start), 'day')}
           />
-          
+
       </div>
     )
   }
