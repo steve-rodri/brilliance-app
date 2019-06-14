@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import SearchField from '../../../../../../../SearchField'
 
-export default function Location(props) {
+export default function LocationForm(props) {
   const { formData: { place }, searchFieldData, fields, onChange, onSearchFieldChange, onSelect } = props
   const alignLeft = { textAlign: 'left' }
   return (
@@ -48,7 +48,8 @@ export default function Location(props) {
           handleChange={(name, value) => onSearchFieldChange({target: { name, value }}, 'address')}
           onEnter={onSelect}
           onSelect={onSelect}
-          create={props.createAddress}
+          create={props.openAddress}
+          edit={props.openAddress}
         />
 
     </Fragment>

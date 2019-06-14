@@ -5,7 +5,7 @@ import { contact, company, emailAddress } from '../../../../../../../../services
 import axios from 'axios'
 import './index.css'
 
-export default class CreateClient extends Component {
+export default class Client extends Component {
   constructor(props){
     super(props)
     this.state = {

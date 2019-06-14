@@ -16,17 +16,6 @@ export default function Address(props) {
         />
       </div>
 
-      <label>Street (Line 2)</label>
-      <div className="Edit--Field">
-        <input
-          className="Input"
-          style={alignLeft}
-          name="street_line_two"
-          value={address.street_line_two? address.street_line_two : ''}
-          onChange={(e) => onChange(e, 'address')}
-        />
-      </div>
-
       <label>City</label>
       <div className="Edit--Field">
         <input
