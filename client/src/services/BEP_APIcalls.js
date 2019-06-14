@@ -502,6 +502,21 @@ export const employee = {
 }
 
 export const place = {
+  get: async function (id, options) {
+    const { cancelToken, unauthorizedCB } = options
+    try {
+      const resp = await axios.get(`/api/places/${id}`, { cancelToken: cancelToken })
+      return resp.data.place
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Place Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
+  },
   getAll: async function (options){
     const { cancelToken, unauthorizedCB, sendCount } = options
     let url = '/api/places'
@@ -550,6 +565,21 @@ export const place = {
         if (unauthorizedCB) unauthorizedCB()
       }
     }
+  },
+  update: async function(id, data, options){
+    const { cancelToken, unauthorizedCB } = options
+    try {
+      const resp = await axios.put(`/api/places/${id}`, data, { cancelToken: cancelToken })
+      return resp.data.place
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Place Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
   }
 }
 
@@ -588,6 +618,21 @@ export const address = {
     const { cancelToken, unauthorizedCB } = options
     try {
       const resp = await axios.post(`/api/addresses`, data, { cancelToken: cancelToken })
+      return resp.data.address
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Address Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
+  },
+  update: async function(id, data, options){
+    const { cancelToken, unauthorizedCB } = options
+    try {
+      const resp = await axios.put(`/api/addresses/${id}`, data, { cancelToken: cancelToken })
       return resp.data.address
     } catch (e) {
       if (axios.isCancel(e)) {

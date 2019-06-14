@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { plusIcon } from '../../helpers/icons'
+import { plusIcon, pencilIcon } from '../../helpers/icons'
 import './index.css'
 
 export default class SearchField extends Component {
@@ -9,17 +9,24 @@ export default class SearchField extends Component {
       highlightedResult: 0,
       hoveringResults: false,
       fieldActive: false,
+      showEditButton: false
     }
     this.searchResults = React.createRef();
   }
 
+  componentDidMount(){
+    if (this.props.input.value) this.setState({ showEditButton: true })
+  }
+
   componentDidUpdate(prevProps){
-    const { searchResults, scroll, input: { value } } = this.props;
+    const { searchResults, scroll, input: { value }, formDataValue } = this.props;
     const searchResultMatch = searchResults === prevProps.searchResults;
+    const valueMatch = prevProps.input.value === value
+    const formDataValueMatch = prevProps.formDataValue === formDataValue;
 
     if (!searchResultMatch) this.scrollToTop()
 
-    if (prevProps.input.value !== value) {
+    if (!valueMatch) {
       this.setState( prevState => ({
         highlightedResult: {
           ...prevState.highlightedResult,
@@ -34,6 +41,11 @@ export default class SearchField extends Component {
 
     if (scroll && scroll !== prevProps.scroll) {
       this.setState({ fieldActive: false })
+    }
+
+    if (!formDataValueMatch) {
+      if (formDataValue) this.setState({ showEditButton: true })
+      if (!formDataValue) this.setState({ showEditButton: false })
     }
   }
 
@@ -378,7 +390,7 @@ export default class SearchField extends Component {
   }
 
   render(){
-    const { highlightedResult, hoveringResults } = this.state
+    const { highlightedResult, hoveringResults, showEditButton } = this.state
     const {
       searchResults,
 
@@ -397,83 +409,100 @@ export default class SearchField extends Component {
       handleChange,
       formDataValue,
       onEnter,
-      create
+      create,
+      edit
     }
     = this.props
 
     return (
-      <form
-        autoComplete="off"
-        className={formClassName}
-        onFocus={this.handleFocusSelect}
-        onSubmit={(e) => e.preventDefault()}
-        onKeyDown={(e) => {
-          if ( e.key === 'Enter') {
-            if (this.resultCount()) {
-              onEnter(e, name, highlightedResult.index, highlightedResult.section.name)
-              this.handleCloseResults()
-            } else if (value.length > 2 && typeof create === 'function') {
-              create()
-              this.handleCloseResults()
-            }
-          }
-        }}
-        style={styleForm}
-      >
-
-        {/* Search */}
-        <input
-          name={name}
-          placeholder={placeholder}
-          className={className}
-          value={value}
-          tabIndex={tabIndex}
-          onChange={(e) => {
-            handleChange(e.target.name, e.target.value)
-            this.handleViewResults(e.target.value)
-          }}
-          onFocus={this.handleViewResults}
-          onBlur={(e) => {
-            if (value && !formDataValue && !hoveringResults) {
-              handleChange(name, '')
-            }
-            if (!hoveringResults) {
-              this.handleCloseResults()
-            }
-          }}
+      <div className="SearchField">
+        <form
+          autoComplete="off"
+          className={formClassName}
+          onFocus={this.handleFocusSelect}
+          onSubmit={(e) => e.preventDefault()}
           onKeyDown={(e) => {
-
-            if (e.key === 'ArrowDown'){
-
-              e.preventDefault()
-              this.updateHighlightedResult('down')
-
-              this.scrollResults('down')
-
-            } else if (e.key === 'ArrowUp') {
-
-              e.preventDefault()
-              this.updateHighlightedResult('up')
-
-              this.scrollResults('up')
-
+            if ( e.key === 'Enter') {
+              if (this.resultCount()) {
+                onEnter(e, name, highlightedResult.index, highlightedResult.section.name)
+                this.handleCloseResults()
+              } else if (value.length > 2 && typeof create === 'function') {
+                create()
+                this.handleCloseResults()
+              }
             }
-
           }}
-        />
-
-        {/* Results */}
-        <div
-          className={`${resultsClassName} SearchField--results `}
-          ref={this.searchResults}
-          style={this.displayResults()}
-          onMouseEnter={this.choosingResult}
-          onMouseLeave={this.leavingResults}
+          style={styleForm}
         >
-          { searchResults && this.viewResults()}
-        </div>
 
-      </form>
+          {/* Search */}
+          <input
+            name={name}
+            placeholder={placeholder}
+            className={className}
+            value={value}
+            tabIndex={tabIndex}
+            onChange={(e) => {
+              handleChange(e.target.name, e.target.value)
+              this.handleViewResults(e.target.value)
+            }}
+            onFocus={this.handleViewResults}
+            onBlur={(e) => {
+              if (value && !formDataValue && !hoveringResults) {
+                handleChange(name, '')
+              }
+              if (!hoveringResults) {
+                this.handleCloseResults()
+              }
+            }}
+            onKeyDown={(e) => {
+
+              if (e.key === 'ArrowDown'){
+
+                e.preventDefault()
+                this.updateHighlightedResult('down')
+
+                this.scrollResults('down')
+
+              } else if (e.key === 'ArrowUp') {
+
+                e.preventDefault()
+                this.updateHighlightedResult('up')
+
+                this.scrollResults('up')
+
+              }
+
+            }}
+          />
+
+          {/* Results */}
+          <div
+            className={`${resultsClassName} SearchField--results `}
+            ref={this.searchResults}
+            style={this.displayResults()}
+            onMouseEnter={this.choosingResult}
+            onMouseLeave={this.leavingResults}
+          >
+            { searchResults && this.viewResults()}
+          </div>
+
+        </form>
+        {
+          showEditButton?
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              if (typeof edit === 'function') edit()
+            }}
+          >
+            {pencilIcon()}
+          </button>
+          :
+          null
+        }
+      </div>
     )
   }
 }

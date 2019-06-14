@@ -1,3 +1,22 @@
+.SearchField {
+  position: relative;
+  width: 100%;
+}
+
+.SearchField > button {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  height: 100%;
+  width: 40px;
+  padding: 5px;
+  border-radius: 0 5px 5px 0;
+  border-width: 1px 1px 1px 0;
+  border-color: #BBBBBB;
+  border-style: solid;
+  background-color: #F8F8F8;
+}
+
 .SearchField--results {
   display: none;
   z-index: 10000;
