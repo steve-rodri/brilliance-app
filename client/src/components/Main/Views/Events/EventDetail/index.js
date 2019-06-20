@@ -182,6 +182,7 @@ export default class EventDetail extends Component {
             onPremise: evt.location.installation
           },
           formData: {
+            ...prevState.formData,
             location_id: evt.location.id
           }
         }
@@ -191,6 +192,7 @@ export default class EventDetail extends Component {
             location
           },
           formData: {
+            ...prevState.formData,
             location_id: evt.location.id
           }
         }
