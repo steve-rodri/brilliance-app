@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import Contact from './Contact'
 import Company from './Company'
-import { contact, company, emailAddress } from '../../../../../../../../services/BEP_APIcalls.js'
+import Edit from './Edit'
+import { client, contact, company, emailAddress } from '../../../../../../../../services/BEP_APIcalls.js'
 import axios from 'axios'
 import './index.css'
 
@@ -10,6 +11,7 @@ export default class Client extends Component {
     super(props)
     this.state = {
       view: '',
+      mode: '',
       search: this.props.fields.client,
       searchResults: {
         contacts: {},
@@ -34,12 +36,40 @@ export default class Client extends Component {
     }
   }
 
-  async componentDidMount(){
-    await this.searchForExisting()
-  }
-
   componentWillUnmount(){
     this.axiosRequestSource = this.axiosRequestSource.cancel()
+  }
+
+  async componentDidMount(){
+    await this.runSetup()
+  }
+
+  runSetup = async() => {
+    const { formData } = this.props
+    let clt;
+    if (formData.client_id) {
+      clt = await client.get(formData.client_id, this.ajaxOptions)
+    }
+    console.log(clt)
+    this.setState( prevState => {
+
+      if (clt) return {
+        mode: 'edit',
+        formData: {
+          ...prevState.formData,
+          id: clt.id,
+          contact_id: clt.contactInfo? clt.contactInfo.id : '',
+          address_id: clt.company? clt.company.id : ''
+        },
+        fields: {
+          contact: clt.contactInfo? clt.contactInfo.fullName : '',
+          company: clt.company? clt.company.name : '',
+        }
+      }
+      return { mode: 'create' }
+    })
+
+    if (!clt) await this.searchForExisting()
   }
 
   searchForExisting = async() => {
@@ -52,6 +82,7 @@ export default class Client extends Component {
     const q = query.split('');
     if (q.length > 1) {
       const data = await contact.find({q: query}, this.ajaxOptions)
+      if (!data) return;
       this.setState(prevState => ({
         searchResults: {
           ...prevState.searchResults,
@@ -471,96 +502,114 @@ export default class Client extends Component {
   }
 
   content = () => {
-    const { view, type, search, searchResults: { contacts, companies } } = this.state
-    switch (type) {
-      case 'contact':
-        switch (view) {
-          case 'chooseExisting':
-          return (
-            <ChooseContact
-              search={search}
-              contacts={contacts}
-              handleSelect={this.handleSelect}
-              skip={this.skip}
-            />
-          )
-          case 'form':
-          return (
-            <Contact
-              {...this.props}
-              {...this.state}
-              handleChange={this.handleChange}
-              handleSearchFieldChange={this.handleSearchFieldChange}
-              onSearchFieldSelect={this.handleSearchFieldSelect}
-              createCompany={this.createCompany}
-              createEmailAddress={this.createEmailAddress}
-            />
-          )
-          case 'createCompany':
-          return (
-            <Company
-              {...this.props}
-              {...this.state}
-              handleChange={this.handleChange}
-              handleSearchFieldChange={this.handleSearchFieldChange}
-              onSearchFieldSelect={this.handleSearchFieldSelect}
-              createContact={this.createContact}
-              createEmailAddress={this.createEmailAddress}
-            />
-          )
-          default:
-          break;
-        }
-      break;
-      case 'company':
-        switch (view) {
-          case 'chooseExisting':
-          return (
-            <ChooseCompany
-              search={search}
-              companies={companies}
-              handleSelect={this.handleSelect}
-              skip={this.skip}
-            />
-          )
-          case 'form':
-          return (
-            <Company
-              {...this.props}
-              {...this.state}
-              handleChange={this.handleChange}
-              handleSearchFieldChange={this.handleSearchFieldChange}
-              onSearchFieldSelect={this.handleSearchFieldSelect}
-              createContact={this.createContact}
-              createEmailAddress={this.createEmailAddress}
-            />
-          )
-          case 'createContact':
-          return (
-            <Contact
-              {...this.props}
-              {...this.state}
-              handleChange={this.handleChange}
-              handleSearchFieldChange={this.handleSearchFieldChange}
-              onSearchFieldSelect={this.handleSearchFieldSelect}
-              createCompany={this.createCompany}
-              createEmailAddress={this.createEmailAddress}
-            />
-          )
-          default:
-          break;
-        }
-      break;
-      default:
+    const { view, type, mode, search, searchResults: { contacts, companies } } = this.state
+
+
+    switch (mode) {
+      case 'edit':
       return (
-        <div className="CreateClient--opening">
-          <h2>Is this a Person or a Company?</h2>
-          <div>
-            <button onClick={() => this.setPerson()}><p>Person</p></button>
-            <button onClick={() => this.setCompany()}><p>Company</p></button>
-          </div>
-        </div>
+        <Edit
+          {...this.props}
+          {...this.state}
+          handleSearchFieldChange={this.handleSearchFieldChange}
+          onSearchFieldSelect={this.handleSearchFieldSelect}
+        />
       )
+      case 'create':
+        switch (type) {
+          case 'contact':
+            switch (view) {
+              case 'chooseExisting':
+              return (
+                <ChooseContact
+                  search={search}
+                  contacts={contacts}
+                  handleSelect={this.handleSelect}
+                  skip={this.skip}
+                />
+              )
+              case 'form':
+              return (
+                <Contact
+                  {...this.props}
+                  {...this.state}
+                  handleChange={this.handleChange}
+                  handleSearchFieldChange={this.handleSearchFieldChange}
+                  onSearchFieldSelect={this.handleSearchFieldSelect}
+                  createCompany={this.createCompany}
+                  createEmailAddress={this.createEmailAddress}
+                />
+              )
+              case 'createCompany':
+              return (
+                <Company
+                  {...this.props}
+                  {...this.state}
+                  handleChange={this.handleChange}
+                  handleSearchFieldChange={this.handleSearchFieldChange}
+                  onSearchFieldSelect={this.handleSearchFieldSelect}
+                  createContact={this.createContact}
+                  createEmailAddress={this.createEmailAddress}
+                />
+              )
+              default:
+              break;
+            }
+          break;
+          case 'company':
+            switch (view) {
+              case 'chooseExisting':
+              return (
+                <ChooseCompany
+                  search={search}
+                  companies={companies}
+                  handleSelect={this.handleSelect}
+                  skip={this.skip}
+                />
+              )
+              case 'form':
+              return (
+                <Company
+                  {...this.props}
+                  {...this.state}
+                  handleChange={this.handleChange}
+                  handleSearchFieldChange={this.handleSearchFieldChange}
+                  onSearchFieldSelect={this.handleSearchFieldSelect}
+                  createContact={this.createContact}
+                  createEmailAddress={this.createEmailAddress}
+                />
+              )
+              case 'createContact':
+              return (
+                <Contact
+                  {...this.props}
+                  {...this.state}
+                  handleChange={this.handleChange}
+                  handleSearchFieldChange={this.handleSearchFieldChange}
+                  onSearchFieldSelect={this.handleSearchFieldSelect}
+                  createCompany={this.createCompany}
+                  createEmailAddress={this.createEmailAddress}
+                />
+              )
+              default:
+              break;
+            }
+          break;
+          default:
+          return (
+            <div className="CreateClient--opening">
+              <h2>Is this a Person or a Company?</h2>
+              <div>
+                <button onClick={() => this.setPerson()}><p>Person</p></button>
+                <button onClick={() => this.setCompany()}><p>Company</p></button>
+              </div>
+            </div>
+          )
+        }
+      break;
+
+      default:
+      break;
     }
   }
 
@@ -647,6 +696,7 @@ export default class Client extends Component {
 
   render (){
     const { mobile } = this.props
+    const { mode } = this.state
     return (
       <div className="CreateClient">
         <div className="CreateClient--header">
@@ -663,7 +713,7 @@ export default class Client extends Component {
             null
           }
 
-          <h2>Create Client</h2>
+          <h2>{`${mode === 'create'? 'Create' : 'Edit'} Client`}</h2>
         </div>
         <div className="CreateClient--content">
           {this.content()}

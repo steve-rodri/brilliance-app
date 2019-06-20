@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { pencilIcon, checkIcon, timesIcon } from '../../../../../../helpers/icons'
-// import { styleConfirmation, changeConfirmation } from '../../../../../../Helpers/eventHelpers'
 import './index.css'
 
 export default function Header(props){
@@ -13,7 +12,6 @@ export default function Header(props){
     mobile,
     handleChange,
     history,
-    // handleStatusChange,
 
     back,
     close,
@@ -54,31 +52,6 @@ export default function Header(props){
     }
   }
 
-  //----------------------------------------------------------------------
-
-  //Function to display status of event (confirmation)--------------------
-  // function displayConfirmation(){
-  //   if (fields && fields.confirmation && !editMode) {
-  //     return (
-  //       <div
-  //         className="EventDetail--event-status"
-  //         name="confirmation"
-  //         onClick={(e) => {
-  //           e.stopPropagation();
-  //           props.handleStatusChange('confirmation', changeConfirmation(fields.confirmation)
-  //         )}}
-  //         style={styleConfirmation(fields.confirmation)}
-  //       >
-  //         <p>{fields.confirmation}</p>
-  //       </div>
-  //     )
-  //   } else {
-  //     return null
-  //   }
-  // }
-
-  //----------------------------------------------------------------------
-
   // Functions to Dynamically change buttons based on Mode ---------------
   function cancel(){
     if (!isNew && evt) {
@@ -103,19 +76,6 @@ export default function Header(props){
       </div>
     )
   }
-
-  // function trashCan(){
-  //   if (evt) {
-  //     return (
-  //       <div
-  //         className="EventDetail--icon right"
-  //         onClick={props.delete}
-  //       >
-  //         {trash('2x')}
-  //       </div>
-  //     )
-  //   }
-  // }
 
   function submit(){
     return (
@@ -152,7 +112,7 @@ export default function Header(props){
     if (isNew) {
       return (
         <Fragment>
-          <button className="EventDetail--back-button" onClick={() => history.goBack()}>Back</button>
+          {mobile? <button className="EventDetail--back-button" onClick={() => history.goBack()}>Back</button> : null}
           <div className="EventDetail--event-title-container">
             <h2
               className="EventDetail--event-title"
