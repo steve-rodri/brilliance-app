@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import Contact from './Contact'
-import Company from './Company'
 import Edit from './Edit'
+import Create from './Create'
 import { client, contact, company, emailAddress } from '../../../../../../../../services/BEP_APIcalls.js'
 import axios from 'axios'
 import './index.css'
@@ -11,7 +10,7 @@ export default class Client extends Component {
     super(props)
     this.state = {
       view: '',
-      mode: '',
+      mode: 'edit',
       search: this.props.fields.client,
       searchResults: {
         contacts: {},
@@ -47,29 +46,63 @@ export default class Client extends Component {
   runSetup = async() => {
     const { formData } = this.props
     let clt;
-    if (formData.client_id) {
-      clt = await client.get(formData.client_id, this.ajaxOptions)
-    }
-    console.log(clt)
+    if (formData.client_id) clt = await client.get(formData.client_id, this.ajaxOptions)
+    if (!clt) await this.searchForExisting()
+
     this.setState( prevState => {
 
-      if (clt) return {
+      if (!clt) return { mode: 'create' }
+
+      let newState = {
         mode: 'edit',
         formData: {
           ...prevState.formData,
-          id: clt.id,
-          contact_id: clt.contactInfo? clt.contactInfo.id : '',
-          address_id: clt.company? clt.company.id : ''
+          id: clt.id
         },
         fields: {
           contact: clt.contactInfo? clt.contactInfo.fullName : '',
           company: clt.company? clt.company.name : '',
         }
       }
-      return { mode: 'create' }
-    })
 
-    if (!clt) await this.searchForExisting()
+      if (clt.contactInfo) {
+        newState.formData = {
+          ...newState.formData,
+          contact_id: clt.contactInfo.id,
+          contact: {
+            ...newState.formData.contact,
+            id: clt.contactInfo.id,
+            first_name: clt.contactInfo.firstName || '',
+            last_name: clt.contactInfo.lastName || '',
+            phone_number: clt.contactInfo.phone_number || ''
+          }
+        }
+        const emailAddresses = clt.contactInfo.emailAddresses
+        if (emailAddresses && emailAddresses.length) {
+          newState.formData.contact.email_addresses_attributes = emailAddresses
+        }
+      }
+
+      if (clt.company) {
+        newState.formData = {
+          ...newState.formData,
+          company_id: clt.company.id,
+          company: {
+            ...newState.formData.company,
+            id: clt.company.id,
+            name: clt.company.firstName || '',
+            phone_number: clt.company.phone_number || ''
+          }
+        }
+
+        const emailAddresses = clt.company.emailAddresses
+        if (emailAddresses && emailAddresses.length) {
+          newState.formData.company.email_addresses_attributes = emailAddresses
+        }
+      }
+
+      return newState
+    })
   }
 
   searchForExisting = async() => {
@@ -146,8 +179,8 @@ export default class Client extends Component {
           ...prevState.formData,
           contact: {
             ...prevState.formData.contact,
-            first_name: words[0],
-            last_name: words[1]
+            first_name: words.shift(),
+            last_name: words.join(' ')
           }
         }
       }
@@ -213,9 +246,24 @@ export default class Client extends Component {
           }))
         }
       break;
+
       default:
       break;
     }
+  }
+
+  editContact = () => {
+    this.setState(prevState => ({
+      type: 'contact',
+      view: 'createContact'
+    }))
+  }
+
+  editCompany = () => {
+    this.setState(prevState => ({
+      type: 'company',
+      view: 'form'
+    }))
   }
 
   skip = () => {
@@ -277,6 +325,7 @@ export default class Client extends Component {
 
   handleSubmit = async() => {
     const {
+      mode,
       formData: {
         contact: {
           email_addresses_attributes: contactEmailData,
@@ -289,20 +338,32 @@ export default class Client extends Component {
         ...data
       }
     } = this.state
+    const { onClientSubmit, close } = this.props
 
-    const { createClient, close } = this.props
     let newContact, newCompany;
 
-    if(Object.keys(contactData).length || contactEmailData.length) {
-      newContact = await contact.create({ ...contactData, ...contactEmailData }, this.ajaxOptions)
+    if (Object.keys(contactData).length || contactEmailData.length) {
+      if (mode === 'create') {
+        newContact = await contact.create({ ...contactData, ...contactEmailData }, this.ajaxOptions)
+      }
+      if (mode === 'edit') {
+        newContact = await contact.update(data.contact_id, { ...contactData, ...contactEmailData }, this.ajaxOptions)
+      }
       data.contact_id = newContact.id
     }
-    if(Object.keys(companyData).length || companyEmailData.length) {
-      newCompany = await company.create({ ...companyData, ...companyEmailData }, this.ajaxOptions)
+
+    if (Object.keys(companyData).length || companyEmailData.length) {
+      if (mode === 'create') {
+        newCompany = await company.create({ ...companyData, ...companyEmailData }, this.ajaxOptions)
+      }
+
+      if (mode === 'edit') {
+        newCompany = await company.update(data.company_id, { ...companyData, ...companyEmailData }, this.ajaxOptions)
+      }
       data.company_id = newCompany.id
     }
 
-    if (Object.keys(data).length) await createClient(data)
+    if (Object.keys(data).length) await onClientSubmit(data)
     close()
   }
 
@@ -393,7 +454,7 @@ export default class Client extends Component {
     }
   }
 
-  handleCreate = async() => {
+  handleCreateOrUpdate = async() => {
     const {
       view,
       formData: {
@@ -411,9 +472,14 @@ export default class Client extends Component {
     switch (view) {
 
       case 'createContact':
-        if( Object.keys(contactData).length || contactEmailData.length ) {
-          const newContact = await contact.create({ ...contactData, ...contactEmailData }, this.ajaxOptions)
-          this.setState(prevState => {
+        if ( Object.keys(contactData).length || contactEmailData.length ) {
+          let newContact;
+          if (contactData.id) {
+            newContact = await contact.update(contactData.id, { ...contactData, ...contactEmailData }, this.ajaxOptions)
+          } else {
+            newContact = await contact.create({ ...contactData, ...contactEmailData }, this.ajaxOptions)
+          }
+          this.setState( prevState => {
             return {
               view: 'form',
               fields: {
@@ -433,8 +499,13 @@ export default class Client extends Component {
       break;
 
       case 'createCompany':
-        if( Object.keys(companyData).length || companyEmailData.length ) {
-          const newCompany = await company.create({ ...companyData, ...companyEmailData }, this.ajaxOptions)
+        if ( Object.keys(companyData).length || companyEmailData.length ) {
+          let newCompany;
+          if (companyData.id) {
+            newCompany = await company.update(companyData.id, { ...companyData, ...companyEmailData }, this.ajaxOptions)
+          } else {
+            newCompany = await company.create({ ...companyData, ...companyEmailData }, this.ajaxOptions)
+          }
           this.setState(prevState => {
             return {
               view: 'form',
@@ -459,9 +530,9 @@ export default class Client extends Component {
     }
   }
 
-  setView = (view) => {
-    this.setState({ view : view })
-  }
+  setView = view => this.setState({ view })
+
+  setType = type => this.setState({ type })
 
   setPerson = () => {
     const { search, searchResults: { contacts } } = this.state
@@ -502,10 +573,7 @@ export default class Client extends Component {
   }
 
   content = () => {
-    const { view, type, mode, search, searchResults: { contacts, companies } } = this.state
-
-
-    switch (mode) {
+    switch (this.state.mode) {
       case 'edit':
       return (
         <Edit
@@ -513,100 +581,26 @@ export default class Client extends Component {
           {...this.state}
           handleSearchFieldChange={this.handleSearchFieldChange}
           onSearchFieldSelect={this.handleSearchFieldSelect}
+          editContact={this.editContact}
+          editCompany={this.editCompany}
         />
       )
+
       case 'create':
-        switch (type) {
-          case 'contact':
-            switch (view) {
-              case 'chooseExisting':
-              return (
-                <ChooseContact
-                  search={search}
-                  contacts={contacts}
-                  handleSelect={this.handleSelect}
-                  skip={this.skip}
-                />
-              )
-              case 'form':
-              return (
-                <Contact
-                  {...this.props}
-                  {...this.state}
-                  handleChange={this.handleChange}
-                  handleSearchFieldChange={this.handleSearchFieldChange}
-                  onSearchFieldSelect={this.handleSearchFieldSelect}
-                  createCompany={this.createCompany}
-                  createEmailAddress={this.createEmailAddress}
-                />
-              )
-              case 'createCompany':
-              return (
-                <Company
-                  {...this.props}
-                  {...this.state}
-                  handleChange={this.handleChange}
-                  handleSearchFieldChange={this.handleSearchFieldChange}
-                  onSearchFieldSelect={this.handleSearchFieldSelect}
-                  createContact={this.createContact}
-                  createEmailAddress={this.createEmailAddress}
-                />
-              )
-              default:
-              break;
-            }
-          break;
-          case 'company':
-            switch (view) {
-              case 'chooseExisting':
-              return (
-                <ChooseCompany
-                  search={search}
-                  companies={companies}
-                  handleSelect={this.handleSelect}
-                  skip={this.skip}
-                />
-              )
-              case 'form':
-              return (
-                <Company
-                  {...this.props}
-                  {...this.state}
-                  handleChange={this.handleChange}
-                  handleSearchFieldChange={this.handleSearchFieldChange}
-                  onSearchFieldSelect={this.handleSearchFieldSelect}
-                  createContact={this.createContact}
-                  createEmailAddress={this.createEmailAddress}
-                />
-              )
-              case 'createContact':
-              return (
-                <Contact
-                  {...this.props}
-                  {...this.state}
-                  handleChange={this.handleChange}
-                  handleSearchFieldChange={this.handleSearchFieldChange}
-                  onSearchFieldSelect={this.handleSearchFieldSelect}
-                  createCompany={this.createCompany}
-                  createEmailAddress={this.createEmailAddress}
-                />
-              )
-              default:
-              break;
-            }
-          break;
-          default:
-          return (
-            <div className="CreateClient--opening">
-              <h2>Is this a Person or a Company?</h2>
-              <div>
-                <button onClick={() => this.setPerson()}><p>Person</p></button>
-                <button onClick={() => this.setCompany()}><p>Company</p></button>
-              </div>
-            </div>
-          )
-        }
-      break;
+      return (
+        <Create
+          {...this.props}
+          {...this.state}
+          handleChange={this.handleChange}
+          handleSelect={this.handleSelect}
+          handleSearchFieldChange={this.handleSearchFieldChange}
+          onSearchFieldSelect={this.handleSearchFieldSelect}
+          createCompany={this.createCompany}
+          createContact={this.createContact}
+          createEmailAddress={this.createEmailAddress}
+          skip={this.skip}
+        />
+      )
 
       default:
       break;
@@ -616,6 +610,7 @@ export default class Client extends Component {
   footer = () => {
     const {
       view,
+      mode,
       formData: {
         contact: {
           email_addresses_attributes: contactEmailData,
@@ -639,17 +634,17 @@ export default class Client extends Component {
 
     if (view === 'chooseExisting') return null
 
-    if (view === 'createCompany') {
+    if (view === 'createCompany' || view === 'createContact') {
       return (
         <Fragment>
           {
-            companyData || companyEmailData?
+             contactData || contactEmailData || companyData || companyEmailData?
             <Fragment>
               <button className="CreateClient--button" onClick={() => this.setView('form')}>
                 <p>Cancel</p>
               </button>
-              <button className="CreateClient--button" onClick={this.handleCreate}>
-                <p>Create Company</p>
+              <button className="CreateClient--button" onClick={this.handleCreateOrUpdate}>
+                <p>{`Create ${view === 'createCompany'? 'Company' : 'Contact'}`}</p>
               </button>
             </Fragment>
             :
@@ -660,33 +655,10 @@ export default class Client extends Component {
         </Fragment>
       )
     }
-
-    if (view === 'createContact') {
-      return (
-        <Fragment>
-          {
-            contactData || contactEmailData?
-            <Fragment>
-              <button className="CreateClient--button" onClick={() => this.setView('form')}>
-                <p>Cancel</p>
-              </button>
-              <button className="CreateClient--button" onClick={this.handleCreate}>
-                <p>Create Contact</p>
-              </button>
-            </Fragment>
-            :
-            <button className="CreateClient--button" onClick={() => this.setView('form')}>
-              <p>Cancel</p>
-            </button>
-          }
-        </Fragment>
-      )
-    }
-
     if (formData) {
       return (
         <button className="CreateClient--button" onClick={this.handleSubmit}>
-          <p>CREATE</p>
+          <p>{mode === 'create'? 'CREATE' : 'SUBMIT'}</p>
         </button>
       )
     }
@@ -696,7 +668,7 @@ export default class Client extends Component {
 
   render (){
     const { mobile } = this.props
-    const { mode } = this.state
+    const { mode, type } = this.state
     return (
       <div className="CreateClient">
         <div className="CreateClient--header">
@@ -713,7 +685,40 @@ export default class Client extends Component {
             null
           }
 
-          <h2>{`${mode === 'create'? 'Create' : 'Edit'} Client`}</h2>
+          {
+            mode === 'edit' && (type === 'contact' || type === 'company')?
+            <button
+              className="CreateClient--back-button"
+              onClick={() => {
+                this.setType('')
+                this.setView('form')
+              }}
+            >
+              Back
+            </button>
+            :
+            null
+          }
+
+          <h2>
+            {
+              `
+              ${mode === 'create'? 'Create' : 'Edit'}
+              ${mode === 'edit'?
+                  type === 'contact'?
+                    'Contact'
+                  :
+                    type === 'company'?
+                      'Company'
+                    :
+                      'Client'
+                :
+                  'Client'
+                }
+              `
+            }
+          </h2>
+
         </div>
         <div className="CreateClient--content">
           {this.content()}
@@ -724,80 +729,4 @@ export default class Client extends Component {
       </div>
     )
   }
-}
-
-function ChooseContact(props){
-  const { search, contacts, handleSelect, skip } = props
-  return (
-    <div className="CreateClient--choose">
-      <div className="CreateClient--choose-existing">
-        <h2>Found Existing Information:</h2>
-        <div>
-          <div className="CreateClient--choose-existing-dialog">
-            <p>{`Found ${contacts.count} ${contacts.count === 1? 'contact' : 'contacts'} that matches`}</p>
-            <p>{`"${search}"`}</p>
-            <p>{`Choose ${contacts.count === 1? '' : 'ONE'} to make a New Client.`}</p>
-          </div>
-          <div className="CreateClient--choose-existing-contacts">
-            {
-              contacts.data.map( contact => (
-                <button key={contact.id} onClick={(e) => {
-                  e.stopPropagation()
-                  handleSelect(contact.id, 'contact')
-                }}>
-                  <p>{contact.fullName}</p>
-                </button>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-
-      <div className="CreateClient--divider">
-        <div></div>
-        <h2>OR</h2>
-        <div></div>
-      </div>
-
-      <div className="CreateClient--skip">
-        <button onClick={skip}><h2>Skip</h2></button>
-      </div>
-    </div>
-  )
-}
-
-function ChooseCompany(props){
-  const { search, companies, handleSelect, skip } = props
-  return (
-    <div className="CreateClient--choose">
-      <div className="CreateClient--choose-existing">
-        <h2>Choose From Existing:</h2>
-        <div>
-          <p>{`Found ${companies.count} ${companies.count === 1? 'company' : 'companies'} matching "${search}"`}</p>
-          <div>
-            {
-              companies.data.map( company => (
-                <div key={company.id} onClick={(e) => {
-                  e.stopPropagation()
-                  handleSelect(company.id, 'company')
-                }}>
-                  <p>{company.name}</p>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-
-      <div className="CreateClient--divider">
-        <div></div>
-        <h2>OR</h2>
-        <div></div>
-      </div>
-
-      <div className="CreateClient--skip">
-        <button onClick={skip}><h2>Skip</h2></button>
-      </div>
-    </div>
-  )
 }
