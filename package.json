@@ -8,8 +8,5 @@
     "build": "npm --prefix client install && npm run build --prefix client",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run build && npm run deploy"
-  },
-  "dependencies": {
-    "parse-address": "^1.1.2"
   }
 }
