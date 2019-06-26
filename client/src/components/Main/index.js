@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Switch } from 'react-router-dom'
 import { PrivateRoute } from '../../helpers/customRouters.js'
+import { DndProvider } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 import Admin from './Admin'
 import { GOOGLE } from '../../services/google_service'
 import { event } from '../../services/BEP_APIcalls'
@@ -151,30 +153,32 @@ export default class Main extends Component {
 
   render(){
     return(
-      <div className="App">
-        <Switch>
-          <PrivateRoute
-            path="/admin"
-            component={Admin}
-            {...this.props}
-            {...this.state}
+      <DndProvider backend={HTML5Backend}>
+        <div className="App">
+          <Switch>
+            <PrivateRoute
+              path="/admin"
+              component={Admin}
+              {...this.props}
+              {...this.state}
 
-            setView={this.setView}
-            setCategories={this.setCategories}
-            setLoadingState={this.setLoadingState}
-            changeNav={this.changeNav}
+              setView={this.setView}
+              setCategories={this.setCategories}
+              setLoadingState={this.setLoadingState}
+              changeNav={this.changeNav}
 
-            onDateChange={this.handleDateChange}
-            isMonth={this.isMonth}
-            isDay={this.isDay}
+              onDateChange={this.handleDateChange}
+              isMonth={this.isMonth}
+              isDay={this.isDay}
 
-            syncAllEvents={this.synchronizeAllEvents}
+              syncAllEvents={this.synchronizeAllEvents}
 
-            camelToSnake={this.camelToSnakeCase}
-            singularView={this.singularView}
-          />
-        </Switch>
-      </div>
+              camelToSnake={this.camelToSnakeCase}
+              singularView={this.singularView}
+            />
+          </Switch>
+        </div>
+      </DndProvider>
     )
   }
 }

@@ -33,13 +33,13 @@ export default class Invoice extends Component {
     const { inv } = this.props
     if (inv && inv.lines) {
       const lines = [...inv.lines]
-      return lines.reverse().map( (line, id) =>
+      return lines.map( (line, i) =>
         <Line
           {...this.props}
-          key={line.id}
-          index={id}
-          length={lines.length}
           line={line}
+          index={i}
+          key={line.id}
+          length={lines.length}
           styleCell={this.styleCell}
           showQty={this.quantities()}
         />
