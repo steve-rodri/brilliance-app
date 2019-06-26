@@ -686,6 +686,21 @@ export const contact = {
         if (unauthorizedCB) unauthorizedCB()
       }
     }
+  },
+  update: async function(id, data, options){
+    const { cancelToken, unauthorizedCB } = options
+    try {
+      const resp = await axios.put(`/api/contacts/${id}`, data, { cancelToken: cancelToken })
+      return resp.data.contact
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Contact Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
   }
 }
 
@@ -718,6 +733,21 @@ export const company = {
     const { cancelToken, unauthorizedCB } = options
     try {
       const resp = await axios.post(`/api/companies`, data, { cancelToken: cancelToken })
+      return resp.data.company
+    } catch (e) {
+      if (axios.isCancel(e)) {
+        console.log('Company Request Canceled')
+      }
+      if (e.response && e.response.status === 401) {
+        localStorage.clear()
+        if (unauthorizedCB) unauthorizedCB()
+      }
+    }
+  },
+  update: async function(id, data, options){
+    const { cancelToken, unauthorizedCB } = options
+    try {
+      const resp = await axios.put(`/api/companies/${id}`, data, { cancelToken: cancelToken })
       return resp.data.company
     } catch (e) {
       if (axios.isCancel(e)) {

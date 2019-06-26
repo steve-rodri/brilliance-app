@@ -3,6 +3,7 @@ import SearchField from '../../../../../../../SearchField'
 
 export default function Contact(props){
   const {
+    mode,
     type,
     fields,
     searchResults,
@@ -41,7 +42,7 @@ export default function Contact(props){
       </div>
 
       {
-        type !== 'company'?
+        mode !== 'edit' && type !== 'company'?
         <Fragment>
           <label>Company</label>
           <SearchField
