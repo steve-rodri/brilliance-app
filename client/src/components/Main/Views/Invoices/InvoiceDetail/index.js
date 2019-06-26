@@ -91,7 +91,9 @@ export default class InvoiceDetail extends Component {
 
   setLines = async() => {
     const { inv, inv: { lines } } = this.state
-    const updatedLines = lines.map( line => {
+    const updatedLines = lines.map( ( line, i ) => {
+      if (!line.order) line.order = i + 1
+
       if (line.quantity > 0 && line.price > 0) return line
 
       if (!line.quantity && !line.price) {
@@ -305,7 +307,7 @@ export default class InvoiceDetail extends Component {
   }
 
   deleteLine = async(lineId) => {
-    let { inv } = this.state
+    let { inv } = { ...this.state }
 
     await line.delete(lineId, this.ajaxOptions)
     const updatedLines = inv.lines.filter(line => line.id !== lineId)
@@ -320,6 +322,27 @@ export default class InvoiceDetail extends Component {
         lines: updatedLines
       }
     }), async() => await this.updateSummary())
+  }
+
+  reOrderLine = (dragIndex, hoverIndex) => {
+    let { inv: { lines } } = { ...this.state }
+    let dragLine = lines[dragIndex]
+
+    if (dragIndex > hoverIndex) dragLine.order -= 1
+    if (dragIndex < hoverIndex) dragLine.order += 1
+
+    lines.splice(dragIndex, 1)
+    lines.splice(hoverIndex, 0, dragLine)
+    this.setState(prevState => ({
+      inv: {
+        ...prevState.inv,
+        lines
+      },
+      formData: {
+        ...prevState.formData,
+        lines_attributes: lines
+      }
+    }))
   }
 
   // --------------------------------Items--------------------------------------
@@ -709,6 +732,7 @@ export default class InvoiceDetail extends Component {
               handleLineChange={this.handleLineChange}
               addLine={this.addLine}
               deleteLine={this.deleteLine}
+              reOrderLine={this.reOrderLine}
               setSubTotal={this.setSubTotal}
             />
             <Summary
