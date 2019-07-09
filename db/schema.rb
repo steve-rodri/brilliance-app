@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_163920) do
     t.float "discount_adj", default: 0.0
     t.float "price", default: 0.0
     t.integer "quantity", default: 0
+    t.integer "order"
     t.bigint "invoice_id"
     t.bigint "item_id"
     t.datetime "created_at", null: false
