@@ -2,7 +2,7 @@ require 'csv'
 Event.destroy_all
 
 #seed Events
-csv_text = File.read(Rails.root.join('lib','seeds', 'Events.csv'))
+csv_text = File.read(Rails.root.join('lib','seeds', 'tmpEvents.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
   Event.create! ({
@@ -15,15 +15,17 @@ csv.each do |row|
     description: row['description'],
     driving_time: row['driving_time'],
     end: row['event_end_tz'],
+    gc_id: row['gc_id'],
+    i_cal_UID: row['i_cal_UID'],
     kind: row['kind'],
     notes: row['notes'],
     start: row['event_start_tz'],
     summary: row['summary'],
     tags: row['tags'],
 
+    client_id: row['client_id'],
     location_id: row['location_id'],
     call_location_id: row['call_location_id'],
-    client_id: row['client_id'],
     created_at: row['created_at']
   })
 end
