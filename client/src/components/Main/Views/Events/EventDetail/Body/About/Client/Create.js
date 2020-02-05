@@ -46,8 +46,8 @@ export default function Create(props){
       <div className="CreateClient--opening">
         <h2>Is this a Person or a Company?</h2>
         <div>
-          <button onClick={() => this.setPerson()}><p>Person</p></button>
-          <button onClick={() => this.setCompany()}><p>Company</p></button>
+          <button onClick={() => props.setPerson()}><p>Person</p></button>
+          <button onClick={() => props.setCompany()}><p>Company</p></button>
         </div>
       </div>
     )

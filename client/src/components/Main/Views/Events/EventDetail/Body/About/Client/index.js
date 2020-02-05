@@ -46,7 +46,7 @@ export default class Client extends Component {
   runSetup = async() => {
     const { formData } = this.props
     let clt;
-    if (formData.client_id) clt = await client.get(formData.client_id, this.ajaxOptions)
+    if (formData && formData.client_id) clt = await client.get(formData.client_id, this.ajaxOptions)
     if (!clt) await this.searchForExisting()
 
     this.setState( prevState => {
@@ -536,7 +536,7 @@ export default class Client extends Component {
 
   setPerson = () => {
     const { search, searchResults: { contacts } } = this.state
-    const contactData = contacts && contacts.data && contacts.data.length
+    const contactData = contacts && contacts.data && contacts.data.lengt
     const terms = search.split(' ')
     this.setState(prevState => ({
       type: 'contact',
@@ -598,6 +598,8 @@ export default class Client extends Component {
           createCompany={this.createCompany}
           createContact={this.createContact}
           createEmailAddress={this.createEmailAddress}
+          setPerson={this.setPerson}
+          setCompany={this.setCompany}
           skip={this.skip}
         />
       )

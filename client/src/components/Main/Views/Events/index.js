@@ -351,7 +351,7 @@ export default class Events extends Component {
 
         newData.event_employees_attributes = update
       }
-      
+
       updatedEvent = await event.update(e.id, newData, this.ajaxOptions)
     }
 
@@ -375,10 +375,11 @@ export default class Events extends Component {
         }
         const evt = await this.synchronizeWithGoogle(e)
         if (evt) {
-          if (next.id === evt.id) evt.isNextEvent = true
+          if (next && next.id === evt.id) evt.isNextEvent = true
           return evt
         } else {
-          if (next.id === e.id) e.isNextEvent = true
+
+          if (next && next.id === e.id) e.isNextEvent = true
           return e
         }
       })
