@@ -1,38 +1,38 @@
-import React, { Component } from 'react'
-import { searchIcon } from '../../helpers/icons'
-import './Search.css'
+import React, { Component } from "react";
+import { searchIcon } from "../../icons";
+import "./Search.css";
 
 export default class Search extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      query:''
-    }
+      query: ""
+    };
   }
 
-  handleFocusSelect = (e) => {
-    e.target.select()
-  }
+  handleFocusSelect = e => {
+    e.target.select();
+  };
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       query: e.target.value
-    })
-  }
+    });
+  };
 
-  handleSubmit = (e) => {
-    const { history, location, mobile, changeNav } = this.props
+  handleSubmit = e => {
+    const { history, location, mobile, changeNav } = this.props;
     e.preventDefault();
     if (mobile) changeNav(false);
-    history.push(`${location.pathname}?q=${this.state.query}`)
-    this.setState({query: ''})
-  }
+    history.push(`${location.pathname}?q=${this.state.query}`);
+    this.setState({ query: "" });
+  };
 
-  render(){
-    const { className } = this.props
-    return(
+  render() {
+    const { className } = this.props;
+    return (
       <form className={`search ${className}`} onSubmit={this.handleSubmit}>
-        <div className="search--icon">{searchIcon('1x')}</div>
+        <div className="search--icon">{searchIcon("1x")}</div>
         <input
           name="query"
           type="text"
@@ -42,6 +42,6 @@ export default class Search extends Component {
           onFocus={this.handleFocusSelect}
         />
       </form>
-    )
+    );
   }
 }

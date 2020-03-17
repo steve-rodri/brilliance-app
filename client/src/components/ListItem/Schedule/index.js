@@ -1,11 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { date, time } from '../../../helpers/datetime'
-import { statusIcon } from '../../../helpers/icons'
-import { styleWorkerStatus } from '../../../helpers/eventHelpers'
-import './index.css'
+import React from "react";
+import { Link } from "react-router-dom";
+import { date, time } from "../../../helpers/datetime";
+import { statusIcon } from "../../../icons";
+import { styleWorkerStatus } from "../../../helpers/eventHelpers";
+import "./index.css";
 
-export default function Schedule(props){
+export default function Schedule(props) {
   const {
     user,
     item,
@@ -18,29 +18,35 @@ export default function Schedule(props){
     user: { accessLevel },
 
     changeConfirmation
-  }
-  = props
+  } = props;
 
-  const leftCell = styleCell('left', item)
-  const rightCell = styleCell('right', item)
-  const eventDisplay = displayColumn('event')
-  const confirmationDisplay = displayColumn('confirmation')
+  const leftCell = styleCell("left", item);
+  const rightCell = styleCell("right", item);
+  const eventDisplay = displayColumn("event");
+  const confirmationDisplay = displayColumn("confirmation");
 
   let currentUser = {};
-  if(item && item.staff) currentUser = item.staff.find( worker => {
-    const email = worker.info.contact.emailAddresses.find( e => e.emailAddress === user.profile.email)
-    if (email) return worker
-    return null
-  })
+  if (item && item.staff)
+    currentUser = item.staff.find(worker => {
+      const email = worker.info.contact.emailAddresses.find(
+        e => e.emailAddress === user.profile.email
+      );
+      if (email) return worker;
+      return null;
+    });
 
   return (
     <div className="List-Item" style={styleItem(item, view)}>
-
       {/* Event */}
       <div className="List-Item--Cell" style={{ ...eventDisplay, ...leftCell }}>
         <Link
           to={`${accessLevel}/events/${item.id}`}
-          style={{textDecoration: 'none', color: 'black', height: '100%', width: '100%'}}
+          style={{
+            textDecoration: "none",
+            color: "black",
+            height: "100%",
+            width: "100%"
+          }}
         >
           <div className="Schedule--event">
             <div className="Schedule--event-summary">{summary()}</div>
@@ -56,19 +62,21 @@ export default function Schedule(props){
       </div>
 
       {/* Confirmation */}
-      <div className="List-Item--Cell" style={{ ...confirmationDisplay, ...rightCell }}>
+      <div
+        className="List-Item--Cell"
+        style={{ ...confirmationDisplay, ...rightCell }}
+      >
         <div
           className="Schedule--confirmation"
           style={styleWorkerStatus(currentUser.confirmation)}
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation();
-            changeConfirmation(item.id, currentUser.id)
+            changeConfirmation(item.id, currentUser.id);
           }}
         >
-          {statusIcon(currentUser.confirmation, '2x')}
+          {statusIcon(currentUser.confirmation, "2x")}
         </div>
       </div>
-
     </div>
-  )
+  );
 }

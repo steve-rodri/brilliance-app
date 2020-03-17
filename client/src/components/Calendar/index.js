@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
-import { chevronRightIcon, chevronLeftIcon } from '../../helpers/icons'
-import moment from 'moment';
+import { chevronRightIcon, chevronLeftIcon } from "../../icons";
+import moment from "moment";
 import calendar, {
   isDate,
   isSameDay,
@@ -47,8 +47,8 @@ class Calendar extends Component {
 
     !(current && isSameDay(date, current)) &&
       this.setState(this.resolveStateFromDate(date), () => {
-        typeof onDateChanged === "function" && onDateChanged(date, 'day');
-        changeNav(false)
+        typeof onDateChanged === "function" && onDateChanged(date, "day");
+        changeNav(false);
       });
   };
 
@@ -56,9 +56,11 @@ class Calendar extends Component {
     const { month, year } = this.state;
     const { onDateChanged } = this.props;
     this.setState(getPreviousMonth(month, year), () => {
-      const { month, year } = this.state
-      const date = moment().month(month - 1).year(year)
-      typeof onDateChanged === "function" && onDateChanged(date, 'month')
+      const { month, year } = this.state;
+      const date = moment()
+        .month(month - 1)
+        .year(year);
+      typeof onDateChanged === "function" && onDateChanged(date, "month");
     });
   };
 
@@ -66,9 +68,11 @@ class Calendar extends Component {
     const { month, year } = this.state;
     const { onDateChanged } = this.props;
     this.setState(getNextMonth(month, year), () => {
-      const { month, year } = this.state
-      const date = moment().month(month - 1).year(year)
-      typeof onDateChanged === "function" && onDateChanged(date, 'month')
+      const { month, year } = this.state;
+      const date = moment()
+        .month(month - 1)
+        .year(year);
+      typeof onDateChanged === "function" && onDateChanged(date, "month");
     });
   };
 
@@ -76,9 +80,11 @@ class Calendar extends Component {
     const { year } = this.state;
     const { onDateChanged } = this.props;
     this.setState({ year: year - 1 }, () => {
-      const { month, year } = this.state
-      const date = moment().month(month - 1).year(year)
-      typeof onDateChanged === "function" &&  onDateChanged(date, 'month')
+      const { month, year } = this.state;
+      const date = moment()
+        .month(month - 1)
+        .year(year);
+      typeof onDateChanged === "function" && onDateChanged(date, "month");
     });
   };
 
@@ -86,9 +92,11 @@ class Calendar extends Component {
     const { year } = this.state;
     const { onDateChanged } = this.props;
     this.setState({ year: year + 1 }, () => {
-      const { month, year } = this.state
-      const date = moment().month(month - 1).year(year)
-      typeof onDateChanged === "function" && onDateChanged(date, 'month')
+      const { month, year } = this.state;
+      const date = moment()
+        .month(month - 1)
+        .year(year);
+      typeof onDateChanged === "function" && onDateChanged(date, "month");
     });
   };
 
@@ -135,12 +143,16 @@ class Calendar extends Component {
           onMouseDown={this.handlePrevious}
           onMouseUp={this.clearPressureTimer}
           title="Previous Month"
-        >{chevronLeftIcon('1x')}</Styled.ArrowLeft>
+        >
+          {chevronLeftIcon("1x")}
+        </Styled.ArrowLeft>
         <Styled.CalendarMonth
           onClick={() => {
-            const date = moment().month(month - 1).year(year)
-            typeof onDateChanged === "function" && onDateChanged(date, 'month')
-            typeof changeNav === "function" && changeNav(false)
+            const date = moment()
+              .month(month - 1)
+              .year(year);
+            typeof onDateChanged === "function" && onDateChanged(date, "month");
+            typeof changeNav === "function" && changeNav(false);
           }}
         >
           {monthname} {year}
@@ -149,7 +161,9 @@ class Calendar extends Component {
           onMouseDown={this.handleNext}
           onMouseUp={this.clearPressureTimer}
           title="Next Month"
-        >{chevronRightIcon('1x')}</Styled.ArrowRight>
+        >
+          {chevronRightIcon("1x")}
+        </Styled.ArrowRight>
       </Styled.CalendarHeader>
     );
   };
@@ -165,27 +179,23 @@ class Calendar extends Component {
 
   renderCalendarDate = (date, index) => {
     const { current, month, year, today } = this.state;
-    const { isMonth } = this.props
+    const { isMonth } = this.props;
     const _date = new Date(date.join("-"));
 
     const isToday = isSameDay(_date, today);
     const isCurrent = current && isSameDay(_date, current);
-    const inMonth = (
-      month &&
-      year &&
-      isSameMonth(_date, new Date([year, month, 1].join("-")))
-    );
+    const inMonth =
+      month && year && isSameMonth(_date, new Date([year, month, 1].join("-")));
     const onClick = this.gotoDate(_date);
 
     const props = { index, inMonth, onClick, title: _date.toDateString() };
 
-    const DateComponent = isCurrent && !isMonth()?
-      Styled.HighlightedCalendarDate
-      :
-      isToday?
-        Styled.TodayCalendarDate
-        :
-        Styled.CalendarDate;
+    const DateComponent =
+      isCurrent && !isMonth()
+        ? Styled.HighlightedCalendarDate
+        : isToday
+        ? Styled.TodayCalendarDate
+        : Styled.CalendarDate;
 
     return (
       <DateComponent key={getDateISO(_date)} {...props}>

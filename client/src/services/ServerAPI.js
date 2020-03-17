@@ -5,9 +5,9 @@ export default class Request {
   constructor(table, type, o) {
     this.table = table
     this.type = type? type : 'get'
-    this.params = o.params? o.params : null;
+    this.params = o.params? o.params : {};
     this.data = o.data? o.data : null;
-    this.options = o.options? o.options : null;
+    this.options = o.options? o.options : {};
   }
 
   paramsSerializer(){
@@ -27,13 +27,9 @@ export default class Request {
         },
         paramsSerializer: self.paramsSerializer,
         cancelToken: cancelToken
-        // onDownloadProgress: function (pe) {
-        //   if (pe.lengthComputable) {
-        //     console.log(pe.loaded, pe.total)
-        //   }
-        // }
       })
      }
+
     const handleError = (e) => {
       const { unauthorizedCB } = self.options
 

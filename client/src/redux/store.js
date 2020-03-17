@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware } from "redux";
-import { composeWithDevtools } from "redux-devtools-extension";
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
+import { loadState, saveState } from "./localStorage";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
-import { loadState, saveState } from "./localStorage";
 import throttle from "lodash/throttle";
 
 import rootReducer from "./reducers";
@@ -15,7 +15,7 @@ const configureStore = () => {
   const store = createStore(
     rootReducer,
     persistedState,
-    composeWithDevtools(middleware)
+    composeWithDevTools(middleware)
   );
   store.subscribe(
     throttle(() => {
@@ -23,6 +23,6 @@ const configureStore = () => {
     }),
     1000
   );
+  return store;
 };
-
 export default configureStore();

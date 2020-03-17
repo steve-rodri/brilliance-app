@@ -1,7 +1,10 @@
-import React, { Fragment } from 'react'
-import { pencilIcon, checkIcon } from '../../helpers/icons'
-import { styleConfirmation, changeConfirmation } from '../../helpers/eventHelpers'
-import './Buttons.css'
+import React, { Fragment } from "react";
+import { pencilIcon, checkIcon } from "../../icons";
+import {
+  styleConfirmation,
+  changeConfirmation
+} from "../../helpers/eventHelpers";
+import "./Buttons.css";
 
 export default function Buttons(props) {
   // Functions to Dynamically change buttons based on Mode ---------------
@@ -13,22 +16,23 @@ export default function Buttons(props) {
     edit,
     submit: onSubmit,
     scrollToTop,
-    handleStatusChange,
-
-   } = props
-  function editButton(){
+    handleStatusChange
+  } = props;
+  function editButton() {
     return (
       <div
         className="Button Edit"
         onClick={() => {
-          edit()
-          scrollToTop()
+          edit();
+          scrollToTop();
         }}
       >
-        <div className="Button--text"><p>Edit</p></div>
+        <div className="Button--text">
+          <p>Edit</p>
+        </div>
         <div className="Button--icon">{pencilIcon()}</div>
       </div>
-    )
+    );
   }
 
   // function trashCan(){
@@ -44,69 +48,73 @@ export default function Buttons(props) {
   //   }
   // }
 
-  function submit(){
+  function submit() {
     return (
-      <div
-        className="Button Submit"
-        onClick={onSubmit}
-      >
-        <div className="Button--text"><p>SUBMIT</p></div>
+      <div className="Button Submit" onClick={onSubmit}>
+        <div className="Button--text">
+          <p>SUBMIT</p>
+        </div>
         <div className="Button--icon">{checkIcon()}</div>
       </div>
-    )
+    );
   }
 
-  function confirmation(){
+  function confirmation() {
     if (fields && fields.confirmation) {
       return (
         <div
           className="event-status Button"
           name="confirmation"
-          onClick={(e) => {
+          onClick={e => {
             e.stopPropagation();
-            handleStatusChange('confirmation', changeConfirmation(fields && fields.confirmation)
-          )}}
+            handleStatusChange(
+              "confirmation",
+              changeConfirmation(fields && fields.confirmation)
+            );
+          }}
           style={styleConfirmation(fields && fields.confirmation)}
         >
-          <div className="Button--text"><p>{fields && fields.confirmation}</p></div>
+          <div className="Button--text">
+            <p>{fields && fields.confirmation}</p>
+          </div>
         </div>
-      )
+      );
     } else {
-      return null
+      return null;
     }
   }
 
-  function displayButtons(){
+  function displayButtons() {
     if (editMode) {
       return (
         <Fragment>
           {/* {trashCan()} */}
           {submit()}
         </Fragment>
-      )
+      );
     } else {
       return (
         <Fragment>
           {confirmation()}
           {editButton()}
         </Fragment>
-      )
+      );
     }
   }
 
-  function styleButtons(){
+  function styleButtons() {
     let style = {};
     if (!editMode) {
       style = {
-        position: 'sticky',
-        bottom: '115px'
-      }
+        position: "sticky",
+        bottom: "115px"
+      };
     }
-    return style
+    return style;
   }
   return (
     <div className="Buttons" style={styleButtons()}>
       {displayButtons()}
     </div>
-  )
+  );
 }

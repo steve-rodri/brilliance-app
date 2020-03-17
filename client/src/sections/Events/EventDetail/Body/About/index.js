@@ -1,0 +1,62 @@
+import React, { Component } from "react";
+import {
+  styleConfirmation,
+  changeConfirmation
+} from "../../../../../helpers/eventHelpers";
+import View from "./View";
+import Edit from "./Edit";
+import "./index.css";
+
+export default class About extends Component {
+  view = () => {
+    const { editMode } = this.props;
+
+    if (editMode) {
+      return <Edit {...this.props} />;
+    } else {
+      return <View {...this.props} />;
+    }
+  };
+
+  displayConfirmation = () => {
+    const { fields, editMode } = this.props;
+    if (fields && fields.confirmation && !editMode) {
+      return (
+        <div
+          className="About--event-status"
+          name="confirmation"
+          onClick={e => {
+            e.stopPropagation();
+            this.props.handleStatusChange(
+              "confirmation",
+              changeConfirmation(fields.confirmation)
+            );
+          }}
+          style={styleConfirmation(fields.confirmation)}
+        >
+          <p>{fields.confirmation}</p>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
+
+  render() {
+    const { editMode, mobile, styleComp, styleContainer } = this.props;
+    return (
+      <div
+        style={styleComp("About")}
+        className="EventDetail-Body--component EventDetail-Body--about"
+      >
+        <div className="EventDetail-Body--component-title">
+          <h4>About</h4>
+        </div>
+        <div className="About--container" style={styleContainer()}>
+          {this.view()}
+          {!editMode && !mobile ? this.displayConfirmation() : null}
+        </div>
+      </div>
+    );
+  }
+}
