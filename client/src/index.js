@@ -1,22 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import App from "./App";
+import "./index.css";
 
-document.body.removeAttribute("class")
-document.querySelector('html').addEventListener("touchstart", function() {
+const Root = () => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  );
+};
 
-        var clientHeight = this.clientHeight;
-        var scrollHeight = this.scrollHeight;
-        var scrollTop = this.scrollTop;
-        var scroll = scrollHeight - scrollTop;
-        var scrollTo;
+ReactDOM.render(<Root />, document.getElementById("root"));
 
-        if( scroll === clientHeight ) scrollTo = scrollTop - 1;
-        if( scroll === scrollHeight ) scrollTo = scrollTop + 1;
+document.body.removeAttribute("class");
+document.querySelector("html").addEventListener("touchstart", () => {
+  let { clientHeight, scrollHeight, scrollTop } = this;
+  let scroll = scrollHeight - scrollTop;
+  let scrollTo;
 
-        if(scrollTo) return this.scrollTop = scrollTo;
+  if (scroll === clientHeight) scrollTo = scrollTop - 1;
+  if (scroll === scrollHeight) scrollTo = scrollTop + 1;
 
-    });
-
-ReactDOM.render(<App />, document.getElementById('root'));
+  if (scrollTo) return (this.scrollTop = scrollTo);
+});
