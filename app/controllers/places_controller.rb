@@ -3,9 +3,37 @@ class PlacesController < ApplicationController
 
   # GET /places
   def index
-    @places = Place.all
+    if params[:limit]
+      @limit = params[:limit]
+    end
+    if params[:q]
+      terms = params[:q].split
+      query = ''
+      terms.each do |term|
+        query += "(name LIKE '%#{term}%'
+          OR name LIKE '%#{term.capitalize}%'
+          OR name LIKE '%#{term.upcase}%'
+          OR name LIKE '%#{term.downcase}%'
+          OR short_name LIKE '%#{term}%'
+          OR short_name LIKE '%#{term.capitalize}%'
+          OR short_name LIKE '%#{term.upcase}%'
+          OR short_name LIKE '%#{term.downcase}%')"
 
-    render json: @places, include: '**'
+        if terms.index(term) + 1 < terms.length
+          query += " AND "
+        end
+      end
+
+      @places = Place
+        .distinct
+        .where(query)
+        .order(:name)
+        .limit(@limit)
+      render json: @places, include: '**'
+    else
+      @places = Place.all
+      render json: @places, include: '**'
+    end
   end
 
   # GET /places/1
@@ -36,32 +64,6 @@ class PlacesController < ApplicationController
   # DELETE /places/1
   def destroy
     @place.destroy
-  end
-
-  # GET /places/find
-  def find
-    terms = params[:q].split
-    query = ''
-    terms.each do |term|
-      query += "(name LIKE '%#{term}%'
-        OR name LIKE '%#{term.capitalize}%'
-        OR name LIKE '%#{term.upcase}%'
-        OR name LIKE '%#{term.downcase}%'
-        OR short_name LIKE '%#{term}%'
-        OR short_name LIKE '%#{term.capitalize}%'
-        OR short_name LIKE '%#{term.upcase}%'
-        OR short_name LIKE '%#{term.downcase}%')"
-
-      if terms.index(term) + 1 < terms.length
-        query += " AND "
-      end
-    end
-
-    @places = Place
-      .distinct
-      .where(query)
-      .order(:name)
-    render json: @places, include: '**'
   end
 
   private

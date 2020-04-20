@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_01_163920) do
+ActiveRecord::Schema.define(version: 2020_04_06_202033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2019_05_01_163920) do
     t.string "zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "contact_id"
+    t.index ["contact_id"], name: "index_addresses_on_contact_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -70,7 +72,6 @@ ActiveRecord::Schema.define(version: 2019_05_01_163920) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
-    t.string "work_email"
     t.string "ss"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -94,6 +95,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_163920) do
 
   create_table "email_addresses", force: :cascade do |t|
     t.string "email_address"
+    t.boolean "notifications", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "contact_id"
@@ -148,7 +150,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_163920) do
     t.datetime "end"
     t.string "gc_id"
     t.string "html_link"
-    t.string "i_cal_UID"
+    t.string "gc_i_cal_uid"
     t.string "kind"
     t.text "notes"
     t.datetime "start"
@@ -302,6 +304,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_163920) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "contacts"
   add_foreign_key "clients", "companies"
   add_foreign_key "clients", "contacts"
   add_foreign_key "contents", "inventories"

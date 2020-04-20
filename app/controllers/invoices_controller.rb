@@ -1,17 +1,17 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :update, :destroy]
   @@items_per_page = 25
-  @@date_start = Time.zone.today()
-  @@date_end = Time.zone.today()
+  @@start = Time.zone.today()
+  @@end = Time.zone.today()
 
   # GET /invoices
   def index
     @@date_where = ''
     @@send_count = false
-    if params[:date_start] && params[:date_end]
-      @@date_start = Time.zone.parse(params[:date_start])
-      @@date_end = Time.zone.parse(params[:date_end])
-      @@date_where = "events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'"
+    if params[:start] && params[:end]
+      @@start = Time.zone.parse(params[:start])
+      @@end = Time.zone.parse(params[:end])
+      @@date_where = "events.start BETWEEN '#{@@start}' AND '#{@@end}'"
     end
     if params[:send_count]
       @@send_count = true

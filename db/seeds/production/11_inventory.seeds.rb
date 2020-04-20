@@ -14,7 +14,7 @@ csv.each do |row|
     rental_price: row['rental_price'],
     net_cost_per_invoice: row['net_cost_per_invoice'],
     purchase_price: row['purchase_price'],
-
+    
     created_at: row['created_at']
   }) do |i|
     if row['photo_file_name']

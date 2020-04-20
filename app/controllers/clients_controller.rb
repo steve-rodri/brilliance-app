@@ -129,14 +129,18 @@ class ClientsController < ApplicationController
   # GET /clients
   def index
     @@date_where = nil
-    if params[:date_start] && params[:date_end]
-      @@date_start = Time.zone.parse(params[:date_start])
-      @@date_end = Time.zone.parse(params[:date_end])
-      @@date_where = "events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'"
+    if params[:start] && params[:end]
+      @@start = Time.zone.parse(params[:start])
+      @@end = Time.zone.parse(params[:end])
+      @@date_where = "events.start BETWEEN '#{@@start}' AND '#{@@end}'"
     end
     @@send_count = false
     if params[:send_count]
       @@send_count = true
+    end
+    @@limit = nil
+    if params[:limit]
+      @@limit = params[:limit]
     end
 
     if params[:category]
@@ -183,10 +187,6 @@ class ClientsController < ApplicationController
       end
 
     elsif params[:q]
-      count = 0
-      page_num = params[:page].to_i
-      offset = ( page_num - 1 ) * @@items_per_page
-
       query = "SELECT DISTINCT clients.*
       FROM clients
       LEFT OUTER JOIN companies ON companies.id = clients.company_id
@@ -216,8 +216,16 @@ class ClientsController < ApplicationController
         count = Client.find_by_sql(query).size
       end
 
-      query += " OFFSET #{offset} ROWS"
-      query += " FETCH NEXT #{@@items_per_page} ROWS ONLY"
+      if @@limit
+        query += " LIMIT #{@@limit}"
+      end
+
+      if params[:page]
+        page_num = params[:page].to_i
+        offset = ( page_num - 1 ) * @@items_per_page
+        query += " OFFSET #{offset} ROWS"
+        query += " FETCH NEXT #{@@items_per_page} ROWS ONLY"
+      end
 
       @clients = Client.find_by_sql(query)
 
@@ -290,6 +298,32 @@ class ClientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def client_params
-      params.require(:client).permit(:contact_id, :company_id)
+      params.require(:client).permit(
+        :contact_id,
+        :company_id,
+        contact_attributes: [
+          :photo,
+          :prefix,
+          :first_name,
+          :last_name,
+          :phone_number,
+          :email,
+          :ss,
+          email_addresses_attributes: [
+            :email_address,
+            :notifications
+          ]
+        ],
+        company_attributes: [
+          :name,
+          :logo,
+          :website,
+          :phone_number,
+          email_addresses_attributes: [
+            :email_address,
+            :notifications
+          ]
+        ]
+      )
     end
 end

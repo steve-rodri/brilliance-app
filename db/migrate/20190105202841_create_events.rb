@@ -12,7 +12,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.datetime :end
       t.string :gc_id
       t.string :html_link
-      t.string :i_cal_UID
+      t.string :gc_i_cal_uid
       t.string :kind
       t.text :notes
       t.datetime :start

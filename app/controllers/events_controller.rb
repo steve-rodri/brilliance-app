@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
   @@items_per_page = 25
-  @@date_start = Time.zone.today()
-  @@date_end = Time.zone.today()
+  @@start = Time.zone.today()
+  @@end = Time.zone.tomorrow() - 1
 
   # GET /events
   def index
@@ -13,61 +13,22 @@ class EventsController < ApplicationController
       .order(:start)
       .first
 
-    if params[:date_start] && params[:date_end]
-      @@date_start = Time.zone.parse(params[:date_start])
-      @@date_end = Time.zone.parse(params[:date_end])
-      @@date_where = "events.start BETWEEN '#{@@date_start}' AND '#{@@date_end}'"
+    if params[:start] && params[:end]
+      @@start = Time.zone.parse(params[:start])
+      @@end = Time.zone.parse(params[:end])
+      @@date_where = "events.start BETWEEN '#{@@start}' AND '#{@@end}'"
     end
 
     if params[:send_count]
-      @@send_count = true
+      @@send_count = params[:send_count]
     end
 
-    # By Category---------------------------------------------------------------
-    if params[:category]
-      count = 0
-      if params[:category] == 'Production'
-        if @@send_count
-          count = Event
-            .joins("JOIN places ON places.id = events.location_id")
-            .where(@@date_where)
-            .where("places.installation = false")
-            .size
-        end
-        @events = Event
-          .joins("JOIN places ON places.id = events.location_id")
-          .where(@@date_where)
-          .where("places.installation = false")
-          .order(:start)
-          .paginate(page: params[:page], per_page: @@items_per_page)
-      elsif
-        params[:category] == 'CATP' ||
-        params[:category] == 'CANS' ||
-        params[:category] == 'TANS' ||
-        params[:category] == 'THC'
-
-        short_name = params[:category]
-        if @@send_count
-          count = Event
-            .joins("JOIN places on places.id = events.location_id")
-            .where(@@date_where)
-            .where("places.short_name = '#{short_name}'")
-            .size
-        end
-        @events = Event
-          .joins("JOIN places on places.id = events.location_id")
-          .where(@@date_where)
-          .where("places.short_name = '#{short_name}'")
-          .order(:start)
-          .paginate(page: params[:page], per_page: @@items_per_page)
-      end
-
-        render json: @events,
-        meta: { count: count, next: @@next_event },
-        include: '**'
+    if params[:items_per_page]
+      @@items_per_page = params[:items_per_page]
+    end
 
     # By Query------------------------------------------------------------------
-    elsif params[:q]
+    if params[:q]
       count = 0
       page_num = params[:page].to_i
       offset = ( page_num - 1 ) * @@items_per_page
@@ -123,7 +84,7 @@ class EventsController < ApplicationController
         count = Event.find_by_sql(query).size
       end
 
-      query += " ORDER BY events.start"
+      query += " ORDER BY events.start DESC"
       query += " OFFSET #{offset} ROWS"
       query += " FETCH NEXT #{@@items_per_page} ROWS ONLY"
 
@@ -136,18 +97,33 @@ class EventsController < ApplicationController
     elsif params[:email]
       count = 0
       email = params[:email]
+      query = "email_addresses.email_address LIKE '%#{email}%'"
+      order = "events.start DESC"
+
+      if params[:upcoming] && params[:in_progress]
+        query += " AND (('#{Time.zone.now()}' BETWEEN events.start AND events.end) OR events.start > '#{Time.zone.now()}')"
+        order = "events.start ASC"
+
+      elsif params[:in_progress]
+        query += " AND '#{Time.zone.now()}' BETWEEN events.start AND events.end"
+        order = "events.start ASC"
+
+      elsif params[:upcoming]
+        query += " AND events.start > '#{Time.zone.now()}'"
+        order = "events.start ASC"
+      end
 
       if @@send_count
         count = Event
         .joins(event_employees: [{employee: [{contact: :email_address }]}])
-        .where("email_addresses.email_address LIKE '%#{email}%'")
+        .where(query)
         .size
       end
 
       @events = Event
       .joins(event_employees: [{employee: [{contact: :email_address }]}])
-      .where("email_addresses.email_address LIKE '%#{email}%'")
-      .order(start: :DESC)
+      .where(query)
+      .order(order)
       .paginate(page: params[:page], per_page: @@items_per_page)
 
       render json: @events,
@@ -174,10 +150,13 @@ class EventsController < ApplicationController
         meta: { count: count, next: @@next_event },
         include: '**'
 
-    # By i_cal_UID----------------------------------------------------------------
-    elsif params[:i_cal_UID]
-      @event = Event.where( i_cal_UID: "#{params[:i_cal_UID]}").first
-      render json: @event, include: '**'
+    # By gc_i_cal_uid----------------------------------------------------------------
+    elsif params[:gc_i_cal_uid]
+      if @event
+        render json: @event, include: '**'
+      else
+        render status: :not_found
+      end
 
     # --------------------------------------------------------------------------
     else
@@ -215,35 +194,22 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1
+  # PATCH/PUT /events/1 or /events
   def update
-    if @event.update(event_params)
+    if @event.update(event_only_params)
+      if event_employee_params
+        event_employee_params.each do | worker_params |
+          worker = @event
+            .event_employees
+            .where( employee_id: worker_params[:employee_id] )
+            .first_or_create
+          worker.update(worker_params.except(:employee_id))
+        end
+      end
       render json: @event, include: '**'
     else
-      render json: @event.errors, status: :unprocessable_entity
+      render status: :unprocessable_entity
     end
-  end
-
-  # PATCH/PUT /events
-  def sync
-    event_only_params = event_params.except(:event_employees_attributes)
-    e_e_params = event_params.slice(:event_employees_attributes)[:event_employees_attributes]
-
-    @event = Event.where(:i_cal_UID => params[:i_cal_UID]).first_or_create(event_params)
-
-    @event.update(event_only_params)
-    if e_e_params
-      e_e_params.each do |p|
-        worker = @event
-          .event_employees
-          .where( employee_id: p[:employee_id] )
-          .first_or_create
-
-        worker.update(p.except(:employee_id))
-    end
-    end
-
-    render json: @event, include: '**'
   end
 
   # DELETE /events/1
@@ -254,7 +220,11 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params[:id])
+      if params[:id]
+        @event = Event.find(params[:id])
+      elsif params[:gc_i_cal_uid]
+        @event = Event.find_by gc_i_cal_uid: params[:gc_i_cal_uid]
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
@@ -272,8 +242,8 @@ class EventsController < ApplicationController
         :created_at,
         :creator_id,
         :date,
-        :date_start,
-        :date_end,
+        :start,
+        :end,
         :description,
         :driving_time,
         :end,
@@ -281,7 +251,7 @@ class EventsController < ApplicationController
         :extendedProperties,
         :gc_id,
         :html_link,
-        :i_cal_UID,
+        :gc_i_cal_uid,
         :id,
         :kind,
         :location_id,
@@ -311,5 +281,13 @@ class EventsController < ApplicationController
           :event_id
         ]
       )
+    end
+
+    def event_only_params
+      event_params.except(:event_employees_attributes)
+    end
+
+    def event_employee_params
+      event_params.slice(:event_employees_attributes)[:event_employees_attributes]
     end
 end

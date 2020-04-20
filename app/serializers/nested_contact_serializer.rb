@@ -5,7 +5,8 @@ class NestedContactSerializer < ApplicationSerializer
   :full_name,
   :first_name,
   :last_name,
-  :phone_number
+  :phone_number,
+  :ss
 
   def full_name
     if object.first_name

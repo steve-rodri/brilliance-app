@@ -11,7 +11,6 @@ csv.each do |row|
     first_name: row['first_name'],
     last_name: row['last_name'],
     phone_number: row['phone_number'],
-    work_email: row['work_email'],
     ss: row['ss'],
 
     created_at: row['created_at']

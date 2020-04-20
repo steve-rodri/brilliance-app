@@ -1,5 +1,5 @@
 class EventSerializer < ApplicationSerializer
-  attributes :id, :action, :break, :break_start, :client, :call_time, :clock_out, :confirmation, :description, :driving_time, :end, :gc_id, :html_link, :i_cal_UID, :kind, :notes, :start, :summary, :tags
+  attributes :id, :action, :break, :break_start, :client, :call_time, :clock_out, :confirmation, :description, :driving_time, :end, :gc_id, :html_link, :gc_i_cal_uid, :kind, :notes, :start, :summary, :tags
   belongs_to :client, foreign_key: true, serializer: NestedClientSerializer
   has_one :invoice, serializer: NestedInvoiceSerializer
   has_one :place_location, key: 'location', serializer: NestedPlaceLocationSerializer

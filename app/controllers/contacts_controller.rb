@@ -37,13 +37,12 @@ class ContactsController < ApplicationController
       render json: @contacts, root: "contacts", meta: { count: count }, include: "**"
 
     elsif params[:email]
+      if !@contact
+        emailAddress = EmailAddress.find_or_create_by(email_address: params[:email])
+        @contact = emailAddress.create_contact
+      end
+      render json: @contact, include: '**'
 
-      @contact = Contact
-        .left_outer_joins(:email_address)
-        .where("email_addresses.email_address = '#{params[:email]}'")
-        .first_or_create
-
-      render json: @contact
     else
       @contacts = Contact.all
       render json: @contacts, include: '**'
@@ -83,7 +82,13 @@ class ContactsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
-      @contact = Contact.find(params[:id])
+      if params[:id]
+        @contact = Contact.find(params[:id])
+      elsif params[:email]
+        @contact = Contact
+          .joins(:email_address)
+          .find_by("email_addresses.email_address = '#{params[:email]}'")
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
@@ -94,10 +99,11 @@ class ContactsController < ApplicationController
         :first_name,
         :last_name,
         :phone_number,
-        :work_email,
+        :email,
         :ss,
         email_addresses_attributes: [
-          :email_address
+          :email_address,
+          :notifications
         ]
       )
     end

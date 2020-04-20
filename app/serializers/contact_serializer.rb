@@ -5,10 +5,12 @@ class ContactSerializer < ApplicationSerializer
   :full_name,
   :first_name,
   :last_name,
-  :phone_number
+  :phone_number,
+  :ss
 
   has_many :email_address, key: 'email_addresses', serializer: NestedEmailAddressSerializer
-  
+  has_many :address, key: 'addresses'
+
   def full_name
     if object.first_name
       if object.last_name
