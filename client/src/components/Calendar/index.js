@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import * as Styled from "./styles";
 import { chevronRightIcon, chevronLeftIcon } from "../../icons";
 import moment from "moment";
-import calendar, {
+import {
+  calendar,
   isDate,
+  isMonth,
   isSameDay,
   isSameMonth,
   getDateISO,
@@ -12,7 +14,7 @@ import calendar, {
   getPreviousMonth,
   WEEK_DAYS,
   CALENDAR_MONTHS
-} from "../../helpers/calendar";
+} from "../../helpers";
 
 class Calendar extends Component {
   state = { ...this.resolveStateFromProp(), today: new Date() };
@@ -43,12 +45,11 @@ class Calendar extends Component {
   gotoDate = date => evt => {
     evt && evt.preventDefault();
     const { current } = this.state;
-    const { onDateChanged, changeNav } = this.props;
+    const { onDateChanged } = this.props;
 
     !(current && isSameDay(date, current)) &&
       this.setState(this.resolveStateFromDate(date), () => {
         typeof onDateChanged === "function" && onDateChanged(date, "day");
-        changeNav(false);
       });
   };
 
@@ -132,7 +133,7 @@ class Calendar extends Component {
 
   renderMonthAndYear = () => {
     const { month, year } = this.state;
-    const { changeNav, onDateChanged } = this.props;
+    const { onDateChanged } = this.props;
     const monthname = Object.keys(CALENDAR_MONTHS)[
       Math.max(0, Math.min(month - 1, 11))
     ];
@@ -152,7 +153,6 @@ class Calendar extends Component {
               .month(month - 1)
               .year(year);
             typeof onDateChanged === "function" && onDateChanged(date, "month");
-            typeof changeNav === "function" && changeNav(false);
           }}
         >
           {monthname} {year}
@@ -179,7 +179,6 @@ class Calendar extends Component {
 
   renderCalendarDate = (date, index) => {
     const { current, month, year, today } = this.state;
-    const { isMonth } = this.props;
     const _date = new Date(date.join("-"));
 
     const isToday = isSameDay(_date, today);
@@ -191,7 +190,7 @@ class Calendar extends Component {
     const props = { index, inMonth, onClick, title: _date.toDateString() };
 
     const DateComponent =
-      isCurrent && !isMonth()
+      isCurrent && !isMonth(current)
         ? Styled.HighlightedCalendarDate
         : isToday
         ? Styled.TodayCalendarDate

@@ -15,14 +15,14 @@ export default function Invoice(props){
     displayColumn,
     numColumns,
     styleItem,
-    styleCell
+    
   } = props
   const invoice = item;
   const { event } = invoice
 
-  const leftCell = styleCell('left')
-  const middleCell = styleCell('middle')
-  const rightCell = styleCell('right')
+  const leftCell = ('left')
+  const middleCell = ('middle')
+  const rightCell = ('right')
   const clientDateDisplay = displayColumn('clientDate')
   const typeDisplay = displayColumn('type')
   const balanceDisplay = displayColumn('balance')

@@ -1,383 +1,154 @@
-import React, { Component, Fragment } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
+import { isObject, isArray } from "../../helpers";
 import { plusIcon, pencilIcon } from "../../icons";
 import "./index.css";
 
-export default class SearchField extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      highlightedResult: 0,
-      hoveringResults: false,
-      fieldActive: false,
-      showEditButton: false
-    };
-    this.searchResults = React.createRef();
-  }
+const SearchField = props => {
+  const resultsContainer = useRef();
+  const [inputValue, setInputValue] = useState();
+  const [highlightedResult, setHighlightedResult] = useState({
+    section: null,
+    index: null
+  });
+  const [hoveringResults, setHoveringResults] = useState(false);
+  const [fieldActive, setFieldActive] = useState(false);
+  const [editButtonVisible, setEditButtonVisible] = useState(false);
+  const showEditButton = useCallback(() => setEditButtonVisible(true), []);
+  const hideEditButton = () => setEditButtonVisible(false);
 
-  componentDidMount() {
-    if (this.props.input.value) this.setState({ showEditButton: true });
-  }
+  const handleFocus = e => e.target.select();
 
-  componentDidUpdate(prevProps) {
-    const {
-      searchResults,
-      scroll,
-      input: { value },
-      formDataValue
-    } = this.props;
-    const searchResultMatch = searchResults === prevProps.searchResults;
-    const valueMatch = prevProps.input.value === value;
-    const formDataValueMatch = prevProps.formDataValue === formDataValue;
-
-    if (!searchResultMatch) this.scrollToTop();
-
-    if (!valueMatch) {
-      this.setState(prevState => ({
-        highlightedResult: {
-          ...prevState.highlightedResult,
-          section: {
-            ...prevState.highlightedResult.section,
-            index: 0
-          },
-          index: 0
-        }
-      }));
-    }
-
-    if (scroll && scroll !== prevProps.scroll) {
-      this.setState({ fieldActive: false });
-    }
-
-    if (!formDataValueMatch) {
-      if (formDataValue) this.setState({ showEditButton: true });
-      if (!formDataValue) this.setState({ showEditButton: false });
-    }
-  }
-
-  displayResults = () => {
-    const { fieldActive } = this.state;
-    const { searchResults, mobile } = this.props;
-    let style = { display: "none" };
-
-    if (fieldActive) style.display = "block";
-
-    if (Array.isArray(searchResults)) {
-      if (!searchResults.length && mobile) {
-        style.height = "60px";
-        style.marginTop = "60px";
-      } else if (!searchResults.length) {
-        style.height = "50px";
-        style.marginTop = "45px";
-      }
-    } else if (searchResults) {
-      let resultCount = 0;
-      const results = Object.entries(searchResults);
-      results.forEach(obj => {
-        if (obj[1] && obj[1].length) resultCount += obj[1].length;
-      });
-
-      if (!resultCount) {
-        style.height = "70px";
+  const handleKeyDown = e => {
+    const { onEnter, onCreate, inputProps, searchResults } = props;
+    if (e.key === "Enter") {
+      if (countResults()) {
+        onEnter({
+          selectedResult: searchResults[highlightedResult.index]
+        });
+        handleCloseResults();
+      } else if (
+        inputProps.value.length > 2 &&
+        typeof onCreate === "function"
+      ) {
+        onCreate();
+        handleCloseResults();
       }
     }
-
-    return style;
   };
 
-  handleViewResults = value => {
-    if (value.length > 2) {
-      this.setState({
-        fieldActive: true
-      });
-    } else {
-      this.setState({
-        fieldActive: false
-      });
-    }
-  };
-
-  handleCloseResults = e => {
-    this.setState({ fieldActive: false });
-  };
-
-  leavingResults = e => {
-    e.stopPropagation();
-    this.setState({ hoveringResults: false });
-  };
-
-  scrollResults = direction => {
-    const {
-      highlightedResult: { section, index, height }
-    } = this.state;
-    const scrollPosition = this.searchResults.current.scrollTop;
-
-    switch (direction) {
-      case "up":
-        if (scrollPosition === 0) break;
-        if (section) {
-          this.searchResults.current.scrollTop =
-            (section.index + 1) * index * height;
-        } else {
-          this.searchResults.current.scrollTop = index * height;
-        }
-        break;
-
-      case "down":
-        if (section) {
-          this.searchResults.current.scrollTop =
-            (section.index + 1) * index * height;
-        } else {
-          this.searchResults.current.scrollTop = index * height;
-        }
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  viewResults = () => {
-    const {
-      searchResults,
-      subTitleClassName,
-      resultClassName,
-      formatResult,
-      input: { name },
-      onSelect
-    } = this.props;
-
-    if (Array.isArray(searchResults)) {
-      if (searchResults.length) {
-        return searchResults.map((item, i) => (
-          <div
-            style={this.styleResult(i)}
-            key={i}
-            className={`${resultClassName} SearchField--result`}
-            onClick={e => {
-              e.stopPropagation();
-              onSelect(e, name, i);
-              this.handleCloseResults();
-            }}
-            onMouseEnter={e => this.changeHighlightedResult(e, i)}
-          >
-            <Fragment>{formatResult && formatResult(item)}</Fragment>
-          </div>
-        ));
-      } else {
-        this.create();
-      }
-    }
-    const results = Object.entries(searchResults);
-    let resultCount = 0;
-    results.forEach(obj => {
-      if (obj[1] && obj[1].length) resultCount += obj[1].length;
-    });
-    const view = () =>
-      results.map((obj, index) => {
-        const key = obj[0];
-        const value = obj[1];
-        const section = { name: key, index };
-        return (
-          <Fragment key={index}>
-            <div
-              className={`${subTitleClassName} SearchField--subtitle`}
-              style={this.styleSectionTitle(section)}
-            >
-              <h4>{key}</h4>
-            </div>
-            {value &&
-              value.map((val, i) => (
-                <div
-                  style={this.styleResult(i, section)}
-                  key={i}
-                  className={`${resultClassName} SearchField--result`}
-                  onClick={e => {
-                    e.stopPropagation();
-                    onSelect(e, name, i, key);
-                    this.handleCloseResults();
-                  }}
-                  onMouseEnter={e =>
-                    this.changeHighlightedResult(e, i, section)
-                  }
-                >
-                  <Fragment>{formatResult && formatResult(val, key)}</Fragment>
-                </div>
-              ))}
-          </Fragment>
-        );
-      });
-    if (resultCount) return view();
-    return this.create();
-  };
-
-  changeHighlightedResult = (e, i, section) => {
-    const { clientHeight: height } = e.target;
+  const handleEditButtonPress = e => {
+    const { onEdit } = props;
     e.preventDefault();
     e.stopPropagation();
-    const { highlightedResult } = this.state;
-    if (i !== highlightedResult.index) {
-      this.setState(prevState => {
-        const sectionMatch = prevState.highlightedResult.section === section;
-        if (!sectionMatch) {
-          return {
-            highlightedResult: {
-              section,
-              index: i,
-              height
-            }
-          };
-        }
-        return {
-          highlightedResult: {
-            ...prevState.highlightedResult,
-            index: i,
-            height
-          }
-        };
-      });
+    if (typeof edit === "function") onEdit();
+  };
+
+  const handleOpenResults = value => {
+    if (value.length > 2) setFieldActive(true);
+    else setFieldActive(false);
+  };
+
+  const handleCloseResults = () => setFieldActive(false);
+
+  const handleScrollResults = direction => {
+    const { section, index, height } = highlightedResult;
+    const scrollPosition = resultsContainer.current.scrollTop;
+    if (direction === "up") {
+      if (scrollPosition === 0) return;
+      if (section) {
+        resultsContainer.current.scrollTop =
+          (section.index + 1) * index * height;
+      } else {
+        resultsContainer.current.scrollTop = index * height;
+      }
+    }
+    if (direction === "down") {
+      if (section) {
+        resultsContainer.current.scrollTop =
+          (section.index + 1) * index * height;
+      } else {
+        resultsContainer.current.scrollTop = index * height;
+      }
     }
   };
 
-  updateHighlightedResult = direction => {
-    const {
-      highlightedResult: { section, index }
-    } = this.state;
-    const { searchResults } = this.props;
+  const handleChangeHighlightedResult = direction => {
+    const { section, index } = highlightedResult;
+    const { searchResults } = props;
     const isArray = Array.isArray(searchResults);
-    const isObj = () => searchResults === Object(searchResults) && !isArray;
-    if (isObj()) {
+    const isObj = searchResults === Object(searchResults) && !isArray;
+
+    if (isObj) {
       const sections = Object.entries(searchResults);
-      switch (direction) {
-        case "up":
-          if (index > 0) {
-            this.setState(prevState => ({
-              highlightedResult: {
-                ...prevState.highlightedResult,
-                index: (prevState.highlightedResult.index -= 1)
-              }
-            }));
-          } else if (section.index > 0) {
-            this.setState(prevState => {
-              const prevSection = prevState.highlightedResult.section;
-              if (prevSection.index > 0) {
-                const index = sections[prevSection.index - 1][1].length - 1;
-                return {
-                  highlightedResult: {
-                    ...prevState.highlightedResult,
-                    section: {
-                      ...prevSection,
-                      index: (prevSection.index -= 1)
-                    },
-                    index
-                  }
-                };
-              } else return null;
-            });
-          }
-          break;
-
-        case "down":
-          if (index < sections[section.index][1].length - 1) {
-            this.setState(prevState => ({
-              highlightedResult: {
-                ...prevState.highlightedResult,
-                index: (prevState.highlightedResult.index += 1)
-              }
-            }));
-          } else if (section.index + 1 < sections.length) {
-            this.setState(prevState => {
-              const prevSection = prevState.highlightedResult.section;
+      if (direction === "up") {
+        if (index > 0) {
+          setHighlightedResult(prevState => ({
+            ...prevState,
+            index: (prevState.index -= 1)
+          }));
+        } else if (section.index > 0) {
+          setHighlightedResult(prevState => {
+            const prevSection = prevState.section;
+            if (prevSection.index > 0) {
+              const index = sections[prevSection.index - 1][1].length - 1;
               return {
-                highlightedResult: {
-                  ...prevState.highlightedResult,
-                  section: {
-                    ...prevSection,
-                    index: (prevSection.index += 1)
-                  },
-                  index: 0
-                }
+                ...prevState,
+                section: {
+                  ...prevSection,
+                  index: (prevSection.index -= 1)
+                },
+                index
               };
-            });
-          }
-          break;
-
-        default:
-          break;
+            } else return null;
+          });
+        }
+      }
+      if (direction === "down") {
+        if (index < sections[section.index][1].length - 1) {
+          setHighlightedResult(prevState => ({
+            ...prevState,
+            index: (prevState.index += 1)
+          }));
+        } else if (section.index + 1 < sections.length) {
+          setHighlightedResult(prevState => {
+            const prevSection = prevState.section;
+            return {
+              ...prevState,
+              section: {
+                ...prevSection,
+                index: (prevSection.index += 1)
+              },
+              index: 0
+            };
+          });
+        }
       }
     } else if (isArray) {
-      switch (direction) {
-        case "up":
-          if (index > 0) {
-            this.setState(prevState => ({
-              highlightedResult: {
-                ...prevState.highlightedResult,
-                index: (prevState.highlightedResult.index -= 1)
-              }
-            }));
-          }
-          break;
-        case "down":
-          if (index < searchResults.length - 1) {
-            this.setState(prevState => ({
-              highlightedResult: {
-                ...prevState.highlightedResult,
-                index: (prevState.highlightedResult.index += 1)
-              }
-            }));
-          }
-          break;
-        default:
-          break;
+      if (direction === "up") {
+        if (index > 0) {
+          setHighlightedResult(prevState => ({
+            ...prevState,
+            index: (prevState.index -= 1)
+          }));
+        }
+      }
+      if (direction === "down") {
+        if (index < searchResults.length - 1) {
+          setHighlightedResult(prevState => ({
+            ...prevState,
+            index: (prevState.index += 1)
+          }));
+        }
       }
     }
   };
 
-  choosingResult = e => {
-    e.stopPropagation();
-    this.setState({ hoveringResults: true });
-  };
-
-  styleResult = (i, key) => {
-    const {
-      highlightedResult: { section, index }
-    } = this.state;
-    const style = {};
-    if (key) {
-      if (key.index === section.index && i === index)
-        style.backgroundColor = "var(--light-blue)";
-    } else {
-      if (i === index) style.backgroundColor = "var(--light-blue)";
-    }
-    return style;
-  };
-
-  styleSectionTitle = section => {
-    let style = {};
-    if (section.index > 0) {
-      style.top = `${section.index * 28}px`;
-      style.borderTop = "1px solid var(--light-gray)";
-    }
-    return style;
-  };
-
-  handleFocusSelect = e => {
-    e.target.select();
-  };
-
-  scrollToTop = () => {
-    this.searchResults.current.scrollTop = 0;
-  };
-
-  resultCount = () => {
-    const { searchResults } = this.props;
+  const countResults = () => {
+    const { searchResults } = props;
     if (!searchResults) return 0;
+    if (isArray(searchResults)) return searchResults.length;
+
     let resultCount = 0;
-
-    if (Array.isArray(searchResults)) {
-      resultCount = searchResults.length;
-      return resultCount;
-    }
-
     const results = Object.entries(searchResults);
     results.forEach(obj => {
       if (obj[1] && obj[1].length) resultCount += obj[1].length;
@@ -385,142 +156,271 @@ export default class SearchField extends Component {
     return resultCount;
   };
 
-  create = () => {
-    const {
-      create: createNew,
-      label,
-      input: { value },
-      resultClassName
-    } = this.props;
-    if (typeof createNew === "function") {
-      const styleOverride = {
-        color: "var(--white)",
-        backgroundColor: "limegreen",
-        display: "grid",
-        height: "100%",
-        grid: "auto / 40px auto 40px",
-        justifyContent: "stretch"
-      };
-      return (
-        <div
-          className={`SearchField--create ${resultClassName} `}
-          style={styleOverride}
-          onClick={e => {
-            e.stopPropagation();
-            createNew();
-            this.handleCloseResults();
+  //value Change
+  useEffect(() => {
+    setHighlightedResult(prevState => ({
+      ...prevState,
+      section: {
+        ...prevState.section,
+        index: 0
+      },
+      index: 0
+    }));
+    setInputValue(props.value);
+  }, [props.value]);
+  //searchResults Change
+  useEffect(() => {
+    if (resultsContainer.current) {
+      resultsContainer.current.scrollTop = 0;
+    }
+  }, [props.searchResults]);
+  //scroll Change
+  useEffect(() => {
+    setFieldActive(false);
+  }, [props.scroll]);
+  //formValue Change
+  useEffect(() => {
+    if (props.formDataValue) showEditButton();
+    else hideEditButton();
+  }, [props.formDataValue, showEditButton]);
+
+  return (
+    <div className="SearchField">
+      <form
+        autoComplete="off"
+        className={props.formClassName}
+        onSubmit={e => e.preventDefault()}
+        onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
+      >
+        <Input
+          {...props}
+          resultProps={{
+            hoveringResults,
+            openResults: handleOpenResults,
+            closeResults: handleCloseResults,
+            scrollResults: handleScrollResults,
+            changeHighlightedResult: handleChangeHighlightedResult
           }}
-        >
-          {plusIcon("1x")}
-          <p>{`CREATE ${
-            value.length < 25 ? `"${value}"` : `${label ? label : ""}`
-          }`}</p>
-        </div>
-      );
+          inputProps={{
+            ...props.inputProps,
+            value: inputValue
+          }}
+        />
+        <ResultsContainer
+          {...props}
+          containerRef={resultsContainer}
+          fieldActive={fieldActive}
+          resultProps={{
+            highlightedResult,
+            setHoveringResults,
+            closeResults: handleCloseResults,
+            changeHighlightedResult: handleChangeHighlightedResult,
+            formatResult: props.formatResult,
+            count: countResults
+          }}
+        />
+      </form>
+      <EditButton show={editButtonVisible} onEdit={handleEditButtonPress} />
+    </div>
+  );
+};
+
+const Input = ({ inputProps, onChange, formDataValue, ...rest }) => {
+  const {
+    openResults,
+    closeResults,
+    scrollResults,
+    changeHighlightedResult,
+    hoveringResults
+  } = rest.resultProps;
+  const handleKeyDown = e => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      changeHighlightedResult("down");
+
+      scrollResults("down");
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      changeHighlightedResult("up");
+
+      scrollResults("up");
     }
   };
+  const handleBlur = e => {
+    if (inputProps.value && !formDataValue && !hoveringResults) onChange("");
+    if (!hoveringResults) closeResults();
+  };
+  const handleChange = ({ target: { value } }) => {
+    onChange(value);
+    openResults(value);
+  };
+  return (
+    <input
+      {...inputProps}
+      onFocus={openResults}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
+    />
+  );
+};
 
-  render() {
-    const { highlightedResult, hoveringResults, showEditButton } = this.state;
+const ResultsContainer = props => {
+  const styleResultsContainer = () => {
+    const { searchResults, resultProps } = props;
+    let style = {};
+    if (isArray(searchResults)) {
+      if (!searchResults.length && props.mobile) {
+        style.height = "60px";
+      } else if (!searchResults.length) {
+        style.height = "50px";
+      }
+    } else if (!resultProps.resultCount) {
+      style.height = "70px";
+    }
+    return style;
+  };
+  const leavingResults = e => {
+    e.stopPropagation();
+    props.resultProps.setHoveringResults(false);
+  };
+  const choosingResult = e => {
+    e.stopPropagation();
+    props.resultProps.setHoveringResults(true);
+  };
+  const render = () => {
+    if (!props.resultProps.count()) return <CreateNewFromResult {...props} />;
+    if (isObject(props.searchResults)) return <SectionedResults {...props} />;
+    else return <Results {...props} />;
+  };
+  if (!props.fieldActive) return null;
+  return (
+    <div
+      className={`SearchField--results-container`}
+      ref={props.containerRef}
+      style={styleResultsContainer()}
+      onMouseEnter={choosingResult}
+      onMouseLeave={leavingResults}
+    >
+      {render()}
+    </div>
+  );
+};
+
+const SectionedResults = ({ searchResults, ...rest }) => {
+  const sections = Object.entries(searchResults);
+  return sections.map((entry, index) => {
+    const section = { index, name: entry[0], results: entry[1] };
+    return <ResultsSection section={section} {...rest} />;
+  });
+};
+
+const ResultsSection = ({ section, sectionTitleClassName }) => {
+  return (
+    <>
+      <SectionTitle className={sectionTitleClassName} section={section} />
+      {section.results.map((result, i) => (
+        <Result />
+      ))}
+    </>
+  );
+};
+
+const SectionTitle = ({ className, section }) => {
+  const styleSectionTitle = section => {
+    let style = {};
+    if (section.index > 0) {
+      style.top = `${section.index * 28}px`;
+      style.borderTop = "1px solid var(--light-gray)";
+    }
+    return style;
+  };
+  return (
+    <div
+      className={`${className} SearchField--subtitle`}
+      style={styleSectionTitle(section)}
+    >
+      <h4>{section.name}</h4>
+    </div>
+  );
+};
+
+const Results = ({ searchResults, ...rest }) => {
+  return searchResults.map((result, i) => (
+    <Result key={result.id || i} result={result} index={i} {...rest} />
+  ));
+};
+
+const Result = ({
+  resultClassName: className,
+  result,
+  index,
+  section,
+  resultProps,
+  inputProps,
+  onSelect
+}) => {
+  const handleSelect = e => {
+    e.stopPropagation();
+    onSelect({ selectedResult: result });
+    resultProps.closeResults();
+  };
+  const handleMouseEnter = e => resultProps.changeHighlightedResult(e, index);
+  const styleResult = (index, section) => {
     const {
-      searchResults,
+      hoveringResults,
+      highlightedResult: { section: highSection, index: highIndex }
+    } = resultProps;
+    const style = {};
+    if (!hoveringResults) {
+      if (section) {
+        if (section.index === highSection.index && index === highIndex)
+          style.backgroundColor = "var(--light-blue)";
+      } else {
+        if (index === highIndex) style.backgroundColor = "var(--light-blue)";
+      }
+    }
+    return style;
+  };
+  return (
+    <div
+      style={styleResult(index, section)}
+      key={(result && result.id) || index}
+      className={`${className} SearchField--result`}
+      onClick={handleSelect}
+      onMouseEnter={handleMouseEnter}
+    >
+      <>{resultProps.formatResult(result, section)}</>
+    </div>
+  );
+};
 
-      formClassName,
-      resultsClassName,
-      styleForm,
+const CreateNewFromResult = ({ onCreate, label, ...props }) => {
+  if (typeof onCreate !== "function") return null;
+  const {
+    resultProps: { closeResults },
+    inputProps: { value }
+  } = props;
+  const handleCreate = e => {
+    e.stopPropagation();
+    onCreate();
+    closeResults();
+  };
 
-      input: { className, placeholder, name, value, tabIndex },
+  return (
+    <div className="SearchField--create" onClick={handleCreate}>
+      {plusIcon("1x")}
+      <p>
+        {`CREATE ${value.length < 25 ? `"${value}"` : `${label ? label : ""}`}`}
+      </p>
+    </div>
+  );
+};
 
-      handleChange,
-      formDataValue,
-      onEnter,
-      create,
-      edit
-    } = this.props;
+const EditButton = ({ show, onEdit }) => {
+  if (!show) return null;
+  else return <button onClick={onEdit}>{pencilIcon()}</button>;
+};
 
-    return (
-      <div className="SearchField">
-        <form
-          autoComplete="off"
-          className={formClassName}
-          onFocus={this.handleFocusSelect}
-          onSubmit={e => e.preventDefault()}
-          onKeyDown={e => {
-            if (e.key === "Enter") {
-              if (this.resultCount()) {
-                onEnter(
-                  e,
-                  name,
-                  highlightedResult.index,
-                  highlightedResult.section.name
-                );
-                this.handleCloseResults();
-              } else if (value.length > 2 && typeof create === "function") {
-                create();
-                this.handleCloseResults();
-              }
-            }
-          }}
-          style={styleForm}
-        >
-          {/* Search */}
-          <input
-            name={name}
-            placeholder={placeholder}
-            className={className}
-            value={value}
-            tabIndex={tabIndex}
-            onChange={e => {
-              handleChange(e.target.name, e.target.value);
-              this.handleViewResults(e.target.value);
-            }}
-            onFocus={this.handleViewResults}
-            onBlur={e => {
-              if (value && !formDataValue && !hoveringResults) {
-                handleChange(name, "");
-              }
-              if (!hoveringResults) {
-                this.handleCloseResults();
-              }
-            }}
-            onKeyDown={e => {
-              if (e.key === "ArrowDown") {
-                e.preventDefault();
-                this.updateHighlightedResult("down");
-
-                this.scrollResults("down");
-              } else if (e.key === "ArrowUp") {
-                e.preventDefault();
-                this.updateHighlightedResult("up");
-
-                this.scrollResults("up");
-              }
-            }}
-          />
-
-          {/* Results */}
-          <div
-            className={`${resultsClassName} SearchField--results `}
-            ref={this.searchResults}
-            style={this.displayResults()}
-            onMouseEnter={this.choosingResult}
-            onMouseLeave={this.leavingResults}
-          >
-            {searchResults && this.viewResults()}
-          </div>
-        </form>
-        {showEditButton ? (
-          <button
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-              if (typeof edit === "function") edit();
-            }}
-          >
-            {pencilIcon()}
-          </button>
-        ) : null}
-      </div>
-    );
-  }
-}
+export default SearchField;

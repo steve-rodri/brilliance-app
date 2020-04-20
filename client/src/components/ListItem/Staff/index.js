@@ -11,12 +11,12 @@ export default function Staff(props) {
     displayColumn,
     numColumns,
     styleItem,
-    styleCell
+    
   } = props;
   const employee = item;
-  const leftCell = styleCell("left", employee);
-  const middleCell = styleCell("middle", employee);
-  const rightCell = styleCell("right", employee);
+  const leftCell = ("left", employee);
+  const middleCell = ("middle", employee);
+  const rightCell = ("right", employee);
   const nameDisplay = displayColumn("name");
   const activeDisplay = displayColumn("active");
   const laborDisplay = displayColumn("labor");

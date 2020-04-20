@@ -1,0 +1,89 @@
+.QueryPanel {
+  display: grid;
+  grid-gap: 20px;
+}
+
+@media (min-width: 750px) {
+  .QueryPanel {
+    height: 100%;
+    align-content: start;
+    grid-gap: 40px;
+    padding: 20px 20px 40px;
+    justify-items: center;
+  }
+}
+
+/* Title */
+.QueryPanel--title {
+  color: var(--turquoise);
+  font-weight: 300;
+  align-self: start;
+}
+
+.QueryPanel--title:hover {
+  cursor: pointer;
+}
+
+/* Search */
+.QueryPanel--search {
+  height: 60px;
+  width: 95%;
+}
+
+@media (min-width: 750px) {
+  .QueryPanel--search {
+    height: 50px;
+  }
+}
+
+/* Calendar */
+.QueryPanel--calendar {
+  height: 400px;
+  justify-self: stretch;
+  align-self: stretch;
+}
+
+@media (min-width: 750px) {
+  .QueryPanel--calendar {
+    height: 300px;
+  }
+}
+
+/* recent searches */
+
+.QueryPanel--recent-searches-container {
+  display: grid;
+  width: 100%;
+}
+
+.QueryPanel--recent-searches {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-auto-flow: column;
+  grid: repeat(auto-fit, minmax(calc(25% - 20px), auto)) / repeat(
+      auto-fit,
+      minmax(calc(25% - 20px), auto)
+    );
+  grid-auto-flow: dense;
+  grid-gap: 20px;
+}
+
+.QueryPanel--recent-searches > div > p {
+  color: var(--light-gray);
+  font-weight: bold;
+  text-align: center;
+  grid-gap: 10px;
+  transition: all 200ms ease-out;
+}
+
+.QueryPanel--recent-searches > div > p:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.QueryPanel--button {
+  justify-self: center;
+  width: 95%;
+  align-self: end;
+}

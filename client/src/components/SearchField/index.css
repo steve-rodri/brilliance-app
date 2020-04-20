@@ -1,37 +1,36 @@
 .SearchField {
-  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid: auto / 1fr auto;
   width: 100%;
 }
 
 .SearchField > button {
-  position: absolute;
-  top: 0%;
-  right: 0%;
-  height: 100%;
   width: 40px;
   padding: 5px;
   border-radius: 0 5px 5px 0;
   border-width: 1px 1px 1px 0;
-  border-color: #BBBBBB;
+  border-color: #bbbbbb;
   border-style: solid;
-  background-color: #F8F8F8;
-  color: var(--light-gray);
+  background-color: #f8f8f8;
+  color: var(--default-black);
 }
 
-.SearchField--results {
-  display: none;
+.SearchField--results-container {
   z-index: 10000;
   position: absolute;
-  margin-top: 120px;
-  width: 100%;
+  top: 105%;
+  left: -1%;
+  width: 102%;
   height: 180px;
   overflow: auto;
   overscroll-behavior-y: contain;
+  background-color: var(--highlight);
+  border-radius: 5px;
 }
 
 @media (min-width: 750px) {
-  .SearchField--results {
-    margin-top: 95px;
+  .SearchField--results-container {
     height: 150px;
   }
 }
@@ -51,7 +50,10 @@
 .SearchField--create {
   background-color: limegreen;
   color: var(--white);
+  height: 100%;
   display: grid;
+  grid: auto / 40px auto 40px;
+  justify-content: stretch;
   align-items: center;
   justify-items: center;
 }

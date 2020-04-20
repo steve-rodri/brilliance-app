@@ -1,150 +1,107 @@
-import React, { Component, Fragment } from 'react'
-import ListItem from '../ListItem/index.js'
-import InfiniteScroll from 'react-infinite-scroll-component'
-import Loader from '../Loader'
-import './index.css'
+import React, { useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
+import InfiniteScroll from "../InfiniteScroll";
+import { Item } from "../ListItem";
+import Loader from "../Loader";
+import "./index.css";
 
-export default class List extends Component {
-  constructor(props){
-    super(props)
-    this.container = React.createRef()
-  }
+// collectionType
+// collection.list properties
+// setScrollPosition
+// loadMore
+// refresh
 
-  componentWillUnmount(){
-    const { setScrollPosition } = this.props
-    if (typeof setScrollPosition === 'function') {
-      setScrollPosition(this.container.current.scrollTop)
-    }
-  }
-
-  componentDidMount(){
-    const { listScrollPosition } = this.props
-    this.container.current.scrollTop = listScrollPosition
-  }
-
-  styleList = () => {
-    const { items, mobile, loading } = this.props
+const List = ({ data, scrollPosition, setScrollPosition, ...rest }) => {
+  const listContainer = useRef();
+  const mobile = useSelector(state => state.view.mobile);
+  const listStyles = () => {
     let style = {};
-    if (!mobile && !loading && items && items.length ) {
+    if (!mobile && data && data.length) {
       style = {
-        boxShadow: 'var(--box-shadow)',
+        boxShadow: "var(--box-shadow)",
         zIndex: 2
-      }
+      };
     }
-    return style
-  }
+    return style;
+  };
+  useEffect(() => {
+    const listRef = listContainer.current;
+    if (listRef) listRef.scrollTop = scrollPosition;
+    return () => {
+      const position = listRef.scrollTop;
+      if (typeof setScrollPosition === "function") setScrollPosition(position);
+    };
+  }, [scrollPosition, setScrollPosition]);
 
-  render(){
-    const {
-      page,
-      items,
-      view,
-      columnHeaders,
-      load,
-      hasMore,
-      loading
-    } = this.props
+  const props = { data, ...rest };
+  return (
+    <div className="List" ref={listContainer} style={listStyles()}>
+      <ColumnHeaders {...props} />
+      <Items containerRef={listContainer} data={data} {...rest} />
+    </div>
+  );
+};
 
+const ColumnHeaders = ({
+  columnHeaders,
+  columnHeaderStyles,
+  loading,
+  data
+}) => {
+  if (!columnHeaders) return null;
+  if (data && !data.length) return null;
+  if (loading) return null;
+  return (
+    <div className="Headers" style={columnHeaderStyles()}>
+      {columnHeaders().map((header, i) => (
+        <h5 key={header} style={!i ? { justifySelf: "start" } : {}}>
+          {header}
+        </h5>
+      ))}
+    </div>
+  );
+};
+
+const Items = ({ data, loading, containerRef, ...rest }) => {
+  if (loading) {
     return (
-      <div id="List" className="List" ref={this.container} style={this.styleList()}>
-        {columnHeaders && items && items.length && view !== 'Dashboard'?
-          <div className="Titles">
-            {columnHeaders && columnHeaders.map((header, i) => {
-              // const indices = findIndices(columnHeaders, header)
-              if (columnHeaders[i] === columnHeaders[i - 1]) {
-                return <h5 key={i}>{}</h5>
-              } else {
-                return <h5 key={i}>{header}</h5>
-              }
-            })}
-          </div>
-          :
-          null
-        }
-          <InfiniteScroll
-            dataLength={items && items.length}
-            next={() => page >= 1? load() : null}
-            hasMore={hasMore}
-            loader=
-            {
-              <div className="List--Loader">
-                <Loader />
-              </div>
-            }
-            scrollableTarget="List"
-            endMessage={
-              <Fragment>
-                {
-                  items && items.length?
-                  null
-                  :
-                  !loading?
-                    <div className="List--None-Found">
-                      <h3 style={{fontWeight: 'bold'}}>{`No ${view}...`}</h3>
-                    </div>
-                    :
-                    <Loader />
-                }
-              </Fragment>
-            }
-          >
-            {items && items.map((item, id) => (
-              <ListItem
-                {...this.props}
-                key={id}
-                index={id}
-                item={item}
-                total={items.length}
-                numColumns={columnHeaders && columnHeaders.length}
-                displayColumn={displayColumn}
-                styleColumns={styleColumns}
-              />
-            ))}
-          </InfiniteScroll>
+      <div className="List--Loader">
+        <Loader />
       </div>
-    )
+    );
+  } else
+    return (
+      <InfiniteScroll {...rest} parentNode={containerRef}>
+        {data.map(item => (
+          <Item
+            item={item}
+            key={item && item.id}
+            total={data.length}
+            {...rest}
+          />
+        ))}
+        <EndMessage data={data} loading={loading} {...rest} />
+      </InfiniteScroll>
+    );
+};
 
-    function styleColumns(numColumns){
-      if (view === 'Dashboard') {
-        return {
-          color: 'white',
-        }
-      }
-    }
-
-    function displayColumn(headerName){
-      let style = { display: 'none'};
-
-      if (columnHeaders) {
-        const indices = columnHeaders.flatMap( (header, i) => {
-          if (header === headerName ) return i
-          return []
-        })
-
-        if (indices.length === 1) {
-          style.display = 'grid'
-          style.gridColumn = indices[0] + 1
-        }
-
-        if (indices.length > 1) {
-          style.display = 'grid'
-          style.gridColumn = `${indices[0] + 1} / span ${indices.length}`
-        }
-
-      }
-
-      return style;
-    }
-
-    // function findIndices(arr, val){
-    //   let indexes = []
-    //   let i = -1;
-    //
-    //   while ((i = arr.indexOf(val, i+1)) !== -1){
-    //     indexes.push(i);
-    //   }
-    //
-    //   return indexes;
-    // }
+const EndMessage = ({ data, loading, collectionType }) => {
+  if (data.length && loading)
+    return (
+      <div className="List--Loader">
+        <Loader />
+      </div>
+    );
+  if (!data.length && !loading) {
+    return (
+      <div className="List--None-Found">
+        <h3
+          style={{ fontWeight: "bold" }}
+        >{`No ${collectionType.toLowerCase()} have been found.`}</h3>
+      </div>
+    );
   }
-}
+  return null;
+};
+
+export default List;

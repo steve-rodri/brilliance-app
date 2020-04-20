@@ -12,16 +12,15 @@ export default function Schedule(props) {
     view,
     displayColumn,
     styleItem,
-    styleCell,
     // styleMobileEventSummary,
     eventSummary: summary,
     user: { accessLevel },
 
-    changeConfirmation
+    changeConfirmationStatus
   } = props;
 
-  const leftCell = styleCell("left", item);
-  const rightCell = styleCell("right", item);
+  const leftCell = ("left", item);
+  const rightCell = ("right", item);
   const eventDisplay = displayColumn("event");
   const confirmationDisplay = displayColumn("confirmation");
 
@@ -71,7 +70,7 @@ export default function Schedule(props) {
           style={styleWorkerStatus(currentUser.confirmation)}
           onClick={e => {
             e.stopPropagation();
-            changeConfirmation(item.id, currentUser.id);
+            changeConfirmationStatus(item.id, currentUser.id);
           }}
         >
           {statusIcon(currentUser.confirmation, "2x")}

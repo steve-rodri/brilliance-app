@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import { pencilIcon, checkIcon } from "../../icons";
 import {
-  styleConfirmation,
-  changeConfirmation
+  styleConfirmationStatus,
+  changeConfirmationStatus
 } from "../../helpers/eventHelpers";
 import "./Buttons.css";
 
-export default function Buttons(props) {
+export default function MobileButtons(props) {
   // Functions to Dynamically change buttons based on Mode ---------------
 
   const {
@@ -69,10 +69,10 @@ export default function Buttons(props) {
             e.stopPropagation();
             handleStatusChange(
               "confirmation",
-              changeConfirmation(fields && fields.confirmation)
+              changeConfirmationStatus(fields && fields.confirmation)
             );
           }}
-          style={styleConfirmation(fields && fields.confirmation)}
+          style={styleConfirmationStatus(fields && fields.confirmation)}
         >
           <div className="Button--text">
             <p>{fields && fields.confirmation}</p>

@@ -1,38 +1,32 @@
-.ListPage {
-  height: calc(100% - 75px);
+.CollectionPage {
   display: grid;
+  height: 100%;
 }
 
 @media (min-width: 1000px) {
-  .ListPage {
-    grid-template-columns:  25% 75%;
+  .CollectionPage {
+    grid-template-columns: auto 1fr;
   }
 }
 
 /* -----------------Aside---------------- */
 
-.ListPage > aside {
+.CollectionPage > aside {
   display: none;
 }
 
 @media (min-width: 1000px) {
-  .ListPage > aside {
+  .CollectionPage > aside {
+    min-width: 350px;
     display: block;
-    padding: 10px 10px 40px 10px;
     height: 100%;
     background-color: var(--dark-gray);
   }
 }
 
-@media (min-width: 1200px) {
-  .ListPage > aside {
-    padding: 10px 40px 40px 40px;
-  }
-}
-
 /* -----------------Main---------------- */
 
-.ListPage > main {
+.CollectionPage > main {
   display: grid;
   grid-template-rows: 40px auto 40px;
   align-content: start;
@@ -40,12 +34,12 @@
 }
 
 @media (min-width: 1000px) {
-  .ListPage > main {
+  .CollectionPage > main {
     grid-column: 2 / span 1;
   }
 }
 
-.ListPage--category-title-container {
+.CollectionPage--category-title-container {
   display: flex;
   position: sticky;
   top: 75px;
@@ -56,13 +50,13 @@
   color: var(--white);
 }
 
-.ListPage--category-title {
+.CollectionPage--category-title {
   font-weight: 400;
   padding: 5px 0;
   text-shadow: 0 4px 10px black;
 }
 
-.ListPage--list {
+.CollectionPage--list {
   grid-row: 2 / span 1;
   width: 100%;
   max-height: calc(100vh - 155px - var(--mobile-adj));
@@ -73,26 +67,27 @@
 }
 
 @media (min-width: 500px) {
-  .ListPage--list {
+  .CollectionPage--list {
     padding: 0 40px;
     max-height: calc(100vh - 155px);
   }
 }
 
-.ListPage--end-message {
+.CollectionPage--end-message {
   height: 100%;
   padding: 0 20px;
   display: grid;
   align-items: center;
+  justify-content: center;
   background-color: var(--dark-blue);
   color: var(--white);
   grid-row: 3 / span 1;
 }
 
-.ListPage--end-message > h4 {
+.CollectionPage--end-message > h4 {
   text-shadow: 0 4px 10px black;
 }
 
-.ListPage--end-message > div {
+.CollectionPage--end-message > div {
   padding: 0 20px 20px;
 }
