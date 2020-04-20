@@ -3,25 +3,26 @@
   box-sizing: border-box;
 }
 
-.App {
-  position: relative;
-  text-align: center;
-}
-
-@media (min-width: 750px) {
-  .App {
-    height: calc(100vh);
-    background-color: var(--dark-blue)
-  }
-}
-
-h1, h2 {
-  font-family: 'Calibri', sans-serif;
+h1,
+h2 {
+  font-family: "Calibri", sans-serif;
   font-weight: 300;
 }
 
-h3, h4, h5, h6, p, a, label, td, th, input, select, button, textarea {
-  font-family: 'Roboto', sans-serif;
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+label,
+td,
+th,
+input,
+select,
+button,
+textarea {
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
 }
 
@@ -34,37 +35,54 @@ h2 {
   font-size: 1.4em;
 }
 
-h3, input, select {
+h3,
+input,
+select {
   font-size: 1.4em;
 }
 
-h4, p, textarea {
-  font-size: 1em;
+h4,
+p,
+textarea {
+  font-size: 0.8em;
 }
 
 @media (min-width: 750px) {
-  h3, input, textarea, select {
+  h3,
+  input,
+  textarea,
+  select {
     font-size: 1.2em;
+  }
+
+  h4,
+  p,
+  textarea {
+    font-size: 0.97em;
   }
 }
 
-h5, label {
-  font-size: .9em;
+h5,
+label {
+  font-size: 0.9em;
 }
 
 h6 {
-  font-size: .6em;
+  font-size: 0.6em;
 }
 
-li, select {
+li,
+select {
   width: 100%;
 }
 
-button:hover, .Icon:hover {
-  cursor: pointer
+button:hover,
+.Icon:hover {
+  cursor: pointer;
 }
 
-button:active, button:focus {
+button:active,
+button:focus {
   outline: none;
 }
 
@@ -77,8 +95,7 @@ button {
   cursor: pointer;
   text-align: center;
   background: transparent;
-  transition: background 250ms ease-in-out,
-              transform 150ms ease;
+  transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
@@ -100,20 +117,23 @@ label {
 }
 
 input {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-input:not([type=checkbox]):not([type=radio]), textarea {
+input:not([type="checkbox"]):not([type="radio"]),
+textarea {
   -webkit-appearance: none;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   box-shadow: 0 0 2px 2px var(--light-blue);
   border: 1px solid var(--light-blue);
   outline: none;
 }
 
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -125,7 +145,6 @@ input[type="number"] {
 select {
   text-align-last: center;
 }
-
 
 /* -----------Fields------------ */
 
@@ -158,17 +177,21 @@ select {
   }
 }
 
-.Edit--Field {
+.Edit--field {
   position: relative;
   width: 100%;
-  min-width: 100px;
   height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #F8F8F8;
-  border: 1px solid #BBBBBB;
+  display: grid;
+  background-color: #f8f8f8;
+  border: 1px solid #bbbbbb;
   border-radius: 5px;
+}
+
+.Edit--field > input {
+  padding: 0 0 0 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f8f8f8;
 }
 
 .datetime:hover {
@@ -176,29 +199,9 @@ select {
 }
 
 @media (min-width: 750px) {
-  .Edit--Field {
+  .Edit--field {
     height: 36px;
   }
-}
-
-/* -----------Inputs------------- */
-
-.Input--container {
-  width: 100%;
-  height: 100%;
-}
-
-.Input {
-  height: 100%;
-  width: 100%;
-  padding: 0 10px;
-  min-width: 275px;
-  text-align: center;
-  border-radius: 5px;
-  border: none;
-  /* border-left: 1px solid #BBBBBB; */
-  /* border-right: 1px solid #BBBBBB; */
-  background-color: #F8F8F8;
 }
 
 /* -------------------------Search-Results------------------------ */
@@ -234,16 +237,16 @@ select {
 
 .Arrow {
   appearance: none;
-	user-select: none;
-	outline: none !important;
-	display: inline-block;
-	position: relative;
-	cursor: pointer;
-	padding: 0;
-	border: none;
-	border-top: 10px solid var(--dark-gray);
-	border-bottom: 10px solid var(--dark-gray);
-	transition: all 250ms ease-out;
+  user-select: none;
+  outline: none !important;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  border-top: 10px solid var(--dark-gray);
+  border-bottom: 10px solid var(--dark-gray);
+  transition: all 250ms ease-out;
 }
 
 .Arrow-Left {
