@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import ListPage from "../../components/ListPage";
+import CollectionPage from "../../components/CollectionPage";
 import InvoiceDetail from "./InvoiceDetail";
-import { invoice, client } from "../../services/BEP_APIcalls.js";
+import { invoiceRequests, clientRequests } from "../../services/railsServer.js";
 import { clientName } from "../../helpers/clientHelpers";
 import queryString from "query-string";
 import axios from "axios";
@@ -136,7 +136,7 @@ export default class Invoices extends Component {
 
       // Client-Query-----------
     } else if (queries.client && queries.client !== this.state.client) {
-      const clt = await client.get(queries.client, this.ajaxOptions);
+      const clt = await clientRequests.get(queries.client, this.ajaxOptions);
       this.setState(
         {
           events: [],
@@ -248,9 +248,9 @@ export default class Invoices extends Component {
     this.props.setLoadingState(true);
     const { invoices, page, category, query: q, client, type } = this.state;
     const {
-      date: { start: date_start, end: date_end }
+      date: { start, end }
     } = this.props;
-    let searchData = { page, category, q, client, date_start, date_end };
+    let searchData = { page, category, q, client, start, end };
     if ((invoices.length + this.itemsPerPage) / page <= this.itemsPerPage) {
       switch (type) {
         case "query":
@@ -266,7 +266,7 @@ export default class Invoices extends Component {
           break;
       }
 
-      const data = await invoice.batch(searchData, this.ajaxOptions);
+      const data = await invoiceRequests.get(searchData);
       if (data && data.invoices && data.invoices.length)
         await this.updateInvoices(data);
     } else {
@@ -277,7 +277,7 @@ export default class Invoices extends Component {
 
   addInvoice = async data => {
     let invoices = [...this.state.invoices];
-    const newInvoice = await invoice.create(data, this.ajaxOptions);
+    const newInvoice = await invoiceRequests.create(data);
     invoices.shift(newInvoice);
     this.setState({ invoices });
     return newInvoice;
@@ -285,7 +285,7 @@ export default class Invoices extends Component {
 
   deleteInvoice = async i => {
     let invoices = [...this.state.invoices];
-    await invoice.delete(i.id, this.ajaxOptions);
+    await invoiceRequests.delete(i.id, this.ajaxOptions);
 
     const index = invoices.findIndex(inv => i.id === inv.id);
     invoices.splice(index, 1);
@@ -293,7 +293,11 @@ export default class Invoices extends Component {
   };
 
   updateInvoice = async (i, data) => {
-    const updatedInvoice = await invoice.update(i.id, data, this.ajaxOptions);
+    const updatedInvoice = await invoiceRequests.update(
+      i.id,
+      data,
+      this.ajaxOptions
+    );
     let invoices = [...this.state.invoices];
     if (invoices.length) {
       const index = invoices.findIndex(inv => i.id === inv.id);
@@ -391,7 +395,7 @@ export default class Invoices extends Component {
   List = props => {
     const { invoices, searchLabel } = this.state;
     return (
-      <ListPage
+      <CollectionPage
         {...this.props}
         {...props}
         {...this.state}

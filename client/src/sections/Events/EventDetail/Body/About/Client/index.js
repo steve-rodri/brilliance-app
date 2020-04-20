@@ -2,11 +2,11 @@ import React, { Component, Fragment } from "react";
 import Edit from "./Edit";
 import Create from "./Create";
 import {
-  client,
-  contact,
-  company,
-  emailAddress
-} from "../../../../../../services/BEP_APIcalls.js";
+  clientRequests,
+  contactRequests,
+  companyRequests,
+  emailAddressRequests
+} from "../../../../../../services/railsServer.js";
 import axios from "axios";
 import "./index.css";
 
@@ -52,7 +52,7 @@ export default class Client extends Component {
     const { formData } = this.props;
     let clt;
     if (formData && formData.client_id)
-      clt = await client.get(formData.client_id, this.ajaxOptions);
+      clt = await clientRequests.get({ id: formData.clientId });
     if (!clt) await this.searchForExisting();
 
     this.setState(prevState => {
@@ -119,7 +119,7 @@ export default class Client extends Component {
   findContacts = async query => {
     const q = query.split("");
     if (q.length > 1) {
-      const data = await contact.find({ q: query }, this.ajaxOptions);
+      const data = await contactRequests.get({ q: query });
       if (!data) return;
       this.setState(prevState => ({
         searchResults: {
@@ -138,7 +138,7 @@ export default class Client extends Component {
   findCompanies = async query => {
     const q = query.split("");
     if (q.length > 1) {
-      const data = await company.find({ q: query }, this.ajaxOptions);
+      const data = await companyRequests.get({ q: query });
       this.setState(prevState => ({
         searchResults: {
           ...prevState.searchResults,
@@ -156,7 +156,7 @@ export default class Client extends Component {
   findEmailAddresses = async query => {
     const q = query.split("");
     if (q.length > 1) {
-      const data = await emailAddress.find({ q: query }, this.ajaxOptions);
+      const data = await emailAddressRequests.get({ q: query });
       this.setState(prevState => ({
         searchResults: {
           ...prevState.searchResults,
@@ -219,10 +219,9 @@ export default class Client extends Component {
       case "companyEmail":
         const { companyEmail } = this.state.fields;
         if (isValidEmail(companyEmail)) {
-          newEmail = await emailAddress.create(
-            { email_address: { email_address: companyEmail } },
-            this.ajaxOptions
-          );
+          newEmail = await emailAddressRequests.create({
+            emailAddress: companyEmail
+          });
           this.setState(prevState => ({
             formData: {
               ...prevState.formData,
@@ -238,10 +237,9 @@ export default class Client extends Component {
       case "contactEmail":
         const { contactEmail } = this.state.fields;
         if (isValidEmail(contactEmail)) {
-          newEmail = await emailAddress.create(
-            { email_address: { email_address: contactEmail } },
-            this.ajaxOptions
-          );
+          newEmail = await emailAddressRequests.create({
+            email_address: contactEmail
+          });
           this.setState(prevState => ({
             formData: {
               ...prevState.formData,
@@ -351,13 +349,13 @@ export default class Client extends Component {
 
     if (Object.keys(contactData).length || contactEmailData.length) {
       if (mode === "create") {
-        newContact = await contact.create(
-          { ...contactData, ...contactEmailData },
-          this.ajaxOptions
-        );
+        newContact = await contactRequests.create({
+          ...contactData,
+          ...contactEmailData
+        });
       }
       if (mode === "edit") {
-        newContact = await contact.update(
+        newContact = await contactRequests.update(
           data.contact_id,
           { ...contactData, ...contactEmailData },
           this.ajaxOptions
@@ -368,14 +366,14 @@ export default class Client extends Component {
 
     if (Object.keys(companyData).length || companyEmailData.length) {
       if (mode === "create") {
-        newCompany = await company.create(
+        newCompany = await companyRequests.create(
           { ...companyData, ...companyEmailData },
           this.ajaxOptions
         );
       }
 
       if (mode === "edit") {
-        newCompany = await company.update(
+        newCompany = await companyRequests.update(
           data.company_id,
           { ...companyData, ...companyEmailData },
           this.ajaxOptions
@@ -491,16 +489,15 @@ export default class Client extends Component {
         if (Object.keys(contactData).length || contactEmailData.length) {
           let newContact;
           if (contactData.id) {
-            newContact = await contact.update(
-              contactData.id,
-              { ...contactData, ...contactEmailData },
-              this.ajaxOptions
+            newContact = await contactRequests.update(
+              { id: contactData.id },
+              { ...contactData, ...contactEmailData }
             );
           } else {
-            newContact = await contact.create(
-              { ...contactData, ...contactEmailData },
-              this.ajaxOptions
-            );
+            newContact = await contactRequests.create({
+              ...contactData,
+              ...contactEmailData
+            });
           }
           this.setState(prevState => {
             return {
@@ -525,16 +522,15 @@ export default class Client extends Component {
         if (Object.keys(companyData).length || companyEmailData.length) {
           let newCompany;
           if (companyData.id) {
-            newCompany = await company.update(
-              companyData.id,
-              { ...companyData, ...companyEmailData },
-              this.ajaxOptions
+            newCompany = await companyRequests.update(
+              { id: companyData.id },
+              { ...companyData, ...companyEmailData }
             );
           } else {
-            newCompany = await company.create(
-              { ...companyData, ...companyEmailData },
-              this.ajaxOptions
-            );
+            newCompany = await companyRequests.create({
+              ...companyData,
+              ...companyEmailData
+            });
           }
           this.setState(prevState => {
             return {

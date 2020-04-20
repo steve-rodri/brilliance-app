@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from "react";
 import SearchField from "../../../../components/SearchField/";
 import SearchResult from "./SearchResult/";
-import { line, inventory } from "../../../../services/BEP_APIcalls.js";
+import {
+  lineRequests as line,
+  inventoryRequests as inventory
+} from "../../../../services/railsServer.js";
 import axios from "axios";
 import "./index.css";
 

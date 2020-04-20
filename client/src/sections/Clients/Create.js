@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import SearchField from "../../components/SearchField/";
 import { contactName, companyName } from "../../helpers/clientHelpers";
-import { contact, company } from "../../services/BEP_APIcalls.js";
+import {
+  contactRequests as contact,
+  companyRequests as company
+} from "../../services/railsServer.js";
 import axios from "axios";
 
 export default class Create extends Component {

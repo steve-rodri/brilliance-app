@@ -11,7 +11,6 @@ export default function Edit(props) {
     line,
     index,
     length,
-    styleCell,
     handleLineChange,
     deleteLine,
     reOrderLine
@@ -74,7 +73,7 @@ export default function Edit(props) {
     <tr key={line.id} className="Line" ref={ref} style={{ opacity }}>
       {/* Add - Delete */}
       <td
-        style={styleCell(index, length, "delete")}
+        style={(index, length, "delete")}
         className="Invoice--cell Line--add-delete"
         onClick={e => {
           e.stopPropagation();
@@ -87,7 +86,7 @@ export default function Edit(props) {
       {/* Quantity */}
       {!mobile ? (
         <td
-          style={styleCell(index, length, "quantity")}
+          style={(index, length, "quantity")}
           className="Invoice--cell Line--quantity"
         >
           <form onSubmit={e => e.preventDefault()} autoComplete="off">
@@ -105,7 +104,7 @@ export default function Edit(props) {
       ) : null}
 
       {/* Item */}
-      <td style={styleCell(index, length)} className="Invoice--cell Line--item">
+      <td style={(index, length)} className="Invoice--cell Line--item">
         <div className="Line--item-description">
           <p>{itemDescription(line.item)}</p>
         </div>
@@ -115,7 +114,7 @@ export default function Edit(props) {
       {/* Inc */}
       {!mobile ? (
         <td
-          style={styleCell(index, length)}
+          style={(index, length)}
           className="Invoice--cell Line--inc"
           onClick={e => {
             e.stopPropagation();
@@ -129,7 +128,7 @@ export default function Edit(props) {
       {/* Price */}
       {!mobile ? (
         <td
-          style={styleCell(index, length, "price")}
+          style={(index, length, "price")}
           className="Invoice--cell Line--price"
         >
           {!line.inc ? (

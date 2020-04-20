@@ -34,28 +34,6 @@
     grid-gap: 40px;
   }
 
-  .EventDetail-Body--component {
-    position: relative;
-    grid-template-rows: 30px auto;
-    background-color: var(--light-gray);
-    box-shadow: 0 5px 1px 0 var(--darker-blue);
-    border-radius: 1px;
-  }
-
-  .EventDetail-Body--component-title {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--dark-gray);
-    color: var(--light-gray);
-    border-radius: 1px 1px 0 0;
-  }
-
   .EventDetail-Body--notes {
     overscroll-behavior-y: contain;
     overflow: auto;

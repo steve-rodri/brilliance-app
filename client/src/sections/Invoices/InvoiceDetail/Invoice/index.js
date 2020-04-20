@@ -39,7 +39,6 @@ export default class Invoice extends Component {
           index={i}
           key={line.id}
           length={lines.length}
-          styleCell={this.styleCell}
           showQty={this.quantities()}
         />
       ));

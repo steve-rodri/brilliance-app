@@ -6,8 +6,13 @@ import Invoice from "./Invoice";
 import Summary from "./Summary";
 import Modal from "../../../components/Modal/";
 import ItemSelector from "./ItemSelector/";
-import Buttons from "../../../components/Buttons/Buttons";
-import { invoice, line, item, client } from "../../../services/BEP_APIcalls.js";
+import Buttons from "../../../components/Buttons/MobileButtons";
+import {
+  invoiceRequests,
+  lineRequests,
+  itemRequests,
+  clientRequests
+} from "../../../services";
 import { lineQty, linePrice, itemQty, itemPrice } from "./Invoice/Line/Helpers";
 import { clientName } from "../../../helpers/clientHelpers";
 import axios from "axios";
@@ -68,10 +73,10 @@ export default class InvoiceDetail extends Component {
       user: { accessLevel }
     } = this.props;
     if (isNew && evtId) {
-      const inv = await invoice.create(
-        { kind: "Proposal", event_id: evtId },
-        this.ajaxOptions
-      );
+      const inv = await invoiceRequests.create({
+        kind: "Proposal",
+        eventId: evtId
+      });
       if (inv) history.push(`/${accessLevel}/invoices/${inv.id}`);
     } else {
       this.setInvoice();
@@ -86,7 +91,7 @@ export default class InvoiceDetail extends Component {
     if (inv) {
       this.setState({ inv }, () => this.setLines());
     } else {
-      const inv = await invoice.get(invoiceId, this.ajaxOptions);
+      const inv = await invoiceRequests.get({ id: invoiceId });
       if (inv) {
         this.setState({ inv }, () => this.setLines());
       } else {
@@ -330,7 +335,7 @@ export default class InvoiceDetail extends Component {
   deleteLine = async lineId => {
     let { inv } = { ...this.state };
 
-    await line.delete(lineId, this.ajaxOptions);
+    await lineRequests.delete({ id: lineId });
     const updatedLines = inv.lines.filter(line => line.id !== lineId);
 
     this.setState(
@@ -394,16 +399,13 @@ export default class InvoiceDetail extends Component {
 
       case "inventory":
         const inventory = data;
-        const newItem = await item.create(
-          {
-            item_contents_attributes: {
-              contents_attributes: {
-                inventory_id: inventory.id
-              }
+        const newItem = await itemRequests.create({
+          itemContentsAttributes: {
+            contentsAttributes: {
+              inventoryId: inventory.id
             }
-          },
-          this.ajaxOptions
-        );
+          }
+        });
         if (newItem) {
           lineData = {
             invoice_id: inv.id,
@@ -418,7 +420,7 @@ export default class InvoiceDetail extends Component {
         break;
     }
 
-    const newLine = await line.create(lineData, this.ajaxOptions);
+    const newLine = await lineRequests.create(lineData);
 
     this.setState(
       prevState => ({
@@ -634,7 +636,7 @@ export default class InvoiceDetail extends Component {
   findClients = async query => {
     const q = query.split("");
     if (q.length > 2) {
-      const data = await client.batch({ page: 1, q: query }, this.ajaxOptions);
+      const data = await clientRequests.get({ page: 1, q: query });
       return data.clients;
     }
   };
@@ -653,7 +655,7 @@ export default class InvoiceDetail extends Component {
     if (fromEvent) {
       if (isNew) {
         if (formData) {
-          const newInvoice = await invoice.create(formData, this.ajaxOptions);
+          const newInvoice = await invoiceRequests.create(formData);
           this.setState({ inv: newInvoice });
           await this.close(true);
         } else {
@@ -661,8 +663,8 @@ export default class InvoiceDetail extends Component {
         }
         history.push(`/${accessLevel}/events/${evtId}`, { view: "Invoice" });
       } else {
-        const updatedInvoice = await invoice.update(
-          inv.id,
+        const updatedInvoice = await invoiceRequests.update(
+          { id: inv.id },
           formData,
           this.ajaxOptions
         );
@@ -703,7 +705,7 @@ export default class InvoiceDetail extends Component {
     const { inv, fromEvent } = this.state;
     const { handleDelete, setView } = this.props;
     if (fromEvent) {
-      await invoice.delete(inv.id, this.ajaxOptions);
+      await invoiceRequests.delete({ id: inv.id });
       if (setView) setView("Invoice");
     } else {
       await handleDelete(inv);

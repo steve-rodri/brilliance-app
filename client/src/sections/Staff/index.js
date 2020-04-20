@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import ListPage from "../../components/ListPage";
-import { employee } from "../../services/BEP_APIcalls.js";
+import CollectionPage from "../../components/CollectionPage";
+import { employeeRequests as employee } from "../../services/railsServer.js";
 import axios from "axios";
 
 export default class Staff extends Component {
@@ -96,7 +96,7 @@ export default class Staff extends Component {
   List = props => {
     const { staff } = this.state;
     return (
-      <ListPage
+      <CollectionPage
         {...this.props}
         {...this.state}
         {...props}

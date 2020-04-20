@@ -1,0 +1,114 @@
+/* Mobile Styles */
+
+.EventListItem--title {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding: 10px 20px;
+  grid: auto 1fr / auto;
+  grid-row-gap: 5px;
+}
+
+.EventListItem--summary > h4 {
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
+@media (min-width: 750px) {
+  .EventListItem--summary > h4 {
+    font-size: 1.2em;
+  }
+}
+
+.EventListItem--job-description {
+  display: grid;
+  justify-content: start;
+  padding: 5px;
+}
+
+.EventListItem--confirmation,
+.EventListItem--scheduled,
+.EventListItem--scheduled-details {
+  height: 100%;
+  width: 75px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.EventListItem--confirmation {
+  width: 100px;
+}
+
+.EventListItem--confirmation > p {
+  font-weight: bold;
+}
+
+@media (min-width: 750px) {
+  .EventListItem--confirmation,
+  .EventListItem--scheduled,
+  .EventListItem--scheduled-details {
+    width: 150px;
+  }
+}
+
+.EventListItem--scheduled-details {
+  flex-direction: column;
+}
+
+.EventListItem--time {
+  grid-column: auto;
+  grid-row: auto;
+  justify-self: start;
+  align-self: stretch;
+  display: grid;
+  align-items: start;
+  padding: 0;
+}
+
+.EventListItem--time > p {
+  text-align: left;
+}
+
+.EventListItem--next-event-triangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: 5px solid transparent;
+  border-top-color: red;
+  border-left-color: red;
+}
+
+.EventListItem--scheduled {
+  padding: 2.5px 5px;
+  display: grid;
+}
+
+.EventListItem--scheduled-workers {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 25px);
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 2.5px;
+}
+
+.EventListItem--scheduled-worker {
+  border-radius: 100%;
+  background-color: black;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  color: white;
+  height: 25px;
+  width: 25px;
+}
+
+.EventListItem--scheduled-worker > p {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------------------- */

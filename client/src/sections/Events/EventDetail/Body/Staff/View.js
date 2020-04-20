@@ -1,38 +1,53 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { statusIcon } from "../../../../../icons";
-import { call } from "../../../../../helpers/eventHelpers";
+import { call, styleWorkerStatus } from "../../../../../helpers/eventHelpers";
 
-export default function View(props) {
-  const { fields, mobile, workers, status } = props;
+const View = props => {
   return (
-    <Fragment>
-      {mobile ? <label>Staff</label> : null}
-      <div className="Staff">
-        {call(fields) ? (
-          <Fragment>
-            <div className="Staff--call">
-              <h3>{`Call: ${call(fields)}`}</h3>
-            </div>
-          </Fragment>
-        ) : null}
-        {workers ? (
-          <div className="Staff--workers">
-            {workers.map((worker, i) => (
-              <div className="Staff--worker" key={i}>
-                <div
-                  className="Staff--worker-status"
-                  style={status(worker.confirmation)}
-                >
-                  {statusIcon(worker.confirmation, "1x")}
-                </div>
-                <p className="Staff--worker-name">
-                  {worker.info.contact.fullName}
-                </p>
-              </div>
-            ))}
-          </div>
-        ) : null}
-      </div>
-    </Fragment>
+    <div className="Staff">
+      <Call {...props} />
+      <Workers {...props} />
+    </div>
   );
-}
+};
+
+const Call = ({ callTime, callLocation }) => {
+  if (!callTime && !callLocation) return null;
+  return (
+    <div className="Staff--call">
+      <h3>{`Call: ${call({ callTime, callLocation })}`}</h3>
+    </div>
+  );
+};
+
+const Workers = ({ staff }) => {
+  if (!staff || (staff && !staff.length)) return null;
+  return (
+    <div className="Staff--workers">
+      {staff.map(data => (
+        <Worker {...data} />
+      ))}
+    </div>
+  );
+};
+
+const Worker = ({ id, confirmation, info: { contact } }) => {
+  return (
+    <div className="Staff--worker" key={id}>
+      <WorkerStatus status={confirmation} />
+      <WorkerName contactInformation={contact} />
+    </div>
+  );
+};
+
+const WorkerStatus = ({ status }) => (
+  <div className="Staff-worker-status" style={styleWorkerStatus(status)}>
+    {statusIcon(status, "1x")}
+  </div>
+);
+
+const WorkerName = ({ contactInformation: { fullName } }) => (
+  <p className="Staff--worker-name">{fullName}</p>
+);
+
+export default View;

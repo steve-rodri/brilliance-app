@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
-import ListPage from "../../components/ListPage";
+import CollectionPage from "../../components/CollectionPage";
 import Modal from "./Modal";
-import { client } from "../../services/BEP_APIcalls.js";
+import { clientRequests } from "../../services/railsServer.js";
 import queryString from "query-string";
 import axios from "axios";
 
@@ -38,10 +38,6 @@ export default class Clients extends Component {
       });
     }
   };
-
-  componentWillReceiveProps(nextProps) {
-    this.setClients(nextProps, 0);
-  }
 
   async componentDidMount() {
     this.updateColumnHeaders();
@@ -124,7 +120,7 @@ export default class Clients extends Component {
       clt = clients.find(c => c.id === id);
     }
     if (!clt) {
-      clt = await client.get(id, this.ajaxOptions);
+      clt = await clientRequests.get(id, this.ajaxOptions);
     }
     return clt;
   };
@@ -133,9 +129,9 @@ export default class Clients extends Component {
     const { page, category, query } = this.state;
     let data;
     if (query) {
-      data = await client.batch({ page, q: query }, this.ajaxOptions);
+      data = await clientRequests.batch({ page, q: query }, this.ajaxOptions);
     } else {
-      data = await client.batch({ page, category }, this.ajaxOptions);
+      data = await clientRequests.batch({ page, category }, this.ajaxOptions);
     }
     if (data) {
       await this.updateClients(data);
@@ -155,7 +151,7 @@ export default class Clients extends Component {
 
   refreshClients = async () => {
     this.resetClients();
-    const data = await client.batch(null, this.ajaxOptions);
+    const data = await clientRequests.batch(null, this.ajaxOptions);
     this.updateClients(data);
   };
 
@@ -167,13 +163,13 @@ export default class Clients extends Component {
   };
 
   createClient = async data => {
-    const clt = await client.create(data, this.ajaxOptions);
+    const clt = await clientRequests.create(data, this.ajaxOptions);
     await this.addClient(clt);
     return clt;
   };
 
   deleteClient = async id => {
-    await client.delete(id, this.ajaxOptions);
+    await clientRequests.delete(id, this.ajaxOptions);
     let clients = [...this.state.clients];
     clients = clients.filter(clt => clt.id !== id);
     this.setState({ clients });
@@ -181,7 +177,7 @@ export default class Clients extends Component {
   };
 
   updateClient = async (id, data) => {
-    let clt = await client.update(id, data, this.ajaxOptions);
+    let clt = await clientRequests.update(id, data, this.ajaxOptions);
     let clients = [...this.state.clients];
     const clientId = clients.findIndex(client => client.id === clt.id);
     clients[clientId] = clt;
@@ -290,7 +286,7 @@ export default class Clients extends Component {
   List = ({ match, history }) => {
     const { clients, hasMoreClients } = this.state;
     return (
-      <ListPage
+      <CollectionPage
         {...this.props}
         {...this.state}
         data={clients}

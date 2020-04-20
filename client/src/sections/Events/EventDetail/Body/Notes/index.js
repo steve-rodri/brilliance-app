@@ -1,43 +1,46 @@
-import React from 'react'
-import './index.css'
+import React, { useState, useEffect } from "react";
+import BodyComponent from "../BodyComponent";
+import { useSelector, useDispatch } from "react-redux";
+import { updateEventFormData } from "../../../../../redux";
 
-export default function Notes(props){
-  const { mobile, fields, editMode, styleComp, styleContainer } = props
-  const view = () => {
+import "./index.css";
+
+const Notes = ({ notes }) => {
+  const [value, setValue] = useState(notes);
+  const { edit: editMode } = useSelector(state => state.section.events.form);
+  const dispatch = useDispatch();
+  const handleChange = ({ target: { value } }) => setValue(value);
+  useEffect(() => {
+    dispatch(updateEventFormData({ notes: value }));
+  }, [dispatch, value]);
+  const format = text => {
+    if (!text) return;
+    const arr = text.split(`\n`);
+    return arr.map((p, id) => <p key={id}>{p}</p>);
+  };
+
+  const render = () => {
     if (editMode) {
       return (
         <textarea
           className="Notes"
           type="text"
-          name='notes'
-          value={fields.notes || ''}
-          onChange={props.handleChange}
+          name="notes"
+          value={value}
+          onChange={handleChange}
           tabIndex="9"
         />
-      )
+      );
     } else {
-      return (
-        <div className="Notes--readonly">
-          {notes(fields.notes)}
-        </div>
-      )
+      return <div className="Notes--readonly">{format(notes)}</div>;
     }
-  }
-
-  const notes = (text) => {
-    const arr = text.split(`\n`)
-    return arr.map((p, id) => (
-      <p key={id}>{p}</p>
-    ))
-  }
+  };
 
   return (
-    <div style={styleComp('Notes')} className="EventDetail-Body--component EventDetail-Body--notes">
-      {!mobile? <div className="EventDetail-Body--component-title"><h4>Notes</h4></div> : null}
-      <div className="Notes--container" style={styleContainer()}>
-        {mobile? <label>Notes</label> : null}
-        {view()}
-      </div>
-    </div>
-  )
-}
+    <BodyComponent className="EventDetail-Body--notes" titleText="Notes">
+      {render()}
+    </BodyComponent>
+  );
+};
+
+export default Notes;

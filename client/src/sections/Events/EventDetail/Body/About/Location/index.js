@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from "react";
 import LocationForm from "./LocationForm";
 import Address from "./Address";
-import { place, address } from "../../../../../../services/BEP_APIcalls";
+import {
+  placeRequests,
+  addressRequests
+} from "../../../../../../services/railsServer";
 import { parseAddress } from "../../../../../../helpers/addressHelpers";
 import axios from "axios";
 import "./index.css";
@@ -43,12 +46,12 @@ export default class Location extends Component {
       addressObj = {};
 
     if (showLocationModal && formData.location_id) {
-      location = await place.get(formData.location_id, this.ajaxOptions);
+      location = await placeRequests.get({ id: formData.locationId });
       addressObj = location && location.address ? location.address : {};
     }
 
     if (showCallLocationModal && formData.call_location_id) {
-      location = await place.get(formData.call_location_id, this.ajaxOptions);
+      location = await placeRequests.get({ id: formData.callLocationId });
       addressObj = location && location.address ? location.address : {};
     }
 
@@ -113,7 +116,7 @@ export default class Location extends Component {
       formData: { address: addressData }
     } = this.state;
     if (Object.keys(addressData).length) {
-      const newAddress = await address.create(addressData, this.ajaxOptions);
+      const newAddress = await addressRequests.create(addressData);
       this.setState(prevState => ({
         view: "",
         fields: {
@@ -137,10 +140,9 @@ export default class Location extends Component {
       formData: { address: addressData }
     } = this.state;
     if (Object.keys(addressData).length) {
-      const updatedAddress = await address.update(
-        addressData.id,
-        addressData,
-        this.ajaxOptions
+      const updatedAddress = await addressRequests.update(
+        { id: addressData.id },
+        addressData
       );
       if (updatedAddress) {
         this.setState(prevState => ({
@@ -223,7 +225,7 @@ export default class Location extends Component {
   findAddresses = async q => {
     const query = q.split("");
     if (query.length > 1) {
-      const data = await address.batch({ q }, this.ajaxOptions);
+      const data = await addressRequests.get({ q });
       if (data) {
         this.setState(prevState => ({
           searchFieldData: {

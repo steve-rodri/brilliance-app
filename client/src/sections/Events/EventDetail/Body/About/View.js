@@ -1,44 +1,96 @@
-import React, { Fragment } from "react";
-import { date, time, duration } from "../../../../../helpers/datetime";
-import { clientDisplay } from "../../../../../helpers/clientHelpers";
-export default function View(props) {
-  const { fields, mobile, evt } = props;
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Label } from "../BodyComponent";
+import { updateEventFormData } from "../../../../../redux";
+import {
+  styleConfirmationStatus,
+  changeConfirmationStatus,
+  clientDisplay,
+  date,
+  time,
+  duration,
+  locationName
+} from "../../../../../helpers";
+
+const View = props => (
+  <div className="About">
+    <Client {...props} />
+    <Location {...props} />
+    <Date {...props} />
+    <Time {...props} />
+    <Duration {...props} />
+    <ConfirmationButton {...props} />
+  </div>
+);
+
+const Client = ({ client }) => {
+  if (!client) return null;
   return (
-    <div className="About">
-      {fields && fields.client ? (
-        <Fragment>
-          {mobile ? <label>Client</label> : null}
-          {clientDisplay(evt.client)}
-        </Fragment>
-      ) : null}
+    <>
+      <Label text="Client" />
+      {clientDisplay(client)}
+    </>
+  );
+};
 
-      {fields && fields.location ? (
-        <Fragment>
-          {mobile ? <label>Location</label> : null}
-          <h3>{fields.location}</h3>
-        </Fragment>
-      ) : null}
+const Location = ({ location }) => {
+  if (!location) return null;
+  return (
+    <>
+      <Label text="Location" />
+      <h3>{locationName(location)}</h3>
+    </>
+  );
+};
 
-      {fields && date(fields) ? (
-        <Fragment>
-          {mobile ? <label>Date</label> : null}
-          <h3>{date(fields, false, true)}</h3>
-        </Fragment>
-      ) : null}
+const Date = ({ start, end }) => {
+  if (!start || !end) return null;
+  return (
+    <>
+      <Label text="Date" />
+      <h3>{date({ start, end }, false, true)}</h3>
+    </>
+  );
+};
 
-      {fields && time(fields) ? (
-        <Fragment>
-          {mobile ? <label>Time</label> : null}
-          <h3>{time(fields)}</h3>
-        </Fragment>
-      ) : null}
+const Time = ({ start, end }) => {
+  if (!start || !end) return null;
+  return (
+    <>
+      <Label text="Time" />
+      <h3>{time({ start, end })}</h3>
+    </>
+  );
+};
 
-      {fields && duration(fields) ? (
-        <Fragment>
-          {mobile ? <label>Duration</label> : null}
-          <h3>{duration(fields)}</h3>
-        </Fragment>
-      ) : null}
+const Duration = ({ start, end }) => {
+  if (!start || !end) return null;
+  return (
+    <>
+      <Label text="Duration" />
+      <h3>{duration({ start, end })}</h3>
+    </>
+  );
+};
+
+const ConfirmationButton = ({ confirmation }) => {
+  const dispatch = useDispatch();
+  return (
+    <div
+      className="About--event-status"
+      onClick={e => {
+        e.stopPropagation();
+        dispatch(
+          updateEventFormData({
+            confirmation: changeConfirmationStatus(confirmation)
+          })
+        );
+      }}
+      style={styleConfirmationStatus(confirmation)}
+    >
+      <p>{confirmation}</p>
     </div>
   );
-}
+};
+
+export default View;

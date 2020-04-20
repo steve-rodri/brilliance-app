@@ -1,47 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import About from "./About";
 import Logistics from "./Logistics";
 import Notes from "./Notes";
 import Staff from "./Staff";
 import Invoice from "./Invoice";
 import Loader from "../../../../components/Loader";
-import { date, time } from "../../../../helpers/datetime";
+import { useSelector } from "react-redux";
 import "./index.css";
 
-export default class Body extends Component {
-  styleContainer = () => {
-    const { mobile, editMode } = this.props;
-    let style = {};
-    if (!mobile && editMode) {
-      style.padding = "15px 20px";
-    }
-    return style;
-  };
-
-  styleComp = name => {
-    const { editMode } = this.props;
-    let style = {};
-    if (editMode) {
-      switch (name) {
-        case "About":
-          break;
-        case "Logistics":
-          break;
-        case "Notes":
-          break;
-        case "Staff":
-          break;
-        case "Invoice":
-          break;
-        default:
-          break;
-      }
-    }
-    return style;
-  };
-
-  styleComponents = () => {
-    const { editMode, mobile } = this.props;
+const Body = props => {
+  const styleComponents = () => {
+    const { editMode, mobile } = props;
     let style = {};
     if (!mobile) {
       style.gridTemplateColumns = "repeat(auto-fit, minmax(17.25rem, auto))";
@@ -52,75 +21,65 @@ export default class Body extends Component {
     return style;
   };
 
-  render() {
-    const { evt, editMode, fields, isNew } = this.props;
-    const about =
-      fields &&
-      (fields.client || fields.location || date(fields) || time(fields));
-
-    const showInvoice =
-      !isNew &&
-      !editMode &&
-      evt &&
-      ((evt.client && !evt.invoice) ||
-        (!evt.client && evt.invoice) ||
-        (evt.client && evt.invoice));
-    const showStaff = editMode || (evt && evt.staff && evt.staff.length);
-
+  const { data, loading } = useSelector(state => state.section.events.form);
+  if (loading)
+    return (
+      <div className="EventDetail-Body--loader">
+        <Loader />
+      </div>
+    );
+  if (data && !loading)
     return (
       <main>
         <div className="EventDetail-Body--components-container">
-          {about ? (
-            <div
-              className="EventDetail-Body--components"
-              style={this.styleComponents()}
-            >
-              <About
-                {...this.props}
-                styleComp={this.styleComp}
-                styleContainer={this.styleContainer}
-              />
-
-              <Logistics
-                {...this.props}
-                styleComp={this.styleComp}
-                styleContainer={this.styleContainer}
-              />
-
-              {showStaff ? (
-                <Staff
-                  {...this.props}
-                  styleComp={this.styleComp}
-                  styleContainer={this.styleContainer}
-                />
-              ) : null}
-              {showInvoice ? (
-                <Invoice
-                  {...this.props}
-                  styleComp={this.styleComp}
-                  styleContainer={this.styleContainer}
-                />
-              ) : null}
-              {editMode || !isNullOrWhitespace(fields.notes) ? (
-                <Notes
-                  {...this.props}
-                  styleComp={this.styleComp}
-                  styleContainer={this.styleContainer}
-                />
-              ) : null}
-            </div>
-          ) : (
-            <div className="EventDetail-Body--loader">
-              <Loader />
-            </div>
-          )}
+          <div
+            className="EventDetail-Body--components"
+            style={styleComponents()}
+          >
+            <About {...props} {...data} />
+            <Logistics {...props} {...data} />
+            <Staff {...props} {...data} />
+            <Invoice {...props} {...data} />
+            <Notes {...props} {...data} />
+          </div>
         </div>
       </main>
     );
-  }
-}
+};
 
-function isNullOrWhitespace(input) {
-  if (typeof input === "undefined" || input == null) return true;
-  return input.replace(/\s/g, "").length < 1;
-}
+export default Body;
+
+// const about =
+//   fields &&
+//   (fields.client || fields.location || date(fields) || time(fields));
+//
+// const showInvoice =
+//   !isNew &&
+//   !editMode &&
+//   evt &&
+//   ((evt.client && !evt.invoice) ||
+//     (!evt.client && evt.invoice) ||
+//     (evt.client && evt.invoice));
+// const showStaff = editMode || (evt && evt.staff && evt.staff.length);
+
+// {showStaff ? (
+//   <Staff
+//     {...props}
+
+//     styleContainer={styleContainer}
+//   />
+// ) : null}
+// {showInvoice ? (
+//   <Invoice
+//     {...props}
+//     styleComp={styleComp}
+//     styleContainer={styleContainer}
+//   />
+// ) : null}
+// {editMode || !isNullOrWhitespace(fields.notes) ? (
+//   <Notes
+//     {...props}
+//     styleComp={styleComp}
+//     styleContainer={styleContainer}
+//   />
+// ) : null}
