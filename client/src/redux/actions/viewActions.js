@@ -5,7 +5,19 @@ export const setMobile = value => ({
   payload: value
 });
 
-export const setNav = value => ({
-  type: types.SET_NAV,
+export const toggleNav = () => ({
+  type: types.TOGGLE_NAV
+});
+
+export const displayNav = () => ({
+  type: types.DISPLAY_NAV
+});
+
+export const hideNav = () => ({
+  type: types.HIDE_NAV
+});
+
+export const setSection = value => ({
+  type: types.SET_SECTION,
   payload: value
 });

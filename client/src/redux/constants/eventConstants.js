@@ -1,17 +1,5 @@
-export const FETCH_EVENTS = "FETCH_EVENTS";
-export const FETCH_EVENTS_PENDING = "FETCH_EVENTS_PENDING";
-export const FETCH_EVENTS_REJECTED = "FETCH_EVENTS_REJECTED";
-export const FETCH_EVENTS_FULFILLED = "FETCH_EVENTS_FULFILLED";
-
-// export function foo() {
-//   return dispatch => ({
-//     type: 'FOO_ACTION',
-//     payload: new Promise(() => {
-//       throw new Error('foo');
-//     })
-//   }).catch(error => {
-//     console.log(error.message); // 'foo'
-//     // Dispatch a second action in response to the error
-//     dispatch(bar());
-//   });
-// }
+export const MODIFY_LIST = "MODIFY_LIST";
+export const MODIFY_FORM = "MODIFY_FORM";
+export const MODIFY_USER_IS_SCHEDULED_LIST = "MODIFY_USER_IS_SCHEDULED_LIST";
+export const UPDATE_SEARCH_TITLE = "UPDATE_SEARCH_TITLE";
+export const ADD_RECENT_SEARCH_TERM = "ADD_RECENT_SEARCH_TERM";

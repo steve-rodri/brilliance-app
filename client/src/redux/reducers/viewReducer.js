@@ -1,8 +1,9 @@
 import * as types from "../constants";
 
 const initialState = {
+  section: null,
   mobile: false,
-  nav: true
+  nav: false
 };
 
 export default function reducer(state = initialState, action) {
@@ -12,10 +13,25 @@ export default function reducer(state = initialState, action) {
         ...state,
         mobile: action.payload
       };
-    case types.SET_NAV:
+    case types.TOGGLE_NAV:
       return {
         ...state,
-        nav: action.payload
+        nav: !state.nav
+      };
+    case types.DISPLAY_NAV:
+      return {
+        ...state,
+        nav: true
+      };
+    case types.HIDE_NAV:
+      return {
+        ...state,
+        nav: false
+      };
+    case types.SET_SECTION:
+      return {
+        ...state,
+        section: action.payload
       };
     default:
       return state;

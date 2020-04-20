@@ -1,14 +1,14 @@
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import { loadState, saveState } from "./localStorage";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
 import throttle from "lodash/throttle";
 
 import rootReducer from "./reducers";
 
-const middleware = applyMiddleware(logger, thunk, promise);
+const middleware = applyMiddleware(thunk, promise);
 
 const configureStore = () => {
   const persistedState = loadState();
