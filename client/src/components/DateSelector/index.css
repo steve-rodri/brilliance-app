@@ -1,10 +1,12 @@
 .DateSelector {
-  width: 100%;
   position: relative;
+  padding: 0 10px;
 }
 
 .DateSelector--container {
   position: absolute;
+  top: 101%;
+  left: -4%;
   z-index: 99999 !important;
 }
 

@@ -1,73 +1,93 @@
-import React, { Component } from 'react'
-import Datetime from 'react-datetime'
-import moment from 'moment'
-import './react-datetime.css'
-import './index.css'
+import React, { useState, useRef } from "react";
+import Datetime from "react-datetime";
+import { trashIcon } from "../../icons";
+import moment from "moment";
+import "./react-datetime.css";
+import "./index.css";
 
-export default class DateSelector extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      open: false
-    }
-    this.button = React.createRef()
-  }
+const DateSelector = ({ name, value, onDateChange, ...rest }) => {
+  const [isOpen, setOpen] = useState(false);
+  const [isSelecting, setSelecting] = useState(false);
+  const buttonRef = useRef();
+  const close = () => (!isSelecting ? setOpen(false) : null);
+  const toggle = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setOpen(!isOpen);
+  };
+  const selecting = (e) => {
+    setSelecting(true);
+    buttonRef.current.focus();
+  };
+  const notSelecting = (e) => {
+    setSelecting(false);
+    buttonRef.current.focus();
+  };
+  const displayValue =
+    value && moment(value).isValid() ? moment(value).format("llll") : "";
+  return (
+    <div className="DateSelector Edit--field">
+      <Value
+        {...rest}
+        toggle={toggle}
+        close={close}
+        buttonRef={buttonRef}
+        displayValue={displayValue}
+      />
+      <DatePicker
+        {...rest}
+        isOpen={isOpen}
+        selecting={selecting}
+        notSelecting={notSelecting}
+        close={close}
+        value={value}
+        onDateChange={onDateChange}
+      />
+    </div>
+  );
+};
 
-  open = () => this.setState({ open: true })
+const Value = ({ toggle, close, buttonRef, displayValue }) => {
+  return (
+    <button
+      className="datetime"
+      onClick={toggle}
+      onBlur={close}
+      ref={buttonRef}
+    >
+      <h3>{displayValue}</h3>
+    </button>
+  );
+};
 
-  close = (e) => {
-    const { selecting } = this.state;
-    if (!selecting) this.setState({ open: false })
-  }
+const DatePicker = (props) => {
+  const {
+    selecting,
+    notSelecting,
+    close,
+    value,
+    onDateChange,
+    isOpen,
+    ...rest
+  } = props;
+  if (!isOpen) return null;
+  return (
+    <div
+      className="DateSelector--container"
+      onMouseEnter={selecting}
+      onMouseLeave={notSelecting}
+      onBlur={close}
+    >
+      <Datetime
+        {...rest}
+        input={false}
+        value={value ? moment(value) : moment().startOf("hour")}
+        timeConstraints={{ minutes: { step: 5 } }}
+        onChange={(datetime) => onDateChange(datetime)}
+        closeOnSelect={false}
+      />
+    </div>
+  );
+};
 
-  switch = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    this.setState({ open: !this.state.open })
-  }
-
-  selecting = (e) => {
-    this.setState({ selecting: true })
-    this.button.current.focus()
-  }
-
-  notSelecting = (e) => {
-    this.setState({ selecting: false })
-    this.button.current.focus()
-  }
-
-  render(){
-    const { name, value, handleDateChange, viewMode, viewDate, isValid } = this.props
-    const displayValue = value && moment(value).isValid()? moment(value).format('llll') : ''
-    return (
-      <div className="DateSelector">
-        <button
-          className="Edit--Field datetime"
-          onClick={this.switch}
-          onBlur={this.close}
-          ref={this.button}
-        >
-          <h3>{displayValue}</h3>
-        </button>
-        <div
-          className="DateSelector--container"
-          onMouseEnter={this.selecting}
-          onMouseLeave={this.notSelecting}
-          onBlur={this.close}
-        >
-          <Datetime
-            input={false}
-            open={this.state.open}
-            value={value? moment(value) : moment().startOf('hour')}
-            viewDate={viewDate}
-            viewMode={viewMode}
-            isValidDate={isValid}
-            timeConstraints={{ minutes:{ step: 5 } }}
-            onChange={ datetime => handleDateChange(name, datetime)}
-            closeOnSelect={false}
-          />
-        </div>
-      </div>
-    )
-  }
-}
+export default DateSelector;
