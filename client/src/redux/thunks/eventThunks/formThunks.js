@@ -42,12 +42,17 @@ export const setEvent = (e) => {
 
 export const setNewEvent = () => {
   return (dispatch) => {
+    const now = moment();
+    const remainder = 5 - (now.minute() % 5);
     dispatch(reset());
     dispatch(
       addData({
         summary: "New Event",
-        start: moment().startOf("hour").toISOString(true),
-        end: moment().startOf("hour").add(1, "hours").toISOString(true),
+        start: moment(now).add(remainder, "minutes").toISOString(true),
+        end: moment(now)
+          .add(remainder, "minutes")
+          .add(1, "hours")
+          .toISOString(true),
       })
     );
     dispatch(setEditMode(true));
