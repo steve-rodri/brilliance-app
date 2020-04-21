@@ -1,6 +1,6 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faCircle,
   faCheckCircle,
@@ -19,11 +19,9 @@ import {
   faSearchPlus,
   faChevronRight,
   faChevronLeft,
-  faUserCircle
-} from '@fortawesome/free-solid-svg-icons'
-import {
-  faSquare as farSquare
-} from '@fortawesome/free-regular-svg-icons'
+  faUserCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { faSquare as farSquare } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
   faPencilAlt,
@@ -45,80 +43,125 @@ library.add(
   faChevronRight,
   faChevronLeft,
   faUserCircle
-)
+);
 
-export function statusIcon(str, size){
+export function statusIcon(str, size) {
   switch (str) {
-    case 'needsAction':
-      return <FontAwesomeIcon  className="Icon" icon="question" size={size}/>
-    case 'Unconfirmed':
-      return <FontAwesomeIcon  className="Icon" icon="question" size={size}/>
-    case 'accepted':
-      return <FontAwesomeIcon  className="Icon" icon="check" size={size}/>
-    case 'Confirmed':
-      return <FontAwesomeIcon  className="Icon" icon="check" size={size}/>
-    case 'tentative':
-      return <FontAwesomeIcon  className="Icon" icon="minus" size={size}/>
-    case 'declined':
-      return <FontAwesomeIcon  className="Icon" icon="times" size={size}/>
+    case "needsAction":
+      return <FontAwesomeIcon className="Icon" icon="question" size={size} />;
+    case "Unconfirmed":
+      return <FontAwesomeIcon className="Icon" icon="question" size={size} />;
+    case "accepted":
+      return <FontAwesomeIcon className="Icon" icon="check" size={size} />;
+    case "Confirmed":
+      return <FontAwesomeIcon className="Icon" icon="check" size={size} />;
+    case "tentative":
+      return <FontAwesomeIcon className="Icon" icon="minus" size={size} />;
+    case "declined":
+      return <FontAwesomeIcon className="Icon" icon="times" size={size} />;
     default:
   }
 }
 
-export function userCircleIcon(size, style){
-  return <FontAwesomeIcon className={`Icon`} icon="user-circle" size={size} style={style}/>
-}
+export const userCircleIcon = (size, style) => (
+  <FontAwesomeIcon
+    className={`Icon`}
+    icon="user-circle"
+    size={size}
+    style={style}
+  />
+);
 
-export function chevronRightIcon(size, className){
-  return <FontAwesomeIcon className={`Icon ${className}`} icon="chevron-right" size={size}/>
-}
+export const chevronRightIcon = (size, className) => (
+  <FontAwesomeIcon
+    className={`Icon ${className}`}
+    icon="chevron-right"
+    size={size}
+  />
+);
 
-export function chevronLeftIcon(size, className){
-  return <FontAwesomeIcon className={`Icon ${className}`} icon="chevron-left" size={size}/>
-}
+export const chevronLeftIcon = (size, className) => (
+  <FontAwesomeIcon
+    className={`Icon ${className}`}
+    icon="chevron-left"
+    size={size}
+  />
+);
 
-export function searchIcon(size, className){
-  return <FontAwesomeIcon className={`Icon ${className}`} icon="search" size={size}/>
-}
+export const searchIcon = (size, className) => (
+  <FontAwesomeIcon className={`Icon ${className}`} icon="search" size={size} />
+);
 
-export function searchPlusIcon(size, className){
-  return <FontAwesomeIcon className={`Icon ${className}`} icon="search-plus" size={size}/>
-}
+export const searchPlusIcon = (size, className) => (
+  <FontAwesomeIcon
+    className={`Icon ${className}`}
+    icon="search-plus"
+    size={size}
+  />
+);
 
-export function plusIcon(size, className, style){
-  let s = {}
-  if (style) s = style;
-  return <FontAwesomeIcon className={`Icon ${className}`} icon="plus" size={size} style={s}/>
-}
+export const plusIcon = (size, className, styles) => (
+  <FontAwesomeIcon
+    className={`Icon ${className}`}
+    icon="plus"
+    size={size}
+    style={styles}
+  />
+);
 
-export function minusIcon(size, className){
-  return <FontAwesomeIcon className={`Icon ${className}`} icon="minus" size={size}/>
-}
+export const minusIcon = (size, className) => (
+  <FontAwesomeIcon className={`Icon ${className}`} icon="minus" size={size} />
+);
 
-export function addIcon(size){
-  return <FontAwesomeIcon  className="Icon" icon="plus-circle" size={size}/>
-}
+export const addIcon = (size) => (
+  <FontAwesomeIcon className="Icon" icon="plus-circle" size={size} />
+);
 
-export function deleteIcon(size){
-  return <FontAwesomeIcon className="Icon" icon="minus-circle" size={size}/>
-}
+export const deleteIcon = (size) => (
+  <FontAwesomeIcon className="Icon" icon="minus-circle" size={size} />
+);
 
-export function timesIcon(size, color, className){
-  return <FontAwesomeIcon  className={`Icon ${className}`} color={color} icon="times" size={size}/>
-}
+export const timesIcon = (size, color, className) => (
+  <FontAwesomeIcon
+    className={`Icon ${className}`}
+    color={color}
+    icon="times"
+    size={size}
+  />
+);
 
-export function pencilIcon(size, className, color){
-  return <FontAwesomeIcon  className={`Icon ${className}`} icon="pencil-alt" color={color? color : null} size={size}/>
-}
+export const pencilIcon = (size, className, color) => (
+  <FontAwesomeIcon
+    className={`Icon ${className}`}
+    icon="pencil-alt"
+    color={color ? color : null}
+    size={size}
+  />
+);
 
-export function trashIcon(size, className, color){
-  return <FontAwesomeIcon  className={`Icon ${className}`} icon="trash" color={color? color : null} size={size}/>
-}
+export const trashIcon = (size, className, color) => (
+  <FontAwesomeIcon
+    className={`Icon ${className}`}
+    icon="trash"
+    color={color ? color : null}
+    size={size}
+  />
+);
 
-export function checkIcon(size, className, color){
-  return <FontAwesomeIcon  className={`Icon ${className}`} icon="check" color={color? color : null} size={size? size : '1x'}/>
-}
+export const checkIcon = (size, className, color) => (
+  <FontAwesomeIcon
+    className={`Icon ${className}`}
+    icon="check"
+    color={color ? color : null}
+    size={size ? size : "1x"}
+  />
+);
 
-export function squareIcon(style, size, className, color){
-  return <FontAwesomeIcon className={`Icon ${className}`} icon={style} color={color? color : null} size={size? size : '1x'}/>
-}
+export const squareIcon = (style, size, className, color) => (
+  <FontAwesomeIcon
+    className={`Icon ${className}`}
+    icon={style}
+    color={color ? color : null}
+    size={size ? size : "1x"}
+  />
+);
