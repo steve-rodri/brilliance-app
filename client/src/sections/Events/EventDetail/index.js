@@ -18,6 +18,7 @@ import "./index.css";
 
 const EventDetail = ({ match }) => {
   const [modal, setModal] = useState({ show: false, content: "", props: {} });
+  const { data, loading } = useSelector((state) => state.section.events.form);
   const container = useRef();
   const dispatch = useDispatch();
   const { state } = useLocation();
@@ -68,23 +69,22 @@ const EventDetail = ({ match }) => {
   };
 
   const scrollToTop = () => (container.current.scrollTop = 0);
-  const accessLevel = useSelector(state => state.user.accessLevel);
-  const { data, loading } = useSelector(state => state.section.events.form);
+  const accessLevel = useSelector((state) => state.user.accessLevel);
   if (!loading && !data) return <Redirect to={`/${accessLevel}/events`} />;
   return (
     <div className="EventDetail" ref={container}>
       <Header onSubmit={() => showModal("Submit")} closeModal={closeModal} />
       <Body
-        onSubmit={props => showModal("Submit", props)}
-        openClient={props => showModal("Client", props)}
-        openLocation={props => showModal("Location", props)}
-        openCallLocation={props => showModal("Call Location", props)}
+        onSubmit={(props) => showModal("Submit", props)}
+        openClient={(props) => showModal("Client", props)}
+        openLocation={(props) => showModal("Location", props)}
+        openCallLocation={(props) => showModal("Call Location", props)}
         scrollToTop={scrollToTop}
         closeModal={closeModal}
       />
       <Footer
-        onDelete={props => showModal("Delete", props)}
-        onSubmit={props => showModal("Submit", props)}
+        onDelete={(props) => showModal("Delete", props)}
+        onSubmit={(props) => showModal("Submit", props)}
         scrollToTop={scrollToTop}
       />
       <Modal show={modal.show} close={closeModal} content={modalContent()} />
@@ -93,8 +93,8 @@ const EventDetail = ({ match }) => {
 };
 
 const Footer = ({ onDelete, onSubmit, scrollToTop }) => {
-  const mobile = useSelector(state => state.view.mobile);
-  const editMode = useSelector(state => state.section.events.form.edit);
+  const mobile = useSelector((state) => state.view.mobile);
+  const editMode = useSelector((state) => state.section.events.form.edit);
   if (editMode && !mobile) {
     return (
       <footer>

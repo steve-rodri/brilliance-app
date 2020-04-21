@@ -1,85 +1,185 @@
-import React, { Component } from "react";
+import React, { useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { useTraceableState } from "../../../../../hooks";
+import { updateEventFormData, deleteEventFormData } from "../../../../../redux";
+import { placeRequests } from "../../../../../services";
 import DateSelector from "../../../../../components/DateSelector";
 import SearchField from "../../../../../components/SearchField";
 import { locationName } from "../../../../../helpers/locationName";
 import moment from "moment";
 
-export default class Edit extends Component {
-  render() {
-    const { fields, searchFieldData } = this.props;
-    if (!fields) return null;
+const Edit = (props) => {
+  return (
+    <div className="Logistics">
+      <Call {...props} />
+      <CallLocation {...props} />
+      <Start {...props} />
+      <End {...props} />
+    </div>
+  );
+};
 
-    return (
-      <div className="Logistics">
-        <label>Call</label>
-        <DateSelector
-          {...this.props}
-          viewMode="time"
-          name="call"
-          value={fields.callTime}
-          viewDate={
-            fields.start
-              ? moment(fields.start)
-              : fields.callTime
-              ? moment(fields.callTime)
-              : moment().startOf("hour")
-          }
-          isValidDate={current =>
-            current.isSameOrBefore(moment(fields.start), "day")
-          }
-        />
+const Call = ({ callTime, start, ...rest }) => {
+  const [value, setValue, prevValue] = useTraceableState(callTime || "");
+  const dispatch = useDispatch();
+  const handleChange = (value) => {
+    if (moment(value).isSameOrBefore(moment(start))) {
+      setValue(value);
+    }
+  };
+  useEffect(() => {
+    setValue(callTime);
+  }, [callTime, setValue]);
+  useEffect(() => {
+    if (value !== prevValue && value !== callTime) {
+      if (value)
+        dispatch(
+          updateEventFormData({ callTime: moment(value).toISOString(true) })
+        );
+      else if (callTime) dispatch(deleteEventFormData({ callTime }));
+    }
+  }, [dispatch, callTime, prevValue, value]);
+  return (
+    <>
+      <label>Call</label>
+      <DateSelector
+        viewMode="time"
+        name="call"
+        value={value}
+        viewDate={
+          callTime
+            ? moment(callTime)
+            : start
+            ? moment(start)
+            : moment().startOf("hour")
+        }
+        isValidDate={(current) =>
+          current.isSameOrBefore(moment(start), "minute")
+        }
+        onDateChange={handleChange}
+      />
+    </>
+  );
+};
 
-        <label>Call Location</label>
-        <SearchField
-          {...this.props}
-          searchResults={searchFieldData && searchFieldData.callLocations}
-          formClassName="Edit--Field"
-          resultsClassName="Edit--results"
-          resultClassName="Edit--result"
-          formDataValue={
-            this.props.formData && this.props.formData.call_location_id
-          }
-          formatResult={locationName}
-          input={{
-            className: "Input",
-            name: "callLocation",
-            value: fields.callLocation ? fields.callLocation : "",
-            tabIndex: 9
-          }}
-          handleChange={this.props.handleSearchChange}
-          onEnter={this.props.onEnter}
-          onSelect={this.props.onSelect}
-          create={this.props.openCallLocation}
-          edit={this.props.openCallLocation}
-        />
-
-        <label>Start</label>
-        <DateSelector
-          {...this.props}
-          viewMode="days"
-          name="start"
-          value={fields.start}
-          viewDate={moment(fields.start) || moment().startOf("hour")}
-        />
-
-        <label>End</label>
-        <DateSelector
-          {...this.props}
-          viewMode="time"
-          name="end"
-          value={fields.end}
-          viewDate={
-            fields.start
-              ? moment(fields.start)
-              : fields.end
-              ? moment(fields.end)
-              : moment().startOf("hour")
-          }
-          isValidDate={current =>
-            current.isSameOrAfter(moment(fields.start), "day")
-          }
-        />
-      </div>
+const CallLocation = ({ callLocation, callLocationId, openCallLocation }) => {
+  const dispatch = useDispatch();
+  const handleEnter = ({ selectedResult: callLocation }) => {
+    dispatch(
+      updateEventFormData({
+        callLocation,
+        callLocationId: callLocation.id,
+      })
     );
-  }
-}
+  };
+  const handleSelect = ({ selectedResult: callLocation }) => {
+    dispatch(
+      updateEventFormData({
+        callLocation: callLocation,
+        callLocationId: callLocation.id,
+      })
+    );
+  };
+  const handleDelete = () => {
+    dispatch(
+      deleteEventFormData({
+        callLocation,
+        callLocationId,
+      })
+    );
+  };
+  const getResults = useCallback(async (params) => {
+    const data = await placeRequests.get({ limit: 5, ...params });
+    return data.places;
+  }, []);
+  const defaultValue = locationName(callLocation);
+  return (
+    <>
+      <label>Call Location</label>
+      <SearchField
+        className="Edit--field"
+        resultProps={{
+          resultClassName: "Edit--result",
+          resultsClassName: "Edit--results",
+          formatResult: locationName,
+          getResults,
+        }}
+        inputProps={{
+          name: "call location",
+          type: "text",
+          tabIndex: 6,
+        }}
+        formDataValue={callLocation || callLocationId}
+        deleteFormValue={handleDelete}
+        defaultValue={defaultValue}
+        onEnter={handleEnter}
+        onSelect={handleSelect}
+        onCreate={openCallLocation}
+        onEdit={openCallLocation}
+      />
+    </>
+  );
+};
+
+const Start = ({ start, ...rest }) => {
+  const [value, setValue, prevValue] = useTraceableState(start || "");
+  const dispatch = useDispatch();
+  const handleChange = (value) => setValue(value);
+  useEffect(() => {
+    setValue(start);
+  }, [start, setValue]);
+  useEffect(() => {
+    if (value !== prevValue && value !== start) {
+      dispatch(updateEventFormData({ start: moment(value).toISOString(true) }));
+    }
+  }, [dispatch, start, prevValue, value]);
+  return (
+    <>
+      <label>Start</label>
+      <DateSelector
+        {...rest}
+        viewMode="days"
+        name="start"
+        value={value}
+        viewDate={moment(start) || moment().startOf("hour")}
+        onDateChange={handleChange}
+      />
+    </>
+  );
+};
+
+const End = ({ end, start, ...rest }) => {
+  const [value, setValue, prevValue] = useTraceableState(end || "");
+  const dispatch = useDispatch();
+  const handleChange = (value) => {
+    if (moment(value).isAfter(moment(start))) {
+      setValue(value);
+    }
+  };
+  useEffect(() => {
+    setValue(end);
+  }, [end, setValue]);
+  useEffect(() => {
+    if (value !== prevValue && value !== end) {
+      dispatch(updateEventFormData({ end: moment(value).toISOString(true) }));
+    }
+  }, [dispatch, end, prevValue, value]);
+  return (
+    <>
+      <label>End</label>
+      <DateSelector
+        {...rest}
+        viewMode="time"
+        name="end"
+        value={end}
+        viewDate={
+          start ? moment(start) : end ? moment(end) : moment().startOf("hour")
+        }
+        isValidDate={(current) => current.isSameOrAfter(moment(start), "day")}
+        onDateChange={handleChange}
+      />
+    </>
+  );
+};
+
+export default Edit;

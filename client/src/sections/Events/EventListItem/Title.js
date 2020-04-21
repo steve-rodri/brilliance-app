@@ -14,7 +14,7 @@ const Title = ({ event: e, styles }) => (
 );
 
 const Summary = ({ summary }) => {
-  const mobile = useSelector(state => state.view.mobile);
+  const mobile = useSelector((state) => state.view.mobile);
   const styles = () => {
     if (!mobile && summary.length < 30) return {};
     return { fontSize: "15px" };

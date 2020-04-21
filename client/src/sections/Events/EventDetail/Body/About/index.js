@@ -5,11 +5,13 @@ import Form from "./Form";
 import BodyComponent from "../BodyComponent";
 import "./index.css";
 
-const About = props => {
-  const { edit: editable } = useSelector(state => state.section.events.form);
+const About = (props) => {
+  const { edit: editable, data } = useSelector(
+    (state) => state.section.events.form
+  );
   return (
     <BodyComponent className="EventDetail-Body--about" titleText="About">
-      {editable ? <Form {...props} /> : <View {...props} />}
+      {editable ? <Form {...props} {...data} /> : <View {...props} {...data} />}
     </BodyComponent>
   );
 };

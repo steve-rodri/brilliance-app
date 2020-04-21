@@ -1,100 +1,68 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { updateEventFormData } from "../../../../../redux";
+import React, { useEffect, useCallback } from "react";
 import SearchField from "../../../../../components/SearchField/";
+import { useDispatch } from "react-redux";
+import { updateEventFormData, deleteEventFormData } from "../../../../../redux";
 import { useTraceableState } from "../../../../../hooks";
 import { clientRequests, placeRequests } from "../../../../../services";
 import { clientName } from "../../../../../helpers/clientHelpers";
 import { locationName } from "../../../../../helpers/locationName";
 
-//props
-// openClient: () => showModal("Client")
-// openLocation: () => showModal("Location")
-// openCallLocation: () => showModal("Call Location")
-
-const Edit = props => {
-  const data = useSelector(state => state.section.events.form);
+const Edit = (props) => {
   return (
     <div className="About">
-      <Client {...props} {...data} />
-      <Location {...props} {...data} />
-      <Kind {...props} {...data} />
-      <Package {...props} {...data} />
-      <Action {...props} {...data} />
+      <Client {...props} />
+      <Location {...props} />
+      <Kind {...props} />
+      <Package {...props} />
+      <Action {...props} />
     </div>
   );
 };
 
 const Client = ({ client, clientId, openClient }) => {
-  const [searchResults, setSearchResults] = useState([]);
-  const [value, setValue, prevValue] = useTraceableState(clientName(client));
+  const defaultValue = clientName(client);
   const dispatch = useDispatch();
-
-  const handleEnter = ({ selectedResult: client }) => {
+  const getResults = useCallback(async (params) => {
+    const { clients } = await clientRequests.get({ limit: 5, ...params });
+    return clients;
+  }, []);
+  const handleSubmit = ({ selectedResult: client }) => {
     dispatch(
       updateEventFormData({
         client,
-        clientId: client.id
+        clientId: client.id,
       })
     );
-    setValue(clientName(client));
   };
-
-  const handleSelect = ({ selectedResult: client }) => {
+  const handleDelete = () => {
     dispatch(
-      updateEventFormData({
-        client: client,
-        clientId: client.id
+      deleteEventFormData({
+        client,
+        clientId,
       })
     );
-    setValue(clientName(client));
   };
-
-  const handleChange = async value => setValue(value);
-
-  const fetchResults = useCallback(
-    async isSubscribed => {
-      if (!value || !isSubscribed) return;
-      const valueLength = value.split("").length;
-      const getResults = async () => {
-        const data = await clientRequests.get({ q: value, limit: 3 });
-        if (data) setSearchResults(data.clients);
-      };
-      if (valueLength > 2) {
-        if (prevValue) {
-          const prevValueLength = prevValue.split("").length;
-          if (valueLength > prevValueLength) await getResults();
-        } else {
-          await getResults();
-        }
-      }
-    },
-    [prevValue, value]
-  );
-
-  useEffect(() => {
-    let isSubscribed = true;
-    fetchResults(isSubscribed);
-    return () => (isSubscribed = false);
-  }, [value, prevValue, fetchResults]);
   return (
     <>
       <label>Client</label>
       <SearchField
-        formClassName="Edit--field"
-        resultClassName="Edit--result"
-        resultsClassName="Edit--results"
-        searchResults={searchResults}
-        formatResult={clientName}
-        formDataValue={client || clientId}
+        className="Edit--field"
+        resultProps={{
+          resultClassName: "Edit--result",
+          resultsClassName: "Edit--results",
+          formatResult: clientName,
+          getResults,
+        }}
         inputProps={{
           name: "client",
-          value: value,
-          tabIndex: 1
+          type: "text",
+          tabIndex: 1,
         }}
-        onChange={handleChange}
-        onEnter={handleEnter}
-        onSelect={handleSelect}
+        formDataValue={client || clientId}
+        deleteFormValue={handleDelete}
+        defaultValue={defaultValue}
+        onEnter={handleSubmit}
+        onSelect={handleSubmit}
         onCreate={openClient}
         onEdit={openClient}
       />
@@ -103,74 +71,49 @@ const Client = ({ client, clientId, openClient }) => {
 };
 
 const Location = ({ location, locationId, openLocation }) => {
-  const [searchResults, setSearchResults] = useState([]);
-  const [value, setValue, prevValue] = useTraceableState(
-    locationName(location)
-  );
+  const defaultValue = locationName(location);
   const dispatch = useDispatch();
-
-  const handleEnter = ({ selectedResult: location }) => {
-    console.log(location);
+  const getResults = useCallback(async (params) => {
+    const data = await placeRequests.get({ limit: 5, ...params });
+    return data.places;
+  }, []);
+  const handleSubmit = ({ selectedResult: location }) => {
     dispatch(
       updateEventFormData({
         location,
-        locationId: location.id
+        locationId: location.id,
       })
     );
-    setValue(locationName(location));
   };
-
-  const handleSelect = ({ selectedResult: location }) => {
+  const handleDelete = () => {
     dispatch(
-      updateEventFormData({
-        location: location,
-        locationId: location.id
+      deleteEventFormData({
+        location,
+        locationId,
       })
     );
-    setValue(locationName(location));
   };
-
-  const handleChange = async value => setValue(value);
-
-  const fetchResults = useCallback(async () => {
-    if (!value) return;
-    const valueLength = value.split("").length;
-    const getResults = async () => {
-      const data = await placeRequests.get({ q: value, limit: 3 });
-      if (data) setSearchResults(data.places);
-    };
-    if (valueLength > 2) {
-      if (prevValue) {
-        const prevValueLength = prevValue.split("").length;
-        if (valueLength > prevValueLength) await getResults();
-      } else {
-        await getResults();
-      }
-    }
-  }, [prevValue, value]);
-
-  useEffect(() => {
-    fetchResults();
-  }, [value, prevValue, fetchResults]);
   return (
     <>
       <label>Location</label>
       <SearchField
-        formClassName="Edit--field"
-        resultClassName="Edit--result"
-        resultsClassName="Edit--results"
-        searchResults={searchResults}
-        formatResult={locationName}
-        formDataValue={location || locationId}
-        inputProps={{
-          className: "Input",
-          name: "location",
-          value: value,
-          tabIndex: 1
+        className="Edit--field"
+        resultProps={{
+          resultClassName: "Edit--result",
+          resultsClassName: "Edit--results",
+          formatResult: locationName,
+          getResults,
         }}
-        onChange={handleChange}
-        onEnter={handleEnter}
-        onSelect={handleSelect}
+        inputProps={{
+          name: "location",
+          type: "text",
+          tabIndex: 2,
+        }}
+        formDataValue={location || locationId}
+        deleteFormValue={handleDelete}
+        defaultValue={defaultValue}
+        onEnter={handleSubmit}
+        onSelect={handleSubmit}
         onCreate={openLocation}
         onEdit={openLocation}
       />
@@ -178,13 +121,19 @@ const Location = ({ location, locationId, openLocation }) => {
   );
 };
 
-const Kind = ({ kind }) => {
-  const [value, setValue] = useState(kind);
+const Kind = ({ kind = "" }) => {
+  const [value, setValue, prevValue] = useTraceableState(kind);
   const dispatch = useDispatch();
   const handleChange = ({ target: { value } }) => setValue(value);
   useEffect(() => {
-    dispatch(updateEventFormData({ kind: value }));
-  }, [dispatch, value]);
+    setValue(kind);
+  }, [kind, setValue]);
+  useEffect(() => {
+    if (value !== prevValue && value !== kind) {
+      if (value) dispatch(updateEventFormData({ kind: value }));
+      else if (kind) dispatch(deleteEventFormData({ kind }));
+    }
+  }, [dispatch, kind, prevValue, value]);
   return (
     <>
       <label>Kind</label>
@@ -202,13 +151,19 @@ const Kind = ({ kind }) => {
   );
 };
 
-const Package = ({ package: p }) => {
-  const [value, setValue] = useState(p);
+const Package = ({ package: p = "" }) => {
+  const [value, setValue, prevValue] = useTraceableState(p);
   const dispatch = useDispatch();
   const handleChange = ({ target: { value } }) => setValue(value);
   useEffect(() => {
-    dispatch(updateEventFormData({ package: value }));
-  }, [dispatch, value]);
+    setValue(p);
+  }, [p, setValue]);
+  useEffect(() => {
+    if (value !== prevValue && value !== p) {
+      if (value) dispatch(updateEventFormData({ p: value }));
+      else if (p) dispatch(deleteEventFormData({ p }));
+    }
+  }, [dispatch, p, prevValue, value]);
   return (
     <>
       <label>Package</label>
@@ -226,13 +181,19 @@ const Package = ({ package: p }) => {
   );
 };
 
-const Action = ({ action }) => {
-  const [value, setValue] = useState(action);
+const Action = ({ action = "" }) => {
+  const [value, setValue, prevValue] = useTraceableState(action);
   const dispatch = useDispatch();
   const handleChange = ({ target: { value } }) => setValue(value);
   useEffect(() => {
-    dispatch(updateEventFormData({ action: value }));
-  }, [dispatch, value]);
+    setValue(action);
+  }, [action, setValue]);
+  useEffect(() => {
+    if (value !== prevValue && value !== action) {
+      if (value) dispatch(updateEventFormData({ action: value }));
+      else if (action) dispatch(deleteEventFormData({ action }));
+    }
+  }, [dispatch, action, prevValue, value]);
   return (
     <>
       <label>Action</label>

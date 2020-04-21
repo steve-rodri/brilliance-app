@@ -1,7 +1,8 @@
 import moment from "moment";
 import { locationName } from "../locationName";
+import { clientName } from "../clientHelpers";
 
-export const summaryFormatter = summary => {
+export const summaryFormatter = (summary) => {
   let slashWords = [];
   let hyphenWords = [];
   if (summary.search("/")) {
@@ -15,129 +16,106 @@ export const summaryFormatter = summary => {
   return summary;
 };
 
-export const eventTitle = evt => {
-  if (!evt.action) {
-    return title(evt);
-  } else if (title(evt)) {
-    return `${evt.action} - ${title(evt)}`;
+export const generateSummary = (data) => {
+  if (!data.action) {
+    return title(data);
+  } else if (title(data)) {
+    return `${data.action} - ${title(data)}`;
   } else {
-    return evt.action;
+    return data.action;
   }
 };
 
-export const title = evt => {
-  const location = () => {
-    if (evt.location) {
-      if (evt.location.shortName) {
-        return evt.location.shortName;
-      } else if (evt.location.name) {
-        return evt.location.name;
-      } else {
-        return evt.location;
-      }
-    }
-  };
-
-  const client = () => {
-    if (
-      evt.client &&
-      typeof evt.client === "object" &&
-      evt.client.constructor === Object
-    ) {
-      if (evt.client.company) {
-        if (evt.client.company.name) {
-          if (!evt.client.contactInfo) {
-            return evt.client.company.name;
-          } else if (evt.client.contactInfo.fullName) {
-            return evt.client.contactInfo.fullName;
-          }
-        }
-      }
-    } else {
-      return evt.client;
-    }
-  };
-
-  if (evt.confirmation === `Cancelled`) {
+export const title = ({
+  location,
+  package: p,
+  confirmation,
+  onPremise,
+  kind,
+  client,
+}) => {
+  location = locationName(location);
+  client = clientName(client);
+  if (confirmation === `Cancelled`) {
     return `CANCELLED`;
   } else {
-    if (location()) {
-      if (evt.onPremise) {
-        if (!evt.kind) {
-          if (!evt.package) {
-            if (!client()) {
-              return `${location()}`;
+    if (location) {
+      if (onPremise) {
+        if (!kind) {
+          if (!p) {
+            if (!client) {
+              return `${location}`;
             } else {
-              return `${location()} - ${client()}`;
+              return `${location} - ${client}`;
             }
           } else {
-            if (!client()) {
-              return `${location()} - ${evt.package}`;
+            if (!client) {
+              return `${location} - ${p}`;
             } else {
-              return `${location()} - ${client()}`;
+              return `${location} - ${client}`;
             }
           }
         } else {
-          return `${location()} - ${evt.kind}`;
+          return `${location} - ${kind}`;
         }
       } else {
-        if (!client()) {
-          if (!evt.package) {
-            if (!evt.kind) {
-              return location();
+        if (!client) {
+          if (!p) {
+            if (!kind) {
+              return location;
             } else {
-              return `${evt.kind} - ${location()}`;
+              return `${kind} - ${location}`;
             }
           } else {
-            if (!evt.kind) {
-              return `${evt.package} - ${location()}`;
+            if (!kind) {
+              return `${p} - ${location}`;
             } else {
-              return `${evt.kind} - ${location()}`;
+              return `${kind} - ${location}`;
             }
           }
         } else {
-          if (!evt.package) {
-            if (!evt.kind) {
-              return `${client()} - ${location()}`;
+          if (!p) {
+            if (!kind) {
+              return `${client} - ${location}`;
             } else {
-              return `${client()} - ${evt.kind}`;
+              return `${client} - ${kind}`;
             }
           } else {
-            if (!evt.kind) {
-              return `${client()} - ${evt.package}`;
+            if (!kind) {
+              return `${client} - ${p}`;
             } else {
-              return `${client()} - ${evt.kind}`;
+              return `${client} - ${kind}`;
             }
           }
         }
       }
     } else {
-      if (!client()) {
-        if (!evt.package) {
-          if (!evt.kind) {
+      if (!client) {
+        if (!p) {
+          if (!kind) {
             return null;
           } else {
-            return `${evt.kind}`;
+            return `${kind}`;
           }
         } else {
-          if (!evt.kind) {
-            return `${evt.package}`;
+          if (!kind) {
+            return `${p}`;
           } else {
-            return `${evt.kind} - ${evt.package}`;
+            return `${kind} - ${p}`;
           }
         }
       } else {
-        if (!evt.package) {
-          if (!evt.kind) {
-            return client();
+        if (!p) {
+          if (!kind) {
+            return client;
           } else {
-            return `${client()} ${evt.kind}`;
+            return `${client} ${kind}`;
           }
         } else {
-          if (!evt.kind) {
-            return `${client()} - ${evt.package}`;
+          if (!kind) {
+            return `${client} - ${p}`;
           } else {
-            return `${client()} ${evt.kind}`;
+            return `${client} ${kind}`;
           }
         }
       }

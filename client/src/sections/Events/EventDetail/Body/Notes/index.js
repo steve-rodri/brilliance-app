@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useTraceableState } from "../../../../../hooks";
 import BodyComponent from "../BodyComponent";
 import { useSelector, useDispatch } from "react-redux";
-import { updateEventFormData } from "../../../../../redux";
+import { updateEventFormData, deleteEventFormData } from "../../../../../redux";
 
 import "./index.css";
 
 const Notes = ({ notes }) => {
-  const [value, setValue] = useState(notes);
-  const { edit: editMode } = useSelector(state => state.section.events.form);
+  const [value, setValue, prevValue] = useTraceableState(notes);
+  const { edit: editMode } = useSelector((state) => state.section.events.form);
   const dispatch = useDispatch();
   const handleChange = ({ target: { value } }) => setValue(value);
   useEffect(() => {
-    dispatch(updateEventFormData({ notes: value }));
+    if (value) dispatch(updateEventFormData({ notes: value }));
   }, [dispatch, value]);
-  const format = text => {
+  useEffect(() => {
+    if (prevValue && !value) dispatch(deleteEventFormData({ notes }));
+  }, [dispatch, notes, prevValue, value]);
+
+  const format = (text) => {
     if (!text) return;
     const arr = text.split(`\n`);
     return arr.map((p, id) => <p key={id}>{p}</p>);
