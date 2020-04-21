@@ -1,20 +1,26 @@
 import { userIsUnauthenticated } from "../../actions";
 import { eventSandbox } from "../../sandboxes";
 import { eventRequests } from "../../../services";
-import { eventTitle, updateEvent } from "../../../helpers";
+import { generateSummary, updateEvent } from "../../../helpers";
 
 const {
-  listActions: { addData, loading, loaded, setScrollPosition, setColumnHeaders }
+  listActions: {
+    addData,
+    loading,
+    loaded,
+    setScrollPosition,
+    setColumnHeaders,
+  },
 } = eventSandbox.actions;
 
-export const setEventListScrollPosition = position => {
-  return dispatch => {
+export const setEventListScrollPosition = (position) => {
+  return (dispatch) => {
     dispatch(setScrollPosition(position));
   };
 };
 
-export const setEventListColumnHeaders = headers => {
-  return dispatch => {
+export const setEventListColumnHeaders = (headers) => {
+  return (dispatch) => {
     dispatch(setColumnHeaders(headers));
   };
 };
@@ -27,9 +33,9 @@ export const fetchEvents = () => {
       section: {
         events: {
           list: { page, data, totalCount },
-          search: { params }
-        }
-      }
+          search: { params },
+        },
+      },
     } = getState();
 
     //configure params
@@ -49,13 +55,13 @@ export const fetchEvents = () => {
 export const updateEvents = ({ events, meta }) => {
   return async (dispatch, getState) => {
     const {
-      user: { adminCalendar: calendarId }
+      user: { adminCalendar: calendarId },
     } = getState();
     try {
       //loop through events from backend
       const syncedEvents = events.map(async ({ id, ...data }) => {
         //add summary if there is none
-        if (!data.summary) data.summary = eventTitle(data);
+        if (!data.summary) data.summary = generateSummary(data);
         if (meta.next && meta.next.id === id) data.isNextEvent = true;
         try {
           return await updateEvent(id, data, calendarId);
@@ -72,7 +78,7 @@ export const updateEvents = ({ events, meta }) => {
       dispatch(
         addData({
           data,
-          totalCount: meta.count
+          totalCount: meta.count,
         })
       );
       dispatch(loaded());
