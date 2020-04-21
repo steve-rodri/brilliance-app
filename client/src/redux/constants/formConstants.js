@@ -1,5 +1,6 @@
 export const ADD_DATA = "ADD_DATA";
 export const UPDATE_DATA = "UPDATE_DATA";
+export const DELETE_DATA = "DELETE_DATA";
 export const LOADING = "DATA_LOADING";
 export const LOADED = "DATA_LOADED";
 export const TOGGLE_EDIT = "TOGGLE_EDIT";
