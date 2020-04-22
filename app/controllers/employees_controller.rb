@@ -3,49 +3,7 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   def index
-    @@active_only = false;
-
-    if params[:active]
-      @@active_only = true;
-    end
-
-    if params[:email]
-      @employees = Employee
-        .joins(contact: :email_address)
-        .where("email_address = '#{params[:email]}'")
-        .first
-    elsif @@active_only
-      if params[:q]
-        query = params[:q]
-        @employees = Employee
-        .joins(:contact, contact: :email_address)
-        .where(active: true)
-        .where(
-          "contacts.first_name LIKE '%#{query}%' OR
-           contacts.last_name LIKE '%#{query}%' OR
-           email_addresses.email_address LIKE '%#{query}%)'
-          "
-        )
-      else
-        @employees = Employee.where(active: true)
-      end
-    else
-      if params[:q]
-        query = params[:q]
-        @employees = Employee
-        .joins(:contact, contact: :email_address)
-        .where(active: true)
-        .where(
-          "contacts.first_name LIKE '%#{query}%' OR
-           contacts.last_name LIKE '%#{query}%' OR
-           email_addresses.email_address LIKE '%#{query}%)'
-          "
-        )
-      else
-        @employees = Employee.all
-      end
-    end
-
+    @employees = Employee.search(search_params)
     render json: @employees, include: '**'
   end
 
@@ -88,5 +46,9 @@ class EmployeesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def employee_params
       params.require(:employee).permit(:active, :labor, :rate_hand_per_job, :rate_full_job, :rate_on_premise_one_man, :rate_on_premise, :rate_hourly, :rate_hourly_office_shop, :rate_demo, :email, :contact_id)
+    end
+
+    def search_params
+      params.permit(:active, :labor, :q, :email)
     end
 end
