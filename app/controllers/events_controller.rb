@@ -115,13 +115,13 @@ class EventsController < ApplicationController
 
       if @@send_count
         count = Event
-        .joins(event_employees: [{employee: [{contact: :email_address }]}])
+        .joins(event_employees: [{employee: [{contact: :email_addresses }]}])
         .where(query)
         .size
       end
 
       @events = Event
-      .joins(event_employees: [{employee: [{contact: :email_address }]}])
+      .joins(event_employees: [{employee: [{contact: :email_addresses }]}])
       .where(query)
       .order(order)
       .paginate(page: params[:page], per_page: @@items_per_page)

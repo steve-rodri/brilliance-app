@@ -46,6 +46,43 @@ class EventEmployeesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def event_employee_params
-      params.require(:event_employee).permit(:confirmation, :paid?, :position, :rate, :clock_in, :clock_out, :break_minutes, :break?, :hourly?, :employee_id, :event_id)
+      params.require(:event_employee).permit(
+        :confirmation,
+        :paid?,
+        :position,
+        :rate,
+        :clock_in,
+        :clock_out,
+        :break_minutes,
+        :break?,
+        :hourly?,
+        :employee_id,
+        :event_id,
+        employee_attributes: [
+          :active,
+          :labor,
+          :rate_hand_per_job,
+          :rate_full_job,
+          :rate_on_premise_one_man,
+          :rate_on_premise,
+          :rate_hourly,
+          :rate_hourly_office_shop,
+          :rate_demo, :email,
+          :contact_id,
+          contact_attributes: [
+            :photo,
+            :prefix,
+            :first_name,
+            :last_name,
+            :phone_number,
+            :email,
+            :ss,
+            email_addresses_attributes: [
+              :email_address,
+              :notifications
+            ]
+          ]
+        ],
+      )
     end
 end

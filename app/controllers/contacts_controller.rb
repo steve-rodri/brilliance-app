@@ -102,6 +102,7 @@ class ContactsController < ApplicationController
         :email,
         :ss,
         email_addresses_attributes: [
+          :id,
           :email_address,
           :notifications
         ]

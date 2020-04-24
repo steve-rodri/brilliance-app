@@ -22,7 +22,7 @@ class Employee < ApplicationRecord
      AND active = :active AND labor = :labor
     "
 
-    joins(:contact, contact: :email_address)
+    joins(:contact, contact: :email_addresses)
     if params[:active] == nil
       where(query, params).unscope(where: :active)
     elsif params[:labor] == nil
@@ -36,7 +36,7 @@ class Employee < ApplicationRecord
     params[:email_address] = params[:email]
     params.delete(:email)
 
-    joins(contact: :email_address)
+    joins(contact: :email_addresses)
     if params[:active] == nil
       where(params).unscope(where: :active)
     end

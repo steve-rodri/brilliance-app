@@ -1,13 +1,13 @@
 class GoogleEventsController < ApplicationController
-@@event_sync_params = {}
+@@sync_params = {}
 
   def update
     @events = []
     if params[:events]
-      params[:events].each do |event|
-        set_google_event_params(event)
-        if @event && @event.update(@@event_sync_params)
-          @events.push(@event)
+      params[:events].each do | google_event |
+        set_google_event_params(google_event)
+        if @google_event && @google_event.update(@@sync_params)
+          @events.push(@google_event)
         end
       end
       render json: @events, include: "**"
@@ -16,122 +16,94 @@ class GoogleEventsController < ApplicationController
 
   private
 
-  def set_google_event_params(event)
-    @@event_sync_params[:gc_id] = event[:id]
-    @@event_sync_params[:gc_i_cal_uid] = event[:i_cal_u_i_d]
-
-    #initialize event
-    if event[:organizer][:email] == params[:admin_calendar_id]
-      @event = Event.find_or_create_by gc_i_cal_uid: @@event_sync_params[:gc_i_cal_uid]
-    end
-    if event[:start][:date]
-      @@event_sync_params[:start] = Time.zone.parse(event[:start][:date])
-    elsif event[:start][:date_time]
-      @@event_sync_params[:start] = Time.zone.parse(event[:start][:date_time])
-    end
-    if event[:end][:date]
-      @@event_sync_params[:end] = Time.zone.parse(event[:end][:date])
-    elsif event[:end][:date_time]
-      @@event_sync_params[:end] = Time.zone.parse(event[:end][:date_time])
+  def set_google_event_params(google_event)
+    #find or create event
+    if google_event[:organizer][:email] == params[:admin_calendar_id]
+      @google_event = Event.find_or_create_by gc_i_cal_uid: google_event[:i_cal_u_i_d]
     end
 
-    @@event_sync_params[:summary] = event[:summary]
-    @@event_sync_params[:html_link] = event[:html_link]
+    #identifiers
+    @@sync_params[:gc_id] = google_event[:id]
+    @@sync_params[:gc_i_cal_uid] = google_event[:i_cal_u_i_d]
 
+    #summary
+    @@sync_params[:summary] = google_event[:summary]
 
-    if event[:status]
-      case event[:status]
+    #html_link
+    @@sync_params[:html_link] = google_event[:html_link]
+
+    #start
+    if google_event[:start][:date]
+      @@sync_params[:start] = Time.zone.parse(google_event[:start][:date])
+    elsif google_event[:start][:date_time]
+      @@sync_params[:start] = Time.zone.parse(google_event[:start][:date_time])
+    end
+
+    #end
+    if google_event[:end][:date]
+      @@sync_params[:end] = Time.zone.parse(google_event[:end][:date])
+    elsif google_event[:end][:date_time]
+      @@sync_params[:end] = Time.zone.parse(google_event[:end][:date_time])
+    end
+
+    #status
+    if google_event[:status]
+      case google_event[:status]
       when "tentative"
-        @@event_sync_params[:confirmation] = "Unconfirmed"
+        @@sync_params[:confirmation] = "Unconfirmed"
       when "confirmed"
-        @@event_sync_params[:confirmation] = "Confirmed"
+        @@sync_params[:confirmation] = "Confirmed"
       when "cancelled"
-        @@event_sync_params[:confirmation] = "Cancelled"
+        @@sync_params[:confirmation] = "Cancelled"
       end
     end
 
-    if event[:attendees]
-      event[:attendees].each do | attendee_params |
-        # email, displayName, responseStatus
-        worker = EventEmployee
-          .joins(:event, employee: { contact: :email_address } )
-          .find_by(
-            "
-            event_employees.event_id = events.id
-            AND email_addresses.email_address
-            LIKE '%#{attendee_params[:email].downcase}%'
-            "
+    #attendees
+    if google_event[:attendees]
+      google_event[:attendees].each do | attendee |
+        # email, display_name, response_status
+        @google_event
+          .event_employees
+          .create_or_update_by_email(
+            attendee.slice(
+              :email,
+              :display_name,
+              :response_status
+            )
           )
-        if worker
-          worker.update(confirmation: attendee_params[:response_status])
-        else
-          emailAddress = EmailAddress.find_by(email_address: attendee_params[:email])
-          if emailAddress
-            emailAddress.update(notifications: true)
-          else
-            emailAddress = EmailAddress.create(email_address: attendee_params[:email], notifications: true)
-          end
-
-          if emailAddress.contact && emailAddress.contact.employee
-            emailAddress.contact.employee.event_employees.create(
-              confirmation: attendee_params[:response_status],
-            )
-
-          elsif emailAddress.contact
-            employee = emailAddress.contact.create_employee(active: true)
-            employee.event_employees.create(
-              confirmation: attendee_params[:response_status],
-              event_id: @event[:id]
-            )
-
-          else
-            if attendee_params[:display_name]
-              contact = emailAddress.create_contact(
-                first_name: attendee_params[:display_name].split(' ')[0],
-                last_name: attendee_params[:display_name].split(' ')[1]
-              )
-            else
-              contact = emailAddress.create_contact()
-            end
-            employee = contact.create_employee(
-              active: true
-            )
-            employee.event_employees.create(
-              confirmation: attendee_params[:response_status],
-              event_id: @event[:id]
-            )
-          end
-        end
       end
     end
 
-    if event[:creator]
-      emailAddress = EmailAddress.find_or_create_by(
-        email_address: event[:creator][:email]
+
+    #creator
+    if google_event[:creator]
+      email_address = EmailAddress.find_or_create_by(
+        email_address: google_event[:creator][:email]
       )
-      if emailAddress.contact
-        contact = emailAddress.contact
-      elsif event[:creator][:display_name]
-        contact = emailAddress.create_contact(
-          first_name: event[:creator][:display_name].split(' ')[0],
-          last_name: event[:creator][:display_name].split(' ')[1]
+      if email_address.contact
+        contact = email_address.contact
+      elsif google_event[:creator][:display_name]
+        contact = email_address.create_contact(
+          first_name: google_event[:creator][:display_name].split(' ')[0],
+          last_name: google_event[:creator][:display_name].split(' ')[1]
         )
       else
-        contact = emailAddress.create_contact()
+        contact = email_address.create_contact()
       end
-      @@event_sync_params[:creator_id] = contact[:id]
+      @@sync_params[:creator_id] = contact[:id]
     end
 
-    if event[:description]
+    #description
+    if google_event[:description]
       spacer = "***************************************";
-      subsection = event[:description].include? spacer;
+      subsection = google_event[:description].include? spacer;
       if subsection
         length = "#{spacer}\n\n".length;
-        i = event[:description].index(spacer);
-        notes = event[:description].slice(i + length);
-        @@event_sync_params[:notes] = notes;
+        i = google_event[:description].index(spacer);
+        notes = google_event[:description].slice(i + length);
+        @@sync_params[:notes] = notes;
       else
-        @@event_sync_params[:notes] = event[:description];
+        @@sync_params[:notes] = google_event[:description];
       end
     end
   end
