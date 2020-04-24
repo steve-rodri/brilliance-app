@@ -222,15 +222,18 @@ const SearchField = (props) => {
       resultsContainer.current.scrollTop = 0;
     }
   }, [results]);
+
   //scroll Change
   useEffect(() => {
     setFieldActive(false);
   }, [props.scroll]);
+
   //formValue Change
   useEffect(() => {
     if (props.formDataValue) showEditButton();
     else hideEditButton();
   }, [props.formDataValue, showEditButton]);
+
   //restore highlightedResult
   useEffect(() => {
     if (!hoveringResults) {

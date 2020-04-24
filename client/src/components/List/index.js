@@ -13,13 +13,13 @@ import "./index.css";
 
 const List = ({ data, scrollPosition, setScrollPosition, ...rest }) => {
   const listContainer = useRef();
-  const mobile = useSelector(state => state.view.mobile);
+  const mobile = useSelector((state) => state.view.mobile);
   const listStyles = () => {
     let style = {};
     if (!mobile && data && data.length) {
       style = {
         boxShadow: "var(--box-shadow)",
-        zIndex: 2
+        zIndex: 2,
       };
     }
     return style;
@@ -46,7 +46,7 @@ const ColumnHeaders = ({
   columnHeaders,
   columnHeaderStyles,
   loading,
-  data
+  data,
 }) => {
   if (!columnHeaders) return null;
   if (data && !data.length) return null;
@@ -63,7 +63,7 @@ const ColumnHeaders = ({
 };
 
 const Items = ({ data, loading, containerRef, ...rest }) => {
-  if (loading) {
+  if (loading && !data.length) {
     return (
       <div className="List--Loader">
         <Loader />
@@ -72,7 +72,7 @@ const Items = ({ data, loading, containerRef, ...rest }) => {
   } else
     return (
       <InfiniteScroll {...rest} parentNode={containerRef}>
-        {data.map(item => (
+        {data.map((item) => (
           <Item
             item={item}
             key={item && item.id}
