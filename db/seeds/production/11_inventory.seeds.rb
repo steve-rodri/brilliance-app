@@ -14,13 +14,14 @@ csv.each do |row|
     rental_price: row['rental_price'],
     net_cost_per_invoice: row['net_cost_per_invoice'],
     purchase_price: row['purchase_price'],
-    
+
     created_at: row['created_at']
   }) do |i|
+    path_to_images = "/Users/Steve/Documents/Development/bep_data/inventory_images/"
     if row['photo_file_name']
       puts row['photo_file_name']
       i.photo.attach(
-        io: File.open(row['photo_file_path']),
+        io: File.open("#{path_to_images}#{row["photo_file_name"]}"),
         filename: row['photo_file_name'],
         content_type: "application/#{row['photo_file_type']}"
       )

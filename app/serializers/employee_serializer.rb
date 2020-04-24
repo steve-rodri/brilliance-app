@@ -1,6 +1,6 @@
 class EmployeeSerializer < ApplicationSerializer
   attributes :id, :active, :labor, :rates
-  has_one :contact, key: 'contact_info'
+  has_one :contact
 
   def rates
     {
