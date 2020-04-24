@@ -28,5 +28,6 @@ export const updateEvent = async (id, data, googleAdminCalendar) => {
     }
   } catch (resp) {
     console.log("Rails 1", resp);
+    throw resp;
   }
 };
