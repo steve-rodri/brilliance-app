@@ -5,15 +5,16 @@ import Edit from "./Edit";
 import View from "./View";
 import "./index.css";
 
-const Staff = props => {
-  const { edit: editMode } = useSelector(state => state.section.events.form);
+const Staff = (props) => {
+  const { edit: editMode, data } = useSelector(
+    (state) => state.section.events.form
+  );
 
   const render = () => {
-    if (editMode) return <Edit {...props} />;
-    else return <View {...props} />;
+    if (editMode) return <Edit {...props} {...data} />;
+    else return <View {...props} {...data} />;
   };
 
-  if (props.staff && !props.staff.length) return null;
   return (
     <BodyComponent className="EventDetail-Body--staff" titleText="Staff">
       {render()}

@@ -2,7 +2,7 @@ import React from "react";
 import { statusIcon } from "../../../../../icons";
 import { call, styleWorkerStatus } from "../../../../../helpers/eventHelpers";
 
-const View = props => {
+const View = (props) => {
   return (
     <div className="Staff">
       <Call {...props} />
@@ -24,8 +24,8 @@ const Workers = ({ staff }) => {
   if (!staff || (staff && !staff.length)) return null;
   return (
     <div className="Staff--workers">
-      {staff.map(data => (
-        <Worker {...data} />
+      {staff.map((data, i) => (
+        <Worker key={data.id || i} {...data} />
       ))}
     </div>
   );

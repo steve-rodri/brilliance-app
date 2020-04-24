@@ -41,8 +41,12 @@
   align-items: center;
 }
 
-.StaffSelector--labor, .StaffSelector--non-labor {
+.StaffSelector--labor,
+.StaffSelector--non-labor {
   width: 100%;
+  max-height: 200px;
+  overscroll-behavior-y: contain;
+  overflow: auto;
   display: grid;
   justify-items: center;
   align-items: center;

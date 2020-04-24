@@ -37,6 +37,7 @@ export const setEvent = (e) => {
   return (dispatch) => {
     dispatch(addData(e));
     dispatch(loaded());
+    dispatch(setEditMode(false));
   };
 };
 
@@ -93,6 +94,75 @@ export const deleteEventFormData = (data) => {
   return (dispatch) => {
     dispatch(deleteData(data));
     dispatch(updateEventFormData());
+  };
+};
+
+export const addEventWorker = (employee) => {
+  return (dispatch, getState) => {
+    let {
+      staff,
+      eventEmployeesAttributes,
+      deleteWorkers,
+    } = getState().section.events.form.data;
+    const worker = {
+      confirmation: "needsAction",
+      info: employee,
+    };
+    if (staff && staff.length) staff.push(worker);
+    else staff = [worker];
+
+    if (eventEmployeesAttributes && eventEmployeesAttributes.length) {
+      eventEmployeesAttributes.push({ employeeId: employee.id });
+    } else {
+      eventEmployeesAttributes = [{ employeeId: employee.id }];
+    }
+
+    if (deleteWorkers && deleteWorkers.length) {
+      deleteWorkers = deleteWorkers.filter(
+        (worker) => worker.employeeId !== employee.id
+      );
+    }
+
+    dispatch(
+      updateEventFormData({ staff, eventEmployeesAttributes, deleteWorkers })
+    );
+  };
+};
+
+export const deleteEventWorker = (employee) => {
+  return (dispatch, getState) => {
+    let {
+      staff,
+      deleteWorkers,
+      eventEmployeesAttributes,
+    } = getState().section.events.form.data;
+
+    staff = staff.filter((worker) => worker.info.id !== employee.id);
+    if (!staff.length) dispatch(deleteEventFormData({ staff }));
+    else dispatch(updateEventFormData({ staff }));
+
+    const worker = staff.find((worker) => worker.info.id === employee.id);
+
+    if (deleteWorkers && deleteWorkers.length) {
+      if (worker) {
+        deleteWorkers.push(worker);
+      } else {
+        deleteWorkers.push({ employeeId: employee.id });
+      }
+    } else {
+      if (worker) {
+        deleteWorkers = [worker];
+      } else {
+        deleteWorkers = [{ employeeId: employee.id }];
+      }
+    }
+
+    if (eventEmployeesAttributes && eventEmployeesAttributes.length) {
+      eventEmployeesAttributes = eventEmployeesAttributes.filter(
+        (worker) => worker.employeeId !== employee.id
+      );
+    }
+    dispatch(updateEventFormData({ deleteWorkers, eventEmployeesAttributes }));
   };
 };
 

@@ -1,53 +1,19 @@
-import React, { Component, Fragment } from "react";
+import React from "react";
 import StaffSelector from "./StaffSelector";
+import { useSelector } from "react-redux";
 
-// const [employees, setEmployees] = useState([]);
-// useEffect(() => {
-//   const mount = async () => {
-//     const employees = await employeeRequests.get({ active: true });
-//     setEmployees(employees);
-//   };
-//   mount();
-// }, []);
-
-export default class Edit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showInput: false
-    };
-  }
-
-  styleRow = () => {
-    return {
-      backgroundColor: "#F8F8F8"
-    };
-  };
-
-  showInput = () => {
-    this.setState({
-      showInput: true
-    });
-  };
-
-  render() {
-    const { mobile } = this.props;
+const Edit = (props) => {
+  const mobile = useSelector((state) => state.view.mobile);
+  if (mobile)
     return (
-      <Fragment>
-        {mobile ? (
-          <Fragment>
-            <label>Staff</label>
-            <div
-              className="Staff--choose-workers"
-              onClick={this.props.chooseWorker}
-            >
-              <p style={{ fontWeight: 700 }}>Choose Workers</p>
-            </div>
-          </Fragment>
-        ) : (
-          <StaffSelector {...this.props} />
-        )}
-      </Fragment>
+      <>
+        <label>Staff</label>
+        <div className="Staff--choose-workers" onClick={props.openStaff}>
+          <p style={{ fontWeight: 700 }}>Choose Workers</p>
+        </div>
+      </>
     );
-  }
-}
+  else return <StaffSelector {...props} />;
+};
+
+export default Edit;

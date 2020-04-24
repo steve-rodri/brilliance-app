@@ -79,6 +79,7 @@ const EventDetail = ({ match }) => {
         openClient={(props) => showModal("Client", props)}
         openLocation={(props) => showModal("Location", props)}
         openCallLocation={(props) => showModal("Call Location", props)}
+        openStaff={(props) => showModal("Staff", props)}
         scrollToTop={scrollToTop}
         closeModal={closeModal}
       />
